@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581105069491.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3443154012",
+    "id" : "D547AF8F",
+    "lastKnownWriteTime" : 1581106785,
+    "last_content_update" : 1581106785381,
+    "path" : "~/Documents/Projects/1-Research/SaeedKiaSVN/copub/2019/serializationT/new_R/Experiment_ExternalSort.R",
+    "project_path" : "Experiment_ExternalSort.R",
+    "properties" : {
+        "cursorPosition" : "29,26",
+        "scrollLine" : "25"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

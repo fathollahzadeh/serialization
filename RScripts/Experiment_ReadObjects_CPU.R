@@ -1,0 +1,366 @@
+
+library(plyr)
+# library(ggplot2)
+# require(cowplot)
+
+
+# function definition for calculating mean of data 
+
+calulateMeanDataTotaltime <- function(myfilename, n){
+  
+  totaltime <- matrix(nrow= 5, ncol=n)
+  
+  # run for all 5 experiments 
+  for(i in 1:5){
+    #       file = paste("data/java/resultJavaReadObjects_100_", i,  sep = "")
+    file = paste(myfilename, i,  sep = "")
+    file <- paste(file, ".txt" , sep="")
+    mydata <- read.delim(file, header=TRUE, sep="#")
+    totaltime[i,] <-  mydata[['totaltime']]- mydata[['iotime']]
+  }
+  
+  finalTime <- vector() 
+  
+  for(j in 1:n){
+    tmp<-0
+    for(i in 1:5){
+      tmp= tmp+totaltime[i,j]   
+    }
+    tmp=tmp/5
+    finalTime[j] <- tmp
+  }
+  
+  # print("This is before replacing")
+  # print(mydata)
+  mydata$totaltime<-finalTime
+  return(mydata)
+}
+
+# load data for 10 objects read 
+#data10 <-  calulateMeanDataTotaltime("data/java/final5/resultJavaReadObjects_10_", 36)
+#data10$size <-10 
+
+# load data for 100 objects read 
+# data100 <- read.delim("data/java/resultJavaReadObjects_100_1.txt", header=TRUE, sep="#")
+#data100 = calulateMeanDataTotaltime("data/java/final5/resultJavaReadObjects_100_", 36)
+#data100$size <- 100 
+
+
+# load data for 1000 objects read 
+# data1000 <- read.delim("data/java/resultJavaReadObjects_1000_1.txt", header=TRUE, sep="#")
+# data1000 <- read.delim("data/java/resultJavaReadObjects_1000_1.txt", header=TRUE, sep="#")
+#data1000 = calulateMeanDataTotaltime("data/java/final5/resultJavaReadObjects_1000_", 36)
+#data1000$size <-1000 
+
+
+# load data for 10000 objects read 
+#data10000 <- read.delim("data/java/resultJavaReadObjects_10000_1.txt", header=TRUE, sep="#")
+#data10000 =calulateMeanDataTotaltime("data/java/final5/resultJavaReadObjects_10000_", 36)
+#data10000$size <-10000 
+
+
+# load data for 100000 objects read 
+# data100000 <- read.delim("data/java/resultJavaReadObjects_100000_1.txt", header=TRUE, sep="#")
+#data100000 = calulateMeanDataTotaltime("data/java/final5/resultJavaReadObjects_100000_", 36)
+#data100000$size <-100000 
+
+# load data for 1000000 objects read 
+# data100000 <- read.delim("data/java/resultJavaReadObjects_1000000_1.txt", header=TRUE, sep="#")
+# data1000000 = calulateMeanDataTotaltime("data/java/resultJavaReadObjects_1000000_")
+# data1000000$size <-1000000 
+
+
+
+# C Results 
+##################################################################
+# load data for 1M objects read 
+datac1 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_1000000_", 8)
+datac1$size <-1000000 
+
+# load data for 2M objects read 
+datac2 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_2000000_", 8)
+datac2$size <-2000000 
+
+
+# load data for 3M objects read 
+datac3 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_3000000_", 8)
+datac3$size <-3000000 
+
+# load data for 4M objects read 
+datac4 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_4000000_", 8)
+datac4$size <-4000000
+
+# load data for 5M objects read 
+datac5 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_5000000_", 8)
+datac5$size <-5000000
+
+
+# bind the data frames together 
+# data <- rbind(data10, data100, data1000, data10000, data100000)
+data <- rbind(datac1,datac2,datac3,datac4,datac5)
+#data1 <- rbind(data10, data100, data1000, data10000,  datac10, datac100, datac1000, datac10000)
+# print(data)
+
+##################################################################
+##################################################################
+##################################################################
+##################################################################
+#partJavaSeq <- subset(data, datatype == "Customer" & seq=="true" & method=="JAVADEFAULT")
+#partSeq <- vector()
+#partSeq <-partJavaSeq[['totaltime']]
+
+
+#partJava <- subset(data1, datatype == "Customer" & seq=="false" & method=="JAVADEFAULT")
+#part <- vector()
+#part <-partJava[['totaltime']]
+
+
+
+# JSON results 
+#partJsonSeq <- subset(data, datatype == "Customer" & seq=="true" & method=="JSON")
+#partJsonSeqV <- vector()
+#partJsonSeqV <-partJsonSeq[['totaltime']]
+
+
+
+#partJson <- subset(data1, datatype == "Customer" & seq=="false" & method=="JSON")
+#partJsonV <- vector()
+#partJsonV <-partJson[['totaltime']]
+
+
+
+# PROTOCOL results 
+#partPROTOCOLSeq <- subset(data, datatype == "Customer" & seq=="true" & method=="PROTOCOL")
+#partPROTOCOLSeqV <- vector()
+#partPROTOCOLSeqV <-partPROTOCOLSeq[['totaltime']]
+
+#partPROTOCOL <- subset(data1, datatype == "Customer" & seq=="false" & method=="PROTOCOL")
+#partPROTOCOLV <- vector()
+#partPROTOCOLV <-partPROTOCOL[['totaltime']]
+
+
+
+
+# KRYO results 
+#partKRYOSeq <- subset(data, datatype == "Customer" & seq=="true" & method=="KRYO")
+#partKRYOSeqV <- vector()
+#partKRYOSeqV <-partKRYOSeq[['totaltime']]
+
+#partKRYO <- subset(data1, datatype == "Customer" & seq=="false" & method=="KRYO")
+#partKRYOV <- vector()
+#partKRYOV <-partKRYO[['totaltime']]
+
+
+# ByteBuffer results 
+#partByteBufferSeq <- subset(data, datatype == "Customer" & seq=="true" & method=="BYTEBUFFER")
+#partByteBufferSeqV <- vector()
+#partByteBufferSeqV <-partByteBufferSeq[['totaltime']]
+
+#partByteBuffer <- subset(data1, datatype == "Customer" & seq=="false" & method=="BYTEBUFFER")
+#partByteBufferV <- vector()
+#partByteBufferV <-partByteBuffer[['totaltime']]
+
+
+# BSON results 
+#partBsonSeq <- subset(data, datatype == "Customer" & seq=="true" & method=="BSON")
+#partBsonSeqV <- vector()
+#partBsonSeqV <-partBsonSeq[['totaltime']]
+
+#partBson <- subset(data1, datatype == "Customer" & seq=="false" & method=="BSON")
+#partBsonV <- vector()
+#partBsonV <-partBson[['totaltime']]
+
+
+# C++  HANDCODED  results 
+cppHANDCODEDSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="HANDCODED")
+cppHANDCODEDSeqV <- vector()
+cppHANDCODEDSeqV <-cppHANDCODEDSeq[['totaltime']]
+
+cppHANDCODED <- subset(data, language="ReadTimeCPP",seq=="false" & method=="HANDCODED")
+cppHANDCODEDV <- vector()
+cppHANDCODEDV <-cppHANDCODED[['totaltime']]
+
+# C++  PROTOBUF  results 
+cppPROTOBUFSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="PROTOBUF")
+cppPROTOBUFSeqV <- vector()
+cppPROTOBUFSeqV <-cppPROTOBUFSeq[['totaltime']]
+
+cppPROTOBUF <- subset(data, language="ReadTimeCPP", seq=="false" & method=="PROTOBUF")
+cppPROTOBUFV <- vector()
+cppPROTOBUFV <-cppPROTOBUF[['totaltime']]
+
+
+# C++  INPLACE  results 
+cppINPLACESeq <- subset(data, language="ReadTimeCPP",  seq=="true" & method=="INPLACE")
+cppINPLACESeqV <- vector()
+cppINPLACESeqV <- cppINPLACESeq[['totaltime']]
+
+cppINPLACE <- subset(data, language="ReadTimeCPP", seq=="false" & method=="INPLACE")
+cppINPLACEV <- vector()
+cppINPLACEV <-cppINPLACE[['totaltime']]
+
+
+# C++  BOOST  results 
+cppBOOSTSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="BOOST")
+cppBOOSTSeqV <- vector()
+cppBOOSTSeqV <-cppBOOSTSeq[['totaltime']]
+
+cppBOOST <- subset(data, language="ReadTimeCPP", seq=="false" & method=="BOOST")
+cppBOOSTV <- vector()
+cppBOOSTV <-cppBOOST[['totaltime']]
+
+
+#################################################
+#######     Plots       #########################
+#################################################
+pdf(file='Experiment_ReadObjects_CPU.pdf')
+
+# old.par <- par(mfrow=c(1, 2))
+old.par<-par(mfrow=c(1, 2), oma=c(0.1, 0.1, 0.1, 0.1),  pty="m")
+
+op <- par(mar = c(4, 4, 0.1, 0.1))
+
+# op <- par(mar = c(4,6,0.2,0.2) + 0.1)
+# par(mar=c(4, 4, 1, 1))
+# par(oma=c(0, 0, 0, 0))
+
+x <- c(1000000, 2000000,3000000,4000000,5000000)
+# x <- c(1:4)
+
+# HANDCODED C++
+plot(cppHANDCODEDSeqV, log="y", type="o", pch=2, lty=2, col="deepskyblue", ylim=c(0.5, 800), axes=FALSE, ann=FALSE,  panel.first=abline(h= c(0.5,3, 8,15, 25, 35, 45, 60, 75, 110, 200,370,570,800), v=c(1, 2, 3, 4, 5), lty=3, col="gray"))
+# grid(10,10)
+
+
+# Make x axis using one to 7 labels
+axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 )
+# axis(1, at=x, labels=c("10","100","1k","10k"))
+# axis(1, at=x, lab=c("1","2","3","4"))
+
+# Make y axis with horizontal labels that display ticks at 
+# every 4 marks. 4*0:g_range[2] is equivalent to c(0,4,8,12).
+#axis(2, las=1, at=0.2*0:g_range[2])
+# axis(2, las=1, at = seq(0, 4, by = 0.2))
+axis(2, las=1, at = c(0.5,3, 8,15, 25, 35, 45, 60, 75, 110, 200,370,570,800), labels=c("0.5","3","8","15","25","35","45","60","75","110","200","370","570","800" ))
+
+#lines for JAVA Default
+#lines(partSeq , type="o", pch=3, lty=2, col="green")
+# lines(partJsonV, type="o", pch=22, lty=2, col="green")
+
+#lines for BSON
+#lines(partBsonSeqV , type="o", pch=4, lty=2, col="blue")
+
+#lines for Protocol Buffer 
+#lines(partPROTOCOLSeqV, type="o", pch=5, lty=2, col="red")
+
+#lines for KRYO
+#lines(partKRYOSeqV, type="o", pch=6, lty=2, col="green4")
+
+#lines for ByteBuffer
+#lines(partByteBufferSeqV, type="o", pch=7, lty=2, col="blue1")
+
+#lines for BOOST C++ 
+lines(cppBOOSTSeqV, type="o", pch=8, lty=2, col="violet")
+
+
+#lines for PROTOBUF C++ 
+lines(cppPROTOBUFSeqV, type="o", pch=9, lty=2, col="orange")
+
+#lines for HANDCODED C++ 
+#lines(partHANDCODEDSeqV, type="o", pch=10, lty=2, col="deepskyblue")
+
+#lines for INPLACE C++ 
+lines(cppINPLACESeqV, type="o", pch=11, lty=2, col="blue3")
+
+
+
+#print("partINPLACESeqV results")
+#print(partINPLACESeqV)
+
+#print("partHANDCODEDSeqV results")
+#print(partHANDCODEDSeqV)
+
+
+title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
+title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0))
+text(3, 10, "Sequential", cex=1.4)
+
+
+box()
+
+##############################################################
+##################                   #########################
+##################      Next Plot    #########################
+##################                   #########################
+##############################################################
+op <- par(mar = c(4, 4, 0.1, 0.1))
+
+# op <- par(mar = c(4,4,0.2,1))
+# par(mar=c(4, 4, 1, 1))
+# par(oma=c(0, 0, 0, 0))
+# plot(partSeq, log="y")
+
+x <- c(1000000, 2000000,3000000,4000000,5000000) 
+# HANDCODED C++
+plot(cppHANDCODEDV, log="y", type="o", pch=2, lty=2, col="deepskyblue", ylim=c(0.5, 800), axes=FALSE, ann=FALSE,  panel.first=abline(h= c(0.5,3, 8,15, 25, 35, 45, 60, 75,  110,  200,370,570,800), v=c(1, 2, 3, 4, 5), lty=3, col="gray"))
+
+# plot(x, partSeq, type="b", pch=21, col="red",  yaxt="n", lty=3, xlab="", ylab=")
+
+# Make x axis using one to 7 labels
+axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M") , las = 2 )
+axis(2, las=1, at = c(0.5,3, 8,15, 25, 35, 45, 60, 75, 110,  200 ,370,570,800), labels=c("0.5","3","8","15","25","35","45","60","75","110","200","370","570","800") )
+
+
+#lines for JAVA Default
+#lines(part , type="o", pch=3, lty=2, col="green")
+
+
+#lines for BSON
+#lines(partBsonV , type="o", pch=4, lty=2, col="blue")
+
+#lines for Protocol Buffer 
+#lines(partPROTOCOLV, type="o", pch=5, lty=2, col="red")
+
+
+
+#lines for KRYO
+#lines(partKRYOV, type="o", pch=6, lty=2, col="green4")
+
+
+#lines for ByteBuffer
+#lines(partByteBufferV, type="o", pch=7, lty=2, col="blue1")
+
+
+#lines for BOOST C++ 
+lines(cppBOOSTV, type="o", pch=8, lty=2, col="violet")
+
+#lines for PROTOBUF C++ 
+lines(cppPROTOBUFV, type="o", pch=9, lty=2, col="orange")
+
+#lines for HANDCODED C++ 
+#lines(partHANDCODEDV, type="o", pch=10, lty=2, col="deepskyblue")
+
+#lines for INPLACE C++ 
+lines(cppINPLACEV, type="o", pch=11, lty=2, col="blue3")
+
+#print("INPLACE results and Boost")
+#print(partINPLACEV)
+
+#print("BOOST results")
+#print(partBOOSTV)
+
+
+title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
+title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0))
+
+text(3.5, 25, "Random", cex=1.4)
+
+# Create box around plot
+box()
+
+par(old.par)
+par(xpd=TRUE)
+
+#legend(3.1, 0.16, c("Java JSON GZIP",  "Java Default" , "Java BSON" , "Java Protocol", "Java Kryo", "Java ByteBuffer", "C++ Boost",  "C++ Protocol",  "C++ HandCoded", "C++ InPlace"), cex=0.9,  col=c("darkred", "green","blue", "red","green4", "blue1", "violet", "orange", "deepskyblue" , "blue3"), pch=2:11, lty=2:2);
+legend(3.5, 2, c("C++ Boost",  "C++ HandCoded", "C++ InPlace","C++ Protocol"), cex=0.9,  col=c( "violet",  "deepskyblue" , "blue3","orange"), pch=2:11, lty=2:2);
+# par(xpd=TRUE)

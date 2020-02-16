@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1577561351931.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2392336952",
+    "id" : "4489E2E7",
+    "lastKnownWriteTime" : 1577566685,
+    "last_content_update" : 1577566685442,
+    "path" : "~/Documents/Projects/1-Research/SaeedKiaSVN/copub/2019/serializationT/new_R/Experiment_ReadObjects.R",
+    "project_path" : "Experiment_ReadObjects.R",
+    "properties" : {
+        "cursorPosition" : "296,10",
+        "scrollLine" : "286"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
