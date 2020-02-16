@@ -1,0 +1,1030 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Twitter"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterNetworkClient">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterNetworkClient" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterNetworkClient"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterNetworkClient/fast">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterNetworkClient" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterNetworkClient/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterNetworkServer">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterNetworkServer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterNetworkServer"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterNetworkServer/fast">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterNetworkServer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterNetworkServer/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterSerialization">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterSerialization" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterSerialization"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterSerialization/fast">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterSerialization" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterSerialization/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterGenerateData">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterGenerateData" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterGenerateData"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterGenerateData/fast">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterGenerateData" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterGenerateData/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterSequentialRead">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterSequentialRead" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterSequentialRead"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterSequentialRead/fast">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterSequentialRead" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterSequentialRead/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterGenerateRandomList">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterGenerateRandomList" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterGenerateRandomList"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterGenerateRandomList/fast">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterGenerateRandomList" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterGenerateRandomList/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterRandomRead">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterRandomRead" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterRandomRead"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterRandomRead/fast">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterRandomRead" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterRandomRead/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterExternalSort">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterExternalSort" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterExternalSort"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TwitterExternalSort/fast">
+				<Option output="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin/TwitterExternalSort" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/header/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/header"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source"/>
+					<Add directory="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 TwitterExternalSort/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/source/DataSerialization.cpp">
+			<Option target="TwitterSerialization"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/source/ExternalSort.cpp">
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/source/GenerateData.cpp">
+			<Option target="TwitterGenerateData"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/source/GenerateRandomList.cpp">
+			<Option target="TwitterGenerateRandomList"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/source/NetworkClient.cpp">
+			<Option target="TwitterNetworkClient"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/source/NetworkServer.cpp">
+			<Option target="TwitterNetworkServer"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/source/RandomRead.cpp">
+			<Option target="TwitterRandomRead"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/benchmarks/source/SequentialRead.cpp">
+			<Option target="TwitterSequentialRead"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source/DataReader.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source/FileHandler.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/filehandler/source/LogFileHandler.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source/ClientSocket.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source/ServerSocket.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/networkadapter/source/Socket.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/rootdata/source/RootData.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/AdditionalMediaInfoEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/BoundingBoxCoordinate.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/Coordinates.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/Entities.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/ExtendedEntities.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/HashtagEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/MatchingRulesEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/MediaEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/MediaSizesEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/OptionEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/Place.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/PollEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/SizeEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/SymbolEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/TweetStatus.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/URLEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/User.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/UserMentionEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/VariantEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/VideoEntity.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/AdditionalMediaInfoEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/BoundingBoxCoordinateIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/CoordinatesIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/EntitiesIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/ExtendedEntitiesIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/HashtagEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/MatchingRulesEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/MediaEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/MediaSizesEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/Object.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/OptionEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/PlaceIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/PollEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/SizeEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/SymbolEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/TweetStatusIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/URLEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/UserIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/UserMentionEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/VariantEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/inplace/VideoEntityIP.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto/TweetStatusP.pb.cc">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/src/serialization/source/proto/TweetStatusProto.cpp">
+			<Option target="TwitterNetworkClient"/>
+			<Option target="TwitterNetworkServer"/>
+			<Option target="TwitterSerialization"/>
+			<Option target="TwitterSequentialRead"/>
+			<Option target="TwitterRandomRead"/>
+			<Option target="TwitterExternalSort"/>
+		</Unit>
+		<Unit filename="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/C++/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

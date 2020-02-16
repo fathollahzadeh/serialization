@@ -1,0 +1,1 @@
+clang++   -std=c++11 -g -fPIC -Wno-deprecated-declarations -pthread -lprotobuf -lboost_serialization -g   CMakeFiles/TwitterGenerateData.dir/src/benchmarks/source/GenerateData.cpp.o  -o ../bin/TwitterGenerateData 

@@ -1,0 +1,1 @@
+clang++   -std=c++11 -g -fPIC -Wno-deprecated-declarations -pthread -lprotobuf -lboost_serialization -g   CMakeFiles/TwitterGenerateRandomList.dir/src/benchmarks/source/GenerateRandomList.cpp.o  -o ../bin/TwitterGenerateRandomList 
