@@ -1,5 +1,6 @@
 
-#Dependencies
+Dependencies
+------------
 * rapid-json
 * boost
 * google protobuf
