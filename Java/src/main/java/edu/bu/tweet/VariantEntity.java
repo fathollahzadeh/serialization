@@ -1,26 +1,10 @@
 package edu.bu.tweet;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import edu.rice.dmodel.Base;
 import edu.rice.dmodel.RootData;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonReader;
-import javax.json.JsonWriter;
-import javax.json.JsonWriterFactory;
-import javax.json.stream.JsonGenerator;
-
+import javax.json.*;
 import org.apache.log4j.Logger;
 
 
@@ -90,13 +74,67 @@ public class VariantEntity extends Base implements RootData {
     }
 
     public byte[] writeByteBuffer() {
-        return new byte[0];
+
+        int allocatedBufferSize = 0;
+        byte[] content_typeBytes = (content_type != null) ? content_type.getBytes() : new byte[0];
+        allocatedBufferSize += content_typeBytes.length + 4;
+
+        byte[] urlBytes = (url != null) ? url.getBytes() : new byte[0];
+        allocatedBufferSize += urlBytes.length + 4;
+
+        allocatedBufferSize+=8;//bitrate
+
+        // array fields
+        ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+        byteBuffer.putLong(bitrate);
+        byteBuffer.putInt(content_typeBytes.length);
+        byteBuffer.put(content_typeBytes);
+        byteBuffer.putInt(urlBytes.length);
+        byteBuffer.put(urlBytes);
+
+        return byteBuffer.array();
     }
 
     public RootData readByteBuffer(byte[] buffData) {
-        return null;
+        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+        int stringSize;
+
+        this.bitrate=byteBuffer.getLong();
+        stringSize = byteBuffer.getInt();
+        this.content_type = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.url = extractString(byteBuffer, stringSize);
+        return this;
     }
 
+    public JsonObject jsonObjectBuilder() {
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+        objectBuilder.add("bitrate",this.bitrate);
+
+        if (this.content_type != null && !this.content_type.isEmpty()) {
+            objectBuilder.add("content_type", this.content_type);
+        }
+
+        if (this.url != null && !this.url.isEmpty()) {
+            objectBuilder.add("url", this.url);
+        }
+
+        JsonObject jsonObject = objectBuilder.build();
+        return jsonObject;
+    }
+
+    public VariantEntity readJSONVariantEntity(JsonObject jsonObject) {
+
+        this.bitrate=Long.parseLong(jsonObject.getJsonNumber("bitrate").toString());
+
+        if (jsonObject.get("content_type") != null && jsonObject.get("content_type") != JsonValue.NULL) {
+            this.content_type = jsonObject.getString("content_type");
+        }
+        if (jsonObject.get("url") != null && jsonObject.get("url") != JsonValue.NULL) {
+            this.url = jsonObject.getString("url");
+        }
+        return  this;
+    }
     public int compareTo(RootData o) {
         return 0;
     }

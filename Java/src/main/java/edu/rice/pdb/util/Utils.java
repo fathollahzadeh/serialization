@@ -23,8 +23,8 @@ import com.esotericsoftware.kryo.Kryo;
 import edu.rice.dmodel.Element;
 import edu.rice.dmodel.IndexData;
 import edu.rice.dmodel.RootData;
-import edu.rice.pdb.read.SerializationMethod;
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.SerializationType;
+import edu.bu.util.Const;
 import edu.rice.pdb.sort.WriteValues;
 
 public class Utils {
@@ -264,7 +264,7 @@ public class Utils {
 	/*
 	 * This method reads the objects based on their serialization and prints them out
 	 */
-	public static RootData readObjectWithSerialization(RootData myData, byte[] buffData, SerializationMethod method, Kryo kryo) {
+	public static RootData readObjectWithSerialization(RootData myData, byte[] buffData, SerializationType method, Kryo kryo) {
 		RootData myDeserlizedObject = null;
 
 		switch (method) {

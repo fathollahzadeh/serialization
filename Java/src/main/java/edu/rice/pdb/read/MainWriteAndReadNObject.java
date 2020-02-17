@@ -3,6 +3,7 @@ package edu.rice.pdb.read;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import edu.bu.util.SerializationType;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -10,7 +11,7 @@ import edu.rice.dmodel.Customer;
 import edu.rice.dmodel.Element;
 import edu.rice.dmodel.LineItem;
 import edu.rice.dmodel.Part;
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.Const;
 import edu.rice.pdb.util.Utils;
 
 public class MainWriteAndReadNObject {
@@ -28,16 +29,16 @@ public class MainWriteAndReadNObject {
 		PropertyConfigurator.configure("log4j.properties");
 		Utils.deleteOldFiles(new String[] { "*.obj", "*.index" });
 
-		runExperiments(SerializationMethod.JAVADEFAULT);
-		runExperiments(SerializationMethod.JSON);
-		runExperiments(SerializationMethod.BSON);
-		runExperiments(SerializationMethod.PROTOCOL);
-		runExperiments(SerializationMethod.KRYO);
-		runExperiments(SerializationMethod.BYTEBUFFER);
+		runExperiments(SerializationType.JAVADEFAULT);
+		runExperiments(SerializationType.JSON);
+		runExperiments(SerializationType.BSON);
+		runExperiments(SerializationType.PROTOCOL);
+		runExperiments(SerializationType.KRYO);
+		runExperiments(SerializationType.BYTEBUFFER);
 
 	}
 
-	public static void runExperiments(SerializationMethod serialMethod) throws FileNotFoundException, IOException, ClassNotFoundException {
+	public static void runExperiments(SerializationType serialMethod) throws FileNotFoundException, IOException, ClassNotFoundException {
 		
 		
 		// Generate Objects and write to Files. 

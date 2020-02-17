@@ -3,7 +3,11 @@ package edu.bu.tweet;
 import edu.rice.dmodel.Base;
 import edu.rice.dmodel.RootData;
 import org.apache.log4j.Logger;
-
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.json.JsonValue;
+import java.nio.ByteBuffer;
 import java.util.List;
 
 public class OptionEntity extends Base implements RootData {
@@ -62,11 +66,51 @@ public class OptionEntity extends Base implements RootData {
     }
 
     public byte[] writeByteBuffer() {
-        return new byte[0];
+
+        int allocatedBufferSize = 0;
+
+        byte[] textBytes = (text != null) ? text.getBytes() : new byte[0];
+        allocatedBufferSize += textBytes.length + 4;
+
+        allocatedBufferSize+=4;//position
+
+        // array fields
+        ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+        byteBuffer.putInt(textBytes.length);
+        byteBuffer.put(textBytes);
+        byteBuffer.putInt(position);
+
+        return byteBuffer.array();
     }
 
     public RootData readByteBuffer(byte[] buffData) {
-        return null;
+        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+        int stringSize;
+
+        stringSize = byteBuffer.getInt();
+        this.text = extractString(byteBuffer, stringSize);
+        this.position=byteBuffer.getInt();
+
+        return this;
+    }
+
+    public JsonObject jsonObjectBuilder() {
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+        objectBuilder.add("position",this.position);
+        if (this.text != null && !this.text.isEmpty()) {
+            objectBuilder.add("text", this.text);
+        }
+        JsonObject jsonObject = objectBuilder.build();
+        return jsonObject;
+    }
+
+    public OptionEntity readJSONOptionEntity(JsonObject jsonObject) {
+
+        this.position=jsonObject.getInt("position");
+        if (jsonObject.get("text") != null && jsonObject.get("text") != JsonValue.NULL) {
+            this.text = jsonObject.getString("text");
+        }
+        return this;
     }
 
     public int compareTo(RootData o) {

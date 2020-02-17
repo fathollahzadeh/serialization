@@ -1,29 +1,16 @@
 package edu.bu.tweet;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import edu.rice.dmodel.Base;
 import edu.rice.dmodel.RootData;
-
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
-import javax.json.JsonReader;
-import javax.json.JsonWriter;
-import javax.json.JsonWriterFactory;
-import javax.json.stream.JsonGenerator;
-
 import org.apache.log4j.Logger;
 
 
@@ -45,6 +32,10 @@ public class MediaEntity extends Base implements RootData {
     private String url;
     private VideoEntity video_info;
     private AdditionalMediaInfoEntity additional_media_info;
+
+    public MediaEntity() {
+        this.indices=new ArrayList<>();
+    }
 
     public String getDisplay_url() {
         return display_url;
@@ -183,11 +174,234 @@ public class MediaEntity extends Base implements RootData {
     }
 
     public byte[] writeByteBuffer() {
-        return new byte[0];
+
+        int allocatedBufferSize = 0;
+
+        byte[] display_urlBytes = (display_url != null) ? display_url.getBytes() : new byte[0];
+        allocatedBufferSize += display_urlBytes.length + 4;
+
+        byte[] expanded_urlBytes = (expanded_url != null) ? expanded_url.getBytes() : new byte[0];
+        allocatedBufferSize += expanded_urlBytes.length + 4;
+
+        byte[] media_urlBytes = (media_url != null) ? media_url.getBytes() : new byte[0];
+        allocatedBufferSize += media_urlBytes.length + 4;
+
+        byte[] media_url_httpsBytes = (media_url_https != null) ? media_url_https.getBytes() : new byte[0];
+        allocatedBufferSize += media_url_httpsBytes.length + 4;
+
+        byte[] sizesBytes = (sizes != null) ? sizes.writeByteBuffer() : new byte[0];
+        allocatedBufferSize += sizesBytes.length + 4;
+
+        byte[] typeBytes = (type != null) ? type.getBytes() : new byte[0];
+        allocatedBufferSize += typeBytes.length + 4;
+
+        byte[] source_status_id_strBytes = (source_status_id_str != null) ? source_status_id_str.getBytes() : new byte[0];
+        allocatedBufferSize += source_status_id_strBytes.length + 4;
+
+        byte[] urlBytes = (url != null) ? url.getBytes() : new byte[0];
+        allocatedBufferSize += urlBytes.length + 4;
+
+        byte[] video_infoBytes = (video_info != null) ? video_info.writeByteBuffer() : new byte[0];
+        allocatedBufferSize += video_infoBytes.length + 4;
+
+        byte[] additional_media_infoBytes = (additional_media_info != null) ? additional_media_info.writeByteBuffer() : new byte[0];
+        allocatedBufferSize += additional_media_infoBytes.length + 4;
+
+        allocatedBufferSize += 8; //id
+        allocatedBufferSize += 4 * (indices.size() + 1);//indices
+        allocatedBufferSize += 8;//source_status_id
+
+        // array fields
+        ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+        byteBuffer.putInt(display_urlBytes.length);
+        byteBuffer.put(display_urlBytes);
+        byteBuffer.putInt(expanded_urlBytes.length);
+        byteBuffer.put(expanded_urlBytes);
+        byteBuffer.putLong(id);
+        byteBuffer.putInt(indices.size());
+        for (int i = 0; i < indices.size(); i++) {
+            byteBuffer.putInt(indices.get(i));
+        }
+        byteBuffer.putInt(media_urlBytes.length);
+        byteBuffer.put(media_urlBytes);
+        byteBuffer.putInt(media_url_httpsBytes.length);
+        byteBuffer.put(media_url_httpsBytes);
+        byteBuffer.putInt(sizesBytes.length);
+        byteBuffer.put(sizesBytes);
+        byteBuffer.putInt(typeBytes.length);
+        byteBuffer.put(typeBytes);
+        byteBuffer.putLong(source_status_id);
+        byteBuffer.putInt(source_status_id_strBytes.length);
+        byteBuffer.put(source_status_id_strBytes);
+        byteBuffer.putInt(urlBytes.length);
+        byteBuffer.put(urlBytes);
+        byteBuffer.putInt(video_infoBytes.length);
+        byteBuffer.put(video_infoBytes);
+        byteBuffer.putInt(additional_media_infoBytes.length);
+        byteBuffer.put(additional_media_infoBytes);
+        return byteBuffer.array();
     }
 
     public RootData readByteBuffer(byte[] buffData) {
-        return null;
+        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+        int stringSize;
+
+        stringSize = byteBuffer.getInt();
+        this.display_url = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.expanded_url = extractString(byteBuffer, stringSize);
+        this.id = byteBuffer.getLong();
+
+        int numberOfIndices = byteBuffer.getInt();
+        this.indices = new ArrayList<>();
+        for (int i = 0; i < numberOfIndices; i++) {
+            this.indices.add(byteBuffer.getInt());
+        }
+
+        stringSize = byteBuffer.getInt();
+        this.media_url = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.media_url_https = extractString(byteBuffer, stringSize);
+
+        byte[] sizesBytes = new byte[byteBuffer.getInt()];
+        if (sizesBytes.length > 0) {
+            byteBuffer.get(sizesBytes, 0, sizesBytes.length);
+            this.sizes = new MediaSizesEntity();
+            this.sizes.readByteBuffer(sizesBytes);
+        } else
+            this.sizes = null;
+
+        stringSize = byteBuffer.getInt();
+        this.type = extractString(byteBuffer, stringSize);
+        this.source_status_id = byteBuffer.getLong();
+        stringSize = byteBuffer.getInt();
+        this.source_status_id_str = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.url = extractString(byteBuffer, stringSize);
+
+        byte[] video_infoBytes = new byte[byteBuffer.getInt()];
+        if (video_infoBytes.length > 0) {
+            byteBuffer.get(video_infoBytes, 0, video_infoBytes.length);
+            this.video_info = new VideoEntity();
+            this.video_info.readByteBuffer(video_infoBytes);
+        } else
+            this.video_info = null;
+
+        byte[] additional_media_infoBytes = new byte[byteBuffer.getInt()];
+        if (additional_media_infoBytes.length > 0) {
+            byteBuffer.get(additional_media_infoBytes, 0, additional_media_infoBytes.length);
+            this.additional_media_info = new AdditionalMediaInfoEntity();
+            this.additional_media_info.readByteBuffer(additional_media_infoBytes);
+        } else
+            this.additional_media_info = null;
+
+        return this;
+    }
+
+    public JsonObject jsonObjectBuilder() {
+
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+        if (this.display_url != null && !this.display_url.isEmpty()) {
+            objectBuilder.add("display_url", this.display_url);
+        }
+
+        if (this.expanded_url != null && !this.expanded_url.isEmpty()) {
+            objectBuilder.add("expanded_url", this.expanded_url);
+        }
+        objectBuilder.add("id", this.id);
+
+        JsonArrayBuilder jsonIndicesArray = Json.createArrayBuilder();
+        for (Integer integer : indices) {
+            jsonIndicesArray.add(integer);
+        }
+
+        objectBuilder.add("indices", jsonIndicesArray);
+        if (this.media_url != null && !this.media_url.isEmpty()) {
+            objectBuilder.add("media_url", this.media_url);
+        }
+
+        if (this.media_url_https != null && !this.media_url_https.isEmpty()) {
+            objectBuilder.add("media_url_https", this.media_url_https);
+        }
+
+        if (this.sizes!=null){
+            objectBuilder.add("sizes",this.sizes.jsonObjectBuilder());
+        }
+
+        if (this.type != null && !this.type.isEmpty()) {
+            objectBuilder.add("type", this.type);
+        }
+        objectBuilder.add("source_status_id",this.source_status_id);
+
+        if (this.source_status_id_str != null && !this.source_status_id_str.isEmpty()) {
+            objectBuilder.add("source_status_id_str", this.source_status_id_str);
+        }
+
+        if (this.url != null && !this.url.isEmpty()) {
+            objectBuilder.add("url", this.url);
+        }
+
+        if (this.video_info!=null){
+            objectBuilder.add("video_info",this.video_info.jsonObjectBuilder());
+        }
+
+        if (this.additional_media_info!=null){
+            objectBuilder.add("additional_media_info",this.additional_media_info.jsonObjectBuilder());
+        }
+
+        JsonObject jsonObject = objectBuilder.build();
+        return jsonObject;
+    }
+
+    public MediaEntity readJSONMediaEntity(JsonObject jsonObject) {
+
+        if (jsonObject.get("display_url") != null && jsonObject.get("display_url") != JsonValue.NULL) {
+            this.display_url = jsonObject.getString("display_url");
+        }
+        if (jsonObject.get("expanded_url") != null && jsonObject.get("expanded_url") != JsonValue.NULL) {
+            this.expanded_url = jsonObject.getString("expanded_url");
+        }
+        this.id = Long.parseLong(jsonObject.getJsonNumber("id").toString());
+
+        if (jsonObject.getJsonArray("indices") != null) {
+            JsonArray indicesArray = jsonObject.getJsonArray("indices");
+            for (int i = 0; i < indicesArray.size(); i++) {
+                this.indices.add(indicesArray.getInt(i));
+            }
+        }
+
+        if (jsonObject.get("media_url") != null && jsonObject.get("media_url") != JsonValue.NULL) {
+            this.media_url = jsonObject.getString("media_url");
+        }
+        if (jsonObject.get("media_url_https") != null && jsonObject.get("media_url_https") != JsonValue.NULL) {
+            this.media_url_https = jsonObject.getString("media_url_https");
+        }
+        if (jsonObject.getJsonObject("sizes") != null && jsonObject.getJsonObject("sizes") != JsonValue.NULL) {
+            JsonObject sizesJsonObject = jsonObject.getJsonObject("sizes");
+            this.sizes=new MediaSizesEntity().readJSONMediaSizesEntity(sizesJsonObject);
+        }
+        if (jsonObject.get("type") != null && jsonObject.get("type") != JsonValue.NULL) {
+            this.type = jsonObject.getString("type");
+        }
+        this.source_status_id = Long.parseLong(jsonObject.getJsonNumber("source_status_id").toString());
+
+        if (jsonObject.get("source_status_id_str") != null && jsonObject.get("source_status_id_str") != JsonValue.NULL) {
+            this.source_status_id_str = jsonObject.getString("source_status_id_str");
+        }
+        if (jsonObject.get("url") != null && jsonObject.get("url") != JsonValue.NULL) {
+            this.url = jsonObject.getString("url");
+        }
+        if (jsonObject.getJsonObject("video_info") != null && jsonObject.getJsonObject("video_info") != JsonValue.NULL) {
+            JsonObject video_infoJsonObject = jsonObject.getJsonObject("video_info");
+            this.video_info=new VideoEntity().readJSONVideoEntity(video_infoJsonObject);
+        }
+
+        if (jsonObject.getJsonObject("additional_media_info") != null && jsonObject.getJsonObject("additional_media_info") != JsonValue.NULL) {
+            JsonObject additional_media_infoJsonObject = jsonObject.getJsonObject("additional_media_info");
+            this.additional_media_info=new AdditionalMediaInfoEntity().readJSONAdditionalMediaInfoEntity(additional_media_infoJsonObject);
+        }
+
+        return this;
     }
 
     public int compareTo(RootData o) {

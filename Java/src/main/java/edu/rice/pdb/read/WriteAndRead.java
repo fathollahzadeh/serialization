@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import edu.bu.util.SerializationType;
 import org.apache.log4j.Logger;
 
 import edu.rice.dmodel.Customer;
@@ -19,7 +20,7 @@ import edu.rice.dmodel.LineItem;
 import edu.rice.dmodel.Order;
 import edu.rice.dmodel.Part;
 import edu.rice.dmodel.RootData;
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.Const;
 import edu.rice.pdb.serialization.KryoSinglton;
 import edu.rice.pdb.util.Utils;
 
@@ -29,7 +30,7 @@ public class WriteAndRead {
 
 	final static Logger logger = Logger.getLogger(WriteAndRead.class);
 
-	public static void writeObjects(SerializationMethod method, SerializedData dataType, int numberOfObjects, String indexFile, String OutputFileName) throws FileNotFoundException, IOException {
+	public static void writeObjects(SerializationType method, SerializedData dataType, int numberOfObjects, String indexFile, String OutputFileName) throws FileNotFoundException, IOException {
 
 		List<RootData> objectList = null;
 		RootData m_p = null;
@@ -141,7 +142,7 @@ public class WriteAndRead {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public static ArrayList<RootData> readObjects(SerializationMethod method, RootData myDataType, int numberOfObjectsToRead, int indexSizeToRead, String indexFile, String fileinput, boolean seq, boolean randomStart)
+	public static ArrayList<RootData> readObjects(SerializationType method, RootData myDataType, int numberOfObjectsToRead, int indexSizeToRead, String indexFile, String fileinput, boolean seq, boolean randomStart)
 			throws IOException, ClassNotFoundException {
 
 		ArrayList<RootData> readListOfObject = new ArrayList<RootData>();

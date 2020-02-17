@@ -239,4 +239,21 @@ public class Base {
 		return gson.fromJson(jsonString, TweetStatus.class);
 	}
 
+	public static byte convertToByte(boolean value) {
+		return (byte) (value ? 1 : 0);
+	}
+
+	public static byte convertToByte(Boolean value) {
+		return (byte) (value == null ? 2 : (value ? 1 : 0));
+	}
+
+	public static boolean convertToBoolean(byte value) {
+		return value > 0;
+	}
+
+	public static Boolean convertToBoolean1(byte value) {
+		return value == 2 ? null : value > 0;
+	}
+
+
 }

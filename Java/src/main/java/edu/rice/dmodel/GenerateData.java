@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import org.apache.log4j.PropertyConfigurator;
 
-import edu.rice.pdb.read.SerializationMethod;
+import edu.bu.util.SerializationType;
 import edu.rice.pdb.serialization.KryoSinglton;
 import edu.rice.pdb.util.Utils;
 
@@ -26,7 +26,7 @@ import edu.rice.pdb.util.Utils;
  */
 public class GenerateData {
 
-	static SerializationMethod method = null;
+	static SerializationType method = null;
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
@@ -44,36 +44,36 @@ public class GenerateData {
 			// Write them to file with different serialization methods.
 			switch (serializationType) {
 			case 1:
-				method = SerializationMethod.JAVADEFAULT;
+				method = SerializationType.JAVADEFAULT;
 
 				System.out.println("Running with  SerializationMethod.JAVADEFAULT");
 
 				break;
 			case 2:
-				method = SerializationMethod.JSON;
+				method = SerializationType.JSON;
 				System.out.println("Running with  SerializationMethod.JSON");
 
 				break;
 
 			case 3:
-				method = SerializationMethod.BSON;
+				method = SerializationType.BSON;
 				System.out.println("Running with  SerializationMethod.BSON");
 
 				break;
 			case 4:
 
-				method = SerializationMethod.PROTOCOL;
+				method = SerializationType.PROTOCOL;
 				System.out.println("Running with  SerializationMethod.PROTOCOL");
 
 				break;
 
 			case 5:
-				method = SerializationMethod.KRYO;
+				method = SerializationType.KRYO;
 				System.out.println("Running with  SerializationMethod.KRYO");
 				break;
 
 			case 6:
-				method = SerializationMethod.BYTEBUFFER;
+				method = SerializationType.BYTEBUFFER;
 				System.out.println("Running with  SerializationMethod.ByteBuffer");
 				break;
 

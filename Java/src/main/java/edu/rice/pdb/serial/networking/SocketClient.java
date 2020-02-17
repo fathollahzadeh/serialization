@@ -19,9 +19,9 @@ import edu.rice.dmodel.IndexData;
 import edu.rice.dmodel.LineItem;
 import edu.rice.dmodel.Part;
 import edu.rice.dmodel.RootData;
-import edu.rice.pdb.read.SerializationMethod;
+import edu.bu.util.SerializationType;
 import edu.rice.pdb.read.WriteAndRead;
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.Const;
 import edu.rice.pdb.serialization.KryoSinglton;
 import edu.rice.pdb.util.Utils;
 
@@ -129,25 +129,25 @@ public class SocketClient {
 			}
 		}
 
-		SerializationMethod serialMethod = null;
+		SerializationType serialMethod = null;
 		switch (serializationTypeInt) {
 		case 1:
-			serialMethod = SerializationMethod.JAVADEFAULT;
+			serialMethod = SerializationType.JAVADEFAULT;
 			break;
 		case 2:
-			serialMethod = SerializationMethod.JSON;
+			serialMethod = SerializationType.JSON;
 			break;
 		case 3:
-			serialMethod = SerializationMethod.BSON;
+			serialMethod = SerializationType.BSON;
 			break;
 		case 4:
-			serialMethod = SerializationMethod.PROTOCOL;
+			serialMethod = SerializationType.PROTOCOL;
 			break;
 		case 5:
-			serialMethod = SerializationMethod.KRYO;
+			serialMethod = SerializationType.KRYO;
 			break;
 		case 6:
-			serialMethod = SerializationMethod.BYTEBUFFER;
+			serialMethod = SerializationType.BYTEBUFFER;
 			break;
 		}
 
@@ -166,22 +166,22 @@ public class SocketClient {
 			// Select based on the serialization method.
 			switch (serialMethod) {
 			case JAVADEFAULT:
-				myClient.prepareAndSend(mydata, dataTypeInt, SerializationMethod.JAVADEFAULT, false);
+				myClient.prepareAndSend(mydata, dataTypeInt, SerializationType.JAVADEFAULT, false);
 				break;
 			case JSON:
-				myClient.prepareAndSend(mydata, dataTypeInt, SerializationMethod.JSON, false);
+				myClient.prepareAndSend(mydata, dataTypeInt, SerializationType.JSON, false);
 				break;
 			case BSON:
-				myClient.prepareAndSend(mydata, dataTypeInt, SerializationMethod.BSON, false);
+				myClient.prepareAndSend(mydata, dataTypeInt, SerializationType.BSON, false);
 				break;
 			case PROTOCOL:
-				myClient.prepareAndSend(mydata, dataTypeInt, SerializationMethod.PROTOCOL, false);
+				myClient.prepareAndSend(mydata, dataTypeInt, SerializationType.PROTOCOL, false);
 				break;
 			case KRYO:
-				myClient.prepareAndSend(mydata, dataTypeInt, SerializationMethod.KRYO, false);
+				myClient.prepareAndSend(mydata, dataTypeInt, SerializationType.KRYO, false);
 				break;
 			case BYTEBUFFER:
-				myClient.prepareAndSend(mydata, dataTypeInt, SerializationMethod.BYTEBUFFER, false);
+				myClient.prepareAndSend(mydata, dataTypeInt, SerializationType.BYTEBUFFER, false);
 				break;
 			default:
 				logger.error("SocketClient - Serialization Method is not defined. ");
@@ -191,7 +191,7 @@ public class SocketClient {
 	}
 
 	// this method reads or generates data into RAM for sending over socket.
-	public List<RootData> readData(int dataType, SerializationMethod serialMethod) throws IOException {
+	public List<RootData> readData(int dataType, SerializationType serialMethod) throws IOException {
 
 		System.out.println("readData: data type is " + dataType + " Serialization is " + serialMethod);
 
@@ -230,7 +230,7 @@ public class SocketClient {
 	 * @paran serializationMethod - is the choice for serialization of objects.
 	 */
 
-	void prepareAndSend(List<RootData> mydata, int dataType, SerializationMethod serializationMethod, boolean isForwarding) {
+	void prepareAndSend(List<RootData> mydata, int dataType, SerializationType serializationType, boolean isForwarding) {
 
 		try {
 			clientSocket = new Socket(hostName, portNumber);
@@ -254,7 +254,7 @@ public class SocketClient {
 			}
 		}
 
-		System.out.println("Prepare and send: data type is " + dataType + " Serialization is " + serializationMethod);
+		System.out.println("Prepare and send: data type is " + dataType + " Serialization is " + serializationType);
 
 		try {
 			ByteBuffer m_buffer = ByteBuffer.allocate(80 * Const.PAGESIZE);
@@ -275,7 +275,7 @@ public class SocketClient {
 				for (RootData rootData : mydata) {
 
 					// Select based on the serialization method.
-					switch (serializationMethod) {
+					switch (serializationType) {
 					case JAVADEFAULT:
 						s_data = rootData.javaDefaultSerialization();
 						break;
@@ -356,7 +356,7 @@ public class SocketClient {
 		}
 	}
 
-	void readByteArrayAndSend(int dataType, SerializationMethod serialMethod, int numberOfObjects) {
+	void readByteArrayAndSend(int dataType, SerializationType serialMethod, int numberOfObjects) {
 		// ByteBuffer bb = ByteBuffer.allocateDirect(Const.PAGESIZE);
 
 

@@ -12,7 +12,7 @@ import edu.rice.dmodel.Customer;
 import edu.rice.dmodel.LineItem;
 import edu.rice.dmodel.Part;
 import edu.rice.dmodel.RootData;
-import edu.rice.pdb.read.SerializationMethod;
+import edu.bu.util.SerializationType;
 import edu.rice.pdb.read.WriteAndRead;
 
 /**
@@ -62,42 +62,42 @@ public class ReadObjectAndPrintThemExperiment {
 		switch (serial) {
 		case 1:
 			System.out.println("Running with  SerializationMethod.JAVADEFAULT");
-			runExperiments(SerializationMethod.JAVADEFAULT,dataType,  seq);
+			runExperiments(SerializationType.JAVADEFAULT,dataType,  seq);
 			break;
 		case 2:
 			System.out.println("Running with  SerializationMethod.JSON");
-			runExperiments(SerializationMethod.JSON,dataType,  seq);
+			runExperiments(SerializationType.JSON,dataType,  seq);
 			break;
 		case 3:
 			System.out.println("Running with  SerializationMethod.BSON");
-			runExperiments(SerializationMethod.BSON,dataType,  seq);
+			runExperiments(SerializationType.BSON,dataType,  seq);
 			break;
 		case 4:
 			System.out.println("Running with  SerializationMethod.PROTOCOL");
-			runExperiments(SerializationMethod.PROTOCOL,dataType,  seq);
+			runExperiments(SerializationType.PROTOCOL,dataType,  seq);
 			break;
 		case 5:
 			System.out.println("Running with  SerializationMethod.KRYO");
-			runExperiments(SerializationMethod.KRYO,dataType,  seq);
+			runExperiments(SerializationType.KRYO,dataType,  seq);
 			break;
 		case 6:
 			System.out.println("Running with  SerializationMethod.ByteBuffer");
-			runExperiments(SerializationMethod.BYTEBUFFER,dataType,  seq);
+			runExperiments(SerializationType.BYTEBUFFER,dataType,  seq);
 			break;
 		case 7:
 			System.out.println("Running with  SerializationMethod.JSON_GZIP");
-			runExperiments(SerializationMethod.JSON_GZIP, dataType,  seq);
+			runExperiments(SerializationType.JSON_GZIP, dataType,  seq);
 			break;
 		case 8:
 			System.out.println("Running with  SerializationMethod.GSON");
-			runExperiments(SerializationMethod.GSON,dataType,  seq);
+			runExperiments(SerializationType.GSON,dataType,  seq);
 			break;
 			}
 	}
 
 
 
-	public static void runExperiments(SerializationMethod method, 	int dataType,  boolean seq) throws FileNotFoundException, IOException, ClassNotFoundException {
+	public static void runExperiments(SerializationType method, int dataType, boolean seq) throws FileNotFoundException, IOException, ClassNotFoundException {
 		
 		System.out.println("Number of objects to be read from disk is: "+numberOfObjectsTobeReadFromDisk);
 		

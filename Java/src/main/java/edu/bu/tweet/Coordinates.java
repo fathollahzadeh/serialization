@@ -1,30 +1,15 @@
 package edu.bu.tweet;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.StringWriter;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.zip.GZIPOutputStream;
-
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.json.JsonReader;
 import javax.json.JsonValue;
-import javax.json.JsonWriter;
-import javax.json.JsonWriterFactory;
-import javax.json.stream.JsonGenerator;
-
 import org.apache.log4j.Logger;
 
 import edu.rice.dmodel.Base;
@@ -38,6 +23,10 @@ public class Coordinates extends Base implements RootData {
 
 	private String type;
 	private double[] coordinates;
+
+	public Coordinates() {
+		this.coordinates=new double[0];
+	}
 
 	public String getType() {
 		return type;
@@ -88,14 +77,77 @@ public class Coordinates extends Base implements RootData {
 	}
 
 	public byte[] writeByteBuffer() {
-		return new byte[0];
+
+		int allocatedBufferSize = 0;
+
+		byte[] typeBytes = type.getBytes(Charset.forName("UTF-8"));
+		allocatedBufferSize += typeBytes.length + 4;
+
+		//coordinate size
+		// 4 bytes is for an additional integer for write the size byteArray
+		allocatedBufferSize+=8* this.coordinates.length+4;
+
+		// array fields
+		ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+
+		byteBuffer.putInt(typeBytes.length);
+		byteBuffer.put(typeBytes);
+
+		byteBuffer.putInt(coordinates.length);
+		for (double d:coordinates){
+			byteBuffer.putDouble(d);
+		}
+		return byteBuffer.array();
 	}
 
 	public RootData readByteBuffer(byte[] buffData) {
-		return null;
+
+		ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+		int stringSize;
+
+		stringSize=byteBuffer.getInt();
+		this.type=extractString(byteBuffer,stringSize);
+
+		int numOfCoordinates=byteBuffer.getInt();
+		this.coordinates=new double[numOfCoordinates];
+		for (int i=0;i<numOfCoordinates;i++){
+			this.coordinates[i]=byteBuffer.getDouble();
+		}
+
+		return this;
 	}
 
 	public int compareTo(RootData o) {
 		return 0;
+	}
+
+    public JsonObject jsonObjectBuilder() {
+
+		JsonObjectBuilder coordinatesObjectBuilder = Json.createObjectBuilder();
+		coordinatesObjectBuilder.add("type",this.type);
+
+		JsonArrayBuilder jsonCoordinatesArray = Json.createArrayBuilder();
+		for (Double d : this.coordinates) {
+			jsonCoordinatesArray.add(d);
+		}
+		coordinatesObjectBuilder.add("coordinates",jsonCoordinatesArray);
+		JsonObject coordinatesJsonObject = coordinatesObjectBuilder.build();
+		return coordinatesJsonObject;
+
+    }
+
+	public Coordinates readJSONCoordinates(JsonObject jsonObject) {
+		if (jsonObject.get("type") != null && jsonObject.get("type") != JsonValue.NULL) {
+			this.type=jsonObject.getString("type");
+		}
+
+		if (jsonObject.getJsonArray("coordinates") != null) {
+			JsonArray coordinatesArray = jsonObject.getJsonArray("coordinates");
+			this.coordinates=new double[coordinatesArray.size()];
+			for (int i = 0; i < coordinatesArray.size(); i++) {
+				this.coordinates[i]=Double.parseDouble(coordinatesArray.getJsonNumber(i).toString());
+			}
+		}
+		return this;
 	}
 }

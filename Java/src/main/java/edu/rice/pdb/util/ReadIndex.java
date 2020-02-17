@@ -3,7 +3,7 @@ package edu.rice.pdb.util;
 import org.apache.log4j.PropertyConfigurator;
 
 import edu.rice.dmodel.IndexData;
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.Const;
 
 public class ReadIndex {
 

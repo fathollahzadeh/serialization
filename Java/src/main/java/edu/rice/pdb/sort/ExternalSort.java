@@ -23,10 +23,9 @@ import edu.rice.dmodel.IndexData;
 import edu.rice.dmodel.LineItem;
 import edu.rice.dmodel.Part;
 import edu.rice.dmodel.RootData;
-import edu.rice.pdb.read.SerializationMethod;
+import edu.bu.util.SerializationType;
 import edu.rice.pdb.read.SerializedData;
-import edu.rice.pdb.serial.garbagecollector.Garbage;
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.Const;
 import edu.rice.pdb.serialization.KryoSinglton;
 import edu.rice.pdb.util.Utils;
 
@@ -65,7 +64,7 @@ public class ExternalSort {
 		// Create a hot garbage collector
 //		Garbage.activateGarbageCollector();
 
-		SerializationMethod method = null;
+		SerializationType method = null;
 		SerializedData dataType = null;
 
 		// Write them to file with different serialization methods.
@@ -91,28 +90,28 @@ public class ExternalSort {
 
 		switch (serializationType) {
 		case 1:
-			method = SerializationMethod.JAVADEFAULT;
+			method = SerializationType.JAVADEFAULT;
 			break;
 		case 2:
-			method = SerializationMethod.JSON;
+			method = SerializationType.JSON;
 			break;
 		case 3:
-			method = SerializationMethod.BSON;
+			method = SerializationType.BSON;
 			break;
 		case 4:
-			method = SerializationMethod.PROTOCOL;
+			method = SerializationType.PROTOCOL;
 			break;
 		case 5:
-			method = SerializationMethod.KRYO;
+			method = SerializationType.KRYO;
 			break;
 		case 6:
-			method = SerializationMethod.BYTEBUFFER;
+			method = SerializationType.BYTEBUFFER;
 			break;
 		case 7:
-			method = SerializationMethod.JSON_GZIP;
+			method = SerializationType.JSON_GZIP;
 			break;
 		case 8:
-			method = SerializationMethod.GSON;
+			method = SerializationType.GSON;
 			break;			
 		}
 
@@ -128,11 +127,11 @@ public class ExternalSort {
 	 * 	
 	 * 
 	 */
-	private static void runTheExternalSort(SerializationMethod serializationMethod, SerializedData dataType) throws IOException, FileNotFoundException, ClassNotFoundException {
+	private static void runTheExternalSort(SerializationType serializationType, SerializedData dataType) throws IOException, FileNotFoundException, ClassNotFoundException {
 		System.out.println("Start Reading part of the file into RAM");
 
 		// Open The object file
-		File itRaw = new File("inputdata/" + dataType + serializationMethod + ".object");
+		File itRaw = new File("inputdata/" + dataType + serializationType + ".object");
 		RandomAccessFile fisRaw = new RandomAccessFile(itRaw, "r");
 
 		ArrayList<WriteValues> writeValues = new ArrayList<WriteValues>();
@@ -141,7 +140,7 @@ public class ExternalSort {
 		// Get a Runtime object
 		Runtime runTime = Runtime.getRuntime();
 
-		IndexData myIndex = Utils.readIndex("inputdata/" + dataType + serializationMethod + ".index", 0);
+		IndexData myIndex = Utils.readIndex("inputdata/" + dataType + serializationType + ".index", 0);
 		System.out.println("Read Index file number into RAM");
 
 		long[] my_indexStarts = myIndex.getStarts();
@@ -231,19 +230,19 @@ public class ExternalSort {
 				// NOW read each object
 				switch (dataType) {
 				case PART:
-					tmp = (Part) Utils.readObjectWithSerialization(new Part(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmp = (Part) Utils.readObjectWithSerialization(new Part(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				case LINEITEM:
-					tmp = (LineItem) Utils.readObjectWithSerialization(new LineItem(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmp = (LineItem) Utils.readObjectWithSerialization(new LineItem(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				case CUSTOMER:
-					tmp = (Customer) Utils.readObjectWithSerialization(new Customer(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmp = (Customer) Utils.readObjectWithSerialization(new Customer(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				case ELEMENT:
-					tmp = (Element) Utils.readObjectWithSerialization(new Element(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmp = (Element) Utils.readObjectWithSerialization(new Element(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				case TWEET:
-					tmp = (TweetStatus) Utils.readObjectWithSerialization(new TweetStatus(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmp = (TweetStatus) Utils.readObjectWithSerialization(new TweetStatus(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				default:
 					break;
@@ -265,7 +264,7 @@ public class ExternalSort {
 			
 			
 			// write the sorted list back to files.
-			WriteValues tmpResults = writeToFiles(i, m_list_read_from_file, "tmp/sorted-" + dataType + serializationMethod, serializationMethod);
+			WriteValues tmpResults = writeToFiles(i, m_list_read_from_file, "tmp/sorted-" + dataType + serializationType, serializationType);
 			
 			// 	add IO time for writing data into disk
 			tmpResults.setIoTime(tmpResults.getIoTime() + ioTime); // add IO time
@@ -303,7 +302,7 @@ public class ExternalSort {
 		double elapsedIndexTime = indexTime / 1000000000.0;
 		double elapsedSortTime = sortTime / 1000000000.0;
 
-		System.out.println("[ReadTimeJAVA]#ExternalSortFirstStep#" + dataType + "#" + serializationMethod + "#" + String.format("%.9f", elapsedIOSeconds) + "#" + String.format("%.9f", elapsedIndexTime)+"#" +   String.format("%.9f", elapsedSortTime)  + "#" +   String.format("%.9f", elapsedSeconds));
+		System.out.println("[ReadTimeJAVA]#ExternalSortFirstStep#" + dataType + "#" + serializationType + "#" + String.format("%.9f", elapsedIOSeconds) + "#" + String.format("%.9f", elapsedIndexTime)+"#" +   String.format("%.9f", elapsedSortTime)  + "#" +   String.format("%.9f", elapsedSeconds));
 		
 		
 		
@@ -318,7 +317,7 @@ public class ExternalSort {
 		for (int i = 0; i < numberOfFiles; i++) {
 			// Read each index file and insert them at the specific position.
 			// 0 means read the entire index file.
-			IndexData mynewIndex = Utils.readIndex("tmp/sorted-" + dataType + serializationMethod + i + ".index", 0);
+			IndexData mynewIndex = Utils.readIndex("tmp/sorted-" + dataType + serializationType + i + ".index", 0);
 			indexStarts.add(i, mynewIndex.getStarts());
 			indexLenghts.add(i, mynewIndex.getLenghts());
 		}
@@ -331,7 +330,7 @@ public class ExternalSort {
 		for (int x = 0; x < numberOfFiles; x++) {
 			// now read the objects from file one by one - reading
 			// sequentially
-			File it = new File("tmp/sorted-" + dataType + serializationMethod + x + ".object");
+			File it = new File("tmp/sorted-" + dataType + serializationType + x + ".object");
 			fileArray.add(x, new RandomAccessFile(it, "r"));
 		}
 
@@ -396,19 +395,19 @@ public class ExternalSort {
 				// NOW read each object
 				switch (dataType) {
 				case PART:
-					tmpObject = Utils.readObjectWithSerialization(new Part(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmpObject = Utils.readObjectWithSerialization(new Part(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				case LINEITEM:
-					tmpObject = Utils.readObjectWithSerialization(new LineItem(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmpObject = Utils.readObjectWithSerialization(new LineItem(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				case CUSTOMER:
-					tmpObject = Utils.readObjectWithSerialization(new Customer(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmpObject = Utils.readObjectWithSerialization(new Customer(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				case ELEMENT:
-					tmpObject = Utils.readObjectWithSerialization(new Element(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmpObject = Utils.readObjectWithSerialization(new Element(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				case TWEET:
-					tmpObject = Utils.readObjectWithSerialization(new TweetStatus(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+					tmpObject = Utils.readObjectWithSerialization(new TweetStatus(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 					break;
 				default:
 					break;
@@ -503,19 +502,19 @@ public class ExternalSort {
 					// NOW read each object
 					switch (dataType) {
 					case PART:
-						tmpObject = Utils.readObjectWithSerialization(new Part(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+						tmpObject = Utils.readObjectWithSerialization(new Part(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 						break;
 					case LINEITEM:
-						tmpObject = Utils.readObjectWithSerialization(new LineItem(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo() );
+						tmpObject = Utils.readObjectWithSerialization(new LineItem(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo() );
 						break;
 					case CUSTOMER:
-						tmpObject = Utils.readObjectWithSerialization(new Customer(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+						tmpObject = Utils.readObjectWithSerialization(new Customer(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 						break;
 					case ELEMENT:
-						tmpObject = Utils.readObjectWithSerialization(new Element(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+						tmpObject = Utils.readObjectWithSerialization(new Element(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 						break;
 					case TWEET:
-						tmpObject = Utils.readObjectWithSerialization(new TweetStatus(), buffData_each_obecjt, serializationMethod, KryoSinglton.getInstance().getKryo());
+						tmpObject = Utils.readObjectWithSerialization(new TweetStatus(), buffData_each_obecjt, serializationType, KryoSinglton.getInstance().getKryo());
 						break;
 					default:
 						break;
@@ -535,7 +534,7 @@ public class ExternalSort {
 
 			// now deserialize and write to the final file
 			// Do the serialization
-			switch (serializationMethod) {
+			switch (serializationType) {
 			case JAVADEFAULT:
 				dataToWrite.add(data.javaDefaultSerialization());
 				break;
@@ -589,8 +588,8 @@ public class ExternalSort {
 //		System.out.println(indexTime);
 		elapsedIndexTime = indexTime / 1000000000.0;
 
-		logger.info("[ReadTimeJAVA]#ExternalSort#" + dataType + "#" + serializationMethod + "#" + String.format("%.9f", elapsedIOSeconds) + "#"+ String.format("%.9f", elapsedIndexTime) + "#" + String.format("%.9f", elapsedSeconds) );
-		System.out.println("Sorted " + objectCounter + " " + dataType + " objects with " + serializationMethod);
+		logger.info("[ReadTimeJAVA]#ExternalSort#" + dataType + "#" + serializationType + "#" + String.format("%.9f", elapsedIOSeconds) + "#"+ String.format("%.9f", elapsedIndexTime) + "#" + String.format("%.9f", elapsedSeconds) );
+		System.out.println("Sorted " + objectCounter + " " + dataType + " objects with " + serializationType);
 
 		
 		System.out.println("Page Counts for the second stage " + pageCount);
@@ -614,7 +613,7 @@ public class ExternalSort {
 	 * @param name
 	 * @param method
 	 */
-	static WriteValues writeToFiles(int i, List<RootData> m_list_read_from_file, String name, SerializationMethod method) {
+	static WriteValues writeToFiles(int i, List<RootData> m_list_read_from_file, String name, SerializationType method) {
 		WriteValues writeValueResults = null;
 
 		// Now write them back one by one

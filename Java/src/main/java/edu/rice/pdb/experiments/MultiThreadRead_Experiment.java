@@ -17,9 +17,9 @@ import edu.rice.dmodel.IndexData;
 import edu.rice.dmodel.LineItem;
 import edu.rice.dmodel.Part;
 import edu.rice.dmodel.RootData;
-import edu.rice.pdb.read.SerializationMethod;
+import edu.bu.util.SerializationType;
 import edu.rice.pdb.serial.garbagecollector.Garbage;
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.Const;
 import edu.rice.pdb.serialization.KryoSinglton;
 import edu.rice.pdb.util.Utils;
 
@@ -27,7 +27,7 @@ public class MultiThreadRead_Experiment extends Thread {
 
 	final static Logger logger = Logger.getLogger(MultiThreadRead_Experiment.class);
 
-	SerializationMethod method;
+	SerializationType method;
 	RootData myDataType;
 	int numberOfObjectsToRead;
 	int fromObjectNumber;
@@ -42,7 +42,7 @@ public class MultiThreadRead_Experiment extends Thread {
 
 	private static int numberOfThreads = 4;
 
-	public MultiThreadRead_Experiment(IndexData myIndex, SerializationMethod method, RootData myDataType, int numberOfObjectsToRead, int fromObjectNumber, String fileinput) {
+	public MultiThreadRead_Experiment(IndexData myIndex, SerializationType method, RootData myDataType, int numberOfObjectsToRead, int fromObjectNumber, String fileinput) {
 		this.method = method;
 		this.myDataType = myDataType;
 		this.numberOfObjectsToRead = numberOfObjectsToRead;
@@ -82,7 +82,7 @@ public class MultiThreadRead_Experiment extends Thread {
 			int serial = Integer.parseInt(args[1]);
 			int dataType = Integer.parseInt(args[2]);
 
-			SerializationMethod method = null;
+			SerializationType method = null;
 
 			RootData myDataType = null;
 
@@ -92,32 +92,32 @@ public class MultiThreadRead_Experiment extends Thread {
 			switch (serial) {
 			case 1:
 				System.out.println("Running with  SerializationMethod.JAVADEFAULT");
-				method = SerializationMethod.JAVADEFAULT;
+				method = SerializationType.JAVADEFAULT;
 				break;
 
 			case 2:
 				System.out.println("Running with  SerializationMethod.JSON");
-				method = SerializationMethod.JSON;
+				method = SerializationType.JSON;
 				break;
 
 			case 3:
 				System.out.println("Running with  SerializationMethod.BSON");
-				method = SerializationMethod.BSON;
+				method = SerializationType.BSON;
 				break;
 
 			case 4:
 				System.out.println("Running with  SerializationMethod.PROTOCOL");
-				method = SerializationMethod.PROTOCOL;
+				method = SerializationType.PROTOCOL;
 				break;
 
 			case 5:
 				System.out.println("Running with  SerializationMethod.KRYO");
-				method = SerializationMethod.KRYO;
+				method = SerializationType.KRYO;
 				break;
 
 			case 6:
 				System.out.println("Running with  SerializationMethod.ByteBuffer");
-				method = SerializationMethod.BYTEBUFFER;
+				method = SerializationType.BYTEBUFFER;
 				break;
 			}
 
@@ -199,7 +199,7 @@ public class MultiThreadRead_Experiment extends Thread {
 	 * This method reads objects based on serialization and data type
 	 * 
 	 */
-	public void  readObjects(SerializationMethod method, RootData myDataType, int numberOfObjectsToRead, int fromObjectNumber) throws IOException,
+	public void  readObjects(SerializationType method, RootData myDataType, int numberOfObjectsToRead, int fromObjectNumber) throws IOException,
 			ClassNotFoundException {
 		ByteBuffer bb = ByteBuffer.allocateDirect(Const.PAGESIZE);
 

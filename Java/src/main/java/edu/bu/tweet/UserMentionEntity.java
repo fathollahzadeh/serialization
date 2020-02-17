@@ -1,25 +1,10 @@
 package edu.bu.tweet;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonReader;
-import javax.json.JsonValue;
-import javax.json.JsonWriter;
-import javax.json.JsonWriterFactory;
-import javax.json.stream.JsonGenerator;
-
+import javax.json.*;
 import org.apache.log4j.Logger;
-
 import edu.rice.dmodel.Base;
 import edu.rice.dmodel.RootData;
 
@@ -34,6 +19,10 @@ public class UserMentionEntity extends Base implements RootData {
     private List<Integer> indices;
     private String name;
     private String screen_name;
+
+    public UserMentionEntity() {
+        this.indices=new ArrayList<>();
+    }
 
     public long getId() {
         return id;
@@ -110,11 +99,107 @@ public class UserMentionEntity extends Base implements RootData {
     }
 
     public byte[] writeByteBuffer() {
-        return new byte[0];
+
+        int allocatedBufferSize = 0;
+        byte[] id_strBytes = (id_str != null) ? id_str.getBytes() : new byte[0];
+        allocatedBufferSize += id_strBytes.length + 4;
+
+        allocatedBufferSize += 4 * (indices.size() + 1); //indices * sizeof integer
+
+        byte[] nameBytes = (name != null) ? name.getBytes() : new byte[0];
+        allocatedBufferSize += nameBytes.length + 4;
+
+        byte[] screen_nameBytes = (screen_name != null) ? screen_name.getBytes() : new byte[0];
+        allocatedBufferSize += screen_nameBytes.length + 4;
+
+        allocatedBufferSize+=8;// id
+
+        // array fields
+        ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+        byteBuffer.putLong(id);
+        byteBuffer.putInt(id_strBytes.length);
+        byteBuffer.put(id_strBytes);
+
+        byteBuffer.putInt(indices.size());
+        for (int i=0;i<indices.size();i++){
+            byteBuffer.putInt(indices.get(i));
+        }
+
+        byteBuffer.putInt(nameBytes.length);
+        byteBuffer.put(nameBytes);
+        byteBuffer.putInt(screen_nameBytes.length);
+        byteBuffer.put(screen_nameBytes);
+        return byteBuffer.array();
     }
 
     public RootData readByteBuffer(byte[] buffData) {
-        return null;
+
+        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+        int stringSize;
+
+        this.id=byteBuffer.getLong();
+
+        stringSize = byteBuffer.getInt();
+        this.id_str = extractString(byteBuffer, stringSize);
+
+        int numberOfIndices = byteBuffer.getInt();
+        for (int i = 0; i < numberOfIndices; i++) {
+            this.indices.add(byteBuffer.getInt());
+        }
+        stringSize = byteBuffer.getInt();
+        this.name = extractString(byteBuffer, stringSize);
+
+        stringSize = byteBuffer.getInt();
+        this.screen_name = extractString(byteBuffer, stringSize);
+
+        return this;
+    }
+    public JsonObject jsonObjectBuilder() {
+
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+        objectBuilder.add("id",this.id);
+
+        if (this.id_str != null && !this.id_str.isEmpty()) {
+            objectBuilder.add("id_str", this.id_str);
+        }
+
+        JsonArrayBuilder jsonIndicesArray = Json.createArrayBuilder();
+        for (Integer integer : indices) {
+            jsonIndicesArray.add(integer);
+        }
+        objectBuilder.add("indices", jsonIndicesArray);
+
+        if (this.name != null && !this.name.isEmpty()) {
+            objectBuilder.add("name", this.name);
+        }
+        if (this.screen_name != null && !this.screen_name.isEmpty()) {
+            objectBuilder.add("screen_name", this.screen_name);
+        }
+        JsonObject jsonObject = objectBuilder.build();
+        return jsonObject;
+    }
+
+    public UserMentionEntity readJSONUserMentionEntity(JsonObject jsonObject) {
+
+        this.id=Long.parseLong(jsonObject.getJsonNumber("id").toString());
+
+        if (jsonObject.get("id_str") != null && jsonObject.get("id_str") != JsonValue.NULL) {
+            this.id_str = jsonObject.getString("id_str");
+        }
+
+        if (jsonObject.getJsonArray("indices") != null) {
+            JsonArray indicesArray = jsonObject.getJsonArray("indices");
+            for (int i = 0; i < indicesArray.size(); i++) {
+                this.indices.add(indicesArray.getInt(i));
+            }
+        }
+        if (jsonObject.get("name") != null && jsonObject.get("name") != JsonValue.NULL) {
+            this.name = jsonObject.getString("name");
+        }
+        if (jsonObject.get("screen_name") != null && jsonObject.get("screen_name") != JsonValue.NULL) {
+            this.screen_name = jsonObject.getString("screen_name");
+        }
+        return  this;
     }
 
     public int compareTo(RootData o) {

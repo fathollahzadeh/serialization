@@ -10,7 +10,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 import edu.rice.dmodel.Element;
 import edu.rice.dmodel.RootData;
-import edu.rice.pdb.read.SerializationMethod;
+import edu.bu.util.SerializationType;
 import edu.rice.pdb.read.SerializedData;
 import edu.rice.pdb.serialization.KryoSinglton;
 import edu.rice.pdb.util.Utils;
@@ -55,11 +55,11 @@ public class GenerateDataForExternalSort {
 
 		List<RootData> m_list = tmpRootData.generateObjects(numberOfObjectsInEachFiles * numberOfFiles);
 		// SerializationMethod[] methodArray = { SerializationMethod.JSON};
-		SerializationMethod[] methodArray = { SerializationMethod.JAVADEFAULT, SerializationMethod.JSON, SerializationMethod.BSON, SerializationMethod.PROTOCOL,
-				SerializationMethod.KRYO, SerializationMethod.BYTEBUFFER };
+		SerializationType[] methodArray = { SerializationType.JAVADEFAULT, SerializationType.JSON, SerializationType.BSON, SerializationType.PROTOCOL,
+				SerializationType.KRYO, SerializationType.BYTEBUFFER };
 		
 //		SerializationMethod[] methodArray = { SerializationMethod.JAVADEFAULT, SerializationMethod.KRYO};
-		for (SerializationMethod method : methodArray) {
+		for (SerializationType method : methodArray) {
 			System.out.println("Generating data for Element with serialization: " + method);
 			
 			

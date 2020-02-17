@@ -23,15 +23,15 @@ import edu.rice.dmodel.Order;
 import edu.rice.dmodel.Part;
 import edu.rice.dmodel.RootData;
 import edu.rice.dmodel.Supplier;
-import edu.rice.pdb.read.SerializationMethod;
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.SerializationType;
+import edu.bu.util.Const;
 import edu.rice.pdb.util.Utils;
 
 class ServiceWorker extends Thread {
 	Socket myClientSocket;
 	boolean m_bRunThread = true;
 
-	SerializationMethod serializationMethod;
+	SerializationType serializationType;
 	RootData myDataType;
 
 	private final CountDownLatch startSignal;
@@ -46,17 +46,17 @@ class ServiceWorker extends Thread {
 
 	final static Logger logger = Logger.getLogger(ServiceWorker.class);
 
-	ServiceWorker(Socket myClientSocket, int threadID, CountDownLatch startSignal, CountDownLatch stopSignal, SerializationMethod serializationMethod, RootData myDataType, int numberOfExpectedObjectsToReceive) {
+	ServiceWorker(Socket myClientSocket, int threadID, CountDownLatch startSignal, CountDownLatch stopSignal, SerializationType serializationType, RootData myDataType, int numberOfExpectedObjectsToReceive) {
 		this.myClientSocket = myClientSocket;
 		this.startSignal = startSignal;
 		this.stopSignal = stopSignal;
 		this.myDataType = myDataType;
 		this.threadID = threadID;
-		this.serializationMethod = serializationMethod;
+		this.serializationType = serializationType;
 
 		this.numberOfExpectedObjectsToReceive = numberOfExpectedObjectsToReceive;
 
-		if (serializationMethod == SerializationMethod.KRYO) {
+		if (serializationType == SerializationType.KRYO) {
 			// Kryo is not multi-thread safe, so we need to create separate instances of kryo for each thread.
 			this.kryo = new Kryo();
 			this.kryo.register(Element.class);
@@ -144,7 +144,7 @@ class ServiceWorker extends Thread {
 							RootData m_object = null;
 
 							// Select based on the serialization method.
-							switch (this.serializationMethod) {
+							switch (this.serializationType) {
 							case JAVADEFAULT:
 								m_object = myDataType.javaDefaultDeserialization(rawDataEachObject);
 								break;
@@ -218,25 +218,25 @@ class ServiceWorker extends Thread {
 							if (!SocketServer.localStorage) {
 
 								// Select based on the serialization method.
-								switch (serializationMethod) {
+								switch (serializationType) {
 								case JAVADEFAULT:
 									// here true means that we do not wait for the GO signal because we already waited for GO signal from upper server.
-									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationMethod.JAVADEFAULT, true);
+									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationType.JAVADEFAULT, true);
 									break;
 								case JSON:
-									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationMethod.JSON, true);
+									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationType.JSON, true);
 									break;
 								case BSON:
-									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationMethod.BSON, true);
+									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationType.BSON, true);
 									break;
 								case PROTOCOL:
-									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationMethod.PROTOCOL, true);
+									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationType.PROTOCOL, true);
 									break;
 								case KRYO:
-									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationMethod.KRYO, true);
+									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationType.KRYO, true);
 									break;
 								case BYTEBUFFER:
-									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationMethod.BYTEBUFFER, true);
+									SocketServer.forwardClient.prepareAndSend(aggregatedData, 1, SerializationType.BYTEBUFFER, true);
 									break;
 								default:
 									break;
@@ -252,7 +252,7 @@ class ServiceWorker extends Thread {
 									
 									
 									// Select based on the serialization method.
-									switch (serializationMethod) {
+									switch (serializationType) {
 									case JAVADEFAULT:
 										rawDatalist.add(objectData.javaDefaultSerialization());
 										 break;
@@ -300,7 +300,7 @@ class ServiceWorker extends Thread {
 						// End of time calculation
 						long endTime = System.nanoTime();
 						double elapsedSeconds = (endTime - SocketServer.startTime) / 1000000000.0;
-						logger.info("[NetworkJAVA]#" + SocketServer.sendFromDisk + "#" + this.numberOfExpectedObjectsToReceive + "#" + this.serializationMethod + "#" + this.myDataType.getClass().getSimpleName() + "#"
+						logger.info("[NetworkJAVA]#" + SocketServer.sendFromDisk + "#" + this.numberOfExpectedObjectsToReceive + "#" + this.serializationType + "#" + this.myDataType.getClass().getSimpleName() + "#"
 								+ elapsedSeconds);
 
 						

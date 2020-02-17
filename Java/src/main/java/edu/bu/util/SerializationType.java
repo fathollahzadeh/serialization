@@ -1,6 +1,6 @@
-package edu.rice.pdb.read;
+package edu.bu.util;
 
-public enum SerializationMethod {
+public enum SerializationType {
 	
 	JAVADEFAULT,
 	JSON,

@@ -14,7 +14,7 @@ import edu.rice.dmodel.Element;
 import edu.rice.dmodel.LineItem;
 import edu.rice.dmodel.Part;
 import edu.rice.dmodel.RootData;
-import edu.rice.pdb.read.SerializationMethod;
+import edu.bu.util.SerializationType;
 
 public class SocketServer {
 
@@ -144,22 +144,22 @@ public class SocketServer {
 
 			switch (Integer.parseInt(args[3])) {
 			case 1:
-				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationMethod.JAVADEFAULT, tmp);
+				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationType.JAVADEFAULT, tmp);
 				break;
 			case 2:
-				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationMethod.JSON, tmp);
+				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationType.JSON, tmp);
 				break;
 			case 3:
-				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationMethod.BSON, tmp);
+				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationType.BSON, tmp);
 				break;
 			case 4:
-				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationMethod.PROTOCOL, tmp);
+				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationType.PROTOCOL, tmp);
 				break;
 			case 5:
-				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationMethod.KRYO, tmp);
+				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationType.KRYO, tmp);
 				break;
 			case 6:
-				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationMethod.BYTEBUFFER, tmp);
+				new SocketServer(port, numberOfClients, numberOfExpectedObjectsToReceive, SerializationType.BYTEBUFFER, tmp);
 				break;
 			}
 
@@ -167,10 +167,10 @@ public class SocketServer {
 
 	}
 
-	public SocketServer(int port, int numberOfClients, int numberOfExpectedObjectsToReceive, SerializationMethod serializationMethod, RootData myDataType) {
+	public SocketServer(int port, int numberOfClients, int numberOfExpectedObjectsToReceive, SerializationType serializationType, RootData myDataType) {
 
 		System.out.println("ServerPort: " + port + "  No.ofClients: " + numberOfClients + " ExpectedObjectsToReceive: " + numberOfExpectedObjectsToReceive + " DataType: " + myDataType.getClass().getSimpleName()
-				+ " SerializationType:" + serializationMethod);
+				+ " SerializationType:" + serializationType);
 
 		startSignal = new CountDownLatch(numberOfClients);
 		stopSignal = new CountDownLatch(numberOfClients);
@@ -206,7 +206,7 @@ public class SocketServer {
 				System.out.println("Accepted a new client connection. Starting a Thread ... ");
 				threadID++;
 
-				new ServiceWorker(clientSocket, threadID, startSignal, stopSignal, serializationMethod, myDataType, numberOfExpectedObjectsToReceive).start();
+				new ServiceWorker(clientSocket, threadID, startSignal, stopSignal, serializationType, myDataType, numberOfExpectedObjectsToReceive).start();
 				// send also the start time of the experiment.
 
 				System.out.println("Start Client number: " + startSignal.getCount());

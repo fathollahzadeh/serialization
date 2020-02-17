@@ -1,26 +1,11 @@
 package edu.bu.tweet;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonReader;
-import javax.json.JsonWriter;
-import javax.json.JsonWriterFactory;
-import javax.json.stream.JsonGenerator;
-
+import javax.json.*;
 import org.apache.log4j.Logger;
-
 import edu.rice.dmodel.Base;
 import edu.rice.dmodel.RootData;
-
 
 public class SizeEntity extends Base implements RootData {
 
@@ -88,11 +73,58 @@ public class SizeEntity extends Base implements RootData {
     }
 
     public byte[] writeByteBuffer() {
-        return new byte[0];
+        int allocatedBufferSize = 0;
+
+        byte[] resizeBytes = (resize != null) ? resize.getBytes() : new byte[0];
+        allocatedBufferSize += resizeBytes.length + 4;
+
+        allocatedBufferSize+=4;//width
+        allocatedBufferSize+=4;//height
+
+        // array fields
+        ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+        byteBuffer.putInt(resizeBytes.length);
+        byteBuffer.put(resizeBytes);
+        byteBuffer.putInt(width);
+        byteBuffer.putInt(height);
+
+        return byteBuffer.array();
     }
 
     public RootData readByteBuffer(byte[] buffData) {
-        return null;
+        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+        int stringSize;
+
+        stringSize = byteBuffer.getInt();
+        this.resize = extractString(byteBuffer, stringSize);
+
+        this.width=byteBuffer.getInt();
+        this.height=byteBuffer.getInt();
+
+        return this;
+    }
+
+    public JsonObject jsonObjectBuilder() {
+
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+        objectBuilder.add("width",this.width);
+        objectBuilder.add("height",this.height);
+
+        if (this.resize != null && !this.resize.isEmpty()) {
+            objectBuilder.add("resize", this.resize);
+        }
+        JsonObject jsonObject = objectBuilder.build();
+        return jsonObject;
+    }
+
+    public SizeEntity readJSONSizeEntity(JsonObject jsonObject) {
+        this.width=jsonObject.getInt("width");
+        this.height=jsonObject.getInt("height");
+
+        if (jsonObject.get("resize") != null && jsonObject.get("resize") != JsonValue.NULL) {
+            this.resize = jsonObject.getString("resize");
+        }
+        return  this;
     }
 
     public int compareTo(RootData o) {

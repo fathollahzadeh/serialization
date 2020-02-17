@@ -5,7 +5,7 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import edu.rice.pdb.serialization.Const;
+import edu.bu.util.Const;
  
 public class ReadFilesInPages 
 {

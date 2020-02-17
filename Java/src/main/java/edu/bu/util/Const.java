@@ -1,4 +1,4 @@
-package edu.rice.pdb.serialization;
+package edu.bu.util;
 
 public class Const {
 
