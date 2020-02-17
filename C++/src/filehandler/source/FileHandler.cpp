@@ -132,6 +132,7 @@ void FileHandler<T>::appendObjectToFile(TweetStatusIP *object) {
     int objectSize = object->objectsize;
     int sizeofObject = sizeof(objectSize);
 
+    auto tmpTime = chrono::steady_clock::now();
     //Set object size in the reserved place:
     this->copyInPlaceInt(buffer + currentOffset, objectSize);
 
@@ -143,9 +144,7 @@ void FileHandler<T>::appendObjectToFile(TweetStatusIP *object) {
     if ((currentOffset + objectSize + sizeofObject) > pageSize) {
 
         //Write in file:
-        auto tmpTime = chrono::steady_clock::now();
-        outStreamRegularFile.write(pageBuffer, pageSize);
-        ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
+         outStreamRegularFile.write(pageBuffer, pageSize);
 
         //At this point, previous page is written in file.
         //All you need is to write this object in the new current page.
@@ -155,6 +154,7 @@ void FileHandler<T>::appendObjectToFile(TweetStatusIP *object) {
         currentPageNumber++;
         currentOffset = 0;
     }
+    ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
     pageIndex.push_back(currentPageNumber);
     objectIndex.push_back(currentOffset);
     currentOffset += objectSize + sizeofObject;
