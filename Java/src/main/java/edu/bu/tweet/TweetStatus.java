@@ -351,7 +351,7 @@ public class TweetStatus extends Base implements RootData {
             p = (TweetStatus) objectInputStream.readObject();
 
         } catch (IOException | ClassNotFoundException e) {
-            logger.error("Can read object from byteArray", e);
+            logger.error("Can't read object from byteArray", e);
         }
         return p;
     }
