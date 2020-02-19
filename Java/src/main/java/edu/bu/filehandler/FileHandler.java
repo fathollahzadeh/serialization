@@ -407,4 +407,8 @@ public class FileHandler {
             logger.error("can't close randOutStreamRegularFile file! ",e);
         }
     }
+
+    public double getIoTime() {
+        return ioTime;
+    }
 }

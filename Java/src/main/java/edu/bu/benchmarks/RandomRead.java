@@ -4,17 +4,21 @@ import com.google.gson.Gson;
 import edu.bu.filehandler.FileHandler;
 import edu.bu.filehandler.LogFileHandler;
 import edu.bu.tweet.TweetStatus;
+import edu.rice.dmodel.RootData;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.stream.Stream;
 
-public class SequentialRead {
+public class RandomRead {
 
     public static void main(String[] args) throws IOException {
+
         Properties prop = new Properties();
 
         PropertyConfigurator.configure(prop);
@@ -22,27 +26,29 @@ public class SequentialRead {
 
         PropertyConfigurator.configure("log4j.properties");
 
-        // Before any experiments create a hot gc
-        // Create a hot garbage collector
-//        Garbage.activateGarbageCollector();
-//
-//        System.out.println("Activating Java garbage collector!");
-//        System.gc();
-//        System.out.println("Java garbage collector is made hot!");
-
-
         //Set serialized file path
+
         String inFile = args[0];
 
         int serializationType = Integer.parseInt(args[1]);
 
-        int from = Integer.parseInt(args[2]);
+        long cunt_to_read = Integer.parseInt(args[2]);
 
-        int numberofobjects = Integer.parseInt(args[3]);
+        int round=Integer.parseInt(args[3]);
 
-        int round=Integer.parseInt(args[4]);
+        List<Long>  objectIndexes=new ArrayList<>();
+        // read random data from file
+        try (Stream<String> stream = Files.lines(Paths.get(args[4]))) {
+            stream.forEach(
+                    e -> {
+                        objectIndexes.add(Long.parseLong(e));
+                    }
+            );
+        }
 
-        String logFileName="bin/benchmark/readobjects/result_java_readobjects_" + numberofobjects + "_" + round + ".txt";
+        String logFileName="bin/benchmark/readobjects/result_java_readobjects_" + cunt_to_read + "_" + round + ".txt";
+
+
 
         FileHandler fileHandler = new FileHandler(inFile, serializationType);
         fileHandler.prepareToRead();
@@ -50,13 +56,16 @@ public class SequentialRead {
         // Start Calculation time:
         long tmpTime = System.nanoTime();
 
-        fileHandler.getObjectsFromFile(from,numberofobjects);
+        List<RootData>  objectList=new ArrayList<>();
+        for (long j = 0; j < cunt_to_read; ++j) {
+            objectList.add(fileHandler.getObjectsFromFile(objectIndexes.get((int) j), 1).get(0));
+        }
 
         // Time Calculation
         double elapsedSeconds= (System.nanoTime() - tmpTime) / 1000000000.0;
 
         LogFileHandler logFileHandler=new LogFileHandler(logFileName);
-        logFileHandler.addLog(serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds);
-    }
+        logFileHandler.addLog(serializationType,false,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds);
 
+    }
 }
