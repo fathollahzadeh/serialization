@@ -409,6 +409,14 @@ public class FileHandler {
     }
 
     public double getIoTime() {
-        return ioTime;
+        return ioTime / 1000000000.0;
+    }
+
+    public long getTotalOfObjects() {
+        return totalOfObjects;
+    }
+
+    public Map<Long, Long> getObjectInEachPage() {
+        return objectInEachPage;
     }
 }

@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import edu.bu.util.ObjectFileIndex;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 

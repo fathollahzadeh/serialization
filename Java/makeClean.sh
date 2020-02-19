@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#mvn clean compile assembly:single
+mvn clean compile assembly:single
 
 mkdir -p "bin/benchmark"
 mkdir -p "bin/benchmark/externalsort"

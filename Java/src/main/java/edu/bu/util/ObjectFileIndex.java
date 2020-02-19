@@ -1,4 +1,4 @@
-package edu.rice.pdb.sort;
+package edu.bu.util;
 
 import edu.rice.dmodel.RootData;
 
@@ -6,11 +6,11 @@ public class ObjectFileIndex implements Comparable<ObjectFileIndex> {
 	private RootData myObject;
 	private int fileIndex;
 
-	ObjectFileIndex(int fileIndex, RootData myObject) {
+	public ObjectFileIndex( int fileIndex,RootData myObject) {
 		this.myObject = myObject;
 		this.fileIndex = fileIndex;
-
 	}
+
 
 	public RootData getValue() {
 		return myObject;
