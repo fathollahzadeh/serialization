@@ -1727,6 +1727,29 @@ public class TweetStatus extends Base implements RootData {
     }
 
     public int compareTo(RootData o) {
-        return 0;
+        TweetStatus other = (TweetStatus) o;
+        int countLevel = 0;
+        int countLevelOtherTweet = 0;
+
+        // get text
+        countLevel += this.text.length();
+
+        countLevelOtherTweet += other.text.length();
+
+        // get QuoteStatus
+        if (this.quoted_status != null)
+        countLevel += this.quoted_status.getText().length();
+
+        if (other.getQuoted_status() != null)
+            countLevelOtherTweet += other.getQuoted_status().getText().length();
+
+        // get Retweet
+        if (this.retweeted_status != null)
+        countLevel += this.retweeted_status.getRetweet_count();
+
+        if (other.getRetweeted_status() != null)
+            countLevelOtherTweet += other.getRetweeted_status().getRetweet_count();
+        return Integer.compare(countLevel, countLevelOtherTweet);
     }
+
 }
