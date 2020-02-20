@@ -1,7 +1,7 @@
 package edu.bu.tweet;
 
-import edu.rice.dmodel.Base;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.Base;
+import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
 import javax.json.Json;
 import javax.json.JsonObject;

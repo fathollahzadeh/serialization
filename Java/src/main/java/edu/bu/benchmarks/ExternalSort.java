@@ -1,9 +1,10 @@
 package edu.bu.benchmarks;
 
+import com.google.gson.Gson;
 import edu.bu.filehandler.FileHandler;
 import edu.bu.filehandler.LogFileHandler;
 import edu.bu.tweet.TweetStatus;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.RootData;
 import edu.bu.util.ObjectFileIndex;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -58,8 +59,7 @@ public class ExternalSort {
         //define start position of objects in each file:
         long startIndexInEachFile = 0;
         numberOfObjectsInEachFiles = totalObjectsCount / numberOfFiles;
-
-        for (int i = 0; i < numberOfFiles; i++) {
+       for (int i = 0; i < numberOfFiles; i++) {
             System.out.println("Reading for file number "+ i);
 
             startIndexInEachFile = i * numberOfObjectsInEachFiles;
@@ -69,6 +69,7 @@ public class ExternalSort {
 
             // read objects from file:
             m_list_read_from_file=fileHandler.getObjectsFromFile(startIndexInEachFile, numberOfObjectsInEachFiles);
+
             // Sort the data
             long tmpTime = System.nanoTime();
 
@@ -81,7 +82,6 @@ public class ExternalSort {
             // write the sorted list back to files.
             String tmpStoreFileName = "bin/tmp/sorted-" + i + "-" + serializationType;
             writeToFiles(m_list_read_from_file, tmpStoreFileName);
-
             m_list_read_from_file.clear();
         }
 

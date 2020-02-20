@@ -12,8 +12,8 @@ import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 import org.apache.log4j.Logger;
 
-import edu.rice.dmodel.Base;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.Base;
+import edu.bu.util.RootData;
 
 public class Coordinates extends Base implements RootData {
 

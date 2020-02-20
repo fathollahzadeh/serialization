@@ -8,8 +8,8 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 import org.apache.log4j.Logger;
-import edu.rice.dmodel.Base;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.Base;
+import edu.bu.util.RootData;
 
 public class Place extends Base implements RootData {
 

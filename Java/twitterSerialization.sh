@@ -10,7 +10,7 @@ echo ""
 #set data and out serialization files path
 datapath="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/tweets_jsonline_1M.txt"
 
-for serialization_type in 6 #2 3 4 5 6
+for serialization_type in 1 2 3 4 5 6
 do
     outpath="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/jdata/serialization_$serialization_type.se"
     echo "start to run the project"

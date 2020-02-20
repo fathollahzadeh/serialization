@@ -23,13 +23,14 @@ public class test1 {
                         Gson gson = new Gson();
                         TweetStatus tweetStatus = gson.fromJson(e, TweetStatus.class);
 
-
-                        byte[] b= tweetStatus.javaDefaultSerialization();
+                        byte[] b= tweetStatus.protocolBufferWrite();
 
                         TweetStatus tweetStatus2=new TweetStatus();
-                        tweetStatus2= (TweetStatus) tweetStatus2.javaDefaultDeserialization(b);
+                        tweetStatus2= (TweetStatus) tweetStatus2.protocolBufferRead(b);
 
-                        System.out.println(gson.toJson(tweetStatus2));
+                        byte[] b2= tweetStatus2.protocolBufferWrite();
+
+                       // System.out.println(gson.toJson(tweetStatus2));
                         //  i.getAndIncrement();
                     }
             );

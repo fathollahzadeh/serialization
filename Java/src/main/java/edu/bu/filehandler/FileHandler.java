@@ -5,9 +5,8 @@ import com.google.gson.Gson;
 import edu.bu.tweet.TweetStatus;
 import edu.bu.util.Const;
 import edu.bu.util.SerializationType;
-import edu.rice.dmodel.IndexData;
-import edu.rice.dmodel.RootData;
-import edu.rice.pdb.serialization.KryoSinglton;
+import edu.bu.util.RootData;
+import edu.bu.util.KryoSinglton;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -375,6 +374,7 @@ public class FileHandler {
                 myDeserlizedObject = myData.gsonDeSerialization(buffData);
                 break;
         }
+
         return myDeserlizedObject;
     }
 

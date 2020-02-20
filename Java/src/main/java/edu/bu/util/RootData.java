@@ -1,12 +1,9 @@
-package edu.rice.dmodel;
+package edu.bu.util;
 
 import java.io.Serializable;
-import java.nio.charset.Charset;
 import java.util.List;
 
 import com.esotericsoftware.kryo.Kryo;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import edu.bu.tweet.TweetStatus;
 

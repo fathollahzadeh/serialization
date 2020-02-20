@@ -2,8 +2,8 @@ package edu.bu.tweet;
 
 import java.nio.ByteBuffer;
 import java.util.List;
-import edu.rice.dmodel.Base;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.Base;
+import edu.bu.util.RootData;
 import javax.json.*;
 import org.apache.log4j.Logger;
 

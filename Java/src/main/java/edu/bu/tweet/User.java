@@ -4,8 +4,8 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import edu.rice.dmodel.Base;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.Base;
+import edu.bu.util.RootData;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -616,7 +616,7 @@ public class User extends Base implements RootData {
 		stringSize=byteBuffer.getInt();
 		this.withheld_scope=extractString(byteBuffer,stringSize);
 
-		this.descriptionURLEntities=new ArrayList<>();
+
 		int numberOfUrlEntities=byteBuffer.getInt();
 		if (numberOfUrlEntities>0) {
 			for (int i = 0; i < numberOfUrlEntities; i++) {
@@ -626,8 +626,7 @@ public class User extends Base implements RootData {
 				urlEntity.readByteBuffer(urlEntityBytes);
 				this.descriptionURLEntities.add(urlEntity);
 			}
-		} else
-			this.descriptionURLEntities=null;
+		}
 
 		this.geo_enabled=convertToBoolean(byteBuffer.get());
 		stringSize=byteBuffer.getInt();

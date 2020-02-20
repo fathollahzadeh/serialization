@@ -1,10 +1,8 @@
 package edu.bu.benchmarks;
 
-import com.google.gson.Gson;
 import edu.bu.filehandler.FileHandler;
 import edu.bu.filehandler.LogFileHandler;
-import edu.bu.tweet.TweetStatus;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.RootData;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.io.IOException;

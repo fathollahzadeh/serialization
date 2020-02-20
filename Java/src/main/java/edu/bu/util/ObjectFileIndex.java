@@ -1,7 +1,5 @@
 package edu.bu.util;
 
-import edu.rice.dmodel.RootData;
-
 public class ObjectFileIndex implements Comparable<ObjectFileIndex> {
 	private RootData myObject;
 	private int fileIndex;

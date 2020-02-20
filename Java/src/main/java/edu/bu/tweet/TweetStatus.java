@@ -19,11 +19,13 @@ import javax.json.JsonReader;
 import javax.json.JsonValue;
 import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
+
+import com.google.gson.Gson;
 import com.google.protobuf.CodedInputStream;
 import edu.bu.tweet.proto.TweetStatusProtos;
 import org.apache.log4j.Logger;
-import edu.rice.dmodel.Base;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.Base;
+import edu.bu.util.RootData;
 
 public class TweetStatus extends Base implements RootData {
 
@@ -702,7 +704,8 @@ public class TweetStatus extends Base implements RootData {
         // end set user
 
         //set coordinates:
-        if (this.coordinates != null) {
+        if (this.coordinates != null && this.coordinates.getCoordinates().length>0) {
+
             TweetStatusProtos.TweetStatusP.CoordinatesP.Builder coordinatesP = TweetStatusProtos.TweetStatusP.CoordinatesP.newBuilder();
             if (this.getCoordinates().getType() != null)
                 coordinatesP.setType(this.getCoordinates().getType());
@@ -1690,8 +1693,7 @@ public class TweetStatus extends Base implements RootData {
                 matchingRulesEntity.readByteBuffer(matching_ruleBytes);
                 this.matching_rules.add(matchingRulesEntity);
             }
-        } else
-            this.matching_rules = null;
+        }
 
 
         this.current_user_retweet = byteBuffer.getLong();
@@ -1705,8 +1707,7 @@ public class TweetStatus extends Base implements RootData {
                 boolean value = convertToBoolean(byteBuffer.get());
                 this.scopes.put(key, value);
             }
-        } else
-            this.scopes = null;
+        }
 
         this.withheld_copyright = convertToBoolean(byteBuffer.get());
 
@@ -1717,8 +1718,7 @@ public class TweetStatus extends Base implements RootData {
                 stringSize = byteBuffer.getInt();
                 this.withheld_in_countries.add(extractString(byteBuffer, stringSize));
             }
-        } else
-            this.withheld_in_countries = null;
+        }
 
         stringSize = byteBuffer.getInt();
         this.withheld_scope = extractString(byteBuffer, stringSize);

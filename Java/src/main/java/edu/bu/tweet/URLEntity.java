@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.json.*;
 import org.apache.log4j.Logger;
-import edu.rice.dmodel.Base;
-import edu.rice.dmodel.RootData;
+import edu.bu.util.Base;
+import edu.bu.util.RootData;
 
 public class URLEntity extends Base implements RootData {
 

@@ -1,6 +1,6 @@
 language#method#seq#datatype#iotime#totaltime
-[ReadTimeCPP]#HANDCODED#true#TweetStatus#9383.98#31591.2
-[ReadTimeCPP]#INPLACE#true#TweetStatus#22567.6#60130.9
+[ReadTimeCPP]#HANDCODED#true#TweetStatus#8839.29#29161.2
+[ReadTimeCPP]#INPLACE#true#TweetStatus#21609#53350.5
+[ReadTimeCPP]#BOOST#true#TweetStatus#5787.36#49717.5
 [ReadTimeCPP]#PROTOBUF#true#TweetStatus#8627.91#32072.9
-[ReadTimeCPP]#BOOST#true#TweetStatus#7899.14#54796.3
 
