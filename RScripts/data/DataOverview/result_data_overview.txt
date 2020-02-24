@@ -1,0 +1,3 @@
+Row#Tweets#users#coordinates#place#quoted_status#retweeted_status#entities#extended_entities
+Number of Object#1000000#1000000#1586#11974#177537#598517#940400#51479
+AVG#4682.0#1264.0#53.0#347.0#2586.0#3012.0#336.0#1017.0
