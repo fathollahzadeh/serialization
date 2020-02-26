@@ -116,7 +116,7 @@ hist(data_media_entity, density=20, prob=TRUE, main="sizes",cex.main=0.7,lwd=1,p
 curve(dnorm(x, mean=mmedia_entity, sd=sdmedia_entity), add=TRUE,col="blue")
 
 mtext("Dencity", outer = TRUE, cex = 0.6, font=0.7,side=2,family="Helvetica" )
-mtext("Data Size", outer = TRUE, cex = 0.6, font=0.7,side=1,family="Helvetica" )
+mtext("Number od Data", outer = TRUE, cex = 0.6, font=0.7,side=1,family="Helvetica" )
 
 # media sizes entity
 data_media_size_entity <- read.delim("data/DataOverview/media_size_entity.txt", header=TRUE, sep="#")
