@@ -1,0 +1,13 @@
+language#method#seq#datatype#iotime#totaltime
+[ReadTimeJAVA]#Java Default#true#TweetStatus#5.11996881270001E-8#843.078348539
+[ReadTimeJAVA]#Java Default#false#TweetStatus#1.9393709563620813E-6#2775.088513261
+[ReadTimeJAVA]#Java Json#true#TweetStatus#4.585179789999999E-8#683.591431315
+[ReadTimeJAVA]#Java Json#false#TweetStatus#2.104981100820038E-6#2798.055994704
+[ReadTimeJAVA]#Java Bson#true#TweetStatus#2.1539351133999974E-7#7097.381894253
+[ReadTimeJAVA]#Java Bson#false#TweetStatus#6.618988854588416E-6#13906.788345451
+[ReadTimeJAVA]#Java ProtoBuf#true#TweetStatus#2.0995426830000053E-9#242.271516589
+[ReadTimeJAVA]#Java ProtoBuf#false#TweetStatus#1.3093997426600246E-7#379.812981856
+[ReadTimeJAVA]#Java Kryo#true#TweetStatus#1.7801622799999992E-9#203.781715214
+[ReadTimeJAVA]#Java Kryo#false#TweetStatus#1.2245294757900196E-7#325.70555509
+[ReadTimeJAVA]#Java Byte Buffer#true#TweetStatus#2.221165426999993E-9#242.252140659
+[ReadTimeJAVA]#Java Byte Buffer#false#TweetStatus#1.3636691886200742E-7#382.245854131
