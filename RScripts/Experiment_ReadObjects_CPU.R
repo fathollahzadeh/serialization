@@ -188,12 +188,14 @@ serialization_methods<-c("Java Default","Java JSON","Java BSON","Java Protocol",
 #################################################
 #######     Plots       #########################
 #################################################
-pdf(file='Experiment_ReadObjects_CPU.pdf',family="Helvetica")
+pdf(file='Experiment_ReadObjects_CPU.pdf',family="Helvetica",height=3.5, width=3.4)
 
 # old.par <- par(mfrow=c(1, 2))
-old.par<-par(mfrow=c(1, 2), oma=c(0.1, 0.1, 0.1, 0.1),  pty="m")
+old.par<-par(mfrow=c(1, 2), oma=c(0.3, 0.3, 0.0, 0.0),  pty="m")
 
-op <- par(mar = c(4, 4, 0.1, 0.1))
+#mar=c(2.9,3,1.5,0.5),oma = c(0.9, 0.8, 0, 0)
+op <- par(mar = c(2.5,2.5,0,0.1))
+#op <- par(mar = c(4, 4, 0.1, 0.1))
 
 #par(mfrow=c(1,2),mar=c(2.9,3,1.5,0.5),oma = c(0, 0, 0, 0))
 
@@ -209,55 +211,55 @@ tick_list=c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,1200
 y_labels<- sprintf("%s",tick_list);
 
 # Java Deafult
-plot(javaDefaultSeqV, log="y", type="o", pch=1, lty=2,lwd=1, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,  panel.first=abline(h= tick_list, v=c(1, 2, 3, 4, 5), lty=3, col=plot_colors[1]))
+plot(javaDefaultSeqV, log="y", type="o", pch=1,cex=0.4, lty=2,lwd=1, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,col=plot_colors[1],  panel.first=abline(h= tick_list, v=c(1, 2, 3, 4, 5), lty=3, col="gray"))
 
 # Make x axis using one to 5 labels
-axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 )
+axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 ,cex.axis=0.4)
 
 # Make y axis with horizontal labels that display ticks at 
-axis(2, las=1, at = tick_list, labels=y_labels)
+axis(2, las=1, at = tick_list, labels=y_labels,cex.axis=0.5)
 
 #lines for Json
-lines(javaJsonSeqV , type="o", pch=2, lty=2, col=plot_colors[2])
+lines(javaJsonSeqV , type="o", pch=2, lty=2, col=plot_colors[2],cex=0.4)
 
 #lines for Bson 
-lines(javaBsonSeqV, type="o", pch=3, lty=2, col=plot_colors[3])
+lines(javaBsonSeqV, type="o", pch=3, lty=2, col=plot_colors[3],cex=0.4)
 
 #lines for ProtoBuf
-lines(javaProtoBufSeqV, type="o", pch=4, lty=2, col=plot_colors[4])
+lines(javaProtoBufSeqV, type="o", pch=4, lty=2, col=plot_colors[4],cex=0.4)
 
 #lines for Kryo
-lines(javaKryoSeqV, type="o", pch=5, lty=2, col=plot_colors[5])
+lines(javaKryoSeqV, type="o", pch=5, lty=2, col=plot_colors[5],cex=0.4)
 
 #lines for ByteBuffer
-lines(javaByteBufferSeqV, type="o", pch=6, lty=2, col=plot_colors[6])
+lines(javaByteBufferSeqV, type="o", pch=6, lty=2, col=plot_colors[6],cex=0.4)
 
 #lines for BOOST C++ 
-lines(cppBOOSTSeqV, type="o", pch=7, lty=2, col=plot_colors[7])
+lines(cppBOOSTSeqV, type="o", pch=7, lty=2, col=plot_colors[7],cex=0.4)
 
 #lines for PROTOBUF C++ 
-lines(cppPROTOBUFSeqV, type="o", pch=8, lty=2, col=plot_colors[8])
+lines(cppPROTOBUFSeqV, type="o", pch=8, lty=2, col=plot_colors[8],cex=0.4)
 
 #lines for HANDCODED C++ 
-lines(cppHANDCODEDSeqV, type="o", pch=9, lty=2, col=plot_colors[9])
+lines(cppHANDCODEDSeqV, type="o", pch=9, lty=2, col=plot_colors[9],cex=0.4)
 
 #lines for INPLACE C++ 
-lines(cppINPLACESeqV, type="o", pch=10, lty=2, col=plot_colors[10])
+lines(cppINPLACESeqV, type="o", pch=10, lty=2, col=plot_colors[10],cex=0.4)
 
 
 title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
-title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0))
-text(3, 4000, "Sequential", cex=1.4)
+title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0),cex=0.4)
+text(3, 4000, "Sequential", cex=0.8)
 
 box()
 #par(xpd=TRUE)
-legend(2, 25, serialization_methods, cex=0.6,  col=plot_colors, pch=2:11, lty=2:2);
+legend(2, 25, serialization_methods, cex=0.29,  col=plot_colors, pch=2:11, lty=2:2);
 ##############################################################
 ##################                   #########################
 ##################      Next Plot    #########################
 ##################                   #########################
 ##############################################################
-op <- par(mar = c(4, 4, 0.1, 0.1))
+#op <- par(oma=c(0.1, 0.1, 0.0, 0.0))#par(mar = c(4, 4, 0.1, 0.1))
 
 x <- c(1000000, 2000000,3000000,4000000,5000000)
 max_y<-25000
@@ -267,46 +269,48 @@ tick_list=c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,1200
 y_labels<- sprintf("%s",tick_list);
 
 # Java Deafult
-plot(javaDefaultV, log="y", type="o", pch=1, lty=2,lwd=1, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,  panel.first=abline(h= tick_list, v=c(1, 2, 3, 4, 5), lty=3, col=plot_colors[1]))
+plot(javaDefaultV, log="y", type="o", pch=1, lty=2,lwd=1,cex=0.4, ylim=c(min_y, max_y),col=plot_colors[1], axes=FALSE, ann=FALSE,cex.axis=0.6, panel.first=abline(h= tick_list, v=c(1, 2, 3, 4, 5), lty=3, col="gray"))
 
 # Make x axis using one to 5 labels
-axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 )
+axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 ,cex.axis=0.4)
 
 # Make y axis with horizontal labels that display ticks at 
-axis(2, las=1, at = tick_list, labels=y_labels)
+axis(2, las=1, at = tick_list, labels=y_labels,cex.axis=0.5)
 
 #lines for Json
-lines(javaJsonV , type="o", pch=2, lty=2, col=plot_colors[2])
+lines(javaJsonV , type="o", pch=2, lty=2, col=plot_colors[2],cex=0.4)
 
 #lines for Bson 
-lines(javaBsonV, type="o", pch=3, lty=2, col=plot_colors[3])
+lines(javaBsonV, type="o", pch=3, lty=2, col=plot_colors[3],cex=0.4)
 
 #lines for ProtoBuf
-lines(javaProtoBufV, type="o", pch=4, lty=2, col=plot_colors[4])
+lines(javaProtoBufV, type="o", pch=4, lty=2, col=plot_colors[4],cex=0.4)
 
 #lines for Kryo
-lines(javaKryoV, type="o", pch=5, lty=2, col=plot_colors[5])
+lines(javaKryoV, type="o", pch=5, lty=2, col=plot_colors[5],cex=0.4)
 
 #lines for ByteBuffer
-lines(javaByteBufferV, type="o", pch=6, lty=2, col=plot_colors[6])
+lines(javaByteBufferV, type="o", pch=6, lty=2, col=plot_colors[6],cex=0.4)
 
 #lines for BOOST C++ 
-lines(cppBOOSTV, type="o", pch=7, lty=2, col=plot_colors[7])
+lines(cppBOOSTV, type="o", pch=7, lty=2, col=plot_colors[7],cex=0.4)
 
 #lines for PROTOBUF C++ 
-lines(cppPROTOBUFV, type="o", pch=8, lty=2, col=plot_colors[8])
+lines(cppPROTOBUFV, type="o", pch=8, lty=2, col=plot_colors[8],cex=0.4)
 
 #lines for HANDCODED C++ 
-lines(cppHANDCODEDV, type="o", pch=9, lty=2, col=plot_colors[9])
+lines(cppHANDCODEDV, type="o", pch=9, lty=2, col=plot_colors[9],cex=0.4)
 
 #lines for INPLACE C++ 
-lines(cppINPLACEV, type="o", pch=10, lty=2, col=plot_colors[10])
+lines(cppINPLACEV, type="o", pch=10, lty=2, col=plot_colors[10],cex=0.4)
 
 
-title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
-title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0))
-text(3.5, 25, "Random", cex=1.4)
+#title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
+#title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0))
+text(3.5, 25, "Random", cex=0.8)
 
+mtext("Total Reading Time (sec) - log", outer = TRUE, cex = 0.6, font=0.7,side=2,family="Helvetica",line = -0.5, col=rgb(0,0.5,0) )
+mtext("Number of Objects", outer = TRUE, cex = 0.6, font=0.7,side=1,family="Helvetica" ,line = -1,col=rgb(0,0.5,0))
 # Create box around plot
 box()
 
