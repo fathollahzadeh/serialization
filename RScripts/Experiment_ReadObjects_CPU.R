@@ -188,7 +188,7 @@ serialization_methods<-c("Java Default","Java JSON","Java BSON","Java Protocol",
 #################################################
 #######     Plots       #########################
 #################################################
-pdf(file='Experiment_ReadObjects_CPU.pdf',family="Helvetica",height=3.5, width=3.4)
+pdf(file='Experiment_ReadObjects_CPU.pdf',family="Helvetica",height=3, width=3.4)
 
 # old.par <- par(mfrow=c(1, 2))
 old.par<-par(mfrow=c(1, 2), oma=c(0.3, 0.3, 0.0, 0.0),  pty="m")
@@ -217,7 +217,7 @@ plot(javaDefaultSeqV, log="y", type="o", pch=1,cex=0.4, lty=2,lwd=1, ylim=c(min_
 axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 ,cex.axis=0.4)
 
 # Make y axis with horizontal labels that display ticks at 
-axis(2, las=1, at = tick_list, labels=y_labels,cex.axis=0.5)
+axis(2, las=1, at = tick_list, labels=y_labels,cex.axis=0.4)
 
 #lines for Json
 lines(javaJsonSeqV , type="o", pch=2, lty=2, col=plot_colors[2],cex=0.4)
@@ -253,7 +253,7 @@ text(3, 4000, "Sequential", cex=0.8)
 
 box()
 #par(xpd=TRUE)
-legend(2, 25, serialization_methods, cex=0.29,  col=plot_colors, pch=2:11, lty=2:2);
+legend(2, 25, serialization_methods, cex=0.25,  col=plot_colors, pch=2:11, lty=2:2);
 ##############################################################
 ##################                   #########################
 ##################      Next Plot    #########################
@@ -275,7 +275,7 @@ plot(javaDefaultV, log="y", type="o", pch=1, lty=2,lwd=1,cex=0.4, ylim=c(min_y, 
 axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 ,cex.axis=0.4)
 
 # Make y axis with horizontal labels that display ticks at 
-axis(2, las=1, at = tick_list, labels=y_labels,cex.axis=0.5)
+axis(2, las=1, at = tick_list, labels=y_labels,cex.axis=0.4)
 
 #lines for Json
 lines(javaJsonV , type="o", pch=2, lty=2, col=plot_colors[2],cex=0.4)
