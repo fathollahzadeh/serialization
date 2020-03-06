@@ -14,44 +14,60 @@ In the next few sections of the paper, we will give detailed explanations of the
 For the various experiments, we use twitter data sets \cite{tweet_objects}, implemented using each of the ten different physical implementations. 
 
 \subsection{Encoding sizes}
-The ten different complex object implementations that we considered have very different encoding densities when the objects are serialized for storage or transmission across the network. The average, per-object sizes are given in Table \ref{tbl:object_size}. Figure \ref{fig:data_overview} show histogram of per objects with Standard Deviation(SD).
+The ten different complex object implementations that we considered have very different encoding densities when the objects are serialized for storage or transmission across the network. The average, per-object sizes are given in Table \ref{tbl:object_size}. 
 \begin{table}
 	\centering
 	\caption{Frequency of some Tweet Objects  (for 1 million tweets) }
 	\label{tbl:object_size}
 	\begin{adjustbox}{width=\columnwidth,center}	
 		
-		\begin{tabular}{|c|c|c|l|} \hline
-			Object Name &Parent Object &Frequency&AVG Size(byte)\\ \hline
-			tweet  & root object& 1,000,000 & 6599.305602\\ \hline
-			users & tweet & 1,000,000 & 1453.798722\\ \hline
-			coordinates  &tweet& 1586 & 57.87705\\ \hline
-			place & tweet & 11974 & 392.8976115\\ \hline
-			quoted status  & tweet & 177537 & 3993.947594\\ \hline
-			retweeted status  & tweet & 598517 & 4775.996797\\ \hline
-			entities  & tweet & 1,000,000 &336.02128\\ \hline
-			extended entities  & tweet & 51479 & 1133.00505\\ \hline
-			hashtags  & entities & 398720 & 44.0340615\\ \hline
-			media  & entities & 51481 & 762.556516\\ \hline
-			urls  & entities & 417176 & 187.6829563\\ \hline
-			user mentions  & entities & 1063216 & 126.845482\\ \hline
-			symbols  & entities & 7793 & 36.55832\\ \hline
-			sizes  & media & 7793 & 36.55832\\ \hline
-			media sizes  & sizes & 51485 & 194.91743\\ \hline
-			thumb  & media sizes & 51485 & 37.989\\ \hline
-			large  & media sizes & 51485 & 37.524\\ \hline
-			medium  & media sizes & 51485 & 37.412\\ \hline
-			small  & media sizes & 51485 & 36.993\\ \hline
+		\begin{tabular}{|c|c|c|} \hline
+			Object Name &Parent Object &Frequency\\ \hline
+			tweet  & root object& 1,000,000 \\ \hline
+			users & tweet & 1,000,000 \\ \hline
+			coordinates  &tweet& 1586 \\ \hline
+			place & tweet & 11974 \\ \hline
+			quoted status  & tweet & 177537 \\ \hline
+			retweeted status  & tweet & 598517 \\ \hline
+			entities  & tweet & 1,000,000 \\ \hline
+			extended entities  & tweet & 51479 \\ \hline
+			hashtags  & entities & 398720 \\ \hline
+			media  & entities & 51481 \\ \hline
+			urls  & entities & 417176 \\ \hline
+			user mentions  & entities & 1063216 \\ \hline
+			symbols  & entities & 7793 \\ \hline
+			sizes  & media & 7793 \\ \hline
+			media sizes  & sizes & 51485 \\ \hline
+			thumb  & media sizes & 51485 \\ \hline
+			large  & media sizes & 51485 \\ \hline
+			medium  & media sizes & 51485 \\ \hline
+			small  & media sizes & 51485 \\ \hline
 			\hline\end{tabular}
 	\end{adjustbox}
 \end{table}
 
-\begin{figure*}
+\begin{table}
 	\centering
-	\includegraphics[scale=1]{img/Data_Overview.pdf}
-	\caption{histograms with Standard Deviation}
-	\label{fig:data_overview}
-\end{figure*}
+	\caption{Comparison of object size for 1 million tweet }
+	\label{tbl:object_size}
+	\begin{adjustbox}{width=\columnwidth,center}	
+		
+		\begin{tabular}{|l|c|c|} \hline
+		 \textbf{Serialization Methods} & \textbf{Serialized file size(gigabyte)}\\ \hline
+			Java Default  & 4.6 \\ \hline	
+			Java JSON  & 4.3 \\ \hline	
+			Java BSON  & 4.6 \\ \hline	
+			Java Protocol Buffer  & 1.9 \\ \hline	
+			Java Kyro  & 1.9 \\ \hline	
+			Java Hand Coded ByteBuffer  & 2.3 \\ \hline	
+			C++ Hand Coded  & 2.1 \\ \hline	
+			C++ InPlace  & 3.2 \\ \hline	
+			C++ Boost  & 2.2 \\ \hline	
+			C++ Protocol Buffer  & 1.9 \\ \hline					
+			\hline\end{tabular}
+	\end{adjustbox}
+\end{table}
+
 
 \subsection{Experimental Details}
 We run our experiments on a virtual server instances which have 8 vCPU cores, 32 GB RAM and one 800

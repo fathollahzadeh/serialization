@@ -15,7 +15,7 @@ serialization_type=$1
 
 #set data and out serialization files path
 datapath="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/jdata/serialization_$serialization_type.se"
-random_list_path="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/randomlist/randomlist_$number_of_read_object.txt"
+random_list_path="/home/saeed/randomdata/randomlist_$number_of_read_object.txt"
 
 echo "start to run the project"
 echo "------------------------"

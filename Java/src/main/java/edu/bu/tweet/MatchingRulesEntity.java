@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MatchingRulesEntity extends Base implements RootData {
 
-    static Logger logger = Logger.getLogger(AdditionalMediaInfoEntity.class);
+    static Logger logger = Logger.getLogger(MatchingRulesEntity.class);
 
     private String tag;
     private long id;

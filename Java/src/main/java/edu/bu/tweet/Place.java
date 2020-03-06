@@ -147,7 +147,7 @@ public class Place extends Base implements RootData {
 		byte[] full_nameBytes = full_name.getBytes();
 		allocatedBufferSize += full_nameBytes.length + 4;
 
-		byte[] bounding_boxBytes=bounding_box.writeByteBuffer();
+		byte[] bounding_boxBytes=(bounding_box != null) ? bounding_box.writeByteBuffer() : new byte[0];
 		allocatedBufferSize +=bounding_boxBytes.length+4;
 
 		// array fields
