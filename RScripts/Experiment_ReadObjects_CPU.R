@@ -6,7 +6,7 @@ library(plyr)
 
 # function definition for calculating mean of data 
 
-calulateMeanDataTotaltime <- function(myfilename,nr, n){
+calulateMeanDataTotaltime <- function(myfilename,nr, n,timeparam){
   
   totaltime <- matrix(nrow= nr, ncol=n)
   
@@ -16,7 +16,7 @@ calulateMeanDataTotaltime <- function(myfilename,nr, n){
     file = paste(myfilename, i,  sep = "")
     file <- paste(file, ".txt" , sep="")
     mydata <- read.delim(file, header=TRUE, sep="#")
-    totaltime[i,] <-  mydata[['totaltime']]- mydata[['iotime']]
+    totaltime[i,] <-mydata[['totaltime']]- mydata[['iotime']]*timeparam
   }
   
   finalTime <- vector() 
@@ -38,48 +38,48 @@ calulateMeanDataTotaltime <- function(myfilename,nr, n){
 
 
 #Java Results
-dataj1 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_1000000_",1 ,12)
+dataj1 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_1000000_",1 ,12,1000000000.0)
 dataj1$size <-1000000 
 
 # load data for 2M objects read 
-dataj2 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_2000000_",1 , 12)
+dataj2 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_2000000_",1 , 12,1000000000.0)
 dataj2$size <-2000000 
 
 
 # load data for 3M objects read 
-dataj3 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_3000000_", 1 ,12)
+dataj3 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_3000000_", 1 ,12,1000000000.0)
 dataj3$size <-3000000 
 
 # load data for 4M objects read 
-dataj4 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_4000000_",1 , 12)
+dataj4 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_4000000_",1 , 12,1000000000.0)
 dataj4$size <-4000000
 
 # load data for 5M objects read 
-dataj5 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_5000000_",1 , 12)
+dataj5 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_5000000_",1 , 12,1000000000.0)
 dataj5$size <-5000000
 
 
 # CPP Results 
 ##################################################################
 # load data for 1M objects read 
-datac1 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_1000000_",5 ,8)
+datac1 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_1000000_",5 ,8,1)
 datac1$size <-1000000 
 
 # load data for 2M objects read 
-datac2 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_2000000_",5 , 8)
+datac2 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_2000000_",5 , 8,1)
 datac2$size <-2000000 
 
 
 # load data for 3M objects read 
-datac3 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_3000000_", 5 ,8)
+datac3 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_3000000_", 5 ,8,1)
 datac3$size <-3000000 
 
 # load data for 4M objects read 
-datac4 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_4000000_",5 , 8)
+datac4 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_4000000_",5 , 8,1)
 datac4$size <-4000000
 
 # load data for 5M objects read 
-datac5 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_5000000_",5 , 8)
+datac5 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_5000000_",5 , 8,1)
 datac5$size <-5000000
 
 
@@ -182,19 +182,19 @@ cppBOOSTV <- vector()
 cppBOOSTV <-cppBOOST[['totaltime']]
 
 
-plot_colors <- c("darkred", "green","blue", "red","green4", "blue1", "violet", "orange", "deepskyblue" , "blue3")
+plot_colors <- c("red2", "blue1","green4", "saddlebrown","green", "lightseagreen", "deeppink3", "darkorange", "yellow1" , "gray8")
 serialization_methods<-c("Java Default","Java JSON","Java BSON","Java Protocol","Java Kryo","Java ByteBuffer","C++ Boost","C++ Protocol",  "C++ HandCoded", "C++ InPlace")
 
 #################################################
 #######     Plots       #########################
 #################################################
-pdf(file='Experiment_ReadObjects_CPU.pdf',family="Helvetica",height=3, width=3.4)
+pdf(file='Experiment_ReadObjects_CPU.pdf')
 
 # old.par <- par(mfrow=c(1, 2))
-old.par<-par(mfrow=c(1, 2), oma=c(0.3, 0.3, 0.0, 0.0),  pty="m")
+old.par<-par(mfrow=c(1, 2), oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
 
 #mar=c(2.9,3,1.5,0.5),oma = c(0.9, 0.8, 0, 0)
-op <- par(mar = c(2.5,2.5,0,0.1))
+op <- par(mar = c(3.5,3.5,0,0.1))
 #op <- par(mar = c(4, 4, 0.1, 0.1))
 
 #par(mfrow=c(1,2),mar=c(2.9,3,1.5,0.5),oma = c(0, 0, 0, 0))
@@ -204,56 +204,56 @@ op <- par(mar = c(2.5,2.5,0,0.1))
 # par(oma=c(0, 0, 0, 0))
 
 x <- c(1000000, 2000000,3000000,4000000,5000000)
-max_y<-16500
+max_y<-14000
 min_y<-0.5
-tick_list=c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,12000,max_y)
+tick_list=c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,max_y)
 
 y_labels<- sprintf("%s",tick_list);
 
 # Java Deafult
-plot(javaDefaultSeqV, log="y", type="o", pch=1,cex=0.4, lty=2,lwd=1, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,col=plot_colors[1],  panel.first=abline(h= tick_list, v=c(1, 2, 3, 4, 5), lty=3, col="gray"))
+plot(javaDefaultSeqV, log="y", type="o", pch=1, lty=2,lwd=1, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,col=plot_colors[1],  panel.first=abline(h= tick_list, v=c(1, 2, 3, 4,5), lty=3, col="gray"))
 
 # Make x axis using one to 5 labels
-axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 ,cex.axis=0.4)
+axis(1, at=c(1, 2, 3, 4,5), labels=c("1M","2M","3M", "4M","5M"), las=2 )
 
 # Make y axis with horizontal labels that display ticks at 
-axis(2, las=1, at = tick_list, labels=y_labels,cex.axis=0.4)
+axis(2, las=1, at = tick_list, labels=y_labels)
 
 #lines for Json
-lines(javaJsonSeqV , type="o", pch=2, lty=2, col=plot_colors[2],cex=0.4)
+lines(javaJsonSeqV , type="o", pch=2, lty=2, col=plot_colors[2])
 
 #lines for Bson 
-lines(javaBsonSeqV, type="o", pch=3, lty=2, col=plot_colors[3],cex=0.4)
+lines(javaBsonSeqV, type="o", pch=3, lty=2, col=plot_colors[3])
 
 #lines for ProtoBuf
-lines(javaProtoBufSeqV, type="o", pch=4, lty=2, col=plot_colors[4],cex=0.4)
+lines(javaProtoBufSeqV, type="o", pch=4, lty=2, col=plot_colors[4])
 
 #lines for Kryo
-lines(javaKryoSeqV, type="o", pch=5, lty=2, col=plot_colors[5],cex=0.4)
+lines(javaKryoSeqV, type="o", pch=5, lty=2, col=plot_colors[5])
 
 #lines for ByteBuffer
-lines(javaByteBufferSeqV, type="o", pch=6, lty=2, col=plot_colors[6],cex=0.4)
+lines(javaByteBufferSeqV, type="o", pch=6, lty=2, col=plot_colors[6])
 
 #lines for BOOST C++ 
-lines(cppBOOSTSeqV, type="o", pch=7, lty=2, col=plot_colors[7],cex=0.4)
+lines(cppBOOSTSeqV, type="o", pch=7, lty=2, col=plot_colors[7])
 
 #lines for PROTOBUF C++ 
-lines(cppPROTOBUFSeqV, type="o", pch=8, lty=2, col=plot_colors[8],cex=0.4)
+lines(cppPROTOBUFSeqV, type="o", pch=8, lty=2, col=plot_colors[8])
 
 #lines for HANDCODED C++ 
-lines(cppHANDCODEDSeqV, type="o", pch=9, lty=2, col=plot_colors[9],cex=0.4)
+lines(cppHANDCODEDSeqV, type="o", pch=9, lty=2, col=plot_colors[9])
 
 #lines for INPLACE C++ 
-lines(cppINPLACESeqV, type="o", pch=10, lty=2, col=plot_colors[10],cex=0.4)
+lines(cppINPLACESeqV, type="o", pch=10, lty=2, col=plot_colors[10])
 
 
-title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
-title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0),cex=0.4)
-text(3, 4000, "Sequential", cex=0.8)
+#title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
+#title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0),cex=1)
+text(3, 4000, "Sequential", cex=1)
 
 box()
 #par(xpd=TRUE)
-legend(2, 25, serialization_methods, cex=0.25,  col=plot_colors, pch=2:11, lty=2:2);
+legend(2, 25, serialization_methods, cex=0.6,  col=plot_colors, pch=1:10, lty=2:2);
 ##############################################################
 ##################                   #########################
 ##################      Next Plot    #########################
@@ -262,55 +262,56 @@ legend(2, 25, serialization_methods, cex=0.25,  col=plot_colors, pch=2:11, lty=2
 #op <- par(oma=c(0.1, 0.1, 0.0, 0.0))#par(mar = c(4, 4, 0.1, 0.1))
 
 x <- c(1000000, 2000000,3000000,4000000,5000000)
-max_y<-25000
+max_y<-14000
 min_y<-0.5
-tick_list=c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,12000,max_y)
+tick_list<-c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,max_y)
 
 y_labels<- sprintf("%s",tick_list);
 
 # Java Deafult
-plot(javaDefaultV, log="y", type="o", pch=1, lty=2,lwd=1,cex=0.4, ylim=c(min_y, max_y),col=plot_colors[1], axes=FALSE, ann=FALSE,cex.axis=0.6, panel.first=abline(h= tick_list, v=c(1, 2, 3, 4, 5), lty=3, col="gray"))
+plot(javaDefaultV, log="y", type="o", pch=1, lty=2,lwd=1, ylim=c(min_y, max_y),col=plot_colors[1], axes=FALSE, ann=FALSE,cex.axis=0.6, panel.first=abline(h= tick_list, v=c(1, 2, 3, 4,5), lty=3, col="gray"))
 
 # Make x axis using one to 5 labels
-axis(1, at=c(1, 2, 3, 4, 5), labels=c("1M","2M","3M", "4M","5M"), las=2 ,cex.axis=0.4)
+axis(1, at=c(1, 2, 3, 4,5), labels=c("1M","2M","3M", "4M", "5M"), las=2 )
 
 # Make y axis with horizontal labels that display ticks at 
-axis(2, las=1, at = tick_list, labels=y_labels,cex.axis=0.4)
+axis(2, las=1, at = tick_list, labels=y_labels)
 
 #lines for Json
-lines(javaJsonV , type="o", pch=2, lty=2, col=plot_colors[2],cex=0.4)
+lines(javaJsonV , type="o", pch=2, lty=2, col=plot_colors[2])
 
 #lines for Bson 
-lines(javaBsonV, type="o", pch=3, lty=2, col=plot_colors[3],cex=0.4)
+lines(javaBsonV, type="o", pch=3, lty=2, col=plot_colors[3])
 
 #lines for ProtoBuf
-lines(javaProtoBufV, type="o", pch=4, lty=2, col=plot_colors[4],cex=0.4)
+lines(javaProtoBufV, type="o", pch=4, lty=2, col=plot_colors[4])
 
 #lines for Kryo
-lines(javaKryoV, type="o", pch=5, lty=2, col=plot_colors[5],cex=0.4)
+print(javaKryoV)
+lines(javaKryoV, type="o", pch=5, lty=2, col=plot_colors[5])
 
 #lines for ByteBuffer
-lines(javaByteBufferV, type="o", pch=6, lty=2, col=plot_colors[6],cex=0.4)
+lines(javaByteBufferV, type="o", pch=6, lty=2, col=plot_colors[6])
 
 #lines for BOOST C++ 
-lines(cppBOOSTV, type="o", pch=7, lty=2, col=plot_colors[7],cex=0.4)
+lines(cppBOOSTV, type="o", pch=7, lty=2, col=plot_colors[7])
 
 #lines for PROTOBUF C++ 
-lines(cppPROTOBUFV, type="o", pch=8, lty=2, col=plot_colors[8],cex=0.4)
+lines(cppPROTOBUFV, type="o", pch=8, lty=2, col=plot_colors[8])
 
 #lines for HANDCODED C++ 
-lines(cppHANDCODEDV, type="o", pch=9, lty=2, col=plot_colors[9],cex=0.4)
+lines(cppHANDCODEDV, type="o", pch=9, lty=2, col=plot_colors[9])
 
 #lines for INPLACE C++ 
-lines(cppINPLACEV, type="o", pch=10, lty=2, col=plot_colors[10],cex=0.4)
+lines(cppINPLACEV, type="o", pch=10, lty=2, col=plot_colors[10])
 
 
 #title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
 #title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0))
 text(3.5, 25, "Random", cex=0.8)
 
-mtext("Total Reading Time (sec) - log", outer = TRUE, cex = 0.6, font=0.7,side=2,family="Helvetica",line = -0.5, col=rgb(0,0.5,0) )
-mtext("Number of Objects", outer = TRUE, cex = 0.6, font=0.7,side=1,family="Helvetica" ,line = -1,col=rgb(0,0.5,0))
+mtext("Total Reading Time (sec) - log", outer = TRUE, cex = 1, font=0.7,side=2,family="Helvetica",line = -0.5, col=rgb(0,0.5,0) )
+mtext("Number of Objects", outer = TRUE, cex = 1, font=0.7,side=1,family="Helvetica" ,line = -1,col=rgb(0,0.5,0))
 # Create box around plot
 box()
 

@@ -56,7 +56,7 @@ public class RandomRead {
 
         List<RootData>  objectList=new ArrayList<>();
         for (long j = 0; j < cunt_to_read; ++j) {
-            objectList.add(fileHandler.getObjectsFromFile(objectIndexes.get((int) j), 1).get(0));
+           objectList.add(fileHandler.getObjectsFromFile(objectIndexes.get((int) j), 1).get(0));
         }
 
         // Time Calculation

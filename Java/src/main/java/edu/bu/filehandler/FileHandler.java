@@ -202,7 +202,7 @@ public class FileHandler {
                 inStreamRegularFile.read(bbPageBuffer); // read object data from disk
 
                 // Time Calculation
-                ioTime += (System.nanoTime() - tmpTime) / 1000000000.0;
+                ioTime += (System.nanoTime() - tmpTime);
                 currentPageNumber = id;
             }
             catch (Exception ex){
