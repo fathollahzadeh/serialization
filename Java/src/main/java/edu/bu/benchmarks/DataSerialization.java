@@ -24,10 +24,10 @@ public class DataSerialization {
 
         // Before any experiments create a hot gc
         // Create a hot garbage collector
-//        Garbage.activateGarbageCollector();
+         //Garbage.activateGarbageCollector();
 //
 //        System.out.println("Activating Java garbage collector!");
-//        System.gc();
+      //  System.gc();
 //        System.out.println("Java garbage collector is made hot!");
 
         // Set input file path:

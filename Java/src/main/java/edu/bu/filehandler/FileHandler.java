@@ -302,7 +302,7 @@ public class FileHandler {
                     buffer = object.javaDefaultSerialization();
                     break;
                 case JSON:
-                    buffer = object.jsonSerialization();
+                    buffer = object.jsonSerialization_withGZIP();
                     break;
                 case BSON:
                     buffer = object.bsonSerialization();
@@ -353,7 +353,7 @@ public class FileHandler {
                 myDeserlizedObject = myData.javaDefaultDeserialization(buffData);
                 break;
             case JSON:
-                myDeserlizedObject = myData.jsonDeserialization(buffData);
+                myDeserlizedObject = myData.jsonDeserialization_withGZIP(buffData);
                 break;
             case BSON:
                 myDeserlizedObject = myData.bsonDeSerialization(buffData, myData.getClass());
@@ -367,12 +367,12 @@ public class FileHandler {
             case BYTEBUFFER:
                 myDeserlizedObject = myData.readByteBuffer(buffData);
                 break;
-            case JSON_GZIP:
-                myDeserlizedObject = myData.jsonDeserialization_withGZIP(buffData);
-                break;
-            case GSON:
-                myDeserlizedObject = myData.gsonDeSerialization(buffData);
-                break;
+//            case JSON_GZIP:
+//                myDeserlizedObject = myData.jsonDeserialization_withGZIP(buffData);
+//                break;
+//            case GSON:
+//                myDeserlizedObject = myData.gsonDeSerialization(buffData);
+//                break;
         }
 
         return myDeserlizedObject;
