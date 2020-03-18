@@ -157,9 +157,8 @@ public class ExternalSort {
             if (pageObjectCounter[fileNumber] == 0 &&  pageCounter[fileNumber] < fileArray.get(fileNumber).getObjectInEachPage().size() - 1) {
 
                 // add page counter
-                pageCounter[fileNumber] = pageCounter[fileNumber] + 1;
-
-                pageObjectCounter[fileNumber] = fileArray.get(fileNumber).getObjectInEachPage().get(pageCounter[fileNumber]);
+                 pageCounter[fileNumber] = pageCounter[fileNumber] + 1;
+                 pageObjectCounter[fileNumber] = fileArray.get(fileNumber).getObjectInEachPage().get( (long)pageCounter[fileNumber]);
 
                 List<RootData> m_list_read_from_file;
 
