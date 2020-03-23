@@ -216,7 +216,9 @@ public class ExternalSort {
         fileHandler.prepareToWrite();
         for (int i = 0; i < list.size(); ++i) {
             //Serialize the TweetStatus object and then write to file:
-            fileHandler.appendObjectToFile((TweetStatus) list.get(i));
+            RootData rd=list.get(i);
+            fileHandler.appendObjectToFile((TweetStatus)rd );
+            rd=null;
         }
         fileHandler.appendObjectToFileFlush();
         this.ioTime+=fileHandler.getIoTime();
