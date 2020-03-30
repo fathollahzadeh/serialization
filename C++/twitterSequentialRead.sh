@@ -5,22 +5,28 @@ echo "start to compiling the project"
 echo "------------------------------"
 echo ""
 
-#number of reads
-number_of_read_object=$2
-
-./makeClean.sh $number_of_read_object $3
 #define a name for project target
 project_target="TwitterSequentialRead"
 
+#number of reads
+number_of_read_object=$2
+
+./resultPath.sh $number_of_read_object $3
+
 #serialization type
-serialization_type=$1 #1-Handcoded, 2-InPlace, 3-Boost, 4-Proto
+serialization_type=$1
 
 #set data and out serialization files path
-datapath="data/serialization_$serialization_type.se"
+datapath="$4/serialization_$serialization_type.se"
 
 echo "start to run the project"
 echo "------------------------"
 
-echo "start to benchmark for sequential $serialization_type read with $number_of_read_object objects:"
+echo "start to benchmark for << sequential read >>  with $number_of_read_object objects: serialization type="$serialization_type
 #valgrind  -v --leak-check=yes ./bin/$project_target $datapath $serialization_type 0 $number_of_read_object $3
+
+#clear the OS cache
+echo 3 > /proc/sys/vm/drop_caches && sync
+
+#run the experiment
 time ./bin/$project_target $datapath $serialization_type 0 $number_of_read_object $3

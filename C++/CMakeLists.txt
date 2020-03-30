@@ -72,15 +72,22 @@ add_executable(TwitterSerialization
         ${rootDataSource}
         )
 
+target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})
+
 # generate random list for benchmark random read
 add_executable(TwitterGenerateRandomList
         src/benchmarks/source/GenerateRandomList.cpp
         )
+target_link_libraries(TwitterGenerateRandomList ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterGenerateRandomList ${LIBBSONCXX_LIBRARIES})
 
 # data generate
 add_executable(TwitterGenerateData
         src/benchmarks/source/GenerateData.cpp
         )
+target_link_libraries(TwitterGenerateData ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterGenerateData ${LIBBSONCXX_LIBRARIES})
 
 
 # sequential read benchmark
@@ -95,6 +102,8 @@ add_executable(TwitterSequentialRead
         ${protpSerializationSource}
         ${rootDataSource}
         )
+target_link_libraries(TwitterSequentialRead ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterSequentialRead ${LIBBSONCXX_LIBRARIES})
 
 # random read benchmark
 add_executable(TwitterRandomRead
@@ -108,6 +117,9 @@ add_executable(TwitterRandomRead
         ${protpSerializationSource}
         ${rootDataSource}
         )
+target_link_libraries(TwitterRandomRead ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterRandomRead ${LIBBSONCXX_LIBRARIES})
+
 # external sort benchmark
 add_executable(TwitterExternalSort
         src/benchmarks/source/ExternalSort.cpp
@@ -120,6 +132,8 @@ add_executable(TwitterExternalSort
         ${protpSerializationSource}
         ${rootDataSource}
         )
+target_link_libraries(TwitterExternalSort ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterExternalSort ${LIBBSONCXX_LIBRARIES})
 
 # network benchmark
 add_executable(TwitterNetworkServer
@@ -132,6 +146,8 @@ add_executable(TwitterNetworkServer
         ${rootDataSource}
         src/serialization/source/proto/TweetStatusP.pb.cc
         )
+target_link_libraries(TwitterNetworkServer ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterNetworkServer ${LIBBSONCXX_LIBRARIES})
 
 # network benchmark client
 add_executable(TwitterNetworkClient
@@ -146,14 +162,6 @@ add_executable(TwitterNetworkClient
         ${rootDataSource}
         ${networkAdapterSource}
         )
+target_link_libraries(TwitterNetworkClient ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterNetworkClient ${LIBBSONCXX_LIBRARIES})
 
-## MongoDB driver for BSON test
-#add_executable(bsonTest
-#        src/test/myMongoBSON.cpp
-#        )
-#
-#target_link_libraries(bsonTest ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(bsonTest ${LIBBSONCXX_LIBRARIES})
-
-target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
-target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})

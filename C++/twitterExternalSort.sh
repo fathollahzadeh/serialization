@@ -1,21 +1,15 @@
 #!/usr/bin/env bash
 
-# clean last cmake files and the run "make clean" and make
-echo "start to compiling the project"
-echo "------------------------------"
-echo ""
-./makeClean.sh
-
 #define a name for project target
 project_target="TwitterExternalSort"
 mkdir -p "bin/tmp"
 
 #serialization type
-serialization_type=$1 #1-Handcoded, 2-InPlace, 3-Boost, 4-Proto
-number_of_files=20
+serialization_type=$1
+number_of_files=$4
 
 #set data and out serialization files path
-datapath="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/serialization_$serialization_type.se"
+datapath="$3/serialization_$serialization_type.se"
 
 echo "start to run the project"
 echo "------------------------"
@@ -28,4 +22,8 @@ file_external_sort="bin/benchmark/externalsort/result_cpp_externalsort_$2.txt"
    fi
 
 
+#clear the OS cache
+echo 3 > /proc/sys/vm/drop_caches && sync
+
+#run the experiment
 ./bin/$project_target $datapath $number_of_files $serialization_type $2
