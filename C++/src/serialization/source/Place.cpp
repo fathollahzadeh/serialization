@@ -90,10 +90,28 @@ Place *Place::deserializeHandcoded(char *buffer, int &bytesRead) {
     return this;
 }
 
+bsoncxx::document::value Place::serializeBSON() {
+
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+
+    document doc=document{};
+    doc<<"name"<<this->name<<
+    "country_code"<<this->countryCode<<
+    "id"<<this->id<<
+    "country"<<this->country<<
+    "place_type"<<this->placeType<<
+    "url"<<this->url<<
+    "full_name"<<this->fullName;
+
+    if (this->boundingBoxCoordinates!= nullptr){
+        doc<<"bounding_box" << bsoncxx::types::b_document{this->boundingBoxCoordinates->serializeBSON().view()} ;
+    }
+   return doc<<finalize;
+}
+
 Place::~Place() {
     if (boundingBoxCoordinates != nullptr) {
         delete boundingBoxCoordinates;
     }
-
-
 }

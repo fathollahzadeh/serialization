@@ -59,5 +59,18 @@ Coordinates::~Coordinates() {
     // delete coordinates;
 }
 
+bsoncxx::document::value Coordinates::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::open_array;
+    using bsoncxx::builder::stream::close_array;
+
+    document doc=document{};
+    doc<<"type"<<this->type<<
+    "coordinates"<<open_array<<this->coordinates[0]<<this->coordinates[1]<<close_array;
+
+    return doc<<finalize;
+}
+
 
 

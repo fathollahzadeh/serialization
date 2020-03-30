@@ -4,6 +4,12 @@ Dependencies
 * rapid-json
 * boost
 * google protobuf
+    - link to google proto buf c++:
+https://github.com/protocolbuffers/protobuf/blob/master/src/README.md
+* C++ Bson
+    - http://bsonspec.org/implementations.html
+    - visit MongoDb derives web site for compile and install BSON: http://mongocxx.org/
+
 * cmake
 
 File Directory Structure

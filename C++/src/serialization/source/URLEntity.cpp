@@ -80,3 +80,21 @@ URLEntity *URLEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 
     return this;
 }
+
+bsoncxx::document::value URLEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    auto arrindices = array{};
+    for (int i = 0; i < this->indices.size(); ++i) {
+        arrindices << this->indices[i];
+    }
+    document doc=document{};
+    doc<<"display_url"<<this->displayURL<<
+    "expanded_url"<<this->expandedURL<<
+    "url"<<this->url<<
+    "indices"<<arrindices;
+
+    return doc<<finalize;
+}

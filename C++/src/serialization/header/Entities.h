@@ -71,6 +71,9 @@ public:
     //Hand Coded C++ de-serialization:
     Entities *deserializeHandcoded(char *buffer, int &bytesRead);
 
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
+
 };
 BOOST_CLASS_TRACKING(Entities, boost::serialization::track_never)
 

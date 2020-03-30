@@ -83,5 +83,23 @@ string UserMentionEntity::toJSON() {
 UserMentionEntity::~UserMentionEntity() {
     //free memory:
     indices.shrink_to_fit();
+}
 
+bsoncxx::document::value UserMentionEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    auto arrindices = array{};
+    for (int i = 0; i < this->indices.size(); ++i) {
+        arrindices << this->indices[i];
+    }
+    document doc=document{};
+    doc<<"id"<<this->id<<
+    "id_str"<<this->idStr<<
+    "name"<<this->name<<
+    "screen_name"<<this->screenName<<
+    "indices"<<arrindices;
+
+    return doc<<finalize;
 }

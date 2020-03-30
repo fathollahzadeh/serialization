@@ -60,6 +60,9 @@ public:
 
     TweetStatusProto * deserializeInPlace(char *buffer);
 
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
+
     proto::TweetStatusP *getProto() const;
 
     bool operator<(TweetStatusProto &other);

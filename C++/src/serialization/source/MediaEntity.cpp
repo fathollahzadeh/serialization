@@ -9,9 +9,9 @@ MediaEntity::MediaEntity() {
 
 //Constructor with arguments:
 MediaEntity::MediaEntity(string displayURL, string expandedURL, long id, vector<int> indices, string mediaURL,
-                             string mediaURLHttps, MediaSizesEntity *sizes, long sourceStatusId,
-                             string sourceStatusIdStr, string type,
-                             string url, VideoEntity *videoInfo, AdditionalMediaInfoEntity *additionalMediaInfo) {
+                         string mediaURLHttps, MediaSizesEntity *sizes, long sourceStatusId,
+                         string sourceStatusIdStr, string type,
+                         string url, VideoEntity *videoInfo, AdditionalMediaInfoEntity *additionalMediaInfo) {
     this->displayURL = displayURL;
     this->expandedURL = expandedURL;
     this->id = id;
@@ -26,7 +26,6 @@ MediaEntity::MediaEntity(string displayURL, string expandedURL, long id, vector<
     this->additionalMediaInfo = additionalMediaInfo;
     this->videoInfo = videoInfo;
 }
-
 
 
 //C++: Explicit call needed for printing content:
@@ -79,19 +78,19 @@ char *MediaEntity::serializeHandcoded(char *buffer, int &objectSize) {
     buffer = copyString(buffer, this->url, objectSize);
 
     //Copy MediaSizesEntityHC Objects:
-    buffer =this->sizes->serializeHandcoded(buffer, objectSize);
+    buffer = this->sizes->serializeHandcoded(buffer, objectSize);
 
     //Copy AdditionalMediaInfoEntityHC Object:
     if (this->additionalMediaInfo != nullptr) {
         buffer = copyBool(buffer, false, objectSize);
-        buffer =this->additionalMediaInfo->serializeHandcoded(buffer, objectSize);
+        buffer = this->additionalMediaInfo->serializeHandcoded(buffer, objectSize);
     } else
         buffer = copyBool(buffer, true, objectSize);
 
     //Copy VideoEntityHC Object:
     if (this->videoInfo != nullptr) {
         buffer = copyBool(buffer, false, objectSize);
-        buffer =this->videoInfo->serializeHandcoded(buffer, objectSize);
+        buffer = this->videoInfo->serializeHandcoded(buffer, objectSize);
     } else
         buffer = copyBool(buffer, true, objectSize);
 
@@ -100,7 +99,7 @@ char *MediaEntity::serializeHandcoded(char *buffer, int &objectSize) {
 }
 
 
-MediaEntity * MediaEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
+MediaEntity *MediaEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
     //Parse Integers:
     int numOfIndices = parseInt(buffer + bytesRead);
     bytesRead += sizeof(numOfIndices);
@@ -132,7 +131,7 @@ MediaEntity * MediaEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
     bytesRead += (sizeof(int) + this->url.length());
 
     //Parse MediaSizesEntityHC Objects:
-    this->sizes=new MediaSizesEntity();
+    this->sizes = new MediaSizesEntity();
     this->sizes->deserializeHandcoded(buffer, bytesRead);
 
     bool checknullptr;
@@ -140,7 +139,7 @@ MediaEntity * MediaEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
     checknullptr = parseBool(buffer + bytesRead);
     bytesRead += sizeof(checknullptr);
     if (!checknullptr) {
-        this->additionalMediaInfo=new AdditionalMediaInfoEntity();
+        this->additionalMediaInfo = new AdditionalMediaInfoEntity();
         this->additionalMediaInfo->deserializeHandcoded(buffer, bytesRead);
 
     } else
@@ -150,7 +149,7 @@ MediaEntity * MediaEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
     checknullptr = parseBool(buffer + bytesRead);
     bytesRead += sizeof(checknullptr);
     if (!checknullptr) {
-        this->videoInfo=new VideoEntity();
+        this->videoInfo = new VideoEntity();
         this->videoInfo->deserializeHandcoded(buffer, bytesRead);
     } else
         this->videoInfo = nullptr;
@@ -161,15 +160,49 @@ MediaEntity * MediaEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 MediaEntity::~MediaEntity() {
 
     //free memory:
-     indices.shrink_to_fit();
+    indices.shrink_to_fit();
 
-     if (sizes != nullptr)
-         delete sizes;
+    if (sizes != nullptr)
+        delete sizes;
 
-     if (videoInfo != nullptr)
-         delete videoInfo;
-     if (additionalMediaInfo != nullptr)
-         delete additionalMediaInfo;
+    if (videoInfo != nullptr)
+        delete videoInfo;
+    if (additionalMediaInfo != nullptr)
+        delete additionalMediaInfo;
+}
+
+bsoncxx::document::value MediaEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+    using bsoncxx::builder::stream::open_document;
+    using bsoncxx::builder::stream::close_document;
+
+    document doc = document{};
+    doc << "display_url" << this->displayURL <<
+        "expanded_url" << this->expandedURL <<
+        "id" << this->id;
+
+    auto arrindices = array{};
+    for (int i = 0; i < this->indices.size(); ++i) {
+        arrindices << this->indices[i];
+    }
+    doc << "indices" << arrindices <<
+        "media_url" << this->mediaURL <<
+        "media_url_https" << this->mediaURLHttps ;
+    if (this->sizes!= nullptr)
+        doc<<"sizes" << bsoncxx::types::b_document{this->sizes->serializeBSON().view()} ;
+    doc<<"type" << this->type <<
+        "source_status_id" << this->sourceStatusId <<
+        "source_status_id_str" << this->sourceStatusIdStr <<
+        "url" << this->url;
+    if (this->videoInfo != nullptr)
+        doc << "video_info" << bsoncxx::types::b_document{this->videoInfo->serializeBSON().view()};
+
+    if (this->additionalMediaInfo != nullptr)
+        doc << "additional_media_info" << bsoncxx::types::b_document{this->additionalMediaInfo->serializeBSON().view()};
+
+    return doc << finalize;
 }
 
 

@@ -9,11 +9,11 @@ echo ""
 project_target="TwitterGenerateData"
 
 #set number of repeats
-number_of_repeats=10
+number_of_repeats=6
 
 #set data and out serialization files path
-datapath="data/tweets_jsonline_1M.txt"
-outpath="data/tweet_$number_of_repeats.txt"
+datapath="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/tweets_1M_rows.txt"
+outpath="/mnt/twitter_data/tweet_$number_of_repeats.txt"
 
 echo "start to run the project"
 echo "------------------------"

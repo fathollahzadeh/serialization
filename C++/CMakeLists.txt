@@ -8,6 +8,16 @@ set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 # set(CMAKE_CXX_STANDARD 11)
 
+find_package(libmongocxx REQUIRED)
+find_package(libbsoncxx REQUIRED)
+include_directories(${LIBMONGOCXX_INCLUDE_DIR})
+include_directories(${LIBBSONCXX_INCLUDE_DIR})
+include_directories("/usr/local/include/mongocxx/v_noabi")
+include_directories("/usr/local/include/bsoncxx/v_noabi")
+include_directories("/usr/local/include/libmongoc-1.0")
+include_directories("/usr/local/include/libbson-1.0")
+include_directories("/usr/local/lib")
+
 
 # set the output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
@@ -20,7 +30,7 @@ if (APPLE)
     SET(CMAKE_CXX_FLAGS " -std=c++11 -g -fPIC -Wno-deprecated-declarations")
     SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 elseif (UNIX AND NOT APPLE)
-    SET(CMAKE_CXX_FLAGS " -std=c++11 -g -fPIC -Wno-deprecated-declarations -pthread -lprotobuf -lboost_serialization")
+    SET(CMAKE_CXX_FLAGS " -std=c++11 -g -march=native -O3 -fPIC -Wno-deprecated-declarations -pthread -lprotobuf -lboost_serialization")
 endif ()
 
 
@@ -136,3 +146,14 @@ add_executable(TwitterNetworkClient
         ${rootDataSource}
         ${networkAdapterSource}
         )
+
+## MongoDB driver for BSON test
+#add_executable(bsonTest
+#        src/test/myMongoBSON.cpp
+#        )
+#
+#target_link_libraries(bsonTest ${LIBMONGOCXX_LIBRARIES})
+#target_link_libraries(bsonTest ${LIBBSONCXX_LIBRARIES})
+
+target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})

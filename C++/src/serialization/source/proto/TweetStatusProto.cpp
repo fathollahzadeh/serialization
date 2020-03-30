@@ -381,6 +381,10 @@ TweetStatusProto *TweetStatusProto::deserializeInPlace(char *buffer) {
     return nullptr;
 }
 
+bsoncxx::document::value TweetStatusProto::serializeBSON() {
+    return bsoncxx::document::value(nullptr, 0, nullptr);
+}
+
 //Implement your own custom comparator:
 bool TweetStatusProto::operator<(TweetStatusProto &other) {
 

@@ -60,6 +60,9 @@ public:
 
     //Hand Coded C++ de-serialization:
     URLEntity *deserializeHandcoded(char *buffer, int &bytesRead);
+
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
 };
 
 BOOST_CLASS_TRACKING(URLEntity, boost::serialization::track_never)

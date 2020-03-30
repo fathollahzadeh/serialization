@@ -99,6 +99,9 @@ public:
     //proto buffer de-serialization
     TweetStatusIP* deserializeProto(char *buffer, int &bytesRead);
 
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
+
     //Implement your own custom comparator:
     bool operator< (TweetStatusIP& other);
 

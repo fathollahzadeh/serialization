@@ -60,6 +60,27 @@ MediaSizesEntity * MediaSizesEntity::deserializeHandcoded(char *buffer, int &byt
     return this;
 }
 
+bsoncxx::document::value MediaSizesEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    document doc=document{};
+     if (this->thumb!= nullptr)
+        doc<<"thumb" << bsoncxx::types::b_document{this->thumb->serializeBSON().view()} ;
+
+    if (this->large!= nullptr)
+        doc<<"large" << bsoncxx::types::b_document{this->large->serializeBSON().view()} ;
+
+    if (this->medium!= nullptr)
+        doc<<"medium" << bsoncxx::types::b_document{this->medium->serializeBSON().view()} ;
+
+    if (this->small!= nullptr)
+        doc<<"small" << bsoncxx::types::b_document{this->small->serializeBSON().view()} ;
+
+    return doc<<finalize;
+}
+
 
 MediaSizesEntity::~MediaSizesEntity() {
 

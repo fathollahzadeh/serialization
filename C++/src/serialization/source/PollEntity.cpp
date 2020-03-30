@@ -8,15 +8,15 @@ PollEntity::PollEntity() {}
 
 PollEntity::~PollEntity() {
 
-    for (int i = 0; i <options.size() ; ++i) {
+    for (int i = 0; i < options.size(); ++i) {
         delete options.at(i);
     }
     options.shrink_to_fit();
 }
 
 PollEntity::PollEntity(const vector<OptionEntity *> &options, const string &endDatetime,
-                           const string &durationMinutes) : options(options), endDatetime(endDatetime),
-                                                            durationMinutes(durationMinutes) {}
+                       const string &durationMinutes) : options(options), endDatetime(endDatetime),
+                                                        durationMinutes(durationMinutes) {}
 
 
 //C++: Explicit call needed for printing content:
@@ -43,7 +43,7 @@ char *PollEntity::serializeHandcoded(char *buffer, int &objectSize) {
     int numOfoptions = this->options.size();
     buffer = copyInt(buffer, numOfoptions, objectSize);
     for (int i = 0; i < numOfoptions; i++) {
-        buffer =this->options.at(i)->serializeHandcoded(buffer, objectSize);
+        buffer = this->options.at(i)->serializeHandcoded(buffer, objectSize);
     }
     //Copy Strings:
     buffer = copyString(buffer, this->endDatetime, objectSize);
@@ -53,7 +53,7 @@ char *PollEntity::serializeHandcoded(char *buffer, int &objectSize) {
 }
 
 
-PollEntity* PollEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
+PollEntity *PollEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 
     int numOfoptions = parseInt(buffer + bytesRead);
     bytesRead += sizeof(numOfoptions);
@@ -69,4 +69,21 @@ PollEntity* PollEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
     bytesRead += (sizeof(int) + this->durationMinutes.length());
 
     return this;
+}
+
+bsoncxx::document::value PollEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    auto arroptions = array{};
+    for (int i = 0; i < this->options.size(); ++i) {
+        arroptions << bsoncxx::types::b_document{this->options[i]->serializeBSON().view()};
+    }
+    document doc = document{};
+    doc << "end_datetime" << this->endDatetime <<
+        "duration_minutes" << this->durationMinutes <<
+        "options" << arroptions;
+
+    return doc << finalize;
 }

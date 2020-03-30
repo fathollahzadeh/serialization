@@ -53,6 +53,9 @@ public:
     //Hand Coded C++ de-serialization:
     SymbolEntity *deserializeHandcoded(char *buffer, int &bytesRead);
 
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
+
 };
 BOOST_CLASS_TRACKING(SymbolEntity, boost::serialization::track_never)
 

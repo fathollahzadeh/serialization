@@ -174,6 +174,10 @@ TweetStatusIP *TweetStatusIP::deserializeProto(char *buffer, int &bytesRead) {
     return nullptr;
 }
 
+bsoncxx::document::value TweetStatusIP::serializeBSON() {
+    return bsoncxx::document::value(nullptr, 0, nullptr);
+}
+
 
 //Implement your own custom comparator:
 bool TweetStatusIP::operator< (TweetStatusIP& other) {

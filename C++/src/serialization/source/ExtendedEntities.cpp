@@ -59,3 +59,18 @@ ExtendedEntities::~ExtendedEntities() {
     }
     media.shrink_to_fit();
 }
+
+bsoncxx::document::value ExtendedEntities::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    auto arrmedia = array{};
+    for (int i = 0; i < this->media.size(); ++i) {
+        arrmedia<< bsoncxx::types::b_document{this->media[i]->serializeBSON().view()};
+    }
+    document doc=document{};
+    doc<<"media"<<arrmedia;
+
+    return doc<<finalize;
+}

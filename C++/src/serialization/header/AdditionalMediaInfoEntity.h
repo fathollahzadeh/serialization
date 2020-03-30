@@ -48,6 +48,9 @@ public:
     //Hand Coded C++ de-serialization:
     AdditionalMediaInfoEntity *deserializeHandcoded(char *buffer, int &bytesRead);
 
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
+
 };
 BOOST_CLASS_TRACKING(AdditionalMediaInfoEntity, boost::serialization::track_never)
 

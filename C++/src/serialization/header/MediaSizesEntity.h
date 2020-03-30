@@ -59,6 +59,9 @@ public:
     //Hand Coded C++ de-serialization:
     MediaSizesEntity *deserializeHandcoded(char *buffer, int &bytesRead);
 
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
+
 };
 
 BOOST_CLASS_TRACKING(MediaSizesEntity, boost::serialization::track_never)

@@ -18,6 +18,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
+
+
+//using namespace bsoncxx;
 using namespace std;
 
 /*
@@ -155,6 +158,8 @@ public:
 
     TweetStatus * deserializeInPlace(char *buffer);
 
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
 
     //Implement your own custom comparator:
     bool operator< (TweetStatus& other);

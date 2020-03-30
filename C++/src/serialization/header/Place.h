@@ -68,6 +68,9 @@ public:
 
     //Hand Coded C++ de-serialization:
     Place *deserializeHandcoded(char *buffer, int &bytesRead);
+
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
 };
 
 BOOST_CLASS_TRACKING(Place, boost::serialization::track_never)

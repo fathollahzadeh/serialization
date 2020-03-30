@@ -47,6 +47,9 @@ public:
 
     //Hand Coded C++ de-serialization:
     PollEntity *deserializeHandcoded(char *buffer, int &bytesRead);
+
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
 };
 BOOST_CLASS_TRACKING(PollEntity, boost::serialization::track_never)
 

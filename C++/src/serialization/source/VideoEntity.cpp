@@ -7,29 +7,29 @@
 VideoEntity::VideoEntity() {}
 
 VideoEntity::VideoEntity(const vector<int> &aspectRatio, int durationMillis,
-                             const vector<VariantEntity *> &variants) : aspectRatio(aspectRatio),
-                                                                          durationMillis(durationMillis),
-                                                                          variants(variants) {}
+                         const vector<VariantEntity *> &variants) : aspectRatio(aspectRatio),
+                                                                    durationMillis(durationMillis),
+                                                                    variants(variants) {}
 
 
 string VideoEntity::toJSON() {
-    string stringS="{\"aspect_ratio\":[";
-    for (int i = 0; i <aspectRatio.size()-1 ; ++i) {
-        stringS+=itos(aspectRatio.at(i))+",";
+    string stringS = "{\"aspect_ratio\":[";
+    for (int i = 0; i < aspectRatio.size() - 1; ++i) {
+        stringS += itos(aspectRatio.at(i)) + ",";
     }
-    if(aspectRatio.size()>0)
-        stringS+=itos(aspectRatio.at(aspectRatio.size()-1));
-    stringS+="],";
+    if (aspectRatio.size() > 0)
+        stringS += itos(aspectRatio.at(aspectRatio.size() - 1));
+    stringS += "],";
 
-    stringS+=getIntKeyValue("DurationMillis",durationMillis)+",";
-    stringS+="\"variants\":[";
-    for (int i = 0; i <variants.size()-1 ; ++i) {
-        stringS+=variants.at(i)->toJSON()+",";
+    stringS += getIntKeyValue("DurationMillis", durationMillis) + ",";
+    stringS += "\"variants\":[";
+    for (int i = 0; i < variants.size() - 1; ++i) {
+        stringS += variants.at(i)->toJSON() + ",";
     }
-    if (variants.size()>0){
-        stringS+=variants.at(variants.size()-1)->toJSON();
+    if (variants.size() > 0) {
+        stringS += variants.at(variants.size() - 1)->toJSON();
     }
-    stringS+="]";
+    stringS += "]";
 
     return stringS;
 }
@@ -49,7 +49,7 @@ char *VideoEntity::serializeHandcoded(char *buffer, int &objectSize) {
     int numOfVariants = this->variants.size();
     buffer = copyInt(buffer, numOfVariants, objectSize);
     for (int i = 0; i < numOfVariants; i++) {
-        buffer =this->variants.at(i)->serializeHandcoded(buffer,objectSize);
+        buffer = this->variants.at(i)->serializeHandcoded(buffer, objectSize);
     }
     //Copy Integer:
     buffer = copyInt(buffer, this->durationMillis, objectSize);
@@ -58,13 +58,13 @@ char *VideoEntity::serializeHandcoded(char *buffer, int &objectSize) {
 
 }
 
-VideoEntity * VideoEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
+VideoEntity *VideoEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 
-    int numOfAspectRatio = parseInt(buffer+bytesRead);
+    int numOfAspectRatio = parseInt(buffer + bytesRead);
     bytesRead += sizeof(numOfAspectRatio);
-    for (int i = 0; i <numOfAspectRatio ; ++i) {
-        this->aspectRatio.push_back(parseInt(buffer+bytesRead));
-        bytesRead+= sizeof(int);
+    for (int i = 0; i < numOfAspectRatio; ++i) {
+        this->aspectRatio.push_back(parseInt(buffer + bytesRead));
+        bytesRead += sizeof(int);
     }
 
     int numOfVariants = parseInt(buffer + bytesRead);
@@ -84,11 +84,33 @@ VideoEntity * VideoEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 VideoEntity::~VideoEntity() {
     //free memory:
     aspectRatio.shrink_to_fit();
-    for (int i = 0; i <variants.size() ; ++i) {
-        delete  variants.at(i);
+    for (int i = 0; i < variants.size(); ++i) {
+        delete variants.at(i);
     }
     variants.shrink_to_fit();
+}
 
+bsoncxx::document::value VideoEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    auto arraspect_ratio = array{};
+    for (int i = 0; i < this->aspectRatio.size(); ++i) {
+        arraspect_ratio << this->aspectRatio[i];
+    }
+
+    auto arrvariants = array{};
+    for (int i = 0; i < this->variants.size(); ++i) {
+        arrvariants << bsoncxx::types::b_document{this->variants[i]->serializeBSON().view()};
+    }
+
+    document doc = document{};
+    doc << "duration_millis" << this->durationMillis <<
+        "aspect_ratio" << arraspect_ratio <<
+        "variants" << arrvariants;
+
+    return doc << finalize;
 }
 
 

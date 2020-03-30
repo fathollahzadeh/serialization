@@ -219,4 +219,45 @@ Entities::~Entities() {
 
 }
 
+bsoncxx::document::value Entities::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    auto arrhashtags = array{};
+    for (int i = 0; i < this->hashtags.size(); ++i) {
+        arrhashtags<< bsoncxx::types::b_document{this->hashtags[i]->serializeBSON().view()};
+    }
+
+    auto arrmedia = array{};
+    for (int i = 0; i < this->media.size(); ++i) {
+        arrmedia<< bsoncxx::types::b_document{this->media[i]->serializeBSON().view()};
+    }
+
+    auto arrurls = array{};
+    for (int i = 0; i < this->urls.size(); ++i) {
+        arrurls<< bsoncxx::types::b_document{this->urls[i]->serializeBSON().view()};
+    }
+
+    auto arruserMentions = array{};
+    for (int i = 0; i < this->userMentions.size(); ++i) {
+        arruserMentions<< bsoncxx::types::b_document{this->userMentions[i]->serializeBSON().view()};
+    }
+
+    auto arrsymbols = array{};
+    for (int i = 0; i < this->symbols.size(); ++i) {
+        arrsymbols<< bsoncxx::types::b_document{this->symbols[i]->serializeBSON().view()};
+    }
+
+    auto arrpolls = array{};
+    for (int i = 0; i < this->polls.size(); ++i) {
+        arrpolls<< bsoncxx::types::b_document{this->polls[i]->serializeBSON().view()};
+    }
+    document doc=document{};
+    doc<<"hashtags"<<arrhashtags<<"media"<<arrmedia<<"urls"<<arrurls<<"user_mentions"<<arruserMentions<<"symbols"<<arrsymbols<<"polls"<<arrpolls;
+
+    return doc<<finalize;
+}
+
+
 

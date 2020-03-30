@@ -24,7 +24,7 @@ string OptionEntity::toJSON() {
 char *OptionEntity::serializeHandcoded(char *buffer, int &objectSize) {
     //Serialize the object.
     //Copy Integers:
-    buffer = copyInt(buffer,this->position, objectSize);
+    buffer = copyInt(buffer, this->position, objectSize);
     //Copy Strings:
     buffer = copyString(buffer, this->text, objectSize);
 
@@ -32,9 +32,9 @@ char *OptionEntity::serializeHandcoded(char *buffer, int &objectSize) {
 }
 
 
-OptionEntity * OptionEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
+OptionEntity *OptionEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 
-    OptionEntity * optionEntity=new OptionEntity();
+    OptionEntity *optionEntity = new OptionEntity();
     //Parse Integer:
     optionEntity->position = parseInt(buffer + bytesRead);
     bytesRead += sizeof(optionEntity->position);
@@ -44,4 +44,14 @@ OptionEntity * OptionEntity::deserializeHandcoded(char *buffer, int &bytesRead) 
     bytesRead += (sizeof(int) + optionEntity->text.length());
 
     return optionEntity;
+}
+
+bsoncxx::document::value OptionEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+
+    document doc = document{};
+    doc << "position" << this->position <<
+        "text" << this->text;
+    return doc << finalize;
 }

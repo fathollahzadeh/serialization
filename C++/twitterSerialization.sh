@@ -10,13 +10,15 @@ echo ""
 project_target="TwitterSerialization"
 
 #set data and out serialization files path
-datapath="data/tweets_jsonline_1M.txt"
+datapath="/mnt/tweets_1M_rows.txt"
 
-for serialization_type in 1 2 3 4 #1-Handcoded, 2-InPlace, 3-Boost, 4-Proto
+numberOfTweets=100000
+
+for serialization_type in 5 #1 2 3 4 # 5 #1-Handcoded, 2-InPlace, 3-Boost, 4-Proto 5-BSON
 do
-    outpath="data/serialization_$serialization_type.se"
+    outpath="/mnt/serialized_data/cppdata/serialization_$serialization_type.se"
     echo "start to run the project"
     echo "------------------------"
 
-    ./bin/$project_target $datapath $serialization_type $outpath
+    ./bin/$project_target $datapath $serialization_type $outpath $numberOfTweets
 done

@@ -100,6 +100,13 @@ void FileHandler<T>::appendObjectToFile(TweetStatus *object) {
             delete tweetStatusProto;
         }
 
+            // if serialization type is ProtoBuf:
+        else if (serializationType == 5) {
+            string jsonString=bsoncxx::to_json( object->serializeBSON());
+            strcpy(buffer + currentOffset,jsonString.c_str());
+            objectSize=jsonString.size();
+        }
+
 
         //check capacity of the current page size
         //if current page is full should be write to the file and then reset the page

@@ -59,6 +59,17 @@ SizeEntity * SizeEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 }
 
 
-SizeEntity::~SizeEntity() {
+SizeEntity::~SizeEntity() {}
 
+bsoncxx::document::value SizeEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    document doc=document{};
+    doc<<"width"<<this->width<<
+    "height"<<this->height<<
+    "resize"<<this->resize;
+
+    return doc<<finalize;
 }

@@ -54,4 +54,18 @@ AdditionalMediaInfoEntity *AdditionalMediaInfoEntity::deserializeHandcoded(char 
     return this;
 }
 
+bsoncxx::document::value AdditionalMediaInfoEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+
+    document doc=document{};
+    doc<<"title"<<this->title<<
+    "description"<<this->description<<
+    "embeddable"<<this->embeddable<<
+    "monetizable"<<this->monetizable;
+
+    return doc<<finalize;
+
+}
+
 

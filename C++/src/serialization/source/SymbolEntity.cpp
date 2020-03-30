@@ -60,7 +60,23 @@ SymbolEntity * SymbolEntity::deserializeHandcoded(char *buffer, int &bytesRead) 
 }
 
 SymbolEntity::~SymbolEntity() {
-
     //free memory:
     indices.shrink_to_fit();
+}
+
+bsoncxx::document::value SymbolEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    auto arrindices = array{};
+    for (int i = 0; i < this->indices.size(); ++i) {
+        arrindices << this->indices[i];
+    }
+
+    document doc=document{};
+    doc<<"text"<<this->text;
+    doc<<"indices"<<arrindices;
+
+    return doc<<finalize;
 }

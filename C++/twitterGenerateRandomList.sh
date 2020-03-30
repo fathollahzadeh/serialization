@@ -13,10 +13,10 @@ mkdir -p "bin/benchmark/readobjects"
 project_target="TwitterGenerateRandomList"
 
 #define maximum value can be generate
-maximum_value=6000000;
+maximum_value=1000000;
 
 #for number of objects:
-for n in 1000000 2000000 3000000 4000000 5000000
+for n in 1000000 #1000000 2000000 3000000 4000000 5000000
 do
    outpath="bin/benchmark/readobjects/randomlist_$n.txt"
    ./bin/$project_target $n $maximum_value $outpath

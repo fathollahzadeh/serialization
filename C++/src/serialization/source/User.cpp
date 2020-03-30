@@ -7,7 +7,7 @@ using namespace std;
 User::~User() {
     //free memory:
     withheldInCountries.shrink_to_fit();
-     for (int i = 0; i <descriptionURLEntities.size() ; ++i) {
+    for (int i = 0; i < descriptionURLEntities.size(); ++i) {
         delete descriptionURLEntities.at(i);
     }
 
@@ -252,17 +252,17 @@ User *User::deserializeHandcoded(char *buffer, int &bytesRead) {
 
 
 User::User(long id, string name, string screenName, string location, string url,
-               string description, bool isProtected, bool isVerified, int followersCount, int friendsCount,
-               int listedCount, int favouritesCount, int statusesCount, string createdAt,
-               string profileBannerImageUrl, string profileImageUrlHttps, bool isDefaultProfile,
-               vector<string> withheldInCountries, string withheldScope,
-               vector<URLEntity *> descriptionURLEntities, bool isGeoEnabled, string lang,
-               bool isContributorsEnabled, string profileBackgroundColor, string profileBackgroundImageUrl,
-               string profileBackgroundImageUrlHttps, bool profileBackgroundTiled, string profileImageUrl,
-               string profileLinkColor, string profileSidebarBorderColor,
-               string profileSidebarFillColor, string profileTextColor, bool profileUseBackgroundImage,
-               bool isDefaultProfileImage, int utcOffset, string timeZone, bool translator, bool isFollowRequestSent,
-               bool showAllInlineMedia) {
+           string description, bool isProtected, bool isVerified, int followersCount, int friendsCount,
+           int listedCount, int favouritesCount, int statusesCount, string createdAt,
+           string profileBannerImageUrl, string profileImageUrlHttps, bool isDefaultProfile,
+           vector<string> withheldInCountries, string withheldScope,
+           vector<URLEntity *> descriptionURLEntities, bool isGeoEnabled, string lang,
+           bool isContributorsEnabled, string profileBackgroundColor, string profileBackgroundImageUrl,
+           string profileBackgroundImageUrlHttps, bool profileBackgroundTiled, string profileImageUrl,
+           string profileLinkColor, string profileSidebarBorderColor,
+           string profileSidebarFillColor, string profileTextColor, bool profileUseBackgroundImage,
+           bool isDefaultProfileImage, int utcOffset, string timeZone, bool translator, bool isFollowRequestSent,
+           bool showAllInlineMedia) {
 
     this->id = id;
     this->name = name;
@@ -303,5 +303,65 @@ User::User(long id, string name, string screenName, string location, string url,
     this->translator = translator;
     this->isFollowRequestSent = isFollowRequestSent;
     this->showAllInlineMedia = showAllInlineMedia;
+}
+
+bsoncxx::document::value User::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    auto arrwithheld_in_countries = array{};
+    for (int i = 0; i < this->withheldInCountries.size(); ++i) {
+        arrwithheld_in_countries << this->withheldInCountries[i];
+    }
+
+    auto arrdescriptionURLEntities = array{};
+    for (int i = 0; i < this->descriptionURLEntities.size(); ++i) {
+        arrdescriptionURLEntities
+                << bsoncxx::types::b_document{this->descriptionURLEntities[i]->serializeBSON().view()};
+    }
+
+
+    document doc = document{};
+    doc << "id" << this->id <<
+        "name" << this->name <<
+        "screen_name" << this->screenName <<
+        "location" << this->location <<
+        "url" << this->url <<
+        "protected" << this->isProtected <<
+        "verified" << this->isVerified <<
+        "followers_count" << this->followersCount <<
+        "friends_count" << this->friendsCount <<
+        "listed_count" << this->listedCount <<
+        "favourites_count" << this->favouritesCount <<
+        "statuses_count" << this->statusesCount <<
+        "created_at" << this->createdAt <<
+        "profile_banner_url" << this->profileBannerImageUrl <<
+        "profile_image_url_https" << this->profileImageUrlHttps <<
+        "default_profile" << this->isDefaultProfile <<
+        "withheld_in_countries" << arrwithheld_in_countries <<
+        "withheld_scope" << this->withheldScope <<
+        "descriptionURLEntities" << arrdescriptionURLEntities <<
+        "geo_enabled" << this->isGeoEnabled <<
+        "lang" << this->lang <<
+        "contributors_enabled" << this->isContributorsEnabled <<
+        "profile_background_color" << this->profileBackgroundColor <<
+        "profile_background_image_url" << this->profileBackgroundImageUrl <<
+        "profile_background_image_url_https" << this->profileBackgroundImageUrlHttps <<
+        "profile_background_tile" << this->profileBackgroundTiled <<
+        "profile_image_url" << this->profileImageUrl <<
+        "profile_link_color" << this->profileLinkColor <<
+        "profile_sidebar_border_color" << this->profileSidebarBorderColor <<
+        "profile_sidebar_fill_color" << this->profileSidebarFillColor <<
+        "profile_text_color" << this->profileTextColor<<
+        "profile_use_background_image" << this->profileUseBackgroundImage<<
+        "utc_offset" << this->utcOffset<<
+        "time_zone" << this->timeZone<<
+        "is_translator" << this->translator<<
+        "follow_request_sent" << this->isFollowRequestSent<<
+        "showAllInlineMedia" << this->showAllInlineMedia;
+
+
+    return doc << finalize;
 }
 

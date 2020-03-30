@@ -28,10 +28,14 @@ int main(int argc, char *argv[]) {
     //Set output file path
     string outFile = argv[3];
 
+    //set number Of Tweets
+    long numberOfTweets=atoi(argv[4]);
+
     switch (serializationType) {
         case 1:
-        case 3:{
-            DataSerialization<TweetStatus> *dataSerialization=new DataSerialization<TweetStatus>(inputFile,outFile,serializationType);
+        case 3:
+        case 5:{
+            DataSerialization<TweetStatus> *dataSerialization=new DataSerialization<TweetStatus>(inputFile,outFile,serializationType,numberOfTweets);
             dataSerialization->runTheDataSerialization();
 
             delete dataSerialization;
@@ -39,7 +43,7 @@ int main(int argc, char *argv[]) {
         }
 
         case 2: {
-            DataSerialization<TweetStatusIP> *dataSerialization=new DataSerialization<TweetStatusIP>(inputFile,outFile,serializationType);
+            DataSerialization<TweetStatusIP> *dataSerialization=new DataSerialization<TweetStatusIP>(inputFile,outFile,serializationType,numberOfTweets);
             dataSerialization->runTheDataSerialization();
 
             delete dataSerialization;
@@ -47,7 +51,7 @@ int main(int argc, char *argv[]) {
         }
 
         case 4: {
-            DataSerialization<TweetStatusProto> *dataSerialization=new DataSerialization<TweetStatusProto>(inputFile,outFile,serializationType);
+            DataSerialization<TweetStatusProto> *dataSerialization=new DataSerialization<TweetStatusProto>(inputFile,outFile,serializationType,numberOfTweets);
             dataSerialization->runTheDataSerialization();
 
             delete dataSerialization;

@@ -63,3 +63,24 @@ HashtagEntity::~HashtagEntity() {
     //free memory
     indices.shrink_to_fit();
 }
+
+bsoncxx::document::value HashtagEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+    using bsoncxx::builder::stream::open_array;
+    using bsoncxx::builder::stream::close_array;
+
+    // private List<Integer> indices;
+    //    private String text;
+
+    document doc=document{};
+    doc<<"text"<< this->text;
+
+    auto arrindices = array{};
+    for (int i = 0; i < this->indices.size(); ++i) {
+        arrindices<< this->indices[i];
+    }
+    doc<<"indices"<<arrindices;
+    return doc<<finalize;
+}

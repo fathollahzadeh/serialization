@@ -8,6 +8,16 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/string.hpp>
 
+#include <bsoncxx/builder/stream/array.hpp>
+#include <bsoncxx/builder/stream/document.hpp>
+#include <bsoncxx/builder/stream/helpers.hpp>
+#include <bsoncxx/types.hpp>
+#include <bsoncxx/json.hpp>
+#include <bsoncxx/builder/basic/document.hpp>
+#include <bsoncxx/stdx/string_view.hpp>
+#include <bsoncxx/string/to_string.hpp>
+#include <bsoncxx/types/value.hpp>
+
 using namespace std;
 
 // Declaration of the "base" class.

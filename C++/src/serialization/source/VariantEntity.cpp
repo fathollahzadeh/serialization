@@ -56,6 +56,17 @@ string VariantEntity::toJSON() {
     return stringS;
 }
 
-VariantEntity::~VariantEntity() {
+VariantEntity::~VariantEntity() {}
 
+bsoncxx::document::value VariantEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    document doc=document{};
+    doc<<"bitrate"<<this->bitrate<<
+    "content_type"<<this->contentType<<
+    "url"<<this->url;
+
+    return doc<<finalize;
 }

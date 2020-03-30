@@ -5,7 +5,7 @@
 #include "MatchingRulesEntity.h"
 
 MatchingRulesEntity::MatchingRulesEntity(const string &tag, long id, const string &idStr) : tag(tag), id(id),
-                                                                                                idStr(idStr) {}
+                                                                                            idStr(idStr) {}
 
 MatchingRulesEntity::MatchingRulesEntity() {}
 
@@ -27,9 +27,9 @@ char *MatchingRulesEntity::serializeHandcoded(char *buffer, int &objectSize) {
     return buffer;
 }
 
-MatchingRulesEntity* MatchingRulesEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
+MatchingRulesEntity *MatchingRulesEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 
-     // Long elements
+    // Long elements
     this->id = parseLong(buffer + bytesRead);
     bytesRead += sizeof(this->id);
 
@@ -45,4 +45,17 @@ MatchingRulesEntity* MatchingRulesEntity::deserializeHandcoded(char *buffer, int
 
 MatchingRulesEntity::~MatchingRulesEntity() {
 
+}
+
+bsoncxx::document::value MatchingRulesEntity::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+
+    document doc = document{};
+    doc << "tag" << this->tag <<
+        "id" << this->id <<
+        "id_str" << this->idStr;
+
+    return doc << finalize;
 }

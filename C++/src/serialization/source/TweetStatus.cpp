@@ -32,7 +32,7 @@ TweetStatus::~TweetStatus() {
 }
 
 TweetStatus::TweetStatus() {
-    this->isPointer= true;
+    this->isPointer = true;
 }
 
 TweetStatus::TweetStatus(string createdAt, long id, string text, string source,
@@ -77,7 +77,7 @@ TweetStatus::TweetStatus(string createdAt, long id, string text, string source,
     this->withheldCopyright = withheldCopyright;
     this->withheldInCountries = withheldInCountries;
     this->withheldScope = withheldScope;
-    this->isPointer= true;
+    this->isPointer = true;
 }
 
 
@@ -394,7 +394,7 @@ char *TweetStatus::serializeBoost(char *buffer, int &objectSize) {
 //Boost de-serialization:
 TweetStatus *TweetStatus::deserializeBoost(char *buffer, int &bytesRead) {
 
-    TweetStatus *boostObject=this; //new TweetStatus();
+    TweetStatus *boostObject = this; //new TweetStatus();
 
     //Use this subsequently:
     char *tempBuffer = buffer;
@@ -406,7 +406,7 @@ TweetStatus *TweetStatus::deserializeBoost(char *buffer, int &bytesRead) {
     bytesRead += sizeof(int);
 
     //Create stream on heap: Keep stream alive:
-    stringstream *rs= new stringstream();
+    stringstream *rs = new stringstream();
     rs->write(tempBuffer, sizeofString);
     bytesRead += sizeofString;
 
@@ -432,6 +432,75 @@ TweetStatus *TweetStatus::deserializeProto(char *buffer, int &bytesRead) {
 
 TweetStatus *TweetStatus::deserializeInPlace(char *buffer) {
     return nullptr;
+}
+
+bsoncxx::document::value TweetStatus::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+    using bsoncxx::builder::stream::open_array;
+    using bsoncxx::builder::stream::close_array;
+    using bsoncxx::builder::stream::open_document;
+    using bsoncxx::builder::stream::close_document;
+
+    document doc = document{};
+    doc << "created_at" << this->createdAt <<
+        "id" << this->id <<
+        "text" << this->text <<
+        "source" << this->source <<
+        "truncated" << this->isTruncated <<
+        "in_reply_to_status_id" << this->inReplyToStatusId <<//nullable
+        "in_reply_to_user_id" << this->inReplyToUserId <<//nullable
+        "in_reply_to_screen_name" << this->inReplyToScreenName <<//nullable
+        "user" << bsoncxx::types::b_document{this->user->serializeBSON().view()};
+    if (this->coordinates != nullptr)
+        doc << "coordinates" << bsoncxx::types::b_document{this->coordinates->serializeBSON().view()};
+    if (this->place != nullptr) {
+        doc << "place" << bsoncxx::types::b_document{this->place->serializeBSON().view()};
+    }
+    doc << "quoted_status_id" << this->quotedStatusId <<
+        "is_quote_status" << this->isQuoteStatus;
+    if (this->quotedStatus != nullptr) {
+        doc << "quoted_status" << bsoncxx::types::b_document{this->quotedStatus->serializeBSON().view()};
+    }
+    if (retweetedStatus != nullptr) {
+        doc << "retweeted_status" << bsoncxx::types::b_document{this->retweetedStatus->serializeBSON().view()};
+    }
+    doc << "quote_count" << this->quoteCount <<//nullable
+        "reply_count" << this->replyCount <<
+        "retweet_count" << this->retweetCount <<
+        "favorite_count" << this->favoriteCount <<//nullable
+        //"entities"<< <<
+        //"extended_entities"<< <<
+        "favorited" << this->isFavorited <<//nullable
+        "retweeted" << this->isRetweeted <<
+        "possibly_sensitive" << this->isPossiblySensitive <<//nullable
+        "filter_level" << this->filterLevel <<
+        "lang" << this->lang;//nullable
+
+    auto arrMatchingRules = array{};
+
+    for (int i = 0; i < this->matchingRules.size(); ++i) {
+        arrMatchingRules << bsoncxx::types::b_document{this->matchingRules[i]->serializeBSON().view()};
+    }
+
+    doc << "matching_rules" << arrMatchingRules <<
+        "current_user_retweet" << this->currentUserRetweetedId << //nullable
+        "scopes" << open_document;
+    for (auto it = scopes.begin(); it != scopes.end(); ++it) {
+        doc << it->first << it->second;
+    }
+    doc << close_document;
+    doc << "withheld_copyright" << this->withheldCopyright;//nullable
+
+    auto arrwithheldInCountries = array{};
+    for (int i = 0; i < this->withheldInCountries.size(); ++i) {
+        arrwithheldInCountries << this->withheldInCountries[i];
+    }
+    doc << " withheld_in_countries" << arrwithheldInCountries <<//nullable
+        "withheld_scope" << this->withheldScope;
+     return doc << finalize;
+
 }
 
 //Implement your own custom comparator:
@@ -477,6 +546,7 @@ int TweetStatus::getOrder() {
 
     return countLevel;
 }
+
 TweetStatus::TweetStatus(bool isPointer) : isPointer(isPointer) {}
 
 

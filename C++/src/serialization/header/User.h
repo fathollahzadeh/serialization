@@ -144,6 +144,9 @@ public:
 
     //Hand Coded C++ de-serialization:
     User *deserializeHandcoded(char *buffer, int &bytesRead);
+
+    //BSON C++ serialization:
+    bsoncxx::document::value serializeBSON();
 };
 BOOST_CLASS_TRACKING(User, boost::serialization::track_never)
 

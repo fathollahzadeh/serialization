@@ -46,6 +46,9 @@ public:
 
     //Hand Coded C++ de-serialization:
     VideoEntity *deserializeHandcoded(char *buffer, int &bytesRead);
+
+    //BSON buffer serialization
+    bsoncxx::document::value serializeBSON();
 };
 BOOST_CLASS_TRACKING(VideoEntity, boost::serialization::track_never)
 

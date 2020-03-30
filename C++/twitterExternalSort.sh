@@ -15,7 +15,7 @@ serialization_type=$1 #1-Handcoded, 2-InPlace, 3-Boost, 4-Proto
 number_of_files=20
 
 #set data and out serialization files path
-datapath="data/serialization_$serialization_type.se"
+datapath="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/serialization_$serialization_type.se"
 
 echo "start to run the project"
 echo "------------------------"

@@ -109,4 +109,27 @@ BoundingBoxCoordinate::~BoundingBoxCoordinate() {
 
 }
 
+bsoncxx::document::value BoundingBoxCoordinate::serializeBSON() {
+    using bsoncxx::builder::stream::document;
+    using bsoncxx::builder::stream::finalize;
+    using bsoncxx::builder::stream::array;
+    document doc=document{};
+    doc<<"type"<<this->type;
+
+    auto arr1 = array{};
+
+    for (int i = 0; i < this->coordinates.size(); i++) {
+        auto arr2 = array{};
+       for (int j = 0; j < this->coordinates.at(i).size(); ++j) {
+            //Copy Double:
+            auto arr3 = array{};
+            arr3<<this->coordinates.at(i).at(j).at(0)<<this->coordinates.at(i).at(j).at(1);
+            arr2<<arr3;
+        }
+       arr1<<arr2;
+    }
+    doc<<"coordinates"<<arr1;
+    return doc<<finalize;
+}
+
 
