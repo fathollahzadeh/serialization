@@ -6,4 +6,4 @@ Java Implementation is in Directory ./Java
 
 C++
 --
-C++ Implementation is in Direcotry ./C++ Directory ./C++
+C++ Implementation is in Direcotry ./C++ 
