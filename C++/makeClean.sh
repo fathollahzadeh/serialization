@@ -9,6 +9,6 @@ rm -rf CMakeCache.txt
 rm -rf Makefile
 rm -rf C__.cbp
 rm -rf bin
-#cmake .
-#make clean
-#make -j4
+cmake .
+make clean
+make -j4

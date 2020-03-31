@@ -83,6 +83,7 @@ public class ExternalSort {
             String tmpStoreFileName = "bin/tmp/sorted-" + i + "-" + serializationType;
             writeToFiles(m_list_read_from_file, tmpStoreFileName);
             m_list_read_from_file.clear();
+            
         }
 
         System.out.println("First stage done! ");

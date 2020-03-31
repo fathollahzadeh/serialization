@@ -1,20 +1,14 @@
 #!/usr/bin/env bash
 
-# clean last cmake files and the run "make clean" and make
-echo "start to compiling the project"
-echo "------------------------------"
-echo ""
-./makeClean.sh
-
-#define a temp path for save temporary sort
 mkdir -p "bin/tmp"
 
+./resultPath.sh
 #serialization type
-serialization_type=$1 #1-Handcoded, 2-InPlace, 3-Boost, 4-Proto
-number_of_files=20
+serialization_type=$1
+number_of_files=$4
 
 #set data and out serialization files path
-datapath="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/jdata/serialization_$serialization_type.se"
+datapath="$3/serialization_$serialization_type.se"
 
 echo "start to run the project"
 echo "------------------------"
@@ -26,4 +20,7 @@ file_external_sort="bin/benchmark/externalsort/result_java_externalsort_$2.txt"
        echo "language#method#seq#datatype#iotime#totaltime" > $file_external_sort
    fi
 
-time taskset -c 0 java  -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.ExternalSort $datapath $number_of_files $serialization_type $2
+
+#clear the OS cache
+echo 3 > /proc/sys/vm/drop_caches && sync
+time taskset -c 0 java  -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx6g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.ExternalSort $datapath $number_of_files $serialization_type $2
