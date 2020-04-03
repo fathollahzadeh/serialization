@@ -1,9 +1,0 @@
-language#method#seq#datatype#iotime#totaltime
-[ReadTimeCPP]#HANDCODED#true#TweetStatus#32.5961#110.139
-[ReadTimeCPP]#HANDCODED#false#TweetStatus#2335.81#2461.32
-[ReadTimeCPP]#INPLACE#true#TweetStatus#80.2322#82.8381
-[ReadTimeCPP]#INPLACE#false#TweetStatus#1929.95#1937.66
-[ReadTimeCPP]#BOOST#true#TweetStatus#67.9469#771.9
-[ReadTimeCPP]#BOOST#false#TweetStatus#2068.74#2852.53
-[ReadTimeCPP]#PROTOBUF#true#TweetStatus#45.8853#188.988
-[ReadTimeCPP]#PROTOBUF#false#TweetStatus#3530.82#3736.96

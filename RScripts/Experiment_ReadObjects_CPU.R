@@ -6,7 +6,7 @@ library(plyr)
 
 # function definition for calculating mean of data 
 
-calulateMeanDataTotaltime <- function(myfilename,nr, n,timeparam){
+calulateMeanDataTotaltime <- function(myfilename,nr, n){
   
   totaltime <- matrix(nrow= nr, ncol=n)
   
@@ -16,7 +16,7 @@ calulateMeanDataTotaltime <- function(myfilename,nr, n,timeparam){
     file = paste(myfilename, i,  sep = "")
     file <- paste(file, ".txt" , sep="")
     mydata <- read.delim(file, header=TRUE, sep="#")
-    totaltime[i,] <-mydata[['totaltime']]- mydata[['iotime']]*timeparam
+    totaltime[i,] <-mydata[['totaltime']]- mydata[['iotime']]
   }
   
   finalTime <- vector() 
@@ -38,48 +38,48 @@ calulateMeanDataTotaltime <- function(myfilename,nr, n,timeparam){
 
 
 #Java Results
-dataj1 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_1000000_",1 ,12,1000000000.0)
+dataj1 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_1000000_",1 ,12)
 dataj1$size <-1000000 
 
 # load data for 2M objects read 
-dataj2 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_2000000_",1 , 12,1000000000.0)
+dataj2 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_2000000_",1 , 12)
 dataj2$size <-2000000 
 
 
 # load data for 3M objects read 
-dataj3 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_3000000_", 1 ,12,1000000000.0)
+dataj3 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_3000000_", 1 ,12)
 dataj3$size <-3000000 
 
 # load data for 4M objects read 
-dataj4 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_4000000_",1 , 12,1000000000.0)
+dataj4 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_4000000_",1 , 12)
 dataj4$size <-4000000
 
 # load data for 5M objects read 
-dataj5 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_5000000_",1 , 12,1000000000.0)
+dataj5 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_5000000_",1 , 12)
 dataj5$size <-5000000
 
 
 # CPP Results 
 ##################################################################
 # load data for 1M objects read 
-datac1 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_1000000_",5 ,8,1)
+datac1 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_1000000_",1 ,8)
 datac1$size <-1000000 
 
 # load data for 2M objects read 
-datac2 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_2000000_",5 , 8,1)
+datac2 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_2000000_",1 , 8)
 datac2$size <-2000000 
 
 
 # load data for 3M objects read 
-datac3 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_3000000_", 5 ,8,1)
+datac3 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_3000000_", 1 ,8)
 datac3$size <-3000000 
 
 # load data for 4M objects read 
-datac4 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_4000000_",5 , 8,1)
+datac4 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_4000000_",1 , 8)
 datac4$size <-4000000
 
 # load data for 5M objects read 
-datac5 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_5000000_",5 , 8,1)
+datac5 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_5000000_",1 , 8)
 datac5$size <-5000000
 
 
@@ -205,8 +205,8 @@ op <- par(mar = c(3.5,3.5,0,0.1))
 
 x <- c(1000000, 2000000,3000000,4000000,5000000)
 max_y<-14000
-min_y<-0.5
-tick_list=c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,max_y)
+min_y<-0.1
+tick_list=c(min_y,0.3,0.6,1,2,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,max_y)
 
 y_labels<- sprintf("%s",tick_list);
 
@@ -244,16 +244,17 @@ lines(cppPROTOBUFSeqV, type="o", pch=8, lty=2, col=plot_colors[8])
 lines(cppHANDCODEDSeqV, type="o", pch=9, lty=2, col=plot_colors[9])
 
 #lines for INPLACE C++ 
+print(cppINPLACESeqV)
 lines(cppINPLACESeqV, type="o", pch=10, lty=2, col=plot_colors[10])
 
 
 #title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
 #title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0),cex=1)
-text(3, 4000, "Sequential", cex=1)
+text(3, 4000, "Sequential", cex=1.3)
 
 box()
 #par(xpd=TRUE)
-legend(2, 25, serialization_methods, cex=0.6,  col=plot_colors, pch=1:10, lty=2:2);
+legend(3, 16, serialization_methods, cex=0.65,  col=plot_colors, pch=1:10, lty=2:2);
 ##############################################################
 ##################                   #########################
 ##################      Next Plot    #########################
@@ -261,10 +262,10 @@ legend(2, 25, serialization_methods, cex=0.6,  col=plot_colors, pch=1:10, lty=2:
 ##############################################################
 #op <- par(oma=c(0.1, 0.1, 0.0, 0.0))#par(mar = c(4, 4, 0.1, 0.1))
 
-x <- c(1000000, 2000000,3000000,4000000,5000000)
-max_y<-14000
-min_y<-0.5
-tick_list<-c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,max_y)
+#x <- c(1000000, 2000000,3000000,4000000,5000000)
+#max_y<-14000
+#min_y<-0.5
+#tick_list<-c(min_y,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,max_y)
 
 y_labels<- sprintf("%s",tick_list);
 
@@ -287,7 +288,6 @@ lines(javaBsonV, type="o", pch=3, lty=2, col=plot_colors[3])
 lines(javaProtoBufV, type="o", pch=4, lty=2, col=plot_colors[4])
 
 #lines for Kryo
-print(javaKryoV)
 lines(javaKryoV, type="o", pch=5, lty=2, col=plot_colors[5])
 
 #lines for ByteBuffer
@@ -308,7 +308,7 @@ lines(cppINPLACEV, type="o", pch=10, lty=2, col=plot_colors[10])
 
 #title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
 #title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0))
-text(3.5, 25, "Random", cex=0.8)
+text(3, 8, "Random", cex=1.3)
 
 mtext("Total Reading Time (sec) - log", outer = TRUE, cex = 1, font=0.7,side=2,family="Helvetica",line = -0.5, col=rgb(0,0.5,0) )
 mtext("Number of Objects", outer = TRUE, cex = 1, font=0.7,side=1,family="Helvetica" ,line = -1,col=rgb(0,0.5,0))
