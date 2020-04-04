@@ -55,3 +55,13 @@ bsoncxx::document::value OptionEntity::serializeBSON() {
         "text" << this->text;
     return doc << finalize;
 }
+
+OptionEntity *OptionEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["position"];
+    this->position =element.get_int32();
+
+    element = doc["text"];
+    this->text = bsoncxx::string::to_string(element.get_utf8().value);
+
+    return  this;
+}

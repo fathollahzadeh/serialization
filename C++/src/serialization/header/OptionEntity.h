@@ -45,6 +45,9 @@ public:
 
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
+
+    //BSON de-serialization:
+    OptionEntity * deserializeBSON(bsoncxx::document::view doc);
 };
 
 BOOST_CLASS_TRACKING(OptionEntity, boost::serialization::track_never)

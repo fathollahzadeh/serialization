@@ -67,7 +67,7 @@ void FileHandler<T>::prepareToRead() {
     this->totalOfObjects = this->objectIndex.size();
 
     //calculate object in each page:
-    for (long i = 0; i<pageIndex.size(); ++i) {
+    for (long i = 0; i < pageIndex.size(); ++i) {
         if (objectInEachPage.find(pageIndex.at(i)) == objectInEachPage.end())
             objectInEachPage[pageIndex.at(i)] = 0;
         objectInEachPage[pageIndex.at(i)] = objectInEachPage[pageIndex.at(i)] + 1;
@@ -102,9 +102,18 @@ void FileHandler<T>::appendObjectToFile(TweetStatus *object) {
 
             // if serialization type is ProtoBuf:
         else if (serializationType == 5) {
-            string jsonString=bsoncxx::to_json( object->serializeBSON());
-            strcpy(buffer + currentOffset,jsonString.c_str());
-            objectSize=jsonString.size();
+            string jsonString = bsoncxx::to_json(object->serializeBSON());
+            objectSize = jsonString.size();
+
+            // insert json size to the first 4 byte of buffer
+            memcpy(buffer + currentOffset, &objectSize, sizeof(int));
+
+            // add json string to the buffer:
+            strcpy(buffer + currentOffset+ sizeof(objectSize), jsonString.c_str());
+
+            // add json size to the object size:
+            objectSize += sizeof(objectSize);
+
         }
 
 
@@ -151,7 +160,7 @@ void FileHandler<T>::appendObjectToFile(TweetStatusIP *object) {
     if ((currentOffset + objectSize + sizeofObject) > pageSize) {
 
         //Write in file:
-         outStreamRegularFile.write(pageBuffer, pageSize);
+        outStreamRegularFile.write(pageBuffer, pageSize);
 
         //At this point, previous page is written in file.
         //All you need is to write this object in the new current page.
@@ -259,7 +268,7 @@ void FileHandler<T>::writeIndexToFile(vector<long> indexVector) {
     buffer = this->copyLong(buffer, indexVector.size(), tempItemSize);
 
     //write index vector to buffer:
-    for (long i = 0; i<indexVector.size(); ++i) {
+    for (long i = 0; i < indexVector.size(); ++i) {
 
         buffer = this->copyLong(buffer, indexVector.at(i), tempItemSize);
     }
@@ -395,7 +404,6 @@ void FileHandler<T>::getObjectsFromFile(long i, long n, vector<T *> &objectList)
     long listSize = (i + n) > this->totalOfObjects ? this->totalOfObjects : (i + n);
     //Iterate over all objects that you aspire to read.
     for (long j = i; j < listSize; j++) {
-
         curBuffer = readPageFromFile(pageIndex[j]);
 
         //Read the object using a object index.
@@ -414,16 +422,16 @@ void FileHandler<T>::getObjectsFromFile(long i, long n, vector<T *> &objectList)
 
                 int objectSize = 0;
                 //Read object size:
-                objectSize = parseInPlaceInt(curBuffer);
+                objectSize = parseInPlaceInt(curBuffer + objectIndex[j]);
 
                 //keep data in heap
                 auto tmpTime = chrono::steady_clock::now();
-                char * tBuffer=new char[objectSize];
-                memcpy(tBuffer,curBuffer + sizeof(objectSize),objectSize);
+                char *tBuffer = new char[objectSize];
+                memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(objectSize), objectSize);
                 ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
                 T *inPlaceObject = (T *) tBuffer;
-                inPlaceObject->objectsize=objectSize;
+                inPlaceObject->objectsize = objectSize;
                 object = inPlaceObject;
                 break;
             }
@@ -438,20 +446,39 @@ void FileHandler<T>::getObjectsFromFile(long i, long n, vector<T *> &objectList)
                 object->deserializeProto(curBuffer + objectIndex[j], tempObjectSize);
                 break;
             }
+                // de-serialize BSON object from file:
+            case 5: {
+                object = new T();
+                memcpy(&tempObjectSize, curBuffer + objectIndex[j], sizeof(int));
+                //keep data in heap
+                auto tmpTime = chrono::steady_clock::now();
+                char *tBuffer = new char[tempObjectSize+1];
+                memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(int), tempObjectSize);
+                memcpy(tBuffer+tempObjectSize,"\0",1);
+                ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
+
+                bsoncxx::document::value bsonObj = bsoncxx::from_json(tBuffer);
+                auto doc = bsonObj.view();
+                object->deserializeBSON(doc);
+                delete[] tBuffer;
+                break;
+            }
         }
 
         objectList.push_back(object);
     }
 }
+
 //Simply reads the next network page from file:
 template<class T>
-long FileHandler<T>::getNextNetworkPage(char * networkBuffer) {
+long FileHandler<T>::getNextNetworkPage(char *networkBuffer) {
     //PROTOBUF, BOOST, HANDCODED, INPLACE:
     if (this->pageIndex.size() > 0) {
-        long pageSize=inStreamRegularFile.read(networkBuffer+ sizeof(long), this->networkPageSize- sizeof(long)).gcount();
+        long pageSize = inStreamRegularFile.read(networkBuffer + sizeof(long),
+                                                 this->networkPageSize - sizeof(long)).gcount();
 
         //write network page size in page:
-        cout<<"curNetworkPageSize= "<<pageSize<<endl;
+        cout << "curNetworkPageSize= " << pageSize << endl;
         memcpy(networkBuffer, &pageSize, sizeof(long));
         return pageSize;
     } else
@@ -471,13 +498,13 @@ int FileHandler<T>::getNextNetworkPage(vector<T *> &objectList, int startIndex, 
     char *tempBuffer = networkBuffer;
 
     //Need to copy network page size in page
-    currentOffset+= sizeof(long);
+    currentOffset += sizeof(long);
 
     //Need to copy number of objects in page at beginning:
     currentOffset += sizeof(int);
 
     //int previousOffset = 0;
-    long curNetworkPageSize=0;
+    long curNetworkPageSize = 0;
 
     int i = 0;
     for (i = startIndex; i < numObjects; i++) {
@@ -491,11 +518,11 @@ int FileHandler<T>::getNextNetworkPage(vector<T *> &objectList, int startIndex, 
             currentOffset += sizeof(int);
 
             //Copy object:
-            memcpy(tempBuffer + currentOffset, (char *)objectList.at(i), curObjectSize);
+            memcpy(tempBuffer + currentOffset, (char *) objectList.at(i), curObjectSize);
             currentOffset += curObjectSize;
         } else {
 
-             curObjectSize = 0;
+            curObjectSize = 0;
             // objectList.at(i)->serialize(tempBuffer + currentOffset, curObjectSize);
             // if serialization type is Handcoded:
             if (serializationType == 1) {
@@ -515,12 +542,12 @@ int FileHandler<T>::getNextNetworkPage(vector<T *> &objectList, int startIndex, 
         if (currentOffset > networkPageSize) {
             break;
         }
-        curNetworkPageSize=currentOffset;
+        curNetworkPageSize = currentOffset;
         //Else, object fits in current page:
     }
 
     //write network page size in page:
-    cout<<"curNetworkPageSize= "<<curNetworkPageSize<<endl;
+    cout << "curNetworkPageSize= " << curNetworkPageSize << endl;
     memcpy(networkBuffer, &curNetworkPageSize, sizeof(long));
 
     // Write total number of objects in page:
@@ -532,19 +559,20 @@ int FileHandler<T>::getNextNetworkPage(vector<T *> &objectList, int startIndex, 
 }
 
 template<class T>
-int FileHandler<T>::parseNetworkPage(vector <T *>& objectList, char * networkBuffer) {
+int FileHandler<T>::parseNetworkPage(vector<T *> &objectList, char *networkBuffer) {
 
     char *tempBuffer = networkBuffer;
     int bytesRead = 0;
 
     // Total number of objects in this page:
-    int numObjects = parseInt(tempBuffer+bytesRead); bytesRead += sizeof(int);
+    int numObjects = parseInt(tempBuffer + bytesRead);
+    bytesRead += sizeof(int);
     int currentObjectSize = 0;
 
     //DELETE:
     cout << "parseNetworkPage:: " << objectList.size() << endl;
 
-    T * object = NULL;
+    T *object = NULL;
 
     for (int j = 0; j < numObjects; j++) {
 
@@ -579,27 +607,27 @@ int FileHandler<T>::parseNetworkPage(vector <T *>& objectList, char * networkBuf
         objectList.push_back(object);
     }
 }
+
 //Number of network pages to be sent from disk:
 template<class T>
 long FileHandler<T>::getNetworkPageCount(int numObjects) {
     long contentSize = 0;
 
     // network page without page size
-    long tmpNetworkPageSize=this->networkPageSize- sizeof(long);
+    long tmpNetworkPageSize = this->networkPageSize - sizeof(long);
 
     //PROTOBUF, BOOST, HANDCODED, INPLACE:
     if (pageIndex.size() > numObjects) {
-        contentSize = (1 + pageIndex.at(numObjects - 1)) * (long)this->pageSize;
+        contentSize = (1 + pageIndex.at(numObjects - 1)) * (long) this->pageSize;
     } else {
         contentSize = (1 + pageIndex.at(pageIndex.size() - 1)) * (long) this->pageSize;
     }
 
     //Return pagecount:
     if (contentSize % tmpNetworkPageSize == 0) {
-        return (contentSize/tmpNetworkPageSize);
-    }
-    else {
-        return (1 + (contentSize/tmpNetworkPageSize));
+        return (contentSize / tmpNetworkPageSize);
+    } else {
+        return (1 + (contentSize / tmpNetworkPageSize));
     }
 }
 

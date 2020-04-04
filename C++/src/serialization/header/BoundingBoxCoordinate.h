@@ -54,6 +54,9 @@ public:
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
 
+    //BSON de-serialization:
+    BoundingBoxCoordinate * deserializeBSON(bsoncxx::document::view doc);
+
 };
 BOOST_CLASS_TRACKING(BoundingBoxCoordinate, boost::serialization::track_never)
 

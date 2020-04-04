@@ -259,5 +259,62 @@ bsoncxx::document::value Entities::serializeBSON() {
     return doc<<finalize;
 }
 
+Entities *Entities::deserializeBSON(bsoncxx::document::view doc) {
+
+    bsoncxx::document::element element = doc["hashtags"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            HashtagEntity * hashtagEntity=new HashtagEntity();
+            hashtagEntity->deserializeBSON(ele.get_document().view());
+            this->hashtags.push_back(hashtagEntity);
+        }
+    }
+
+    element = doc["media"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            MediaEntity * mediaEntity=new MediaEntity();
+            mediaEntity->deserializeBSON(ele.get_document().view());
+            this->media.push_back(mediaEntity);
+        }
+    }
+
+    element = doc["urls"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            URLEntity * urlEntity=new URLEntity();
+            urlEntity->deserializeBSON(ele.get_document().view());
+            this->urls.push_back(urlEntity);
+        }
+    }
+
+    element = doc["user_mentions"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            UserMentionEntity * userMentionEntity=new UserMentionEntity();
+            userMentionEntity->deserializeBSON(ele.get_document().view());
+            this->userMentions.push_back(userMentionEntity);
+        }
+    }
+
+    element = doc["symbols"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            SymbolEntity * symbolEntity=new SymbolEntity();
+            symbolEntity->deserializeBSON(ele.get_document().view());
+            this->symbols.push_back(symbolEntity);
+        }
+    }
+    element = doc["polls"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            PollEntity * pollEntity=new PollEntity();
+            pollEntity->deserializeBSON(ele.get_document().view());
+            this->polls.push_back(pollEntity);
+        }
+    }
+    return this;
+}
+
 
 

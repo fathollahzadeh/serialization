@@ -81,6 +81,37 @@ bsoncxx::document::value MediaSizesEntity::serializeBSON() {
     return doc<<finalize;
 }
 
+MediaSizesEntity *MediaSizesEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["thumb"];
+    if (element){
+        this->thumb=new SizeEntity();
+        this->thumb->deserializeBSON(element.get_document().view());
+    } else
+        this->thumb= nullptr;
+
+    element = doc["large"];
+    if (element){
+        this->large=new SizeEntity();
+        this->large->deserializeBSON(element.get_document().view());
+    } else
+        this->large= nullptr;
+
+    element = doc["medium"];
+    if (element){
+        this->medium=new SizeEntity();
+        this->medium->deserializeBSON(element.get_document().view());
+    } else
+        this->medium= nullptr;
+
+    element = doc["small"];
+    if (element){
+        this->small=new SizeEntity();
+        this->small->deserializeBSON(element.get_document().view());
+    } else
+        this->small= nullptr;
+    return this;
+}
+
 
 MediaSizesEntity::~MediaSizesEntity() {
 

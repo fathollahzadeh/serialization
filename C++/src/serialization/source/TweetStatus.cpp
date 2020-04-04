@@ -218,8 +218,6 @@ char *TweetStatus::serializeHandcoded(char *buffer, int &objectSize) {
         buffer = this->matchingRules.at(i)->serializeHandcoded(buffer, objectSize);
     }
 
-    //cout<<this->toJSON()<<endl;
-
     return buffer;
 }
 
@@ -449,9 +447,9 @@ bsoncxx::document::value TweetStatus::serializeBSON() {
         "text" << this->text <<
         "source" << this->source <<
         "truncated" << this->isTruncated <<
-        "in_reply_to_status_id" << this->inReplyToStatusId <<//nullable
+        "in_reply_to_status_id" << bsoncxx::types::b_int64{this->inReplyToStatusId} <<//nullable
         "in_reply_to_user_id" << this->inReplyToUserId <<//nullable
-        "in_reply_to_screen_name" << this->inReplyToScreenName <<//nullable
+        "in_reply_to_screen_name" << this->inReplyToScreenName << //nullable
         "user" << bsoncxx::types::b_document{this->user->serializeBSON().view()};
     if (this->coordinates != nullptr)
         doc << "coordinates" << bsoncxx::types::b_document{this->coordinates->serializeBSON().view()};
@@ -470,9 +468,11 @@ bsoncxx::document::value TweetStatus::serializeBSON() {
         "reply_count" << this->replyCount <<
         "retweet_count" << this->retweetCount <<
         "favorite_count" << this->favoriteCount <<//nullable
-        //"entities"<< <<
-        //"extended_entities"<< <<
-        "favorited" << this->isFavorited <<//nullable
+        "entities" << bsoncxx::types::b_document{this->entities->serializeBSON().view()};
+    if (this->extendedEntities != nullptr) {
+        doc << "extended_entities" << bsoncxx::types::b_document{this->extendedEntities->serializeBSON().view()};
+    }
+    doc << "favorited" << this->isFavorited <<//nullable
         "retweeted" << this->isRetweeted <<
         "possibly_sensitive" << this->isPossiblySensitive <<//nullable
         "filter_level" << this->filterLevel <<
@@ -487,6 +487,7 @@ bsoncxx::document::value TweetStatus::serializeBSON() {
     doc << "matching_rules" << arrMatchingRules <<
         "current_user_retweet" << this->currentUserRetweetedId << //nullable
         "scopes" << open_document;
+
     for (auto it = scopes.begin(); it != scopes.end(); ++it) {
         doc << it->first << it->second;
     }
@@ -499,9 +500,142 @@ bsoncxx::document::value TweetStatus::serializeBSON() {
     }
     doc << " withheld_in_countries" << arrwithheldInCountries <<//nullable
         "withheld_scope" << this->withheldScope;
-     return doc << finalize;
-
+    return doc << finalize;
 }
+
+TweetStatus *TweetStatus::deserializeBSON(bsoncxx::document::view doc) {
+
+    bsoncxx::document::element element = doc["created_at"];
+    this->createdAt = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["id"];
+    this->id = element.type() == bsoncxx::type::k_int64 ? element.get_int64() : element.get_int32();
+
+    element = doc["text"];
+    this->text = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["source"];
+    this->source = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["truncated"];
+    this->isTruncated = element.get_bool().value;
+
+    element = doc["in_reply_to_status_id"];
+    this->inReplyToStatusId = element.type() == bsoncxx::type::k_int64 ? element.get_int64() : element.get_int32();
+
+    element = doc["in_reply_to_user_id"];
+    this->inReplyToUserId = element.type() == bsoncxx::type::k_int64 ? element.get_int64() : element.get_int32();
+
+    element = doc["in_reply_to_screen_name"];
+    this->inReplyToScreenName = bsoncxx::string::to_string(element.get_utf8().value);
+
+
+    this->user = new User();
+    element = doc["user"];
+    this->user->deserializeBSON(element.get_document().view());
+
+    element = doc["coordinates"];
+    if (element) {
+        this->coordinates = new Coordinates();
+        this->coordinates->deserializeBSON(element.get_document().view());
+    } else
+        this->coordinates = nullptr;
+
+        element = doc["place"];
+    if (element) {
+        this->place = new Place();
+        this->place->deserializeBSON(element.get_document().view());
+    } else
+        this->place = nullptr;
+
+    element = doc["quoted_status_id"];
+    this->quotedStatusId = element.type() == bsoncxx::type::k_int64 ? element.get_int64() : element.get_int32();
+
+    element = doc["is_quote_status"];
+    this->isQuoteStatus = element.get_bool();
+
+    element = doc["quoted_status"];
+    if (element){
+        this->quotedStatus=new TweetStatus();
+        this->quotedStatus->deserializeBSON(element.get_document().view());
+    } else
+        this->quotedStatus= nullptr;
+
+    if (element){
+        this->retweetedStatus=new TweetStatus();
+        this->retweetedStatus->deserializeBSON(element.get_document().view());
+    } else
+        this->retweetedStatus= nullptr;
+
+    element = doc["quote_count"];
+    this->quoteCount = element.type() == bsoncxx::type::k_int32 ? element.get_int32() : -1;
+
+    element = doc["reply_count"];
+    this->replyCount = element.type() == bsoncxx::type::k_int32 ? element.get_int32() : -1;
+
+    element = doc["retweet_count"];
+    this->retweetCount = element.type() == bsoncxx::type::k_int32 ? element.get_int32() : -1;
+
+    element = doc["favorite_count"];
+    this->favoriteCount = element.type() == bsoncxx::type::k_int32 ? element.get_int32() : -1;
+
+    element = doc["favorited"];
+    this->isFavorited = element.get_bool();
+
+    element = doc["retweeted"];
+    this->isRetweeted = element.get_bool();
+
+    element = doc["possibly_sensitive"];
+    this->isPossiblySensitive = element.get_bool();
+
+    element = doc["filter_level"];
+    this->filterLevel = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["lang"];
+    this->lang = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["matching_rules"];
+    for (auto ele : element.get_array().value) {
+        MatchingRulesEntity *matchingRulesEntity = new MatchingRulesEntity();
+        matchingRulesEntity->deserializeBSON(ele.get_document().view());
+        this->matchingRules.push_back(matchingRulesEntity);
+    }
+
+    element = doc["current_user_retweet"];
+    this->currentUserRetweetedId = element.type() == bsoncxx::type::k_int64 ? element.get_int64() : element.get_int32();
+
+    element = doc["withheld_copyright"];
+    this->withheldCopyright = element.get_bool();
+
+    element = doc["withheld_in_countries"];
+    if (element && element.type() == bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->withheldInCountries.push_back(bsoncxx::string::to_string(ele.get_utf8().value));
+        }
+    }
+
+    element = doc["withheld_scope"];
+    this->withheldScope = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["scopes"];
+    for (bsoncxx::document::element ele : element.get_document().view()) {
+        this->scopes[ele.key().to_string()] = ele.get_bool();
+
+    }
+
+    element = doc["entities"];
+    this->entities=new Entities();
+    this->entities->deserializeBSON(element.get_document().view());
+
+    element = doc["extended_entities"];
+    if (element){
+        this->extendedEntities=new ExtendedEntities();
+        this->extendedEntities->deserializeBSON(element.get_document().view());
+    } else
+        this->extendedEntities= nullptr;
+   return this;
+}
+
 
 //Implement your own custom comparator:
 bool TweetStatus::operator<(TweetStatus &other) {

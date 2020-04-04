@@ -72,5 +72,19 @@ bsoncxx::document::value Coordinates::serializeBSON() {
     return doc<<finalize;
 }
 
+Coordinates *Coordinates::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["type"];
+    this->type =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["coordinates"];
+    auto val0=element[0].get_double();
+    auto val1=element[1].get_double();
+    if (val0 && val1){
+        this->coordinates[0]=val0.value;
+        this->coordinates[1]=val1.value;
+    }
+    return this;
+}
+
 
 

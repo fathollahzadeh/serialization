@@ -161,6 +161,9 @@ public:
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
 
+    //BSON de-serialization:
+    TweetStatus * deserializeBSON(bsoncxx::document::view doc);
+
     //Implement your own custom comparator:
     bool operator< (TweetStatus& other);
 

@@ -63,6 +63,9 @@ public:
 
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
+
+    //BSON de-serialization:
+    URLEntity * deserializeBSON(bsoncxx::document::view doc);
 };
 
 BOOST_CLASS_TRACKING(URLEntity, boost::serialization::track_never)

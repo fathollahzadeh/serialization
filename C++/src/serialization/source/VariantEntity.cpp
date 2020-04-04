@@ -70,3 +70,16 @@ bsoncxx::document::value VariantEntity::serializeBSON() {
 
     return doc<<finalize;
 }
+
+VariantEntity *VariantEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["bitrate"];
+    this->bitrate=element.type() == bsoncxx::type::k_int64? element.get_int64():element.get_int32();
+
+    element = doc["content_type"];
+    this->contentType= bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["url"];
+    this->url= bsoncxx::string::to_string(element.get_utf8().value);
+
+    return this;
+}

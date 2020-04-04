@@ -59,7 +59,6 @@ HashtagEntity* HashtagEntity::deserializeHandcoded(char *buffer, int &bytesRead)
 }
 
 HashtagEntity::~HashtagEntity() {
-
     //free memory
     indices.shrink_to_fit();
 }
@@ -71,9 +70,6 @@ bsoncxx::document::value HashtagEntity::serializeBSON() {
     using bsoncxx::builder::stream::open_array;
     using bsoncxx::builder::stream::close_array;
 
-    // private List<Integer> indices;
-    //    private String text;
-
     document doc=document{};
     doc<<"text"<< this->text;
 
@@ -83,4 +79,18 @@ bsoncxx::document::value HashtagEntity::serializeBSON() {
     }
     doc<<"indices"<<arrindices;
     return doc<<finalize;
+}
+
+HashtagEntity *HashtagEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["text"];
+    this->text =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["indices"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->indices.push_back(ele.get_int32());
+        }
+    }
+
+    return this;
 }

@@ -59,3 +59,16 @@ bsoncxx::document::value MatchingRulesEntity::serializeBSON() {
 
     return doc << finalize;
 }
+
+MatchingRulesEntity *MatchingRulesEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["tag"];
+    this->tag =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["id"];
+    this->id = element.type()==bsoncxx::type::k_int64? element.get_int64().value:element.get_int32().value;
+
+    element = doc["id_str"];
+    this->idStr =bsoncxx::string::to_string(element.get_utf8().value);
+
+    return this;
+}

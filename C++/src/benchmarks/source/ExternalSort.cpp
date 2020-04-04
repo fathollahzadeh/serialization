@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     int round=atoi(argv[4]);
 
     //if serialization type is Handcoded or Boost:
-    if (serializationType==1 || serializationType==3){
+    if (serializationType==1 || serializationType==3 || serializationType==5){
         ExternalSort<TweetStatus> externalSort(fileName,numberOfFiles,serializationType,round);
 
         externalSort.runTheExternalSort();

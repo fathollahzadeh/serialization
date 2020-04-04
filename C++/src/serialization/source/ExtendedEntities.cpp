@@ -74,3 +74,15 @@ bsoncxx::document::value ExtendedEntities::serializeBSON() {
 
     return doc<<finalize;
 }
+
+ExtendedEntities *ExtendedEntities::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["media"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            MediaEntity * mediaEntity=new MediaEntity();
+            mediaEntity->deserializeBSON(ele.get_document().view());
+            this->media.push_back(mediaEntity);
+        }
+    }
+    return this;
+}

@@ -103,3 +103,25 @@ bsoncxx::document::value UserMentionEntity::serializeBSON() {
 
     return doc<<finalize;
 }
+
+UserMentionEntity *UserMentionEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["id"];
+    this->id=element.type() == bsoncxx::type::k_int64 ? element.get_int64() : element.get_int32();
+
+    element = doc["id_str"];
+    this->idStr=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["name"];
+    this->name=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["screen_name"];
+    this->screenName=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["indices"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->indices.push_back(ele.get_int32());
+        }
+    }
+    return this;
+}

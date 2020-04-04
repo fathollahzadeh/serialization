@@ -113,5 +113,28 @@ bsoncxx::document::value VideoEntity::serializeBSON() {
     return doc << finalize;
 }
 
+VideoEntity *VideoEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["duration_millis"];
+    this->durationMillis=element.get_int32();
+
+    element = doc["aspect_ratio"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->aspectRatio.push_back(ele.get_int32());
+        }
+    }
+
+    element = doc["variants"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            VariantEntity *variantEntity=new VariantEntity();
+            variantEntity->deserializeBSON(ele.get_document().view());
+            this->variants.push_back(variantEntity);
+        }
+    }
+
+    return this;
+}
+
 
 

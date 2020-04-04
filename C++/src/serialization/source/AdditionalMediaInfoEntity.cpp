@@ -65,7 +65,24 @@ bsoncxx::document::value AdditionalMediaInfoEntity::serializeBSON() {
     "monetizable"<<this->monetizable;
 
     return doc<<finalize;
+}
 
+AdditionalMediaInfoEntity *AdditionalMediaInfoEntity::deserializeBSON(bsoncxx::document::view doc) {
+
+
+   bsoncxx::document::element element = doc["title"];
+   this->title =bsoncxx::string::to_string(element.get_utf8().value);
+
+     element = doc["description"];
+    this->description =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["embeddable"];
+    this->embeddable =element.get_bool();
+
+    element = doc["monetizable"];
+    this->monetizable =element.get_bool();
+
+    return this;
 }
 
 

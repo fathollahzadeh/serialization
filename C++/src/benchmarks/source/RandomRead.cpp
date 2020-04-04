@@ -44,7 +44,8 @@ int main(int argc, char *argv[]) {
 
     switch (serializationType) {
         case 1:
-        case 3:{
+        case 3:
+        case 5:{
             //Define variable for generate random object index:
             RandomRead<TweetStatus> *randomRead=new RandomRead<TweetStatus>(inFile,serializationType,cunt_to_read,round);
             randomRead->setObjectIndexes(objectIndexes);

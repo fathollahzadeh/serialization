@@ -110,6 +110,36 @@ bsoncxx::document::value Place::serializeBSON() {
    return doc<<finalize;
 }
 
+Place *Place::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["name"];
+    this->name = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["country_code"];
+    this->countryCode = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["id"];
+    this->id = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["country"];
+    this->country = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["place_type"];
+    this->placeType = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["url"];
+    this->url = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["full_name"];
+    this->fullName = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["bounding_box"];
+    if (element){
+        this->boundingBoxCoordinates=new BoundingBoxCoordinate();
+        this->boundingBoxCoordinates->deserializeBSON(element.get_document().view());
+    } else
+        this->boundingBoxCoordinates= nullptr;
+    return this;
+}
 Place::~Place() {
     if (boundingBoxCoordinates != nullptr) {
         delete boundingBoxCoordinates;

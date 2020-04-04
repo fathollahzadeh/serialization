@@ -132,4 +132,26 @@ bsoncxx::document::value BoundingBoxCoordinate::serializeBSON() {
     return doc<<finalize;
 }
 
+BoundingBoxCoordinate *BoundingBoxCoordinate::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["type"];
+    this->type =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["coordinates"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele1 : element.get_array().value) {
+            vector<vector<double>> arr2;
+            for (auto ele2 : ele1.get_array().value) {
+                vector<double> arr3;
+                for (auto ele3 : ele2.get_array().value) {
+                    arr3.push_back(ele3.get_double());
+                }
+                arr2.push_back(arr3);
+            }
+            this->coordinates.push_back(arr2);
+        }
+    }
+
+    return this;
+}
+
 

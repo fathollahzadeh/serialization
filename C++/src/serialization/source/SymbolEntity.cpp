@@ -80,3 +80,16 @@ bsoncxx::document::value SymbolEntity::serializeBSON() {
 
     return doc<<finalize;
 }
+
+SymbolEntity *SymbolEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["text"];
+    this->text=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["indices"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->indices.push_back(ele.get_int32());
+        }
+    }
+    return this;
+}

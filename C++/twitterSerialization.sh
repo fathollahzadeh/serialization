@@ -13,5 +13,5 @@ do
     outpath="$2/serialization_$serialization_type.se"
     echo "start to run the project for serialization type: " $serialization_type
     echo "------------------------"
-    ./bin/$project_target $datapath $serialization_type $outpath $numberOfTweets
+    time ./bin/$project_target $datapath $serialization_type $outpath $numberOfTweets
 done

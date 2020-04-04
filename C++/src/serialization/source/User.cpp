@@ -360,8 +360,130 @@ bsoncxx::document::value User::serializeBSON() {
         "is_translator" << this->translator<<
         "follow_request_sent" << this->isFollowRequestSent<<
         "showAllInlineMedia" << this->showAllInlineMedia;
-
-
     return doc << finalize;
+}
+
+User *User::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["id"];
+    this->id =element.type() == bsoncxx::type::k_int64? element.get_int64():element.get_int32();
+
+    element=doc["name"];
+    this->name=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["screen_name"];
+    this->screenName=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["location"];
+    this->location=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["url"];
+    this->url=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["protected"];
+    this->isProtected=element.get_bool();
+
+    element=doc["verified"];
+    this->isVerified=element.get_bool();
+
+    element=doc["followers_count"];
+    this->followersCount =element.type() == bsoncxx::type::k_int32? element.get_int32().value:0;
+
+    element=doc["friends_count"];
+    this->friendsCount =element.type() == bsoncxx::type::k_int32? element.get_int32().value:0;
+
+    element=doc["listed_count"];
+    this->listedCount =element.type() == bsoncxx::type::k_int32? element.get_int32().value:0;
+
+    element=doc["favourites_count"];
+    this->favouritesCount =element.type() == bsoncxx::type::k_int32? element.get_int32().value:0;
+
+    element=doc["statuses_count"];
+    this->statusesCount =element.type() == bsoncxx::type::k_int32? element.get_int32().value:0;
+
+    element=doc["created_at"];
+    this->createdAt =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_banner_url"];
+    this->profileBannerImageUrl =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_image_url_https"];
+    this->profileImageUrlHttps =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["default_profile"];
+    this->isDefaultProfile=element.get_bool();
+
+    element=doc["withheld_in_countries"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->withheldInCountries.push_back(bsoncxx::string::to_string(ele.get_utf8().value));
+        }
+    }
+
+    element=doc["withheld_scope"];
+    this->withheldScope=bsoncxx::string::to_string(element.get_utf8().value);
+
+   element=doc["descriptionURLEntities"];
+   if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            URLEntity *urlEntity=new URLEntity();
+            urlEntity->deserializeBSON(ele.get_document().view());
+            this->descriptionURLEntities.push_back(urlEntity);
+        }
+    }
+    element=doc["geo_enabled"];
+    this->isGeoEnabled=element.get_bool();
+
+    element=doc["lang"];
+    this->lang=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["contributors_enabled"];
+    this->isContributorsEnabled=element.get_bool();
+
+    element=doc["profile_background_color"];
+    this->profileBackgroundColor=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_background_image_url"];
+    this->profileBackgroundImageUrl=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_background_image_url_https"];
+    this->profileBackgroundImageUrlHttps=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_background_tile"];
+    this->profileBackgroundTiled=element.get_bool();
+
+    element=doc["profile_image_url"];
+    this->profileImageUrl=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_link_color"];
+    this->profileLinkColor=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_sidebar_border_color"];
+    this->profileSidebarBorderColor=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_sidebar_fill_color"];
+    this->profileSidebarFillColor=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_text_color"];
+    this->profileTextColor=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["profile_use_background_image"];
+    this->profileUseBackgroundImage=element.get_bool();
+
+    element=doc["utc_offset"];
+    this->utcOffset= element.type() == bsoncxx::type::k_int32? element.get_int32().value:0;
+
+    element=doc["time_zone"];
+    this->timeZone= bsoncxx::string::to_string(element.get_utf8().value);
+
+    element=doc["is_translator"];
+    this->translator=element.get_bool();
+
+    element=doc["follow_request_sent"];
+    this->isFollowRequestSent=element.get_bool();
+
+    element=doc["showAllInlineMedia"];
+    this->showAllInlineMedia=element.get_bool();
+
+    return this;
 }
 

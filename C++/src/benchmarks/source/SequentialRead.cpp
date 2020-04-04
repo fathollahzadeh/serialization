@@ -35,7 +35,8 @@ int main(int argc, char *argv[]) {
 
     switch (serializationType) {
         case 1:
-        case 3:{
+        case 3:
+        case 5:{
             SequentialRead<TweetStatus> *sequentialRead=new SequentialRead<TweetStatus>(inFile,serializationType,from,numberofobjects,round);
             sequentialRead->runTheSequentialRead();
 

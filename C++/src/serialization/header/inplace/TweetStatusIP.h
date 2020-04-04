@@ -102,6 +102,9 @@ public:
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
 
+    //BSON de-serialization:
+    TweetStatusIP * deserializeBSON(bsoncxx::document::view doc);
+
     //Implement your own custom comparator:
     bool operator< (TweetStatusIP& other);
 

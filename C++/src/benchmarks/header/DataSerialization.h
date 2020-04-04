@@ -35,8 +35,7 @@ private:
 public:
     DataSerialization();
 
-    DataSerialization(const string &inputFileName, const string &outFileName, int serializationType,
-                      long numberOfTweets);
+    DataSerialization(const string &inputFileName, const string &outFileName, int serializationType, long numberOfTweets);
    virtual ~DataSerialization();
 
     void runTheDataSerialization();

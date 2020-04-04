@@ -63,6 +63,9 @@ public:
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
 
+    //BSON de-serialization:
+    TweetStatusProto * deserializeBSON(bsoncxx::document::view doc);
+
     proto::TweetStatusP *getProto() const;
 
     bool operator<(TweetStatusProto &other);

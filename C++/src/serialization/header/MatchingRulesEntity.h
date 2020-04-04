@@ -47,6 +47,9 @@ public:
 
     //BSON C++ serialization:
     bsoncxx::document::value serializeBSON();
+
+    //BSON de-serialization:
+    MatchingRulesEntity * deserializeBSON(bsoncxx::document::view doc);
 };
 BOOST_CLASS_TRACKING(MatchingRulesEntity, boost::serialization::track_never)
 

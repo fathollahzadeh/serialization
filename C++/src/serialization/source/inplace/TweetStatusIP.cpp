@@ -206,6 +206,10 @@ bool TweetStatusIP::operator< (TweetStatusIP& other) {
     return countLevel< countLevelOtherTweet;
 }
 
+TweetStatusIP *TweetStatusIP::deserializeBSON(bsoncxx::document::view doc) {
+    return nullptr;
+}
+
 int TweetStatusIP::getOrder() {
 
     int countLevel = 0;

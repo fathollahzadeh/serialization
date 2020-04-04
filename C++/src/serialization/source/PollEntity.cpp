@@ -87,3 +87,19 @@ bsoncxx::document::value PollEntity::serializeBSON() {
 
     return doc << finalize;
 }
+
+PollEntity *PollEntity::deserializeBSON(bsoncxx::document::view doc) {
+    bsoncxx::document::element element = doc["end_datetime"];
+    this->endDatetime = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["duration_minutes"];
+    this->durationMinutes = bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["options"];
+    for (auto ele : element.get_array().value) {
+        OptionEntity * optionEntity=new OptionEntity();
+        optionEntity->deserializeBSON(ele.get_document().view());
+        this->options.push_back(optionEntity);
+    }
+    return this;
+}

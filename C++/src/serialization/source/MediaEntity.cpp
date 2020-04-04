@@ -206,3 +206,59 @@ bsoncxx::document::value MediaEntity::serializeBSON() {
 }
 
 
+MediaEntity *MediaEntity::deserializeBSON(bsoncxx::document::view doc) {
+
+    bsoncxx::document::element element = doc["display_url"];
+    this->displayURL =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["id"];
+    this->id = element.type()==bsoncxx::type::k_int64? element.get_int64().value:element.get_int32().value;
+
+    element = doc["expanded_url"];
+    this->expandedURL =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["indices"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->indices.push_back(ele.get_int32());
+        }
+    }
+
+    element = doc["media_url"];
+    this->mediaURL =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["media_url_https"];
+    this->mediaURLHttps =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["sizes"];
+    this->sizes=new MediaSizesEntity();
+    this->sizes->deserializeBSON(element.get_document().view());
+
+    element = doc["type"];
+    this->type =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["source_status_id"];
+    this->sourceStatusId = element.type()==bsoncxx::type::k_int64? element.get_int64().value:element.get_int32().value;
+
+    element = doc["source_status_id_str"];
+    this->sourceStatusIdStr =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["url"];
+    this->url =bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["video_info"];
+    if (element){
+        this->videoInfo = new VideoEntity();
+        this->videoInfo->deserializeBSON(element.get_document().view());
+    } else
+        this->videoInfo = nullptr;
+
+
+    element = doc["additional_media_info"];
+    if (element){
+        this->additionalMediaInfo = new AdditionalMediaInfoEntity();
+        this->additionalMediaInfo->deserializeBSON(element.get_document().view());
+    } else
+        this->additionalMediaInfo = nullptr;
+    return this;
+}

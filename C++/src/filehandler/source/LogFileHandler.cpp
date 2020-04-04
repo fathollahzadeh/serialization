@@ -36,6 +36,9 @@ void LogFileHandler::addLog(int serializationType, bool seq, string datatype, do
         case 4:
             method="PROTOBUF";
             break;
+        case 5:
+            method="BSON";
+            break;
 
     }
     string seqString="true";

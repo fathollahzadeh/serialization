@@ -409,5 +409,9 @@ bool TweetStatusProto::operator<(TweetStatusProto &other) {
     return countLevel < countLevelOtherTweet;
 }
 
+TweetStatusProto *TweetStatusProto::deserializeBSON(bsoncxx::document::view doc) {
+    return nullptr;
+}
+
 TweetStatusProto::TweetStatusProto(bool isPointer) : isPointer(isPointer) {}
 

@@ -50,6 +50,9 @@ public:
 
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
+
+    //BSON de-serialization:
+    PollEntity * deserializeBSON(bsoncxx::document::view doc);
 };
 BOOST_CLASS_TRACKING(PollEntity, boost::serialization::track_never)
 

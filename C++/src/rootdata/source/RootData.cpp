@@ -227,4 +227,3 @@ double RootData::parseInPlaceDouble(char *buffer) {
     double element=*(double *)buffer;
     return element;
 }
-

@@ -59,7 +59,7 @@ void SequentialRead<T>::runTheSequentialRead() {
 
     // free memory:
     for (long i = 0; i < cuntToRead; ++i){
-        if (serializationType!=2){
+         if (serializationType!=2){
             delete objectList.at(i);
         } else{
             char * tbuffer=(char *)objectList.at(i);

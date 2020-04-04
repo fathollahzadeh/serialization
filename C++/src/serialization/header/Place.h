@@ -71,6 +71,9 @@ public:
 
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
+
+    //BSON de-serialization:
+    Place * deserializeBSON(bsoncxx::document::view doc);
 };
 
 BOOST_CLASS_TRACKING(Place, boost::serialization::track_never)

@@ -98,3 +98,24 @@ bsoncxx::document::value URLEntity::serializeBSON() {
 
     return doc<<finalize;
 }
+
+URLEntity *URLEntity::deserializeBSON(bsoncxx::document::view doc) {
+
+    bsoncxx::document::element element = doc["display_url"];
+    this->displayURL=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["expanded_url"];
+    this->expandedURL=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["url"];
+    this->url=bsoncxx::string::to_string(element.get_utf8().value);
+
+    element = doc["indices"];
+    if (element && element.type()==bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->indices.push_back(ele.get_int32());
+        }
+    }
+
+    return this;
+}

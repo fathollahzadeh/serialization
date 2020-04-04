@@ -73,3 +73,17 @@ bsoncxx::document::value SizeEntity::serializeBSON() {
 
     return doc<<finalize;
 }
+
+SizeEntity *SizeEntity::deserializeBSON(bsoncxx::document::view doc) {
+
+    bsoncxx::document::element element = doc["width"];
+    this->width=element.get_int32();
+
+    element = doc["height"];
+    this->height=element.get_int32();
+
+    element = doc["resize"];
+    this->resize=bsoncxx::string::to_string(element.get_utf8().value);
+
+    return this;
+}

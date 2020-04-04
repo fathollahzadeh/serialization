@@ -147,6 +147,9 @@ public:
 
     //BSON C++ serialization:
     bsoncxx::document::value serializeBSON();
+
+    //BSON de-serialization:
+    User * deserializeBSON(bsoncxx::document::view doc);
 };
 BOOST_CLASS_TRACKING(User, boost::serialization::track_never)
 

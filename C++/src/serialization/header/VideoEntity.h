@@ -49,6 +49,9 @@ public:
 
     //BSON buffer serialization
     bsoncxx::document::value serializeBSON();
+
+    //BSON de-serialization:
+    VideoEntity * deserializeBSON(bsoncxx::document::view doc);
 };
 BOOST_CLASS_TRACKING(VideoEntity, boost::serialization::track_never)
 
