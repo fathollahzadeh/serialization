@@ -268,6 +268,8 @@ void ExternalSort<T>::runTheExternalSort() {
 
     objectFileOutput->appendObjectToFileFlush();
 
+    this->ioTime +=objectFileOutput->getIoTime();
+
     cout << "Done!" << endl;
 
     // Close object files.

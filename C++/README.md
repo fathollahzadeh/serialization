@@ -21,7 +21,7 @@ Library/Software
 * download last version of boost from this link: https://www.boost.org/users/download/
 * follow bellow steps for install from source(tested version 1_72):
    ```bash 
-     $ tar -xvzf boost_1_72_0.tar.gz  
+     $ tar -xf boost_1_72_0.tar.bz2 
      $ cd boost_1_72_0
      $ ./bootstrap.sh --prefix=/usr/
      $ ./b2
