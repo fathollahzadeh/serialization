@@ -42,6 +42,9 @@ public class ExternalSort {
 
     private void runTheExternalSort(){
 
+        // Get a Runtime object
+        Runtime runTime = Runtime.getRuntime();
+
         System.out.println("Start Reading part of the file into RAM" );
 
         FileHandler fileHandler = new FileHandler(fileName, serializationType);
@@ -60,6 +63,7 @@ public class ExternalSort {
         long startIndexInEachFile = 0;
         numberOfObjectsInEachFiles = totalObjectsCount / numberOfFiles;
        for (int i = 0; i < numberOfFiles; i++) {
+
             System.out.println("Reading for file number "+ i);
 
             startIndexInEachFile = i * numberOfObjectsInEachFiles;
@@ -83,6 +87,8 @@ public class ExternalSort {
             String tmpStoreFileName = "bin/tmp/sorted-" + i + "-" + serializationType;
             writeToFiles(m_list_read_from_file, tmpStoreFileName);
             m_list_read_from_file.clear();
+           // activate the garbage collector
+           runTime.gc();
             
         }
 
@@ -137,6 +143,9 @@ public class ExternalSort {
 
         System.out.println("First page reading is done! ");
 
+        // activate the garbage collector
+        runTime.gc();
+
         List<RootData> dataToWrite=new ArrayList<>();
 
         // reading next pages
@@ -183,6 +192,8 @@ public class ExternalSort {
                 }
                 //dataToWrite.shrink_to_fit();
                 dataToWrite.clear();
+                // activate the garbage collector
+                runTime.gc();
             }
         }
 
@@ -194,6 +205,8 @@ public class ExternalSort {
         dataToWrite.clear();
 
         objectFileOutput.appendObjectToFileFlush();
+
+        this.ioTime +=objectFileOutput.getIoTime();
 
         System.out.println("Done!");
 
@@ -219,7 +232,7 @@ public class ExternalSort {
             //Serialize the TweetStatus object and then write to file:
             RootData rd=list.get(i);
             fileHandler.appendObjectToFile((TweetStatus)rd );
-            rd=null;
+            //rd=null;
         }
         fileHandler.appendObjectToFileFlush();
         this.ioTime+=fileHandler.getIoTime();

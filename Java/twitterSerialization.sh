@@ -5,7 +5,7 @@ datapath=$1
 mkdir -p "$2"
 numberOfTweets=$3
 
-for serialization_type in  1 2 3 4 5 6
+for serialization_type in  1 5 #1 2 3 4 5 6
 do
     outpath="$2/serialization_$serialization_type.se"
     echo "start to run the project for serialization type: " $serialization_type
