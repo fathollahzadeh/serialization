@@ -26,6 +26,10 @@ import edu.bu.tweet.proto.TweetStatusProtos;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 public class TweetStatus extends Base implements RootData {
 
@@ -370,7 +374,7 @@ public class TweetStatus extends Base implements RootData {
             jsonWriter.writeObject(this.jsonObjectBuilder());
             jsonWriter.close();
         } catch (Exception e) {
-           logger.error(e);
+            logger.error(e);
         }
 
         // Get the bytes of the serialized JSON object
@@ -704,7 +708,7 @@ public class TweetStatus extends Base implements RootData {
         // end set user
 
         //set coordinates:
-        if (this.coordinates != null && this.coordinates.getCoordinates().length>0) {
+        if (this.coordinates != null && this.coordinates.getCoordinates().length > 0) {
 
             TweetStatusProtos.TweetStatusP.CoordinatesP.Builder coordinatesP = TweetStatusProtos.TweetStatusP.CoordinatesP.newBuilder();
             if (this.getCoordinates().getType() != null)
@@ -757,7 +761,7 @@ public class TweetStatus extends Base implements RootData {
         tweetP.setIsQuoteStatus(this.isIs_quote_status());
 
         if (this.quoted_status != null) {
-           tweetP.setQuotedStatus(this.quoted_status.protoObjectBuilder());
+            tweetP.setQuotedStatus(this.quoted_status.protoObjectBuilder());
         }
 
         if (this.retweeted_status != null) {
@@ -1170,14 +1174,14 @@ public class TweetStatus extends Base implements RootData {
         this.setIs_quote_status(protoTweet.getIsQuoteStatus());
 
         if (protoTweet.getQuotedStatus() != null && protoTweet.getQuotedStatus().getId() != 0) {
-            TweetStatus quotedStatus=new TweetStatus();
+            TweetStatus quotedStatus = new TweetStatus();
             quotedStatus.tweetObjectBuilder(protoTweet.getQuotedStatus());
             this.setQuoted_status(quotedStatus);
 
         }
 
         if (protoTweet.getRetweetedStatus() != null && protoTweet.getRetweetedStatus().getId() != 0) {
-            TweetStatus retweetedStatus=new TweetStatus();
+            TweetStatus retweetedStatus = new TweetStatus();
             retweetedStatus.tweetObjectBuilder(protoTweet.getRetweetedStatus());
             this.setRetweeted_status(retweetedStatus);
         }
@@ -1738,18 +1742,227 @@ public class TweetStatus extends Base implements RootData {
 
         // get QuoteStatus
         if (this.quoted_status != null)
-        countLevel += this.quoted_status.getText().length();
+            countLevel += this.quoted_status.getText().length();
 
         if (other.getQuoted_status() != null)
             countLevelOtherTweet += other.getQuoted_status().getText().length();
 
         // get Retweet
         if (this.retweeted_status != null)
-        countLevel += this.retweeted_status.getRetweet_count();
+            countLevel += this.retweeted_status.getRetweet_count();
 
         if (other.getRetweeted_status() != null)
             countLevelOtherTweet += other.getRetweeted_status().getRetweet_count();
         return Integer.compare(countLevel, countLevelOtherTweet);
     }
 
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+        writer.writeString("created_at", this.created_at);
+        writer.writeInt64("id", this.id);
+        writer.writeString("text", this.text);
+        writer.writeString("source", this.source);
+        writer.writeBoolean("truncated", this.truncated);
+        writer.writeInt64("in_reply_to_status_id", this.in_reply_to_status_id);
+        writer.writeInt64("in_reply_to_user_id", this.in_reply_to_user_id);
+
+
+        if (this.in_reply_to_screen_name != null)
+            writer.writeString("in_reply_to_screen_name", this.in_reply_to_screen_name);
+
+        writer.writeName("user");
+        writer.writeBinaryData( new BsonBinary(this.user.bsonSerialization()));
+
+        if (this.coordinates != null)
+            writer.writeBinaryData("coordinates", new BsonBinary(this.coordinates.bsonSerialization()));
+
+        if (this.place != null)
+            writer.writeBinaryData("place", new BsonBinary(this.place.bsonSerialization()));
+        writer.writeInt64("quoted_status_id", this.quoted_status_id);
+        writer.writeBoolean("is_quote_status", this.is_quote_status);
+
+        if (this.quoted_status != null)
+            writer.writeBinaryData("quoted_status", new BsonBinary(this.quoted_status.bsonSerialization()));
+
+        if (this.retweeted_status != null)
+            writer.writeBinaryData("retweeted_status", new BsonBinary(this.retweeted_status.bsonSerialization()));
+
+        writer.writeInt32("quote_count", this.quote_count);
+        writer.writeInt32("reply_count", this.reply_count);
+        writer.writeInt32("retweet_count", this.retweet_count);
+        writer.writeInt32("favorite_count", this.favorite_count);
+
+        if (this.entities != null)
+            writer.writeBinaryData("entities", new BsonBinary(this.entities.bsonSerialization()));
+
+        if (this.extended_entities != null)
+            writer.writeBinaryData("extended_entities", new BsonBinary(this.extended_entities.bsonSerialization()));
+
+        writer.writeBoolean("favorited", this.favorited);
+        writer.writeBoolean("retweeted", this.retweeted);
+        writer.writeBoolean("possibly_sensitive", this.possibly_sensitive);
+        writer.writeString("filter_level", this.filter_level);
+        if (this.lang != null)
+            writer.writeString("lang", this.lang);
+
+        writer.writeInt32("matching_rules_size", this.matching_rules.size());
+        writer.writeName("matching_rules");
+        writer.writeStartArray();
+        for (MatchingRulesEntity matchingRulesEntity : this.matching_rules) {
+            writer.writeBinaryData(new BsonBinary(matchingRulesEntity.bsonSerialization()));
+        }
+        writer.writeEndArray();
+
+        writer.writeInt64("current_user_retweet", this.current_user_retweet);
+
+        writer.writeInt32("scopes_size", this.scopes.size());
+        writer.writeName("scopes");
+        writer.writeStartDocument();
+        for (String k : this.scopes.keySet()) {
+            writer.writeBoolean(k, this.scopes.get(k));
+        }
+        writer.writeEndDocument();
+
+        writer.writeBoolean("withheld_copyright", this.withheld_copyright);
+
+        if (this.withheld_scope != null)
+            writer.writeString("withheld_scope", this.withheld_scope);
+
+        writer.writeInt32("withheld_in_countries_size",this.withheld_in_countries.size());
+        writer.writeName("withheld_in_countries");
+        writer.writeStartArray();
+        for (String s : this.withheld_in_countries) {
+            writer.writeString(s);
+        }
+        writer.writeEndArray();
+
+
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader = new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+        this.created_at = reader.readString("created_at");
+        this.id = reader.readInt64("id");
+        this.text = reader.readString("text");
+        this.source = reader.readString("source");
+        this.truncated = reader.readBoolean("truncated");
+        this.in_reply_to_status_id = reader.readInt64("in_reply_to_status_id");
+        this.in_reply_to_user_id = reader.readInt64("in_reply_to_user_id");
+
+        String currentName = reader.readName();
+        if (currentName.equals("in_reply_to_screen_name")) {
+            this.in_reply_to_screen_name = reader.readString();
+            reader.readName();
+        }
+
+        this.user = new User();
+        this.user.bsonDeSerialization(reader.readBinaryData().getData());
+
+        currentName =reader.readName();
+        if (currentName.equals("coordinates")) {
+            this.coordinates = new Coordinates();
+            this.coordinates.bsonDeSerialization(reader.readBinaryData().getData());
+            currentName =reader.readName();
+        }
+
+        if (currentName.equals("place")) {
+            this.place = new Place();
+            this.place.bsonDeSerialization(reader.readBinaryData().getData());
+            reader.readName();
+        }
+
+        this.quoted_status_id = reader.readInt64();
+        this.is_quote_status = reader.readBoolean("is_quote_status");
+
+        currentName =reader.readName();
+        if (currentName.equals("quoted_status")) {
+            this.quoted_status = new TweetStatus();
+            this.quoted_status.bsonDeSerialization(reader.readBinaryData().getData());
+            currentName =reader.readName();
+        }
+
+        if (currentName.equals("retweeted_status")) {
+            this.retweeted_status = new TweetStatus();
+            this.retweeted_status.bsonDeSerialization(reader.readBinaryData().getData());
+            reader.readName();
+        }
+
+        this.quote_count = reader.readInt32();
+        this.reply_count = reader.readInt32("reply_count");
+        this.retweet_count = reader.readInt32("retweet_count");
+        this.favorite_count = reader.readInt32("favorite_count");
+
+        currentName=reader.readName();
+        if (currentName.equals("entities")) {
+            this.entities = new Entities();
+            this.entities.bsonDeSerialization(reader.readBinaryData().getData());
+            currentName =reader.readName();
+        }
+
+        if (currentName.equals("extended_entities")) {
+            this.extended_entities = new ExtendedEntities();
+            this.extended_entities.bsonDeSerialization(reader.readBinaryData().getData());
+            reader.readName();
+        }
+
+        this.favorited = reader.readBoolean();
+        this.retweeted = reader.readBoolean("retweeted");
+        this.possibly_sensitive = reader.readBoolean("possibly_sensitive");
+        this.filter_level = reader.readString("filter_level");
+
+        currentName = reader.readName();
+        if (currentName.equals("lang")) {
+            this.lang = reader.readString();
+            reader.readName();
+        }
+
+        int list_size = reader.readInt32();
+        reader.readName("matching_rules");
+        reader.readStartArray();
+        for (int i = 0; i < list_size; i++) {
+            MatchingRulesEntity matchingRulesEntity = new MatchingRulesEntity();
+            matchingRulesEntity.bsonDeSerialization(reader.readBinaryData().getData());
+            this.matching_rules.add(matchingRulesEntity);
+        }
+        reader.readEndArray();
+
+        this.current_user_retweet = reader.readInt64("current_user_retweet");
+
+        int scopes_size = reader.readInt32("scopes_size");
+        reader.readName("scopes");
+        reader.readStartDocument();
+        for (int i = 0; i < scopes_size; i++) {
+            String key = reader.readName();
+            Boolean value = reader.readBoolean();
+            this.scopes.put(key, value);
+        }
+        reader.readEndDocument();
+        this.withheld_copyright=reader.readBoolean("withheld_copyright");
+
+        currentName = reader.readName();
+        if (currentName.equals("withheld_scope")) {
+            this.withheld_scope = reader.readString();
+            reader.readName();
+        }
+
+        int withheld_in_countries_size=reader.readInt32();
+        reader.readName("withheld_in_countries");
+        reader.readStartArray();
+        for (int i = 0; i < withheld_in_countries_size; i++) {
+           this.withheld_in_countries.add(reader.readString());
+        }
+        reader.readEndArray();
+        reader.readEndDocument();
+
+        return this;
+    }
 }

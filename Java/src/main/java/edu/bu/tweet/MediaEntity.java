@@ -3,15 +3,22 @@ package edu.bu.tweet;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
+
 import org.apache.log4j.Logger;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 
 public class MediaEntity extends Base implements RootData {
@@ -34,7 +41,7 @@ public class MediaEntity extends Base implements RootData {
     private AdditionalMediaInfoEntity additional_media_info;
 
     public MediaEntity() {
-        this.indices=new ArrayList<>();
+        this.indices = new ArrayList<>();
     }
 
     public String getDisplay_url() {
@@ -324,14 +331,14 @@ public class MediaEntity extends Base implements RootData {
             objectBuilder.add("media_url_https", this.media_url_https);
         }
 
-        if (this.sizes!=null){
-            objectBuilder.add("sizes",this.sizes.jsonObjectBuilder());
+        if (this.sizes != null) {
+            objectBuilder.add("sizes", this.sizes.jsonObjectBuilder());
         }
 
         if (this.type != null && !this.type.isEmpty()) {
             objectBuilder.add("type", this.type);
         }
-        objectBuilder.add("source_status_id",this.source_status_id);
+        objectBuilder.add("source_status_id", this.source_status_id);
 
         if (this.source_status_id_str != null && !this.source_status_id_str.isEmpty()) {
             objectBuilder.add("source_status_id_str", this.source_status_id_str);
@@ -341,12 +348,12 @@ public class MediaEntity extends Base implements RootData {
             objectBuilder.add("url", this.url);
         }
 
-        if (this.video_info!=null){
-            objectBuilder.add("video_info",this.video_info.jsonObjectBuilder());
+        if (this.video_info != null) {
+            objectBuilder.add("video_info", this.video_info.jsonObjectBuilder());
         }
 
-        if (this.additional_media_info!=null){
-            objectBuilder.add("additional_media_info",this.additional_media_info.jsonObjectBuilder());
+        if (this.additional_media_info != null) {
+            objectBuilder.add("additional_media_info", this.additional_media_info.jsonObjectBuilder());
         }
 
         JsonObject jsonObject = objectBuilder.build();
@@ -378,7 +385,7 @@ public class MediaEntity extends Base implements RootData {
         }
         if (jsonObject.getJsonObject("sizes") != null && jsonObject.getJsonObject("sizes") != JsonValue.NULL) {
             JsonObject sizesJsonObject = jsonObject.getJsonObject("sizes");
-            this.sizes=new MediaSizesEntity().readJSONMediaSizesEntity(sizesJsonObject);
+            this.sizes = new MediaSizesEntity().readJSONMediaSizesEntity(sizesJsonObject);
         }
         if (jsonObject.get("type") != null && jsonObject.get("type") != JsonValue.NULL) {
             this.type = jsonObject.getString("type");
@@ -393,13 +400,146 @@ public class MediaEntity extends Base implements RootData {
         }
         if (jsonObject.getJsonObject("video_info") != null && jsonObject.getJsonObject("video_info") != JsonValue.NULL) {
             JsonObject video_infoJsonObject = jsonObject.getJsonObject("video_info");
-            this.video_info=new VideoEntity().readJSONVideoEntity(video_infoJsonObject);
+            this.video_info = new VideoEntity().readJSONVideoEntity(video_infoJsonObject);
         }
 
         if (jsonObject.getJsonObject("additional_media_info") != null && jsonObject.getJsonObject("additional_media_info") != JsonValue.NULL) {
             JsonObject additional_media_infoJsonObject = jsonObject.getJsonObject("additional_media_info");
-            this.additional_media_info=new AdditionalMediaInfoEntity().readJSONAdditionalMediaInfoEntity(additional_media_infoJsonObject);
+            this.additional_media_info = new AdditionalMediaInfoEntity().readJSONAdditionalMediaInfoEntity(additional_media_infoJsonObject);
         }
+
+        return this;
+    }
+
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+        if (this.display_url != null) {
+            writer.writeString("display_url",this.display_url);
+        }
+
+        if (this.expanded_url != null) {
+            writer.writeString("expanded_url",this.expanded_url);
+        }
+        writer.writeInt64("id", this.id);
+
+        writer.writeInt32("indices_size", this.indices.size());
+        writer.writeName("indices");
+        writer.writeStartArray();
+        for (Integer i : this.indices) {
+            writer.writeInt32(i);
+        }
+        writer.writeEndArray();
+
+        if (this.media_url != null) {
+            writer.writeString("media_url",this.media_url);
+        }
+
+        if (this.media_url_https != null) {
+            writer.writeString("media_url_https",this.media_url_https);
+        }
+
+        if (this.sizes != null)
+            writer.writeBinaryData("sizes", new BsonBinary(this.sizes.bsonSerialization()));
+
+        if (this.type != null) {
+            writer.writeString("type",this.type);
+        }
+
+        if (this.source_status_id_str != null) {
+            writer.writeString("source_status_id_str",this.source_status_id_str);
+        }
+
+        if (this.url != null) {
+            writer.writeString("url",this.url);
+        }
+
+        if (this.video_info != null)
+            writer.writeBinaryData("video_info", new BsonBinary(this.video_info.bsonSerialization()));
+
+        if (this.additional_media_info != null)
+            writer.writeBinaryData("additional_media_info", new BsonBinary(this.additional_media_info.bsonSerialization()));
+
+        writer.writeInt64("source_status_id", this.source_status_id);
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader = new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+
+        String currentName = reader.readName();
+        if (currentName.equals("display_url")) {
+            this.display_url = reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("expanded_url")) {
+            this.expanded_url = reader.readString();
+            reader.readName();
+        }
+        this.id = reader.readInt64();
+
+        int indices_size = reader.readInt32("indices_size");
+        reader.readName("indices");
+        reader.readStartArray();
+        for (int i = 0; i < indices_size; i++) {
+            this.indices.add(reader.readInt32());
+        }
+        reader.readEndArray();
+
+        currentName = reader.readName();
+        if (currentName.equals("media_url")) {
+            this.media_url = reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("media_url_https")) {
+            this.media_url_https = reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("sizes")) {
+            this.sizes = new MediaSizesEntity();
+            this.sizes.bsonDeSerialization(reader.readBinaryData().getData());
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("type")) {
+            this.type = reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("source_status_id_str")) {
+            this.source_status_id_str = reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("url")) {
+            this.url = reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("video_info")) {
+            this.video_info = new VideoEntity();
+            this.video_info.bsonDeSerialization(reader.readBinaryData().getData());
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("additional_media_info")) {
+            this.additional_media_info = new AdditionalMediaInfoEntity();
+            this.additional_media_info.bsonDeSerialization(reader.readBinaryData().getData());
+            reader.readName();
+        }
+        this.source_status_id = reader.readInt64();
+
+        reader.readEndDocument();
 
         return this;
     }

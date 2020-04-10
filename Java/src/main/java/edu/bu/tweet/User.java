@@ -4,15 +4,22 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
+
 import org.apache.log4j.Logger;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 
 public class User extends Base implements RootData {
@@ -448,7 +455,7 @@ public class User extends Base implements RootData {
         }
         allocatedBufferSize += 4;
 
-        byte[] withheld_scopeBytes = (withheld_scope!=null)? withheld_scope.getBytes():new byte[0];
+        byte[] withheld_scopeBytes = (withheld_scope != null) ? withheld_scope.getBytes() : new byte[0];
         allocatedBufferSize += withheld_scopeBytes.length + 4;
 
         ArrayList<byte[]> descriptionURLEntitiesBytes = new ArrayList<>();
@@ -554,8 +561,8 @@ public class User extends Base implements RootData {
         byteBuffer.put(convertToByte(contributors_enabled));
         byteBuffer.putInt(profile_background_colorBytes.length);
         byteBuffer.put(profile_background_colorBytes);
-		byteBuffer.putInt(profile_background_image_urlBytes.length);
-		byteBuffer.put(profile_background_image_urlBytes);
+        byteBuffer.putInt(profile_background_image_urlBytes.length);
+        byteBuffer.put(profile_background_image_urlBytes);
         byteBuffer.putInt(profile_background_image_url_httpsBytes.length);
         byteBuffer.put(profile_background_image_url_httpsBytes);
         byteBuffer.put(convertToByte(profile_background_tile));
@@ -581,84 +588,84 @@ public class User extends Base implements RootData {
     }
 
     public RootData readByteBuffer(byte[] buffData) {
-		ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
-		int stringSize;
+        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+        int stringSize;
 
-		this.id=byteBuffer.getLong();
-		stringSize=byteBuffer.getInt();
-		this.name=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.screen_name=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.location=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.url=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.description=extractString(byteBuffer,stringSize);
-		this.isProtected=convertToBoolean(byteBuffer.get());
-		this.verified=convertToBoolean(byteBuffer.get());
-		this.followers_count=byteBuffer.getInt();
-		this.friends_count=byteBuffer.getInt();
-		this.listed_count=byteBuffer.getInt();
-		this.favourites_count=byteBuffer.getInt();
-		this.statuses_count=byteBuffer.getInt();
-		stringSize=byteBuffer.getInt();
-		this.created_at=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.profile_banner_url=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.profile_image_url_https=extractString(byteBuffer,stringSize);
-		this.default_profile=convertToBoolean(byteBuffer.get());
-		for (int i=0;i<byteBuffer.getInt();i++){
-			stringSize=byteBuffer.getInt();
-			this.withheld_in_countries.add(extractString(byteBuffer,stringSize));
-		}
-		stringSize=byteBuffer.getInt();
-		this.withheld_scope=extractString(byteBuffer,stringSize);
+        this.id = byteBuffer.getLong();
+        stringSize = byteBuffer.getInt();
+        this.name = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.screen_name = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.location = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.url = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.description = extractString(byteBuffer, stringSize);
+        this.isProtected = convertToBoolean(byteBuffer.get());
+        this.verified = convertToBoolean(byteBuffer.get());
+        this.followers_count = byteBuffer.getInt();
+        this.friends_count = byteBuffer.getInt();
+        this.listed_count = byteBuffer.getInt();
+        this.favourites_count = byteBuffer.getInt();
+        this.statuses_count = byteBuffer.getInt();
+        stringSize = byteBuffer.getInt();
+        this.created_at = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.profile_banner_url = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.profile_image_url_https = extractString(byteBuffer, stringSize);
+        this.default_profile = convertToBoolean(byteBuffer.get());
+        for (int i = 0; i < byteBuffer.getInt(); i++) {
+            stringSize = byteBuffer.getInt();
+            this.withheld_in_countries.add(extractString(byteBuffer, stringSize));
+        }
+        stringSize = byteBuffer.getInt();
+        this.withheld_scope = extractString(byteBuffer, stringSize);
 
 
-		int numberOfUrlEntities=byteBuffer.getInt();
-		if (numberOfUrlEntities>0) {
-			for (int i = 0; i < numberOfUrlEntities; i++) {
-				byte[] urlEntityBytes = new byte[byteBuffer.getInt()];
-				byteBuffer.get(urlEntityBytes, 0, urlEntityBytes.length);
-				URLEntity urlEntity=new URLEntity();
-				urlEntity.readByteBuffer(urlEntityBytes);
-				this.descriptionURLEntities.add(urlEntity);
-			}
-		}
+        int numberOfUrlEntities = byteBuffer.getInt();
+        if (numberOfUrlEntities > 0) {
+            for (int i = 0; i < numberOfUrlEntities; i++) {
+                byte[] urlEntityBytes = new byte[byteBuffer.getInt()];
+                byteBuffer.get(urlEntityBytes, 0, urlEntityBytes.length);
+                URLEntity urlEntity = new URLEntity();
+                urlEntity.readByteBuffer(urlEntityBytes);
+                this.descriptionURLEntities.add(urlEntity);
+            }
+        }
 
-		this.geo_enabled=convertToBoolean(byteBuffer.get());
-		stringSize=byteBuffer.getInt();
-		this.lang=extractString(byteBuffer,stringSize);
-		this.contributors_enabled=convertToBoolean(byteBuffer.get());
-		stringSize=byteBuffer.getInt();
-		this.profile_background_color=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.profile_background_image_url=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.profile_background_image_url_https=extractString(byteBuffer,stringSize);
-		this.profile_background_tile=convertToBoolean(byteBuffer.get());
-		stringSize=byteBuffer.getInt();
-		this.profile_image_url=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.profile_link_color=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.profile_sidebar_border_color=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.profile_sidebar_fill_color=extractString(byteBuffer,stringSize);
-		stringSize=byteBuffer.getInt();
-		this.profile_text_color=extractString(byteBuffer,stringSize);
-		this.profile_use_background_image=convertToBoolean(byteBuffer.get());
-		this.utc_offset=byteBuffer.getInt();
-		stringSize=byteBuffer.getInt();
-		this.time_zone=extractString(byteBuffer,stringSize);
-		this.is_translator=convertToBoolean(byteBuffer.get());
-		this.follow_request_sent=convertToBoolean(byteBuffer.get());
-		this.showAllInlineMedia=convertToBoolean(byteBuffer.get());
+        this.geo_enabled = convertToBoolean(byteBuffer.get());
+        stringSize = byteBuffer.getInt();
+        this.lang = extractString(byteBuffer, stringSize);
+        this.contributors_enabled = convertToBoolean(byteBuffer.get());
+        stringSize = byteBuffer.getInt();
+        this.profile_background_color = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.profile_background_image_url = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.profile_background_image_url_https = extractString(byteBuffer, stringSize);
+        this.profile_background_tile = convertToBoolean(byteBuffer.get());
+        stringSize = byteBuffer.getInt();
+        this.profile_image_url = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.profile_link_color = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.profile_sidebar_border_color = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.profile_sidebar_fill_color = extractString(byteBuffer, stringSize);
+        stringSize = byteBuffer.getInt();
+        this.profile_text_color = extractString(byteBuffer, stringSize);
+        this.profile_use_background_image = convertToBoolean(byteBuffer.get());
+        this.utc_offset = byteBuffer.getInt();
+        stringSize = byteBuffer.getInt();
+        this.time_zone = extractString(byteBuffer, stringSize);
+        this.is_translator = convertToBoolean(byteBuffer.get());
+        this.follow_request_sent = convertToBoolean(byteBuffer.get());
+        this.showAllInlineMedia = convertToBoolean(byteBuffer.get());
 
-		return this;
-		//TODO: protected is a java keyboard so we need a solution for get data from text string
+        return this;
+        //TODO: protected is a java keyboard so we need a solution for get data from text string
 
     }
 
@@ -669,7 +676,7 @@ public class User extends Base implements RootData {
     public JsonObject jsonObjectBuilder() {
 
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        objectBuilder.add("id",this.id);
+        objectBuilder.add("id", this.id);
         if (this.name != null && !this.name.isEmpty()) {
             objectBuilder.add("name", this.name);
         }
@@ -685,13 +692,13 @@ public class User extends Base implements RootData {
         if (this.description != null && !this.description.isEmpty()) {
             objectBuilder.add("description", this.description);
         }
-        objectBuilder.add("isProtected",this.isProtected);
-        objectBuilder.add("verified",this.verified);
-        objectBuilder.add("followers_count",this.followers_count);
-        objectBuilder.add("friends_count",this.friends_count);
-        objectBuilder.add("listed_count",this.listed_count);
-        objectBuilder.add("favourites_count",this.favourites_count);
-        objectBuilder.add("statuses_count",this.statuses_count);
+        objectBuilder.add("isProtected", this.isProtected);
+        objectBuilder.add("verified", this.verified);
+        objectBuilder.add("followers_count", this.followers_count);
+        objectBuilder.add("friends_count", this.friends_count);
+        objectBuilder.add("listed_count", this.listed_count);
+        objectBuilder.add("favourites_count", this.favourites_count);
+        objectBuilder.add("statuses_count", this.statuses_count);
 
         if (this.created_at != null && !this.created_at.isEmpty()) {
             objectBuilder.add("created_at", this.created_at);
@@ -702,30 +709,30 @@ public class User extends Base implements RootData {
         if (this.profile_image_url_https != null && !this.profile_image_url_https.isEmpty()) {
             objectBuilder.add("profile_image_url_https", this.profile_image_url_https);
         }
-        objectBuilder.add("default_profile",this.default_profile);
+        objectBuilder.add("default_profile", this.default_profile);
 
         JsonArrayBuilder jsonWithheld_in_countriesArray = Json.createArrayBuilder();
         for (String s : withheld_in_countries) {
             jsonWithheld_in_countriesArray.add(s);
         }
-        objectBuilder.add("withheld_in_countries",jsonWithheld_in_countriesArray);
+        objectBuilder.add("withheld_in_countries", jsonWithheld_in_countriesArray);
 
         if (this.withheld_scope != null && !this.withheld_scope.isEmpty()) {
             objectBuilder.add("withheld_scope", this.withheld_scope);
         }
-        if (descriptionURLEntities.size()>0) {
+        if (descriptionURLEntities.size() > 0) {
             JsonArrayBuilder jsonDescriptionURLEntitiesArray = Json.createArrayBuilder();
             for (URLEntity urlEntity : descriptionURLEntities) {
                 jsonDescriptionURLEntitiesArray.add(urlEntity.jsonObjectBuilder());
             }
-            objectBuilder.add("descriptionURLEntities",jsonDescriptionURLEntitiesArray);
+            objectBuilder.add("descriptionURLEntities", jsonDescriptionURLEntitiesArray);
         }
-        objectBuilder.add("geo_enabled",this.geo_enabled);
+        objectBuilder.add("geo_enabled", this.geo_enabled);
 
         if (this.lang != null && !this.lang.isEmpty()) {
             objectBuilder.add("lang", this.lang);
         }
-        objectBuilder.add("contributors_enabled",this.contributors_enabled);
+        objectBuilder.add("contributors_enabled", this.contributors_enabled);
 
         if (this.profile_background_color != null && !this.profile_background_color.isEmpty()) {
             objectBuilder.add("profile_background_color", this.profile_background_color);
@@ -736,7 +743,7 @@ public class User extends Base implements RootData {
         if (this.profile_background_image_url_https != null && !this.profile_background_image_url_https.isEmpty()) {
             objectBuilder.add("profile_background_image_url_https", this.profile_background_image_url_https);
         }
-        objectBuilder.add("profile_background_tile",this.profile_background_tile);
+        objectBuilder.add("profile_background_tile", this.profile_background_tile);
         if (this.profile_image_url != null && !this.profile_image_url.isEmpty()) {
             objectBuilder.add("profile_image_url", this.profile_image_url);
         }
@@ -752,14 +759,14 @@ public class User extends Base implements RootData {
         if (this.profile_text_color != null && !this.profile_text_color.isEmpty()) {
             objectBuilder.add("profile_text_color", this.profile_text_color);
         }
-        objectBuilder.add("profile_use_background_image",this.profile_use_background_image);
-        objectBuilder.add("utc_offset",this.utc_offset);
+        objectBuilder.add("profile_use_background_image", this.profile_use_background_image);
+        objectBuilder.add("utc_offset", this.utc_offset);
         if (this.time_zone != null && !this.time_zone.isEmpty()) {
             objectBuilder.add("time_zone", this.time_zone);
         }
-        objectBuilder.add("is_translator",this.is_translator);
-        objectBuilder.add("follow_request_sent",this.follow_request_sent);
-        objectBuilder.add("showAllInlineMedia",this.showAllInlineMedia);
+        objectBuilder.add("is_translator", this.is_translator);
+        objectBuilder.add("follow_request_sent", this.follow_request_sent);
+        objectBuilder.add("showAllInlineMedia", this.showAllInlineMedia);
 
         JsonObject jsonObject = objectBuilder.build();
         return jsonObject;
@@ -767,7 +774,7 @@ public class User extends Base implements RootData {
 
     public User readJSONUser(JsonObject jsonObject) {
 
-        this.id=Long.parseLong(jsonObject.getJsonNumber("id").toString());
+        this.id = Long.parseLong(jsonObject.getJsonNumber("id").toString());
         if (jsonObject.get("name") != null && jsonObject.get("name") != JsonValue.NULL) {
             this.name = jsonObject.getString("name");
         }
@@ -783,13 +790,13 @@ public class User extends Base implements RootData {
         if (jsonObject.get("description") != null && jsonObject.get("description") != JsonValue.NULL) {
             this.description = jsonObject.getString("description");
         }
-        this.isProtected=jsonObject.getBoolean("isProtected");
-        this.verified=jsonObject.getBoolean("verified");
-        this.followers_count=jsonObject.getInt("followers_count");
-        this.friends_count=jsonObject.getInt("friends_count");
-        this.listed_count=jsonObject.getInt("listed_count");
-        this.favourites_count=jsonObject.getInt("favourites_count");
-        this.statuses_count=jsonObject.getInt("statuses_count");
+        this.isProtected = jsonObject.getBoolean("isProtected");
+        this.verified = jsonObject.getBoolean("verified");
+        this.followers_count = jsonObject.getInt("followers_count");
+        this.friends_count = jsonObject.getInt("friends_count");
+        this.listed_count = jsonObject.getInt("listed_count");
+        this.favourites_count = jsonObject.getInt("favourites_count");
+        this.statuses_count = jsonObject.getInt("statuses_count");
         if (jsonObject.get("created_at") != null && jsonObject.get("created_at") != JsonValue.NULL) {
             this.created_at = jsonObject.getString("created_at");
         }
@@ -799,7 +806,7 @@ public class User extends Base implements RootData {
         if (jsonObject.get("profile_image_url_https") != null && jsonObject.get("profile_image_url_https") != JsonValue.NULL) {
             this.profile_image_url_https = jsonObject.getString("profile_image_url_https");
         }
-        this.default_profile=jsonObject.getBoolean("default_profile");
+        this.default_profile = jsonObject.getBoolean("default_profile");
 
         if (jsonObject.getJsonArray("withheld_in_countries") != null) {
             JsonArray jsonWithheld_in_countriesArray = jsonObject.getJsonArray("withheld_in_countries");
@@ -818,12 +825,12 @@ public class User extends Base implements RootData {
                 this.descriptionURLEntities.add(new URLEntity().readJSONURLEntity(urlEntityJsonObject));
             }
         }
-        this.geo_enabled=jsonObject.getBoolean("geo_enabled");
+        this.geo_enabled = jsonObject.getBoolean("geo_enabled");
         if (jsonObject.get("lang") != null && jsonObject.get("lang") != JsonValue.NULL) {
             this.lang = jsonObject.getString("lang");
         }
-        this.contributors_enabled=jsonObject.getBoolean("contributors_enabled");
-        this.geo_enabled=jsonObject.getBoolean("geo_enabled");
+        this.contributors_enabled = jsonObject.getBoolean("contributors_enabled");
+        this.geo_enabled = jsonObject.getBoolean("geo_enabled");
 
         if (jsonObject.get("profile_background_color") != null && jsonObject.get("profile_background_color") != JsonValue.NULL) {
             this.profile_background_color = jsonObject.getString("profile_background_color");
@@ -836,7 +843,7 @@ public class User extends Base implements RootData {
         if (jsonObject.get("profile_background_image_url_https") != null && jsonObject.get("profile_background_image_url_https") != JsonValue.NULL) {
             this.profile_background_image_url_https = jsonObject.getString("profile_background_image_url_https");
         }
-        this.profile_background_tile=jsonObject.getBoolean("profile_background_tile");
+        this.profile_background_tile = jsonObject.getBoolean("profile_background_tile");
 
         if (jsonObject.get("profile_image_url") != null && jsonObject.get("profile_image_url") != JsonValue.NULL) {
             this.profile_image_url = jsonObject.getString("profile_image_url");
@@ -853,15 +860,262 @@ public class User extends Base implements RootData {
         if (jsonObject.get("profile_text_color") != null && jsonObject.get("profile_text_color") != JsonValue.NULL) {
             this.profile_text_color = jsonObject.getString("profile_text_color");
         }
-        this.profile_use_background_image=jsonObject.getBoolean("profile_use_background_image");
-        this.utc_offset=jsonObject.getInt("utc_offset");
+        this.profile_use_background_image = jsonObject.getBoolean("profile_use_background_image");
+        this.utc_offset = jsonObject.getInt("utc_offset");
 
         if (jsonObject.get("time_zone") != null && jsonObject.get("time_zone") != JsonValue.NULL) {
             this.time_zone = jsonObject.getString("time_zone");
         }
-        this.is_translator=jsonObject.getBoolean("is_translator");
-        this.follow_request_sent=jsonObject.getBoolean("follow_request_sent");
-        this.showAllInlineMedia=jsonObject.getBoolean("showAllInlineMedia");
+        this.is_translator = jsonObject.getBoolean("is_translator");
+        this.follow_request_sent = jsonObject.getBoolean("follow_request_sent");
+        this.showAllInlineMedia = jsonObject.getBoolean("showAllInlineMedia");
+
+        return this;
+    }
+
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+        writer.writeInt64("id", this.id);
+        writer.writeString("name", this.name);
+        writer.writeString("screen_name", this.screen_name);
+
+        if (this.location != null)
+            writer.writeString("location", this.location);
+
+        if (this.url != null)
+            writer.writeString("url", this.url);
+
+        if (this.description != null)
+            writer.writeString("description", this.description);
+
+        writer.writeBoolean("isProtected", this.isProtected);
+        writer.writeBoolean("verified", this.verified);
+        writer.writeInt32("followers_count", this.followers_count);
+        writer.writeInt32("friends_count", this.friends_count);
+        writer.writeInt32("listed_count", this.listed_count);
+        writer.writeInt32("favourites_count", this.favourites_count);
+        writer.writeInt32("statuses_count", this.statuses_count);
+        writer.writeString("created_at", this.created_at);
+
+        if (this.profile_banner_url != null)
+            writer.writeString("profile_banner_url", this.profile_banner_url);
+
+        if (this.profile_image_url_https != null)
+            writer.writeString("profile_image_url_https", this.profile_image_url_https);
+        writer.writeBoolean("default_profile", this.default_profile);
+
+        writer.writeInt32("withheld_in_countries_size", this.withheld_in_countries.size());
+        writer.writeName("withheld_in_countries");
+        writer.writeStartArray();
+        for (String s : this.withheld_in_countries) {
+            writer.writeString(s);
+        }
+        writer.writeEndArray();
+
+        if (this.withheld_scope != null)
+            writer.writeString("withheld_scope", this.withheld_scope);
+
+        writer.writeInt32("descriptionURLEntities_size", this.descriptionURLEntities.size());
+        writer.writeName("descriptionURLEntities");
+        writer.writeStartArray();
+        for (URLEntity urlEntity : this.descriptionURLEntities) {
+            writer.writeBinaryData(new BsonBinary(urlEntity.bsonSerialization()));
+        }
+        writer.writeEndArray();
+
+        writer.writeBoolean("geo_enabled", this.geo_enabled);
+
+        if (this.lang != null)
+            writer.writeString("lang", this.lang);
+
+        writer.writeBoolean("contributors_enabled", this.contributors_enabled);
+
+        if (this.profile_background_color != null)
+            writer.writeString("profile_background_color", this.profile_background_color);
+
+        if (this.profile_background_image_url != null)
+            writer.writeString("profile_background_image_url", this.profile_background_image_url);
+
+        if (this.profile_background_image_url_https != null)
+            writer.writeString("profile_background_image_url_https", this.profile_background_image_url_https);
+
+        writer.writeBoolean("profile_background_tile", this.profile_background_tile);
+
+        if (this.profile_image_url != null)
+            writer.writeString("profile_image_url", this.profile_image_url);
+
+        if (this.profile_link_color != null)
+            writer.writeString("profile_link_color", this.profile_link_color);
+
+        if (this.profile_sidebar_border_color != null)
+            writer.writeString("profile_sidebar_border_color", this.profile_sidebar_border_color);
+
+        if (this.profile_sidebar_fill_color != null)
+            writer.writeString("profile_sidebar_fill_color", this.profile_sidebar_fill_color);
+
+        if (this.profile_text_color != null)
+            writer.writeString("profile_text_color", this.profile_text_color);
+
+        writer.writeBoolean("profile_use_background_image", this.profile_use_background_image);
+
+        writer.writeInt32("utc_offset", this.utc_offset);
+
+        if (this.time_zone != null)
+            writer.writeString("time_zone", this.time_zone);
+
+        writer.writeBoolean("is_translator", this.is_translator);
+        writer.writeBoolean("follow_request_sent", this.follow_request_sent);
+        writer.writeBoolean("showAllInlineMedia", this.showAllInlineMedia);
+
+
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader = new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+        this.id = reader.readInt64("id");
+        this.name = reader.readString("name");
+        this.screen_name = reader.readString("screen_name");
+
+        String currentName = reader.readName();
+        if (currentName.equals("location")) {
+            this.location = reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("url")) {
+            this.url = reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("description")) {
+            this.description = reader.readString();
+            reader.readName();
+        }
+
+        this.isProtected = reader.readBoolean();
+        this.verified = reader.readBoolean("verified");
+        this.followers_count=reader.readInt32("followers_count");
+        this.friends_count=reader.readInt32("friends_count");
+        this.listed_count=reader.readInt32("listed_count");
+        this.favourites_count=reader.readInt32("favourites_count");
+        this.statuses_count=reader.readInt32("statuses_count");
+        this.created_at=reader.readString("created_at");
+
+        currentName = reader.readName();
+        if (currentName.equals("profile_banner_url")){
+            this.profile_banner_url=reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("profile_image_url_https")){
+            this.profile_image_url_https=reader.readString();
+            reader.readName();
+        }
+        this.default_profile = reader.readBoolean();
+
+        int withheld_in_countries_size=reader.readInt32("withheld_in_countries_size");
+        reader.readName("withheld_in_countries");
+        reader.readStartArray();
+        for (int i = 0; i < withheld_in_countries_size; i++) {
+            this.withheld_in_countries.add(reader.readString());
+        }
+        reader.readEndArray();
+
+
+        currentName = reader.readName();
+        if (currentName.equals("withheld_scope")){
+            this.withheld_scope=reader.readString();
+            reader.readName();
+        }
+
+
+        int descriptionURLEntities_size = reader.readInt32();
+        reader.readName("descriptionURLEntities");
+        reader.readStartArray();
+        for (int i = 0; i < descriptionURLEntities_size; i++) {
+            URLEntity urlEntity = new URLEntity();
+            urlEntity.bsonDeSerialization(reader.readBinaryData().getData());
+            this.descriptionURLEntities.add(urlEntity);
+        }
+        reader.readEndArray();
+
+        this.geo_enabled=reader.readBoolean("geo_enabled");
+
+        currentName = reader.readName();
+        if (currentName.equals("lang")){
+            this.lang=reader.readString();
+            reader.readName();
+        }
+
+        this.contributors_enabled=reader.readBoolean();
+
+        currentName = reader.readName();
+        if (currentName.equals("profile_background_color")){
+            this.profile_background_color=reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("profile_background_image_url")){
+            this.profile_background_image_url=reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("profile_background_image_url_https")){
+            this.profile_background_image_url_https=reader.readString();
+            reader.readName();
+        }
+        this.profile_background_tile=reader.readBoolean();
+
+        currentName = reader.readName();
+        if (currentName.equals("profile_image_url")){
+            this.profile_image_url=reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("profile_link_color")){
+            this.profile_link_color=reader.readString();
+            currentName = reader.readName();
+        }
+        if (currentName.equals("profile_sidebar_border_color")){
+            this.profile_sidebar_border_color=reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("profile_sidebar_fill_color")){
+            this.profile_sidebar_fill_color=reader.readString();
+            currentName = reader.readName();
+        }
+
+        if (currentName.equals("profile_text_color")){
+            this.profile_text_color=reader.readString();
+            reader.readName();
+        }
+
+        this.profile_use_background_image=reader.readBoolean();
+        this.utc_offset=reader.readInt32("utc_offset");
+
+
+        currentName = reader.readName();
+        if (currentName.equals("time_zone")){
+            this.time_zone=reader.readString();
+            reader.readName();
+        }
+
+        this.is_translator=reader.readBoolean();
+        this.follow_request_sent=reader.readBoolean("follow_request_sent");
+        this.showAllInlineMedia=reader.readBoolean("showAllInlineMedia");
+
+        reader.readEndDocument();
 
         return this;
     }

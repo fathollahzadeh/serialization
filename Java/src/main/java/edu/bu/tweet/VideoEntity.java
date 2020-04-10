@@ -3,6 +3,11 @@ package edu.bu.tweet;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
+
 import javax.json.*;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -173,6 +178,62 @@ public class VideoEntity extends Base implements RootData {
             }
         }
         return  this;
+    }
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+
+        writer.writeInt32("aspect_ratio_size",this.aspect_ratio.size());
+        writer.writeName("aspect_ratio");
+        writer.writeStartArray();
+        for (Integer i : this.aspect_ratio) {
+            writer.writeInt32(i);
+        }
+        writer.writeEndArray();
+
+        writer.writeInt32("duration_millis",this.duration_millis);
+
+        writer.writeInt32("variants_size", this.variants.size());
+        writer.writeName("variants");
+        writer.writeStartArray();
+        for (VariantEntity variantEntity : this.variants) {
+            writer.writeBinaryData(new BsonBinary(variantEntity.bsonSerialization()));
+        }
+        writer.writeEndArray();
+
+        writer.writeEndDocument();
+        return outputBuffer.toByteArray();
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+
+        int aspect_ratio_size = reader.readInt32("aspect_ratio_size");
+        reader.readName("aspect_ratio");
+        reader.readStartArray();
+        for (int i = 0; i < aspect_ratio_size; i++) {
+            this.aspect_ratio.add(reader.readInt32());
+        }
+        reader.readEndArray();
+
+        this.duration_millis=reader.readInt32();
+
+        int variants_size = reader.readInt32("variants_size");
+        reader.readName("variants");
+        reader.readStartArray();
+        for (int i = 0; i < variants_size; i++) {
+            VariantEntity variantEntity = new VariantEntity();
+            variantEntity.bsonDeSerialization(reader.readBinaryData().getData());
+            this.variants.add(variantEntity);
+        }
+        reader.readEndArray();
+        reader.readEndDocument();
+        return this;
     }
 
     public int compareTo(RootData o) {

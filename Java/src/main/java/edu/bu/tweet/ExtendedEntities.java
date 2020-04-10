@@ -12,6 +12,10 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
 import org.apache.log4j.Logger;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 
 public class ExtendedEntities extends Base implements RootData {
@@ -131,6 +135,44 @@ public class ExtendedEntities extends Base implements RootData {
 				this.media.add(new MediaEntity().readJSONMediaEntity(mediaJsonObject));
 			}
 		}
+		return this;
+	}
+	public byte[] bsonSerialization() {
+		BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+		BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+		writer.writeStartDocument();
+
+		writer.writeInt32("media_size", this.media.size());
+		writer.writeName("media");
+		writer.writeStartArray();
+		for (MediaEntity mediaEntity : this.media) {
+			writer.writeBinaryData(new BsonBinary(mediaEntity.bsonSerialization()));
+		}
+		writer.writeEndArray();
+
+		writer.writeEndDocument();
+
+		return outputBuffer.toByteArray();
+	}
+
+	public RootData bsonDeSerialization(byte[] buffData) {
+		ByteBuffer buf = ByteBuffer.wrap(buffData);
+		BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+		reader.readStartDocument();
+
+		int list_size = reader.readInt32("media_size");
+		reader.readName("media");
+		reader.readStartArray();
+		for (int i = 0; i < list_size; i++) {
+			MediaEntity mediaEntity = new MediaEntity();
+			mediaEntity.bsonDeSerialization(reader.readBinaryData().getData());
+			this.media.add(mediaEntity);
+		}
+		reader.readEndArray();
+		reader.readEndDocument();
+
 		return this;
 	}
 }

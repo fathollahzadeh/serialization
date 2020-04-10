@@ -10,6 +10,10 @@ import javax.json.JsonValue;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 public class Place extends Base implements RootData {
 
@@ -267,6 +271,85 @@ public class Place extends Base implements RootData {
 			JsonObject bounding_boxJsonObject = jsonObject.getJsonObject("bounding_box");
 			this.bounding_box=new BoundingBoxCoordinate().readJSONBoundingBoxCoordinate(bounding_boxJsonObject);
 		}
+		return this;
+	}
+	public byte[] bsonSerialization() {
+		BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+		BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+		writer.writeStartDocument();
+		if (this.name!=null)
+			writer.writeString("name",this.name);
+		if (this.country_code!=null)
+			writer.writeString("country_code",this.country_code);
+		if (this.id!=null)
+			writer.writeString("id",this.id);
+		if (this.country!=null)
+			writer.writeString("country",this.country);
+		if (this.place_type!=null)
+			writer.writeString("place_type",this.place_type);
+		if (this.url!=null)
+			writer.writeString("url",this.url);
+		if (this.full_name!=null)
+			writer.writeString("full_name",this.full_name);
+
+		if (this.bounding_box!=null)
+			writer.writeBinaryData("bounding_box",new BsonBinary(bounding_box.bsonSerialization()));
+
+		// write a boolean just for check end of object when all fields are empty
+		writer.writeBoolean("eof",true);
+
+		writer.writeEndDocument();
+
+		return outputBuffer.toByteArray();
+
+	}
+
+	public RootData bsonDeSerialization(byte[] buffData) {
+		ByteBuffer buf = ByteBuffer.wrap(buffData);
+		BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+		reader.readStartDocument();
+
+		String currentName=reader.readName();
+		if (currentName.equals("name")){
+			this.name=reader.readString();
+			currentName=reader.readName();
+		}
+		if (currentName.equals("country_code")){
+			this.country_code=reader.readString();
+			currentName=reader.readName();
+		}
+		if (currentName.equals("id")){
+			this.id=reader.readString();
+			currentName=reader.readName();
+		}
+		if (currentName.equals("country")){
+			this.country=reader.readString();
+			currentName=reader.readName();
+		}
+		if (currentName.equals("place_type")){
+			this.place_type=reader.readString();
+			currentName=reader.readName();
+		}
+		if (currentName.equals("url")){
+			this.url=reader.readString();
+			currentName=reader.readName();
+		}
+		if (currentName.equals("full_name")){
+			this.full_name=reader.readString();
+			currentName=reader.readName();
+		}
+
+		if (currentName.equals("bounding_box")){
+			this.bounding_box=new BoundingBoxCoordinate();
+			this.bounding_box.bsonDeSerialization(reader.readBinaryData().getData());
+			reader.readName();
+		}
+		reader.readBoolean();
+
+		reader.readEndDocument();
+
 		return this;
 	}
 }

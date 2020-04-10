@@ -4,6 +4,11 @@ import com.google.gson.Gson;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
+
 import javax.json.*;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -186,6 +191,59 @@ public class PollEntity extends Base implements RootData {
         if (jsonObject.get("duration_minutes") != null && jsonObject.get("duration_minutes") != JsonValue.NULL) {
             this.duration_minutes = jsonObject.getString("duration_minutes");
         }
+        return this;
+    }
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+        if (this.end_datetime!=null)
+            writer.writeString("end_datetime",this.end_datetime);
+
+        if (this.duration_minutes!=null)
+            writer.writeString("duration_minutes",this.duration_minutes);
+
+        writer.writeInt32("options_size", this.options.size());
+        writer.writeName("options");
+        writer.writeStartArray();
+        for (OptionEntity optionEntity : this.options) {
+            writer.writeBinaryData(new BsonBinary(optionEntity.bsonSerialization()));
+        }
+        writer.writeEndArray();
+
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+
+        String currentName=reader.readName();
+        if (currentName.equals("end_datetime")){
+            this.end_datetime=reader.readString();
+            currentName=reader.readName();
+        }
+        if (currentName.equals("duration_minutes")){
+            this.duration_minutes=reader.readString();
+            reader.readName();
+        }
+
+        int list_size = reader.readInt32();
+        reader.readName("options");
+        reader.readStartArray();
+        for (int i = 0; i < list_size; i++) {
+            OptionEntity optionEntity = new OptionEntity();
+            optionEntity.bsonDeSerialization(reader.readBinaryData().getData());
+            this.options.add(optionEntity);
+        }
+        reader.readEndArray();
+
+        reader.readEndDocument();
         return this;
     }
 

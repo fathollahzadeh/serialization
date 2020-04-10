@@ -6,6 +6,10 @@ import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import javax.json.*;
 import org.apache.log4j.Logger;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 
 public class MediaSizesEntity extends Base implements RootData {
@@ -188,6 +192,61 @@ public class MediaSizesEntity extends Base implements RootData {
             JsonObject smallJsonObject = jsonObject.getJsonObject("small");
             this.small=new SizeEntity().readJSONSizeEntity(smallJsonObject);
         }
+        return this;
+    }
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+
+        if (this.thumb!=null)
+            writer.writeBinaryData("thumb",new BsonBinary(this.thumb.bsonSerialization()));
+        if (this.large!=null)
+            writer.writeBinaryData("large",new BsonBinary(this.large.bsonSerialization()));
+        if (this.medium!=null)
+            writer.writeBinaryData("medium",new BsonBinary(this.medium.bsonSerialization()));
+        if (this.small!=null)
+            writer.writeBinaryData("small",new BsonBinary(this.small.bsonSerialization()));
+        writer.writeBoolean("eof",true);
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+
+        String currentName=reader.readName();
+        if (currentName.equals("thumb")){
+            this.thumb=new SizeEntity();
+            this.thumb.bsonDeSerialization(reader.readBinaryData().getData());
+            currentName=reader.readName();
+        }
+
+        if (currentName.equals("large")){
+            this.large=new SizeEntity();
+            this.large.bsonDeSerialization(reader.readBinaryData().getData());
+            currentName=reader.readName();
+        }
+
+        if (currentName.equals("medium")){
+            this.medium=new SizeEntity();
+            this.medium.bsonDeSerialization(reader.readBinaryData().getData());
+            currentName=reader.readName();
+        }
+
+        if (currentName.equals("small")){
+            this.small=new SizeEntity();
+            this.small.bsonDeSerialization(reader.readBinaryData().getData());
+            reader.readName();
+        }
+        reader.readBoolean();
+        reader.readEndDocument();
+
         return this;
     }
 

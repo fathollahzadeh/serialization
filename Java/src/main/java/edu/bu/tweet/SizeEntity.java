@@ -6,6 +6,9 @@ import javax.json.*;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 public class SizeEntity extends Base implements RootData {
 
@@ -125,6 +128,40 @@ public class SizeEntity extends Base implements RootData {
             this.resize = jsonObject.getString("resize");
         }
         return  this;
+    }
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+        if (this.resize!=null)
+            writer.writeString("resize",this.resize);
+
+        writer.writeInt32("width",this.width);
+        writer.writeInt32("height",this.height);
+
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+
+        String currentName=reader.readName();
+        if (currentName.equals("resize")){
+            this.resize=reader.readString();
+            reader.readName();
+        }
+
+        this.width=reader.readInt32();
+        this.height=reader.readInt32("height");
+        reader.readEndDocument();
+
+        return this;
     }
 
     public int compareTo(RootData o) {

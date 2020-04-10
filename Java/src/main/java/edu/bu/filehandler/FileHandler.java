@@ -356,7 +356,7 @@ public class FileHandler {
                 myDeserlizedObject = myData.jsonDeserialization_withGZIP(buffData);
                 break;
             case BSON:
-                myDeserlizedObject = myData.bsonDeSerialization(buffData, myData.getClass());
+                myDeserlizedObject = myData.bsonDeSerialization(buffData);
                 break;
             case PROTOCOL:
                 myDeserlizedObject = myData.protocolBufferRead(buffData);

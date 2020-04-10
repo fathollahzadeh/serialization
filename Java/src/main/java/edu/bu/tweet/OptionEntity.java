@@ -3,6 +3,10 @@ package edu.bu.tweet;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
+
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
@@ -110,6 +114,37 @@ public class OptionEntity extends Base implements RootData {
         if (jsonObject.get("text") != null && jsonObject.get("text") != JsonValue.NULL) {
             this.text = jsonObject.getString("text");
         }
+        return this;
+    }
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+        if (this.text!=null){
+            writer.writeString("text",this.text);
+        }
+        writer.writeInt32("position",this.position);
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+
+        String currentName=reader.readName();
+        if (currentName.equals("text")){
+            this.text=reader.readString();
+        }
+        this.position=reader.readInt32();
+
+        reader.readEndDocument();
+
         return this;
     }
 

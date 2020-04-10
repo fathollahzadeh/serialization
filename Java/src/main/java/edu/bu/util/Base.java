@@ -100,55 +100,55 @@ public class Base {
 		return mystring;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public byte[] bsonSerialization() {
-
-		// Serialize Data
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		ObjectMapper mapper = new ObjectMapper(new BsonFactory());
-		try {
-			mapper.writeValue(bos, this);
-		} catch (JsonGenerationException e) {
-			logger.error("bsonSerialization: JsonGenerationException", e);
-		} catch (JsonMappingException e) {
-			logger.error("bsonSerialization: JsonMappingException ", e);
-		} catch (IOException e) {
-			logger.error("bsonSerialization: IOException", e);
-		}
-		byte[] buf = bos.toByteArray();
-
-		return buf;
-	}
-
-	/**
-	 * 
-	 * @param buf
-	 * @return
-	 */
-	public RootData bsonDeSerialization(byte[] buf, Class<?> myclass) {
-
-		ByteArrayInputStream byteInputStream = new ByteArrayInputStream(buf);
-
-		Input input = new Input(byteInputStream);
-
-		ObjectMapper mapper = new ObjectMapper(new BsonFactory());
-		// Deserialize Data
-		RootData clone_of_bob = null;
-		try {
-			clone_of_bob = (RootData) mapper.readValue(input, myclass);
-		} catch (JsonParseException e) {
-			logger.error("bsonDeSerialization: JsonParseException", e);
-		} catch (JsonMappingException e) {
-			logger.error("bsonDeSerialization: JsonMappingException", e);
-		} catch (IOException e) {
-			logger.error("bsonDeSerialization: IOException", e);
-		}
-
-		return clone_of_bob;
-	}
+//	/**
+//	 *
+//	 * @return
+//	 */
+//	public byte[] bsonSerialization() {
+//
+//		// Serialize Data
+//		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//		ObjectMapper mapper = new ObjectMapper(new BsonFactory());
+//		try {
+//			mapper.writeValue(bos, this);
+//		} catch (JsonGenerationException e) {
+//			logger.error("bsonSerialization: JsonGenerationException", e);
+//		} catch (JsonMappingException e) {
+//			logger.error("bsonSerialization: JsonMappingException ", e);
+//		} catch (IOException e) {
+//			logger.error("bsonSerialization: IOException", e);
+//		}
+//		byte[] buf = bos.toByteArray();
+//
+//		return buf;
+//	}
+//
+//	/**
+//	 *
+//	 * @param buf
+//	 * @return
+//	 */
+//	public RootData bsonDeSerialization(byte[] buf, Class<?> myclass) {
+//
+//		ByteArrayInputStream byteInputStream = new ByteArrayInputStream(buf);
+//
+//		Input input = new Input(byteInputStream);
+//
+//		ObjectMapper mapper = new ObjectMapper(new BsonFactory());
+//		// Deserialize Data
+//		RootData clone_of_bob = null;
+//		try {
+//			clone_of_bob = (RootData) mapper.readValue(input, myclass);
+//		} catch (JsonParseException e) {
+//			logger.error("bsonDeSerialization: JsonParseException", e);
+//		} catch (JsonMappingException e) {
+//			logger.error("bsonDeSerialization: JsonMappingException", e);
+//		} catch (IOException e) {
+//			logger.error("bsonDeSerialization: IOException", e);
+//		}
+//
+//		return clone_of_bob;
+//	}
 
 	/**
 	 * Compress a byte array with gzip

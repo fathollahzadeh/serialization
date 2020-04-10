@@ -53,7 +53,7 @@ public interface RootData extends Serializable, Comparable<RootData> {
 
 	byte[] bsonSerialization();
 
-	RootData bsonDeSerialization(byte[] buffData, Class<?> myclass);
+	RootData bsonDeSerialization(byte[] buffData);
 	
 	
 	/**

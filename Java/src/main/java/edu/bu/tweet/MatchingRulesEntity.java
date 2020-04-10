@@ -3,6 +3,10 @@ package edu.bu.tweet;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
+
 import javax.json.*;
 import java.nio.ByteBuffer;
 import java.util.List;
@@ -134,6 +138,49 @@ public class MatchingRulesEntity extends Base implements RootData {
         if (jsonObject.get("id_str") != null && jsonObject.get("id_str") != JsonValue.NULL) {
             this.id_str = jsonObject.getString("id_str");
         }
+
+        return this;
+    }
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+
+        if (this.tag!=null){
+            writer.writeString("tag",this.tag);
+        }
+
+        if (this.id_str!=null){
+            writer.writeString("id_str",this.id_str);
+        }
+
+        writer.writeInt64("id",this.id);
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+        String currentName=reader.readName();
+        if (currentName.equals("tag")){
+            this.tag=reader.readString();
+            currentName=reader.readName();
+        }
+
+        if (currentName.equals("id_str")){
+            this.id_str=reader.readString();
+           reader.readName();
+        }
+
+        this.id=reader.readInt64();
+
+        reader.readEndDocument();
 
         return this;
     }

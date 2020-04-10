@@ -3,6 +3,9 @@ package edu.bu.tweet;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -167,5 +170,48 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
 
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+
+        if (this.title!=null)
+            writer.writeString("title",this.title);
+
+        if (this.description!=null)
+            writer.writeString("description",this.description);
+
+        writer.writeBoolean("embeddable",this.embeddable);
+        writer.writeBoolean("monetizable",this.monetizable);
+
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+        String currentName=reader.readName();
+        if (currentName.equals("title")){
+            this.title=reader.readString();
+            currentName=reader.readName();
+        }
+        if (currentName.equals("description")){
+            this.description=reader.readString();
+            reader.readName();
+        }
+
+        this.embeddable=reader.readBoolean();
+        this.monetizable=reader.readBoolean("monetizable");
+
+        reader.readEndDocument();
+
+        return this;
     }
 }

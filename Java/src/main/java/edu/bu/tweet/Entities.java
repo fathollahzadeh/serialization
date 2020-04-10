@@ -11,6 +11,10 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import org.apache.log4j.Logger;
+import org.bson.BsonBinary;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 
 public class Entities extends Base implements RootData {
@@ -385,5 +389,135 @@ public class Entities extends Base implements RootData {
 			}
 		}
 		return this;
+	}
+
+	public byte[] bsonSerialization() {
+		BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+		BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+		writer.writeStartDocument();
+
+		writer.writeInt32("hashtags_size", this.hashtags.size());
+		writer.writeName("hashtags");
+		writer.writeStartArray();
+		for (HashtagEntity hashtagEntity : this.hashtags) {
+			writer.writeBinaryData(new BsonBinary(hashtagEntity.bsonSerialization()));
+		}
+		writer.writeEndArray();
+
+		writer.writeInt32("media_size", this.media.size());
+		writer.writeName("media");
+		writer.writeStartArray();
+		for (MediaEntity mediaEntity : this.media) {
+			writer.writeBinaryData(new BsonBinary(mediaEntity.bsonSerialization()));
+		}
+		writer.writeEndArray();
+
+		writer.writeInt32("urls_size", this.urls.size());
+		writer.writeName("urls");
+		writer.writeStartArray();
+		for (URLEntity urlEntity : this.urls) {
+			writer.writeBinaryData(new BsonBinary(urlEntity.bsonSerialization()));
+		}
+		writer.writeEndArray();
+
+		writer.writeInt32("user_mentions_size", this.user_mentions.size());
+		writer.writeName("user_mentions");
+		writer.writeStartArray();
+		for (UserMentionEntity userMentionEntity : this.user_mentions) {
+			writer.writeBinaryData(new BsonBinary(userMentionEntity.bsonSerialization()));
+		}
+		writer.writeEndArray();
+
+		writer.writeInt32("symbols_size", this.symbols.size());
+		writer.writeName("symbols");
+		writer.writeStartArray();
+		for (SymbolEntity symbolEntity : this.symbols) {
+			writer.writeBinaryData(new BsonBinary(symbolEntity.bsonSerialization()));
+		}
+		writer.writeEndArray();
+
+		writer.writeInt32("polls_size", this.polls.size());
+		writer.writeName("polls");
+		writer.writeStartArray();
+		for (PollEntity pollEntity : this.polls) {
+			writer.writeBinaryData(new BsonBinary(pollEntity.bsonSerialization()));
+		}
+		writer.writeEndArray();
+
+		writer.writeEndDocument();
+		return outputBuffer.toByteArray();
+	}
+
+	public RootData bsonDeSerialization(byte[] buffData) {
+		ByteBuffer buf = ByteBuffer.wrap(buffData);
+		BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+		reader.readStartDocument();
+
+		int list_size = reader.readInt32("hashtags_size");
+		reader.readName("hashtags");
+		reader.readStartArray();
+		for (int i = 0; i < list_size; i++) {
+			HashtagEntity hashtagEntity = new HashtagEntity();
+			hashtagEntity.bsonDeSerialization(reader.readBinaryData().getData());
+			this.hashtags.add(hashtagEntity);
+		}
+		reader.readEndArray();
+
+		list_size = reader.readInt32("media_size");
+		reader.readName("media");
+		reader.readStartArray();
+		for (int i = 0; i < list_size; i++) {
+			MediaEntity mediaEntity = new MediaEntity();
+			mediaEntity.bsonDeSerialization(reader.readBinaryData().getData());
+			this.media.add(mediaEntity);
+		}
+		reader.readEndArray();
+
+		list_size = reader.readInt32("urls_size");
+		reader.readName("urls");
+		reader.readStartArray();
+		for (int i = 0; i < list_size; i++) {
+			URLEntity urlEntity = new URLEntity();
+			urlEntity.bsonDeSerialization(reader.readBinaryData().getData());
+			this.urls.add(urlEntity);
+		}
+		reader.readEndArray();
+
+		list_size = reader.readInt32("user_mentions_size");
+		reader.readName("user_mentions");
+		reader.readStartArray();
+		for (int i = 0; i < list_size; i++) {
+			UserMentionEntity userMentionEntity = new UserMentionEntity();
+			userMentionEntity.bsonDeSerialization(reader.readBinaryData().getData());
+			this.user_mentions.add(userMentionEntity);
+		}
+		reader.readEndArray();
+
+		list_size = reader.readInt32("symbols_size");
+		reader.readName("symbols");
+		reader.readStartArray();
+		for (int i = 0; i < list_size; i++) {
+			SymbolEntity symbolEntity = new SymbolEntity();
+			symbolEntity.bsonDeSerialization(reader.readBinaryData().getData());
+			this.symbols.add(symbolEntity);
+		}
+		reader.readEndArray();
+
+		list_size = reader.readInt32("polls_size");
+		reader.readName("polls");
+		reader.readStartArray();
+		for (int i = 0; i < list_size; i++) {
+			PollEntity pollEntity = new PollEntity();
+			pollEntity.bsonDeSerialization(reader.readBinaryData().getData());
+			this.polls.add(pollEntity);
+		}
+		reader.readEndArray();
+
+		reader.readEndDocument();
+
+		return this;
+
 	}
 }

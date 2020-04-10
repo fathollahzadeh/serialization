@@ -7,6 +7,9 @@ import javax.json.*;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 public class BoundingBoxCoordinate extends Base implements RootData {
 
@@ -184,6 +187,88 @@ public class BoundingBoxCoordinate extends Base implements RootData {
 				this.coordinates.add(list2);
 			}
 		}
+		return this;
+	}
+
+	public byte[] bsonSerialization() {
+		BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+		BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+		writer.writeStartDocument();
+		if (this.type!=null)
+			writer.writeString("type",this.type);
+
+		writer.writeInt32("coordinates_size",this.coordinates.size());
+		writer.writeName("coordinates");
+		writer.writeStartArray();
+		for (List<List<Double>> list1 : this.coordinates) {
+
+			writer.writeStartDocument();
+			writer.writeInt32("coordinates_list2_size",list1.size());
+			writer.writeName("coordinates_list2");
+			writer.writeStartArray();
+			for (List<Double> list2:list1){
+				writer.writeStartDocument();
+				writer.writeInt32("coordinates_list3_size",list2.size());
+				writer.writeName("coordinates_list3");
+				writer.writeStartArray();
+				for (Double d:list2){
+					writer.writeDouble(d);
+				}
+				writer.writeEndArray();
+				writer.writeEndDocument();
+			}
+			writer.writeEndArray();
+			writer.writeEndDocument();
+		}
+		writer.writeEndArray();
+
+		writer.writeEndDocument();
+
+		return outputBuffer.toByteArray();
+	}
+
+	public RootData bsonDeSerialization(byte[] buffData) {
+		ByteBuffer buf = ByteBuffer.wrap(buffData);
+		BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+		reader.readStartDocument();
+		String currentname=reader.readName();
+		if (currentname.equals("type")){
+			this.type=reader.readString();
+			reader.readName();
+		}
+
+		int coordinates_size=reader.readInt32();
+		reader.readName("coordinates");
+		reader.readStartArray();
+		for (int i = 0; i < coordinates_size; i++) {
+			reader.readStartDocument();
+			List<List<Double>> list1=new ArrayList<>();
+			int coordinates_list2_size=reader.readInt32("coordinates_list2_size");
+			reader.readName("coordinates_list2");
+			reader.readStartArray();
+			for (int j = 0; j < coordinates_list2_size; j++) {
+				reader.readStartDocument();
+				List<Double> list2=new ArrayList<>();
+				int coordinates_list3_size=reader.readInt32("coordinates_list3_size");
+				reader.readName("coordinates_list3");
+				reader.readStartArray();
+				for (int k = 0; k < coordinates_list3_size; k++) {
+					list2.add(reader.readDouble());
+				}
+				reader.readEndArray();
+				list1.add(list2);
+				reader.readEndDocument();
+			}
+			reader.readEndArray();
+
+			this.coordinates.add(list1);
+			reader.readEndDocument();
+		}
+		reader.readEndArray();
+		reader.readEndDocument();
+
 		return this;
 	}
 

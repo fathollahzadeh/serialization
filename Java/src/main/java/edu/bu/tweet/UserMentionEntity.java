@@ -7,6 +7,9 @@ import javax.json.*;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 
 public class UserMentionEntity extends Base implements RootData {
@@ -200,6 +203,71 @@ public class UserMentionEntity extends Base implements RootData {
             this.screen_name = jsonObject.getString("screen_name");
         }
         return  this;
+    }
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+
+        if (this.id_str!=null)
+            writer.writeString("id_str",this.id_str);
+
+        if (this.name!=null)
+            writer.writeString("name",this.name);
+
+        if (this.screen_name!=null)
+            writer.writeString("screen_name",this.screen_name);
+
+        writer.writeInt32("indices_size",this.indices.size());
+        writer.writeName("indices");
+        writer.writeStartArray();
+        for (Integer i : this.indices) {
+            writer.writeInt32(i);
+        }
+        writer.writeEndArray();
+
+        writer.writeInt64("id",this.id);
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+
+        String currentName=reader.readName();
+        if (currentName.equals("id_str")){
+            this.id_str=reader.readString();
+            currentName=reader.readName();
+        }
+
+        if (currentName.equals("name")){
+            this.name=reader.readString();
+            currentName=reader.readName();
+        }
+
+        if (currentName.equals("screen_name")){
+            this.screen_name=reader.readString();
+            reader.readName();
+        }
+
+        int indices_size = reader.readInt32();
+        reader.readName("indices");
+        reader.readStartArray();
+        for (int i = 0; i < indices_size; i++) {
+            this.indices.add(reader.readInt32());
+        }
+        reader.readEndArray();
+
+        this.id=reader.readInt64();
+        reader.readEndDocument();
+
+        return this;
     }
 
     public int compareTo(RootData o) {

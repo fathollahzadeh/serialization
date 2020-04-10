@@ -6,6 +6,9 @@ import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import javax.json.*;
 import org.apache.log4j.Logger;
+import org.bson.BsonBinaryReader;
+import org.bson.BsonBinaryWriter;
+import org.bson.io.BasicOutputBuffer;
 
 
 public class VariantEntity extends Base implements RootData {
@@ -134,6 +137,46 @@ public class VariantEntity extends Base implements RootData {
             this.url = jsonObject.getString("url");
         }
         return  this;
+    }
+    public byte[] bsonSerialization() {
+        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+
+        writer.writeStartDocument();
+
+        if (this.content_type!=null)
+            writer.writeString("content_type",this.content_type);
+
+        if (this.url!=null)
+            writer.writeString("url",this.url);
+
+        writer.writeInt64("bitrate",this.bitrate);
+
+        writer.writeEndDocument();
+
+        return outputBuffer.toByteArray();
+    }
+
+    public RootData bsonDeSerialization(byte[] buffData) {
+        ByteBuffer buf = ByteBuffer.wrap(buffData);
+        BsonBinaryReader reader=new BsonBinaryReader(buf);
+
+        reader.readStartDocument();
+
+        String currentName=reader.readName();
+        if (currentName.equals("content_type")){
+            this.content_type=reader.readString();
+            currentName=reader.readName();
+        }
+
+        if (currentName.equals("url")){
+            this.url=reader.readString();
+            reader.readName();
+        }
+        this.bitrate=reader.readInt64();
+        reader.readEndDocument();
+
+        return this;
     }
     public int compareTo(RootData o) {
         return 0;
