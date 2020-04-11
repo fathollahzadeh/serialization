@@ -62,24 +62,24 @@ dataj5$size <-5000000
 # CPP Results 
 ##################################################################
 # load data for 1M objects read 
-datac1 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_1000000_",1 ,8)
+datac1 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_1000000_",1 ,10)
 datac1$size <-1000000 
 
 # load data for 2M objects read 
-datac2 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_2000000_",1 , 8)
+datac2 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_2000000_",1 , 10)
 datac2$size <-2000000 
 
 
 # load data for 3M objects read 
-datac3 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_3000000_", 1 ,8)
+datac3 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_3000000_", 1 ,10)
 datac3$size <-3000000 
 
 # load data for 4M objects read 
-datac4 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_4000000_",1 , 8)
+datac4 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_4000000_",1 , 10)
 datac4$size <-4000000
 
 # load data for 5M objects read 
-datac5 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_5000000_",1 , 8)
+datac5 = calulateMeanDataTotaltime("data/C_Results/readobjects/result_cpp_readobjects_5000000_",1 , 10)
 datac5$size <-5000000
 
 
@@ -181,9 +181,18 @@ cppBOOST <- subset(data, language="ReadTimeCPP", seq=="false" & method=="BOOST")
 cppBOOSTV <- vector()
 cppBOOSTV <-cppBOOST[['totaltime']]
 
+# C++  BSON  results 
+cppBSONSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="BSON")
+cppBSONSeqV <- vector()
+cppBSONSeqV <-cppBSONSeq[['totaltime']]
 
-plot_colors <- c("red2", "blue1","green4", "saddlebrown","green", "lightseagreen", "deeppink3", "darkorange", "yellow1" , "gray8")
-serialization_methods<-c("Java Default","Java JSON","Java BSON","Java Protocol","Java Kryo","Java ByteBuffer","C++ Boost","C++ Protocol",  "C++ HandCoded", "C++ InPlace")
+cppBSON <- subset(data, language="ReadTimeCPP", seq=="false" & method=="BSON")
+cppBSONV <- vector()
+cppBSONV <-cppBSON[['totaltime']]
+
+
+plot_colors <- c("red2", "blue1","green4", "saddlebrown","green", "lightseagreen", "deeppink3", "darkorange", "yellow1" , "gray8","midnightblue")
+serialization_methods<-c("Java Default","Java JSON","Java BSON","Java Protocol","Java Kryo","Java ByteBuffer","C++ Boost","C++ Protocol",  "C++ HandCoded", "C++ InPlace","C++ BSON")
 
 #################################################
 #######     Plots       #########################
@@ -204,9 +213,9 @@ op <- par(mar = c(3.5,3.5,0,0.1))
 # par(oma=c(0, 0, 0, 0))
 
 x <- c(1000000, 2000000,3000000,4000000,5000000)
-max_y<-14000
+max_y<-1700
 min_y<-0.1
-tick_list=c(min_y,0.3,0.6,1,2,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1300,4000,8000,max_y)
+tick_list=c(min_y,0.3,0.6,1,2,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1200,max_y)
 
 y_labels<- sprintf("%s",tick_list);
 
@@ -244,17 +253,19 @@ lines(cppPROTOBUFSeqV, type="o", pch=8, lty=2, col=plot_colors[8])
 lines(cppHANDCODEDSeqV, type="o", pch=9, lty=2, col=plot_colors[9])
 
 #lines for INPLACE C++ 
-print(cppINPLACESeqV)
 lines(cppINPLACESeqV, type="o", pch=10, lty=2, col=plot_colors[10])
+
+#lines for BSON C++ 
+lines(cppBSONSeqV, type="o", pch=11, lty=2, col=plot_colors[11])
 
 
 #title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
 #title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0),cex=1)
-text(3, 4000, "Sequential", cex=1.3)
+text(3, 8, "Sequential", cex=1.3)
 
 box()
 #par(xpd=TRUE)
-legend(3, 16, serialization_methods, cex=0.65,  col=plot_colors, pch=1:10, lty=2:2);
+#legend(3, 16, serialization_methods, cex=0.65,  col=plot_colors, pch=1:11, lty=2:2);
 ##############################################################
 ##################                   #########################
 ##################      Next Plot    #########################
@@ -305,6 +316,9 @@ lines(cppHANDCODEDV, type="o", pch=9, lty=2, col=plot_colors[9])
 #lines for INPLACE C++ 
 lines(cppINPLACEV, type="o", pch=10, lty=2, col=plot_colors[10])
 
+#lines for BSON C++ 
+lines(cppBSONV, type="o", pch=11, lty=2, col=plot_colors[11])
+
 
 #title(xlab="Number of Objects", col.lab=rgb(0,0.5,0))
 #title(ylab="Total Reading Time (sec) - log ", col.lab=rgb(0,0.5,0))
@@ -314,7 +328,7 @@ mtext("Total Reading Time (sec) - log", outer = TRUE, cex = 1, font=0.7,side=2,f
 mtext("Number of Objects", outer = TRUE, cex = 1, font=0.7,side=1,family="Helvetica" ,line = -1,col=rgb(0,0.5,0))
 # Create box around plot
 box()
-
+legend(3, 3, serialization_methods, cex=0.65,  col=plot_colors, pch=1:11, lty=2:2);
 par(old.par)
 par(xpd=TRUE)
 

@@ -1,13 +1,13 @@
 language#method#seq#datatype#iotime#totaltime
-[ReadTimeJAVA]#Java Default#true#TweetStatus#21.81123143#406.871397129
-[ReadTimeJAVA]#Java Default#false#TweetStatus#1611.860441914#2001.334409352
-[ReadTimeJAVA]#Java Json#true#TweetStatus#10.132630804#477.398446148
-[ReadTimeJAVA]#Java Json#false#TweetStatus#508.024141289#984.835002144
-[ReadTimeJAVA]#Java Bson#true#TweetStatus#58.89845673#3570.957725801
-[ReadTimeJAVA]#Java Bson#false#TweetStatus#1740.86247811#4836.092345934
-[ReadTimeJAVA]#Java ProtoBuf#true#TweetStatus#14.308288067#111.964789873
-[ReadTimeJAVA]#Java ProtoBuf#false#TweetStatus#684.072405942#790.830062267
-[ReadTimeJAVA]#Java Kryo#true#TweetStatus#13.447266632#108.469275192
-[ReadTimeJAVA]#Java Kryo#false#TweetStatus#680.772304462#786.301914582
-[ReadTimeJAVA]#Java Byte Buffer#true#TweetStatus#17.686267535#139.840810796
-[ReadTimeJAVA]#Java Byte Buffer#false#TweetStatus#842.723341751#974.113437412
+[ReadTimeJAVA]#Java Default#true#TweetStatus#137.121683281#489.716934548
+[ReadTimeJAVA]#Java Default#false#TweetStatus#2106.677600482#2490.981637514
+[ReadTimeJAVA]#Java Json#true#TweetStatus#50.850554167#440.861608654
+[ReadTimeJAVA]#Java Json#false#TweetStatus#678.338731559#1100.162199198
+[ReadTimeJAVA]#Java Bson#true#TweetStatus#98.076418017#364.062271617
+[ReadTimeJAVA]#Java Bson#false#TweetStatus#898.759960913#1180.542301474
+[ReadTimeJAVA]#Java ProtoBuf#true#TweetStatus#131.628251883#245.581319031
+[ReadTimeJAVA]#Java ProtoBuf#false#TweetStatus#1062.595587645#1184.565045534
+[ReadTimeJAVA]#Java Kryo#true#TweetStatus#66.620147369#164.33347802
+[ReadTimeJAVA]#Java Kryo#false#TweetStatus#885.110768093#987.398208564
+[ReadTimeJAVA]#Java Byte Buffer#true#TweetStatus#104.311520114#227.17056447
+[ReadTimeJAVA]#Java Byte Buffer#false#TweetStatus#1288.591977788#1409.264272886
