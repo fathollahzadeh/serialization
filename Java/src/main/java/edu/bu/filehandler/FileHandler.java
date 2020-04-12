@@ -3,10 +3,7 @@ package edu.bu.filehandler;
 import com.esotericsoftware.kryo.Kryo;
 import com.google.gson.Gson;
 import edu.bu.tweet.TweetStatus;
-import edu.bu.util.Const;
-import edu.bu.util.SerializationType;
-import edu.bu.util.RootData;
-import edu.bu.util.KryoSinglton;
+import edu.bu.util.*;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -311,7 +308,7 @@ public class FileHandler {
                     buffer = object.protocolBufferWrite();
                     break;
                 case KRYO:
-                    buffer = object.kryoSerialization(KryoSinglton.getInstance().getKryo());
+                    buffer =object.kryoSerialization(KryoSinglton.getInstance().getKryo());
                     break;
                 case BYTEBUFFER:
                     buffer = object.writeByteBuffer();

@@ -32,12 +32,12 @@ public class KryoSinglton {
     	
     	kryo.register(LinkedHashMap.class);
     	
-    	kryo.register(long.class);
-    	kryo.register(Long.class);
-    	kryo.register(Integer.class);
+    	//kryo.register(long.class);
+    	//kryo.register(Long.class);
+    	//kryo.register(Integer.class);
     	kryo.register(ArrayList.class);
 		kryo.register(HashMap.class);
-		kryo.register(double.class);
+//		kryo.register(double.class);
 		kryo.register(double[].class);
 		kryo.register(com.google.gson.internal.LinkedTreeMap.class);
 
