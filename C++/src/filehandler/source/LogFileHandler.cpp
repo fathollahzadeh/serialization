@@ -25,19 +25,19 @@ void LogFileHandler::addLog(int serializationType, bool seq, string datatype, do
     string method="";
     switch (serializationType){
         case 1:
-            method="HANDCODED";
+            method="C++ HandCoded";
             break;
         case 2:
-            method="INPLACE";
+            method="C++ inPlace";
             break;
         case 3:
-            method="BOOST";
+            method="C++ Boost";
             break;
         case 4:
-            method="PROTOBUF";
+            method="C++ ProtoBuf";
             break;
         case 5:
-            method="BSON";
+            method="C++ Bson";
             break;
 
     }
