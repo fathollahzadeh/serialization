@@ -14,7 +14,7 @@ Rscript Experiment_ReadObjects_CPU.R
 
 
 # Sequential and Random read objects for Bar graph
-Rscript Experiment_ReadObjects_Sequential_Bar.R
+#Rscript Experiment_ReadObjects_Sequential_Bar.R
 
-Rscript Experiment_ReadObjects_Random_Bar.R
+#Rscript Experiment_ReadObjects_Random_Bar.R
 

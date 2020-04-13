@@ -144,49 +144,49 @@ javaByteBufferV <-javaByteBuffer[['totaltime']]
 
 
 # C++  HANDCODED  results 
-cppHANDCODEDSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="HANDCODED")
+cppHANDCODEDSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="C++ HandCoded")
 cppHANDCODEDSeqV <- vector()
 cppHANDCODEDSeqV <-cppHANDCODEDSeq[['totaltime']]
 
-cppHANDCODED <- subset(data, language="ReadTimeCPP",seq=="false" & method=="HANDCODED")
+cppHANDCODED <- subset(data, language="ReadTimeCPP",seq=="false" & method=="C++ HandCoded")
 cppHANDCODEDV <- vector()
 cppHANDCODEDV <-cppHANDCODED[['totaltime']]
 
 # C++  PROTOBUF  results 
-cppPROTOBUFSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="PROTOBUF")
+cppPROTOBUFSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="C++ ProtoBuf")
 cppPROTOBUFSeqV <- vector()
 cppPROTOBUFSeqV <-cppPROTOBUFSeq[['totaltime']]
 
-cppPROTOBUF <- subset(data, language="ReadTimeCPP", seq=="false" & method=="PROTOBUF")
+cppPROTOBUF <- subset(data, language="ReadTimeCPP", seq=="false" & method=="C++ ProtoBuf")
 cppPROTOBUFV <- vector()
 cppPROTOBUFV <-cppPROTOBUF[['totaltime']]
 
 
 # C++  INPLACE  results 
-cppINPLACESeq <- subset(data, language="ReadTimeCPP",  seq=="true" & method=="INPLACE")
+cppINPLACESeq <- subset(data, language="ReadTimeCPP",  seq=="true" & method=="C++ inPlace")
 cppINPLACESeqV <- vector()
 cppINPLACESeqV <- cppINPLACESeq[['totaltime']]
 
-cppINPLACE <- subset(data, language="ReadTimeCPP", seq=="false" & method=="INPLACE")
+cppINPLACE <- subset(data, language="ReadTimeCPP", seq=="false" & method=="C++ inPlace")
 cppINPLACEV <- vector()
 cppINPLACEV <-cppINPLACE[['totaltime']]
 
 
 # C++  BOOST  results 
-cppBOOSTSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="BOOST")
+cppBOOSTSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="C++ Boost")
 cppBOOSTSeqV <- vector()
 cppBOOSTSeqV <-cppBOOSTSeq[['totaltime']]
 
-cppBOOST <- subset(data, language="ReadTimeCPP", seq=="false" & method=="BOOST")
+cppBOOST <- subset(data, language="ReadTimeCPP", seq=="false" & method=="C++ Boost")
 cppBOOSTV <- vector()
 cppBOOSTV <-cppBOOST[['totaltime']]
 
 # C++  BSON  results 
-cppBSONSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="BSON")
+cppBSONSeq <- subset(data, language="ReadTimeCPP", seq=="true" & method=="C++ Bson")
 cppBSONSeqV <- vector()
 cppBSONSeqV <-cppBSONSeq[['totaltime']]
 
-cppBSON <- subset(data, language="ReadTimeCPP", seq=="false" & method=="BSON")
+cppBSON <- subset(data, language="ReadTimeCPP", seq=="false" & method=="C++ Bson")
 cppBSONV <- vector()
 cppBSONV <-cppBSON[['totaltime']]
 
@@ -328,7 +328,7 @@ mtext("Total Reading Time (sec) - log", outer = TRUE, cex = 1, font=0.7,side=2,f
 mtext("Number of Objects", outer = TRUE, cex = 1, font=0.7,side=1,family="Helvetica" ,line = -1,col=rgb(0,0.5,0))
 # Create box around plot
 box()
-legend(3, 3, serialization_methods, cex=0.65,  col=plot_colors, pch=1:11, lty=2:2);
+legend(3, 2, serialization_methods, cex=0.65,  col=plot_colors, pch=1:11, lty=2:2);
 par(old.par)
 par(xpd=TRUE)
 
