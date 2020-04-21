@@ -1,39 +1,68 @@
 library(plyr)
 require(stats)
 
+datajo <- read.delim("data/Java_Results/readobjects/result_java_readobjects_5000000_1.txt", header=TRUE, sep="#")
+dataco <- read.delim("data/C_Results/readobjects/result_cpp_readobjects_5000000_1.txt", header=TRUE, sep="#")
 
 
-datajo <- read.delim("data/Java_Results/readobjects/result_java_readobjects_4000000_1.txt", header=TRUE, sep="#")
-dataco <- read.delim("data/C_Results/readobjects/result_cpp_readobjects_4000000_1.txt", header=TRUE, sep="#")
-
-
-dataj <- subset(datajo,seq=="false" & taskset=="true" & datatype=="TweetStatus")
-datac <- subset(dataco,seq=="false" & taskset=="true" & datatype=="TweetStatus")
+dataj <- subset(datajo,seq=="false"  & datatype=="TweetStatus")
+datac <- subset(dataco,seq=="false" & datatype=="TweetStatus")
 
 
 data <- rbind(datac,dataj)
 
+javaDefault <- subset(data, method=="Java Default")
+javaJson <- subset(data, method=="Java Json")
+javaBson <- subset(data, method=="Java Bson")
+javaKryo <- subset(data, method=="Java Kryo")
+javaByteBuffer <- subset(data, method=="Java Byte Buffer")
+javaProtoBuf <- subset(data, method=="Java ProtoBuf")
+cppHandCoded <- subset(data, method=="C++ HandCoded")
+cppInPlace <- subset(data, method=="C++ inPlace")
+cppBoost <- subset(data, method=="C++ Boost")
+cppProtoBuf <- subset(data, method=="C++ ProtoBuf")
+cppBson <- subset(data, method=="C++ Bson")
+
+data <- rbind(cppHandCoded,cppInPlace,cppBoost,cppProtoBuf,cppBson,javaDefault,javaJson,javaBson,javaKryo,javaByteBuffer,javaProtoBuf)
+
+datatasksettrue<-subset(data, taskset=="true")
+datatasksetfalse<-subset(data, taskset=="false")
 
 #print(data)
 
+#xlabel<-data$method
+#xlabel<-xlabel[duplicated(xlabel),]
+#xlabel<-data$method
+#xlabel<-distinct(xlabel)
+#print(xlabel)
+
 #colors=c("darkblue", "green4") 
-colors=c("gray83", "gray95") 
+colorstasksettrue=c("Misty Rose", "Snow") 
+colorstasksetfalse=c("darkseagreen1", "Honeydew") 
 
+regionscolors<-c(colorstasksettrue[1],colorstasksettrue[2],colorstasksetfalse[1],colorstasksetfalse[2])
 
-totaltime <- data$totaltime/60
-iotime <- data$iotime/60
-cputime <- totaltime - iotime
+totaltimetasksettrue <- datatasksettrue$totaltime/60
+iotimetasksettrue <- datatasksettrue$iotime/60
+cputimetasksettrue <- totaltimetasksettrue - iotimetasksettrue
+
+totaltimetasksetfalse <- datatasksetfalse$totaltime/60
+iotimetasksetfalse <- datatasksetfalse$iotime/60
+cputimetasksetfalse <- totaltimetasksetfalse - iotimetasksetfalse
+
 #print("--------------------------")
 #print(totaltime)
 
-values <- matrix( c(iotime, cputime), nrow = 2, ncol = 11, byrow = TRUE)
+valuestasksettrue <- matrix( c(iotimetasksettrue, cputimetasksettrue), nrow = 2, ncol = 11, byrow = TRUE)
+valuestasksetfalse <- matrix( c(iotimetasksetfalse, cputimetasksetfalse), nrow = 2, ncol = 11, byrow = TRUE)
 #values <- matrix(c(iotime, cputime), nrow = 2, ncol = 4, byrow = TRUE)
 #values <- matrix(c(iotime, cputime))
 
 #print(values)
 
-regions <- c("IO Time", "CPU Time")
-xnames = data$method#c("C++ HandCoded", "C++ InPlace","C++ Boost","C++ Protocol","C++ BSON","Java Default","Java JSON","Java BSON","Java Protocol","Java Kryo","Java ByteBuffer")
+regions <- c("IO Time(taskset true)", "CPU Time(taskset true)","IO Time(taskset false)", "CPU Time(taskset false)")
+xnamestasksettrue = datatasksettrue$method
+xnamestasksetfalse = datatasksetfalse$method
 
 
 #################################################
@@ -41,76 +70,42 @@ xnames = data$method#c("C++ HandCoded", "C++ InPlace","C++ Boost","C++ Protocol"
 #################################################
 pdf(file='Experiment_ReadObjects_Random_Bar_TaskSet.pdf', family="Helvetica")
 
-old.par<-par(mfrow=c(1, 2), oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
-par(mar = c(5, 2.5, 1, 0) + 0.1) 
+#old.par<-par(mfrow=c(1, 2), oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
+old.par<-par( oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
+par(mar = c(4.5, 3.5, 1, 0) + 0.1) 
 
-max_y<-max(totaltime)
+max_y<-max(totaltimetasksettrue,totaltimetasksetfalse)
 max_y<-max_y+max_y*0.1;
-min_y<-min(totaltime)/3 #max(min(totaltime)-min(totaltime)/2,50)
+min_y<-min(totaltimetasksettrue,totaltimetasksetfalse)/3 
 
-p1 <- barplot(values, log="y", col=colors, ylim = c(min_y,  max(totaltime,na.rm = TRUE)+max_y/2.5), legend.text=TRUE, axes=FALSE)
+# draw bar plots
+p1 <- barplot(valuestasksettrue, log="y", col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y/2.5), legend.text=TRUE, axes=FALSE,border ="gray" , space=c(0.2,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5))
 
+p2 <- barplot(valuestasksetfalse, log="y", col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y/2.5), add=T,border ="gray", space=c(1.4,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5),axes=FALSE)
+
+p<-rbind(p1,p2)
+
+# write y labels:
+totaltime<-rbind(totaltimetasksettrue,totaltimetasksetfalse)
 z<-totaltime[sort.list(totaltime)]
-z <-c(min_y,z[c(-2,-3,-7)],max_y)
-
+z <-c(min_y,z[c(-3,-4,-5,-7,-8,-9,-12,-13,-14,-17,-18)],max_y)
 axis(2, las=1, at = z, labels=round(z, digits=0),  cex.axis = 0.7, font = 1)
 
-text(x=p1, y=totaltime+totaltime*0.12, font = 2, font.lab = 2, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.7,srt=90)
+#write data inside of bar plots
+iotime<-rbind(iotimetasksettrue,iotimetasksetfalse)
+cputime<-rbind(cputimetasksettrue,cputimetasksetfalse)
 
+text(x=p, y=totaltime+totaltime*0.1, font = 2, font.lab = 2, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.7,srt=90)
 
-#text(x=p1[c(-1,-2)], y=totaltime[c(-1,-2)]-totaltime[c(-1,-2)]*0.18, font = 1, font.lab = 2, labels=round(cputime[c(-1,-2)], 1), pos=3, xpd=NA, cex=0.6,srt=90)
-text(x=p1, y=iotime-iotime*0.18, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.6,srt=90)
+text(x=p[c(-1,-2,-3,-4)]+0.2, y=totaltime[c(-1,-2,-3,-4)]-totaltime[c(-1,-2,-3,-4)]*0.15, font = 1, font.lab = 2, labels=round(cputime[c(-1,-2,-3,-4)], 1), pos=3, xpd=NA, cex=0.6,srt=90)
+text(x=p+0.2, y=iotime-iotime*0.18, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.6,srt=90)
 box()
-text(x=p1+0.1,  y=min_y-min_y/3, xnames, xpd=NA, srt=90, pos=3,  cex=0.6)
-title(xlab = "Task Set is True",  cex.lab = 0.9, line = 4, cex=0.9, font=2)
 
-##############################################################
-##################                   #########################
-##################      Next Bar     #########################
-##################                   #########################
-##############################################################
+lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
+text(x=(p1+p2)/2-2,  y=min_y-min_y/3.4, xnamestasksettrue, xpd=NA, srt=45, pos=3, font=1, cex=0.7)
 
-dataj <- subset(datajo,seq=="false" & taskset=="false" & datatype=="TweetStatus")
-datac <- subset(dataco,seq=="false" & taskset=="false" & datatype=="TweetStatus")
-
-
-data <- rbind(datac,dataj)
-
-totaltime <- data$totaltime/60
-iotime <- data$iotime/60
-cputime <- totaltime - iotime
-#print("--------------------------")
-#print(totaltime)
-
-values <- matrix( c(iotime, cputime), nrow = 2, ncol = 11, byrow = TRUE)
-
-max_y<-max(totaltime)
-max_y<-max_y+max_y*0.1;
-min_y<-min(totaltime)/3 #max(min(totaltime)-min(totaltime)/2,50)
-#tick_list=c(min_y,0.3,0.6,1,2,3, 8,15, 25, 45,  80, 110, 200,370,570,800,1200,max_y)
-
-
-p1 <- barplot(values, log="y", col=colors, ylim = c(min_y,  max(totaltime,na.rm = TRUE)+max_y/2), legend.text=TRUE, axes=FALSE)
-
-z<-totaltime[sort.list(totaltime)]
-z <-c(min_y,z[c(-2,-3,-9)],max_y)
-
-axis(2, las=1, at = z, labels=round(z, digits=0),  cex.axis = 0.7, font = 1)
-#labs <- paste(min_y,names(totaltime), xnames)
-
-
-text(x=p1, y=totaltime+totaltime*0.1, font = 2, font.lab = 2, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.7,srt=90)
-
-#text(x=p1[c(-1,-2)], y=totaltime[c(-1,-2)]-totaltime[c(-1,-2)]*0.18, font = 1, font.lab = 2, labels=round(cputime[c(-1,-2)], 1), pos=3, xpd=NA, cex=0.6,srt=90)
-text(x=p1, y=iotime-iotime*0.18, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.6,srt=90)
-
-text(x=p1+0.1,  y=min_y-min_y/3, xnames, xpd=NA, srt=90, pos=3,  cex=0.6)
-
-box()
-legend("topright", regions, cex = 0.8, fill = colors)
-#title(ylab = "Time (second)- log",  cex.lab = 1.2, line = 3.5, cex=1, font=2)
-title(xlab = "Task Set is False",  cex.lab = 0.9, line = 4, cex=0.9, font=2)
+legend("topleft", regions, cex = 0.8, fill = regionscolors)
 
 mtext("Total Reading Time (minut) - log", outer = TRUE, cex = 1, font=0.7,side=2,family="Helvetica",line = -0.1, col=rgb(0,0.5,0) )
-mtext("Random Read Objects for 4M Tweets", outer = TRUE, cex = 1, font=0.7,side=1,family="Helvetica" ,line = -0.1,col=rgb(0,0.5,0))
+mtext("Random Read Objects for 5M Tweets", outer = TRUE, cex = 1, font=0.7,side=1,family="Helvetica" ,line = -0.1,col=rgb(0,0.5,0))
 
