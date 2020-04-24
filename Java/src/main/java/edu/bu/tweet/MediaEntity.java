@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.MatchingRulesEntityFBS;
 import edu.bu.tweet.flatbuffers.MediaEntityFBS;
 import edu.bu.tweet.flatbuffers.URLEntityFBS;
@@ -587,5 +588,28 @@ public class MediaEntity extends Base implements RootData {
 
         int orc = MediaEntityFBS.endMediaEntityFBS(builder);
         return orc;
+    }
+    public MediaEntity flatBuffersDeserialization(MediaEntityFBS mediaEntityFBS) {
+
+        this.display_url=mediaEntityFBS.displayUrl();
+        this.expanded_url=mediaEntityFBS.expandedUrl();
+        this.id=mediaEntityFBS.id();
+        for (int i=0;i<mediaEntityFBS.indicesLength();i++){
+            this.indices.add(mediaEntityFBS.indices(i));
+        }
+        this.media_url=mediaEntityFBS.mediaUrl();
+        this.media_url_https=mediaEntityFBS.mediaUrlHttps();
+        this.sizes=new MediaSizesEntity();
+        this.sizes.flatBuffersDeserialization(mediaEntityFBS.sizes());
+        this.type=mediaEntityFBS.type();
+        this.source_status_id=mediaEntityFBS.sourceStatusId();
+        this.source_status_id_str=mediaEntityFBS.sourceStatusIdStr();
+        this.url=mediaEntityFBS.url();
+        this.video_info=new VideoEntity();
+        this.video_info.flatBuffersDeserialization(mediaEntityFBS.videoInfo());
+        this.additional_media_info=new AdditionalMediaInfoEntity();
+        this.additional_media_info.flatBuffersDeserialization(mediaEntityFBS.additionalMediaInfo());
+
+        return this;
     }
 }

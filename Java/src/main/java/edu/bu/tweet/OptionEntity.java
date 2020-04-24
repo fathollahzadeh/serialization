@@ -1,6 +1,7 @@
 package edu.bu.tweet;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.MediaSizesEntityFBS;
 import edu.bu.tweet.flatbuffers.OptionEntityFBS;
 import edu.bu.util.Base;
@@ -166,5 +167,11 @@ public class OptionEntity extends Base implements RootData {
 
         int orc = OptionEntityFBS.endOptionEntityFBS(builder);
         return orc;
+    }
+    public OptionEntity flatBuffersDeserialization(OptionEntityFBS optionEntityFBS) {
+
+        this.position=optionEntityFBS.position();
+        this.text=optionEntityFBS.text();
+        return this;
     }
 }

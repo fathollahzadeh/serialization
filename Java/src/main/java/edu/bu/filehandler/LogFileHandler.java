@@ -39,6 +39,9 @@ public class LogFileHandler {
             case 6:
                 method = "Java Byte Buffer";
                 break;
+            case 7:
+                method = "Java FlatBuffers";
+                break;
         }
         String seqString="true";
         if (!seq)

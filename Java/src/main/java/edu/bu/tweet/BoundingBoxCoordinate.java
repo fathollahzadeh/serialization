@@ -305,6 +305,13 @@ public class BoundingBoxCoordinate extends Base implements RootData {
 		int orc = BoundingBoxCoordinateFBS.endBoundingBoxCoordinateFBS(builder);
 		return orc;
 	}
+	public BoundingBoxCoordinate flatBuffersDeserialization(BoundingBoxCoordinateFBS boundingBoxCoordinateFBS) {
+
+		this.type=boundingBoxCoordinateFBS.type();
+		//TODO
+		//this.coordinates=boundingBoxCoordinateFBS.;
+		return this;
+	}
 	public int compareTo(RootData o) {
 		return 0;
 	}

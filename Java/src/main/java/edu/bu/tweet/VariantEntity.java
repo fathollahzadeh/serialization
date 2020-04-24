@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 import java.util.List;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.UserMentionEntityFBS;
 import edu.bu.tweet.flatbuffers.VariantEntityFBS;
 import edu.bu.util.Base;
@@ -202,6 +203,13 @@ public class VariantEntity extends Base implements RootData {
 
         int orc = VariantEntityFBS.endVariantEntityFBS(builder);
         return orc;
+    }
+    public VariantEntity flatBuffersDeserialization(VariantEntityFBS variantEntityFBS) {
+
+        this.bitrate=variantEntityFBS.bitrate();
+        this.content_type=variantEntityFBS.contentType();
+        this.url=variantEntityFBS.url();
+        return this;
     }
 }
 

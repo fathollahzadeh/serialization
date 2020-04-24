@@ -54,13 +54,7 @@ public interface RootData extends Serializable, Comparable<RootData> {
 	byte[] bsonSerialization();
 
 	RootData bsonDeSerialization(byte[] buffData);
-	
-	
-	/**
-	 * Convert this object to JSON object using Google gson 
-	 * We convert the text to byte array and return.  
-	 * @return
-	 */
+
 	public byte[] gsonSerialization(); 
 	
 	/**
@@ -71,6 +65,7 @@ public interface RootData extends Serializable, Comparable<RootData> {
 	public TweetStatus gsonDeSerialization(byte[] buff); 	
 	
 	String toString();
+
 
 
 }

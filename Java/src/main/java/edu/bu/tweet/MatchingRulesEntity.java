@@ -1,6 +1,7 @@
 package edu.bu.tweet;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.HashtagEntityFBS;
 import edu.bu.tweet.flatbuffers.MatchingRulesEntityFBS;
 import edu.bu.util.Base;
@@ -200,5 +201,12 @@ public class MatchingRulesEntity extends Base implements RootData {
         MatchingRulesEntityFBS.addIdStr(builder, id_strBuilder);
         int orc = MatchingRulesEntityFBS.endMatchingRulesEntityFBS(builder);
         return orc;
+    }
+    public MatchingRulesEntity flatBuffersDeserialization(MatchingRulesEntityFBS matchingRulesEntityFBS) {
+
+        this.tag=matchingRulesEntityFBS.tag();
+        this.id=matchingRulesEntityFBS.id();
+        this.id_str=matchingRulesEntityFBS.idStr();
+        return this;
     }
 }

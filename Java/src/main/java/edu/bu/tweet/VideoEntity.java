@@ -1,6 +1,7 @@
 package edu.bu.tweet;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.URLEntityFBS;
 import edu.bu.tweet.flatbuffers.VariantEntityFBS;
 import edu.bu.tweet.flatbuffers.VideoEntityFBS;
@@ -267,5 +268,21 @@ public class VideoEntity extends Base implements RootData {
         VideoEntityFBS.addVariants(builder,variantsBuilder);
         int orc = VideoEntityFBS.endVideoEntityFBS(builder);
         return orc;
+    }
+    public VideoEntity flatBuffersDeserialization(VideoEntityFBS videoEntityFBS) {
+
+        for (int i=0;i<videoEntityFBS.aspectRatioLength();i++){
+            this.aspect_ratio.add(videoEntityFBS.aspectRatio(i));
+        }
+
+        this.duration_millis=videoEntityFBS.durationMillis();
+
+        for (int i=0;i<videoEntityFBS.variantsLength();i++){
+            VariantEntity variantEntity=new VariantEntity();
+            variantEntity.flatBuffersDeserialization(videoEntityFBS.variants(i));
+            this.variants.add(variantEntity);
+        }
+
+        return this;
     }
 }

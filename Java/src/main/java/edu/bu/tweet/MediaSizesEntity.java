@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 import java.util.List;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.MediaEntityFBS;
 import edu.bu.tweet.flatbuffers.MediaSizesEntityFBS;
 import edu.bu.util.Base;
@@ -275,6 +276,28 @@ public class MediaSizesEntity extends Base implements RootData {
         MediaSizesEntityFBS.addSmall(builder, smallBuilder);
         int orc = MediaSizesEntityFBS.endMediaSizesEntityFBS(builder);
         return orc;
+    }
+    public MediaSizesEntity flatBuffersDeserialization(MediaSizesEntityFBS mediaSizesEntityFBS) {
+
+        if (mediaSizesEntityFBS.thumb()!=null){
+            this.thumb=new SizeEntity();
+            this.thumb.flatBuffersDeserialization(mediaSizesEntityFBS.thumb());
+        }
+        if (mediaSizesEntityFBS.large()!=null){
+            this.large=new SizeEntity();
+            this.large.flatBuffersDeserialization(mediaSizesEntityFBS.large());
+        }
+
+        if (mediaSizesEntityFBS.medium()!=null){
+            this.medium=new SizeEntity();
+            this.medium.flatBuffersDeserialization(mediaSizesEntityFBS.medium());
+        }
+
+        if (mediaSizesEntityFBS.small()!=null){
+            this.small=new SizeEntity();
+            this.small.flatBuffersDeserialization(mediaSizesEntityFBS.small());
+        }
+        return this;
     }
 }
 

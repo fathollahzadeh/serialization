@@ -232,4 +232,12 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
         int orc = AdditionalMediaInfoEntityFBS.endAdditionalMediaInfoEntityFBS(builder);
         return orc;
     }
+    public AdditionalMediaInfoEntity flatBuffersDeserialization(AdditionalMediaInfoEntityFBS additionalMediaInfoEntityFBS) {
+
+        this.title=additionalMediaInfoEntityFBS.title();
+        this.description=additionalMediaInfoEntityFBS.description();
+        this.embeddable=additionalMediaInfoEntityFBS.embeddable();
+        this.monetizable=additionalMediaInfoEntityFBS.monetizable();
+        return this;
+    }
 }

@@ -12,6 +12,7 @@ import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.CoordinatesFBS;
 import edu.bu.tweet.flatbuffers.URLEntityFBS;
 import edu.bu.tweet.flatbuffers.UserFBS;
@@ -168,14 +169,14 @@ public class Coordinates extends Base implements RootData {
         if (this.type != null)
             writer.writeString("type", this.type);
 
-        writer.writeInt32("coordinates_size",this.coordinates.length);
+        writer.writeInt32("coordinates_size", this.coordinates.length);
 
-		writer.writeName("coordinates");
-		writer.writeStartArray();
-		for (Double d : this.coordinates) {
-			writer.writeDouble(d);
-		}
-		writer.writeEndArray();
+        writer.writeName("coordinates");
+        writer.writeStartArray();
+        for (Double d : this.coordinates) {
+            writer.writeDouble(d);
+        }
+        writer.writeEndArray();
 
         writer.writeEndDocument();
 
@@ -189,20 +190,20 @@ public class Coordinates extends Base implements RootData {
 
         reader.readStartDocument();
 
-        String currentName=reader.readName();
-        if (currentName.equals("type")){
-        	this.type=reader.readString();
-        	reader.readName();
-		}
+        String currentName = reader.readName();
+        if (currentName.equals("type")) {
+            this.type = reader.readString();
+            reader.readName();
+        }
 
-        int coordinates_size=reader.readInt32();
-		this.coordinates=new double[coordinates_size];
-		reader.readName("coordinates");
-		reader.readStartArray();
-		for (int i = 0; i < coordinates_size; i++) {
-			this.coordinates[i]=reader.readDouble();
-		}
-		reader.readEndArray();
+        int coordinates_size = reader.readInt32();
+        this.coordinates = new double[coordinates_size];
+        reader.readName("coordinates");
+        reader.readStartArray();
+        for (int i = 0; i < coordinates_size; i++) {
+            this.coordinates[i] = reader.readDouble();
+        }
+        reader.readEndArray();
 
         reader.readEndDocument();
 
@@ -211,13 +212,23 @@ public class Coordinates extends Base implements RootData {
 
     public int flatBuffersWriter(FlatBufferBuilder builder) {
 
-        int typeBuilder=this.type!=null? builder.createString(this.type):0;
-        int coordinatesBuilder=CoordinatesFBS.createCoordinatesVector(builder,this.coordinates);
+        int typeBuilder = this.type != null ? builder.createString(this.type) : 0;
+        int coordinatesBuilder = CoordinatesFBS.createCoordinatesVector(builder, this.coordinates);
 
         CoordinatesFBS.startCoordinatesFBS(builder);
         CoordinatesFBS.addType(builder, typeBuilder);
         CoordinatesFBS.addCoordinates(builder, coordinatesBuilder);
         int orc = CoordinatesFBS.endCoordinatesFBS(builder);
         return orc;
+    }
+
+    public Coordinates flatBuffersDeserialization(CoordinatesFBS coordinatesFBS) {
+
+        this.type = coordinatesFBS.type();
+        this.coordinates = new double[coordinatesFBS.coordinatesLength()];
+        for (int i = 0; i < coordinatesFBS.coordinatesLength(); i++)
+            this.coordinates[i] = coordinatesFBS.coordinates(i);
+
+        return this;
     }
 }

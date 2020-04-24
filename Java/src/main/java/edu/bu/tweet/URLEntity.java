@@ -6,10 +6,7 @@ import java.util.List;
 import javax.json.*;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import edu.bu.tweet.flatbuffers.CoordinatesFBS;
-import edu.bu.tweet.flatbuffers.TweetStatusFBS;
-import edu.bu.tweet.flatbuffers.URLEntityFBS;
-import edu.bu.tweet.flatbuffers.UserFBS;
+import edu.bu.tweet.flatbuffers.*;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
@@ -279,5 +276,15 @@ public class URLEntity extends Base implements RootData {
 
         int orc = URLEntityFBS.endURLEntityFBS(builder);
         return orc;
+    }
+    public URLEntity flatBuffersDeserialization(URLEntityFBS urlEntityFBS) {
+
+        for (int i=0;i<urlEntityFBS.indicesLength();i++){
+            this.indices.add(urlEntityFBS.indices(i));
+        }
+        this.display_url=urlEntityFBS.displayUrl();
+        this.expanded_url=urlEntityFBS.expandedUrl();
+        this.url=urlEntityFBS.url();
+        return this;
     }
 }

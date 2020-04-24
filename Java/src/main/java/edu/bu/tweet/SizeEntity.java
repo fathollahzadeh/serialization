@@ -5,6 +5,7 @@ import java.util.List;
 import javax.json.*;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.PollEntityFBS;
 import edu.bu.tweet.flatbuffers.SizeEntityFBS;
 import org.apache.log4j.Logger;
@@ -182,6 +183,13 @@ public class SizeEntity extends Base implements RootData {
         SizeEntityFBS.addResize(builder, resizeBuilder);
         int orc = SizeEntityFBS.endSizeEntityFBS(builder);
         return orc;
+    }
+    public SizeEntity flatBuffersDeserialization(SizeEntityFBS sizeEntityFBS) {
+
+        this.width=sizeEntityFBS.width();
+        this.height=sizeEntityFBS.height();
+        this.resize=sizeEntityFBS.resize();
+        return this;
     }
 }
 

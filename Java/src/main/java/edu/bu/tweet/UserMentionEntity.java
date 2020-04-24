@@ -6,6 +6,7 @@ import java.util.List;
 import javax.json.*;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.SymbolEntityFBS;
 import edu.bu.tweet.flatbuffers.URLEntityFBS;
 import edu.bu.tweet.flatbuffers.UserMentionEntityFBS;
@@ -299,5 +300,16 @@ public class UserMentionEntity extends Base implements RootData {
         UserMentionEntityFBS.addScreenName(builder, screen_nameBuilder);
         int orc = UserMentionEntityFBS.endUserMentionEntityFBS(builder);
         return orc;
+    }
+    public UserMentionEntity flatBuffersDeserialization(UserMentionEntityFBS userMentionEntityFBS) {
+
+        this.id=userMentionEntityFBS.id();
+        this.id_str=userMentionEntityFBS.idStr();
+        for (int i=0;i<userMentionEntityFBS.indicesLength();i++){
+            this.indices.add(userMentionEntityFBS.indices(i));
+        }
+        this.name=userMentionEntityFBS.name();
+        this.screen_name=userMentionEntityFBS.screenName();
+        return this;
     }
 }

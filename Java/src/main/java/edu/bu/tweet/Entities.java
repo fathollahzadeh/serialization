@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import edu.bu.tweet.flatbuffers.BoundingBoxCoordinateFBS;
-import edu.bu.tweet.flatbuffers.EntitiesFBS;
-import edu.bu.tweet.flatbuffers.HashtagEntityFBS;
-import edu.bu.tweet.flatbuffers.UserFBS;
+import edu.bu.tweet.flatbuffers.*;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import javax.json.Json;
@@ -589,5 +586,43 @@ public class Entities extends Base implements RootData {
 
 		int orc = EntitiesFBS.endEntitiesFBS(builder);
 		return orc;
+	}
+	public Entities flatBuffersDeserialization(EntitiesFBS entitiesFBS) {
+
+		for (int i=0;i<entitiesFBS.hashtagsLength();i++){
+			HashtagEntity hashtagEntity=new HashtagEntity();
+			hashtagEntity.flatBuffersDeserialization(entitiesFBS.hashtags(i));
+			this.hashtags.add(hashtagEntity);
+		}
+		for (int i=0;i<entitiesFBS.mediaLength();i++){
+			MediaEntity mediaEntity=new MediaEntity();
+			mediaEntity.flatBuffersDeserialization(entitiesFBS.media(i));
+			this.media.add(mediaEntity);
+		}
+
+		for (int i=0;i<entitiesFBS.urlsLength();i++){
+			URLEntity urlEntity=new URLEntity();
+			urlEntity.flatBuffersDeserialization(entitiesFBS.urls(i));
+			this.urls.add(urlEntity);
+		}
+
+		for (int i=0;i<entitiesFBS.userMentionsLength();i++){
+			UserMentionEntity userMentionEntity=new UserMentionEntity();
+			userMentionEntity.flatBuffersDeserialization(entitiesFBS.userMentions(i));
+			this.user_mentions.add(userMentionEntity);
+		}
+
+		for (int i=0;i<entitiesFBS.symbolsLength();i++){
+			SymbolEntity symbolEntity=new SymbolEntity();
+			symbolEntity.flatBuffersDeserialization(entitiesFBS.symbols(i));
+			this.symbols.add(symbolEntity);
+		}
+
+		for (int i=0;i<entitiesFBS.pollsLength();i++){
+			PollEntity pollEntity=new PollEntity();
+			pollEntity.flatBuffersDeserialization(entitiesFBS.polls(i));
+			this.polls.add(pollEntity);
+		}
+		return this;
 	}
 }

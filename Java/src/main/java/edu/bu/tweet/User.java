@@ -1208,4 +1208,53 @@ public class User extends Base implements RootData {
         int orc = UserFBS.endUserFBS(builder);
         return orc;
     }
+    public User flatBuffersDeserialization(UserFBS userFBS) {
+        this.id=userFBS.id();
+        this.name=userFBS.name();
+        this.screen_name=userFBS.screenName();
+        this.location=userFBS.location();
+        this.url=userFBS.url();
+        this.description=userFBS.description();
+        this.isProtected=userFBS.isProtected();
+        this.verified=userFBS.verified();
+        this.followers_count=userFBS.followersCount();
+        this.friends_count=userFBS.friendsCount();
+        this.listed_count=userFBS.listedCount();
+        this.favourites_count=userFBS.favouritesCount();
+        this.statuses_count=userFBS.statusesCount();
+        this.created_at=userFBS.createdAt();
+        this.profile_banner_url=userFBS.profileBannerUrl();
+        this.profile_image_url_https=userFBS.profileImageUrlHttps();
+        this.default_profile=userFBS.defaultProfile();
+        for (int i=0;i<userFBS.withheldInCountriesLength();i++) {
+            this.withheld_in_countries.add(userFBS.withheldInCountries(i));
+        }
+        this.withheld_scope=userFBS.withheldScope();
+
+        for (int i=0;i<userFBS.descriptionURLEntitiesLength();i++){
+            URLEntity urlEntity=new URLEntity();
+            urlEntity.flatBuffersDeserialization(userFBS.descriptionURLEntities(i));
+            this.descriptionURLEntities.add(urlEntity);
+        }
+
+        this.geo_enabled=userFBS.geoEnabled();
+        this.lang=userFBS.lang();
+        this.contributors_enabled=userFBS.contributorsEnabled();
+        this.profile_background_color=userFBS.profileBackgroundColor();
+        this.profile_background_image_url=userFBS.profileBackgroundImageUrl();
+        this.profile_background_image_url_https=userFBS.profileBackgroundImageUrlHttps();
+        this.profile_background_tile=userFBS.profileBackgroundTile();
+        this.profile_image_url=userFBS.profileImageUrl();
+        this.profile_link_color=userFBS.profileLinkColor();
+        this.profile_sidebar_border_color=userFBS.profileSidebarBorderColor();
+        this.profile_sidebar_fill_color=userFBS.profileSidebarFillColor();
+        this.profile_text_color=userFBS.profileTextColor();
+        this.profile_use_background_image=userFBS.profileUseBackgroundImage();
+        this.utc_offset=userFBS.utcOffset();
+        this.time_zone=userFBS.timeZone();
+        this.is_translator=userFBS.isTranslator();
+        this.follow_request_sent=userFBS.followRequestSent();
+        this.showAllInlineMedia=userFBS.showAllInlineMedia();
+        return this;
+    }
 }

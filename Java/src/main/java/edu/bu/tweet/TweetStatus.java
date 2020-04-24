@@ -74,6 +74,9 @@ public class TweetStatus extends Base implements RootData {
     private List<String> withheld_in_countries;//nullable
     private String withheld_scope;//nullable
 
+    private TweetStatusFBS tweetStatusFBS;
+    private TweetStatusProtos.TweetStatusP tweetStatusP;
+
     public TweetStatus() {
         in_reply_to_status_id = -999;
         in_reply_to_user_id = -999;
@@ -86,6 +89,8 @@ public class TweetStatus extends Base implements RootData {
         withheld_in_countries = new ArrayList<String>();
         matching_rules = new ArrayList<>();
         scopes = new HashMap<>();
+        this.tweetStatusFBS=null;
+        this.tweetStatusP=null;
 
     }
 
@@ -613,7 +618,12 @@ public class TweetStatus extends Base implements RootData {
     }
 
     public byte[] protocolBufferWrite() {
-        byte[] data = this.protoObjectBuilder().toByteArray();
+        byte[] data ;
+        if (this.tweetStatusP==null) {
+            data = this.protoObjectBuilder().toByteArray();
+        }
+        else
+            data=this.tweetStatusP.toByteArray();
         return data;
     }
 
@@ -1020,9 +1030,10 @@ public class TweetStatus extends Base implements RootData {
             logger.error(" Protocol Buffer Reader  in TweetStatus ", e);
         }
 
-        TweetStatus tweet = tweetObjectBuilder(protocTweet.build());
+        //TweetStatus tweet = tweetObjectBuilder(protocTweet.build());
+        this.tweetStatusP=protocTweet.build();
 
-        return tweet;
+        return this;
     }
 
     public TweetStatus tweetObjectBuilder(TweetStatusProtos.TweetStatusP protoTweet) {
@@ -1739,6 +1750,8 @@ public class TweetStatus extends Base implements RootData {
         int countLevel = 0;
         int countLevelOtherTweet = 0;
 
+        if (this.tweetStatusFBS==null & this.tweetStatusP==null){
+
         // get text
         countLevel += this.text.length();
 
@@ -1757,6 +1770,47 @@ public class TweetStatus extends Base implements RootData {
 
         if (other.getRetweeted_status() != null)
             countLevelOtherTweet += other.getRetweeted_status().getRetweet_count();
+        }
+        else if (this.tweetStatusFBS!=null & this.tweetStatusP==null){
+            // get text
+            countLevel += this.tweetStatusFBS.text().length();
+
+            countLevelOtherTweet += other.tweetStatusFBS.text().length();
+
+            // get QuoteStatus
+            if (this.tweetStatusFBS.quotedStatus()!= null)
+                countLevel += this.tweetStatusFBS.quotedStatus().text().length();
+
+            if (other.tweetStatusFBS.quotedStatus()!= null)
+                countLevelOtherTweet += other.tweetStatusFBS.quotedStatus().text().length();
+
+            // get Retweet
+            if (this.tweetStatusFBS.retweetedStatus() != null)
+                countLevel += this.tweetStatusFBS.retweetedStatus().retweetCount();
+
+            if (other.tweetStatusFBS.retweetedStatus() != null)
+                countLevelOtherTweet += other.tweetStatusFBS.retweetedStatus().retweetCount();
+        }
+        else {
+            // get text
+            countLevel += this.tweetStatusP.getText().length();
+
+            countLevelOtherTweet += other.tweetStatusP.getText().length();
+
+            // get QuoteStatus
+            if (this.tweetStatusP.getQuotedStatus()!= null)
+                countLevel += this.tweetStatusP.getQuotedStatus().getText().length();
+
+            if (other.tweetStatusP.getQuotedStatus()!= null)
+                countLevelOtherTweet += other.tweetStatusP.getQuotedStatus().getText().length();
+
+            // get Retweet
+            if (this.tweetStatusP.getRetweetedStatus() != null)
+                countLevel += this.tweetStatusP.getRetweetedStatus().getRetweetCount();
+
+            if (other.tweetStatusP.getRetweetedStatus() != null)
+                countLevelOtherTweet += other.tweetStatusP.getRetweetedStatus().getRetweetCount();
+        }
         return Integer.compare(countLevel, countLevelOtherTweet);
     }
 
@@ -1850,15 +1904,19 @@ public class TweetStatus extends Base implements RootData {
     }
 
     public byte[] flatBuffersSerialization() {
-        FlatBufferBuilder builder = new FlatBufferBuilder(4096);
-        int orc = flatBuffersWriter(builder);
-        builder.finish(orc);
-        byte[] data = builder.sizedByteArray();
+        byte[] data ;
+        if (tweetStatusFBS==null) {
+            FlatBufferBuilder builder = new FlatBufferBuilder(4096);
+            int orc = flatBuffersWriter(builder);
+            builder.finish(orc);
+            data = builder.sizedByteArray();
+        }
+        else
+            data=tweetStatusFBS.getByteBuffer().array();
         return data;
     }
 
     public int flatBuffersWriter(FlatBufferBuilder builder) {
-
 
         int created_atBuilder = builder.createString(this.created_at);
         int textBuilder = this.text != null ? builder.createString(this.text) : 0;
@@ -1941,6 +1999,65 @@ public class TweetStatus extends Base implements RootData {
         int orc = TweetStatusFBS.endTweetStatusFBS(builder);
         return orc;
     }
+
+    public TweetStatus flatBuffersDeserialization(byte[] buffData) {
+        java.nio.ByteBuffer buf = java.nio.ByteBuffer.wrap(buffData);
+        this.tweetStatusFBS = TweetStatusFBS.getRootAsTweetStatusFBS(buf);
+
+        return this;// getFlatBuffersDeserialization(tweetStatusFBS);
+    }
+
+//    public TweetStatus getFlatBuffersDeserialization(TweetStatusFBS tweetStatusFBS) {
+//
+//
+//        this.created_at = tweetStatusFBS.createdAt();
+//        this.id = tweetStatusFBS.id();
+//        this.text = tweetStatusFBS.text();
+//        this.source = tweetStatusFBS.source();
+//        this.truncated = tweetStatusFBS.truncated();
+//        this.in_reply_to_status_id = tweetStatusFBS.inReplyToStatusId();
+//        this.in_reply_to_user_id = tweetStatusFBS.inReplyToUserId();
+//        this.in_reply_to_screen_name = tweetStatusFBS.inReplyToScreenName();
+//        this.user=new User();
+//        this.user.flatBuffersDeserialization(tweetStatusFBS.user());
+//        if (tweetStatusFBS.coordinates()!=null) {
+//            this.coordinates = new Coordinates();
+//            this.coordinates.flatBuffersDeserialization(tweetStatusFBS.coordinates());
+//        }
+//        if (tweetStatusFBS.place()!=null) {
+//            this.place = new Place();
+//            this.place.flatBuffersDeserialization(tweetStatusFBS.place());
+//        }
+//        this.quoted_status_id = tweetStatusFBS.quotedStatusId();
+//        this.is_quote_status = tweetStatusFBS.isQuoteStatus();
+//
+//        if (tweetStatusFBS.quotedStatus()!=null) {
+//            this.quoted_status = new TweetStatus();
+//            this.quoted_status.getFlatBuffersDeserialization(tweetStatusFBS.quotedStatus());
+//        }
+//        if (tweetStatusFBS.place()!=null) {
+//            this.retweeted_status = new TweetStatus();
+//            this.retweeted_status.getFlatBuffersDeserialization(tweetStatusFBS.retweetedStatus());
+//        }
+//        this.quote_count = tweetStatusFBS.quoteCount();
+//        this.reply_count = tweetStatusFBS.replyCount();
+//        this.retweet_count = tweetStatusFBS.retweetCount();
+//        this.favorite_count = tweetStatusFBS.favoriteCount();
+//        //this.entities=tweetStatusFBS.;
+//        //this.extended_entities=tweetStatusFBS.;
+//        this.favorited = tweetStatusFBS.favorited();
+//        this.retweeted = tweetStatusFBS.retweeted();
+//        this.possibly_sensitive = tweetStatusFBS.possiblySensitive();
+//        this.filter_level = tweetStatusFBS.filterLevel();
+//        this.lang = tweetStatusFBS.lang();
+//        //this.matching_rules=tweetStatusFBS.;
+//        this.current_user_retweet = tweetStatusFBS.currentUserRetweet();
+//        //this.scopes=tweetStatusFBS.;
+//        this.withheld_copyright = tweetStatusFBS.withheldCopyright();
+//        //this.withheld_in_countries=tweetStatusFBS.;
+//        this.withheld_scope = tweetStatusFBS.withheldScope();
+//        return this;
+//    }
 
     public RootData bsonDeSerialization(byte[] buffData) {
         ByteBuffer buf = ByteBuffer.wrap(buffData);

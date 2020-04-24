@@ -2,6 +2,7 @@ package edu.bu.tweet;
 
 import com.google.flatbuffers.FlatBufferBuilder;
 import com.google.gson.Gson;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.PlaceFBS;
 import edu.bu.tweet.flatbuffers.PollEntityFBS;
 import edu.bu.util.Base;
@@ -274,5 +275,18 @@ public class PollEntity extends Base implements RootData {
         PollEntityFBS.addDurationMinutes(builder, duration_minutesBuilder);
         int orc = PollEntityFBS.endPollEntityFBS(builder);
         return orc;
+    }
+    public PollEntity flatBuffersDeserialization(PollEntityFBS pollEntityFBS) {
+
+        for (int i=0;i<pollEntityFBS.optionsLength();i++){
+            OptionEntity optionEntity=new OptionEntity();
+            optionEntity.flatBuffersDeserialization(pollEntityFBS.options(i));
+            this.options.add(optionEntity);
+        }
+
+        this.end_datetime=pollEntityFBS.endDatetime();
+        this.duration_minutes=pollEntityFBS.durationMinutes();
+
+        return this;
     }
 }

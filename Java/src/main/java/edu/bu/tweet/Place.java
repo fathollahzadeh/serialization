@@ -9,6 +9,7 @@ import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.OptionEntityFBS;
 import edu.bu.tweet.flatbuffers.PlaceFBS;
 import org.apache.log4j.Logger;
@@ -380,5 +381,18 @@ public class Place extends Base implements RootData {
         PlaceFBS.addBoundingBox(builder, bounding_boxBuilder);
         int orc = PlaceFBS.endPlaceFBS(builder);
         return orc;
+    }
+    public Place flatBuffersDeserialization(PlaceFBS placeFBS) {
+
+        this.name=placeFBS.name();
+        this.country_code=placeFBS.countryCode();
+        this.id=placeFBS.id();
+        this.country=placeFBS.country();
+        this.place_type=placeFBS.placeType();
+        this.url=placeFBS.url();
+        this.full_name=placeFBS.fullName();
+        this.bounding_box=new BoundingBoxCoordinate();
+        this.bounding_box.flatBuffersDeserialization(placeFBS.boundingBox());
+        return this;
     }
 }

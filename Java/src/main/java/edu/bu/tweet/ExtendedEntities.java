@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.EntitiesFBS;
 import edu.bu.tweet.flatbuffers.ExtendedEntitiesFBS;
 import edu.bu.util.Base;
@@ -192,5 +193,14 @@ public class ExtendedEntities extends Base implements RootData {
 		EntitiesFBS.addMedia(builder, mediaBuilder);
 		int orc = ExtendedEntitiesFBS.endExtendedEntitiesFBS(builder);
 		return orc;
+	}
+	public ExtendedEntities flatBuffersDeserialization(ExtendedEntitiesFBS extendedEntitiesFBS) {
+
+		for (int i=0;i<extendedEntitiesFBS.mediaLength();i++){
+			MediaEntity mediaEntity=new MediaEntity();
+			mediaEntity.flatBuffersDeserialization(extendedEntitiesFBS.media(i));
+			this.media.add(mediaEntity);
+		}
+		return this;
 	}
 }

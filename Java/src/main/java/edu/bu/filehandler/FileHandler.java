@@ -349,7 +349,7 @@ public class FileHandler {
     /*
      * This method reads the objects based on their serialization and prints them out
      */
-    public RootData readObjectWithSerialization(RootData myData, byte[] buffData, SerializationType method, Kryo kryo) {
+    public RootData readObjectWithSerialization(TweetStatus myData, byte[] buffData, SerializationType method, Kryo kryo) {
         RootData myDeserlizedObject = null;
 
         switch (method) {
@@ -372,7 +372,7 @@ public class FileHandler {
                 myDeserlizedObject = myData.readByteBuffer(buffData);
                 break;
             case FLATBUFFERS:
-                //myDeserlizedObject = myData.flatBuffersDeserialization(buffData);
+                myDeserlizedObject = myData.flatBuffersDeserialization(buffData);
                 break;
 //            case GSON:
 //                myDeserlizedObject = myData.gsonDeSerialization(buffData);

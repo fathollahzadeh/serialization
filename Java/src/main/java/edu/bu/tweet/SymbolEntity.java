@@ -6,6 +6,7 @@ import java.util.List;
 import javax.json.*;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.SizeEntityFBS;
 import edu.bu.tweet.flatbuffers.SymbolEntityFBS;
 import edu.bu.tweet.flatbuffers.URLEntityFBS;
@@ -204,6 +205,15 @@ public class SymbolEntity extends Base implements RootData {
         SymbolEntityFBS.addText(builder, textBuilder);
         int orc = SymbolEntityFBS.endSymbolEntityFBS(builder);
         return orc;
+    }
+    public SymbolEntity flatBuffersDeserialization(SymbolEntityFBS symbolEntityFBS) {
+
+        for (int i=0;i<symbolEntityFBS.indicesLength();i++){
+            this.indices.add(symbolEntityFBS.indices(i));
+        }
+        this.text=symbolEntityFBS.text();
+
+        return this;
     }
 }
 

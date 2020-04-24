@@ -6,6 +6,7 @@ import java.util.List;
 import javax.json.*;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.ExtendedEntitiesFBS;
 import edu.bu.tweet.flatbuffers.HashtagEntityFBS;
 import edu.bu.tweet.flatbuffers.URLEntityFBS;
@@ -209,6 +210,14 @@ public class HashtagEntity extends Base implements RootData {
         HashtagEntityFBS.addIndices(builder, indicesBuilder);
         int orc = HashtagEntityFBS.endHashtagEntityFBS(builder);
         return orc;
+    }
+    public HashtagEntity flatBuffersDeserialization(HashtagEntityFBS hashtagEntityFBS) {
+
+        for (int i=0;i<hashtagEntityFBS.indicesLength();i++){
+            this.indices.add(hashtagEntityFBS.indices(i));
+        }
+        this.text=hashtagEntityFBS.text();
+        return this;
     }
 }
 
