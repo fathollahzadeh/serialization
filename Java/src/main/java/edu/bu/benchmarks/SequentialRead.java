@@ -42,6 +42,8 @@ public class SequentialRead {
 
         int round=Integer.parseInt(args[4]);
 
+        boolean taskset=Boolean.parseBoolean(args[5]);
+
         String logFileName="bin/benchmark/readobjects/result_java_readobjects_" + numberofobjects + "_" + round + ".txt";
 
         FileHandler fileHandler = new FileHandler(inFile, serializationType);
@@ -56,7 +58,7 @@ public class SequentialRead {
         double elapsedSeconds= (System.nanoTime() - tmpTime) / 1000000000.0;
 
         LogFileHandler logFileHandler=new LogFileHandler(logFileName);
-        logFileHandler.addLog(serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds);
+        logFileHandler.addLog(serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
     }
 
 }

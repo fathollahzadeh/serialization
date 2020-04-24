@@ -21,5 +21,9 @@ echo "start to run benchmark for << random read >> with $number_of_read_object o
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
+time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx8g -cp ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.RandomRead $datapath $serialization_type $number_of_read_object $3 $random_list_path true
 
-time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx8g -cp ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.RandomRead $datapath $serialization_type $number_of_read_object $3 $random_list_path
+sleep 200
+
+echo 3 > /proc/sys/vm/drop_caches && sync
+time java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx8g -cp ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.RandomRead $datapath $serialization_type $number_of_read_object $3 $random_list_path false

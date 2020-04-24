@@ -17,6 +17,7 @@ public class ExternalSort {
     private int serializationType;
     private long numberOfObjectsInEachFiles;
     private  String logFileName;
+    private boolean taskset;
 
     // define variables for calculate bench time:
     private double ioTime = 0;
@@ -35,6 +36,7 @@ public class ExternalSort {
         externalSort.numberOfFiles=Integer.parseInt(args[1]);
         externalSort.serializationType=Integer.parseInt(args[2]);
         int round= Integer.parseInt(args[3]);
+        externalSort.taskset=Boolean.parseBoolean(args[4]);
         externalSort.logFileName="bin/benchmark/externalsort/result_java_externalsort_"+round+".txt";
 
         externalSort.runTheExternalSort();
@@ -220,7 +222,7 @@ public class ExternalSort {
 
         // add times to the log file
         LogFileHandler logFileHandler=new LogFileHandler(logFileName);
-        logFileHandler.addLog(serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds);
+        logFileHandler.addLog(serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
     }
 
     private  void writeToFiles(List<RootData> list, String filename) {

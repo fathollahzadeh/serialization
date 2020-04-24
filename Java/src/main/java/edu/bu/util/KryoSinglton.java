@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 
 import com.esotericsoftware.kryo.Kryo;
 import edu.bu.tweet.*;
+import edu.bu.tweet.flatbuffers.*;
 
 
 public class KryoSinglton {
@@ -61,6 +62,29 @@ public class KryoSinglton {
 		kryo.register(UserMentionEntity.class);
 		kryo.register(VariantEntity.class);
 		kryo.register(VideoEntity.class);
+
+		kryo.register(AdditionalMediaInfoEntityFBS.class);
+		kryo.register(BoundingBoxCoordinateFBS.class);
+		kryo.register(CoordinatesFBS.class);
+		kryo.register(EntitiesFBS.class);
+		kryo.register(ExtendedEntitiesFBS.class);
+		kryo.register(HashtagEntityFBS.class);
+		kryo.register(MatchingRulesEntityFBS.class);
+		kryo.register(MediaEntityFBS.class);
+		kryo.register(MediaSizesEntityFBS.class);
+		kryo.register(OptionEntityFBS.class);
+		kryo.register(PlaceFBS.class);
+		kryo.register(PollEntityFBS.class);
+		kryo.register(SizeEntityFBS.class);
+		kryo.register(SymbolEntityFBS.class);
+		kryo.register(TweetStatusFBS.class);
+		kryo.register(URLEntityFBS.class);
+		kryo.register(UserFBS.class);
+		kryo.register(UserMentionEntityFBS.class);
+		kryo.register(VariantEntityFBS.class);
+		kryo.register(VideoEntityFBS.class);
+
+		kryo.register(edu.bu.tweet.proto.TweetStatusProtos.TweetStatusP.class);
 		
 	}
 }

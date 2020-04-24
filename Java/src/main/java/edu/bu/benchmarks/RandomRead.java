@@ -34,6 +34,8 @@ public class RandomRead {
 
         int round=Integer.parseInt(args[3]);
 
+        boolean taskset=Boolean.parseBoolean(args[5]);
+
         List<Long>  objectIndexes=new ArrayList<>();
         // read random data from file
         try (Stream<String> stream = Files.lines(Paths.get(args[4]))) {
@@ -63,7 +65,7 @@ public class RandomRead {
         double elapsedSeconds= (System.nanoTime() - tmpTime) / 1000000000.0;
 
         LogFileHandler logFileHandler=new LogFileHandler(logFileName);
-        logFileHandler.addLog(serializationType,false,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds);
+        logFileHandler.addLog(serializationType,false,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
 
     }
 }

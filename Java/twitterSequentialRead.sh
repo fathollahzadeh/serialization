@@ -18,5 +18,9 @@ echo "start to benchmark for << sequential read >>  with $number_of_read_object 
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
+time taskset -c 0  java -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.SequentialRead $datapath $serialization_type 0 $number_of_read_object $3 true
 
-time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx6g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.SequentialRead $datapath $serialization_type 0 $number_of_read_object $3
+sleep 200
+
+echo 3 > /proc/sys/vm/drop_caches && sync
+time java -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.SequentialRead $datapath $serialization_type 0 $number_of_read_object $3 false

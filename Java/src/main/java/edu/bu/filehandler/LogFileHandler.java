@@ -16,9 +16,9 @@ public class LogFileHandler {
         this.fileName = fileName;
     }
 
-    public void addLog(int serializationType, boolean seq,String datatype, double iotime, double totaltime){
+    public void addLog(int serializationType, boolean seq,String datatype, double iotime, double totaltime,boolean taskset){
 
-        String log="[ReadTimeJAVA]#";
+        String log="[ReadTimeJAVA]#"+taskset+"#";
         String method="";
         switch (serializationType) {
             case 1:

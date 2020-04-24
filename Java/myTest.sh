@@ -1,8 +1,8 @@
-./makeClean.sh
+#./makeClean.sh
 
-./twitterSerialization.sh /mnt/tweets_1M_rows.txt /mnt/javadata1/ 1000
+#./twitterSerialization.sh /mnt/tweets_1M_rows.txt /mnt/javadata/ 100
 
-#./experimentReadObjects.sh /mnt/javadata/ /mnt/randomlist
+./experimentReadObjects.sh /mnt/javadata/ /mnt/randomlist
 
-./experimentExternalSort.sh /mnt/javadata/ 5
+./experimentExternalSort.sh /mnt/javadata/ 10
 
