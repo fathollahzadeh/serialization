@@ -1,5 +1,8 @@
 package edu.bu.tweet;
 
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.HashtagEntityFBS;
+import edu.bu.tweet.flatbuffers.MatchingRulesEntityFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
@@ -141,21 +144,22 @@ public class MatchingRulesEntity extends Base implements RootData {
 
         return this;
     }
+
     public byte[] bsonSerialization() {
         BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
         writer.writeStartDocument();
 
-        if (this.tag!=null){
-            writer.writeString("tag",this.tag);
+        if (this.tag != null) {
+            writer.writeString("tag", this.tag);
         }
 
-        if (this.id_str!=null){
-            writer.writeString("id_str",this.id_str);
+        if (this.id_str != null) {
+            writer.writeString("id_str", this.id_str);
         }
 
-        writer.writeInt64("id",this.id);
+        writer.writeInt64("id", this.id);
         writer.writeEndDocument();
 
         return outputBuffer.toByteArray();
@@ -164,24 +168,37 @@ public class MatchingRulesEntity extends Base implements RootData {
 
     public RootData bsonDeSerialization(byte[] buffData) {
         ByteBuffer buf = ByteBuffer.wrap(buffData);
-        BsonBinaryReader reader=new BsonBinaryReader(buf);
+        BsonBinaryReader reader = new BsonBinaryReader(buf);
 
         reader.readStartDocument();
-        String currentName=reader.readName();
-        if (currentName.equals("tag")){
-            this.tag=reader.readString();
-            currentName=reader.readName();
+        String currentName = reader.readName();
+        if (currentName.equals("tag")) {
+            this.tag = reader.readString();
+            currentName = reader.readName();
         }
 
-        if (currentName.equals("id_str")){
-            this.id_str=reader.readString();
-           reader.readName();
+        if (currentName.equals("id_str")) {
+            this.id_str = reader.readString();
+            reader.readName();
         }
 
-        this.id=reader.readInt64();
+        this.id = reader.readInt64();
 
         reader.readEndDocument();
 
         return this;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int tagBuilder = this.tag != null ? builder.createString(this.tag) : 0;
+        int id_strBuilder = this.id_str != null ? builder.createString(this.id_str) : 0;
+
+        MatchingRulesEntityFBS.startMatchingRulesEntityFBS(builder);
+        MatchingRulesEntityFBS.addTag(builder, tagBuilder);
+        MatchingRulesEntityFBS.addId(builder, this.id);
+        MatchingRulesEntityFBS.addIdStr(builder, id_strBuilder);
+        int orc = MatchingRulesEntityFBS.endMatchingRulesEntityFBS(builder);
+        return orc;
     }
 }

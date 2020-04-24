@@ -88,6 +88,9 @@ public class FileHandler {
             case 6:
                 method = SerializationType.BYTEBUFFER;
                 break;
+            case 7:
+                method = SerializationType.FLATBUFFERS;
+                break;
         }
     }
 
@@ -313,6 +316,10 @@ public class FileHandler {
                 case BYTEBUFFER:
                     buffer = object.writeByteBuffer();
                     break;
+                case FLATBUFFERS:
+                    buffer = object.flatBuffersSerialization();
+                    break;
+
             }
             objectSize = buffer.length;
 
@@ -364,9 +371,9 @@ public class FileHandler {
             case BYTEBUFFER:
                 myDeserlizedObject = myData.readByteBuffer(buffData);
                 break;
-//            case JSON_GZIP:
-//                myDeserlizedObject = myData.jsonDeserialization_withGZIP(buffData);
-//                break;
+            case FLATBUFFERS:
+                //myDeserlizedObject = myData.flatBuffersDeserialization(buffData);
+                break;
 //            case GSON:
 //                myDeserlizedObject = myData.gsonDeSerialization(buffData);
 //                break;

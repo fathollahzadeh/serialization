@@ -4,6 +4,11 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.json.*;
+
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.SizeEntityFBS;
+import edu.bu.tweet.flatbuffers.SymbolEntityFBS;
+import edu.bu.tweet.flatbuffers.URLEntityFBS;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
@@ -183,6 +188,22 @@ public class SymbolEntity extends Base implements RootData {
 
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int textBuilder=this.text!=null? builder.createString(this.text):0;
+        int[] indicesList=new int[this.indices.size()];
+        for (int i=0;i<this.indices.size();i++) {
+            indicesList[i]=this.indices.get(i);
+        }
+        int indicesBuilder= URLEntityFBS.createIndicesVector(builder,indicesList);
+
+        SymbolEntityFBS.startSymbolEntityFBS(builder);
+        SymbolEntityFBS.addIndices(builder, indicesBuilder);
+        SymbolEntityFBS.addText(builder, textBuilder);
+        int orc = SymbolEntityFBS.endSymbolEntityFBS(builder);
+        return orc;
     }
 }
 

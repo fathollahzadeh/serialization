@@ -3,6 +3,10 @@ package edu.bu.tweet;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.EntitiesFBS;
+import edu.bu.tweet.flatbuffers.ExtendedEntitiesFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import javax.json.Json;
@@ -174,5 +178,19 @@ public class ExtendedEntities extends Base implements RootData {
 		reader.readEndDocument();
 
 		return this;
+	}
+	public int flatBuffersWriter(FlatBufferBuilder builder) {
+		int[] mediaList = new int[this.media.size()];
+		int i = 0;
+		for (MediaEntity mediaEntity : this.media) {
+			mediaList[i]= mediaEntity.flatBuffersWriter(builder);
+			i++;
+		}
+		int mediaBuilder = EntitiesFBS.createMediaVector(builder, mediaList);
+
+		ExtendedEntitiesFBS.startExtendedEntitiesFBS(builder);
+		EntitiesFBS.addMedia(builder, mediaBuilder);
+		int orc = ExtendedEntitiesFBS.endExtendedEntitiesFBS(builder);
+		return orc;
 	}
 }

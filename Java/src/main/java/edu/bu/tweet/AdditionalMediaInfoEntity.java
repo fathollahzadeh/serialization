@@ -1,5 +1,9 @@
 package edu.bu.tweet;
 
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
+import edu.bu.tweet.flatbuffers.URLEntityFBS;
+import edu.bu.tweet.flatbuffers.UserFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
@@ -25,8 +29,8 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
     private boolean monetizable;
 
     public AdditionalMediaInfoEntity() {
-        this.embeddable=false;
-        this.monetizable=false;
+        this.embeddable = false;
+        this.monetizable = false;
     }
 
     public String getTitle() {
@@ -97,14 +101,14 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
 
         int allocatedBufferSize = 0;
 
-        byte[] titleBytes =(title!=null)? title.getBytes(Charset.forName("UTF-8")):new byte[0];
+        byte[] titleBytes = (title != null) ? title.getBytes(Charset.forName("UTF-8")) : new byte[0];
         allocatedBufferSize += titleBytes.length + 4;
 
-        byte[] descriptionBytes =(description!=null)? description.getBytes(Charset.forName("UTF-8")):new byte[0];
+        byte[] descriptionBytes = (description != null) ? description.getBytes(Charset.forName("UTF-8")) : new byte[0];
         allocatedBufferSize += descriptionBytes.length + 4;
 
-        allocatedBufferSize+=1;//embeddable
-        allocatedBufferSize+=1;//monetizable
+        allocatedBufferSize += 1;//embeddable
+        allocatedBufferSize += 1;//monetizable
 
         // array fields
         ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
@@ -130,8 +134,8 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
         stringSize = byteBuffer.getInt();
         this.description = extractString(byteBuffer, stringSize);
 
-        this.embeddable=convertToBoolean(byteBuffer.get());
-        this.monetizable=convertToBoolean(byteBuffer.get());
+        this.embeddable = convertToBoolean(byteBuffer.get());
+        this.monetizable = convertToBoolean(byteBuffer.get());
 
         return this;
 
@@ -146,8 +150,8 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
         if (this.description != null && !this.description.isEmpty()) {
             additionalMediaInfoEntityObjectBuilder.add("description", this.description);
         }
-        additionalMediaInfoEntityObjectBuilder.add("embeddable",this.embeddable);
-        additionalMediaInfoEntityObjectBuilder.add("monetizable",this.monetizable);
+        additionalMediaInfoEntityObjectBuilder.add("embeddable", this.embeddable);
+        additionalMediaInfoEntityObjectBuilder.add("monetizable", this.monetizable);
 
         JsonObject additionalMediaInfoEntityJsonObject = additionalMediaInfoEntityObjectBuilder.build();
 
@@ -157,14 +161,14 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
     public AdditionalMediaInfoEntity readJSONAdditionalMediaInfoEntity(JsonObject jsonObject) {
 
         if (jsonObject.get("title") != null && jsonObject.get("title") != JsonValue.NULL) {
-            this.title=jsonObject.getString("title");
+            this.title = jsonObject.getString("title");
         }
 
         if (jsonObject.get("description") != null && jsonObject.get("description") != JsonValue.NULL) {
-            this.description=jsonObject.getString("description");
+            this.description = jsonObject.getString("description");
         }
-        this.embeddable=jsonObject.getBoolean("embeddable");
-        this.monetizable=jsonObject.getBoolean("monetizable");
+        this.embeddable = jsonObject.getBoolean("embeddable");
+        this.monetizable = jsonObject.getBoolean("monetizable");
         return this;
     }
 
@@ -174,18 +178,18 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
 
     public byte[] bsonSerialization() {
         BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
         writer.writeStartDocument();
 
-        if (this.title!=null)
-            writer.writeString("title",this.title);
+        if (this.title != null)
+            writer.writeString("title", this.title);
 
-        if (this.description!=null)
-            writer.writeString("description",this.description);
+        if (this.description != null)
+            writer.writeString("description", this.description);
 
-        writer.writeBoolean("embeddable",this.embeddable);
-        writer.writeBoolean("monetizable",this.monetizable);
+        writer.writeBoolean("embeddable", this.embeddable);
+        writer.writeBoolean("monetizable", this.monetizable);
 
         writer.writeEndDocument();
 
@@ -194,24 +198,38 @@ public class AdditionalMediaInfoEntity extends Base implements RootData {
 
     public RootData bsonDeSerialization(byte[] buffData) {
         ByteBuffer buf = ByteBuffer.wrap(buffData);
-        BsonBinaryReader reader=new BsonBinaryReader(buf);
+        BsonBinaryReader reader = new BsonBinaryReader(buf);
 
         reader.readStartDocument();
-        String currentName=reader.readName();
-        if (currentName.equals("title")){
-            this.title=reader.readString();
-            currentName=reader.readName();
+        String currentName = reader.readName();
+        if (currentName.equals("title")) {
+            this.title = reader.readString();
+            currentName = reader.readName();
         }
-        if (currentName.equals("description")){
-            this.description=reader.readString();
+        if (currentName.equals("description")) {
+            this.description = reader.readString();
             reader.readName();
         }
 
-        this.embeddable=reader.readBoolean();
-        this.monetizable=reader.readBoolean("monetizable");
+        this.embeddable = reader.readBoolean();
+        this.monetizable = reader.readBoolean("monetizable");
 
         reader.readEndDocument();
 
         return this;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int titleBuilder = this.title != null ? builder.createString(this.title) : 0;
+        int descriptionBuilder = this.description != null ? builder.createString(this.description) : 0;
+
+        AdditionalMediaInfoEntityFBS.startAdditionalMediaInfoEntityFBS(builder);
+        AdditionalMediaInfoEntityFBS.addTitle(builder, titleBuilder);
+        AdditionalMediaInfoEntityFBS.addDescription(builder, descriptionBuilder);
+        AdditionalMediaInfoEntityFBS.addEmbeddable(builder, this.embeddable);
+        AdditionalMediaInfoEntityFBS.addMonetizable(builder, this.monetizable);
+        int orc = AdditionalMediaInfoEntityFBS.endAdditionalMediaInfoEntityFBS(builder);
+        return orc;
     }
 }

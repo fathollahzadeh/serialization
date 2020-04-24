@@ -2,9 +2,15 @@ package edu.bu.tweet;
 
 import java.nio.ByteBuffer;
 import java.util.List;
+
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.UserMentionEntityFBS;
+import edu.bu.tweet.flatbuffers.VariantEntityFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+
 import javax.json.*;
+
 import org.apache.log4j.Logger;
 import org.bson.BsonBinaryReader;
 import org.bson.BsonBinaryWriter;
@@ -13,8 +19,8 @@ import org.bson.io.BasicOutputBuffer;
 
 public class VariantEntity extends Base implements RootData {
 
-	private static final long serialVersionUID = 4970008846733532705L;
-	static Logger logger = Logger.getLogger(VariantEntity.class);
+    private static final long serialVersionUID = 4970008846733532705L;
+    static Logger logger = Logger.getLogger(VariantEntity.class);
 
     private long bitrate;
     private String content_type;
@@ -85,7 +91,7 @@ public class VariantEntity extends Base implements RootData {
         byte[] urlBytes = (url != null) ? url.getBytes() : new byte[0];
         allocatedBufferSize += urlBytes.length + 4;
 
-        allocatedBufferSize+=8;//bitrate
+        allocatedBufferSize += 8;//bitrate
 
         // array fields
         ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
@@ -102,7 +108,7 @@ public class VariantEntity extends Base implements RootData {
         ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
         int stringSize;
 
-        this.bitrate=byteBuffer.getLong();
+        this.bitrate = byteBuffer.getLong();
         stringSize = byteBuffer.getInt();
         this.content_type = extractString(byteBuffer, stringSize);
         stringSize = byteBuffer.getInt();
@@ -112,7 +118,7 @@ public class VariantEntity extends Base implements RootData {
 
     public JsonObject jsonObjectBuilder() {
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        objectBuilder.add("bitrate",this.bitrate);
+        objectBuilder.add("bitrate", this.bitrate);
 
         if (this.content_type != null && !this.content_type.isEmpty()) {
             objectBuilder.add("content_type", this.content_type);
@@ -128,7 +134,7 @@ public class VariantEntity extends Base implements RootData {
 
     public VariantEntity readJSONVariantEntity(JsonObject jsonObject) {
 
-        this.bitrate=Long.parseLong(jsonObject.getJsonNumber("bitrate").toString());
+        this.bitrate = Long.parseLong(jsonObject.getJsonNumber("bitrate").toString());
 
         if (jsonObject.get("content_type") != null && jsonObject.get("content_type") != JsonValue.NULL) {
             this.content_type = jsonObject.getString("content_type");
@@ -136,21 +142,22 @@ public class VariantEntity extends Base implements RootData {
         if (jsonObject.get("url") != null && jsonObject.get("url") != JsonValue.NULL) {
             this.url = jsonObject.getString("url");
         }
-        return  this;
+        return this;
     }
+
     public byte[] bsonSerialization() {
         BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
         writer.writeStartDocument();
 
-        if (this.content_type!=null)
-            writer.writeString("content_type",this.content_type);
+        if (this.content_type != null)
+            writer.writeString("content_type", this.content_type);
 
-        if (this.url!=null)
-            writer.writeString("url",this.url);
+        if (this.url != null)
+            writer.writeString("url", this.url);
 
-        writer.writeInt64("bitrate",this.bitrate);
+        writer.writeInt64("bitrate", this.bitrate);
 
         writer.writeEndDocument();
 
@@ -159,27 +166,42 @@ public class VariantEntity extends Base implements RootData {
 
     public RootData bsonDeSerialization(byte[] buffData) {
         ByteBuffer buf = ByteBuffer.wrap(buffData);
-        BsonBinaryReader reader=new BsonBinaryReader(buf);
+        BsonBinaryReader reader = new BsonBinaryReader(buf);
 
         reader.readStartDocument();
 
-        String currentName=reader.readName();
-        if (currentName.equals("content_type")){
-            this.content_type=reader.readString();
-            currentName=reader.readName();
+        String currentName = reader.readName();
+        if (currentName.equals("content_type")) {
+            this.content_type = reader.readString();
+            currentName = reader.readName();
         }
 
-        if (currentName.equals("url")){
-            this.url=reader.readString();
+        if (currentName.equals("url")) {
+            this.url = reader.readString();
             reader.readName();
         }
-        this.bitrate=reader.readInt64();
+        this.bitrate = reader.readInt64();
         reader.readEndDocument();
 
         return this;
     }
+
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int content_typeBuilder = this.content_type != null ? builder.createString(this.content_type) : 0;
+        int urlBuilder = this.url != null ? builder.createString(this.url) : 0;
+
+        VariantEntityFBS.startVariantEntityFBS(builder);
+        VariantEntityFBS.addBitrate(builder, this.bitrate);
+        VariantEntityFBS.addContentType(builder, content_typeBuilder);
+        VariantEntityFBS.addUrl(builder, urlBuilder);
+
+        int orc = VariantEntityFBS.endVariantEntityFBS(builder);
+        return orc;
     }
 }
 

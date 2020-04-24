@@ -3,6 +3,12 @@ package edu.bu.tweet;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.BoundingBoxCoordinateFBS;
+import edu.bu.tweet.flatbuffers.EntitiesFBS;
+import edu.bu.tweet.flatbuffers.HashtagEntityFBS;
+import edu.bu.tweet.flatbuffers.UserFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import javax.json.Json;
@@ -519,5 +525,69 @@ public class Entities extends Base implements RootData {
 
 		return this;
 
+	}
+
+	public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+
+		int[] hashtagsList = new int[this.hashtags.size()];
+		int i = 0;
+		for (HashtagEntity hashtagEntity : this.hashtags) {
+			hashtagsList[i]= hashtagEntity.flatBuffersWriter(builder);
+			i++;
+		}
+		int hashtagsBuilder = EntitiesFBS.createHashtagsVector(builder, hashtagsList);
+
+		int[] mediaList = new int[this.media.size()];
+		i = 0;
+		for (MediaEntity mediaEntity : this.media) {
+			mediaList[i]= mediaEntity.flatBuffersWriter(builder);
+			i++;
+		}
+		int mediaBuilder = EntitiesFBS.createMediaVector(builder, mediaList);
+
+		int[] urlList = new int[this.urls.size()];
+		i = 0;
+		for (URLEntity urlEntity : this.urls) {
+			urlList[i]= urlEntity.flatBuffersWriter(builder);
+			i++;
+		}
+		int urlBuilder = EntitiesFBS.createUrlsVector(builder, urlList);
+
+		int[] user_mentionsList = new int[this.user_mentions.size()];
+		i = 0;
+		for (UserMentionEntity userMentionEntity : this.user_mentions) {
+			user_mentionsList[i]= userMentionEntity.flatBuffersWriter(builder);
+			i++;
+		}
+		int user_mentionsBuilder = EntitiesFBS.createUserMentionsVector(builder, user_mentionsList);
+
+		int[] symbolsList = new int[this.symbols.size()];
+		i = 0;
+		for (SymbolEntity symbolEntity : this.symbols) {
+			symbolsList[i]= symbolEntity.flatBuffersWriter(builder);
+			i++;
+		}
+		int symbolsBuilder = EntitiesFBS.createSymbolsVector(builder, symbolsList);
+
+		int[] pollsList = new int[this.polls.size()];
+		i = 0;
+		for (PollEntity pollEntity : this.polls) {
+			pollsList[i]= pollEntity.flatBuffersWriter(builder);
+			i++;
+		}
+		int pollsBuilder = EntitiesFBS.createSymbolsVector(builder, pollsList);
+
+		EntitiesFBS.startEntitiesFBS(builder);
+
+		EntitiesFBS.addHashtags(builder, hashtagsBuilder);
+		EntitiesFBS.addMedia(builder, mediaBuilder);
+		EntitiesFBS.addUrls(builder, urlBuilder);
+		EntitiesFBS.addUserMentions(builder,user_mentionsBuilder);
+		EntitiesFBS.addSymbols(builder, symbolsBuilder);
+		EntitiesFBS.addPolls(builder, pollsBuilder);
+
+		int orc = EntitiesFBS.endEntitiesFBS(builder);
+		return orc;
 	}
 }

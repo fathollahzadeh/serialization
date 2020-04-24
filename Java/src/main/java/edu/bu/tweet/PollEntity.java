@@ -1,6 +1,9 @@
 package edu.bu.tweet;
 
+import com.google.flatbuffers.FlatBufferBuilder;
 import com.google.gson.Gson;
+import edu.bu.tweet.flatbuffers.PlaceFBS;
+import edu.bu.tweet.flatbuffers.PollEntityFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
@@ -250,5 +253,26 @@ public class PollEntity extends Base implements RootData {
     @Override
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int end_datetimeBuilder=this.end_datetime!=null? builder.createString(this.end_datetime):0;
+        int duration_minutesBuilder=this.duration_minutes!=null? builder.createString(this.duration_minutes):0;
+
+        int[] optionsList=new int[this.options.size()];
+        int i=0;
+        for (OptionEntity optionEntity:this.options){
+            optionsList[i]=optionEntity.flatBuffersWriter(builder);
+            i++;
+        }
+        int optionsBuilder=PollEntityFBS.createOptionsVector(builder,optionsList);
+
+        PollEntityFBS.startPollEntityFBS(builder);
+        PollEntityFBS.addOptions(builder, optionsBuilder);
+        PollEntityFBS.addEndDatetime(builder, end_datetimeBuilder);
+        PollEntityFBS.addDurationMinutes(builder, duration_minutesBuilder);
+        int orc = PollEntityFBS.endPollEntityFBS(builder);
+        return orc;
     }
 }

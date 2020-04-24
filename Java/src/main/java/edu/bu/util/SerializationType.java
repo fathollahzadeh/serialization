@@ -9,5 +9,6 @@ public enum SerializationType {
 	KRYO,
 	BYTEBUFFER,
 	JSON_GZIP,
-	GSON
+	GSON,
+	FLATBUFFERS
 }

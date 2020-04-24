@@ -4,6 +4,11 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.json.*;
+
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.SymbolEntityFBS;
+import edu.bu.tweet.flatbuffers.URLEntityFBS;
+import edu.bu.tweet.flatbuffers.UserMentionEntityFBS;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
@@ -272,5 +277,27 @@ public class UserMentionEntity extends Base implements RootData {
 
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int id_strBuilder=this.id_str!=null? builder.createString(this.id_str):0;
+        int nameBuilder=this.name!=null? builder.createString(this.name):0;
+        int screen_nameBuilder=this.screen_name!=null? builder.createString(this.screen_name):0;
+
+        int[] indicesList=new int[this.indices.size()];
+        for (int i=0;i<this.indices.size();i++) {
+            indicesList[i]=this.indices.get(i);
+        }
+        int indicesBuilder= URLEntityFBS.createIndicesVector(builder,indicesList);
+
+        UserMentionEntityFBS.startUserMentionEntityFBS(builder);
+        UserMentionEntityFBS.addId(builder, this.id);
+        UserMentionEntityFBS.addIdStr(builder, id_strBuilder);
+        UserMentionEntityFBS.addIndices(builder,indicesBuilder);
+        UserMentionEntityFBS.addName(builder, nameBuilder);
+        UserMentionEntityFBS.addScreenName(builder, screen_nameBuilder);
+        int orc = UserMentionEntityFBS.endUserMentionEntityFBS(builder);
+        return orc;
     }
 }

@@ -3,6 +3,10 @@ package edu.bu.tweet;
 import java.nio.ByteBuffer;
 import java.util.List;
 import javax.json.*;
+
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.PollEntityFBS;
+import edu.bu.tweet.flatbuffers.SizeEntityFBS;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
@@ -166,6 +170,18 @@ public class SizeEntity extends Base implements RootData {
 
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int resizeBuilder=this.resize!=null? builder.createString(this.resize):0;
+
+        SizeEntityFBS.startSizeEntityFBS(builder);
+        SizeEntityFBS.addWidth(builder, this.width);
+        SizeEntityFBS.addHeight(builder, this.height);
+        SizeEntityFBS.addResize(builder, resizeBuilder);
+        int orc = SizeEntityFBS.endSizeEntityFBS(builder);
+        return orc;
     }
 }
 

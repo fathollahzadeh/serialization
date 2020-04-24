@@ -20,8 +20,12 @@ import javax.json.JsonValue;
 import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 
+import com.google.flatbuffers.FlatBufferBuilder;
 import com.google.gson.Gson;
 import com.google.protobuf.CodedInputStream;
+import edu.bu.tweet.flatbuffers.MapStringBool;
+import edu.bu.tweet.flatbuffers.TweetStatusFBS;
+import edu.bu.tweet.flatbuffers.VideoEntityFBS;
 import edu.bu.tweet.proto.TweetStatusProtos;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
@@ -1774,7 +1778,7 @@ public class TweetStatus extends Base implements RootData {
             writer.writeString("in_reply_to_screen_name", this.in_reply_to_screen_name);
 
         writer.writeName("user");
-        writer.writeBinaryData( new BsonBinary(this.user.bsonSerialization()));
+        writer.writeBinaryData(new BsonBinary(this.user.bsonSerialization()));
 
         if (this.coordinates != null)
             writer.writeBinaryData("coordinates", new BsonBinary(this.coordinates.bsonSerialization()));
@@ -1831,7 +1835,7 @@ public class TweetStatus extends Base implements RootData {
         if (this.withheld_scope != null)
             writer.writeString("withheld_scope", this.withheld_scope);
 
-        writer.writeInt32("withheld_in_countries_size",this.withheld_in_countries.size());
+        writer.writeInt32("withheld_in_countries_size", this.withheld_in_countries.size());
         writer.writeName("withheld_in_countries");
         writer.writeStartArray();
         for (String s : this.withheld_in_countries) {
@@ -1843,6 +1847,99 @@ public class TweetStatus extends Base implements RootData {
         writer.writeEndDocument();
 
         return outputBuffer.toByteArray();
+    }
+
+    public byte[] flatBuffersSerialization() {
+        FlatBufferBuilder builder = new FlatBufferBuilder(4096);
+        int orc = flatBuffersWriter(builder);
+        builder.finish(orc);
+        byte[] data = builder.sizedByteArray();
+        return data;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+
+        int created_atBuilder = builder.createString(this.created_at);
+        int textBuilder = this.text != null ? builder.createString(this.text) : 0;
+        int sourceBuilder = this.source != null ? builder.createString(this.source) : 0;
+        int in_reply_to_screen_nameBuilder = this.in_reply_to_screen_name != null ? builder.createString(this.in_reply_to_screen_name) : 0;
+        int filter_levelBuilder = this.filter_level != null ? builder.createString(this.filter_level) : 0;
+        int langBuilder = this.lang != null ? builder.createString(this.lang) : 0;
+        int withheld_scopeBuilder = this.withheld_scope != null ? builder.createString(this.withheld_scope) : 0;
+        int quoted_statusBuilder = this.quoted_status != null ? this.quoted_status.flatBuffersWriter(builder) : 0;
+        int retweeted_statusBuilder = this.retweeted_status != null ? this.retweeted_status.flatBuffersWriter(builder) : 0;
+
+        int[] scopesList = new int[this.scopes.size()];
+        int i = 0;
+        for (String key : this.scopes.keySet()) {
+            int keyBuilder = builder.createString(key);
+            boolean valueBuilder = this.scopes.get(key);
+
+            int mapitem = MapStringBool.createMapStringBool(builder, keyBuilder, valueBuilder);
+            scopesList[i] = mapitem;
+            i++;
+        }
+        int scopesBuilder = TweetStatusFBS.createScopesVector(builder, scopesList);
+
+        int[] withheld_in_countriesList = new int[this.withheld_in_countries.size()];
+        i = 0;
+        for (String s : this.withheld_in_countries) {
+            int item = builder.createString(s);
+            withheld_in_countriesList[i] = item;
+            i++;
+        }
+
+        int withheld_in_countriesBuilder = TweetStatusFBS.createWithheldInCountriesVector(builder, withheld_in_countriesList);
+        int userBuilder = this.user.flatBuffersWriter(builder);
+        int coordinatesBuilder = this.coordinates != null ? this.coordinates.flatBuffersWriter(builder) : 0;
+        int placeBuilder = this.place != null ? this.place.flatBuffersWriter(builder) : 0;
+        int entitiesBuilder = this.entities != null ? this.entities.flatBuffersWriter(builder) : 0;
+        int extended_entitiesBuilder = this.extended_entities != null ? this.extended_entities.flatBuffersWriter(builder) : 0;
+
+        int[] matching_rulesList = new int[this.matching_rules.size()];
+        i = 0;
+        for (MatchingRulesEntity matchingRulesEntity : this.matching_rules) {
+            matching_rulesList[i] = matchingRulesEntity.flatBuffersWriter(builder);
+            i++;
+        }
+        int matching_rulesBuilder = TweetStatusFBS.createMatchingRulesVector(builder, matching_rulesList);
+
+        TweetStatusFBS.startTweetStatusFBS(builder);
+        TweetStatusFBS.addCreatedAt(builder, created_atBuilder);
+        TweetStatusFBS.addId(builder, this.id);
+        TweetStatusFBS.addText(builder, textBuilder);
+        TweetStatusFBS.addSource(builder, sourceBuilder);
+        TweetStatusFBS.addTruncated(builder, this.isTruncated());
+        TweetStatusFBS.addInReplyToStatusId(builder, this.in_reply_to_status_id);
+        TweetStatusFBS.addInReplyToScreenName(builder, in_reply_to_screen_nameBuilder);
+        TweetStatusFBS.addUser(builder, userBuilder);
+        TweetStatusFBS.addCoordinates(builder, coordinatesBuilder);
+        TweetStatusFBS.addPlace(builder, placeBuilder);
+        TweetStatusFBS.addQuotedStatusId(builder, this.quoted_status_id);
+        TweetStatusFBS.addIsQuoteStatus(builder, this.is_quote_status);
+        TweetStatusFBS.addQuotedStatus(builder, quoted_statusBuilder);
+        TweetStatusFBS.addRetweetedStatus(builder, retweeted_statusBuilder);
+        TweetStatusFBS.addQuoteCount(builder, this.getQuote_count());
+        TweetStatusFBS.addReplyCount(builder, this.reply_count);
+        TweetStatusFBS.addRetweetCount(builder, this.retweet_count);
+        TweetStatusFBS.addFavoriteCount(builder, this.favorite_count);
+        TweetStatusFBS.addEntities(builder, entitiesBuilder);
+        TweetStatusFBS.addExtendedEntities(builder, extended_entitiesBuilder);
+        TweetStatusFBS.addFavorited(builder, this.favorited);
+        TweetStatusFBS.addRetweeted(builder, this.retweeted);
+        TweetStatusFBS.addPossiblySensitive(builder, this.isPossibly_sensitive());
+        TweetStatusFBS.addFilterLevel(builder, filter_levelBuilder);
+        TweetStatusFBS.addLang(builder, langBuilder);
+        TweetStatusFBS.addMatchingRules(builder, matching_rulesBuilder);
+        TweetStatusFBS.addCurrentUserRetweet(builder, this.current_user_retweet);
+        TweetStatusFBS.addScopes(builder, scopesBuilder);
+        TweetStatusFBS.addWithheldCopyright(builder, this.withheld_copyright);
+        TweetStatusFBS.addWithheldInCountries(builder, withheld_in_countriesBuilder);
+        TweetStatusFBS.addWithheldScope(builder, withheld_scopeBuilder);
+
+        int orc = TweetStatusFBS.endTweetStatusFBS(builder);
+        return orc;
     }
 
     public RootData bsonDeSerialization(byte[] buffData) {
@@ -1867,11 +1964,11 @@ public class TweetStatus extends Base implements RootData {
         this.user = new User();
         this.user.bsonDeSerialization(reader.readBinaryData().getData());
 
-        currentName =reader.readName();
+        currentName = reader.readName();
         if (currentName.equals("coordinates")) {
             this.coordinates = new Coordinates();
             this.coordinates.bsonDeSerialization(reader.readBinaryData().getData());
-            currentName =reader.readName();
+            currentName = reader.readName();
         }
 
         if (currentName.equals("place")) {
@@ -1883,11 +1980,11 @@ public class TweetStatus extends Base implements RootData {
         this.quoted_status_id = reader.readInt64();
         this.is_quote_status = reader.readBoolean("is_quote_status");
 
-        currentName =reader.readName();
+        currentName = reader.readName();
         if (currentName.equals("quoted_status")) {
             this.quoted_status = new TweetStatus();
             this.quoted_status.bsonDeSerialization(reader.readBinaryData().getData());
-            currentName =reader.readName();
+            currentName = reader.readName();
         }
 
         if (currentName.equals("retweeted_status")) {
@@ -1901,11 +1998,11 @@ public class TweetStatus extends Base implements RootData {
         this.retweet_count = reader.readInt32("retweet_count");
         this.favorite_count = reader.readInt32("favorite_count");
 
-        currentName=reader.readName();
+        currentName = reader.readName();
         if (currentName.equals("entities")) {
             this.entities = new Entities();
             this.entities.bsonDeSerialization(reader.readBinaryData().getData());
-            currentName =reader.readName();
+            currentName = reader.readName();
         }
 
         if (currentName.equals("extended_entities")) {
@@ -1946,7 +2043,7 @@ public class TweetStatus extends Base implements RootData {
             this.scopes.put(key, value);
         }
         reader.readEndDocument();
-        this.withheld_copyright=reader.readBoolean("withheld_copyright");
+        this.withheld_copyright = reader.readBoolean("withheld_copyright");
 
         currentName = reader.readName();
         if (currentName.equals("withheld_scope")) {
@@ -1954,11 +2051,11 @@ public class TweetStatus extends Base implements RootData {
             reader.readName();
         }
 
-        int withheld_in_countries_size=reader.readInt32();
+        int withheld_in_countries_size = reader.readInt32();
         reader.readName("withheld_in_countries");
         reader.readStartArray();
         for (int i = 0; i < withheld_in_countries_size; i++) {
-           this.withheld_in_countries.add(reader.readString());
+            this.withheld_in_countries.add(reader.readString());
         }
         reader.readEndArray();
         reader.readEndDocument();

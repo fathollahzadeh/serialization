@@ -1,0 +1,19 @@
+
+include "HashtagEntity.fbs";
+include "MediaEntity.fbs";
+include "URLEntity.fbs";
+include "UserMentionEntity.fbs";
+include "SymbolEntity.fbs";
+include "PollEntity.fbs";
+
+namespace edu.bu.tweet.flatbuffers;
+
+table EntitiesFBS {
+        hashtags:[HashtagEntityFBS];
+        media:[MediaEntityFBS];
+        urls:[URLEntityFBS];
+        user_mentions:[UserMentionEntityFBS];
+        symbols:[SymbolEntityFBS];
+        polls:[PollEntityFBS];
+}
+root_type EntitiesFBS;

@@ -4,6 +4,10 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.MatchingRulesEntityFBS;
+import edu.bu.tweet.flatbuffers.MediaEntityFBS;
+import edu.bu.tweet.flatbuffers.URLEntityFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 
@@ -546,5 +550,42 @@ public class MediaEntity extends Base implements RootData {
 
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+        int display_urlBuilder=this.display_url!=null? builder.createString(this.display_url):0;
+        int expanded_urlBuilder=this.expanded_url!=null? builder.createString(this.expanded_url):0;
+        int media_urlBuilder=this.media_url!=null? builder.createString(this.media_url):0;
+        int media_url_httpsBuilder=this.media_url_https!=null? builder.createString(this.media_url_https):0;
+        int typeBuilder=this.type!=null? builder.createString(this.type):0;
+        int source_status_id_strBuilder=this.source_status_id_str!=null? builder.createString(this.source_status_id_str):0;
+        int urlBuilder=this.url!=null? builder.createString(this.url):0;
+
+        int[] indicesList=new int[this.indices.size()];
+        for (int i=0;i<this.indices.size();i++) {
+            indicesList[i]=this.indices.get(i);
+        }
+        int indicesBuilder= URLEntityFBS.createIndicesVector(builder,indicesList);
+        int sizesBuilder=this.sizes!=null? this.sizes.flatBuffersWriter(builder):0;
+        int video_infoBuilder=this.video_info!=null ? this.video_info.flatBuffersWriter(builder):0;
+        int additional_media_infoBuilder=this.additional_media_info!=null ? this.additional_media_info.flatBuffersWriter(builder):0;
+
+        MediaEntityFBS.startMediaEntityFBS(builder);
+        MediaEntityFBS.addDisplayUrl(builder, display_urlBuilder);
+        MediaEntityFBS.addExpandedUrl(builder, expanded_urlBuilder);
+        MediaEntityFBS.addId(builder, this.id);
+        MediaEntityFBS.addIndices(builder, indicesBuilder);
+        MediaEntityFBS.addMediaUrl(builder, media_urlBuilder);
+        MediaEntityFBS.addMediaUrlHttps(builder, media_url_httpsBuilder);
+        MediaEntityFBS.addSizes(builder, sizesBuilder);
+        MediaEntityFBS.addType(builder, typeBuilder);
+        MediaEntityFBS.addSourceStatusId(builder, this.source_status_id);
+        MediaEntityFBS.addSourceStatusIdStr(builder, source_status_id_strBuilder);
+        MediaEntityFBS.addUrl(builder, urlBuilder);
+        MediaEntityFBS.addVideoInfo(builder, video_infoBuilder);
+        MediaEntityFBS.addAdditionalMediaInfo(builder, additional_media_infoBuilder);
+
+        int orc = MediaEntityFBS.endMediaEntityFBS(builder);
+        return orc;
     }
 }

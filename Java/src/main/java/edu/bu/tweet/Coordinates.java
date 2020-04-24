@@ -11,6 +11,10 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.CoordinatesFBS;
+import edu.bu.tweet.flatbuffers.URLEntityFBS;
+import edu.bu.tweet.flatbuffers.UserFBS;
 import org.apache.log4j.Logger;
 
 import edu.bu.util.Base;
@@ -203,5 +207,17 @@ public class Coordinates extends Base implements RootData {
         reader.readEndDocument();
 
         return this;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int typeBuilder=this.type!=null? builder.createString(this.type):0;
+        int coordinatesBuilder=CoordinatesFBS.createCoordinatesVector(builder,this.coordinates);
+
+        CoordinatesFBS.startCoordinatesFBS(builder);
+        CoordinatesFBS.addType(builder, typeBuilder);
+        CoordinatesFBS.addCoordinates(builder, coordinatesBuilder);
+        int orc = CoordinatesFBS.endCoordinatesFBS(builder);
+        return orc;
     }
 }

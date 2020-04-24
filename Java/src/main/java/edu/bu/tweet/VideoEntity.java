@@ -1,5 +1,9 @@
 package edu.bu.tweet;
 
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.URLEntityFBS;
+import edu.bu.tweet.flatbuffers.VariantEntityFBS;
+import edu.bu.tweet.flatbuffers.VideoEntityFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
@@ -238,5 +242,30 @@ public class VideoEntity extends Base implements RootData {
 
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int[] aspect_ratioList=new int[this.aspect_ratio.size()];
+        for (int i=0;i<this.aspect_ratio.size();i++) {
+            aspect_ratioList[i]=this.aspect_ratio.get(i);
+        }
+        int aspect_ratioBuilder= VideoEntityFBS.createAspectRatioVector(builder,aspect_ratioList);
+
+        int[] variantsList=new int[this.variants.size()];
+        int i=0;
+        for (VariantEntity variantEntity:this.variants) {
+            variantsList[i]=variantEntity.flatBuffersWriter(builder);
+            i++;
+        }
+        int variantsBuilder= VideoEntityFBS.createVariantsVector(builder,variantsList);
+
+        VideoEntityFBS.startVideoEntityFBS(builder);
+
+        VideoEntityFBS.addAspectRatio(builder, aspect_ratioBuilder);
+        VideoEntityFBS.addDurationMillis(builder, this.duration_millis);
+        VideoEntityFBS.addVariants(builder,variantsBuilder);
+        int orc = VideoEntityFBS.endVideoEntityFBS(builder);
+        return orc;
     }
 }

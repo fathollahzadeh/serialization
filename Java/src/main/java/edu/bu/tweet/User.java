@@ -5,6 +5,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.TweetStatusFBS;
+import edu.bu.tweet.flatbuffers.UserFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 
@@ -1004,26 +1007,26 @@ public class User extends Base implements RootData {
 
         this.isProtected = reader.readBoolean();
         this.verified = reader.readBoolean("verified");
-        this.followers_count=reader.readInt32("followers_count");
-        this.friends_count=reader.readInt32("friends_count");
-        this.listed_count=reader.readInt32("listed_count");
-        this.favourites_count=reader.readInt32("favourites_count");
-        this.statuses_count=reader.readInt32("statuses_count");
-        this.created_at=reader.readString("created_at");
+        this.followers_count = reader.readInt32("followers_count");
+        this.friends_count = reader.readInt32("friends_count");
+        this.listed_count = reader.readInt32("listed_count");
+        this.favourites_count = reader.readInt32("favourites_count");
+        this.statuses_count = reader.readInt32("statuses_count");
+        this.created_at = reader.readString("created_at");
 
         currentName = reader.readName();
-        if (currentName.equals("profile_banner_url")){
-            this.profile_banner_url=reader.readString();
+        if (currentName.equals("profile_banner_url")) {
+            this.profile_banner_url = reader.readString();
             currentName = reader.readName();
         }
 
-        if (currentName.equals("profile_image_url_https")){
-            this.profile_image_url_https=reader.readString();
+        if (currentName.equals("profile_image_url_https")) {
+            this.profile_image_url_https = reader.readString();
             reader.readName();
         }
         this.default_profile = reader.readBoolean();
 
-        int withheld_in_countries_size=reader.readInt32("withheld_in_countries_size");
+        int withheld_in_countries_size = reader.readInt32("withheld_in_countries_size");
         reader.readName("withheld_in_countries");
         reader.readStartArray();
         for (int i = 0; i < withheld_in_countries_size; i++) {
@@ -1033,8 +1036,8 @@ public class User extends Base implements RootData {
 
 
         currentName = reader.readName();
-        if (currentName.equals("withheld_scope")){
-            this.withheld_scope=reader.readString();
+        if (currentName.equals("withheld_scope")) {
+            this.withheld_scope = reader.readString();
             reader.readName();
         }
 
@@ -1049,74 +1052,160 @@ public class User extends Base implements RootData {
         }
         reader.readEndArray();
 
-        this.geo_enabled=reader.readBoolean("geo_enabled");
+        this.geo_enabled = reader.readBoolean("geo_enabled");
 
         currentName = reader.readName();
-        if (currentName.equals("lang")){
-            this.lang=reader.readString();
+        if (currentName.equals("lang")) {
+            this.lang = reader.readString();
             reader.readName();
         }
 
-        this.contributors_enabled=reader.readBoolean();
+        this.contributors_enabled = reader.readBoolean();
 
         currentName = reader.readName();
-        if (currentName.equals("profile_background_color")){
-            this.profile_background_color=reader.readString();
+        if (currentName.equals("profile_background_color")) {
+            this.profile_background_color = reader.readString();
             currentName = reader.readName();
         }
 
-        if (currentName.equals("profile_background_image_url")){
-            this.profile_background_image_url=reader.readString();
+        if (currentName.equals("profile_background_image_url")) {
+            this.profile_background_image_url = reader.readString();
             currentName = reader.readName();
         }
 
-        if (currentName.equals("profile_background_image_url_https")){
-            this.profile_background_image_url_https=reader.readString();
+        if (currentName.equals("profile_background_image_url_https")) {
+            this.profile_background_image_url_https = reader.readString();
             reader.readName();
         }
-        this.profile_background_tile=reader.readBoolean();
+        this.profile_background_tile = reader.readBoolean();
 
         currentName = reader.readName();
-        if (currentName.equals("profile_image_url")){
-            this.profile_image_url=reader.readString();
+        if (currentName.equals("profile_image_url")) {
+            this.profile_image_url = reader.readString();
             currentName = reader.readName();
         }
 
-        if (currentName.equals("profile_link_color")){
-            this.profile_link_color=reader.readString();
+        if (currentName.equals("profile_link_color")) {
+            this.profile_link_color = reader.readString();
             currentName = reader.readName();
         }
-        if (currentName.equals("profile_sidebar_border_color")){
-            this.profile_sidebar_border_color=reader.readString();
-            currentName = reader.readName();
-        }
-
-        if (currentName.equals("profile_sidebar_fill_color")){
-            this.profile_sidebar_fill_color=reader.readString();
+        if (currentName.equals("profile_sidebar_border_color")) {
+            this.profile_sidebar_border_color = reader.readString();
             currentName = reader.readName();
         }
 
-        if (currentName.equals("profile_text_color")){
-            this.profile_text_color=reader.readString();
-            reader.readName();
+        if (currentName.equals("profile_sidebar_fill_color")) {
+            this.profile_sidebar_fill_color = reader.readString();
+            currentName = reader.readName();
         }
 
-        this.profile_use_background_image=reader.readBoolean();
-        this.utc_offset=reader.readInt32("utc_offset");
-
-
-        currentName = reader.readName();
-        if (currentName.equals("time_zone")){
-            this.time_zone=reader.readString();
+        if (currentName.equals("profile_text_color")) {
+            this.profile_text_color = reader.readString();
             reader.readName();
         }
 
-        this.is_translator=reader.readBoolean();
-        this.follow_request_sent=reader.readBoolean("follow_request_sent");
-        this.showAllInlineMedia=reader.readBoolean("showAllInlineMedia");
+        this.profile_use_background_image = reader.readBoolean();
+        this.utc_offset = reader.readInt32("utc_offset");
+
+
+        currentName = reader.readName();
+        if (currentName.equals("time_zone")) {
+            this.time_zone = reader.readString();
+            reader.readName();
+        }
+
+        this.is_translator = reader.readBoolean();
+        this.follow_request_sent = reader.readBoolean("follow_request_sent");
+        this.showAllInlineMedia = reader.readBoolean("showAllInlineMedia");
 
         reader.readEndDocument();
 
         return this;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int nameBuilder = this.name != null ? builder.createString(this.name) : 0;
+        int screen_nameBuilder = this.screen_name != null ? builder.createString(this.screen_name) : 0;
+        int locationBuilder = this.location != null ? builder.createString(this.location) : 0;
+        int urlBuilder = this.url != null ? builder.createString(this.url) : 0;
+        int descriptionBuilder = this.description != null ? builder.createString(this.description) : 0;
+        int created_atBuilder = this.created_at != null ? builder.createString(this.created_at) : 0;
+        int profile_banner_urlBuilder = this.profile_banner_url != null ? builder.createString(this.profile_banner_url) : 0;
+        int profile_image_url_httpsBuilder = this.profile_image_url_https != null ? builder.createString(this.profile_image_url_https) : 0;
+        int withheld_scopeBuilder = this.withheld_scope != null ? builder.createString(this.withheld_scope) : 0;
+        int langBuilder = this.lang != null ? builder.createString(this.lang) : 0;
+        int profile_background_colorBuilder = this.profile_background_color != null ? builder.createString(this.profile_background_color) : 0;
+        int profile_background_image_urlBuilder = this.profile_background_image_url != null ? builder.createString(this.profile_background_image_url) : 0;
+        int profile_background_image_url_httpsBuilder = this.profile_background_image_url_https != null ? builder.createString(this.profile_background_image_url_https) : 0;
+        int profile_image_urlBuilder = this.profile_image_url != null ? builder.createString(this.profile_image_url) : 0;
+        int profile_link_colorBuilder = this.profile_link_color != null ? builder.createString(this.profile_link_color) : 0;
+        int profile_sidebar_border_colorBuilder = this.profile_sidebar_border_color != null ? builder.createString(this.profile_sidebar_border_color) : 0;
+        int profile_sidebar_fill_colorBuilder = this.profile_sidebar_fill_color != null ? builder.createString(this.profile_sidebar_fill_color) : 0;
+        int profile_text_colorBuilder = this.profile_text_color != null ? builder.createString(this.profile_text_color) : 0;
+        int time_zoneBuilder = this.time_zone != null ? builder.createString(this.time_zone) : 0;
+
+        int[] withheld_in_countriesList = new int[this.withheld_in_countries.size()];
+        int i = 0;
+        for (String s : this.withheld_in_countries) {
+            int item = builder.createString(s);
+            withheld_in_countriesList[i] = item;
+            i++;
+        }
+        int withheld_in_countriesBuilder = UserFBS.createWithheldInCountriesVector(builder, withheld_in_countriesList);
+
+        int[] descriptionURLEntitiesList=new int[this.descriptionURLEntities.size()];
+        i=0;
+        for (URLEntity urlEntity : this.descriptionURLEntities) {
+            descriptionURLEntitiesList[i]=urlEntity.flatBuffersWriter(builder);
+            i++;
+        }
+        int descriptionURLEntitiesBuilder = UserFBS.createDescriptionURLEntitiesVector(builder, descriptionURLEntitiesList);
+
+
+        UserFBS.startUserFBS(builder);
+        UserFBS.addId(builder, this.id);
+        UserFBS.addName(builder, nameBuilder);
+        UserFBS.addScreenName(builder, screen_nameBuilder);
+        UserFBS.addLocation(builder, locationBuilder);
+        UserFBS.addUrl(builder, urlBuilder);
+        UserFBS.addDescription(builder, descriptionBuilder);
+        UserFBS.addIsProtected(builder, this.isProtected);
+        UserFBS.addVerified(builder, this.verified);
+        UserFBS.addFollowersCount(builder, this.followers_count);
+        UserFBS.addFriendsCount(builder, this.friends_count);
+        UserFBS.addListedCount(builder, this.listed_count);
+        UserFBS.addFavouritesCount(builder, this.favourites_count);
+        UserFBS.addStatusesCount(builder, this.statuses_count);
+
+        UserFBS.addCreatedAt(builder, created_atBuilder);
+        UserFBS.addProfileBannerUrl(builder, profile_banner_urlBuilder);
+        UserFBS.addProfileImageUrlHttps(builder, profile_image_url_httpsBuilder);
+        UserFBS.addDefaultProfile(builder, this.default_profile);
+        UserFBS.addWithheldInCountries(builder, withheld_in_countriesBuilder);
+        UserFBS.addWithheldScope(builder, withheld_scopeBuilder);
+        UserFBS.addDescriptionURLEntities(builder,descriptionURLEntitiesBuilder);
+        UserFBS.addGeoEnabled(builder,this.geo_enabled);
+        UserFBS.addLang(builder,langBuilder);
+        UserFBS.addContributorsEnabled(builder,contributors_enabled);
+        UserFBS.addProfileBackgroundColor(builder,profile_background_colorBuilder);
+        UserFBS.addProfileBackgroundImageUrl(builder,profile_background_image_urlBuilder);
+        UserFBS.addProfileBackgroundImageUrlHttps(builder,profile_background_image_url_httpsBuilder);
+        UserFBS.addProfileBackgroundTile(builder,this.profile_background_tile);
+        UserFBS.addProfileImageUrl(builder,profile_image_urlBuilder);
+        UserFBS.addProfileLinkColor(builder,profile_link_colorBuilder);
+        UserFBS.addProfileSidebarBorderColor(builder,profile_sidebar_border_colorBuilder);
+        UserFBS.addProfileSidebarFillColor(builder,profile_sidebar_fill_colorBuilder);
+        UserFBS.addProfileTextColor(builder,profile_text_colorBuilder);
+        UserFBS.addProfileUseBackgroundImage(builder,this.profile_use_background_image);
+        UserFBS.addDefaultProfile(builder,this.default_profile);
+        UserFBS.addUtcOffset(builder,this.utc_offset);
+        UserFBS.addTimeZone(builder,time_zoneBuilder);
+        UserFBS.addIsTranslator(builder,this.is_translator);
+        UserFBS.addFollowRequestSent(builder,this.follow_request_sent);
+        UserFBS.addShowAllInlineMedia(builder,this.showAllInlineMedia);
+
+        int orc = UserFBS.endUserFBS(builder);
+        return orc;
     }
 }

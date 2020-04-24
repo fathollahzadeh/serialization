@@ -1,0 +1,9 @@
+namespace edu.bu.tweet.flatbuffers;
+
+table AdditionalMediaInfoEntityFBS {
+    title:string;
+    description:string;
+    embeddable:bool;
+    monetizable:bool;
+}
+root_type AdditionalMediaInfoEntityFBS;

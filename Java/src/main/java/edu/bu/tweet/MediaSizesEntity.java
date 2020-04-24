@@ -2,9 +2,15 @@ package edu.bu.tweet;
 
 import java.nio.ByteBuffer;
 import java.util.List;
+
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.MediaEntityFBS;
+import edu.bu.tweet.flatbuffers.MediaSizesEntityFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
+
 import javax.json.*;
+
 import org.apache.log4j.Logger;
 import org.bson.BsonBinary;
 import org.bson.BsonBinaryReader;
@@ -178,37 +184,38 @@ public class MediaSizesEntity extends Base implements RootData {
 
         if (jsonObject.getJsonObject("thumb") != null && jsonObject.getJsonObject("thumb") != JsonValue.NULL) {
             JsonObject thumbJsonObject = jsonObject.getJsonObject("thumb");
-            this.thumb=new SizeEntity().readJSONSizeEntity(thumbJsonObject);
+            this.thumb = new SizeEntity().readJSONSizeEntity(thumbJsonObject);
         }
         if (jsonObject.getJsonObject("large") != null && jsonObject.getJsonObject("large") != JsonValue.NULL) {
             JsonObject largeJsonObject = jsonObject.getJsonObject("large");
-            this.large=new SizeEntity().readJSONSizeEntity(largeJsonObject);
+            this.large = new SizeEntity().readJSONSizeEntity(largeJsonObject);
         }
         if (jsonObject.getJsonObject("medium") != null && jsonObject.getJsonObject("medium") != JsonValue.NULL) {
             JsonObject mediumJsonObject = jsonObject.getJsonObject("medium");
-            this.medium=new SizeEntity().readJSONSizeEntity(mediumJsonObject);
+            this.medium = new SizeEntity().readJSONSizeEntity(mediumJsonObject);
         }
         if (jsonObject.getJsonObject("small") != null && jsonObject.getJsonObject("small") != JsonValue.NULL) {
             JsonObject smallJsonObject = jsonObject.getJsonObject("small");
-            this.small=new SizeEntity().readJSONSizeEntity(smallJsonObject);
+            this.small = new SizeEntity().readJSONSizeEntity(smallJsonObject);
         }
         return this;
     }
+
     public byte[] bsonSerialization() {
         BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
         writer.writeStartDocument();
 
-        if (this.thumb!=null)
-            writer.writeBinaryData("thumb",new BsonBinary(this.thumb.bsonSerialization()));
-        if (this.large!=null)
-            writer.writeBinaryData("large",new BsonBinary(this.large.bsonSerialization()));
-        if (this.medium!=null)
-            writer.writeBinaryData("medium",new BsonBinary(this.medium.bsonSerialization()));
-        if (this.small!=null)
-            writer.writeBinaryData("small",new BsonBinary(this.small.bsonSerialization()));
-        writer.writeBoolean("eof",true);
+        if (this.thumb != null)
+            writer.writeBinaryData("thumb", new BsonBinary(this.thumb.bsonSerialization()));
+        if (this.large != null)
+            writer.writeBinaryData("large", new BsonBinary(this.large.bsonSerialization()));
+        if (this.medium != null)
+            writer.writeBinaryData("medium", new BsonBinary(this.medium.bsonSerialization()));
+        if (this.small != null)
+            writer.writeBinaryData("small", new BsonBinary(this.small.bsonSerialization()));
+        writer.writeBoolean("eof", true);
         writer.writeEndDocument();
 
         return outputBuffer.toByteArray();
@@ -216,31 +223,31 @@ public class MediaSizesEntity extends Base implements RootData {
 
     public RootData bsonDeSerialization(byte[] buffData) {
         ByteBuffer buf = ByteBuffer.wrap(buffData);
-        BsonBinaryReader reader=new BsonBinaryReader(buf);
+        BsonBinaryReader reader = new BsonBinaryReader(buf);
 
         reader.readStartDocument();
 
-        String currentName=reader.readName();
-        if (currentName.equals("thumb")){
-            this.thumb=new SizeEntity();
+        String currentName = reader.readName();
+        if (currentName.equals("thumb")) {
+            this.thumb = new SizeEntity();
             this.thumb.bsonDeSerialization(reader.readBinaryData().getData());
-            currentName=reader.readName();
+            currentName = reader.readName();
         }
 
-        if (currentName.equals("large")){
-            this.large=new SizeEntity();
+        if (currentName.equals("large")) {
+            this.large = new SizeEntity();
             this.large.bsonDeSerialization(reader.readBinaryData().getData());
-            currentName=reader.readName();
+            currentName = reader.readName();
         }
 
-        if (currentName.equals("medium")){
-            this.medium=new SizeEntity();
+        if (currentName.equals("medium")) {
+            this.medium = new SizeEntity();
             this.medium.bsonDeSerialization(reader.readBinaryData().getData());
-            currentName=reader.readName();
+            currentName = reader.readName();
         }
 
-        if (currentName.equals("small")){
-            this.small=new SizeEntity();
+        if (currentName.equals("small")) {
+            this.small = new SizeEntity();
             this.small.bsonDeSerialization(reader.readBinaryData().getData());
             reader.readName();
         }
@@ -252,6 +259,22 @@ public class MediaSizesEntity extends Base implements RootData {
 
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int thumbBuilder = this.thumb != null ? this.thumb.flatBuffersWriter(builder) : 0;
+        int largeBuilder = this.large != null ? this.large.flatBuffersWriter(builder) : 0;
+        int mediumBuilder = this.medium != null ? this.medium.flatBuffersWriter(builder) : 0;
+        int smallBuilder = this.small != null ? this.small.flatBuffersWriter(builder) : 0;
+
+        MediaSizesEntityFBS.startMediaSizesEntityFBS(builder);
+        MediaSizesEntityFBS.addThumb(builder, thumbBuilder);
+        MediaSizesEntityFBS.addLarge(builder, largeBuilder);
+        MediaSizesEntityFBS.addMedium(builder, mediumBuilder);
+        MediaSizesEntityFBS.addSmall(builder, smallBuilder);
+        int orc = MediaSizesEntityFBS.endMediaSizesEntityFBS(builder);
+        return orc;
     }
 }
 

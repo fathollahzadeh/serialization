@@ -1,5 +1,8 @@
 package edu.bu.tweet;
 
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.MediaSizesEntityFBS;
+import edu.bu.tweet.flatbuffers.OptionEntityFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.apache.log4j.Logger;
@@ -76,7 +79,7 @@ public class OptionEntity extends Base implements RootData {
         byte[] textBytes = (text != null) ? text.getBytes() : new byte[0];
         allocatedBufferSize += textBytes.length + 4;
 
-        allocatedBufferSize+=4;//position
+        allocatedBufferSize += 4;//position
 
         // array fields
         ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
@@ -93,14 +96,14 @@ public class OptionEntity extends Base implements RootData {
 
         stringSize = byteBuffer.getInt();
         this.text = extractString(byteBuffer, stringSize);
-        this.position=byteBuffer.getInt();
+        this.position = byteBuffer.getInt();
 
         return this;
     }
 
     public JsonObject jsonObjectBuilder() {
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        objectBuilder.add("position",this.position);
+        objectBuilder.add("position", this.position);
         if (this.text != null && !this.text.isEmpty()) {
             objectBuilder.add("text", this.text);
         }
@@ -110,21 +113,22 @@ public class OptionEntity extends Base implements RootData {
 
     public OptionEntity readJSONOptionEntity(JsonObject jsonObject) {
 
-        this.position=jsonObject.getInt("position");
+        this.position = jsonObject.getInt("position");
         if (jsonObject.get("text") != null && jsonObject.get("text") != JsonValue.NULL) {
             this.text = jsonObject.getString("text");
         }
         return this;
     }
+
     public byte[] bsonSerialization() {
         BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
         writer.writeStartDocument();
-        if (this.text!=null){
-            writer.writeString("text",this.text);
+        if (this.text != null) {
+            writer.writeString("text", this.text);
         }
-        writer.writeInt32("position",this.position);
+        writer.writeInt32("position", this.position);
         writer.writeEndDocument();
 
         return outputBuffer.toByteArray();
@@ -133,15 +137,15 @@ public class OptionEntity extends Base implements RootData {
 
     public RootData bsonDeSerialization(byte[] buffData) {
         ByteBuffer buf = ByteBuffer.wrap(buffData);
-        BsonBinaryReader reader=new BsonBinaryReader(buf);
+        BsonBinaryReader reader = new BsonBinaryReader(buf);
 
         reader.readStartDocument();
 
-        String currentName=reader.readName();
-        if (currentName.equals("text")){
-            this.text=reader.readString();
+        String currentName = reader.readName();
+        if (currentName.equals("text")) {
+            this.text = reader.readString();
         }
-        this.position=reader.readInt32();
+        this.position = reader.readInt32();
 
         reader.readEndDocument();
 
@@ -150,5 +154,17 @@ public class OptionEntity extends Base implements RootData {
 
     public int compareTo(RootData o) {
         return 0;
+    }
+
+    public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+        int textBuilder = this.text != null ? builder.createString(this.text) : 0;
+
+        OptionEntityFBS.startOptionEntityFBS(builder);
+        OptionEntityFBS.addPosition(builder, this.position);
+        OptionEntityFBS.addText(builder, textBuilder);
+
+        int orc = OptionEntityFBS.endOptionEntityFBS(builder);
+        return orc;
     }
 }

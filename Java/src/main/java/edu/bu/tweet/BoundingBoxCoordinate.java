@@ -4,6 +4,12 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.json.*;
+
+import com.google.flatbuffers.FlatBufferBuilder;
+import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
+import edu.bu.tweet.flatbuffers.BoundingBoxCoordinateFBS;
+import edu.bu.tweet.flatbuffers.DoubleList1;
+import edu.bu.tweet.flatbuffers.DoubleList2;
 import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
@@ -272,6 +278,33 @@ public class BoundingBoxCoordinate extends Base implements RootData {
 		return this;
 	}
 
+	public int flatBuffersWriter(FlatBufferBuilder builder) {
+
+		int typeBuilder=this.type!=null? builder.createString(this.type):0;
+
+		int[] coordinatesList=new int[this.coordinates.size()];
+		for (int i=0;i<this.coordinates.size();i++){
+
+			int[] list1=new int[this.coordinates.get(i).size()];
+			for (int j=0;j<this.coordinates.get(i).size();j++){
+
+				double[] list2=new double[this.coordinates.get(i).get(j).size()];
+				for (int k=0;k<this.coordinates.get(i).get(j).size();k++){
+					list2[k]=this.coordinates.get(i).get(j).get(k);
+				}
+				list1[j]= DoubleList2.createValuesVector(builder,list2);
+			}
+			coordinatesList[i]= DoubleList1.createValuesVector(builder,list1);
+		}
+		int coordinateBuilder= BoundingBoxCoordinateFBS.createCoordinatesVector(builder,coordinatesList);
+
+		BoundingBoxCoordinateFBS.startBoundingBoxCoordinateFBS(builder);
+
+		BoundingBoxCoordinateFBS.addType(builder, typeBuilder);
+		BoundingBoxCoordinateFBS.addCoordinates(builder,coordinateBuilder);
+		int orc = BoundingBoxCoordinateFBS.endBoundingBoxCoordinateFBS(builder);
+		return orc;
+	}
 	public int compareTo(RootData o) {
 		return 0;
 	}
