@@ -1181,7 +1181,6 @@ public class User extends Base implements RootData {
         UserFBS.addCreatedAt(builder, created_atBuilder);
         UserFBS.addProfileBannerUrl(builder, profile_banner_urlBuilder);
         UserFBS.addProfileImageUrlHttps(builder, profile_image_url_httpsBuilder);
-        UserFBS.addDefaultProfile(builder, this.default_profile);
         UserFBS.addWithheldInCountries(builder, withheld_in_countriesBuilder);
         UserFBS.addWithheldScope(builder, withheld_scopeBuilder);
         UserFBS.addDescriptionURLEntities(builder,descriptionURLEntitiesBuilder);
