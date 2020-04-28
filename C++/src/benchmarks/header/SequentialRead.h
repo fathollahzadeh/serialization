@@ -26,9 +26,11 @@ private:
 
     LogFileHandler *logFileHandler;
 
+    bool taskset;
+
 public:
 
-    SequentialRead(string fileName, int serializationType, long from, long cuntToRead, int round);
+    SequentialRead(string fileName, int serializationType, long from, long cuntToRead, int round,bool taskset);
 
     SequentialRead();
 
@@ -53,8 +55,8 @@ void SequentialRead<T>::runTheSequentialRead() {
     fileHandler->getObjectsFromFile(from, cuntToRead, objectList);
     double elapsedSeconds = chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
-    // add times to the log file
-    this->logFileHandler->addLog(serializationType, true, "TweetStatus", fileHandler->getIoTime(), elapsedSeconds);
+     // add times to the log file
+    this->logFileHandler->addLog(serializationType, true, "TweetStatus", fileHandler->getIoTime(), elapsedSeconds,taskset);
     this->logFileHandler->flushLogFile();
 
     // free memory:
@@ -81,10 +83,11 @@ template<class T>
 SequentialRead<T>::SequentialRead() {}
 
 template<class T>
-SequentialRead<T>::SequentialRead(string fileName, int serializationType, long from, long cuntToRead, int round) {
+SequentialRead<T>::SequentialRead(string fileName, int serializationType, long from, long cuntToRead, int round,bool taskset) {
     this->fileName = fileName;
     this->serializationType = serializationType;
     this->cuntToRead = cuntToRead;
+    this->taskset=taskset;
     this->from = from;
     this->logFileHandler = new LogFileHandler(
             "bin/benchmark/readobjects/result_cpp_readobjects_" + to_string(cuntToRead) + "_" + to_string(round) +

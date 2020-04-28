@@ -61,12 +61,14 @@ private:
     // define variables for calculate bench time:
     double ioTime = 0;
 
+    bool taskset;
+
 public:
     ExternalSort();
 
     virtual ~ExternalSort();
 
-    ExternalSort(string fileName, int numberOfFiles, int serializationType,int round);
+    ExternalSort(string fileName, int numberOfFiles, int serializationType,int round,bool taskset);
 
     void runTheExternalSort();
 
@@ -110,9 +112,9 @@ void ExternalSort<T>::runTheExternalSort() {
 
         // define a vector to store read objects from each file:
         vector<T *> m_list_read_from_file;
-
         // read objects from file:
         fileHandler->getObjectsFromFile(startIndexInEachFile, numberOfObjectsInEachFiles, m_list_read_from_file);
+
         // Sort the data
         auto tmpTime = chrono::steady_clock::now();
 
@@ -121,11 +123,9 @@ void ExternalSort<T>::runTheExternalSort() {
 
         // Sort Time Calculation
         sortTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
-
         // write the sorted list back to files.
         string tmpStoreFileName = "bin/tmp/sorted-" + to_string(i) + "-" + to_string(serializationType);
         writeToFiles(m_list_read_from_file, tmpStoreFileName);
-
         //free memory:
         for (long i = 0; i < m_list_read_from_file.size(); ++i) {
             if (serializationType!=2){
@@ -135,7 +135,6 @@ void ExternalSort<T>::runTheExternalSort() {
                 delete[] tbuffer;
             }
         }
-
         m_list_read_from_file.shrink_to_fit();
     }
 
@@ -283,7 +282,7 @@ void ExternalSort<T>::runTheExternalSort() {
     double elapsedSeconds = chrono::duration<double>(endTime - startTime).count();
 
     // add times to the log file
-    this->logFileHandler->addLog(serializationType, true, "TweetStatus", ioTime, elapsedSeconds);
+    this->logFileHandler->addLog(serializationType, true, "TweetStatus", ioTime, elapsedSeconds,taskset);
     this->logFileHandler->flushLogFile();
 }
 
@@ -302,10 +301,11 @@ void ExternalSort<T>::writeToFiles(vector<T *> list, string filename) {
 }
 
 template<class T>
-ExternalSort<T>::ExternalSort(string fileName, int numberOfFiles, int serializationType,int round){
+ExternalSort<T>::ExternalSort(string fileName, int numberOfFiles, int serializationType,int round, bool taskset){
     this->fileName=fileName;
     this->numberOfFiles=numberOfFiles;
     this->serializationType=serializationType;
+    this->taskset=taskset;
     this->logFileHandler=new LogFileHandler("bin/benchmark/externalsort/result_cpp_externalsort_"+to_string(round)+".txt");
 }
 

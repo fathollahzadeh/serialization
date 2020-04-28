@@ -33,11 +33,19 @@ int main(int argc, char *argv[]) {
 
     int round=atoi(argv[5]);
 
+    bool taskset;
+
+    int ts=atoi(argv[6]);
+    if (ts==1)
+        taskset= true;
+    else
+        taskset= false;
+
     switch (serializationType) {
         case 1:
         case 3:
         case 5:{
-            SequentialRead<TweetStatus> *sequentialRead=new SequentialRead<TweetStatus>(inFile,serializationType,from,numberofobjects,round);
+            SequentialRead<TweetStatus> *sequentialRead=new SequentialRead<TweetStatus>(inFile,serializationType,from,numberofobjects,round,taskset);
             sequentialRead->runTheSequentialRead();
 
             // free memory
@@ -46,7 +54,7 @@ int main(int argc, char *argv[]) {
         }
 
         case 2: {
-            SequentialRead<TweetStatusIP> *sequentialRead=new SequentialRead<TweetStatusIP>(inFile,serializationType,from,numberofobjects,round);
+            SequentialRead<TweetStatusIP> *sequentialRead=new SequentialRead<TweetStatusIP>(inFile,serializationType,from,numberofobjects,round,taskset);
             sequentialRead->runTheSequentialRead();
 
             // free memory
@@ -54,13 +62,22 @@ int main(int argc, char *argv[]) {
             break;
         }
 
-        case 4:
-            SequentialRead<TweetStatusProto> *sequentialRead=new SequentialRead<TweetStatusProto>(inFile,serializationType,from,numberofobjects,round);
+        case 4: {
+            SequentialRead <TweetStatusProto> *sequentialRead = new SequentialRead<TweetStatusProto>(inFile,serializationType,from,numberofobjects, round,taskset);
             sequentialRead->runTheSequentialRead();
 
             // free memory
             delete sequentialRead;
             break;
+        }
+        case 6: {
+            SequentialRead <TweetStatusFlatBuffers> *sequentialRead = new SequentialRead<TweetStatusFlatBuffers>(inFile,serializationType,from,numberofobjects, round,taskset);
+            sequentialRead->runTheSequentialRead();
+
+            // free memory
+            delete sequentialRead;
+            break;
+        }
 
     }
     return 0;

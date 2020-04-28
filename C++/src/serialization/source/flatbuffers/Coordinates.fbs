@@ -1,0 +1,7 @@
+namespace tweetstatusflatbuffers;
+
+table CoordinatesFBS {
+        type:string;
+        coordinates:[double];
+}
+root_type CoordinatesFBS;

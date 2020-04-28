@@ -415,3 +415,12 @@ TweetStatusProto *TweetStatusProto::deserializeBSON(bsoncxx::document::view doc)
 
 TweetStatusProto::TweetStatusProto(bool isPointer) : isPointer(isPointer) {}
 
+void TweetStatusProto::serializeFlatBuffers(char *buffer, int &objectSize) {
+
+}
+
+TweetStatusProto *TweetStatusProto::deserializeFlatBuffers(char *buffer, int &bytesRead) {
+    return nullptr;
+}
+
+

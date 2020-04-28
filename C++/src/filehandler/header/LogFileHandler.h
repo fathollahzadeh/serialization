@@ -22,7 +22,7 @@ public:
 
     void addLog(string log);
     //language#method#seq#datatype#iotime#totaltime
-    void addLog(int serializationType, bool seq,string datatype, double iotime, double totaltime);
+    void addLog(int serializationType, bool seq,string datatype, double iotime, double totaltime, bool taskset);
 
     void flushLogFile();
 

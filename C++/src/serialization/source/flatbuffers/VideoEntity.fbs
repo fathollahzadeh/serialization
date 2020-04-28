@@ -1,0 +1,11 @@
+include "VariantEntity.fbs";
+
+namespace tweetstatusflatbuffers;
+
+table VideoEntityFBS {
+
+        aspect_ratio:[int];
+        duration_millis:int;
+        variants:[VariantEntityFBS];
+}
+root_type VideoEntityFBS;

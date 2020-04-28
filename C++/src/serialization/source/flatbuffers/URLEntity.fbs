@@ -1,0 +1,9 @@
+namespace tweetstatusflatbuffers;
+
+table URLEntityFBS {
+        indices:[int];
+        display_url:string;
+        expanded_url:string;
+        url:string;
+}
+root_type URLEntityFBS;

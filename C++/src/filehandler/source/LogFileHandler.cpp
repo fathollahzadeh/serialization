@@ -19,9 +19,14 @@ void LogFileHandler::addLog(string log) {
     logFile << log<<"\n";
 }
 
-void LogFileHandler::addLog(int serializationType, bool seq, string datatype, double iotime, double totaltime) {
+void LogFileHandler::addLog(int serializationType, bool seq, string datatype, double iotime, double totaltime, bool taskset) {
 
     logFile<<"[ReadTimeCPP]#";
+    if (taskset){
+        logFile<<"true#";
+    } else
+        logFile<<"false#";
+
     string method="";
     switch (serializationType){
         case 1:
@@ -38,6 +43,9 @@ void LogFileHandler::addLog(int serializationType, bool seq, string datatype, do
             break;
         case 5:
             method="C++ Bson";
+            break;
+        case 6:
+            method="C++ FlatBuffers";
             break;
 
     }

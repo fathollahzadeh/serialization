@@ -683,6 +683,14 @@ int TweetStatus::getOrder() {
 
 TweetStatus::TweetStatus(bool isPointer) : isPointer(isPointer) {}
 
+void TweetStatus::serializeFlatBuffers(char *buffer, int &objectSize) {
+
+}
+
+TweetStatus *TweetStatus::deserializeFlatBuffers(char *buffer, int &bytesRead) {
+    return nullptr;
+}
+
 
 
 

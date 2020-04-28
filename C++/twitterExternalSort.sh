@@ -3,6 +3,8 @@
 #define a name for project target
 project_target="TwitterExternalSort"
 mkdir -p "bin/tmp"
+mkdir -p "bin/benchmark"
+mkdir -p "bin/benchmark/externalsort"
 
 #serialization type
 serialization_type=$1
@@ -18,12 +20,16 @@ echo "------------------------"
 file_external_sort="bin/benchmark/externalsort/result_cpp_externalsort_$2.txt"
    if test ! -f "$file_external_sort"; then
        touch $file_external_sort
-       echo "language#method#seq#datatype#iotime#totaltime" > $file_external_sort
+       echo "language#taskset#method#seq#datatype#iotime#totaltime" > $file_external_sort
    fi
 
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
+time  ./bin/$project_target $datapath $number_of_files $serialization_type $2 0
 
-#run the experiment
-./bin/$project_target $datapath $number_of_files $serialization_type $2
+sleep 200
+
+#clear the OS cache
+echo 3 > /proc/sys/vm/drop_caches && sync
+time taskset -c 0 ./bin/$project_target $datapath $number_of_files $serialization_type $2 1

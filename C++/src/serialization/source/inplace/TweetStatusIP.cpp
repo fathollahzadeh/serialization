@@ -230,3 +230,11 @@ int TweetStatusIP::getOrder() {
 
 TweetStatusIP::TweetStatusIP(bool isPointer) : isPointer(isPointer) {}
 
+void TweetStatusIP::serializeFlatBuffers(char *buffer, int &objectSize) {
+
+}
+
+TweetStatusIP *TweetStatusIP::deserializeFlatBuffers(char *buffer, int &bytesRead) {
+    return nullptr;
+}
+

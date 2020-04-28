@@ -105,6 +105,12 @@ public:
     //BSON de-serialization:
     TweetStatusIP * deserializeBSON(bsoncxx::document::view doc);
 
+    //flatbuffers buffer serialization
+    void  serializeFlatBuffers(char *buffer, int &objectSize);
+
+    //proto buffer de-serialization
+    TweetStatusIP* deserializeFlatBuffers(char *buffer, int &bytesRead);
+
     //Implement your own custom comparator:
     bool operator< (TweetStatusIP& other);
 

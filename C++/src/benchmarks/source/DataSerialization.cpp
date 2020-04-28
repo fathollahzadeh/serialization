@@ -3,6 +3,7 @@
 //
 
 
+#include <flatbuffers/TweetStatusFlatBuffers.h>
 #include "DataSerialization.h"
 
 using namespace std;
@@ -52,6 +53,13 @@ int main(int argc, char *argv[]) {
 
         case 4: {
             DataSerialization<TweetStatusProto> *dataSerialization=new DataSerialization<TweetStatusProto>(inputFile,outFile,serializationType,numberOfTweets);
+            dataSerialization->runTheDataSerialization();
+
+            delete dataSerialization;
+            break;
+        }
+        case 6: {
+            DataSerialization<TweetStatusFlatBuffers> *dataSerialization=new DataSerialization<TweetStatusFlatBuffers>(inputFile,outFile,serializationType,numberOfTweets);
             dataSerialization->runTheDataSerialization();
 
             delete dataSerialization;

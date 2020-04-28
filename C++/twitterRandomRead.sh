@@ -25,6 +25,10 @@ echo "start to run benchmark for << random read >> with $number_of_read_object o
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
+time ./bin/$project_target $datapath $serialization_type $number_of_read_object $3 $random_list_path 0
 
-#run the experiment
-time ./bin/$project_target $datapath $serialization_type $number_of_read_object $3 $random_list_path
+sleep 200
+
+#clear the OS cache
+echo 3 > /proc/sys/vm/drop_caches && sync
+time taskset -c 0 ./bin/$project_target $datapath $serialization_type $number_of_read_object $3 $random_list_path 1

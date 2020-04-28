@@ -16,6 +16,7 @@
 #include <TweetStatusProto.h>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+#include <TweetStatusFlatBuffers.h>
 
 using namespace std;
 
@@ -57,7 +58,6 @@ private:
     //Object in each page:
     map<long,long> objectInEachPage;
 
-
     //Write data index to the an index file:
     void writeIndexToFile(vector<long> indexMap);
 
@@ -93,6 +93,8 @@ public:
     void appendObjectToFile(TweetStatusIP *object);
 
     void appendObjectToFile(TweetStatusProto *object);
+
+    void appendObjectToFile(TweetStatusFlatBuffers *object);
 
     void appendObjectToFileFlush();
 

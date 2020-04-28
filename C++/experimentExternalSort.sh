@@ -6,10 +6,10 @@ number_of_splits=$2
 for r in 1 2 3 4 5
 do
     # for serialization types:
-    for i in  1 2 3 4 5
+    for i in  1 2 3 4 5 6
     do
         ./twitterExternalSort.sh $i $r $data_path $number_of_splits
-        sleep 1
+        sleep 200
         # remove last experiment temp files
         rm -rf bin/tmp
     done

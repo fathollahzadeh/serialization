@@ -167,6 +167,12 @@ public:
     //Implement your own custom comparator:
     bool operator< (TweetStatus& other);
 
+    //flatbuffers buffer serialization
+    void serializeFlatBuffers(char *buffer, int &objectSize);
+
+    //proto buffer de-serialization
+    TweetStatus* deserializeFlatBuffers(char *buffer, int &bytesRead);
+
     //print order number:
 
     int getOrder();

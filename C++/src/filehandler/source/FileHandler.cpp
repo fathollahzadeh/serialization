@@ -2,6 +2,7 @@
 // Created by saeed on 11/4/19.
 //
 
+
 #include "FileHandler.h"
 
 template<class T>
@@ -105,17 +106,25 @@ void FileHandler<T>::appendObjectToFile(TweetStatus *object) {
             string jsonString = bsoncxx::to_json(object->serializeBSON());
             objectSize = jsonString.size();
 
+            auto tmpTime = chrono::steady_clock::now();
             // insert json size to the first 4 byte of buffer
             memcpy(buffer + currentOffset, &objectSize, sizeof(int));
 
             // add json string to the buffer:
-            strcpy(buffer + currentOffset+ sizeof(objectSize), jsonString.c_str());
+            strcpy(buffer + currentOffset + sizeof(objectSize), jsonString.c_str());
+            ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
             // add json size to the object size:
             objectSize += sizeof(objectSize);
 
         }
 
+            // if serialization type is FlatBuffers:
+        else if (serializationType == 6) {
+            TweetStatusFlatBuffers *tweetStatusFlatBuffers = new TweetStatusFlatBuffers(object);
+            tweetStatusFlatBuffers->serializeFlatBuffers(buffer + currentOffset, objectSize);
+            this->ioTime+=tweetStatusFlatBuffers->getIoTime();
+        }
 
         //check capacity of the current page size
         //if current page is full should be write to the file and then reset the page
@@ -130,7 +139,6 @@ void FileHandler<T>::appendObjectToFile(TweetStatus *object) {
             //All you need is to write this object in the new current page.
             //Re-write the last object again at correct place:
             memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
-
             currentPageNumber++;
             currentOffset = 0;
         }
@@ -206,6 +214,37 @@ void FileHandler<T>::appendObjectToFile(TweetStatusProto *object) {
     currentOffset += objectSize;
     countObject++;
 
+}
+
+template<class T>
+void FileHandler<T>::appendObjectToFile(TweetStatusFlatBuffers *object) {
+
+    char *buffer = pageBuffer;
+    int objectSize = 0;
+
+    object->serializeFlatBuffers(buffer + currentOffset, objectSize);
+
+    this->ioTime+=object->getIoTime();
+
+    if ((currentOffset + objectSize) > pageSize) {
+
+        //Write in file:
+        auto tmpTime = chrono::steady_clock::now();
+        outStreamRegularFile.write(pageBuffer, pageSize);
+        ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
+
+        //At this point, previous page is written in file.
+        //All you need is to write this object in the new current page.
+        //Re-write the last object again at correct place:
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
+
+        currentPageNumber++;
+        currentOffset = 0;
+    }
+    pageIndex.push_back(currentPageNumber);
+    objectIndex.push_back(currentOffset);
+    currentOffset += objectSize;
+    countObject++;
 }
 
 template<class T>
@@ -285,6 +324,7 @@ template<class T>
 void FileHandler<T>::appendObjectToFileFlush() {
 
     //Write last page in file:
+
     this->outStreamRegularFile.write(pageBuffer, currentOffset);
 
     //Close Serialized Data file:
@@ -334,7 +374,6 @@ void FileHandler<T>::readIndexesFromFile() {
 
     //Define a buffer for read index file:
     char *buffer = new char[indexFileSize];
-
 
     //Read data from file to buffer:
     inIndexFile.read(buffer, indexFileSize);
@@ -452,14 +491,30 @@ void FileHandler<T>::getObjectsFromFile(long i, long n, vector<T *> &objectList)
                 memcpy(&tempObjectSize, curBuffer + objectIndex[j], sizeof(int));
                 //keep data in heap
                 auto tmpTime = chrono::steady_clock::now();
-                char *tBuffer = new char[tempObjectSize+1];
+                char *tBuffer = new char[tempObjectSize + 1];
                 memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(int), tempObjectSize);
-                memcpy(tBuffer+tempObjectSize,"\0",1);
+                memcpy(tBuffer + tempObjectSize, "\0", 1);
                 ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
                 bsoncxx::document::value bsonObj = bsoncxx::from_json(tBuffer);
                 auto doc = bsonObj.view();
                 object->deserializeBSON(doc);
+                delete[] tBuffer;
+                break;
+            }
+                // de-serialize flatbuffers object from file:
+            case 6: {
+
+                  //keep data in heap
+                auto tmpTime = chrono::steady_clock::now();
+                memcpy(&tempObjectSize, curBuffer + objectIndex[j], sizeof(int));
+                char *tBuffer = new char[tempObjectSize];
+                memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(tempObjectSize), tempObjectSize);
+                ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
+
+                object = new T();
+                object->deserializeFlatBuffers(tBuffer, tempObjectSize);
+
                 delete[] tBuffer;
                 break;
             }

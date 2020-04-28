@@ -40,6 +40,8 @@ include_directories("${PROJECT_SOURCE_DIR}/src/rootdata/header")
 include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header")
 include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header/inplace")
 include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header/proto")
+include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header/flatbuffers")
+include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header/flatbuffers/flatbuffers")
 include_directories("${PROJECT_SOURCE_DIR}/src/benchmarks/header")
 include_directories("${PROJECT_SOURCE_DIR}/src/networkadapter/header")
 
@@ -47,6 +49,7 @@ include_directories("${PROJECT_SOURCE_DIR}/src/networkadapter/header")
 include_directories("${PROJECT_SOURCE_DIR}/src/serialization/source/")
 include_directories("${PROJECT_SOURCE_DIR}/src/serialization/source/inplace/")
 include_directories("${PROJECT_SOURCE_DIR}/src/serialization/source/proto/")
+include_directories("${PROJECT_SOURCE_DIR}/src/serialization/source/flatbuffers/")
 include_directories("${PROJECT_SOURCE_DIR}/src/rootdata/source/")
 include_directories("${PROJECT_SOURCE_DIR}/src/filehandler/source/")
 include_directories("${PROJECT_SOURCE_DIR}/src/networkadapter/source")
@@ -54,7 +57,8 @@ include_directories("${PROJECT_SOURCE_DIR}/src/networkadapter/source")
 # set serialization source files
 file(GLOB serializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/*.cpp")
 file(GLOB inPlaceSerializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/inplace/*.cpp")
-file(GLOB protpSerializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/proto/*.cpp")
+file(GLOB protSerializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/proto/*.cpp")
+file(GLOB flatBuffersSerializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/flatbuffers/*.cpp")
 file(GLOB rootDataSource "${PROJECT_SOURCE_DIR}/src/rootdata/source/*.cpp")
 file(GLOB rootDataHeader "${PROJECT_SOURCE_DIR}/src/rootdata/header/*.h")
 file(GLOB networkAdapterSource "${PROJECT_SOURCE_DIR}/src/networkadapter/source/*.cpp")
@@ -68,7 +72,8 @@ add_executable(TwitterSerialization
         src/serialization/source/proto/TweetStatusP.pb.cc
         ${serializationSource}
         ${inPlaceSerializationSource}
-        ${protpSerializationSource}
+        ${protSerializationSource}
+        ${flatBuffersSerializationSource}
         ${rootDataSource}
         )
 
@@ -99,7 +104,8 @@ add_executable(TwitterSequentialRead
         src/serialization/source/proto/TweetStatusP.pb.cc
         ${serializationSource}
         ${inPlaceSerializationSource}
-        ${protpSerializationSource}
+        ${protSerializationSource}
+        ${flatBuffersSerializationSource}
         ${rootDataSource}
         )
 target_link_libraries(TwitterSequentialRead ${LIBMONGOCXX_LIBRARIES})
@@ -114,7 +120,8 @@ add_executable(TwitterRandomRead
         src/serialization/source/proto/TweetStatusP.pb.cc
         ${serializationSource}
         ${inPlaceSerializationSource}
-        ${protpSerializationSource}
+        ${protSerializationSource}
+        ${flatBuffersSerializationSource}
         ${rootDataSource}
         )
 target_link_libraries(TwitterRandomRead ${LIBMONGOCXX_LIBRARIES})
@@ -129,7 +136,8 @@ add_executable(TwitterExternalSort
         src/serialization/source/proto/TweetStatusP.pb.cc
         ${serializationSource}
         ${inPlaceSerializationSource}
-        ${protpSerializationSource}
+        ${protSerializationSource}
+        ${flatBuffersSerializationSource}
         ${rootDataSource}
         )
 target_link_libraries(TwitterExternalSort ${LIBMONGOCXX_LIBRARIES})
@@ -142,7 +150,8 @@ add_executable(TwitterNetworkServer
         ${networkAdapterSource}
         ${serializationSource}
         ${inPlaceSerializationSource}
-        ${protpSerializationSource}
+        ${protSerializationSource}
+        ${flatBuffersSerializationSource}
         ${rootDataSource}
         src/serialization/source/proto/TweetStatusP.pb.cc
         )
@@ -158,7 +167,8 @@ add_executable(TwitterNetworkClient
         src/serialization/source/proto/TweetStatusP.pb.cc
         ${serializationSource}
         ${inPlaceSerializationSource}
-        ${protpSerializationSource}
+        ${protSerializationSource}
+        ${flatBuffersSerializationSource}
         ${rootDataSource}
         ${networkAdapterSource}
         )

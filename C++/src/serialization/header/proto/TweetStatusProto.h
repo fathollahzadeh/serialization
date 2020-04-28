@@ -66,6 +66,12 @@ public:
     //BSON de-serialization:
     TweetStatusProto * deserializeBSON(bsoncxx::document::view doc);
 
+    //flatbuffers buffer serialization
+    void serializeFlatBuffers(char *buffer, int &objectSize);
+
+    //proto buffer de-serialization
+    TweetStatusProto* deserializeFlatBuffers(char *buffer, int &bytesRead);
+
     proto::TweetStatusP *getProto() const;
 
     bool operator<(TweetStatusProto &other);

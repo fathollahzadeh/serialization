@@ -26,6 +26,8 @@ private:
     vector<long> objectIndexes;
 
     LogFileHandler *logFileHandler;
+
+    bool taskset;
 public:
     void setObjectIndexes(const vector<long> &objectIndexes);
 
@@ -36,7 +38,7 @@ public:
 
     virtual ~RandomRead();
 
-    RandomRead(string fileName, int serializationType, long cuntToRead, int round);
+    RandomRead(string fileName, int serializationType, long cuntToRead, int round,bool taskset);
 
     void runTheRandomRead();
 
@@ -61,7 +63,7 @@ void RandomRead<T>::runTheRandomRead() {
     double elapsedSeconds = chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
     // add times to the log file
-    this->logFileHandler->addLog(serializationType, false, "TweetStatus", fileHandler->getIoTime(), elapsedSeconds);
+    this->logFileHandler->addLog(serializationType, false, "TweetStatus", fileHandler->getIoTime(), elapsedSeconds,taskset);
     this->logFileHandler->flushLogFile();
 
     // free memory:
@@ -80,10 +82,11 @@ void RandomRead<T>::runTheRandomRead() {
 
 
 template<class T>
-RandomRead<T>::RandomRead(string fileName, int serializationType, long cuntToRead, int round) {
+RandomRead<T>::RandomRead(string fileName, int serializationType, long cuntToRead, int round,bool taskset) {
     this->fileName = fileName;
     this->serializationType = serializationType;
     this->cuntToRead = cuntToRead;
+    this->taskset=taskset;
     this->logFileHandler = new LogFileHandler(
             "bin/benchmark/readobjects/result_cpp_readobjects_" + to_string(cuntToRead) + "_" + to_string(round) +
             ".txt");

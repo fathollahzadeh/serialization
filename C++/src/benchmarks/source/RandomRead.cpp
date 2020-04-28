@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    if (argc < 2) {
+    if (argc < 5) {
         cout << "Requires serialized file path!!" << endl;
         cout << "Requires Data Serialization Type:" << endl;
         cout << " 1: HandCoded Data serialization" << endl;
@@ -29,6 +29,14 @@ int main(int argc, char *argv[]) {
 
     int round=atoi(argv[4]);
 
+    bool taskset;
+
+    int ts=atoi(argv[6]);
+    if (ts==1)
+        taskset= true;
+    else
+        taskset= false;
+
     //read random list from  file:
     ifstream infile;
     infile.open(argv[5]);
@@ -47,7 +55,7 @@ int main(int argc, char *argv[]) {
         case 3:
         case 5:{
             //Define variable for generate random object index:
-            RandomRead<TweetStatus> *randomRead=new RandomRead<TweetStatus>(inFile,serializationType,cunt_to_read,round);
+            RandomRead<TweetStatus> *randomRead=new RandomRead<TweetStatus>(inFile,serializationType,cunt_to_read,round,taskset);
             randomRead->setObjectIndexes(objectIndexes);
             randomRead->runTheRandomRead();
 
@@ -57,7 +65,7 @@ int main(int argc, char *argv[]) {
 
         case 2: {
             //Define variable for generate random object index:
-            RandomRead<TweetStatusIP> *randomRead=new RandomRead<TweetStatusIP>(inFile,serializationType,cunt_to_read,round);
+            RandomRead<TweetStatusIP> *randomRead=new RandomRead<TweetStatusIP>(inFile,serializationType,cunt_to_read,round,taskset);
             randomRead->setObjectIndexes(objectIndexes);
             randomRead->runTheRandomRead();
 
@@ -67,7 +75,17 @@ int main(int argc, char *argv[]) {
 
         case 4: {
             //Define variable for generate random object index:
-            RandomRead<TweetStatusProto> *randomRead=new RandomRead<TweetStatusProto>(inFile,serializationType,cunt_to_read,round);
+            RandomRead<TweetStatusProto> *randomRead=new RandomRead<TweetStatusProto>(inFile,serializationType,cunt_to_read,round,taskset);
+            randomRead->setObjectIndexes(objectIndexes);
+            randomRead->runTheRandomRead();
+
+            delete randomRead;
+
+            break;
+        }
+        case 6: {
+            //Define variable for generate random object index:
+            RandomRead<TweetStatusFlatBuffers> *randomRead=new RandomRead<TweetStatusFlatBuffers>(inFile,serializationType,cunt_to_read,round,taskset);
             randomRead->setObjectIndexes(objectIndexes);
             randomRead->runTheRandomRead();
 
