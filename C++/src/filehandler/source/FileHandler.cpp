@@ -323,9 +323,10 @@ void FileHandler<T>::writeIndexToFile(vector<long> indexVector) {
 template<class T>
 void FileHandler<T>::appendObjectToFileFlush() {
 
+    auto tmpTime = chrono::steady_clock::now();
     //Write last page in file:
-
     this->outStreamRegularFile.write(pageBuffer, currentOffset);
+    ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
     //Close Serialized Data file:
     this->outStreamRegularFile.close();

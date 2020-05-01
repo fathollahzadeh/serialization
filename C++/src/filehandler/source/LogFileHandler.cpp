@@ -19,9 +19,13 @@ void LogFileHandler::addLog(string log) {
     logFile << log<<"\n";
 }
 
-void LogFileHandler::addLog(int serializationType, bool seq, string datatype, double iotime, double totaltime, bool taskset) {
+void LogFileHandler::addLog(bool read,int serializationType, bool seq, string datatype, double iotime, double totaltime, bool taskset) {
 
-    logFile<<"[ReadTimeCPP]#";
+    if (read) {
+        logFile << "[ReadTimeCPP]#";
+    } else
+        logFile << "[WriteTimeCPP]#";
+
     if (taskset){
         logFile<<"true#";
     } else

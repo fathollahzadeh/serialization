@@ -31,12 +31,20 @@ int main(int argc, char *argv[]) {
 
     //set number Of Tweets
     long numberOfTweets=atoi(argv[4]);
+    int round=atoi(argv[5]);
+
+    bool taskset;
+    int ts=atoi(argv[6]);
+    if (ts==1)
+        taskset= true;
+    else
+        taskset= false;
 
     switch (serializationType) {
         case 1:
         case 3:
         case 5:{
-            DataSerialization<TweetStatus> *dataSerialization=new DataSerialization<TweetStatus>(inputFile,outFile,serializationType,numberOfTweets);
+            DataSerialization<TweetStatus> *dataSerialization=new DataSerialization<TweetStatus>(inputFile,outFile,serializationType,numberOfTweets,round,taskset);
             dataSerialization->runTheDataSerialization();
 
             delete dataSerialization;
@@ -44,7 +52,7 @@ int main(int argc, char *argv[]) {
         }
 
         case 2: {
-            DataSerialization<TweetStatusIP> *dataSerialization=new DataSerialization<TweetStatusIP>(inputFile,outFile,serializationType,numberOfTweets);
+            DataSerialization<TweetStatusIP> *dataSerialization=new DataSerialization<TweetStatusIP>(inputFile,outFile,serializationType,numberOfTweets,round,taskset);
             dataSerialization->runTheDataSerialization();
 
             delete dataSerialization;
@@ -52,14 +60,14 @@ int main(int argc, char *argv[]) {
         }
 
         case 4: {
-            DataSerialization<TweetStatusProto> *dataSerialization=new DataSerialization<TweetStatusProto>(inputFile,outFile,serializationType,numberOfTweets);
+            DataSerialization<TweetStatusProto> *dataSerialization=new DataSerialization<TweetStatusProto>(inputFile,outFile,serializationType,numberOfTweets,round,taskset);
             dataSerialization->runTheDataSerialization();
 
             delete dataSerialization;
             break;
         }
         case 6: {
-            DataSerialization<TweetStatusFlatBuffers> *dataSerialization=new DataSerialization<TweetStatusFlatBuffers>(inputFile,outFile,serializationType,numberOfTweets);
+            DataSerialization<TweetStatusFlatBuffers> *dataSerialization=new DataSerialization<TweetStatusFlatBuffers>(inputFile,outFile,serializationType,numberOfTweets,round,taskset);
             dataSerialization->runTheDataSerialization();
 
             delete dataSerialization;
