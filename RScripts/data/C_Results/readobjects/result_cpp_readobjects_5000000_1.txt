@@ -19,3 +19,7 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeCPP]#false#C++ ProtoBuf#false#TweetStatus#523.268#649.771
 [ReadTimeCPP]#false#C++ Bson#true#TweetStatus#834.06#2437.64
 [ReadTimeCPP]#false#C++ Bson#false#TweetStatus#1037.19#2677.79
+[ReadTimeCPP]#false#C++ FlatBuffers#true#TweetStatus#216.611#269.971
+[ReadTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#194.713#247.66
+[ReadTimeCPP]#false#C++ FlatBuffers#false#TweetStatus#605.455#675.167
+[ReadTimeCPP]#true#C++ FlatBuffers#false#TweetStatus#674.185#743.067

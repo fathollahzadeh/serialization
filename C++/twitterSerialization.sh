@@ -14,7 +14,7 @@ do
     do
       ./resultPath.sh $numberOfTweets $r
 
-        outpath="$2/$r/serialization_$serialization_type.se"
+        outpath="$2/serialization_$serialization_type.se"
         echo "start to run the project for serialization type: " $serialization_type
 
         #clear the OS cache

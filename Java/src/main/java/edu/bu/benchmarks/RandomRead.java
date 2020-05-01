@@ -48,8 +48,6 @@ public class RandomRead {
 
         String logFileName="bin/benchmark/readobjects/result_java_readobjects_" + cunt_to_read + "_" + round + ".txt";
 
-
-
         FileHandler fileHandler = new FileHandler(inFile, serializationType);
         fileHandler.prepareToRead();
 
@@ -65,7 +63,7 @@ public class RandomRead {
         double elapsedSeconds= (System.nanoTime() - tmpTime) / 1000000000.0;
 
         LogFileHandler logFileHandler=new LogFileHandler(logFileName);
-        logFileHandler.addLog(serializationType,false,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
+        logFileHandler.addLog(true,serializationType,false,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
 
     }
 }

@@ -58,7 +58,7 @@ public class SequentialRead {
         double elapsedSeconds= (System.nanoTime() - tmpTime) / 1000000000.0;
 
         LogFileHandler logFileHandler=new LogFileHandler(logFileName);
-        logFileHandler.addLog(serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
+        logFileHandler.addLog(true,serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
     }
 
 }

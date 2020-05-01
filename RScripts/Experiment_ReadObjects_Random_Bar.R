@@ -7,8 +7,8 @@ dataj <- read.delim("data/Java_Results/readobjects/result_java_readobjects_40000
 datac <- read.delim("data/C_Results/readobjects/result_cpp_readobjects_4000000_1.txt", header=TRUE, sep="#")
 
 
-dataj <- subset(dataj,seq=="false" & datatype=="TweetStatus")
-datac <- subset(datac,seq=="false" & datatype=="TweetStatus")
+dataj <- subset(dataj,seq=="false" & taskset=="false" & datatype=="TweetStatus")
+datac <- subset(datac,seq=="false"& taskset=="false" & datatype=="TweetStatus")
 
 
 data <- rbind(datac,dataj)

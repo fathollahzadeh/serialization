@@ -222,7 +222,7 @@ public class ExternalSort {
 
         // add times to the log file
         LogFileHandler logFileHandler=new LogFileHandler(logFileName);
-        logFileHandler.addLog(serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
+        logFileHandler.addLog(true,serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
     }
 
     private  void writeToFiles(List<RootData> list, String filename) {

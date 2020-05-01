@@ -21,9 +21,24 @@ echo "start to run benchmark for << random read >> with $number_of_read_object o
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
+
+# start to monitor CPU and Memory
+filenamevar1="$number_of_read_object"
+filenamevar2="_$3"
+filename="taskset_true_javaTwitterRandomRead$filenamevar1$serialization_type$filenamevar2"
+#pkill -f java
+../monitor/run.sh $filename
+
 time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx8g -cp ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.RandomRead $datapath $serialization_type $number_of_read_object $3 $random_list_path true
 
 sleep 200
 
 echo 3 > /proc/sys/vm/drop_caches && sync
+
+filename="taskset_false_javaTwitterRandomRead$filenamevar1$serialization_type$filenamevar2"
+#pkill -f java
+../monitor/run.sh $filename
+
 time java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx8g -cp ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.RandomRead $datapath $serialization_type $number_of_read_object $3 $random_list_path false
+
+#pkill -f java

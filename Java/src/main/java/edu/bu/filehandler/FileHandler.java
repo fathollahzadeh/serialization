@@ -110,8 +110,10 @@ public class FileHandler {
             }
              // write the list to disk.
             data = byteBufferLengths.array();
-            bosIndexFile.write(data); // write the data
 
+            long tmpTime = System.nanoTime();
+            bosIndexFile.write(data); // write the data
+            this.ioTime += (System.nanoTime() - tmpTime);
         }
         catch (Exception e){
             logger.error("write index to file error! ",e);

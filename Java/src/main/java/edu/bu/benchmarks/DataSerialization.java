@@ -2,6 +2,7 @@ package edu.bu.benchmarks;
 
 import com.google.gson.Gson;
 import edu.bu.filehandler.FileHandler;
+import edu.bu.filehandler.LogFileHandler;
 import edu.bu.filehandler.ReadTweet;
 import edu.bu.tweet.TweetStatus;
 import org.apache.log4j.PropertyConfigurator;
@@ -44,6 +45,13 @@ public class DataSerialization {
         // set number of tweets:
         long numberOfTweets=Long.parseLong(args[3]);
 
+        int round=Integer.parseInt(args[4]);
+
+        boolean taskset=Boolean.parseBoolean(args[5]);
+
+        String logFileName="bin/benchmark/writeobjects/result_java_writeobjects_" + numberOfTweets + "_" + round + ".txt";
+
+
         FileHandler fileHandler = new FileHandler(outFile, serializationType);
         fileHandler.prepareToWrite();
 
@@ -52,6 +60,9 @@ public class DataSerialization {
        Thread rt=  new Thread(readTweet);
        rt.start();
         //starting consumer to consume raw tweet from queue
+
+        double elapsedSeconds=0;
+
         try{
             String line;
             readTweet.setReadStatus(true);
@@ -59,7 +70,9 @@ public class DataSerialization {
                 line = queue.take();
                 Gson gson = new Gson();
                 TweetStatus tweetStatus = gson.fromJson(line, TweetStatus.class);
-                fileHandler.appendObjectToFile(tweetStatus);
+                long tmpTime = System.nanoTime();
+               // fileHandler.appendObjectToFile(tweetStatus);
+                elapsedSeconds+= (System.nanoTime() - tmpTime);
             }
             readTweet.setReadStatus(false);
             queue.take();
@@ -67,6 +80,13 @@ public class DataSerialization {
             e.printStackTrace();
         }
         fileHandler.appendObjectToFileFlush();
+
+        // Time Calculation
+        elapsedSeconds /= 1000000000.0;
+
+        LogFileHandler logFileHandler=new LogFileHandler(logFileName);
+        logFileHandler.addLog(false,serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
+
 
     }
 }

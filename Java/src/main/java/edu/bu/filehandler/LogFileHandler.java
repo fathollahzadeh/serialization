@@ -16,16 +16,20 @@ public class LogFileHandler {
         this.fileName = fileName;
     }
 
-    public void addLog(int serializationType, boolean seq,String datatype, double iotime, double totaltime,boolean taskset){
+    public void addLog(boolean read,int serializationType, boolean seq,String datatype, double iotime, double totaltime,boolean taskset){
 
-        String log="[ReadTimeJAVA]#"+taskset+"#";
+        String log;
+        if (read)
+            log="[ReadTimeJAVA]#"+taskset+"#";
+        else
+            log="[WriteTimeJAVA]#"+taskset+"#";
         String method="";
         switch (serializationType) {
             case 1:
                 method = "Java Default";
                 break;
             case 2:
-                method = "Java Json";
+                method = "Java Json+Gzip";
                 break;
             case 3:
                 method = "Java Bson";
