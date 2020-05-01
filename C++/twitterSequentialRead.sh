@@ -28,23 +28,29 @@ echo "start to benchmark for << sequential read >>  with $number_of_read_object 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
 
+# stop monitoring
+../monitor/stopmonitor.sh
+
 # start to monitor CPU and Memory
 filenamevar1="$number_of_read_object"
 filenamevar2="_$3"
 filename="taskset_false_cpp$project_target$filenamevar1$serialization_type$filenamevar2"
-pkill -f $project_target
+
+#start monitor
 ../monitor/run.sh $filename 
 
 # run the project without task set
 time  ./bin/$project_target $datapath $serialization_type 0 $number_of_read_object $3 0
+
+# stop monitoring
+../monitor/stopmonitor.sh
 
 sleep 200
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
 
-# stop last monitoring and start new for tast set true
-pkill -f $project_target
+# start new for tast set true
 filename="taskset_true_cpp$project_target$filenamevar1$serialization_type$filenamevar2"
 ../monitor/run.sh $filename
 
@@ -52,5 +58,5 @@ filename="taskset_true_cpp$project_target$filenamevar1$serialization_type$filena
 time taskset -c 0 ./bin/$project_target $datapath $serialization_type 0 $number_of_read_object $3 1
 
 # stop monitoring
-pkill -f $project_target
+../monitor/stopmonitor.sh
 
