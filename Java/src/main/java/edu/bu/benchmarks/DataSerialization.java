@@ -71,7 +71,7 @@ public class DataSerialization {
                 Gson gson = new Gson();
                 TweetStatus tweetStatus = gson.fromJson(line, TweetStatus.class);
                 long tmpTime = System.nanoTime();
-               // fileHandler.appendObjectToFile(tweetStatus);
+                fileHandler.appendObjectToFile(tweetStatus);
                 elapsedSeconds+= (System.nanoTime() - tmpTime);
             }
             readTweet.setReadStatus(false);
