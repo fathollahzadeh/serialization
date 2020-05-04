@@ -63,7 +63,7 @@ void RandomRead<T>::runTheRandomRead() {
     double elapsedSeconds = chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
     // add times to the log file
-    this->logFileHandler->addLog(false,serializationType, false, "TweetStatus", fileHandler->getIoTime(), elapsedSeconds,taskset);
+    this->logFileHandler->addLog(true,serializationType, false, "TweetStatus", fileHandler->getIoTime(), elapsedSeconds,taskset);
     this->logFileHandler->flushLogFile();
 
     // free memory:

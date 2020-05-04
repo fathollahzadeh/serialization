@@ -282,7 +282,7 @@ void ExternalSort<T>::runTheExternalSort() {
     double elapsedSeconds = chrono::duration<double>(endTime - startTime).count();
 
     // add times to the log file
-    this->logFileHandler->addLog(false,serializationType, true, "TweetStatus", ioTime, elapsedSeconds,taskset);
+    this->logFileHandler->addLog(true,serializationType, true, "TweetStatus", ioTime, elapsedSeconds,taskset);
     this->logFileHandler->flushLogFile();
 }
 
