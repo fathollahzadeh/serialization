@@ -1,0 +1,13 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[WriteTimeCPP]#false#C++ HandCoded#true#TweetStatus#10.4703#25.6007
+[WriteTimeCPP]#true#C++ HandCoded#true#TweetStatus#23.5763#51.6157
+[WriteTimeCPP]#false#C++ inPlace#true#TweetStatus#17.8898#38.6901
+[WriteTimeCPP]#true#C++ inPlace#true#TweetStatus#38.0842#74.4139
+[WriteTimeCPP]#false#C++ Boost#true#TweetStatus#14.9845#206.651
+[WriteTimeCPP]#true#C++ Boost#true#TweetStatus#35.1651#415.86
+[WriteTimeCPP]#false#C++ ProtoBuf#true#TweetStatus#13.2885#82.0007
+[WriteTimeCPP]#true#C++ ProtoBuf#true#TweetStatus#26.2177#161.743
+[WriteTimeCPP]#false#C++ Bson#true#TweetStatus#70.6115#1198.19
+[WriteTimeCPP]#true#C++ Bson#true#TweetStatus#94.961#2327.19
+[WriteTimeCPP]#false#C++ FlatBuffers#true#TweetStatus#31.1738#71.6487
+[WriteTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#32.9971#104.521

@@ -1,11 +1,25 @@
-language#method#seq#datatype#iotime#totaltime
-[ReadTimeCPP]#C++ HandCoded#true#TweetStatus#3.99399#15.3125
-[ReadTimeCPP]#C++ HandCoded#false#TweetStatus#86.7506#100.731
-[ReadTimeCPP]#C++ inPlace#true#TweetStatus#9.68095#9.87604
-[ReadTimeCPP]#C++ inPlace#false#TweetStatus#99.0016#100.801
-[ReadTimeCPP]#C++ Boost#true#TweetStatus#4.37108#82.0096
-[ReadTimeCPP]#C++ Boost#false#TweetStatus#89.7201#170.589
-[ReadTimeCPP]#C++ ProtoBuf#true#TweetStatus#4.10198#28.1325
-[ReadTimeCPP]#C++ ProtoBuf#false#TweetStatus#87.6625#115.394
-[ReadTimeCPP]#C++ Bson#true#TweetStatus#12.707#523.094
-[ReadTimeCPP]#C++ Bson#false#TweetStatus#180.113#716.221
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeCPP]#false#C++ HandCoded#true#TweetStatus#15.6583#27.929
+[ReadTimeCPP]#true#C++ HandCoded#true#TweetStatus#15.1421#28.1455
+[ReadTimeCPP]#false#C++ HandCoded#false#TweetStatus#1105.02#1133.29
+[ReadTimeCPP]#true#C++ HandCoded#false#TweetStatus#1092.21#1115.92
+[ReadTimeCPP]#false#C++ inPlace#true#TweetStatus#38.0533#38.2407
+[ReadTimeCPP]#true#C++ inPlace#true#TweetStatus#39.2388#39.426
+[ReadTimeCPP]#false#C++ inPlace#false#TweetStatus#1666.93#1669.25
+[ReadTimeCPP]#true#C++ inPlace#false#TweetStatus#1592.15#1594.45
+[ReadTimeCPP]#false#C++ Boost#true#TweetStatus#6.91738#86.8144
+[ReadTimeCPP]#true#C++ Boost#true#TweetStatus#7.82824#88.2479
+[ReadTimeCPP]#false#C++ Boost#false#TweetStatus#1083.48#1187.86
+[ReadTimeCPP]#true#C++ Boost#false#TweetStatus#1137.81#1237.32
+[ReadTimeCPP]#false#C++ ProtoBuf#true#TweetStatus#7.15#32.6173
+[ReadTimeCPP]#true#C++ ProtoBuf#true#TweetStatus#8.00888#33.441
+[ReadTimeCPP]#false#C++ ProtoBuf#false#TweetStatus#1048.13#1091.82
+[ReadTimeCPP]#true#C++ ProtoBuf#false#TweetStatus#1052.39#1091.14
+[ReadTimeCPP]#false#C++ Bson#true#TweetStatus#17.8406#549.069
+[ReadTimeCPP]#true#C++ Bson#true#TweetStatus#18.7295#552.361
+[ReadTimeCPP]#false#C++ Bson#false#TweetStatus#6087.1#6659.56
+[ReadTimeCPP]#true#C++ Bson#false#TweetStatus#6440.25#7013.41
+[ReadTimeCPP]#false#C++ FlatBuffers#true#TweetStatus#33.0338#43.0778
+[ReadTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#33.5486#43.5563
+[ReadTimeCPP]#false#C++ FlatBuffers#false#TweetStatus#1644.83#1659.36
+[ReadTimeCPP]#true#C++ FlatBuffers#false#TweetStatus#1621.85#1634.97

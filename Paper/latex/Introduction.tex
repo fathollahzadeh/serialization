@@ -1,2 +1,17 @@
 \section{Introduction}
 \todo[inline]{Introduction}
+The contribution of our work are the following:
+\begin{enumerate}
+	\item we implement all serialization methods in C++ and Java programming language in a single thread system. But, we evaluate the methods with $task set$ for restrict run the method on a special core and without $task set$ to allow run method on the arbitrary cores. In the experimental section we mention which methods use thread or which platforms want to improve performance of processing.
+	
+	\item we implement same method in both C++ and Java programming language and we demonstrated same technique haven't same performance in differ languages(e.g, google protobuf).
+	
+	\item we compare all methods with a complex data sets. In academic setting over the last decade, there has been significant progress in serialization methods. However, much of this work makes assumptions that are simply unrealistic for deployed industrial applications. In this work, we used twitter dataset. This dataset include more objects type with deep hierarchy. Some methods need to save object meta data in serialization step and will be use it in the de-serialization section.    
+	
+	\item we investigate which methods are easy to used. It means is which methods create transparent view in develop step. For example in C++ $InPlace$ we need just one line for de-serialization, But in the serialization step we should spend more times for convert object to the method schema.
+	
+		
+	\item we evaluate multiple famous serialization methods in big data systems. We focused specially on C++ and Java programming language. So, we deeply compared CPU, Memory and I/O for HDD resources. Our empirical experiments demonstrate best way for choose best method in a big data system.
+	
+	
+\end{enumerate}

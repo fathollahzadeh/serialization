@@ -44,7 +44,7 @@ datac <- subset(dataco,seq=="true" & datatype=="TweetStatus")
 data <- rbind(datac,dataj)
 
 javaDefault <- subset(data, method=="Java Default")
-javaJson <- subset(data, method=="Java Json")
+javaJson <- subset(data, method=="Java Json+Gzip")
 javaBson <- subset(data, method=="Java Bson")
 javaKryo <- subset(data, method=="Java Kryo")
 javaByteBuffer <- subset(data, method=="Java Byte Buffer")
@@ -63,14 +63,6 @@ data <- rbind(cppHandCoded,cppInPlace,cppBoost,cppProtoBuf,cppBson,cppFlatBuf,ja
 datatasksettrue<-subset(data, taskset=="true")
 datatasksetfalse<-subset(data, taskset=="false")
 
-
-#xlabel<-data$method
-#xlabel<-xlabel[duplicated(xlabel),]
-#xlabel<-data$method
-#xlabel<-distinct(xlabel)
-#print(xlabel)
-
-#colors=c("darkblue", "green4") 
 colorstasksettrue=c("Misty Rose", "Snow") 
 colorstasksetfalse=c("darkseagreen1", "Honeydew") 
 
@@ -84,15 +76,8 @@ totaltimetasksetfalse <- datatasksetfalse$totaltime
 iotimetasksetfalse <- datatasksetfalse$iotime
 cputimetasksetfalse <- totaltimetasksetfalse - iotimetasksetfalse
 
-#print("--------------------------")
-
-
 valuestasksettrue <- matrix( c(iotimetasksettrue, cputimetasksettrue), nrow = 2, ncol = 13, byrow = TRUE)
 valuestasksetfalse <- matrix( c(iotimetasksetfalse, cputimetasksetfalse), nrow = 2, ncol = 13, byrow = TRUE)
-#values <- matrix(c(iotime, cputime), nrow = 2, ncol = 4, byrow = TRUE)
-#values <- matrix(c(iotime, cputime))
-
-#print(valuestasksettrue)
 
 regions <- c("IO Time(taskset true)", "CPU Time(taskset true)","IO Time(taskset false)", "CPU Time(taskset false)")
 xnamestasksettrue = datatasksettrue$method
@@ -105,7 +90,7 @@ xnamestasksetfalse = datatasksetfalse$method
 pdf(file='Experiment_ReadObjects_Sequential_Bar_TaskSet.pdf', family="Helvetica")
 
 #old.par<-par(mfrow=c(1, 2), oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
-old.par<-par( oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
+#old.par<-par( oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
 par(mar = c(4.5, 3.5, 1, 0) + 0.1) 
 
 max_y<-max(totaltimetasksettrue,totaltimetasksetfalse)

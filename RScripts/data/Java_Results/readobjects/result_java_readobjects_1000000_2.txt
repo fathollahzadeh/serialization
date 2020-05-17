@@ -1,0 +1,5 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeJAVA]#true#Java Default#true#TweetStatus#21.900338183#342.870408086
+[ReadTimeJAVA]#false#Java Default#true#TweetStatus#17.639847099#163.612315696
+[ReadTimeJAVA]#true#Java Default#false#TweetStatus#1554.672862645#1900.843911942
+[ReadTimeJAVA]#false#Java Default#false#TweetStatus#1555.812519548#1717.940822054

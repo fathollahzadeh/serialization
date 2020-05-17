@@ -1,0 +1,25 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeCPP]#false#C++ HandCoded#true#TweetStatus#37.8294#67.3566
+[ReadTimeCPP]#true#C++ HandCoded#true#TweetStatus#42.2955#66.8199
+[ReadTimeCPP]#false#C++ HandCoded#false#TweetStatus#1305.76#1363.39
+[ReadTimeCPP]#true#C++ HandCoded#false#TweetStatus#1277.74#1327.02
+[ReadTimeCPP]#false#C++ inPlace#true#TweetStatus#102.473#102.861
+[ReadTimeCPP]#true#C++ inPlace#true#TweetStatus#100.445#100.848
+[ReadTimeCPP]#false#C++ inPlace#false#TweetStatus#2060.99#2065.57
+[ReadTimeCPP]#true#C++ inPlace#false#TweetStatus#2087.49#2092.06
+[ReadTimeCPP]#false#C++ Boost#true#TweetStatus#16.1518#180.945
+[ReadTimeCPP]#true#C++ Boost#true#TweetStatus#13.5767#171.358
+[ReadTimeCPP]#false#C++ Boost#false#TweetStatus#1416.23#1613.02
+[ReadTimeCPP]#true#C++ Boost#false#TweetStatus#1381.51#1574.18
+[ReadTimeCPP]#false#C++ ProtoBuf#true#TweetStatus#19.6551#79.2904
+[ReadTimeCPP]#true#C++ ProtoBuf#true#TweetStatus#20.7322#70.9882
+[ReadTimeCPP]#false#C++ ProtoBuf#false#TweetStatus#1841.61#1919.21
+[ReadTimeCPP]#true#C++ ProtoBuf#false#TweetStatus#1840.91#1918.75
+[ReadTimeCPP]#false#C++ Bson#true#TweetStatus#43.864#1119.36
+[ReadTimeCPP]#true#C++ Bson#true#TweetStatus#44.2496#1123.93
+[ReadTimeCPP]#false#C++ Bson#false#TweetStatus#46173.2#47437.1
+[ReadTimeCPP]#true#C++ Bson#false#TweetStatus#46005.9#47240.9
+[ReadTimeCPP]#false#C++ FlatBuffers#true#TweetStatus#71.3277#94.0057
+[ReadTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#75.5472#99.6713
+[ReadTimeCPP]#false#C++ FlatBuffers#false#TweetStatus#3357.65#3399.97
+[ReadTimeCPP]#true#C++ FlatBuffers#false#TweetStatus#3265.13#3305.98

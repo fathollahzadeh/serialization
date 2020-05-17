@@ -78,24 +78,24 @@ The ten different complex object implementations that we considered have very di
 			Java Protocol Buffer  & 1.9 \\ \hline	
 			Java Kyro  & 1.9 \\ \hline	
 			Java Hand Coded ByteBuffer  & 2.3 \\ \hline	
+			Java FaltBuffers  & 2.9 \\ \hline	
 			C++ Hand Coded  & 2.1 \\ \hline	
 			C++ InPlace  & 3.2 \\ \hline	
 			C++ Boost  & 2.2 \\ \hline	
 			C++ Protocol Buffer  & 1.9 \\ \hline
-			C++ BSON  & 4.6 \\ \hline					
+			C++ BSON  & 4.6 \\ \hline	
+			C++ FaltBuffers  & 2.9 \\ \hline				
 			\hline\end{tabular}
 	\end{adjustbox}
 \end{table}
 
 
 \subsection{Experimental Details}
-We run our experiments on a virtual server instances which have 8 vCPU cores, 32 GB RAM and one 800
-GB hard disks (Network Instance Store) running with Ubuntu 18.04.3 LTS. Before running each experiment task, we “warmed up” the Java Garbage Collector (GC) by creating a large number of objects. We do not include this warm-up-time in our performance time calculations.
+We run our experiments on Google Cloud costume instances which have 4 vCPU cores, 32 GB RAM and 3000 GB standard persistent disk(Sustained random IOPS limit: read=2,250 and write=4,500) running with Ubuntu Ubuntu 18.04.4 LTS. Before running each experiment task, we "warmed up" the Java Garbage Collector (GC) by creating a large number of objects. We do not include this warm-up-time in our performance time calculations.
 
 We used two Java GC flags $-XX:-UseGCOverheadLimit$ and $-XX:+UseConcMarkSweepGC$. The first flag is used to avoid OutOfMemoryError exceptions while using the complete RAM size for data processing and the second flag is for running concurrent garbage collection.
 
-We run all of our experiments 5 times and observed that the results have low variance. In this paper we present the average of those runs. Before running each experiment, we
-deleted th OS cache using the Linux command: $echo 3 > /proc/sys/vm/drop_caches$.
+We run all of our experiments 3 times and observed that the results have low variance. In this paper we present the average of those runs. Before running each experiment, we deleted th OS cache using the Linux command: $echo 3 > /proc/sys/vm/drop_caches$.
 
 Our Java implementation is written using Java 8 with the Oracle JDK version "1.8.0\_241" and for our C++ implementation we use the C++11, compiled using clang++ (version 6.0.0).
 

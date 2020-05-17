@@ -1,10 +1,27 @@
 #!/bin/bash
+#=====================================
+## CPU benchs
+Rscript Experiment_Seq_Read_CPU_Plot.R
+Rscript Experiment_Rand_Read_CPU_Plot.R
+
+## CPU and IO Zoom
+Rscript Experiment_Seq_Read_CPU_IO_Bar.R
+Rscript Experiment_Rand_Read_CPU_IO_Bar.R
+
+## CPU and IO serialization
+Rscript Experiment_SerializeObjects_Bar.R
+
+## Memory 
+Rscript Experiment_ReadObjects_Memory.R 
 
 # CPU experiment read objects, sequential and random read
-#Rscript Experiment_ReadObjects_CPU.R
+#Rscript Experiment_ReadObjects.R
 
-# IO experiment read objects, sequential and random read
-#Rscript Experiment_ReadObjects_IO.R
+
+# serialization Bar graph
+#Rscript Experiment_SerializeObjects_Bar.R
+
+#Rscript Experiment_ReadObjects_Memory.R
 
 # experiment external sort
 #Rscript Experiment_ExternalSort.R
@@ -18,7 +35,12 @@
 
 #Rscript Experiment_ReadObjects_Random_Bar_TaskSet.R
 
-Rscript Experiment_ReadObjects_Sequential_RAM.R
+#Rscript Experiment_ReadObjects_Sequential_RAM.R
 
 #Rscript test.R
+
+
+
+
+
 
