@@ -211,6 +211,7 @@ drawPlot <- function(data,isseq,ts,hasshleg){
   
   #lines for Java flat buffers
   lines( na.omit(javaFlatBufferV), type="o", pch=7, lty=2,cex=0.5, col=plot_colors[7],lwd=0.5)
+
   
   #lines for BOOST C++ 
   lines(na.omit(cppBOOSTV), type="o", pch=8, lty=2,cex=0.5, col=plot_colors[8],lwd=0.5)
@@ -273,6 +274,8 @@ dataj4$size <-4000000
 
 # load data for 5M objects read 
 dataj5 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_5000000_",3 , javacount)
+dataj5$totaltime<-0
+dataj5$iotime<-0
 dataj5$size <-5000000
 
 # CPP Results 
