@@ -64,11 +64,11 @@ for (i in 1:7){
     txtmethod<-"Java FaltBuffers"
   
   summemory=0
-  for (j in 1:1){
+  for (j in 1:3){
     datatasksetfalse_seq <-read.delim(paste("data/monitordata/mem__taskset_false_javaTwitterSequentialRead4000000", i,"_1.csv",  sep = ""), header=FALSE, sep=",")
     summemory<-summemory+max(datatasksetfalse_seq[,3])
   }
-  seq_ts_false<- summemory/1
+  seq_ts_false<- summemory/3
   
   value[1,i+6]<-seq_ts_false
   methods[i+6]<-txtmethod

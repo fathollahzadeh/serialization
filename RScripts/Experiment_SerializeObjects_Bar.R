@@ -66,7 +66,7 @@ calulateaxes <- function(data){
 }
 
 # load data for 5M objects write 
-datajo = calulateMeanDataTotaltime("data/Java_Results/writeobjects/result_java_writeobjects_5000000_",2 , 14)
+datajo = calulateMeanDataTotaltime("data/Java_Results/writeobjects/result_java_writeobjects_5000000_",3 , 14)
 dataco = calulateMeanDataTotaltime("data/C_Results/writeobjects/result_cpp_writeobjects_5000000_",3 , 12)
 
 data <- rbind(dataco,datajo)
@@ -91,8 +91,8 @@ data <- rbind(cppHandCoded,cppInPlace,cppFlatBuf,cppProtoBuf,cppBoost,cppBson,ja
 datatasksettrue<-subset(data, taskset=="true")
 datatasksetfalse<-subset(data, taskset=="false")
 
-colorstasksettrue=c("Misty Rose", "Snow") 
-colorstasksetfalse=c("darkseagreen1", "Honeydew") 
+colorstasksettrue=c("gray5", "gray80")#c("Misty Rose", "Snow") 
+colorstasksetfalse=c("gray30", "gray91") 
 
 regionscolors<-c(colorstasksettrue[1],colorstasksettrue[2],colorstasksetfalse[1],colorstasksetfalse[2])
 
@@ -127,9 +127,9 @@ max_y<-max_y+max_y*0.1;
 min_y<-min(iotimetasksettrue,iotimetasksetfalse)/1.3 
 
 # draw bar plots
-p1 <- barplot(valuestasksettrue,log="y",  col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), legend.text=TRUE, axes=FALSE,border ="gray" , space=c(0.2,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5),lwd=0.02)
+p1 <- barplot(valuestasksettrue,log="y",  col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), legend.text=TRUE, axes=FALSE,border =colorstasksettrue, space=c(0.2,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5))
 
-p2 <- barplot(valuestasksetfalse,log="y", col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), add=T,border ="gray", space=c(1.4,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5),axes=FALSE,lwd=0.02)
+p2 <- barplot(valuestasksetfalse,log="y", col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), add=T,border =colorstasksetfalse, space=c(1.4,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5),axes=FALSE)
 
 p<-rbind(p1,p2)
 
@@ -146,20 +146,21 @@ axis(2, las=1, at = z, labels=round(z, digits=0),cex=0.5,  cex.axis = 0.5, font 
 iotime<-rbind(iotimetasksettrue,iotimetasksetfalse)
 cputime<-rbind(cputimetasksettrue,cputimetasksetfalse)
 
-text(x=p+0.25, y=totaltime+totaltime*0.1, font = 2, font.lab = 2, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.35,srt=90)
 
-text(x=p+0.22, y=totaltime-totaltime*0.40, font = 1, font.lab = 2, labels=round(cputime, 1), pos=3, xpd=NA, cex=0.3,srt=90)
-#text(x=p[c(2,4)]+0.22, y=totaltime[c(2,4)]-totaltime[c(2,4)]*0.4, font = 1, font.lab = 2, labels=round(cputime[c(2,4)], 1), pos=3, xpd=NA, cex=0.32,srt=90)
+text(x=p+0.25, y=totaltime+totaltime*0.12, font = 2, font.lab = 2, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.4,srt=90)
 
-text(x=p[c(-8,-10,-14)]+0.2, y=iotime[c(-8,-10,-14)]-iotime[c(-8,-10,-14)]*0.43, font = 1, font.lab = 2, labels=round(iotime[c(-8,-10,-14)], 1), pos=3, xpd=NA, cex=0.3,srt=90)
-text(x=p[c(8,10,14)]+0.2, y=iotime[c(8,10,14)]-iotime[c(8,10,14)]*0.35, font = 1, font.lab = 2, labels=round(iotime[c(8,10,14)], 1), pos=3, xpd=NA, cex=0.27,srt=90)
+text(x=p[c(-2,-4)]+0.22, y=totaltime[c(-2,-4)]-totaltime[c(-2,-4)]*0.42, font = 1, font.lab = 2, labels=round(cputime[c(-2,-4)], 1), pos=3, xpd=NA, cex=0.37,srt=90,col = "black")
+text(x=p[c(2,4)]+0.22, y=totaltime[c(2,4)]-totaltime[c(2,4)]*0.37, font = 1, font.lab = 2, labels=round(cputime[c(2,4)], 1), pos=3, xpd=NA, cex=0.37,srt=90,col = "black")
+
+text(x=p[c(-8,-10,-14)]+0.2, y=iotime[c(-8,-10,-14)]-iotime[c(-8,-10,-14)]*0.43, font = 1, font.lab = 2, labels=round(iotime[c(-8,-10,-14)], 1), pos=3, xpd=NA, cex=0.35,srt=90,col = "white")
+text(x=p[c(8,10,14)]+0.2, y=iotime[c(8,10,14)]-iotime[c(8,10,14)]*0.35, font = 1, font.lab = 2, labels=round(iotime[c(8,10,14)], 1), pos=3, xpd=NA, cex=0.27,srt=90,col = "white")
 box(lwd=0.5)
 
 #lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
-text(x=(p1+p2)/2+1.7,  y=13, xnamestasksettrue, xpd=NA, srt=30, pos=2, font=1, cex=0.4)
+text(x=(p1+p2)/2+1.7,  y=13, xnamestasksettrue, xpd=NA, srt=30, pos=2, font=1, cex=0.43)
 
-legend("topright", regions, cex = 0.4, fill = regionscolors,lwd=0.5,box.lwd=0.5)
+legend("topright", regions, cex = 0.4, fill = regionscolors,lwd=0.5,box.lwd=0.5,col = regionscolors,border=regionscolors)
 
-mtext("Total Serialize Time (sec) - log",  cex = 0.6, font=2,side=2,family="Helvetica",line =1.9, col="black" )
+mtext("Total Serialize Time (sec) - log",  cex = 0.7, font=2,side=2,family="Helvetica",line =1.8, col="black" )
 #mtext("Serialize Objects for 5M Tweets",  cex = 0.4, font=2,side=1,family="Helvetica" ,line = 1.3,col="black")
 

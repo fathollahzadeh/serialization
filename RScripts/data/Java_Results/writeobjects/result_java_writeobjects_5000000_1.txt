@@ -1,0 +1,15 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[WriteTimeJAVA]#false#Java Default#true#TweetStatus#46.533803422#402.846320084
+[WriteTimeJAVA]#true#Java Default#true#TweetStatus#57.150347609#548.940365011
+[WriteTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#17.098395421#1589.679004718
+[WriteTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#28.520531689#2014.750860796
+[WriteTimeJAVA]#false#Java Bson#true#TweetStatus#76.436660709#413.198397838
+[WriteTimeJAVA]#true#Java Bson#true#TweetStatus#81.287969579#805.755123283
+[WriteTimeJAVA]#false#Java ProtoBuf#true#TweetStatus#24.474479838#156.098283696
+[WriteTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#42.952889191#310.625049226
+[WriteTimeJAVA]#false#Java Kryo#true#TweetStatus#36.425773039#122.849232761
+[WriteTimeJAVA]#true#Java Kryo#true#TweetStatus#39.149154665#185.596572817
+[WriteTimeJAVA]#false#Java Byte Buffer#true#TweetStatus#37.437747284#136.155696412
+[WriteTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#44.128105797#245.534922711
+[WriteTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#45.86361197#171.276057655
+[WriteTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#53.48092523#254.482728354

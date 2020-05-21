@@ -59,7 +59,7 @@ calulateaxes <- function(data,ts){
     else if(j>listlength*0.15)
       tspace<-space*1.5
     else
-      tspace<-space
+      tspace<-space*3
     
     j<-j+1
     
@@ -78,9 +78,9 @@ calulateaxes <- function(data,ts){
 cppcount=12*2
 javacount=14*2
 
-pdf(file='Experiment_Rand_Read_CPU_IO_Bar.pdf',height=3.5, width=4)
+pdf(file='Experiment_Rand_Read_CPU_IO_Bar.pdf',height=3, width=4)
 
-datajo = calulateMeanDataTimeBar("data/Java_Results/readobjects/result_java_readobjects_4000000_",1 ,javacount)
+datajo = calulateMeanDataTimeBar("data/Java_Results/readobjects/result_java_readobjects_4000000_",3 ,javacount)
 dataco=calulateMeanDataTimeBar("data/C_Results/readobjects/result_cpp_readobjects_4000000_",3 ,cppcount)
 
 dataj <- subset(datajo,seq=="false"  & datatype=="TweetStatus")
@@ -108,8 +108,8 @@ data <- rbind(cppHandCoded,cppProtoBuf,cppInPlace,cppFlatBuf,cppBoost,cppBson,ja
 datatasksettrue<-subset(data, taskset=="true")
 datatasksetfalse<-subset(data, taskset=="false")
 
-colorstasksettrue=c("Misty Rose", "Snow") 
-colorstasksetfalse=c("darkseagreen1", "Honeydew") 
+colorstasksettrue=c("gray5", "gray80")#c("Misty Rose", "Snow") 
+colorstasksetfalse=c("gray30", "gray91") 
 
 regionscolors<-c(colorstasksettrue[1],colorstasksettrue[2],colorstasksetfalse[1],colorstasksetfalse[2])
 
@@ -143,9 +143,9 @@ max_y<-max_y+max_y*0.1;
 min_y<-min(iotimetasksettrue,iotimetasksetfalse)/1.3 
 
 # draw bar plots
-p1 <- barplot(valuestasksettrue, yaxs="i", log="y", col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.5), legend.text=TRUE, axes=FALSE,border ="gray" , space=c(0.2,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5))
+p1 <- barplot(valuestasksettrue, yaxs="i", log="y", col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.5), legend.text=TRUE, axes=FALSE,border =colorstasksettrue , space=c(0.2,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5))
 
-p2 <- barplot(valuestasksetfalse,yaxs="i", log="y", col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.5), add=T,border ="gray", space=c(1.4,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5),axes=FALSE)
+p2 <- barplot(valuestasksetfalse,yaxs="i", log="y", col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.5), add=T,border =colorstasksettrue, space=c(1.4,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5),axes=FALSE)
 
 p<-rbind(p1,p2)
 
@@ -154,7 +154,7 @@ totaltime<-rbind(totaltimetasksettrue,totaltimetasksetfalse)
 z<-rbind(totaltimetasksettrue,totaltimetasksetfalse,iotimetasksettrue,iotimetasksetfalse)
 z<-z[sort.list(z)]
 z <-c(min_y,z,max_y)
-z<-calulateaxes(z,1.5)
+z<-calulateaxes(z,1.2)
 axis(2, las=1, at = z, labels=round(z, digits=0),  cex.axis = 0.5, font = 1,mgp=c(3, .6, 0))
 
 #write data inside of bar plots
@@ -165,13 +165,13 @@ text(x=p+0.2, y=totaltime+totaltime*0.1, font = 2, font.lab = 2, labels=round(to
 
 #text(x=p[c(-5,-6)]+0.27, y=totaltime[c(-5,-6)]-totaltime[c(-5,-6)]*0.34, font = 1, font.lab = 2, labels=round(cputime[c(-5,-6)], 1), pos=3, xpd=NA, cex=0.3,srt=90)
 #text(x=p[26]+0.2, y=totaltime[26]-totaltime[26]*0.25, font = 1, font.lab = 2, labels=round(cputime[26], 1), pos=3, xpd=NA, cex=0.45,srt=90)
-text(x=p+0.2, y=iotime-iotime*0.29, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.3,srt=90)
+text(x=p+0.2, y=iotime-iotime*0.29, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.3,srt=90,col = "white")
 box()
 
 lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
 text(x=(p1+p2)/2+1.7,  y=min_y-1, xnamestasksettrue, xpd=NA, srt=30, pos=2, font=1, cex=0.4)
 
-legend("topleft", regions, cex = 0.4, fill = regionscolors)
+legend("topleft", regions, cex = 0.4, fill = regionscolors,col = regionscolors,border=regionscolors,box.lwd=0.5)
 
 
 #title(xlab="Random Read Objects for 4M Tweets", col.lab=rgb(0,0.5,0),family="Helvetica",cex.lab = 0.5,line = 1.9)

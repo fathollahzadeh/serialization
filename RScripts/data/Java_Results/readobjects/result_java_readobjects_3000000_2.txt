@@ -1,3 +1,29 @@
 language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeJAVA]#true#Java Default#true#TweetStatus#83.127679802#1065.124301343
 [ReadTimeJAVA]#false#Java Default#true#TweetStatus#56.750113762#496.573315989
+[ReadTimeJAVA]#true#Java Default#false#TweetStatus#11581.741710485#12686.519013247
+[ReadTimeJAVA]#false#Java Default#false#TweetStatus#12088.482150719#12678.509045223
+[ReadTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#29.930083481#1065.309596795
+[ReadTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#11.120338881#464.616682589
+[ReadTimeJAVA]#true#Java Json+Gzip#false#TweetStatus#582.360886946#1619.456578623
+[ReadTimeJAVA]#false#Java Json+Gzip#false#TweetStatus#557.970894118#1022.073704569
+[ReadTimeJAVA]#true#Java Bson#true#TweetStatus#125.108849418#880.941513561
+[ReadTimeJAVA]#false#Java Bson#true#TweetStatus#70.72115495#313.560456362
+[ReadTimeJAVA]#true#Java Bson#false#TweetStatus#13051.108081477#13971.418159295
+[ReadTimeJAVA]#false#Java Bson#false#TweetStatus#13791.286877293#14107.968400972
+[ReadTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#54.732379881#309.165098428
+[ReadTimeJAVA]#false#Java ProtoBuf#true#TweetStatus#22.17306577#109.600632518
+[ReadTimeJAVA]#true#Java ProtoBuf#false#TweetStatus#837.888946773#1179.627646465
+[ReadTimeJAVA]#false#Java ProtoBuf#false#TweetStatus#801.322212406#912.158605045
+[ReadTimeJAVA]#true#Java Kryo#true#TweetStatus#51.407496407#328.979878494
+[ReadTimeJAVA]#false#Java Kryo#true#TweetStatus#21.152431793#128.931304606
+[ReadTimeJAVA]#true#Java Kryo#false#TweetStatus#813.798552459#1125.002955886
+[ReadTimeJAVA]#false#Java Kryo#false#TweetStatus#787.363848188#903.235887501
+[ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#63.602552542#400.450751442
+[ReadTimeJAVA]#false#Java Byte Buffer#true#TweetStatus#28.185862674#145.440049704
+[ReadTimeJAVA]#true#Java Byte Buffer#false#TweetStatus#2189.177827966#2557.366098179
+[ReadTimeJAVA]#false#Java Byte Buffer#false#TweetStatus#2362.506156541#2494.595486725
+[ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#42.429807168#95.870551247
+[ReadTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#40.520365364#65.516569844
+[ReadTimeJAVA]#true#Java FlatBuffers#false#TweetStatus#1111.502041356#1182.796660436
+[ReadTimeJAVA]#false#Java FlatBuffers#false#TweetStatus#1086.687670855#1130.057773757

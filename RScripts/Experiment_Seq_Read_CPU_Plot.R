@@ -52,9 +52,9 @@ calulateaxes <- function(data,ts){
       space<-ts
       # space<-1.5
       if(j>listlength*0.75)
-        tspace<-space*40
+        tspace<-space*70
       else if(j>listlength*0.5)
-        tspace<-space*15
+        tspace<-space*30
       else if(j>listlength*0.25)
         tspace<-space*7
       else if(j>listlength*0.15)
@@ -164,7 +164,7 @@ drawPlot <- function(data,isseq,ts,hasshleg){
   min_y<-min(totaltimes) 
   
   tick_list<-totaltimes[sort.list(totaltimes)]
-  tick_list<-calulateaxes(tick_list,4)
+  tick_list<-calulateaxes(tick_list,3.5)
   y_labels<- sprintf("%s",tick_list);
   
   javaDefaultV[javaDefaultV==0]<-NA
@@ -186,10 +186,10 @@ drawPlot <- function(data,isseq,ts,hasshleg){
   plot(na.omit(cppFLATBUFV), log="y", type="o",cex=0.5, pch=13, lty=2,lwd=0.5, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,col=plot_colors[13],  panel.first=abline(h= tick_list, v=c(1, 2, 3, 4,5), lty=3, col="gray"))
   
   # Make x axis using one to 5 labels
-  axis(1, at=c(1, 2, 3, 4,5), labels=c("1M","2M","3M", "4M","5M"), las=1,cex.axis = 0.5,mgp=c(3, .4, 0) )
+  axis(1, at=c(1, 2, 3, 4,5), labels=c("1M","2M","3M", "4M","5M"), las=1,cex.axis = 0.6,mgp=c(3, .4, 0) )
   
   # Make y axis with horizontal labels that display ticks at 
-  axis(2, las=1, at = tick_list, labels=y_labels,cex.axis = 0.5,mgp=c(3, .6, 0))
+  axis(2, las=1, at = tick_list, labels=y_labels,cex.axis = 0.6,mgp=c(3, .6, 0))
   
   #lines for Json
   lines(na.omit(javaJsonV) , type="o", pch=2, lty=2,cex=0.5, col=plot_colors[2],lwd=0.5)
@@ -234,15 +234,21 @@ drawPlot <- function(data,isseq,ts,hasshleg){
   
   
   xlb<-paste("Number of Objects(task set=", ts ,")", sep="")
-  title(xlab=xlb, col.lab="black",family="Helvetica",cex.lab = 0.6,line = 1.5,font=2)
+  title(xlab=xlb, col.lab="black",family="Helvetica",cex.lab = 0.6,line = 1.3,font=2)
   if(ts=="true"){
-      title(ylab="Total Seqential Read Time (sec) - log", col.lab="black",family="Helvetica",cex.lab = 0.6,line = 1.7,font=2)
+      title(ylab="Total Seqential Read Time (sec) - log", col.lab="black",family="Helvetica",cex.lab = 0.7,line = 1.85,font=2,las=1)
   }
   
  
   box()
-  if(hasshleg){
-    legend(3, 13, serialization_methods, cex=0.31,  col=plot_colors, pch=1:13, lty=2:2,lwd=0.5);
+  #if(hasshleg){
+  #  legend(3, 13, serialization_methods, cex=0.31,  col=plot_colors, pch=1:13, lty=2:2,lwd=0.5);
+  #}
+  if(ts=="true"){
+    legend(2.5, 10, serialization_methods[c(1:7)], cex=0.4,  col=plot_colors[c(1:7)], pch=1:7, lty=2:2,lwd=0.5,ncol=1);
+  }
+  else{
+    legend(2.5, 6, serialization_methods[c(8:13)], cex=0.4,  col=plot_colors[c(7:13)], pch=8:13, lty=2:2,lwd=0.5,ncol=1);
   }
 }
 
@@ -251,29 +257,27 @@ cppcount=12*2
 javacount=14*2
 
 #Java Results
-dataj1 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_1000000_",1 ,javacount)
+dataj1 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_1000000_",3 ,javacount)
 dataj1$size <-1000000 
 
 # load data for 2M objects read 
-dataj2 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_2000000_",1 , javacount)
+dataj2 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_2000000_",3 , javacount)
 dataj2$size <-2000000 
 
 
 # load data for 3M objects read 
-dataj3 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_3000000_", 1 ,javacount)
+dataj3 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_3000000_", 3 ,javacount)
 dataj3$size <-3000000 
 
 
 # load data for 4M objects read 
-dataj4 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_4000000_",1 , javacount)
+dataj4 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_4000000_",3, javacount)
 dataj4$size <-4000000
 
-
 # load data for 5M objects read 
-dataj5 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_4000000_",1 , javacount)
-dataj5$totaltime<-0
-dataj5$iotime<-0
+dataj5 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_5000000_",3 , javacount)
 dataj5$size <-5000000
+
 
 # CPP Results 
 ##################################################################
@@ -302,10 +306,10 @@ datac5$size <-5000000
 # bind the data frames together 
 plotdata <- rbind(datac1,datac2,datac3,datac4,datac5,dataj1,dataj2,dataj3,dataj4,dataj5)
 
-pdf(file='Experiment_Seq_Read_CPU_Plot.pdf',height=3.5, width=4)
+pdf(file='Experiment_Seq_Read_CPU_Plot.pdf',height=3, width=4)
 
 old.par<-par(mfrow=c(1, 2),   pty="m")
-op <- par(mar = c(2.5,2.3,0,0.1))
+op <- par(mar = c(2.2,2.5,0,0.1))
 
 drawPlot(subset(plotdata, taskset=="true" & seq=="true"),TRUE,"true",FALSE)
 drawPlot(subset(plotdata, taskset=="false" & seq=="true"),TRUE,"false",TRUE)

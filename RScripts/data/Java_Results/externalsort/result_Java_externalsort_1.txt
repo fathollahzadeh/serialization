@@ -1,0 +1,8 @@
+language#method#seq#datatype#iotime#totaltime
+[ReadTimeJAVA]#JSON#true#TweetStatus#5.633135625#51562.294507369
+[ReadTimeJAVA]#JAVADEFAULT#true#TweetStatus#3.324380258#8741.516705308
+[ReadTimeJAVA]#BSON#true#TweetStatus#3.201078287#19278.438597819
+[ReadTimeJAVA]#PROTOCOL#true#TweetStatus#13.046754386#3396.859550141
+[ReadTimeJAVA]#BYTEBUFFER#true#TweetStatus#5.605230979#2466.489311062
+[ReadTimeJAVA]#KRYO#true#TweetStatus#19.791148645#4163.574873576
+
