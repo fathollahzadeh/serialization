@@ -274,8 +274,6 @@ dataj4$size <-4000000
 
 # load data for 5M objects read 
 dataj5 = calulateMeanDataTotaltime("data/Java_Results/readobjects/result_java_readobjects_5000000_",3 , javacount)
-dataj5$totaltime<-0
-dataj5$iotime<-0
 dataj5$size <-5000000
 
 # CPP Results 
