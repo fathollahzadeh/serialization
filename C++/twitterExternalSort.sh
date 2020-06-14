@@ -26,10 +26,4 @@ file_external_sort="bin/benchmark/externalsort/result_cpp_externalsort_$2.txt"
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
-time  ./bin/$project_target $datapath $number_of_files $serialization_type $2 0
-
-sleep 200
-
-#clear the OS cache
-echo 3 > /proc/sys/vm/drop_caches && sync
-time taskset -c 0 ./bin/$project_target $datapath $number_of_files $serialization_type $2 1
+time taskset -c 0 ./bin/$project_target $datapath $number_of_files $serialization_type $2 0

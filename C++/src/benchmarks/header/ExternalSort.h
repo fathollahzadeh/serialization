@@ -138,6 +138,8 @@ void ExternalSort<T>::runTheExternalSort() {
         m_list_read_from_file.shrink_to_fit();
     }
 
+    this->ioTime+=fileHandler->getIoTime();
+
     cout << "First stage done! " << endl;
     // ///////////////////////////////////////////////////
     //
@@ -282,7 +284,7 @@ void ExternalSort<T>::runTheExternalSort() {
     double elapsedSeconds = chrono::duration<double>(endTime - startTime).count();
 
     // add times to the log file
-    this->logFileHandler->addLog(true,serializationType, true, "TweetStatus", ioTime, elapsedSeconds,taskset);
+    this->logFileHandler->addLog(true,serializationType, true, "TweetStatus", this->ioTime, elapsedSeconds,taskset);
     this->logFileHandler->flushLogFile();
 }
 
