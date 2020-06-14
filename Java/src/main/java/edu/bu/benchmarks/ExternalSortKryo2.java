@@ -1,16 +1,15 @@
 package edu.bu.benchmarks;
 
-import com.google.gson.Gson;
 import edu.bu.filehandler.FileHandler;
 import edu.bu.filehandler.LogFileHandler;
 import edu.bu.tweet.TweetStatus;
-import edu.bu.util.RootData;
 import edu.bu.util.ObjectFileIndex;
+import edu.bu.util.RootData;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.util.*;
 
-public class ExternalSort {
+public class ExternalSortKryo2 {
 
     private String fileName;
     private int numberOfFiles;
@@ -31,7 +30,7 @@ public class ExternalSort {
 
         PropertyConfigurator.configure("log4j.properties");
 
-        ExternalSort externalSort=new ExternalSort();
+        ExternalSortKryo2 externalSort=new ExternalSortKryo2();
         externalSort.fileName=args[0];
         externalSort.numberOfFiles=Integer.parseInt(args[1]);
         externalSort.serializationType=Integer.parseInt(args[2]);
@@ -64,37 +63,6 @@ public class ExternalSort {
         //define start position of objects in each file:
         long startIndexInEachFile = 0;
         numberOfObjectsInEachFiles = totalObjectsCount / numberOfFiles;
-       for (int i = 0; i < numberOfFiles; i++) {
-
-            System.out.println("Reading for file number "+ i);
-
-            startIndexInEachFile = i * numberOfObjectsInEachFiles;
-
-            // define a vector to store read objects from each file:
-            List<RootData> m_list_read_from_file;
-
-            // read objects from file:
-            m_list_read_from_file=fileHandler.getObjectsFromFile(startIndexInEachFile, numberOfObjectsInEachFiles);
-
-            // Sort the data
-            long tmpTime = System.nanoTime();
-
-            //Sort:
-            Collections.sort(m_list_read_from_file);
-
-            // Sort Time Calculation
-            sortTime += System.nanoTime()-tmpTime;
-
-            // write the sorted list back to files.
-            String tmpStoreFileName = "bin/tmp/sorted-" + i + "-" + serializationType;
-            writeToFiles(m_list_read_from_file, tmpStoreFileName);
-            m_list_read_from_file.clear();
-           // activate the garbage collector
-           runTime.gc();
-            
-        }
-        this.ioTime+=fileHandler.getIoTime();
-        System.out.println("First stage done! ");
         // ///////////////////////////////////////////////////
         //
         // External Sort - Second stage //
@@ -208,6 +176,7 @@ public class ExternalSort {
 
         objectFileOutput.appendObjectToFileFlush();
 
+        this.ioTime+=fileHandler.getIoTime();
         this.ioTime +=objectFileOutput.getIoTime();
 
         System.out.println("Done!");
