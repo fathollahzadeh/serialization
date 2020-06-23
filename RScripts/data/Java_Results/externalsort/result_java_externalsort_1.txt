@@ -1,0 +1,5 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeJAVA]#true#Java Default#true#TweetStatus#5452.947184345#146162.82458074# >>>>>>>>>>>> With final error
+[ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#4312.255638584#89578.700841005
+[ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#4978.641430961001#98795.474594109
+[ReadTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#4242.381662146#99885.152843346

@@ -227,6 +227,8 @@ drawPlot <- function(data,isseq,ts,hasshleg){
   # Java Deafult
   lines(na.omit(javaDefaultV), type="o", pch=1,cex=0.5, lty=2, col=plot_colors[1],lwd=0.5)
   
+ # print(javaDefaultV)
+  
   
   ## Allow a second plot on the same graph
   #par(new=TRUE)
@@ -305,6 +307,7 @@ datac5$size <-5000000
 
 # bind the data frames together 
 plotdata <- rbind(datac1,datac2,datac3,datac4,datac5,dataj1,dataj2,dataj3,dataj4,dataj5)
+write.table(plotdata, file = "../Paper/latex/img/exp_read.csv", sep = ",",row.names = FALSE, col.names = TRUE)
 
 pdf(file='Experiment_Seq_Read_CPU_Plot.pdf',height=3, width=4)
 

@@ -20,8 +20,8 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeJAVA]#true#Java Kryo#false#TweetStatus#-1#-1
 [ReadTimeJAVA]#false#Java Kryo#false#TweetStatus#-1#-1
 [ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#-1#-1
+[ReadTimeJAVA]#false#Java Byte Buffer#true#TweetStatus#-1#-1
 [ReadTimeJAVA]#true#Java Byte Buffer#false#TweetStatus#-1#-1
-[ReadTimeJAVA]#false#Java Byte Buffer#false#TweetStatus#-1#-1
 [ReadTimeJAVA]#false#Java Byte Buffer#false#TweetStatus#-1#-1
 [ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#62.09273103#129.204374098
 [ReadTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#65.172303106#98.231025596

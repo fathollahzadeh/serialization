@@ -1,18 +1,21 @@
 #!/bin/bash
+
+Rscript exp_read.R
+
 #=====================================
 ## CPU benchs
-Rscript Experiment_Seq_Read_CPU_Plot.R
-Rscript Experiment_Rand_Read_CPU_Plot.R
+#Rscript Experiment_Seq_Read_CPU_Plot.R
+#Rscript Experiment_Rand_Read_CPU_Plot.R
 
 ## CPU and IO Zoom
-Rscript Experiment_Seq_Read_CPU_IO_Bar.R
-Rscript Experiment_Rand_Read_CPU_IO_Bar.R
+#Rscript Experiment_Seq_Read_CPU_IO_Bar.R
+#Rscript Experiment_Rand_Read_CPU_IO_Bar.R
 
 ## CPU and IO serialization
-Rscript Experiment_SerializeObjects_Bar.R
+#Rscript Experiment_SerializeObjects_Bar.R
 
 ## Memory 
-Rscript Experiment_ReadObjects_Memory.R 
+#Rscript Experiment_ReadObjects_Memory.R 
 
 # CPU experiment read objects, sequential and random read
 #Rscript Experiment_ReadObjects.R
