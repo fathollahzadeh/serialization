@@ -4,3 +4,4 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#4919.267726480999#99514.471117406
 [ReadTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#4194.1382481480005#99031.465367808
 [ReadTimeJAVA]#true#Java Bson#true#TweetStatus#12307.009829449#184275.771931081
+[ReadTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#4021.258055358#190235.713738601
