@@ -78,7 +78,7 @@ calulateaxes <- function(data,ts){
 cppcount=6
 javacount=7
 
-pdf(file='Experiment_External_Sort_CPU_IO_Bar.pdf',height=3, width=4)
+pdf(file='Experiment_External_Sort_CPU_IO_Bar.pdf',height=2, width=3)
 
 datajo = calulateMeanDataTimeBar("data/Java_Results/externalsort/result_java_externalsort_",2 ,javacount)
 dataco=calulateMeanDataTimeBar("data/C_Results/externalsort/result_cpp_externalsort_",2 ,cppcount)
@@ -135,7 +135,7 @@ max_y<-max_y+max_y*0.1;
 min_y<-min(iotimetasksettrue)/1.3 
 
 # draw bar plots
-p <- barplot(valuestasksettrue, yaxs="i", log="y", col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.5), legend.text=TRUE, axes=FALSE,border =colorstasksettrue)
+p <- barplot(valuestasksettrue, yaxs="i", log="y", col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), legend.text=TRUE, axes=FALSE,border =colorstasksettrue,space=0.6)
 
 # write y labels:
 totaltime<-totaltimetasksettrue
@@ -149,15 +149,14 @@ axis(2, las=1, at = z, labels=round(z, digits=0),  cex.axis = 0.5, font = 1,mgp=
 iotime<-rbind(iotimetasksettrue)
 cputime<-rbind(cputimetasksettrue)
 
-text(x=p+0.2, y=totaltime+totaltime*0.1, font = 2, font.lab = 2, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.5,srt=90)
+text(x=p+0.05, y=totaltime-iotime*0.1, font = 2, font.lab = 2, labels=round(totaltime, 2), pos=3, xpd=NA, cex=0.3,srt=90)
 
-#text(x=p[c(-5,-6)]+0.27, y=totaltime[c(-5,-6)]-totaltime[c(-5,-6)]*0.34, font = 1, font.lab = 2, labels=round(cputime[c(-5,-6)], 1), pos=3, xpd=NA, cex=0.3,srt=90)
-#text(x=p[26]+0.2, y=totaltime[26]-totaltime[26]*0.25, font = 1, font.lab = 2, labels=round(cputime[26], 1), pos=3, xpd=NA, cex=0.45,srt=90)
-text(x=p+0.2, y=iotime-iotime*0.3, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.5,srt=90,col = "white")
+text(x=p+0.05, y=totaltime-totaltime*0.4, font = 1, font.lab = 2, labels=round(cputime, 1), pos=3, xpd=NA, cex=0.3,srt=0)
+text(x=p+0.05, y=iotime-iotime*0.4, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.3,srt=0,col = "white")
 box()
 
 lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
-text(x=p+0.5,  y=min_y-0.1, xnamestasksettrue, xpd=NA, srt=30, pos=2, font=1, cex=0.5)
+text(x=p+0.9,  y=min_y-0.15, xnamestasksettrue, xpd=NA, srt=30, pos=2, font=1, cex=0.4)
 
 legend("topleft", regions, cex = 0.4, fill = regionscolors,col = regionscolors,border=regionscolors,box.lwd=0.5)
 
