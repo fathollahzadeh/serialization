@@ -49,7 +49,7 @@ Library/Software
 * test current Java version:
 -       $ sudo java -version
 
-    - result:
+     result:
 -       java version "1.8.0_241"
         Java(TM) SE Runtime Environment (build 1.8.0_241-b07)
         Java HotSpot(TM) 64-Bit Server VM (build 25.241-b07, mixed mode)
@@ -96,10 +96,75 @@ after finish the serialization task in the out path(parameter two) you can seed 
 * Java Byte Buffer serialization:
     - serialization_6.se
     - serialization_6.se.index
+* Java FlatBuffers serialization:
+    - serialization_7.se
+    - serialization_7.se.index
 #### Step 4: run the experiments:
-##### 4.1) Read object experiments:
+##### 4.1) Write object experiments:
+This experiment include sequential write serialized objects.
+One round of this experimentation need for next "Read Experiments".
+We run all of our experiments 5 times and observed that the results have low variance.
+Run this script for write objects:
+```bash
+$ sudo ./twitterSerialization.sh {path/to/raw/file} {path/to/output} {number/of/tweets/want/to/serialize}
+```
+for example:
+```bash
+./twitterSerialization.sh /mnt/tweets_1M_rows.txt /mnt/javadata/ 5000000
+```
+the content of "experimentReadObjects.sh" is here:
+```bash
+for r in 1 2 3 4 5
+do
+    for serialization_type in   1 2 3 4 5 6 7
+    do
+        outpath="serialization_$serialization_type.se"
+        #clear the OS cache
+        echo 3 > /proc/sys/vm/drop_caches && sync
+        
+        #Run normal experiment 
+        time java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r false
+        
+        # wait a short time for back to stable state
+        sleep 200
+
+        #clear the OS cache
+        echo 3 > /proc/sys/vm/drop_caches && sync
+       
+        # Run the experiment just on Core 0
+        time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r true
+
+    done
+
+done
+```
+this experiment for 5 million data.The final log file results for write objects experiment available in this path:
+```bash
+{project/path}/bin/benchmark/writeobjects
+```
+example of files :
+```bash
+result_java_writeobjects_5000000_1.txt
+result_java_writeobjects_5000000_2.txt
+result_java_writeobjects_5000000_3.txt
+result_java_writeobjects_5000000_4.txt
+result_java_writeobjects_5000000_5.txt
+```
+
+example of result content:
+```bash
+language#taskset#method#seq#datatype#iotime#totaltime
+[WriteTimeJAVA]#false#Java Default#true#TweetStatus#46.533803422#402.846320084
+[WriteTimeJAVA]#true#Java Default#true#TweetStatus#57.150347609#548.940365011
+[WriteTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#17.098395421#1589.679004718
+[WriteTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#28.520531689#2014.750860796
+...
+[WriteTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#45.86361197#171.276057655
+[WriteTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#53.48092523#254.482728354
+```
+##### 4.2) Read object experiments:
 This experiment include sequential and random read serialized objects,
-so make sure generated enough list of objects in the Step 3. 
+so make sure generated enough list of objects in the 4.1. 
 For random read, before run the experiment we need to generate random lists and
 save it in a text files. We did this task in cpp section and the random list data 
 shared between Java and C++ experiments.
@@ -113,7 +178,7 @@ for example:
 ```bash
 $ sudo ./experimentReadObjects.sh /mnt/serialized_data/cppdata1000 /mnt/randomlist
 ```
-the contect of "experimentReadObjects.sh" is here:
+the content of "experimentReadObjects.sh" is here:
 ```bash
 #!/usr/bin/env bash
 data_path=$1
@@ -153,25 +218,21 @@ result_java_readobjects_1000_5.txt
 ```
 example of result content:
 ```bash
-language#method#seq#datatype#iotime#totaltime
-[ReadTimeJAVA]#Java Default#true#TweetStatus#0.002910177#0.53175854
-[ReadTimeJAVA]#Java Default#true#TweetStatus#0.002811223#0.530201562
-[ReadTimeJAVA]#Java Default#false#TweetStatus#0.059467179#0.431964925
-[ReadTimeJAVA]#Java Json#true#TweetStatus#0.001006207#0.49057253
-[ReadTimeJAVA]#Java Json#false#TweetStatus#0.021903647#0.378536125
-[ReadTimeJAVA]#Java Bson#true#TweetStatus#0.008939544#2.269378632
-[ReadTimeJAVA]#Java Bson#false#TweetStatus#0.06538651#2.157031023
-[ReadTimeJAVA]#Java ProtoBuf#true#TweetStatus#9.46014E-4#0.412552214
-[ReadTimeJAVA]#Java ProtoBuf#false#TweetStatus#0.018210505#0.326047429
-[ReadTimeJAVA]#Java Kryo#true#TweetStatus#8.85481E-4#0.327833103
-[ReadTimeJAVA]#Java Kryo#false#TweetStatus#0.011504063#0.223180498
-[ReadTimeJAVA]#Java Byte Buffer#true#TweetStatus#9.52354E-4#0.29042324
-[ReadTimeJAVA]#Java Byte Buffer#false#TweetStatus#0.021162836#0.20620445
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeJAVA]#true#Java Default#true#TweetStatus#23.798836036#352.906722848
+[ReadTimeJAVA]#false#Java Default#true#TweetStatus#18.159668422#165.313603375
+[ReadTimeJAVA]#true#Java Default#false#TweetStatus#1572.860794899#1921.952341106
+[ReadTimeJAVA]#false#Java Default#false#TweetStatus#1546.022621157#1708.930474179
+...
+[ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#12.389147518#27.126166431
+[ReadTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#12.793152134#20.527560654
+[ReadTimeJAVA]#true#Java FlatBuffers#false#TweetStatus#960.76642819#980.017399323
+[ReadTimeJAVA]#false#Java FlatBuffers#false#TweetStatus#936.032555176#947.904076846
 ```
-##### 4.2) External sort experiments:
+##### 4.3) External sort experiments:
 Make sure generated enough list of objects in the Step 3. 
 e run all of our experiments 5 times and observed that the results have low variance.
-Run this script for read objects. This script inclode both sequential and random read:
+Run this script for read objects. This script include both sequential and random read:
 ```bash
 $ sudo ./experimentExternalSort.sh {path/to/serialized/data} {number/of/splites}
 ```
@@ -194,11 +255,11 @@ Finally, the final log file results for read object experiment available in this
  ```
  example of result content:
  ```bash
- language#method#seq#datatype#iotime#totaltime
- [ReadTimeJAVA]#Java Default#true#TweetStatus#0.065219451#2.133305723
- [ReadTimeJAVA]#Java Json#true#TweetStatus#0.016413406#3.760303266
- [ReadTimeJAVA]#Java Bson#true#TweetStatus#0.060226151#13.398960503
- [ReadTimeJAVA]#Java ProtoBuf#true#TweetStatus#0.029981841#1.446549824
- [ReadTimeJAVA]#Java Kryo#true#TweetStatus#0.025616975#0.772949934
- [ReadTimeJAVA]#Java Byte Buffer#true#TweetStatus#0.031267013#0.7274486
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeJAVA]#true#Java Default#true#TweetStatus#10216.984410636001#152753.422
+[ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#4312.255638584#89578.700841005
+[ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#4978.641430961001#98795.474594109
+[ReadTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#4242.381662146#99885.152843346
+[ReadTimeJAVA]#true#Java Bson#true#TweetStatus#11536.926679607#168239.949147106
+[ReadTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#3851.4960500650004#189387.954780967
  ```
