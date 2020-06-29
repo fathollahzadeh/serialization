@@ -7,3 +7,7 @@ Java Implementation is in Directory ./Java
 C++
 --
 C++ Implementation is in Direcotry ./C++ 
+
+Rust
+--
+Rust Implementation is in Direcotry ./Rust 
