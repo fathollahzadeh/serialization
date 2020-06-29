@@ -153,7 +153,7 @@ text(x=p+0.2, y=totaltime+totaltime*0.1, font = 2, font.lab = 2, labels=round(to
 
 #text(x=p[c(-5,-6)]+0.27, y=totaltime[c(-5,-6)]-totaltime[c(-5,-6)]*0.34, font = 1, font.lab = 2, labels=round(cputime[c(-5,-6)], 1), pos=3, xpd=NA, cex=0.3,srt=90)
 #text(x=p[26]+0.2, y=totaltime[26]-totaltime[26]*0.25, font = 1, font.lab = 2, labels=round(cputime[26], 1), pos=3, xpd=NA, cex=0.45,srt=90)
-text(x=p+0.2, y=iotime-iotime*0.29, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.5,srt=90,col = "white")
+text(x=p+0.2, y=iotime-iotime*0.3, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.5,srt=90,col = "white")
 box()
 
 lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
@@ -163,6 +163,6 @@ legend("topleft", regions, cex = 0.4, fill = regionscolors,col = regionscolors,b
 
 
 #title(xlab="Random Read Objects for 4M Tweets", col.lab=rgb(0,0.5,0),family="Helvetica",cex.lab = 0.5,line = 1.9)
-title(ylab="Total Time (hour) - log", col.lab="black",family="Helvetica",cex.lab = 0.6,line = 1.3)
+title(ylab="Total Sort Time(hour) - log", col.lab="black",family="Helvetica",cex.lab = 0.6,line = 1.3)
 
 par(xpd=TRUE)
