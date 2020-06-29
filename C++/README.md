@@ -137,10 +137,73 @@ after finish the serialization task in the out path(parameter two) you can seed 
 * BSON serialization:
     - serialization_5.se
     - serialization_5.se.index
+* FlatBuffers serialization:
+    - serialization_6.se
+    - serialization_6.se.index
 #### Step 4: run the experiments:
-##### 4.1) Read object experiments:
+##### 4.1) Write object experiments:
+This experiment include sequential write serialized objects.
+One round of this experimentation need for next "Read Experiments".
+We run all of our experiments 5 times and observed that the results have low variance.
+Run this script for write objects:
+```bash
+$ sudo ./twitterSerialization.sh {path/to/raw/file} {path/to/output} {number/of/tweets/want/to/serialize}
+```
+for example:
+```bash
+./twitterSerialization.sh /mnt/tweets_1M_rows.txt /mnt/javadata/ 5000000
+```
+the content of "experimentReadObjects.sh" is here:
+```bash
+for r in 1 2 3 4 5
+do
+    for serialization_type in   1 2 3 4 5 6 7
+    do
+        outpath="serialization_$serialization_type.se"
+        #clear the OS cache
+        echo 3 > /proc/sys/vm/drop_caches && sync
+        
+        #Run normal experiment 
+        time ./bin/$project_target $datapath $serialization_type $outpath $numberOfTweets $r 0
+        
+        # wait a short time for back to stable state
+        sleep 200
+
+        #clear the OS cache
+        echo 3 > /proc/sys/vm/drop_caches && sync
+       
+        # Run the experiment just on Core 0
+       time taskset -c 0 ./bin/$project_target $datapath $serialization_type $outpath $numberOfTweets $r 1
+
+    done
+
+done
+```
+this experiment for 5 million data.The final log file results for write objects experiment available in this path:
+```bash
+{project/path}/bin/benchmark/writeobjects
+```
+example of files :
+```bash
+result_cpp_writeobjects_5000000_1.txt
+result_cpp_writeobjects_5000000_2.txt
+result_cpp_writeobjects_5000000_3.txt
+result_cpp_writeobjects_5000000_4.txt
+result_cpp_writeobjects_5000000_5.txt
+```
+
+example of result content:
+```bash
+llanguage#taskset#method#seq#datatype#iotime#totaltime
+ [WriteTimeCPP]#false#C++ HandCoded#true#TweetStatus#19.5971#33.5771
+ [WriteTimeCPP]#true#C++ HandCoded#true#TweetStatus#26.2524#54.1029
+ ...
+ [WriteTimeCPP]#false#C++ FlatBuffers#true#TweetStatus#27.5978#64.4684
+ [WriteTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#43.7937#114.757
+```
+##### 4.2) Read object experiments:
 This experiment include sequential and random read serialized objects,
-so make sure generated enough list of objects in the Step 3. 
+so make sure generated enough list of objects in the Step 4.1. 
 For random read, before run the experiment we need to generate random lists and
 save it in a text files. For generate random list you can run this script:
 ```bash
@@ -202,15 +265,16 @@ result_cpp_readobjects_1000_5.txt
 ```
 example of result content:
 ```bash
-language#method#seq#datatype#iotime#totaltime
-[ReadTimeCPP]#HANDCODED#true#TweetStatus#0.00435849#0.0122351
-[ReadTimeCPP]#HANDCODED#false#TweetStatus#0.0387502#0.0465473
-[ReadTimeCPP]#INPLACE#true#TweetStatus#0.00817438#0.00825829
-[ReadTimeCPP]#INPLACE#false#TweetStatus#0.0464583#0.0467077
-[ReadTimeCPP]#BOOST#true#TweetStatus#0.00483162#0.0443216
-[ReadTimeCPP]#BOOST#false#TweetStatus#0.0347336#0.0802113
-[ReadTimeCPP]#PROTOBUF#true#TweetStatus#0.00424887#0.0189199
-[ReadTimeCPP]#PROTOBUF#false#TweetStatus#0.0361407#0.0526357
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeCPP]#false#C++ HandCoded#true#TweetStatus#7.76952#14.8675
+[ReadTimeCPP]#true#C++ HandCoded#true#TweetStatus#7.91878#14.0124
+[ReadTimeCPP]#false#C++ HandCoded#false#TweetStatus#1054.5#1068.13
+[ReadTimeCPP]#true#C++ HandCoded#false#TweetStatus#1027.18#1036.96
+...
+[ReadTimeCPP]#false#C++ FlatBuffers#true#TweetStatus#16.3615#22.8448
+[ReadTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#15.8154#20.72
+[ReadTimeCPP]#false#C++ FlatBuffers#false#TweetStatus#1628.69#1638.26
+[ReadTimeCPP]#true#C++ FlatBuffers#false#TweetStatus#1599.28#1606.7
 ```
 ##### 4.2) External sort experiments:
 Make sure generated enough list of objects in the Step 3. 
@@ -238,11 +302,13 @@ Finally, the final log file results for read object experiment available in this
  ```
  example of result content:
  ```bash
- language#method#seq#datatype#iotime#totaltime
- [ReadTimeCPP]#HANDCODED#true#TweetStatus#0.00206699#0.0318655
- [ReadTimeCPP]#INPLACE#true#TweetStatus#0.00447328#0.0239138
- [ReadTimeCPP]#BOOST#true#TweetStatus#0.00159802#0.160149
- [ReadTimeCPP]#PROTOBUF#true#TweetStatus#0.00173092#0.0518689
+ language#taskset#method#seq#datatype#iotime#totaltime
+ [ReadTimeCPP]#true#C++ HandCoded#true#TweetStatus#5123.37#17662.1
+ [ReadTimeCPP]#true#C++ inPlace#true#TweetStatus#10566#21881.6
+ [ReadTimeCPP]#true#C++ Boost#true#TweetStatus#3888.37#18601.4
+ [ReadTimeCPP]#true#C++ ProtoBuf#true#TweetStatus#4067.24#18093.9
+ [ReadTimeCPP]#true#C++ Bson#true#TweetStatus#27670.8#145550
+ [ReadTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#7251.14#13490
  ```
 
  
