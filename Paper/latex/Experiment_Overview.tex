@@ -2,6 +2,15 @@
 
 In the next few sections of the paper, we will give detailed explanations of the experimental tasks we consider. As a preview, the tasks we consider are:
 
+\begin{figure*}[t]
+	\centering
+	\resizebox{!}{3.5in}{
+	   \input{img/tweet_complex_object}
+	 }
+	\caption{Object relationship and frequency of Tweet Objects (for one million tweets)}
+	\label{fig:tweet_complex_object}
+\end{figure*}
+
 \begin{enumerate}
 	\item A set of serialized objects stored externally on an HDD; the task is to read the objects into memory and deserialize them to their in-memory representation.
 	\item A set of objects are stored in a large file (larger than the available RAM). The task is to perform an external sort of the file in order to perform a duplicate removal.
@@ -14,37 +23,37 @@ In the next few sections of the paper, we will give detailed explanations of the
 For the various experiments, we use twitter data sets \cite{tweet_objects}, implemented using each of the ten different physical implementations. 
 
 \subsection{Encoding sizes}
-The ten different complex object implementations that we considered have very different encoding densities when the objects are serialized for storage or transmission across the network. The average, per-object sizes are given in Table \ref{tbl:object_size}. 
-\begin{table}
-	\centering
-	\caption{Frequency of some Tweet Objects  (for 1 million tweets) }
-	\label{tbl:object_size}
-	\begin{adjustbox}{width=\columnwidth,center}	
+The ten different complex object implementations that we considered have very different encoding densities when the objects are serialized for storage or transmission across the network. The average, per-object sizes are given in Table %\ref{tbl:object_size}. 
+%\begin{table}
+%	\centering
+%	\caption{Frequency of some Tweet Objects  (for 1 million tweets) }
+%	\label{tbl:object_size}
+%	\begin{adjustbox}{width=\columnwidth,center}	
 		
-		\begin{tabular}{|c|c|c|} \hline
-			Object Name &Parent Object &Frequency\\ \hline
-			tweet  & root object& 1,000,000 \\ \hline
-			users & tweet & 1,000,000 \\ \hline
-			coordinates  &tweet& 1586 \\ \hline
-			place & tweet & 11974 \\ \hline
-			quoted status  & tweet & 177537 \\ \hline
-			retweeted status  & tweet & 598517 \\ \hline
-			entities  & tweet & 1,000,000 \\ \hline
-			extended entities  & tweet & 51479 \\ \hline
-			hashtags  & entities & 398720 \\ \hline
-			media  & entities & 51481 \\ \hline
-			urls  & entities & 417176 \\ \hline
-			user mentions  & entities & 1063216 \\ \hline
-			symbols  & entities & 7793 \\ \hline
-			sizes  & media & 7793 \\ \hline
-			media sizes  & sizes & 51485 \\ \hline
-			thumb  & media sizes & 51485 \\ \hline
-			large  & media sizes & 51485 \\ \hline
-			medium  & media sizes & 51485 \\ \hline
-			small  & media sizes & 51485 \\ \hline
-			\hline\end{tabular}
-	\end{adjustbox}
-\end{table}
+%		\begin{tabular}{|c|c|c|} \hline
+%			Object Name &Parent Object &Frequency\\ \hline
+%			tweet  & root object& 1,000,000 \\ \hline
+%			users & tweet & 1,000,000 \\ \hline
+%			coordinates  &tweet& 1586 \\ \hline
+%			place & tweet & 11974 \\ \hline
+%			quoted status  & tweet & 177537 \\ \hline
+%			retweeted status  & tweet & 598517 \\ \hline
+%			entities  & tweet & 1,000,000 \\ \hline
+%			extended entities  & tweet & 51479 \\ \hline
+%			hashtags  & entities & 398720 \\ \hline
+%			media  & entities & 51481 \\ \hline
+%			urls  & entities & 417176 \\ \hline
+%			user mentions  & entities & 1063216 \\ \hline
+%			symbols  & entities & 7793 \\ \hline
+%			sizes  & media & 7793 \\ \hline
+%			media sizes  & sizes & 51485 \\ \hline
+%			thumb  & media sizes & 51485 \\ \hline
+%			large  & media sizes & 51485 \\ \hline
+%			medium  & media sizes & 51485 \\ \hline
+%			small  & media sizes & 51485 \\ \hline
+%			\hline\end{tabular}
+%	\end{adjustbox}
+%\end{table}
 
 \begin{table}
 	\centering
@@ -95,7 +104,7 @@ We run our experiments on Google Cloud costume instances which have 4 vCPU cores
 
 We used two Java GC flags $-XX:-UseGCOverheadLimit$ and $-XX:+UseConcMarkSweepGC$. The first flag is used to avoid OutOfMemoryError exceptions while using the complete RAM size for data processing and the second flag is for running concurrent garbage collection.
 
-We run all of our experiments 3 times and observed that the results have low variance. In this paper we present the average of those runs. Before running each experiment, we deleted th OS cache using the Linux command: $echo 3 > /proc/sys/vm/drop_caches$.
+We run all of our experiments 3 times and observed that the results have low variance. In this paper we present the average of those runs. Before running each experiment, we deleted th OS cache using the Linux command: $echo 3 > /proc/sys/vm/drop\_caches$.
 
 Our Java implementation is written using Java 8 with the Oracle JDK version "1.8.0\_241" and for our C++ implementation we use the C++11, compiled using clang++ (version 6.0.0).
 

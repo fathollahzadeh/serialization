@@ -13,21 +13,63 @@
 \usepackage{hyperref}
 \usepackage{microtype}
 \usepackage{pgfplots} % LaTeX
+\usepgfplotslibrary{groupplots}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%usepackage{pgf}
+\usepackage{tikz}
+\usepackage{listings}
+%%%<
+\usepackage{verbatim}
+%\usepackage[active,tightpage]{preview}
+%\PreviewEnvironment{tikzpicture}
+%\setlength\PreviewBorder{5pt}%
+%%%>
+
+%\usepackage[utf8]{inputenc}
+\usetikzlibrary{arrows,automata}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pgfplotsset{compat=1.11}
+
+
 
 
 % Include information below and uncomment for camera ready
-\vldbTitle{Twitter data serialization methods and benchmarks}
+%\vldbTitle{Twitter data serialization methods and benchmarks}
+\vldbTitle{Complex Object Implementations for Big Data Systems}
 \vldbAuthors{Ben Trovato, G. K. M. Tobin, Lars Th{\sf{\o}}rv{$\ddot{\mbox{a}}$}ld, Lawrence P. Leipuner, Sean Fogarty, Charles Palmer, John Smith, Julius P.~Kumquat, and Ahmet Sacan}
 \vldbDOI{https://doi.org/10.14778/xxxxxxx.xxxxxxx}
 \vldbVolume{12}
 \vldbNumber{xxx}
 \vldbYear{2019}
 
+
+\tikzset{
+	state/.style={
+		rectangle,
+		rounded corners,
+		draw=black, very thick,
+		minimum height=2em,
+		inner sep=2pt,
+		text centered,
+	},
+	connect/.style = {  black },
+}
+\newcommand{\definevariableobject}[1] {\textcolor{black}{ 
+		\ttfamily\bfseries\textcolor{red}{\ #1}}
+} 
+\newcommand{\definevariable}[1] {\textcolor{black}{ 
+		\ttfamily\bfseries\ #1}
+} 
+\definecolor{copper}{cmyk}{0,0.9,0.9,0.2}
+\colorlet{lightgray}{black!25}
+\colorlet{darkgray}{black!75}
+
 \begin{document}
 
 % ****************** TITLE ****************************************
 
-\title{Twitter data serialization methods and benchmarks}
+\title{Complex Object Implementations for Big Data Systems}
 
 
 % possible, but not really needed or used for PVLDB:
