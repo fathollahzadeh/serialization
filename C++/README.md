@@ -217,7 +217,7 @@ we create 100 random number from 0 to maximum number 1000 in "/mnt/randomlist/ra
 
 Now, we are ready for run the read object experiment. 
 We run all of our experiments 5 times and observed that the results have low variance.
-Run this script for read objects. This script inclode both sequential and random read:
+Run this script for read objects. This script include both sequential and random read:
 ```bash
 $ sudo ./experimentReadObjects.sh {path/to/serialized/data} {path/to/randomlist}
 ```
@@ -276,10 +276,10 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeCPP]#false#C++ FlatBuffers#false#TweetStatus#1628.69#1638.26
 [ReadTimeCPP]#true#C++ FlatBuffers#false#TweetStatus#1599.28#1606.7
 ```
-##### 4.2) External sort experiments:
+##### 4.3) External sort experiments:
 Make sure generated enough list of objects in the Step 3. 
 e run all of our experiments 5 times and observed that the results have low variance.
-Run this script for read objects. This script inclode both sequential and random read:
+Run this script for read objects. This script include both sequential and random read:
 ```bash
 $ sudo ./experimentExternalSort.sh {path/to/serialized/data} {number/of/splites}
 ```
