@@ -1,0 +1,40 @@
+%\begin{tikzpicture}
+%\begin{axis}
+%\addplot[color=red]{exp(x)};
+%\end{axis}
+%\end{tikzpicture}
+%%Here ends the furst plot
+%\hskip 5pt
+%Here begins the 3d plot
+%\begin{tikzpicture}
+%\begin{axis}
+%\addplot3[
+%    surf,
+%]
+%{exp(-x^2-y^2)*x};
+%\end{axis}
+%\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1}, width=0.25\textwidth,height=3in]
+\nextgroupplot[
+%xmax=20,
+%ymax=20,
+]
+%\begin{axis}
+\addplot[color=red]{exp(x)};
+%\end{axis}
+
+\nextgroupplot[
+axis lines=middle,
+xmax=20,
+ymax=20,
+xtick=\empty, ytick=\empty]
+\addplot [only marks] table {
+	-3 -4
+	-5  2
+	-12  5
+};
+
+\end{groupplot}
+\end{tikzpicture}
