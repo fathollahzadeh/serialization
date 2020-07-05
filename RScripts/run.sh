@@ -1,6 +1,5 @@
 #!/bin/bash
 
-Rscript exp_read.R
 
 #=====================================
 ## CPU benchs
@@ -27,7 +26,9 @@ Rscript exp_read.R
 #Rscript Experiment_ReadObjects_Memory.R
 
 # experiment external sort
-#Rscript Experiment_ExternalSort.R
+Rscript Experiment_External_Sort_CPU_IO_Bar_60M.R
+
+Rscript Experiment_External_Sort_CPU_IO_Bar_10M.R
 
 #data overview 
 #Rscript Data_Overview.R

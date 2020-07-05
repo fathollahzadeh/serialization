@@ -1,0 +1,8 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeCPP]#true#C++ HandCoded#true#TweetStatus#122.491#592.967
+[ReadTimeCPP]#true#C++ inPlace#true#TweetStatus#275.249#538.516
+[ReadTimeCPP]#true#C++ Boost#true#TweetStatus#127.68#1913.54
+[ReadTimeCPP]#true#C++ ProtoBuf#true#TweetStatus#122.33#861.892
+[ReadTimeCPP]#true#C++ Bson#true#TweetStatus#591.081#14370.6
+[ReadTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#212.908#656.945
+

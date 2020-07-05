@@ -78,10 +78,10 @@ calulateaxes <- function(data,ts){
 cppcount=6
 javacount=7
 
-pdf(file='Experiment_External_Sort_CPU_IO_Bar.pdf',height=2, width=3)
+pdf(file='Experiment_External_Sort_CPU_IO_Bar_60M.pdf',height=2, width=3)
 
-datajo = calulateMeanDataTimeBar("data/Java_Results/externalsort/result_java_externalsort_",2 ,javacount)
-dataco=calulateMeanDataTimeBar("data/C_Results/externalsort/result_cpp_externalsort_",2 ,cppcount)
+datajo = calulateMeanDataTimeBar("data/Java_Results/externalsort/60M/result_java_externalsort_",2 ,javacount)
+dataco=calulateMeanDataTimeBar("data/C_Results/externalsort/60M/result_cpp_externalsort_",2 ,cppcount)
 
 dataj <- subset(datajo,seq=="true"  & datatype=="TweetStatus")
 datac <- subset(dataco,seq=="true" & datatype=="TweetStatus")
@@ -113,7 +113,7 @@ colorstasksetfalse=c("gray30", "gray91")
 
 regionscolors<-c(colorstasksettrue[1],colorstasksettrue[2],colorstasksetfalse[1],colorstasksetfalse[2])
 
-totaltimetasksettrue <- datatasksettrue$totaltime/3060
+totaltimetasksettrue <- datatasksettrue$totaltime/3600
 iotimetasksettrue <- datatasksettrue$iotime/3600
 cputimetasksettrue <- totaltimetasksettrue - iotimetasksettrue
 
