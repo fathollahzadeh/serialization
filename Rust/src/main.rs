@@ -14,7 +14,8 @@ fn main()  -> io::Result<()>{
         //println!("{}", line.unwrap());
 
         let deserialized:  TweetStatus = serde_json::from_str(&line.unwrap()).unwrap();
-        println!("deserialized = {:?}", deserialized);
+       // println!("-------------------------------------------------------------");
+        //println!("{:?}", deserialized);
     }
 
     Ok(())
