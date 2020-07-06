@@ -4,6 +4,8 @@ use crate::tweetStructs::Coordinates::Coordinates;
 use crate::tweetStructs::Place::Place;
 use crate::tweetStructs::Entities::Entities;
 use crate::tweetStructs::ExtendedEntities::ExtendedEntities;
+use std::collections::HashMap;
+use crate::tweetStructs::MatchingRulesEntity::MatchingRulesEntity;
 
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -34,10 +36,9 @@ pub struct TweetStatus {
     possibly_sensitive: Option<bool> ,
     filter_level: Option<String> ,
     lang: Option<String> ,
-    //matching_rules: List,
+    matching_rules: Option<Vec<MatchingRulesEntity>>,
     current_user_retweet: Option<i64> ,
-    //TODO
-    //scopes: Map,
+    scopes: Option<HashMap<String,bool>>,
     withheld_copyright: Option<bool> ,
     withheld_in_countries:Option<Vec<String>>,
     withheld_scope: Option<String>

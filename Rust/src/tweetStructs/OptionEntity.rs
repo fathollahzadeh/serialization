@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Coordinates {
-    types: Option<String>,
-    coordinates: Option<Vec<f64>>
+pub struct OptionEntity {
+    position: Option<i32> ,
+    text: Option<String>
 }

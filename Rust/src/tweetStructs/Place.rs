@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use crate::tweetStructs::BoundingBoxCoordinate::BoundingBoxCoordinate;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Place {
@@ -9,7 +10,5 @@ pub struct Place {
     place_type: String ,
     url: String ,
     full_name: String ,
-
-   //TODO
-   // bounding_box: BoundingBoxCoordinate,
+    bounding_box: Option<BoundingBoxCoordinate>
 }
