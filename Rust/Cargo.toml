@@ -6,9 +6,13 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+#[[bin]]
+#name = "DataSerialization"
+#path = "src/benchmarks/DataSerialization.rs"
+
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
-
-# serde_json is just for the example, not required in general
-bytes = "0.5"
 serde_json = "1.0"
+bytes = "0.5"
+rand = "0.7"
+chrono = "0.4"

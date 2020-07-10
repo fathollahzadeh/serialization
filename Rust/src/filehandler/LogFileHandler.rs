@@ -1,6 +1,9 @@
 use serde::{Serialize, Deserialize};
-use std::fs::{OpenOptions, File};
 use std::io::Write;
+use std::fs::OpenOptions;
+use std::fs::File;
+use std::time::{Duration, Instant};
+use std::io;
 
 pub struct LogFileHandler {
     file_name: String
@@ -11,7 +14,7 @@ impl LogFileHandler {
         LogFileHandler { file_name }
     }
 
-    pub fn add_log(&self, read: bool, serialization_type: i32, seq: bool, datatype: String, iotime: f64, totaltime: f64, taskset: bool) {
+    pub fn add_log(&self, read: bool, serialization_type: i32, seq: bool, datatype: String, iotime: Duration, totaltime: Duration, taskset: bool)-> io::Result<()> {
         let mut  log;
         if read {
             log = format!("{}{}{}","[ReadTimeRUST]#" , taskset , "#");
@@ -47,23 +50,22 @@ impl LogFileHandler {
             seqString="true";
         }
 
-        log+= format!("{}{}", method, "#").as_ref();
-        log+=format!("{}{}",seqString,"#").as_ref();
-        log+=format!("{}{}",datatype,"#").as_ref();
-        log+=format!("{}{}",iotime,"#").as_ref();
-        log+=format!("{}",totaltime).as_ref();
-
+        log+= format!("{}#", method).as_ref();
+        log+=format!("{}#",seqString).as_ref();
+        log+=format!("{}#",datatype).as_ref();
+        log+=format!("{:?}#",iotime).as_ref();
+        log+=format!("{:?}",totaltime).as_ref();
 
         let mut file = OpenOptions::new()
-            .read(true)
-            .write(true)
             .create(true)
             .append(true)
             .open(&self.file_name).unwrap();
 
-         if let Err(e) = writeln!(file, "{}", log.as_str()) {
+         if let Err(e) = writeln!(file, "{}",log.as_str() ) {
             eprintln!("Couldn't write to file: {}", e);
         }
+        file.flush();
+        Ok(())
     }
 }
 
