@@ -5,13 +5,16 @@ use serde::{Serialize, Deserialize};
 use crate::tweetStructs::TweetStatus::TweetStatus;
 use crate::filehandler::LogFileHandler::LogFileHandler;
 use crate::benchmarks::DataSerialization::DataSerialization;
+use bytes::{BytesMut, BufMut};
+use bytes::Bytes;
+use bytebuffer::*;
 
 mod tweetStructs;
 mod filehandler;
 mod benchmarks;
 
 
-fn main()  -> io::Result<()>{
+fn main() -> io::Result<()>{
 
     let args: Vec<String> = env::args().collect();
     let bench_type=&args[1];
@@ -19,9 +22,6 @@ fn main()  -> io::Result<()>{
     if bench_type=="write" {
         DataSerialization(args);
     }
-
-
-
     Ok(())
 }
 

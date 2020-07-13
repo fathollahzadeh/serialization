@@ -6,21 +6,23 @@ use crate::tweetStructs::TweetStatus::TweetStatus;
 use std::time::{Duration, Instant};
 use std::convert::TryInto;
 use std::io::Write;
+use std::borrow::Borrow;
+use serde::Serialize;
 
 
 //#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct FileHandler {
     file_name: String,
     index_file_name: String,
-    current_page_number: i64,
-    current_offset: i64,
-    page_size: i64,
+    current_page_number: u64,
+    current_offset: u64,
+    page_size: u64,
     page_buffer: BytesMut,
 
-    count_object: i64,
+    count_object: u64,
 
     //total number of objects in serialized file:
-    total_of_objects: i64,
+    total_of_objects: u64,
 
     //Output: For Writing:
     // randOutStreamRegularFile:Option<RandomAccessFile>,
@@ -31,20 +33,22 @@ pub struct FileHandler {
 
 
     //Page index:
-    page_index: Vec<i64>,
+    page_index: Vec<u64>,
 
     //Object index:
-    object_index: Vec<i64>,
+    object_index: Vec<u64>,
+
+    object_length: Vec<u64>,
 
     //Object in each page:
-    object_in_each_page: HashMap<i64, i64>,
+    object_in_each_page: HashMap<u64, u64>,
 
     //benchmark times:
     io_time: Duration,
     index_time: Duration,
 
     //Network Experiments:
-    network_page_size: i64,
+    network_page_size: u64,
 
     serialization_type: i32,
 
@@ -60,18 +64,13 @@ impl FileHandler {
             3 => mth = "CBOR",
             4 => mth = "YAML",
             5 => mth = "MessagePack",
-            6 => mth = "TOML",
-            7 => mth = "Pickle",
-            8 => mth = "RON",
-            9 => mth = "BSON",
-            10 => mth = "Avro",
-            11 => mth = "JSON5",
-            12 => mth = "Postcard",
-            13 => mth = "URL",
-            14 => mth = "S-expressions",
-            15 => mth = "D-Bus",
-            16 => mth = "FlexBuffers",
+            6 => mth = "Pickle",
+            7 => mth = "RON",
+            8 => mth = "BSON",
+            9 => mth = "JSON5",
+            10 => mth = "FlexBuffers",
             _ => { mth = "" }
+
         }
         let ifn: String = format!("{}.{}", fileName.clone(), "index");
         FileHandler {
@@ -80,13 +79,14 @@ impl FileHandler {
             current_page_number: 0,
             current_offset: 0,
             page_size: 256 * 1024,
-            page_buffer: BytesMut::with_capacity(256 * 1024), // page size = 256K
+            page_buffer: BytesMut::with_capacity(2 * 256 * 1024), // page size = 256K
             count_object: 0,
             total_of_objects: 0,
             outRegularFile: OpenOptions::new().write(true).create(true).open(fileName).unwrap(),
             outIndexFile: OpenOptions::new().write(true).create(true).open(ifn).unwrap(),
             page_index: vec![],
             object_index: vec![],
+            object_length: vec![],
             object_in_each_page: Default::default(),
             io_time: Duration::new(0, 0),
             index_time: Duration::new(0, 0),
@@ -120,66 +120,74 @@ impl FileHandler {
         Ok(())
     }
     pub fn appendObjectToFile(&mut self, object: TweetStatus) {
-        let buffer;
+        let object_size: u64;
+        let last_len: u64 = self.page_buffer.len().try_into().unwrap();
         match self.method.as_str() {
-            "JSON" => {
-                buffer = serde_json::to_string(&object).unwrap();
+            "JSON" => {//1
+                self.page_buffer.put_slice(serde_json::to_string(&object).unwrap().as_bytes());
             }
-            "Bincode" => { buffer = "".to_string(); }
-            "CBOR" => { buffer = "".to_string(); }
-            "YAML" => { buffer = "".to_string(); }
-            "MessagePack" => { buffer = "".to_string(); }
-            "TOML" => { buffer = "".to_string(); }
-            "Pickle" => { buffer = "".to_string(); }
-            "RON" => { buffer = "".to_string(); }
-            "BSON" => { buffer = "".to_string(); }
-            "Avro" => { buffer = "".to_string(); }
-            "JSON5" => { buffer = "".to_string(); }
-            "Postcard" => { buffer = "".to_string(); }
-            "URL" => { buffer = "".to_string(); }
-            "S-expressions" => { buffer = "".to_string(); }
-            "D-Bus" => { buffer = "".to_string(); }
-            "FlexBuffers" => { buffer = "".to_string(); }
-            _ => { buffer = "".to_string(); }
+            "Bincode" => { //2
+                self.page_buffer.put_slice(bincode::serialize(&object).unwrap().as_slice());
+            }
+            "CBOR" => {//3
+                self.page_buffer.put_slice(serde_cbor::to_vec(&object).unwrap().as_slice());
+            }
+            "YAML" => { //4
+                self.page_buffer.put_slice(serde_yaml::to_string(&object).unwrap().as_bytes());
+            }
+            "MessagePack" => {//5
+                self.page_buffer.put_slice(rmp_serde::to_vec(&object).unwrap().as_slice());
+            }
+             "Pickle" => { //6
+                 self.page_buffer.put_slice(serde_pickle::to_vec(&object,false).unwrap().as_slice());
+             }
+             "RON" => { //7
+                 self.page_buffer.put_slice(ron::to_string(&object).unwrap().as_bytes());
+             }
+             "BSON" => {//8
+                   self.page_buffer.put_slice(bson::to_bson(&object).unwrap().to_string().as_bytes());
+               }
+             "JSON5" => {//9
+                 self.page_buffer.put_slice(json5::to_string(&object).unwrap().as_bytes());
+             }
+             "FlexBuffers" => {//10
+                 self.page_buffer.put_slice( flexbuffers::to_vec(&object).unwrap().as_slice());
+             }
+            _ => {}
         }
-        let object_size: i64 = buffer.len().try_into().unwrap();
+
+        let curren_len: u64 = self.page_buffer.len().try_into().unwrap();
+        object_size = curren_len - last_len;
 
         //check capacity of the current page size
-        //if current page is full should be write to the file and then reset the page
-        if ((self.current_offset + object_size + 8) > self.page_size) {
-
+        //if current page is full should be write to the file
+        if curren_len > self.page_size {
+            let tbuffer = self.page_buffer.split_to(last_len.try_into().unwrap());
             //Write in file:
             let tmpTime = Instant::now();
-            self.outRegularFile.write_all(self.page_buffer.bytes());
+            self.outRegularFile.write_all(&tbuffer);
             self.io_time += tmpTime.elapsed();
-
             self.current_page_number += 1;
-            self.current_offset = 0;
-            self.page_buffer.clear();
         }
-        self.page_buffer.put_i64(object_size);
-        self.page_buffer.put_slice(buffer.as_bytes());
         self.page_index.push(self.current_page_number);
-        self.object_index.push(self.current_offset);
-        self.current_offset += object_size;
+        self.object_index.push(last_len);
+        self.object_length.push(object_size);
         self.count_object += 1;
     }
 
-    fn writeIndexToFile(&mut self, index_vector: Vec<i64>) {
+    fn writeIndexToFile(&mut self, index_vector: Vec<u64>) {
+        let buffer_size = (index_vector.len() + 1) * 8;
+        let mut buffer: BytesMut = BytesMut::with_capacity(buffer_size);
 
-        let buffer_size=(index_vector.len()+1)*8;
-        let mut buffer:BytesMut= BytesMut::with_capacity(buffer_size);
-
-        buffer.put_i64((index_vector.len()).try_into().unwrap());
+        buffer.put_u64((index_vector.len()).try_into().unwrap());
 
         for i in index_vector {
-            buffer.put_i64(i);
+            buffer.put_u64(i);
         }
 
         let tmpTime = Instant::now();
         self.outIndexFile.write_all(buffer.bytes());
         self.io_time += tmpTime.elapsed();
-
     }
 
     pub fn appendObjectToFileFlush(&mut self) {
@@ -194,6 +202,9 @@ impl FileHandler {
 
         //Write objectIndex Vector to the File:
         self.writeIndexToFile(self.object_index.to_owned());
+
+        //Write objectLength Vector to the File:
+        self.writeIndexToFile(self.object_length.to_owned());
 
         //Close Index file:
         self.outIndexFile.flush();

@@ -28,17 +28,11 @@ impl LogFileHandler {
             3 => method = "Rust CBOR",
             4 => method = "Rust YAML",
             5 => method = "Rust MessagePack",
-            6 => method = "Rust TOML",
-            7 => method = "Rust Pickle",
-            8 => method = "Rust RON",
-            9 => method = "Rust BSON",
-            10 => method = "Rust Avro",
-            11 => method = "Rust JSON5",
-            12 => method = "Rust Postcard",
-            13 => method = "Rust URL",
-            14 => method = "Rust S-expressions",
-            15 => method = "Rust D-Bus",
-            16 => method = "Rust FlexBuffers",
+            6 => method = "Rust Pickle",
+            7 => method = "Rust RON",
+            8 => method = "Rust BSON",
+            9 => method = "Rust JSON5",
+            10 => method = "Rust FlexBuffers",
             _ => {method = ""}
         }
 
@@ -53,8 +47,8 @@ impl LogFileHandler {
         log+= format!("{}#", method).as_ref();
         log+=format!("{}#",seqString).as_ref();
         log+=format!("{}#",datatype).as_ref();
-        log+=format!("{:?}#",iotime).as_ref();
-        log+=format!("{:?}",totaltime).as_ref();
+        log+=format!("{:?}#",iotime.as_secs_f64()).as_ref();
+        log+=format!("{:?}",totaltime.as_secs_f64()).as_ref();
 
         let mut file = OpenOptions::new()
             .create(true)
