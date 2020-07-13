@@ -53,9 +53,11 @@ pub struct FileHandler {
     serialization_type: i32,
 
     method: String,
+
 }
 
 impl FileHandler {
+
     pub fn new(fileName: String, serializationType: i32) -> FileHandler {
         let mth;
         match serializationType {
@@ -212,5 +214,11 @@ impl FileHandler {
         //Close Serialized Data file:
         self.outRegularFile.flush();
     }
+
+    pub fn getio_time(&self) -> Duration{
+        return self.io_time;
+    }
+
+
 }
 

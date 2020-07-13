@@ -3,12 +3,12 @@ use crate::tweetStructs::BoundingBoxCoordinate::BoundingBoxCoordinate;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Place {
-    name: String ,
-    country_code: String ,
-    id: String ,
-    country: String ,
-    place_type: String ,
-    url: String ,
-    full_name: String ,
+    name: Option<String> ,
+    country_code: Option<String> ,
+    id: Option<String> ,
+    country: Option<String> ,
+    place_type: Option<String> ,
+    url: Option<String> ,
+    full_name: Option<String> ,
     bounding_box: Option<BoundingBoxCoordinate>
 }

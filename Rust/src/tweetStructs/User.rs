@@ -5,7 +5,7 @@ use crate::tweetStructs::URLEntity::URLEntity;
 pub struct User {
     id: i64 ,
     name: String ,
-    screen_name: String ,
+    screen_name: Option<String> ,
     location: Option<String> ,
     url: Option<String> ,
     description: Option<String> ,
@@ -16,7 +16,7 @@ pub struct User {
     listed_count: i32 ,
     favourites_count: i32 ,
     statuses_count: i32 ,
-    created_at: String ,
+    created_at: Option<String> ,
     profile_banner_url: Option<String> ,
     profile_image_url_https: String ,
     default_profile: bool ,

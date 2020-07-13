@@ -32,24 +32,33 @@ pub fn DataSerialization(args:Vec<String> ) -> io::Result<()>{
     let mut file_handler = FileHandler::new(outFile, serializationType);
     file_handler.prepareToWrite();
 
-    let f = File::open(inputFile)?;
-    let f = BufReader::new(f);
-
     let mut elapsedSeconds:Duration = Duration::new(0, 0);
-      for line in f.lines() {
 
-         let  tweetStatus:TweetStatus = serde_json::from_str(&line.unwrap()).unwrap();
+    let mut  eof:bool=false;
+    let mut nor=0;
+    while !eof {
+        let f = File::open(&inputFile)?;
+        let f = BufReader::new(f);
+        for line in f.lines() {
+            let tweetStatus: TweetStatus = serde_json::from_str(&line.unwrap()).unwrap();
 
-          let start = Instant::now();
-          file_handler.appendObjectToFile(tweetStatus);
-          let duration = start.elapsed();
-          elapsedSeconds+=duration;
-      }
+            let start = Instant::now();
+            file_handler.appendObjectToFile(tweetStatus);
+            let duration = start.elapsed();
+            elapsedSeconds += duration;
 
+            nor+=1;
+            if nor>numberOfTweets {
+                println!(">>>>>>>>>>>>>>> {}",nor);
+                eof=true;
+                break;
+            }
+        }
+    }
     // Finalize and close all open files:
     file_handler.appendObjectToFileFlush();
 
-    logfile.add_log(false, serializationType, true, String::from("TweetStatus"), elapsedSeconds, elapsedSeconds, taskset);
+    logfile.add_log(false, serializationType, true, String::from("TweetStatus"), file_handler.getio_time(), elapsedSeconds, taskset);
 
     Ok(())
 }

@@ -12,8 +12,8 @@ use crate::tweetStructs::MatchingRulesEntity::MatchingRulesEntity;
 pub struct TweetStatus {
     created_at: String ,
     id: i64,
-    text: String,
-    source: String,
+    text: Option<String>,
+    source: Option<String>,
     truncated: bool,
     in_reply_to_status_id: Option<i64>,
     in_reply_to_user_id: Option<i64> ,

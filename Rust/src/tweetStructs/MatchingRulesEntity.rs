@@ -2,7 +2,7 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MatchingRulesEntity {
-    tag: String ,
+    tag: Option<String> ,
     id: i64 ,
-    id_str: String
+    id_str: Option<String>
 }
