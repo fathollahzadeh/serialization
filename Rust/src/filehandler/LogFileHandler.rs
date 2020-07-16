@@ -1,8 +1,7 @@
-use serde::{Serialize, Deserialize};
+
 use std::io::Write;
 use std::fs::OpenOptions;
-use std::fs::File;
-use std::time::{Duration, Instant};
+use std::time::{Duration};
 use std::io;
 
 pub struct LogFileHandler {

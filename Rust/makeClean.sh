@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-#cargo clean
 cargo build #--release
+#env RUSTFLAGS="-Awarnings" cargo build --release
 

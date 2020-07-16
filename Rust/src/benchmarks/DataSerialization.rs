@@ -4,12 +4,9 @@ use std::io;
 use crate::filehandler::FileHandler::FileHandler;
 use std::time::{Duration, Instant};
 use crate::tweetStructs::TweetStatus::TweetStatus;
-use serde::{Serialize, Deserialize};
 use crate::filehandler::LogFileHandler::LogFileHandler;
 
 
-//pub fn DataSerialization(inputFile:String, serializationType:i32, outFile:String, numberOfTweets:i64, round:i32, taskset:bool){
-//write  $datapath $serialization_type $outpath $numberOfTweets $r false
 pub fn DataSerialization(args:Vec<String> ) -> io::Result<()>{
 
     let mut inputFile:String = args[2].to_string();
@@ -48,8 +45,7 @@ pub fn DataSerialization(args:Vec<String> ) -> io::Result<()>{
             elapsedSeconds += duration;
 
             nor+=1;
-            if nor>numberOfTweets {
-                println!(">>>>>>>>>>>>>>> {}",nor);
+            if nor>=numberOfTweets {
                 eof=true;
                 break;
             }
