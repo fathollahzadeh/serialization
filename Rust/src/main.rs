@@ -1,6 +1,9 @@
 use std::{io, env};
 use crate::benchmarks::DataSerialization::DataSerialization;
 use crate::benchmarks::SequentialRead::SequentialRead;
+use crate::benchmarks::RandomRead::RandomRead;
+use bytes::{BytesMut, BufMut, Buf};
+
 mod tweetStructs;
 mod filehandler;
 mod benchmarks;
@@ -15,5 +18,10 @@ fn main() -> io::Result<()>{
     } else if bench_type=="sequential_read" {
         SequentialRead(args);
     }
+    else if bench_type=="random_read" {
+        RandomRead(args);
+    }
+
+
     Ok(())
 }

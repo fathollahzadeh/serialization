@@ -29,7 +29,7 @@ pub fn SequentialRead(args:Vec<String> ) -> io::Result<()>{
     let start = Instant::now();
     let objectList:Vec<TweetStatus>=vec![];
 
-    //file_handler.getObjectsFromFile(from,numberofobjects,objectList);
+    file_handler.getObjectsFromFile(from,numberofobjects,objectList);
     let elapsedSeconds = start.elapsed();
     logfile.add_log(true, serializationType, true, String::from("TweetStatus"), file_handler.getio_time(), elapsedSeconds, taskset);
 

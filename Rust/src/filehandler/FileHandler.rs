@@ -23,6 +23,7 @@ pub struct FileHandler {
     page_buffer: BytesMut,
     count_object: u64,
 
+    current_page_position: u64,
     //total number of objects in serialized file:
     total_of_objects: u64,
 
@@ -34,6 +35,9 @@ pub struct FileHandler {
 
     //Page index:
     page_index: Vec<u64>,
+
+    //Page Position:
+     page_position: Vec<u64>,
 
     //Object index:
     object_index: Vec<u64>,
@@ -80,10 +84,12 @@ impl FileHandler {
             page_size: 256 * 1024,
             page_buffer: BytesMut::with_capacity(2 * 256 * 1024), // page size = 256K
             count_object: 0,
+            current_page_position: 0,
             total_of_objects: 0,
             outRegularFile: OpenOptions::new().write(true).create(true).open(fileName).unwrap(),
             outIndexFile: OpenOptions::new().write(true).create(true).open(ifn).unwrap(),
             page_index: vec![],
+            page_position: vec![],
             object_index: vec![],
             object_length: vec![],
             object_in_each_page: Default::default(),
@@ -147,7 +153,7 @@ impl FileHandler {
 
     pub fn appendObjectToFile(&mut self, object: TweetStatus) {
         let object_size: u64;
-        let last_len: u64 = self.page_buffer.len().try_into().unwrap();
+        let mut last_len: u64 = self.page_buffer.len().try_into().unwrap();
         match self.method.as_str() {
             "JSON" => {//1
                 self.page_buffer.put_slice(serde_json::to_string(&object).unwrap().as_bytes());
@@ -193,7 +199,10 @@ impl FileHandler {
             let tmpTime = Instant::now();
             self.outRegularFile.write_all(&tbuffer);
             self.io_time += tmpTime.elapsed();
+            self.page_position.push(self.current_page_position);
+            self.current_page_position +=tbuffer.len() as u64;
             self.current_page_number += 1;
+            last_len=0;
         }
         self.page_index.push(self.current_page_number);
         self.object_index.push(last_len);
@@ -220,6 +229,7 @@ impl FileHandler {
         let tmpTime = Instant::now();
         self.outRegularFile.write_all(self.page_buffer.bytes());
         self.io_time += tmpTime.elapsed();
+        self.page_position.push(self.current_page_position);
 
         //Write PageIndex Vector to the File:
         self.writeIndexToFile(self.page_index.to_owned());
@@ -229,6 +239,9 @@ impl FileHandler {
 
         //Write objectLength Vector to the File:
         self.writeIndexToFile(self.object_length.to_owned());
+
+        //Write objectLength Vector to the File:
+        self.writeIndexToFile(self.page_position.to_owned());
 
         //Close Index file:
         self.outIndexFile.flush();
@@ -269,6 +282,11 @@ impl FileHandler {
             self.object_length.push(index_buffer.get_u64());
         }
 
+        // get object position from file:
+        let index_size = index_buffer.get_u64();
+        for u in 1..index_size + 1 {
+            self.page_position.push(index_buffer.get_u64());
+        }
 
         Ok(())
     }
@@ -280,7 +298,7 @@ impl FileHandler {
         }
         //Page not in RAM: Disk IO:
         else {
-            let newPosition: u64 = (id - 1) * self.page_size;
+            let newPosition: u64 = self.page_position[(id -1) as usize];//(id - 1) * self.page_size;
 
             // Disk I/O
             let tmpTime = Instant::now();
@@ -300,17 +318,14 @@ impl FileHandler {
 
         //Iterate over all objects that you aspire to read.
         for j in i..list_size {
-
             // get Object page from file:
             let pindex = self.page_index[j as usize];
             self.readPageFromFile(pindex);
 
             // get Object size:
             let lenght_each_object: u64 = self.object_length[j as usize];
-
             let start = self.object_index[j as usize];
             let end = start + lenght_each_object;
-
             let buff_data = self.page_buffer.get(start as usize..end as usize).unwrap();
 
             let myDeserlizedObject: TweetStatus;
