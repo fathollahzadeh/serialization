@@ -40,10 +40,10 @@ pub fn RandomRead(args:Vec<String> ) -> io::Result<()>{
     file_handler.prepareToRead();
 
     let start = Instant::now();
-    let  objectList:Vec<TweetStatus>=vec![];
+    let mut objectList:Vec<TweetStatus>=vec![];
 
     for u in objectIndexes {
-        file_handler.getObjectsFromFile(u,1, objectList.to_owned());
+        file_handler.getObjectsFromFile(u,1, &mut objectList);
     }
     let elapsedSeconds = start.elapsed();
     logfile.add_log(true, serializationType, false, String::from("TweetStatus"), file_handler.getio_time(), elapsedSeconds, taskset);

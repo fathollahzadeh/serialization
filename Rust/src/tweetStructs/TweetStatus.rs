@@ -6,7 +6,7 @@ use crate::tweetStructs::Entities::Entities;
 use crate::tweetStructs::ExtendedEntities::ExtendedEntities;
 use std::collections::HashMap;
 use crate::tweetStructs::MatchingRulesEntity::MatchingRulesEntity;
-
+use std::cmp::Ordering;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct TweetStatus {
@@ -43,4 +43,50 @@ pub struct TweetStatus {
     withheld_in_countries:Option<Vec<String>>,
     withheld_scope: Option<String>
 }
+impl TweetStatus{
+
+    pub fn getOrder(&self)->usize{
+
+        let mut count_level:usize=0;
+
+        // get text
+        if self.text.is_some() {
+            count_level+=self.text.as_ref().unwrap().len();
+        }
+        // get QuoteStatus
+         if self.quoted_status.is_some(){
+             if self.quoted_status.as_ref().unwrap().text.as_ref().is_some() {
+                 count_level += self.quoted_status.as_ref().unwrap().text.as_ref().unwrap().len();
+             }
+         }
+        // get Retweet
+        if self.retweeted_status.is_some(){
+            count_level += self.retweeted_status.as_ref().unwrap().retweet_count as usize;
+        }
+        return count_level;
+    }
+
+    pub fn getId(&self)->i64{
+        return self.id;
+    }
+}
+
+impl Ord for TweetStatus {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.getOrder().cmp(&other.getOrder())
+    }
+}
+
+impl PartialOrd for TweetStatus {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for TweetStatus {
+    fn eq(&self, other: &Self) -> bool {
+        self.getOrder() == other.getOrder()
+    }
+}
+impl Eq for TweetStatus {}
 

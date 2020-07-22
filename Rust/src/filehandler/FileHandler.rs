@@ -142,12 +142,9 @@ impl FileHandler {
             if !self.object_in_each_page.contains_key(&u) {
                 self.object_in_each_page.insert(u.clone(), 0);
             }
-            // let value=self.object_in_each_page.get_mut(u)+1;
-
-            //let value:u64=self.object_in_each_page.get(u);
-            self.object_in_each_page.insert(u.clone(), 100);//self.object_in_each_page.get(u).try_into().unwrap()+1);
+            let value=self.object_in_each_page[u]+1;
+            self.object_in_each_page.insert(u.clone(),value);
         }
-
         Ok(())
     }
 
@@ -313,7 +310,7 @@ impl FileHandler {
             self.page_buffer.extend_from_slice(buffer);
         }
     }
-    pub fn getObjectsFromFile(&mut self, i: u64, n: u64, mut objectList: Vec<TweetStatus>) {
+    pub fn getObjectsFromFile(&mut self, i: u64, n: u64, objectList:&mut Vec<TweetStatus>) {
         let list_size = min(i + n, self.total_of_objects);
 
         //Iterate over all objects that you aspire to read.
@@ -367,4 +364,14 @@ impl FileHandler {
         }
     }
 
+    pub  fn getTotalOfObjects(&self) ->u64{
+        return self.total_of_objects;
+    }
+
+    pub fn getObjectInEachPage(&self) ->HashMap<u64, u64>{
+        // for k in  &self.object_in_each_page{
+        //     println!("key={}- value={}",k.0,k.1);
+        // }
+        return self.object_in_each_page.to_owned();
+    }
 }
