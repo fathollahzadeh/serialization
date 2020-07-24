@@ -3,9 +3,13 @@
 #compile projects 
 
 cd C++
-#./makeClean.sh
+./makeClean.sh
+
 cd ../Java
-#./makeClean.sh
+./makeClean.sh
+
+cd ../Rust
+./makeClean.sh
 
 rawdatapath="/mnt/tweets_1M_rows.txt"
 outdatapath="/mnt"
@@ -19,26 +23,37 @@ cd C++
 ./twitterSerialization.sh $rawdatapath "$outdatapath/cppdata/" 2000000
 
 cd ../Java
-#./twitterSerialization.sh $rawdatapath "$outdatapath/javadata" 5000000
+./twitterSerialization.sh $rawdatapath "$outdatapath/javadata" 5000000
+
+cd ../Rust
+./twitterSerialization.sh $rawdatapath "$outdatapath/rustdata" 5000000
 
 cd ..
 
 # start run read experiments
 
 cd C++
-#./experimentReadObjects.sh "$outdatapath/cppdata/" $randomlistpath
+./experimentReadObjects.sh "$outdatapath/cppdata/" $randomlistpath
+
 cd ../Java
-#./experimentReadObjects.sh "$outdatapath/javadata/" $randomlistpath
+./experimentReadObjects.sh "$outdatapath/javadata/" $randomlistpath
+
+cd ../Rust
+./experimentReadObjects.sh "$outdatapath/rustdata/" $randomlistpath
+
 
 cd ..
 
 # start run external sort experiments
 
 cd C++
-./experimentExternalSort.sh "$outdatapath/cppdata/" 6
-cd ../Java
-#./experimentExternalSort.sh "$outdatapath/javadata/" 10
+./experimentExternalSort.sh "$outdatapath/cppdata/" 25
 
+cd ../Java
+./experimentExternalSort.sh "$outdatapath/javadata/" 25
+
+cd ../Rust
+./experimentExternalSort.sh "$outdatapath/rustdata/" 25
 
 
 
