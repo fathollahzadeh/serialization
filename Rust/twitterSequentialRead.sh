@@ -17,7 +17,7 @@ echo "------------------------"
 echo "start to benchmark for << sequential read >>  with $number_of_read_object objects: serialization type="$serialization_type
 
 #clear the OS cache
-#echo 3 > /proc/sys/vm/drop_caches && sync
+echo 3 > /proc/sys/vm/drop_caches && sync
 
 # stop monitoring
 ../monitor/stopmonitor.sh
@@ -36,7 +36,7 @@ time taskset -c 0  cargo run --release sequential_read $datapath $serialization_
 
 sleep 1
 
-#echo 3 > /proc/sys/vm/drop_caches && sync
+echo 3 > /proc/sys/vm/drop_caches && sync
 
 # stop last monitoring and start new for tast set true
 filename="taskset_false_rustTwitterSequentialRead$filenamevar1$serialization_type$filenamevar2"

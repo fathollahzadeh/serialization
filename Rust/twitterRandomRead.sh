@@ -8,7 +8,6 @@ serialization_type=$1
 
 ./resultPath.sh $number_of_read_object $3
 
-#serialization type
 serialization_type=$1
 
 #set data and out serialization files path
@@ -20,7 +19,7 @@ echo "------------------------"
 echo "start to run benchmark for << random read >> with $number_of_read_object objects: serialization type= "$serialization_type
 
 #clear the OS cache
-#echo 3 > /proc/sys/vm/drop_caches && sync
+echo 3 > /proc/sys/vm/drop_caches && sync
 
 # stop monitoring
 ../monitor/stopmonitor.sh
@@ -40,7 +39,7 @@ time taskset -c 0 cargo run --release random_read $datapath $serialization_type 
 
 sleep 1
 
-#echo 3 > /proc/sys/vm/drop_caches && sync
+echo 3 > /proc/sys/vm/drop_caches && sync
 filename="taskset_false_rustTwitterRandomRead$filenamevar1$serialization_type$filenamevar2"
 ../monitor/run.sh $filename
 
