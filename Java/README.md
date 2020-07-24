@@ -6,7 +6,7 @@ This project contains our java implementation of the complex object experiments 
 Requirements and dependencies
 --
 Java implementation has been compiled, built, and tested in Ubuntu 18.04 LTS. For the system to work properly, make sure the following requirements are satisfied.
-Dependencies
+
 
 Library/Software
 --
