@@ -37,9 +37,7 @@ pub fn DataSerialization(args:Vec<String> ) -> io::Result<()>{
         let f = File::open(&inputFile)?;
         let f = BufReader::new(f);
         for line in f.lines() {
-
             let tweetStatus: TweetStatus = serde_json::from_str(&line.unwrap()).unwrap();
-
             let start = Instant::now();
             file_handler.appendObjectToFile(tweetStatus);
             let duration = start.elapsed();

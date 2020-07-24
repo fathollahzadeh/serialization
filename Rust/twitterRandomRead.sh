@@ -33,18 +33,18 @@ filename="taskset_true_rustTwitterRandomRead$filenamevar1$serialization_type$fil
 #start monitor
 #../monitor/run.sh $filename
 
-time taskset -c 0 cargo run random_read $datapath $serialization_type $random_list_path $number_of_read_object $3 true
+time taskset -c 0 cargo run --release random_read $datapath $serialization_type $random_list_path $number_of_read_object $3 true
 
 ## stop monitoring
 #../monitor/stopmonitor.sh
 #
-#sleep 200
+sleep 1
 #
 #echo 3 > /proc/sys/vm/drop_caches && sync
 #filename="taskset_false_rustTwitterRandomRead$filenamevar1$serialization_type$filenamevar2"
 #../monitor/run.sh $filename
 #
-#time  cargo run random_read $datapath $serialization_type $random_list_path $number_of_read_object $3 true
+time cargo run --release random_read $datapath $serialization_type $random_list_path $number_of_read_object $3 false
 #
 ## stop monitoring
 #../monitor/stopmonitor.sh

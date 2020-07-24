@@ -7,13 +7,12 @@ use std::time::{Duration, Instant};
 use std::convert::TryInto;
 use std::io::{Write, BufReader, BufRead, Seek, SeekFrom, Read, Cursor};
 use std::borrow::Borrow;
-use serde::Serialize;
 use std::cmp::min;
 use rand::seq::index::IndexVec;
 use std::panic::resume_unwind;
+use bson::{Bson, Document, Deserializer, Serializer};
+use serde::{Deserialize, Serialize};
 
-
-//#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct FileHandler {
     file_name: String,
     index_file_name: String,
@@ -37,7 +36,7 @@ pub struct FileHandler {
     page_index: Vec<u64>,
 
     //Page Position:
-     page_position: Vec<u64>,
+    page_position: Vec<u64>,
 
     //Object index:
     object_index: Vec<u64>,
@@ -65,14 +64,9 @@ impl FileHandler {
         match serializationType {
             1 => mth = "JSON",
             2 => mth = "Bincode",
-            3 => mth = "CBOR",
-            4 => mth = "YAML",
-            5 => mth = "MessagePack",
-            6 => mth = "Pickle",
-            7 => mth = "RON",
-            8 => mth = "BSON",
-            9 => mth = "JSON5",
-            10 => mth = "FlexBuffers",
+            3 => mth = "MessagePack",
+            4 => mth = "BSON",
+            5 => mth = "FlexBuffers",
             _ => { mth = "" }
         }
         let ifn: String = format!("{}.{}", fileName.clone(), "index");
@@ -142,8 +136,8 @@ impl FileHandler {
             if !self.object_in_each_page.contains_key(&u) {
                 self.object_in_each_page.insert(u.clone(), 0);
             }
-            let value=self.object_in_each_page[u]+1;
-            self.object_in_each_page.insert(u.clone(),value);
+            let value = self.object_in_each_page[u] + 1;
+            self.object_in_each_page.insert(u.clone(), value);
         }
         Ok(())
     }
@@ -158,28 +152,15 @@ impl FileHandler {
             "Bincode" => { //2
                 self.page_buffer.put_slice(bincode::serialize(&object).unwrap().as_slice());
             }
-            "CBOR" => {//3
-                self.page_buffer.put_slice(serde_cbor::to_vec(&object).unwrap().as_slice());
-            }
-            "YAML" => { //4
-                self.page_buffer.put_slice(serde_yaml::to_string(&object).unwrap().as_bytes());
-            }
-            "MessagePack" => {//5
+            "MessagePack" => {//3
                 self.page_buffer.put_slice(rmp_serde::to_vec(&object).unwrap().as_slice());
             }
-            "Pickle" => { //6
-                self.page_buffer.put_slice(serde_pickle::to_vec(&object, false).unwrap().as_slice());
+            "BSON" => {//4
+                let mut buf = Vec::new();
+                bson::to_bson(&object).unwrap().as_document().unwrap().to_writer(&mut buf);
+                self.page_buffer.put_slice(buf.as_slice());
             }
-            "RON" => { //7
-                self.page_buffer.put_slice(ron::to_string(&object).unwrap().as_bytes());
-            }
-            "BSON" => {//8
-                self.page_buffer.put_slice(bson::to_bson(&object).unwrap().to_string().as_bytes());
-            }
-            "JSON5" => {//9
-                self.page_buffer.put_slice(json5::to_string(&object).unwrap().as_bytes());
-            }
-            "FlexBuffers" => {//10
+            "FlexBuffers" => {//5
                 self.page_buffer.put_slice(flexbuffers::to_vec(&object).unwrap().as_slice());
             }
             _ => {}
@@ -197,9 +178,9 @@ impl FileHandler {
             self.outRegularFile.write_all(&tbuffer);
             self.io_time += tmpTime.elapsed();
             self.page_position.push(self.current_page_position);
-            self.current_page_position +=tbuffer.len() as u64;
+            self.current_page_position += tbuffer.len() as u64;
             self.current_page_number += 1;
-            last_len=0;
+            last_len = 0;
         }
         self.page_index.push(self.current_page_number);
         self.object_index.push(last_len);
@@ -252,9 +233,9 @@ impl FileHandler {
     fn readIndexesFromFile(&mut self) -> io::Result<()> {
         let ifn: String = format!("{}.{}", self.file_name, "index");
         let file = File::open(ifn)?;
-        let file_size=file.metadata().unwrap().len();
+        let file_size = file.metadata().unwrap().len();
 
-        let mut reader = BufReader::with_capacity(file_size as usize,file);
+        let mut reader = BufReader::with_capacity(file_size as usize, file);
         let buf = reader.fill_buf().unwrap();
 
 
@@ -295,7 +276,7 @@ impl FileHandler {
         }
         //Page not in RAM: Disk IO:
         else {
-            let newPosition: u64 = self.page_position[(id -1) as usize];//(id - 1) * self.page_size;
+            let newPosition: u64 = self.page_position[(id - 1) as usize];//(id - 1) * self.page_size;
 
             // Disk I/O
             let tmpTime = Instant::now();
@@ -310,7 +291,7 @@ impl FileHandler {
             self.page_buffer.extend_from_slice(buffer);
         }
     }
-    pub fn getObjectsFromFile(&mut self, i: u64, n: u64, objectList:&mut Vec<TweetStatus>) {
+    pub fn getObjectsFromFile(&mut self, i: u64, n: u64, objectList: &mut Vec<TweetStatus>) {
         let list_size = min(i + n, self.total_of_objects);
 
         //Iterate over all objects that you aspire to read.
@@ -329,6 +310,7 @@ impl FileHandler {
 
             match self.method.as_str() {
                 "JSON" => {
+
                     myDeserlizedObject = serde_json::from_slice(buff_data).unwrap();
                     objectList.push(myDeserlizedObject);
                 }
@@ -340,38 +322,26 @@ impl FileHandler {
                     myDeserlizedObject = rmp_serde::from_read_ref(&buff_data).unwrap();
                     objectList.push(myDeserlizedObject);
                 }
-                //TODO: BSON de-serialization must implement
-                "BSON" => {//8
-                      //bson::from_bson::<Foo>(buff_data).unwrap();
-                    //println!("{:?}",bson::Bson::Document(buff_data));
-                    //myDeserlizedObject=bson::from_bson(&buff_data.to_vec()).unwrap();
-                    // myDeserlizedObject=bson::from_bson(Document::from_reader(&buff_data).unwrap()).unwrap();
-                    //objectList.push(myDeserlizedObject);
-                    //self.page_buffer.put_slice(bson::to_bson(&object).unwrap().to_string().as_bytes());
-
-
-                   // let doc = Document::from_reader(&mut Cursor::new(&buff_data.to_vec()[..])).unwrap();
-                    //println!("{}",serde_json::to_string(&doc).unwrap());
-
+                "BSON" => {
+                    let doc = Document::from_reader(&mut Cursor::new(&buff_data[..])).unwrap();
+                    let bson_data = bson::bson!(doc);
+                    myDeserlizedObject = bson::from_bson(bson_data).unwrap();
+                    objectList.push(myDeserlizedObject);
                 }
-
-                 "FlexBuffers" => {
-                     myDeserlizedObject = flexbuffers::from_slice(&buff_data).unwrap();
-                     objectList.push(myDeserlizedObject);
-                 }
+                "FlexBuffers" => {
+                    myDeserlizedObject = flexbuffers::from_slice(&buff_data).unwrap();
+                    objectList.push(myDeserlizedObject);
+                }
                 _ => {}
             }
         }
     }
 
-    pub  fn getTotalOfObjects(&self) ->u64{
+    pub fn getTotalOfObjects(&self) -> u64 {
         return self.total_of_objects;
     }
 
-    pub fn getObjectInEachPage(&self) ->HashMap<u64, u64>{
-        // for k in  &self.object_in_each_page{
-        //     println!("key={}- value={}",k.0,k.1);
-        // }
+    pub fn getObjectInEachPage(&self) -> HashMap<u64, u64> {
         return self.object_in_each_page.to_owned();
     }
 }
