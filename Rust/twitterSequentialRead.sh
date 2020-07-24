@@ -34,7 +34,7 @@ time taskset -c 0  cargo run --release sequential_read $datapath $serialization_
 # stop monitoring
 ../monitor/stopmonitor.sh
 
-sleep 1
+sleep 200
 
 echo 3 > /proc/sys/vm/drop_caches && sync
 

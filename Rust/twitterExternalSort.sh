@@ -25,6 +25,7 @@ echo 3 > /proc/sys/vm/drop_caches && sync
 
 time taskset -c 0 cargo run --release external_sort $datapath $number_of_files $serialization_type $2 true
 
+sleep 200
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync

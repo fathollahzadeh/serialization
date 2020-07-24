@@ -37,7 +37,7 @@ time taskset -c 0 cargo run --release random_read $datapath $serialization_type 
 # stop monitoring
 ../monitor/stopmonitor.sh
 
-sleep 1
+sleep 200
 
 echo 3 > /proc/sys/vm/drop_caches && sync
 filename="taskset_false_rustTwitterRandomRead$filenamevar1$serialization_type$filenamevar2"

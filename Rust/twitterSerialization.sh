@@ -18,7 +18,7 @@ do
         echo 3 > /proc/sys/vm/drop_caches && sync
         time cargo run --release write  $datapath $serialization_type $outpath $numberOfTweets $r false
 
-        sleep 1
+        sleep 200
 
         #clear the OS cache
         echo 3 > /proc/sys/vm/drop_caches && sync
