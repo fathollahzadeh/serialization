@@ -181,15 +181,27 @@ drawPlot <- function(data,isseq,ts,hasshleg){
   cppBSONV[cppBSONV==0]<-NA
   cppFLATBUFV[cppFLATBUFV==0]<-NA
   
-  
   #lines for Faltbuffers C++ 
-  plot(na.omit(cppFLATBUFV), log="y", type="o",cex=0.5, pch=13, lty=2,lwd=0.5, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,col=plot_colors[13],  panel.first=abline(h= tick_list, v=c(1, 2, 3, 4,5), lty=3, col="gray"))
+  plot(na.omit(cppFLATBUFV), log="y", type="o",cex=0.5, pch=13, lty=2,lwd=0.5, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,col=plot_colors[13])
+  
+  if(ts=="false"){
+    #abline(v=c(1, 2, 3, 4,5), lty=3, col="gray")
+    
+    for (t in tick_list)
+      segments(1,t,5.2,t, lty=3, col="gray")
+    
+    for (t in c(1,2,3,4,5))
+      segments(t,min_y,t,max_y+500, lty=3, col="gray")
+  }
+  else{
+    abline(h=tick_list,v=c(1, 2, 3, 4,5), lty=3, col="gray")
+  }
   
   # Make x axis using one to 5 labels
-  axis(1, at=c(1, 2, 3, 4,5), labels=c("1M","2M","3M", "4M","5M"), las=1,cex.axis = 0.6,mgp=c(3, .4, 0) )
+  axis(1, at=c(1, 2, 3, 4,5), labels=c("1M","2M","3M", "4M","5M"), las=1,cex.axis = 0.4,mgp=c(3, 0.0, 0),tck = -0.04,lwd=0.5 )
   
   # Make y axis with horizontal labels that display ticks at 
-  axis(2, las=1, at = tick_list, labels=y_labels,cex.axis = 0.6,mgp=c(3, .6, 0))
+  axis(2, las=1, at = tick_list, labels=y_labels,cex.axis = 0.4,mgp=c(3, .3, 0),tck = -0.04,lwd=0.5 )
   
   #lines for Json
   lines(na.omit(javaJsonV) , type="o", pch=2, lty=2,cex=0.5, col=plot_colors[2],lwd=0.5)
@@ -227,30 +239,20 @@ drawPlot <- function(data,isseq,ts,hasshleg){
   # Java Deafult
   lines(na.omit(javaDefaultV), type="o", pch=1,cex=0.5, lty=2, col=plot_colors[1],lwd=0.5)
   
- # print(javaDefaultV)
-  
-  
-  ## Allow a second plot on the same graph
-  #par(new=TRUE)
-  #plot(javaFlatBufferV[-5], log="y", type="o",cex=0.5, pch=7, lty=2,lwd=0.5, ylim=c(min_y, max_y), axes=FALSE, ann=FALSE,col=plot_colors[7], panel.first=abline(h= tick_list, v=c(1, 2, 3, 4,5), lty=3, col="gray") )
-  
   
   xlb<-paste("Number of Objects(task set=", ts ,")", sep="")
-  title(xlab=xlb, col.lab="black",family="Helvetica",cex.lab = 0.6,line = 1.3,font=2)
+  title(xlab=xlb, col.lab="black",family="Helvetica",cex.lab = 0.35,line = 0.6,font=2)
   if(ts=="true"){
-      title(ylab="Total Seqential Read Time (sec) - log", col.lab="black",family="Helvetica",cex.lab = 0.7,line = 1.85,font=2,las=1)
+      title(ylab="Total Seqential Read Time (sec) - log", col.lab="black",family="Helvetica",cex.lab = 0.4,line = 0.95,font=2,las=1)
   }
   
  
-  box()
-  #if(hasshleg){
-  #  legend(3, 13, serialization_methods, cex=0.31,  col=plot_colors, pch=1:13, lty=2:2,lwd=0.5);
-  #}
-  if(ts=="true"){
-    legend(2.5, 10, serialization_methods[c(1:7)], cex=0.4,  col=plot_colors[c(1:7)], pch=1:7, lty=2:2,lwd=0.5,ncol=1);
-  }
-  else{
-    legend(2.5, 6, serialization_methods[c(8:13)], cex=0.4,  col=plot_colors[c(7:13)], pch=8:13, lty=2:2,lwd=0.5,ncol=1);
+  box(lwd=0.5)
+ 
+   if(ts=="false"){
+    legend("topright", inset=c(-0.6,0), serialization_methods, cex=0.31,  col=plot_colors, pch=1:13,  title="Methods",box.lty=0);
+   # legend("topright", inset=c(-0.2,0), legend=c("A","B"), pch=c(1,3), title="Group")
+    #legend(2.5, 10, serialization_methods[c(1:7)], cex=0.4,  col=plot_colors[c(1:7)], pch=1:7, lty=2:2,lwd=0.5,ncol=1,inset=c(-0.2,0));
   }
 }
 
@@ -309,11 +311,18 @@ datac5$size <-5000000
 plotdata <- rbind(datac1,datac2,datac3,datac4,datac5,dataj1,dataj2,dataj3,dataj4,dataj5)
 write.table(plotdata, file = "../Paper/latex/img/exp_read.csv", sep = ",",row.names = FALSE, col.names = TRUE)
 
-pdf(file='Experiment_Seq_Read_CPU_Plot.pdf',height=3, width=4)
+pdf(file='Experiment_Seq_Read_CPU_Plot.pdf',height=2.3, width=3)
 
-old.par<-par(mfrow=c(1, 2),   pty="m")
-op <- par(mar = c(2.2,2.5,0,0.1))
+#old.par<-par(mfrow=c(1, 2),   pty="m")
+#op <- par(mar = c(2.2,2.5,0,1),xpd=TRUE)
 
+layout.matrix <- matrix(c(1, 2), nrow = 1, ncol = 2)
+layout(mat = layout.matrix, widths = c(0.41, 0.59)) # Widths of the two columns
+
+par(mar = c(1.6,1.5,0.1,0))
 drawPlot(subset(plotdata, taskset=="true" & seq=="true"),TRUE,"true",FALSE)
-drawPlot(subset(plotdata, taskset=="false" & seq=="true"),TRUE,"false",TRUE)
+
+par(mar = c(1.6,1.2,0.1,3),xpd=TRUE)
+drawPlot(subset(plotdata, taskset=="false" & seq=="true"),TRUE,"false",FALSE)
+
 par(xpd=TRUE)

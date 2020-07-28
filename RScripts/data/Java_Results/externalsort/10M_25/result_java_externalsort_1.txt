@@ -6,3 +6,10 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeJAVA]#true#Java Kryo#true#TweetStatus#162.68725368300008#5162.251002999
 [ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#257.7092275810001#4459.169832637
 [ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#170.45195909299997#2956.366494167
+[ReadTimeJAVA]#false#Java Default#true#TweetStatus#323.627941819#7228.917807755
+[ReadTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#91.92040737800004#11623.184915432
+[ReadTimeJAVA]#false#Java Bson#true#TweetStatus#362.20939312500013#6431.372829985
+[ReadTimeJAVA]#false#Java ProtoBuf#true#TweetStatus#208.88117868199998#4907.221833712
+[ReadTimeJAVA]#false#Java Kryo#true#TweetStatus#162.68725368300008#5162.251002999
+[ReadTimeJAVA]#false#Java Byte Buffer#true#TweetStatus#257.7092275810001#4459.169832637
+[ReadTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#170.45195909299997#2956.366494167
