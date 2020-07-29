@@ -64,6 +64,9 @@ public:
     vector<string> withheldInCountries;//nullable
     string  withheldScope;//nullable
 
+    bsoncxx::document::value  bsonDoc= bsoncxx::document::value(nullptr, 0, nullptr);
+    bool hasBsonDoc;
+
     bool isPointer;
 
 private:
@@ -176,6 +179,8 @@ public:
     //print order number:
 
     int getOrder();
+
+    void setBsonDoc(bsoncxx::document::value bsonDoc);
 
 };
 

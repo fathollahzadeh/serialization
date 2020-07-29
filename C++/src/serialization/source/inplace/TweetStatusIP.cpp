@@ -237,4 +237,5 @@ void TweetStatusIP::serializeFlatBuffers(char *buffer, int &objectSize) {
 TweetStatusIP *TweetStatusIP::deserializeFlatBuffers(char *buffer, int &bytesRead) {
     return nullptr;
 }
+void TweetStatusIP::setBsonDoc(bsoncxx::document::value bsonDoc) {}
 

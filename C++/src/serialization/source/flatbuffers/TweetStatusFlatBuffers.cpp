@@ -648,3 +648,4 @@ TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeProto(char *buffer, i
 double TweetStatusFlatBuffers::getIoTime() const {
     return ioTime;
 }
+void TweetStatusFlatBuffers::setBsonDoc(bsoncxx::document::value bsonDoc) {}

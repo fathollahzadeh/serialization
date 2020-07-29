@@ -498,8 +498,9 @@ void FileHandler<T>::getObjectsFromFile(long i, long n, vector<T *> &objectList)
                 ioTime += chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
                 bsoncxx::document::value bsonObj = bsoncxx::from_json(tBuffer);
-                auto doc = bsonObj.view();
+                bsoncxx::document::view doc = bsonObj.view();
                 object->deserializeBSON(doc);
+                object->setBsonDoc(bsonObj);
                 delete[] tBuffer;
                 break;
             }

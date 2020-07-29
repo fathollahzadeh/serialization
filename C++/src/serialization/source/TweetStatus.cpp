@@ -78,6 +78,8 @@ TweetStatus::TweetStatus(string createdAt, long id, string text, string source,
     this->withheldInCountries = withheldInCountries;
     this->withheldScope = withheldScope;
     this->isPointer = true;
+    this->hasBsonDoc= false;
+
 }
 
 
@@ -433,6 +435,11 @@ TweetStatus *TweetStatus::deserializeInPlace(char *buffer) {
 }
 
 bsoncxx::document::value TweetStatus::serializeBSON() {
+
+    if(this->hasBsonDoc){
+        return this->bsonDoc;
+    }
+
     using bsoncxx::builder::stream::document;
     using bsoncxx::builder::stream::finalize;
     using bsoncxx::builder::stream::array;
@@ -689,6 +696,11 @@ void TweetStatus::serializeFlatBuffers(char *buffer, int &objectSize) {
 
 TweetStatus *TweetStatus::deserializeFlatBuffers(char *buffer, int &bytesRead) {
     return nullptr;
+}
+
+void TweetStatus::setBsonDoc(bsoncxx::document::value bsonDoc) {
+    this->bsonDoc = bsonDoc;
+    this->hasBsonDoc= true;
 }
 
 

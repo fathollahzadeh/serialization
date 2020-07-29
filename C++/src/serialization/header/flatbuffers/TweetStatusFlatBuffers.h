@@ -94,6 +94,8 @@ public:
 
     bool operator<(TweetStatusFlatBuffers &other);
 
+    void setBsonDoc(bsoncxx::document::value bsonDoc);
+
     double getIoTime() const;
 };
 

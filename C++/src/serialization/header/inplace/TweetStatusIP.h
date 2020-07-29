@@ -114,6 +114,8 @@ public:
     //Implement your own custom comparator:
     bool operator< (TweetStatusIP& other);
 
+    void setBsonDoc(bsoncxx::document::value bsonDoc);
+
     //print order number:
     int getOrder();
 

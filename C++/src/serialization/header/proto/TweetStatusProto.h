@@ -72,6 +72,8 @@ public:
     //proto buffer de-serialization
     TweetStatusProto* deserializeFlatBuffers(char *buffer, int &bytesRead);
 
+    void setBsonDoc(bsoncxx::document::value bsonDoc);
+
     proto::TweetStatusP *getProto() const;
 
     bool operator<(TweetStatusProto &other);

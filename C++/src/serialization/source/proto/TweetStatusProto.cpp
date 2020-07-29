@@ -423,4 +423,4 @@ TweetStatusProto *TweetStatusProto::deserializeFlatBuffers(char *buffer, int &by
     return nullptr;
 }
 
-
+void TweetStatusProto::setBsonDoc(bsoncxx::document::value bsonDoc) {}
