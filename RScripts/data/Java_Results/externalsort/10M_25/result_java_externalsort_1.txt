@@ -1,15 +1,15 @@
 language#taskset#method#seq#datatype#iotime#totaltime
-[ReadTimeJAVA]#true#Java Default#true#TweetStatus#323.627941819#7228.917807755
-[ReadTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#91.92040737800004#11623.184915432
-[ReadTimeJAVA]#true#Java Bson#true#TweetStatus#362.20939312500013#6431.372829985
-[ReadTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#208.88117868199998#4907.221833712
-[ReadTimeJAVA]#true#Java Kryo#true#TweetStatus#162.68725368300008#5162.251002999
-[ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#257.7092275810001#4459.169832637
-[ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#170.45195909299997#2956.366494167
-[ReadTimeJAVA]#false#Java Default#true#TweetStatus#323.627941819#7228.917807755
-[ReadTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#91.92040737800004#11623.184915432
-[ReadTimeJAVA]#false#Java Bson#true#TweetStatus#362.20939312500013#6431.372829985
-[ReadTimeJAVA]#false#Java ProtoBuf#true#TweetStatus#208.88117868199998#4907.221833712
-[ReadTimeJAVA]#false#Java Kryo#true#TweetStatus#162.68725368300008#5162.251002999
-[ReadTimeJAVA]#false#Java Byte Buffer#true#TweetStatus#257.7092275810001#4459.169832637
-[ReadTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#170.45195909299997#2956.366494167
+[ReadTimeJAVA]#true#Java Default#true#TweetStatus#323.922580312#7468.930163797
+[ReadTimeJAVA]#false#Java Default#true#TweetStatus#301.25387527600003#7384.556740548
+[ReadTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#99.42488404300003#11828.854714182
+[ReadTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#93.32447928699999#12081.792675595
+[ReadTimeJAVA]#true#Java Bson#true#TweetStatus#374.0190402890001#6710.894317534
+[ReadTimeJAVA]#false#Java Bson#true#TweetStatus#355.9095541660001#6661.626907976
+[ReadTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#205.31243447100005#4910.193966126
+[ReadTimeJAVA]#false#Java ProtoBuf#true#TweetStatus#200.71681016500003#4937.904459474
+[ReadTimeJAVA]#true#Java Kryo#true#TweetStatus#165.75982155999998#5316.57596994
+[ReadTimeJAVA]#false#Java Kryo#true#TweetStatus#156.252532125#5253.037490199
+[ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#245.939788576#4372.685817586
+[ReadTimeJAVA]#false#Java Byte Buffer#true#TweetStatus#237.7081828659999#4458.051700203
+[ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#177.94137105099998#3085.491586263
+[ReadTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#167.389346785#3100.129186077
