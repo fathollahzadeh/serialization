@@ -82,8 +82,8 @@ The ten different complex object implementations that we considered have very di
 		\begin{tabular}{|l|c|c|} \hline
 		 \textbf{Serialization Methods} & \textbf{Serialized file size(gigabyte)}\\ \hline
 			Java Default  & 4.6 \\ \hline	
-			Java JSON Gzip  & 1.4 \\ \hline	
-			Java BSON  & 4.9 \\ \hline	
+			Java Json Gzip  & 1.4 \\ \hline	
+			Java Bson  & 4.9 \\ \hline	
 			Java Protocol Buffer  & 1.9 \\ \hline	
 			Java Kyro  & 1.9 \\ \hline	
 			Java Hand Coded ByteBuffer  & 2.3 \\ \hline	
@@ -92,11 +92,52 @@ The ten different complex object implementations that we considered have very di
 			C++ InPlace  & 3.2 \\ \hline	
 			C++ Boost  & 2.2 \\ \hline	
 			C++ Protocol Buffer  & 1.9 \\ \hline
-			C++ BSON  & 4.6 \\ \hline	
-			C++ FaltBuffers  & 2.9 \\ \hline				
+			C++ Bson  & 4.6 \\ \hline	
+			C++ FaltBuffers  & 2.9 \\ \hline	
+			Rust Json  & 4.8 \\ \hline
+			Rust Bincode  & 2.4 \\ \hline			
+			Rust MessagePack  & 1.9 \\ \hline			
+			Rust Bson  & 4.5 \\ \hline			
+			Rust FlexBuffers  & 4.3 \\ \hline						
 			\hline\end{tabular}
 	\end{adjustbox}
 \end{table}
+
+\begin{table}
+	\centering
+	\caption{Lines of code for serialization and de-serialization  }
+	\label{tbl:object_size}
+	\begin{adjustbox}{width=\columnwidth,center}	
+		
+		\begin{tabular}{|l|c|c|} \hline
+			\textbf{Serialization Methods} & \textbf{Serialize} &  \textbf{De-Serialize}   \\ \hline
+			Java Default  & 4  & 4 \\ \hline	
+			Java Json Gzip  & 2 & 4\\ \hline	
+			Java Bson  & 50  & 120 \\ \hline	
+			Java Protocol Buffer  & 200 & 1 \\ 
+			                      &\textcolor{red}{with 20 extra files} &  \\ \hline	
+			Java Kyro  & 40 & 40 \\ \hline	
+			Java Hand Coded ByteBuffer  & 150 & 150 \\ \hline	
+			Java FaltBuffers  & 250 & 1 \\ 
+							  &\textcolor{red}{with 42 extra files} &  \\ \hline	
+			C++ Hand Coded  & 70  & 100 \\ \hline	
+			C++ InPlace  & 80 & 1 \\ \hline	
+			C++ Boost  & 1 & 2 \\ \hline	
+			C++ Protocol Buffer  & 200 & 1\\ 
+									&\textcolor{red}{with 20 extra files} &  \\ \hline	
+			C++ Bson  & 40 & 100 \\ \hline	
+			C++ FaltBuffers  & 250  & 1 \\ 
+									&\textcolor{red}{with 42 extra files} &  \\ 	\hline	
+			Rust Json  & 1 & 1 \\ \hline
+			Rust Bincode  & 1 & 1\\ \hline			
+			Rust MessagePack  & 1 & 1\\ \hline			
+			Rust Bson  & 1 & 1\\ \hline			
+			Rust FlexBuffers  & 1 & 1\\ \hline						
+			\hline\end{tabular}
+	\end{adjustbox}
+\end{table}
+
+
 
 
 \subsection{Experimental Details}
