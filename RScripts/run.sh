@@ -3,15 +3,15 @@
 
 #=====================================
 ## CPU benchs
-#Rscript Experiment_Seq_Read_CPU_Plot.R
-#Rscript Experiment_Rand_Read_CPU_Plot.R
+Rscript Experiment_Seq_Read_CPU_Plot.R
+Rscript Experiment_Rand_Read_CPU_Plot.R
 
 ## CPU and IO Zoom
-#Rscript Experiment_Seq_Read_CPU_IO_Bar.R
-#Rscript Experiment_Rand_Read_CPU_IO_Bar.R
+Rscript Experiment_Seq_Read_CPU_IO_Bar.R
+Rscript Experiment_Rand_Read_CPU_IO_Bar.R
 
 ## CPU and IO serialization
-Rscript Experiment_SerializeObjects_Bar.R
+#Rscript Experiment_SerializeObjects_Bar.R
 
 ## Memory 
 #Rscript Experiment_ReadObjects_Memory.R 
@@ -28,7 +28,7 @@ Rscript Experiment_SerializeObjects_Bar.R
 # experiment external sort
 #Rscript Experiment_External_Sort_CPU_IO_Bar_60M.R
 
-Rscript Experiment_External_Sort_CPU_IO_Bar_10M.R
+#Rscript Experiment_External_Sort_CPU_IO_Bar_10M.R
 
 #data overview 
 #Rscript Data_Overview.R

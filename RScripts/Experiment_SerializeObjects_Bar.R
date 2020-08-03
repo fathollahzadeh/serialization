@@ -46,13 +46,13 @@ calulateaxes <- function(data){
   for (d in data) {
     
     if(j>listlength*0.75)
-      tspace<-space*217
+      tspace<-space*300
     else if(j>listlength*0.5)
-      tspace<-space*40
+      tspace<-space*26
     else if(j>listlength*0.15)
       tspace<-space*10
-    else if(j>listlength*0.05)
-      tspace<-space*9
+    else if(j>listlength*0.01)
+      tspace<-space*10
     
     j<-j+1
     
@@ -123,18 +123,18 @@ xnamestasksetfalse = datatasksetfalse$method
 #################################################
 #######     Bar         #########################
 #################################################
-pdf(file='Experiment_SerializeObjects_Bar.pdf', family="Helvetica",height=2, width=3.5)
+pdf(file='Experiment_SerializeObjects_Bar.pdf', family="Helvetica",height=2, width=8)
 
-par(mar = c(1.5, 1.4, 0.1, 0.1)) 
+par(mar = c(1.5, 2.3, 0.1, 0.1)) 
 
 max_y<-max(totaltimetasksettrue,totaltimetasksetfalse)
 max_y<-max_y+max_y*0.1;
 min_y<-min(iotimetasksettrue,iotimetasksetfalse)/1.3 
 
 # draw bar plots
-p1 <- barplot(valuestasksettrue,log="y",,xaxs="i",  xlim = c(-0.2, 54),col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), legend.text=TRUE, axes=FALSE,border =colorstasksettrue, space=c(0.2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2))
+p1 <- barplot(valuestasksettrue,log="y",,xaxs="i",  xlim = c(-0.2, 54),col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.7), legend.text=TRUE, axes=FALSE,border =colorstasksettrue, space=c(0.2,1.85,1.85,1.85,1.85,1.85,3,1.85,1.85,1.85,1.85,3.5,1.85,1.85,1.85,1.85,1.85,1.85))
 
-p2 <- barplot(valuestasksetfalse,log="y",,xaxs="i", xlim = c(-0.2, 54),col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), add=T,border =colorstasksetfalse, space=c(1.4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2),axes=FALSE)
+p2 <- barplot(valuestasksetfalse,log="y",,xaxs="i", xlim = c(-0.2, 54),col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.7), add=T,border =colorstasksetfalse, space=c(1.4,1.85,1.85,1.85,1.85,1.85,3,1.85,1.85,1.85,1.85,3.5,1.85,1.85,1.85,1.85,1.85,1.85),axes=FALSE)
 
 p<-rbind(p1,p2)
 
@@ -145,27 +145,27 @@ z<-rbind(totaltimetasksettrue,totaltimetasksetfalse,iotimetasksettrue,iotimetask
 z<-z[sort.list(z)]
 z <-c(min_y,z,max_y)
 z<-calulateaxes(z)
-axis(2, las=1, at = z, labels=round(z, digits=0),cex=0.3,  cex.axis = 0.3, font = 1,lwd=0.5,mgp=c(3, .3, 0),tck = -0.02)
+axis(2, las=1, at = z, labels=round(z, digits=0),cex=0.5,  cex.axis = 0.5, font = 1,lwd=0.5,mgp=c(3, .5, 0),tck = -0.03)
 
 #write data inside of bar plots
 iotime<-rbind(iotimetasksettrue,iotimetasksetfalse)
 cputime<-rbind(cputimetasksettrue,cputimetasksetfalse)
 
 
-text(x=p+0.25, y=totaltime-totaltime*0.04, font = 2, font.lab = 2, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.25,srt=90)
+text(x=p+0.20, y=totaltime+totaltime*0.2, font = 2, font.lab = 1, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.4,srt=90)
 
-text(x=p[-4]+0.22, y=totaltime[-4]-totaltime[-4]*0.465, font = 1, font.lab = 2, labels=round(cputime[-4], 1), pos=3, xpd=NA, cex=0.25,srt=90,col = "black")
-text(x=p[4]+0.22, y=totaltime[4]-totaltime[4]*0.41, font = 1, font.lab = 2, labels=round(cputime[4], 1), pos=3, xpd=NA, cex=0.25,srt=90,col = "black")
+text(x=p[c(-1,-2,-3,-4)]+0.22, y=totaltime[c(-1,-2,-3,-4)]-totaltime[c(-1,-2,-3,-4)]*0.55, font = 1, font.lab = 2, labels=round(cputime[c(-1,-2,-3,-4)], 1), pos=3, xpd=NA, cex=0.4,srt=90,col = "black")
+text(x=p[c(1,2,3,4)], y=totaltime[c(1,2,3,4)]-totaltime[c(1,2,3,4)]*0.5, font = 1, font.lab = 2, labels=round(cputime[c(1,2,3,4)], 1), pos=3, xpd=NA, cex=0.4,srt=0,col = "black")
 
-text(x=p[c(-13,-14,-15,-16)]+0.2, y=iotime[c(-13,-14,-15,-16)]-iotime[c(-13,-14,-15,-16)]*0.465, font = 1, font.lab = 2, labels=round(iotime[c(-13,-14,-15,-16)], 1), pos=3, xpd=NA, cex=0.25,srt=90,col = "white")
-text(x=p[c(13,14,15,16)]+0.2, y=iotime[c(13,14,15,16)]-iotime[c(13,14,15,16)]*0.43, font = 1, font.lab = 2, labels=round(iotime[c(13,14,15,16)], 1), pos=3, xpd=NA, cex=0.20,srt=90,col = "white")
+text(x=p[c(-13,-14,-15,-16)]+0.22, y=iotime[c(-13,-14,-15,-16)]-iotime[c(-13,-14,-15,-16)]*0.55, font = 1, font.lab = 2, labels=round(iotime[c(-13,-14,-15,-16)], 1), pos=3, xpd=NA, cex=0.4,srt=90,col = "white")
+text(x=p[c(13,14,15,16)], y=iotime[c(13,14,15,16)]-iotime[c(13,14,15,16)]*0.47, font = 1, font.lab = 2, labels=round(iotime[c(13,14,15,16)], 1), pos=3, xpd=NA, cex=0.3,srt=0,col = "white")
 box(lwd=0.5)
 
 #lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
-text(x=(p1+p2)/2+1.7,  y=6.4, xnamestasksettrue, xpd=NA, srt=30, pos=2, font=1, cex=0.3)
+text(x=(p1+p2)/2+1,  y=6, xnamestasksettrue, xpd=NA, srt=18, pos=2, font=1, cex=0.5)
 
-legend("topright", regions, cex = 0.3, fill = regionscolors,lwd=0.5,box.lwd=0.5,col = regionscolors,border=regionscolors)
+legend("topleft", regions, cex = 0.45, fill = regionscolors,lwd=0.5,box.lwd=0.5,col = regionscolors,border=regionscolors)
 
-mtext("Total Serialize Time (sec) - log",  cex = 0.4, font=1,side=2,family="Helvetica",line =0.90, col="black" )
+mtext("Total Serialize Time (sec) - log",  cex = 0.6, font=2,side=2,family="Helvetica",line =1.65, col="black" )
 #mtext("Serialize Objects for 5M Tweets",  cex = 0.4, font=2,side=1,family="Helvetica" ,line = 1.3,col="black")
 

@@ -51,7 +51,7 @@ calulateaxes <- function(data,ts){
     space<-ts
     # space<-1.5
     if(j>listlength*0.75)
-      tspace<-space*50
+      tspace<-space*90
     else if(j>listlength*0.5)
       tspace<-space*15
     else if(j>listlength*0.25)
@@ -79,7 +79,7 @@ rustcount=10
 cppcount=12
 javacount=14
 
-pdf(file='Experiment_External_Sort_CPU_IO_Bar_10M.pdf',height=2, width=3.5)
+pdf(file='Experiment_External_Sort_CPU_IO_Bar_10M.pdf',height=2.25, width=3.5)
 
 datajo = calulateMeanDataTimeBar("data/Java_Results/externalsort/10M_25/result_java_externalsort_",3 ,javacount)
 dataco=calulateMeanDataTimeBar("data/C_Results/externalsort/10M_25/result_cpp_externalsort_",3 ,cppcount)
@@ -116,9 +116,9 @@ rustFlexBuffers <- subset(data, method=="Rust FlexBuffers")
 data <- rbind(cppInPlace,cppHandCoded,cppFlatBuf,cppProtoBuf,cppBoost,cppBson,rustMessagePack,rustBincode,rustJson,rustFlexBuffers,rustBson,javaJson,javaDefault,javaBson,javaKryo,javaProtoBuf,javaByteBuffer,javaFlatBuf)
 
 datatasksettrue<-subset(data, taskset=="true")
-datatasksetfalse<-subset(data, taskset=="false")
+#datatasksetfalse<-subset(data, taskset=="false")
 
-colorstasksettrue=c("gray5", "gray80")#c("Misty Rose", "Snow") 
+colorstasksettrue=c("gray5", "gray91")#c("Misty Rose", "Snow") 
 colorstasksetfalse=c("gray30", "gray91") 
 regionscolors<-c(colorstasksettrue[1],colorstasksettrue[2],colorstasksetfalse[1],colorstasksetfalse[2])
 
@@ -126,17 +126,17 @@ totaltimetasksettrue <- datatasksettrue$totaltime/60
 iotimetasksettrue <- datatasksettrue$iotime/60
 cputimetasksettrue <- totaltimetasksettrue - iotimetasksettrue
 
-totaltimetasksetfalse <- datatasksetfalse$totaltime/60
-iotimetasksetfalse <- datatasksetfalse$iotime/60
-cputimetasksetfalse <- totaltimetasksetfalse - iotimetasksetfalse
+#totaltimetasksetfalse <- datatasksetfalse$totaltime/60
+#iotimetasksetfalse <- datatasksetfalse$iotime/60
+#cputimetasksetfalse <- totaltimetasksetfalse - iotimetasksetfalse
 
 
 valuestasksettrue <- matrix( c(iotimetasksettrue, cputimetasksettrue), nrow = 2, ncol = 18, byrow = TRUE)
-valuestasksetfalse <- matrix( c(iotimetasksetfalse, cputimetasksetfalse), nrow = 2, ncol = 18, byrow = TRUE)
+#valuestasksetfalse <- matrix( c(iotimetasksetfalse, cputimetasksetfalse), nrow = 2, ncol = 18, byrow = TRUE)
 
-regions <- c("IO Time(taskset true)", "CPU Time(taskset true)","IO Time(taskset false)", "CPU Time(taskset false)")
+#regions <- c("IO Time(taskset true)", "CPU Time(taskset true)","IO Time(taskset false)", "CPU Time(taskset false)")
 xnamestasksettrue = datatasksettrue$method
-xnamestasksetfalse = datatasksetfalse$method
+#xnamestasksetfalse = datatasksetfalse$method
 
 
 #################################################
@@ -144,46 +144,47 @@ xnamestasksetfalse = datatasksetfalse$method
 #################################################
 
 
-par(mar = c(1.5, 1.3, 0.1, 0.1)) 
+par(mar = c(2.6, 1.7, 0.1, 0.1)) 
 
 
-max_y<-max(totaltimetasksettrue,totaltimetasksetfalse)
+max_y<-max(totaltimetasksettrue)
 max_y<-max_y+max_y*0.1;
-min_y<-min(iotimetasksettrue,iotimetasksetfalse)/1.3 
+min_y<-min(iotimetasksettrue)/1.3 
 
 # draw bar plots
-p1 <- barplot(valuestasksettrue, yaxs="i",xaxs="i", log="y", col=colorstasksettrue,xlim = c(-0.2, 54), ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), legend.text=TRUE, axes=FALSE,border =colorstasksettrue , space=c(0.2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2))
+p <- barplot(valuestasksettrue, yaxs="i",xaxs="i", log="y", col=colorstasksettrue,xlim = c(-0.2, 54), ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.2), legend.text=TRUE, axes=FALSE,border =colorstasksettrue ,width=2, space=c(0.2,0.4,0.4,0.4,0.4,0.4,1.3,0.4,0.4,0.4,0.4,1.3,0.4,0.4,0.4,0.4,0.4,0.4))
 
-p2 <- barplot(valuestasksetfalse,yaxs="i", xaxs="i",log="y", col=colorstasksetfalse,xlim = c(-0.2, 54), ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), add=T,border =colorstasksetfalse, space=c(1.4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2),axes=FALSE)
+#p2 <- barplot(valuestasksetfalse,yaxs="i", xaxs="i",log="y", col=colorstasksetfalse,xlim = c(-0.2, 54), ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), add=T,border =colorstasksetfalse, space=c(1.4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2),axes=FALSE)
 
-p<-rbind(p1,p2)
+
 
 # write y labels:
-totaltime<-rbind(totaltimetasksettrue,totaltimetasksetfalse)
-z<-rbind(totaltimetasksettrue,totaltimetasksetfalse,iotimetasksettrue,iotimetasksetfalse)
+totaltime<-rbind(totaltimetasksettrue)
+z<-rbind(totaltimetasksettrue,iotimetasksettrue)
 z<-z[sort.list(z)]
 z <-c(min_y,z,max_y)
 z<-calulateaxes(z,0.5)
-axis(2, las=1, at = z, labels=round(z, digits=0),  cex.axis = 0.3, font = 1,lwd=0.5,mgp=c(5, .3, 0),tck = -0.02)
+axis(2, las=1, at = z, labels=round(z, digits=0),  cex.axis = 0.5, font = 1,lwd=0.5,mgp=c(5, .4, 0),tck = -0.03)
 
 #write data inside of bar plots
-iotime<-rbind(iotimetasksettrue,iotimetasksetfalse)
-cputime<-rbind(cputimetasksettrue,cputimetasksetfalse)
+iotime<-rbind(iotimetasksettrue)
+cputime<-rbind(cputimetasksettrue)
 
-text(x=p+0.05, y=totaltime-iotime*0.15, font = 2, font.lab = 2, labels=round(totaltime, 2), pos=3, xpd=NA, cex=0.25,srt=90)
+text(x=p+0.27, y=totaltime+totaltime*0.15, font = 2, font.lab = 2, labels=round(totaltime, 2), pos=3, xpd=NA, cex=0.4,srt=90)
 
-text(x=p+0.27, y=totaltime-totaltime*0.5, font = 1, font.lab = 2, labels=round(cputime, 2), pos=3, xpd=NA, cex=0.25,srt=90)
+text(x=p+0.27, y=totaltime-totaltime*0.52, font = 1, font.lab = 2, labels=round(cputime, 2), pos=3, xpd=NA, cex=0.4,srt=90)
 ##text(x=p[26]+0.2, y=totaltime[26]-totaltime[26]*0.25, font = 1, font.lab = 2, labels=round(cputime[26], 1), pos=3, xpd=NA, cex=0.45,srt=90)
-text(x=p[c(-23,-24)]+0.27, y=iotime[c(-23,-24)]-iotime[c(-23,-24)]*0.45, font = 1, font.lab = 2, labels=round(iotime[c(-23,-24)], 2), pos=3, xpd=NA, cex=0.25,srt=90,col = "white")
+text(x=p[c(-2,-4,-5,-12)]+0.27, y=iotime[c(-2,-4,-5,-12)]-iotime[c(-2,-4,-5,-12)]*0.5, font = 1, font.lab = 2, labels=round(iotime[c(-2,-4,-5,-12)], 2), pos=3, xpd=NA, cex=0.4,srt=90,col = "white")
+text(x=p[c(2,4,5)]+0.27, y=iotime[c(2,4,5)]-iotime[c(2,4,5)]*0.45, font = 1, font.lab = 2, labels=round(iotime[c(2,4,5)], 1), pos=3, xpd=NA, cex=0.3,srt=90,col = "white")
 box(lwd=0.5)
 
 lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
-text(x=(p1+p2)/2+1.7,  y=min_y-0.17, xnamestasksettrue, xpd=NA, srt=30, pos=2, font=1, cex=0.3)
+text(x=p+1.7,  y=min_y-0.17, xnamestasksettrue, xpd=NA, srt=40, pos=2, font=1, cex=0.5)
 
-legend("topleft", regions, cex = 0.3, fill = regionscolors,lwd=0.5,box.lwd=0.3,col = regionscolors,border=regionscolors)
+#legend("topleft", regions, cex = 0.3, fill = regionscolors,lwd=0.5,box.lwd=0.3,col = regionscolors,border=regionscolors)
 
 
 #title(xlab="Sequential Read Objects for 4M Tweets", col.lab=rgb(0,0.5,0),family="Helvetica",cex.lab = 0.5,line = 1.9)
-title(ylab="Total Sort Time(minute) - log", col.lab="black",family="Helvetica",cex.lab = 0.4,line = 0.7)
+title(ylab="Total Sort Time(minute) - log", font = 2, col.lab="black",family="Helvetica",cex.lab = 0.55,line = 1.1)
 
 par(xpd=TRUE)

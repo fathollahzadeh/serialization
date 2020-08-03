@@ -1,15 +1,15 @@
 language#taskset#method#seq#datatype#iotime#totaltime
-[ReadTimeJAVA]#true#Java Default#true#TweetStatus#316.7440388600001#6852.037871362
-[ReadTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#92.65244822800001#11200.327885455
-[ReadTimeJAVA]#true#Java Bson#true#TweetStatus#360.6841941970001#6548.692740059
-[ReadTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#216.76624638699988#4963.318848178
-[ReadTimeJAVA]#true#Java Kryo#true#TweetStatus#158.720391918#5067.075625297
-[ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#239.84938869399997#4321.334621277
-[ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#197.72199657400006#3458.520261646
-[ReadTimeJAVA]#false#Java Default#true#TweetStatus#316.7440388600001#6852.037871362
-[ReadTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#92.65244822800001#11200.327885455
-[ReadTimeJAVA]#false#Java Bson#true#TweetStatus#360.6841941970001#6548.692740059
-[ReadTimeJAVA]#false#Java ProtoBuf#true#TweetStatus#216.76624638699988#4963.318848178
-[ReadTimeJAVA]#false#Java Kryo#true#TweetStatus#158.720391918#5067.075625297
-[ReadTimeJAVA]#false#Java Byte Buffer#true#TweetStatus#239.84938869399997#4321.334621277
-[ReadTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#197.72199657400006#3458.520261646
+[ReadTimeJAVA]#true#Java Default#true#TweetStatus#329.51336755600005#7376.94951589
+[ReadTimeJAVA]#false#Java Default#true#TweetStatus#305.31338351600004#7364.867093958
+[ReadTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#93.28542429900003#12002.721420328
+[ReadTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#91.69070254000002#12157.215326509
+[ReadTimeJAVA]#true#Java Bson#true#TweetStatus#415.2498960619999#6860.285690077
+[ReadTimeJAVA]#false#Java Bson#true#TweetStatus#405.13881355500007#6931.110131771
+[ReadTimeJAVA]#true#Java ProtoBuf#true#TweetStatus#226.94814137499998#5037.537542371
+[ReadTimeJAVA]#false#Java ProtoBuf#true#TweetStatus#204.92268987400004#4944.914191574
+[ReadTimeJAVA]#true#Java Kryo#true#TweetStatus#167.953142734#5267.471433065
+[ReadTimeJAVA]#false#Java Kryo#true#TweetStatus#161.18514766599995#5285.799110858
+[ReadTimeJAVA]#true#Java Byte Buffer#true#TweetStatus#253.10654519799996#4470.970581353
+[ReadTimeJAVA]#false#Java Byte Buffer#true#TweetStatus#240.55567714400004#4368.100892213
+[ReadTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#173.524116139#3095.087968356
+[ReadTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#167.176945485#3085.160589954

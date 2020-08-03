@@ -1,0 +1,17 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeRUST]#true#Rust Json#true#TweetStatus#116.487981589#220.602073883
+[ReadTimeRUST]#false#Rust Json#true#TweetStatus#111.419365511#215.654264978
+[ReadTimeRUST]#true#Rust Json#false#TweetStatus#5640.839993276#5798.025227647
+[ReadTimeRUST]#false#Rust Json#false#TweetStatus#5648.256840835#5796.280383133
+[ReadTimeRUST]#true#Rust Bincode#true#TweetStatus#73.728835276#126.604600313
+[ReadTimeRUST]#false#Rust Bincode#true#TweetStatus#71.913812289#122.767004739
+[ReadTimeRUST]#true#Rust Bincode#false#TweetStatus#1438.621400813#1517.076786372
+[ReadTimeRUST]#false#Rust Bincode#false#TweetStatus#1457.659945073#1525.818834204
+[ReadTimeRUST]#true#Rust MessagePack#true#TweetStatus#65.859462016#120.619515571
+[ReadTimeRUST]#false#Rust MessagePack#true#TweetStatus#61.954135234#116.06647535
+[ReadTimeRUST]#true#Rust MessagePack#false#TweetStatus#1171.497575424#1255.794170244
+[ReadTimeRUST]#false#Rust MessagePack#false#TweetStatus#1108.411282283#1185.826365454
+[ReadTimeRUST]#true#Rust Bson#true#TweetStatus#114.858083552#423.63270023
+[ReadTimeRUST]#false#Rust Bson#true#TweetStatus#113.038877864#423.881359205
+[ReadTimeRUST]#true#Rust Bson#false#TweetStatus#8115.328469314#8519.631472413
+[ReadTimeRUST]#false#Rust Bson#false#TweetStatus#7971.501377549#8372.302559396

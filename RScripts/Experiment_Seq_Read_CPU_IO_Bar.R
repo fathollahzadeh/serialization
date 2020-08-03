@@ -57,7 +57,7 @@ calulateaxes <- function(data,ts){
       else if(j>listlength*0.25)
         tspace<-space*7
       else if(j>listlength*0.15)
-        tspace<-space*1.5
+        tspace<-space*3
       else
         tspace<-space
     
@@ -77,16 +77,18 @@ calulateaxes <- function(data,ts){
 
 cppcount=12*2
 javacount=14*2
+rustcount=10*2
 
-pdf(file='Experiment_Seq_Read_CPU_IO_Bar.pdf',height=3.5, width=4)
-
-datajo = calulateMeanDataTimeBar("data/Java_Results/readobjects/result_java_readobjects_4000000_",3 ,javacount)
-dataco=calulateMeanDataTimeBar("data/C_Results/readobjects/result_cpp_readobjects_4000000_",3 ,cppcount)
+# load data for 5M objects write 
+datajo = calulateMeanDataTimeBar("data/Java_Results/readobjects/result_java_readobjects_4000000_",3 , javacount)
+dataco = calulateMeanDataTimeBar("data/C_Results/readobjects/result_cpp_readobjects_4000000_",3 , cppcount)
+dataro = calulateMeanDataTimeBar("data/Rust_Results/readobjects2/result_rust_readobjects_4000000_",1 , rustcount)
 
 dataj <- subset(datajo,seq=="true"  & datatype=="TweetStatus")
 datac <- subset(dataco,seq=="true" & datatype=="TweetStatus")
+datar <- subset(dataro,seq=="true" & datatype=="TweetStatus")
 
-data <- rbind(datac,dataj)
+data <- rbind(datac,dataj,datar)
 
 javaDefault <- subset(data, method=="Java Default")
 javaJson <- subset(data, method=="Java Json+Gzip")
@@ -101,9 +103,14 @@ cppBoost <- subset(data, method=="C++ Boost")
 cppProtoBuf <- subset(data, method=="C++ ProtoBuf")
 cppBson <- subset(data, method=="C++ Bson")
 cppFlatBuf <- subset(data, method=="C++ FlatBuffers")
+rustJson <- subset(data, method=="Rust Json")
+rustBincode <- subset(data, method=="Rust Bincode")
+rustMessagePack <- subset(data, method=="Rust MessagePack")
+rustBson <- subset(data, method=="Rust Bson")
+rustFlexBuffers <- subset(data, method=="Rust FlexBuffers")
 
 
-data <- rbind(cppHandCoded,cppProtoBuf,cppInPlace,cppFlatBuf,cppBoost,cppBson,javaDefault,javaJson,javaBson,javaByteBuffer,javaProtoBuf,javaKryo,javaFlatBuf)
+data <- rbind(cppHandCoded,cppProtoBuf,cppFlatBuf,cppInPlace,cppBoost,cppBson,rustBincode,rustMessagePack,rustFlexBuffers,rustJson,rustBson,javaFlatBuf,javaProtoBuf,javaKryo,javaByteBuffer,javaBson,javaJson,javaDefault)
 
 
 datatasksettrue<-subset(data, taskset=="true")
@@ -122,9 +129,9 @@ totaltimetasksetfalse <- datatasksetfalse$totaltime
 iotimetasksetfalse <- datatasksetfalse$iotime
 cputimetasksetfalse <- totaltimetasksetfalse - iotimetasksetfalse
 
+valuestasksettrue <- matrix( c(iotimetasksettrue, cputimetasksettrue), nrow = 2, ncol = 18, byrow = TRUE)
+valuestasksetfalse <- matrix( c(iotimetasksetfalse, cputimetasksetfalse), nrow = 2, ncol = 18, byrow = TRUE)
 
-valuestasksettrue <- matrix( c(iotimetasksettrue, cputimetasksettrue), nrow = 2, ncol = 13, byrow = TRUE)
-valuestasksetfalse <- matrix( c(iotimetasksetfalse, cputimetasksetfalse), nrow = 2, ncol = 13, byrow = TRUE)
 
 regions <- c("IO Time(taskset true)", "CPU Time(taskset true)","IO Time(taskset false)", "CPU Time(taskset false)")
 xnamestasksettrue = datatasksettrue$method
@@ -134,48 +141,50 @@ xnamestasksetfalse = datatasksetfalse$method
 #################################################
 #######     Bar         #########################
 #################################################
-
-#old.par<-par(mfrow=c(1, 2), oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
-#old.par<-par( oma=c(1.2, 1.3, 0.0, 0.0),  pty="m")
-par(mar = c(1.8, 2.5, 0.1, 0.1)) 
+pdf(file='Experiment_Seq_Read_CPU_IO_Bar.pdf',family="Helvetica",height=2, width=8)
+par(mar = c(1.5, 2.3, 0.1, 0.1)) 
 
 max_y<-max(totaltimetasksettrue,totaltimetasksetfalse)
 max_y<-max_y+max_y*0.1;
 min_y<-min(iotimetasksettrue,iotimetasksetfalse)/1.3 
 
 # draw bar plots
-p1 <- barplot(valuestasksettrue, yaxs="i", log="y", col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), legend.text=TRUE, axes=FALSE,border =colorstasksettrue , space=c(0.2,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5))
+p1 <- barplot(valuestasksettrue,log="y",,xaxs="i",  xlim = c(-0.2, 54),col=colorstasksettrue, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.7), legend.text=TRUE, axes=FALSE,border =colorstasksettrue, space=c(0.2,1.85,1.85,1.85,1.85,1.85,3,1.85,1.85,1.85,1.85,3.5,1.85,1.85,1.85,1.85,1.85,1.85))
 
-p2 <- barplot(valuestasksetfalse,yaxs="i", log="y", col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y), add=T,border =colorstasksettrue, space=c(1.4,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5),axes=FALSE)
+p2 <- barplot(valuestasksetfalse,log="y",,xaxs="i", xlim = c(-0.2, 54),col=colorstasksetfalse, ylim = c(min_y,  max(max_y,na.rm = TRUE)+max_y*1.7), add=T,border =colorstasksetfalse, space=c(1.4,1.85,1.85,1.85,1.85,1.85,3,1.85,1.85,1.85,1.85,3.5,1.85,1.85,1.85,1.85,1.85,1.85),axes=FALSE)
 
 p<-rbind(p1,p2)
+
 
 # write y labels:
 totaltime<-rbind(totaltimetasksettrue,totaltimetasksetfalse)
 z<-rbind(totaltimetasksettrue,totaltimetasksetfalse,iotimetasksettrue,iotimetasksetfalse)
 z<-z[sort.list(z)]
 z <-c(min_y,z,max_y)
-z<-calulateaxes(z,4)
-axis(2, las=1, at = z, labels=round(z, digits=0),  cex.axis = 0.5, font = 1,mgp=c(3, .6, 0))
+z<-calulateaxes(z,6)
+axis(2, las=1, at = z, labels=round(z, digits=0),cex=0.5,  cex.axis = 0.5, font = 1,lwd=0.5,mgp=c(3, .5, 0),tck = -0.03)
 
 #write data inside of bar plots
 iotime<-rbind(iotimetasksettrue,iotimetasksetfalse)
 cputime<-rbind(cputimetasksettrue,cputimetasksetfalse)
 
-text(x=p+0.2, y=totaltime+totaltime*0.1, font = 2, font.lab = 2, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.4,srt=90)
 
-text(x=p[c(-5,-6)]+0.27, y=totaltime[c(-5,-6)]-totaltime[c(-5,-6)]*0.3, font = 1, font.lab = 2, labels=round(cputime[c(-5,-6)], 1), pos=3, xpd=NA, cex=0.3,srt=90)
-#text(x=p[26]+0.2, y=totaltime[26]-totaltime[26]*0.25, font = 1, font.lab = 2, labels=round(cputime[26], 1), pos=3, xpd=NA, cex=0.45,srt=90)
-text(x=p+0.2, y=iotime-iotime*0.31, font = 1, font.lab = 2, labels=round(iotime, 1), pos=3, xpd=NA, cex=0.3,srt=90,col = "white")
-box()
+text(x=p+0.20, y=totaltime+totaltime*0.2, font = 2, font.lab = 1, labels=round(totaltime, 1), pos=3, xpd=NA, cex=0.4,srt=90)
 
-lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
-text(x=(p1+p2)/2+1.7,  y=min_y-1, xnamestasksettrue, xpd=NA, srt=30, pos=2, font=1, cex=0.4)
+text(x=p[c(-1,-2,-5,-6,-7,-8,-24,-34)]+0.22, y=totaltime[c(-1,-2,-5,-6,-7,-8,-24,-34)]-totaltime[c(-1,-2,-5,-6,-7,-8,-24,-34)]*0.55, font = 1, font.lab = 2, labels=round(cputime[c(-1,-2,-5,-6,-7,-8,-24,-34)], 1), pos=3, xpd=NA, cex=0.4,srt=90,col = "black")
+text(x=p[c(1,2,24)], y=totaltime[c(1,2,24)]-totaltime[c(1,2,24)]*0.45, font = 1, font.lab = 2, labels=round(cputime[c(1,2,24)], 1), pos=3, xpd=NA, cex=0.4,srt=90,col = "black")
+text(x=p[c(5,6)], y=totaltime[c(5,6)]-totaltime[c(5,6)]*0.45, font = 1, font.lab = 2, labels=round(cputime[c(5,6)], 1), pos=3, xpd=NA, cex=0.4,srt=0,col = "black")
 
-legend("topleft", regions, cex = 0.4, fill = regionscolors,lwd=0.5,box.lwd=0.5,col = regionscolors,border=regionscolors)
+text(x=p[c(-3,-4,-9,-10,-34)]+0.22, y=iotime[c(-3,-4,-9,-10,-34)]-iotime[c(-3,-4,-9,-10,-34)]*0.55, font = 1, font.lab = 2, labels=round(iotime[c(-3,-4,-9,-10,-34)], 1), pos=3, xpd=NA, cex=0.4,srt=90,col = "white")
+text(x=p[c(3,4)], y=iotime[c(3,4)]-iotime[c(3,4)]*0.47, font = 1, font.lab = 2, labels=round(iotime[c(3,4)], 1), pos=3, xpd=NA, cex=0.3,srt=0,col = "white")
+box(lwd=0.5)
+
+#lines(x=p[1]-2, y=min_y-min_y/5.5,lwd = 1, col = "grey")
+text(x=(p1+p2)/2+1,  y=9.5, xnamestasksettrue, xpd=NA, srt=18, pos=2, font=1, cex=0.5)
+
+legend("topleft", regions, cex = 0.45, fill = regionscolors,lwd=0.5,box.lwd=0.5,col = regionscolors,border=regionscolors)
+
+mtext("Seqential Read Time (sec) - log",  cex = 0.6, font=2,side=2,family="Helvetica",line =1.65, col="black" )
+#mtext("Serialize Objects for 5M Tweets",  cex = 0.4, font=2,side=1,family="Helvetica" ,line = 1.3,col="black")
 
 
-#title(xlab="Sequential Read Objects for 4M Tweets", col.lab=rgb(0,0.5,0),family="Helvetica",cex.lab = 0.5,line = 1.9)
-title(ylab="Total Seqential Read Time (sec) - log", col.lab="black",family="Helvetica",cex.lab = 0.6,line = 1.9)
-
-par(xpd=TRUE)

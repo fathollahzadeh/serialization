@@ -1,0 +1,12 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeRUST]#true#Rust Json#true#TweetStatus#243.419012671#1631.068005548
+[ReadTimeRUST]#false#Rust Json#true#TweetStatus#241.277685649#1627.248852606
+[ReadTimeRUST]#true#Rust Bincode#true#TweetStatus#196.904490854#1121.063068351
+[ReadTimeRUST]#false#Rust Bincode#true#TweetStatus#197.140377963#1120.959913166
+[ReadTimeRUST]#true#Rust MessagePack#true#TweetStatus#194.244772794#1137.470479736
+[ReadTimeRUST]#false#Rust MessagePack#true#TweetStatus#199.144419969#1158.472617029
+[ReadTimeRUST]#true#Rust Bson#true#TweetStatus#278.81054428#4765.080346667
+[ReadTimeRUST]#false#Rust Bson#true#TweetStatus#277.478291314#4737.321547493
+[ReadTimeRUST]#true#Rust FlexBuffers#true#TweetStatus#229.599058208#2034.686802975
+[ReadTimeRUST]#false#Rust FlexBuffers#true#TweetStatus#230.241245667#2060.250665964
+

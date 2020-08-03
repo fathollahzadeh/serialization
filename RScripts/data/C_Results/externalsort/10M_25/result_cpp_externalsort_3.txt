@@ -7,8 +7,8 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeCPP]#false#C++ Boost#true#TweetStatus#115.713#1804.01
 [ReadTimeCPP]#true#C++ ProtoBuf#true#TweetStatus#113.595#804.321
 [ReadTimeCPP]#false#C++ ProtoBuf#true#TweetStatus#114.201#810.982
-[ReadTimeCPP]#true#C++ Bson#true#TweetStatus#542.109#13538.1
-[ReadTimeCPP]#false#C++ Bson#true#TweetStatus#508.487#13297.7
+[ReadTimeCPP]#false#C++ Bson#true#TweetStatus#294.896#9423.33
+[ReadTimeCPP]#true#C++ Bson#true#TweetStatus#269.843#9377.25
 [ReadTimeCPP]#true#C++ FlatBuffers#true#TweetStatus#191.979#605.73
 [ReadTimeCPP]#false#C++ FlatBuffers#true#TweetStatus#191.093#606.066
 

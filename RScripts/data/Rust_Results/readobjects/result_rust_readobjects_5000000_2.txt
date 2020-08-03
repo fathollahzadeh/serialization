@@ -1,0 +1,15 @@
+language#taskset#method#seq#datatype#iotime#totaltime
+[ReadTimeRUST]#true#Rust Json#true#TweetStatus#283.048382645#520.944943323
+[ReadTimeRUST]#false#Rust Json#true#TweetStatus#282.636103213#522.080709912
+[ReadTimeRUST]#true#Rust Json#false#TweetStatus#50226.992167195#50662.45671155
+[ReadTimeRUST]#false#Rust Json#false#TweetStatus#51571.698212182#51990.28377323
+
++++++++ bincode
++++++++ messagepack
+
+
+++++ no bson rand and sequence
+[ReadTimeRUST]#true#Rust FlexBuffers#true#TweetStatus#183.476848436#448.058959246
+[ReadTimeRUST]#false#Rust FlexBuffers#true#TweetStatus#177.993257122#439.858535091
+[ReadTimeRUST]#true#Rust FlexBuffers#false#TweetStatus#43854.312559374#44307.405021166
+[ReadTimeRUST]#false#Rust FlexBuffers#false#TweetStatus#44176.466381599#44627.1078551
