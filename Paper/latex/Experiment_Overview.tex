@@ -73,70 +73,56 @@ The ten different complex object implementations that we considered have very di
 	\end{adjustbox}
 \end{table}
 
-\begin{table}
-	\centering
-	\caption{Comparison of object size for 1 million tweet }
-	\label{tbl:object_size}
-	\begin{adjustbox}{width=\columnwidth,center}	
-		
-		\begin{tabular}{|l|c|c|} \hline
-		 \textbf{Serialization Methods} & \textbf{Serialized file size(gigabyte)}\\ \hline
-			Java Default  & 4.6 \\ \hline	
-			Java Json Gzip  & 1.4 \\ \hline	
-			Java Bson  & 4.9 \\ \hline	
-			Java Protocol Buffer  & 1.9 \\ \hline	
-			Java Kyro  & 1.9 \\ \hline	
-			Java Hand Coded ByteBuffer  & 2.3 \\ \hline	
-			Java FaltBuffers  & 2.9 \\ \hline	
-			C++ Hand Coded  & 2.1 \\ \hline	
-			C++ InPlace  & 3.2 \\ \hline	
-			C++ Boost  & 2.2 \\ \hline	
-			C++ Protocol Buffer  & 1.9 \\ \hline
-			C++ Bson  & 4.6 \\ \hline	
-			C++ FaltBuffers  & 2.9 \\ \hline	
-			Rust Json  & 4.8 \\ \hline
-			Rust Bincode  & 2.4 \\ \hline			
-			Rust MessagePack  & 1.9 \\ \hline			
-			Rust Bson  & 4.5 \\ \hline			
-			Rust FlexBuffers  & 4.3 \\ 						
-			\hline\end{tabular}
-	\end{adjustbox}
-\end{table}
 
 \begin{table}
 	\centering
-	\caption{Lines of code for serialization and de-serialization  }
+	\caption{Object size for 1 million tweets and Lines of code for serialize/de-serialize }
 	\label{tbl:object_size}
 	\begin{adjustbox}{width=\columnwidth,center}	
 		
-		\begin{tabular}{|l|c|c|} \hline
-			\textbf{Serialization Methods} & \textbf{Serialize} &  \textbf{De-Serialize}   \\ \hline
-			Java Default  & 4  & 4 \\ \hline	
-			Java Json Gzip  & 2 & 4\\ \hline	
-			Java Bson  & 50  & 120 \\ \hline	
-			Java Protocol Buffer  & 200 & 1 \\ 
-			                      &\textcolor{red}{with 20 extra files} &  \\ \hline	
-			Java Kyro  & 40 & 40 \\ \hline	
-			Java Hand Coded ByteBuffer  & 150 & 150 \\ \hline	
-			Java FaltBuffers  & 250 & 1 \\ 
-							  &\textcolor{red}{with 42 extra files} &  \\ \hline	
-			C++ Hand Coded  & 70  & 100 \\ \hline	
-			C++ InPlace  & 80 & 1 \\ \hline	
-			C++ Boost  & 1 & 2 \\ \hline	
-			C++ Protocol Buffer  & 200 & 1\\ 
-									&\textcolor{red}{with 20 extra files} &  \\ \hline	
-			C++ Bson  & 40 & 100 \\ \hline	
-			C++ FaltBuffers  & 250  & 1 \\ 
-									&\textcolor{red}{with 42 extra files} &  \\ 	\hline	
-			Rust Json  & 1 & 1 \\ \hline
-			Rust Bincode  & 1 & 1\\ \hline			
-			Rust MessagePack  & 1 & 1\\ \hline			
-			Rust Bson  & 1 & 1\\ \hline			
-			Rust FlexBuffers  & 1 & 1\\						
+		\begin{tabular}{|l|c|c|c|} \hline
+		 \multirow{2}{*}{\textbf{Method}} & \multirow{2}{*}{\textbf{File size(Gig)}} & \textbf{Serialize} &  \textbf{De-Serialize}\\ 
+		 &&\textit{Lines of code}& \textit{Lines of code} \\ \hline
+			\texttt{Java Default}  & 4.6 & 4  & 4 \\ \hline	
+			\texttt{Java Json+Gzip}  & 1.4  & 2 & 4 \\ \hline	
+			\texttt{Java Bson}  & 4.9 & 50  & 120 \\ \hline	
+			\multirow{2}{*}{\texttt{Java ProtoBuf}}  & \multirow{2}{*}{\texttt{1.9}} & 200 & 1 \\ 
+										\cline{3-4}
+										&  & \multicolumn{2}{c|}{\textcolor{red}{
+												\texttt{with 20 extra files}}}   \\ \hline	
+			\texttt{Java Kyro}  & 1.9  & 40 & 40 \\ \hline	
+			\texttt{Java HandCoded ByteBuf$.$}  & 2.3  & 150 & 150 \\ \hline	
+		    \multirow{2}{*}{\texttt{Java FaltBuffers}}  & \multirow{2}{*}{\texttt{2.9}} & 250 & 1 \\ 
+		    				\cline{3-4}
+		    				&&\multicolumn{2}{c|}{\textcolor{red}{
+		    					\texttt{with 42 extra files}}}   
+	    					\\ \hline
+		    	
+			\texttt{C++ HandCoded}  & 2.1 & 70  & 100 \\ \hline	
+			\texttt{C++ InPlace}  & 3.2  & 80 & 1 \\ \hline	
+			\texttt{C++ Boost}  & 2.2 & 1 & 2 \\ \hline				
+			
+			\multirow{2}{*}{\texttt{C++ ProtoBuf}}  & \multirow{2}{*}{\texttt{1.9}} & 200 & 1 \\ 
+			\cline{3-4}
+			&&\multicolumn{2}{c|}{\textcolor{red}{
+					\texttt{with 20 extra files}}}   
+			\\ \hline
+			
+			\texttt{C++ Bson}  & 4.6 & 40 & 100\\ \hline
+			\multirow{2}{*}{\texttt{C++ FaltBuffers}}  & \multirow{2}{*}{\texttt{2.9}} & 250  & 1 \\ 
+			\cline{3-4}
+			&&\multicolumn{2}{c|}{\textcolor{red}{
+					\texttt{with 42 extra files}}}   
+			\\ \hline
+				
+			\texttt{Rust Serde Json}  & 4.8 & 1 & 1 \\ \hline
+			\texttt{Rust Serde Bincode}  & 2.4 & 1 & 1\\ \hline			
+			\texttt{Rust Serde MessagePack}  & 1.9 & 1 & 1 \\ \hline			
+			\texttt{Rust Serde Bson}  & 4.5 & 1 & 1 \\ \hline			
+			\texttt{Rust Serde FlexBuffers}  & 4.3 & 1 & 1 \\ 						
 			\hline\end{tabular}
 	\end{adjustbox}
 \end{table}
-
 
 
 
