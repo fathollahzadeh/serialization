@@ -1,0 +1,85 @@
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{%frame=b,
+	%language=Java,
+	aboveskip=3mm,
+	belowskip=0mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\scriptsize\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=2}
+
+
+   \begin{lstlisting}[language=java,title={a) Java Kryo},captionpos=b]   
+/* Kryo serialization method */		  
+public byte[] serialize( Kryo kryo) {		   
+	ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	Output output = new Output(bos);			   
+	kryo.writeObject(output, this);
+	output.flush();			    
+	return bos.toByteArray();}    
+/* Kryo de-serialization method */			  
+public Tweet deserialize(byte[] buf, Class<?> cls,  Kryo kryo) {
+	ByteArrayInputStream bis = new ByteArrayInputStream(buf);
+	Input input = new Input(bis);	    	    
+	Tweet obj= kryo.readObject(input, cls);
+	return obj;}
+    \end{lstlisting}
+    
+    \begin{lstlisting}[language=c++,title={b) C++ HandCoded},captionpos=b]       	
+/* HandCoded serialization method */		  
+void serialize(char *buffer, int &objSize) {
+	//Write "long" value.
+	memcpy(buffer, &id, sizeof(id));
+	buffer += sizeof(id);
+	objSize += sizeof(id);	   	
+	//Write "length" of the string.
+	int strlen = created_at.length();
+	memcpy(buffer, &strlen, sizeof(strlen));
+	buffer += sizeof(strlen);
+	objSize += sizeof(strlen);	
+	//Write the content of the string.
+	memcpy(buffer, created_at.c_str(), strlen);
+	buffer += strlen;
+	objectSize += strlen;}	   
+/* HandCoded de-serialization method */
+Tweet deserialize(char *buffer, int &bytesRead) {
+	Tweet obj;
+	//Read "long" value.
+	memcpy(&obj.id, buffer, sizeof(long));
+	bytesRead += sizeof(obj.id);	
+	//Read "length" of the string.
+	int strlen;
+	memcpy(&strlen, buffer+bytesRead, sizeof(strlen));
+	buffer += sizeof(strlen);	   	
+	//Read the content of the string.
+	obj.create_at.assign(buffer, strlen);
+	bytesRead += sizeof(int) + strlen;	
+	//Read bool value.
+	memcpy(&obj.truncated, buffer, sizeof(bool));
+	bytesRead +=sizeof(bool);
+	return obj;	}
+    \end{lstlisting}
+    
+    
+    \begin{lstlisting}[language=C,title={c) Rust Json},captionpos=b]   
+/* Serde Json serialization method */		  
+pub fn serialize( Tweet obj)-> &[u8] {		   
+	let r=serde_json::to_string(&obj).unwrap();		    
+	return r.as_bytes(); }    
+/* Serde Json de-serialization method */			  
+pub fn deserialize(buff: &[u8])-> Tweet {		   
+	let obj=serde_json::from_slice(buff).unwrap();
+	return obj;}    
+    \end{lstlisting}
+    
+    
