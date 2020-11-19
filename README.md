@@ -15,7 +15,7 @@ Rust Implementation is in Direcotry ./Rust
 
 Standard Deviation of Experiments
 --
-Table beloow present Standard Deviation of the experiments. 
+The table below present the standard deviation of the experiments.
 
 <table>  
   <tr>
