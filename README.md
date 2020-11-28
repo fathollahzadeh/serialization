@@ -22,7 +22,7 @@ The table below present the standard deviation of the experiments.
     <td rowspan="3">Method</td>
     <td colspan="4">Read Time (Sec.) <b>#4M</b></td>
     <td colspan="2" rowspan="2" >Write Time (Sec.) <b>#5M</b></td>
-    <td rowspan="2"> External Sort Time (Min.) <b>#10M</b></td>
+    <td rowspan="2"> External Sort Time (Sec.) <b>#10M</b></td>
   </tr> 
   <tr>
     <td colspan="2">Sequential</td>
