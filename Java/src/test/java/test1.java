@@ -12,8 +12,8 @@ public class test1 {
 
     public static void main(String[] args) throws IOException {
 
-      // String fileName = "/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/tweets_jsonline_1M.txt";
-       String fileName="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/tweets_1M_rows.txt";
+       String fileName = "/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/tweets_jsonline_1M.txt";
+      // String fileName="/home/saeed/Documents/Projects/1-Research/GitHub/serialization/data/tweets_1M_rows.txt";
 
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
 

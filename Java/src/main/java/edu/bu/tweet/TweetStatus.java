@@ -89,8 +89,8 @@ public class TweetStatus extends Base implements RootData {
         withheld_in_countries = new ArrayList<String>();
         matching_rules = new ArrayList<>();
         scopes = new HashMap<>();
-        this.tweetStatusFBS=null;
-        this.tweetStatusP=null;
+       this.tweetStatusFBS=null;
+       this.tweetStatusP=null;
 
     }
 
@@ -1772,6 +1772,7 @@ public class TweetStatus extends Base implements RootData {
             countLevelOtherTweet += other.getRetweeted_status().getRetweet_count();
         }
         else if (this.tweetStatusFBS!=null & this.tweetStatusP==null){
+
             // get text
             countLevel += this.tweetStatusFBS.text().length();
 
@@ -1792,6 +1793,7 @@ public class TweetStatus extends Base implements RootData {
                 countLevelOtherTweet += other.tweetStatusFBS.retweetedStatus().retweetCount();
         }
         else {
+            Gson gson=new Gson();
             // get text
             countLevel += this.tweetStatusP.getText().length();
 
