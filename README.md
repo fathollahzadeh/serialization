@@ -36,8 +36,7 @@ The table below present the standard deviation of the experiments.
     <td >ts=True</td>
     <td >ts=False</td>
     <td >ts=True</td>    
-  </tr>
-   <tr><td>Method</td><td>ts= True</td><td>ts= False</td><td>ts= True</td><td>ts= True</td><td>ts= True</td><td>ts= False</td><td>ts= True</td></tr>
+  </tr>   
 <tr><td>Java Default</td><td>1548.11(21.52)</td><td>662.97(6.51)</td><td>25397.37(720.34)</td><td>24927.58(357.73)</td><td>583.85(30.24)</td><td>424.78(19)</td><td>7412.91(49.16)</td></tr>
 <tr><td>Java Json+Gzip</td><td>1451.71(11.39)</td><td>612.98(8.99)</td><td>5202.08(110.8)</td><td>4922.71(130.05)</td><td>2060.56(64.51)</td><td>1620.41(48.84)</td><td>11985.22(148.39)</td></tr>
 <tr><td>Java Bson</td><td>1137.91(120.32)</td><td>391.34(39.95)</td><td>27060.17(653.36)</td><td>27080.15(930.24)</td><td>847.16(57.89)</td><td>421.62(18.39)</td><td>6775.98(76.53)</td></tr>
