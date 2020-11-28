@@ -46,6 +46,12 @@ public class LogFileHandler {
             case 7:
                 method = "Java FlatBuffers";
                 break;
+            case 8:
+                method = "Java Json";
+                break;
+            case 9:
+                method = "Java Gson";
+                break;
         }
         String seqString="true";
         if (!seq)

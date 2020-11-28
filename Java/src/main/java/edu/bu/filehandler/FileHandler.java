@@ -74,7 +74,7 @@ public class FileHandler {
                 method = SerializationType.JAVADEFAULT;
                 break;
             case 2:
-                method = SerializationType.JSON;
+                method = SerializationType.JSON_GZIP;
                 break;
             case 3:
                 method = SerializationType.BSON;
@@ -90,6 +90,12 @@ public class FileHandler {
                 break;
             case 7:
                 method = SerializationType.FLATBUFFERS;
+                break;
+            case 8:
+                method = SerializationType.JSON;
+                break;
+            case 9:
+                method = SerializationType.GSON;
                 break;
         }
     }
@@ -303,7 +309,7 @@ public class FileHandler {
                 case JAVADEFAULT:
                     buffer = object.javaDefaultSerialization();
                     break;
-                case JSON:
+                case JSON_GZIP:
                     buffer = object.jsonSerialization_withGZIP();
                     break;
                 case BSON:
@@ -320,6 +326,12 @@ public class FileHandler {
                     break;
                 case FLATBUFFERS:
                     buffer = object.flatBuffersSerialization();
+                    break;
+                case JSON:
+                    buffer = object.jsonSerialization();
+                    break;
+                case GSON:
+                    buffer = object.gsonSerialization();
                     break;
 
             }
@@ -358,7 +370,7 @@ public class FileHandler {
             case JAVADEFAULT:
                 myDeserlizedObject = myData.javaDefaultDeserialization(buffData);
                 break;
-            case JSON:
+            case JSON_GZIP:
                 myDeserlizedObject = myData.jsonDeserialization_withGZIP(buffData);
                 break;
             case BSON:
@@ -376,9 +388,12 @@ public class FileHandler {
             case FLATBUFFERS:
                 myDeserlizedObject = myData.flatBuffersDeserialization(buffData);
                 break;
-//            case GSON:
-//                myDeserlizedObject = myData.gsonDeSerialization(buffData);
-//                break;
+            case JSON:
+                myDeserlizedObject = myData.jsonDeserialization(buffData);
+                break;
+            case GSON:
+                myDeserlizedObject = myData.gsonDeSerialization(buffData);
+                break;
         }
 
         return myDeserlizedObject;

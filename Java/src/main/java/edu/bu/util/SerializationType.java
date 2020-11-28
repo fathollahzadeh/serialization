@@ -3,12 +3,12 @@ package edu.bu.util;
 public enum SerializationType {
 	
 	JAVADEFAULT,
-	JSON,
+	JSON_GZIP,
 	BSON,
 	PROTOCOL,
 	KRYO,
 	BYTEBUFFER,
-	JSON_GZIP,
+	JSON,
 	GSON,
 	FLATBUFFERS
 }

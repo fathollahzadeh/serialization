@@ -613,7 +613,8 @@ public class TweetStatus extends Base implements RootData {
         return this.gZIPCompression(this.jsonSerialization());
     }
 
-    public RootData jsonDeserialization_withGZIP(byte[] buf) {
+    public RootData
+    jsonDeserialization_withGZIP(byte[] buf) {
         return jsonDeserialization(this.gZIP_DE_Compression(buf));
     }
 
