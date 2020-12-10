@@ -1,75 +1,320 @@
-# An Experimental Comparison of Complex Object Implementations for Big Data Systems
+<!-- Short description -->
+<p align="center">
+   Understanding Performance Implications of Complex Objects Implementations for Big Data Systems
+</p>
 
-Java
---
-Java Implementation is in Directory ./Java
-
-C++
---
-C++ Implementation is in Direcotry ./C++ 
-
-Rust
---
-Rust Implementation is in Direcotry ./Rust 
+<!-- Draw horizontal rule -->
+<hr>
 
 
-Standard Deviation of Experiments
---
-The table below present the standard deviation of the experiments.
+<!-- Table of content -->
+|Section|Description|
+| --- |---|
+| [Installation](#installation) | Installing the dependencies |
+| [Getting started](#getting-started) | A quick introduction on how to run benchmarks |
+| [Experimental Results](#experimental_results) | An extensive overview of experimental results|
+| [Citation](#referencing-tslearn) | A citation for scholarly articles |
+
+
+## Installation
+Our implementation has been compiled, built, and tested in Ubuntu 18.04 LTS. For the system to work properly, make sure the following requirements are satisfied.
+### 1. C++
+#### 1.1. Install C++ :
+* Clang and clang++ version 6.0: `$sudo apt-get install clang`
+
+#### 1.2. Install ubuntu rapid json:
+* Rapid-json: `$ sudo apt-get install rapidjson-dev` 
+#### 1.3. Install libboost:
+* Download last version of `Boost` [`https://www.boost.org/users/download/`](https://www.boost.org/users/download/)
+* Steps for install from source(`tested version 1_72`):
+   ```bash 
+     $ tar -xf boost_1_72_0.tar.bz2 
+     $ cd boost_1_72_0
+     $ ./bootstrap.sh --prefix=/usr/
+     $ ./b2
+     $ sudo ./b2 install
+  ```
+#### 1.4. Install google protobuf:
+To build protobuf from source, the following tools are needed:
+* autoconf
+* automake
+* libtool
+* make
+* g++
+* unzip
+
+On Ubuntu/Debian, you can install them with:
+```bash 
+$ sudo apt-get install autoconf automake libtool curl make g++ unzip
+```
+To get the source, download one of the release .tar.gz or .zip packages in the release page:
+(download `.cpp` version)
+```bash 
+https://github.com/protocolbuffers/protobuf/releases/latest
+```
+
+To build and install the C++ Protocol Buffer runtime and the Protocol Buffer compiler (protoc) execute the following:
+
+Extract `.tar.gz` file and cd to source folder:
+```bash 
+    $ ./configure
+    $ make
+    $ make check
+    $ sudo make install
+    $ sudo ldconfig # refresh shared library cache.
+```
+
+#### 1.5. Install C++ BSON:
+The official url for install `MongoDB` driver available at [`http://mongocxx.org/mongocxx-v3/installation/`](http://mongocxx.org/mongocxx-v3/installation/)
+
+* Step 1: Install the latest version of the `MongoDB C` driver:
+    - You will need to download and build from the source code. Get a tarball from the C Driver releases page.
+     [`https://github.com/mongodb/mongo-c-driver/releases`](https://github.com/mongodb/mongo-c-driver/releases)
+    - Follow the instructions for building from a tarball at Installing `libmongoc`.
+      ```bash
+      $ tar xzf mongo-c-driver-x.y.z.tar.gz
+      $ cd mongo-c-driver-x.y.z
+      $ mkdir cmake-build
+      $ cd cmake-build
+      $ cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF ..
+      $ sudo make install
+      ```
+* Step 2: Download the latest version of the `mongocxx` driver:
+    - Download source:[`https://github.com/mongodb/mongo-cxx-driver/releases`](https://github.com/mongodb/mongo-cxx-driver/releases) 
+    - Extract the source and goto to the build path:
+        ```bash
+        $ tar -xzf r3.4.1.tar.gz
+        $ cd mongo-cxx-driver-r3.4.1/build
+        ```
+* Step 3: Configure the driver:
+    * On Unix systems, `libmongoc` installs into `/usr/local` by default. Without additional configuration, `mongocxx` installs into its local build directory as a courtesy to those who build from source. To configure `mongocxx` for installation into `/usr/local` as well, use the following cmake command:
+        ```bash
+        cmake ..                                \
+            -DCMAKE_BUILD_TYPE=Release          \
+            -DCMAKE_INSTALL_PREFIX=/usr/local
+        ``` 
+* Step 4: Build and install the driver:
+    ```bash
+    make && sudo make install
+    ```
+### 2. Java
+#### 2.1 install Maven
+* `python -m pip install tslearn`
+    
+#### 2.2 install JDK(1.8)
+* Download Java SE 8u241 [`https://www.oracle.com/java/technologies/javase-downloads.html`](https://www.oracle.com/java/technologies/javase-downloads.html)
+ 
+* Extract and move Java source:
+    * Extract: `tar -xvf jdk-8u241-linux-x64.tar.gz`
+    * Move: `sudo mv jdk1.8.0_241/ /usr/lib/jvm/`
+
+* Install JDK 1.8:
+    -     $ sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_241/bin/java" 1
+          $ sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.8.0_241/bin/javac" 1
+          $ sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.8.0_241/bin/javaws" 1
+
+
+* Set JDK 1.8 as a default:
+    * Choices a number for the alternative java: `$ sudo update-alternatives --config java`
+    * Add to ```.bashrc``` file: `$ sudo nano ~/.bashrc`
+    * Add bellow texts to the  ```.bashrc``` file:
+        
+            JAVA_HOME=/usr/lib/jvm/jdk1.8.0_241
+            PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+            export JAVA_HOME
+            export JRE_HOME
+            export PATH
+    * Submit changes: `$ source ~/.bashrc`
+
+* Test current Java version: `$ sudo java -version`
+    * result:
+    -       java version "1.8.0_241"
+            Java(TM) SE Runtime Environment (build 1.8.0_241-b07)
+            Java HotSpot(TM) 64-Bit Server VM (build 25.241-b07, mixed mode)
+
+
+### 3. Rust
+* Install the `Rust` and `Cargo` follow this link: [`https://www.rust-lang.org/tools/install`](https://www.rust-lang.org/tools/install):
+    
+## Getting started
+
+#### 1. Download `Twitter` dataset:
+A sample of `Twitter` dataset available in bellow link. This data is in text format and each line is a complete tweet in json format:
+
+* Data Link: [`https://metcs777.s3.amazonaws.com/tweets_1M_rows.txt.bz2`](https://metcs777.s3.amazonaws.com/tweets_1M_rows.txt.bz2)
+
+####  2. Compile the project:
+There is a bash script in each subdirectories `C++`, `Java`, and `Rust`. Run the related bash script for compile the project:
+* C++:`$./C++/makeClean.sh`
+* Java:`$./Java/makeClean.sh`
+* Rust:`$./Rust/makeClean.sh` 
+ 
+## Experimental Results
+####  1. Write object experiments:
+This experiment include sequential write serialized objects.  One round of this experimentation need for next `Read Experiments`. We run all of our experiments 3 times and observed that the results have low variance. Run this script for write objects:
+* C++: `$./C++/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}`
+* Java: `$./Java/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}`
+* Rust: `$./Rust/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}` 
+
+Example:
+```bash
+./C++/twitterSerialization.sh /mnt/tweets_1M_rows.txt /mnt/cppdata 1000
+```
+The content of `twitterSerialization.sh` is:
+* C++:
+```
+            for r in 1 2 3
+            do
+                for serialization_type in   1 2 3 4 5 6
+                do
+                    outpath="serialization_$serialization_type.se"
+                    #clear the OS cache
+                    echo 3 > /proc/sys/vm/drop_caches && sync
+                    
+                    #Run normal experiment 
+                    time ./bin/TwitterSerialization $datapath $serialization_type $outpath $numberOfTweets $r 0
+                    
+                    # wait a short time for back to stable state
+                    sleep 200
+            
+                    #clear the OS cache
+                    echo 3 > /proc/sys/vm/drop_caches && sync
+                   
+                    # Run the experiment just on Core 0
+                   time taskset -c 0 ./bin/TwitterSerialization $datapath $serialization_type $outpath $numberOfTweets $r 1
+                done
+            done
+```
+* Java: set `-XmsXg` `-XmxXg` based on your system configuration
+```
+            for r in 1 2 3
+            do
+                for serialization_type in   1 2 3 4 5 6 7 8
+                do
+                    outpath="serialization_$serialization_type.se"
+                    #clear the OS cache
+                    echo 3 > /proc/sys/vm/drop_caches && sync
+                    
+                    #Run normal experiment 
+                    time java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r false
+                    
+                    # wait a short time for back to stable state
+                    sleep 200
+            
+                    #clear the OS cache
+                    echo 3 > /proc/sys/vm/drop_caches && sync
+                   
+                    # Run the experiment just on Core 0
+                    time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r true
+            
+                done
+            
+            done 
+```
+* Rust:
+```
+            for r in 1 2 3
+            do
+                for serialization_type in   1 2 3 4 5
+                do
+                    outpath="serialization_$serialization_type.se"
+                    #clear the OS cache
+                    echo 3 > /proc/sys/vm/drop_caches && sync
+                    
+                    #Run normal experiment 
+                    time cargo run --release write  $datapath $serialization_type $outpath $numberOfTweets $r false
+                    
+                    # wait a short time for back to stable state
+                    sleep 200
+            
+                    #clear the OS cache
+                    echo 3 > /proc/sys/vm/drop_caches && sync
+                   
+                    # Run the experiment just on Core 0
+                    time taskset -c 0 cargo run --release write  $datapath $serialization_type $outpath $numberOfTweets $r true
+                done
+            done
+```
+After finish the serialization task in the out path(the second parameter) you can see the following files:
+
+| # |C++|Java |Rust|
+|---|--- |---|---|
+|1|`HandCoded` <br> `serialization_1.[se, se.index]`|`Default` <br> `serialization_1.[se, se.index]`|`Json ` <br> `serialization_1.[se, se.index]`|
+|2|`InPlace` <br> `serialization_2.[se, se.index]`|`Json+Gzip` <br> `serialization_2.[se, se.index]`|`Bincode` <br> `serialization_2.[se, se.index]`|
+|3|`Boost` <br> `serialization_3.[se, se.index]`|`Bson` <br> `serialization_3.[se, se.index]`|`MessagePack` <br> `serialization_3.[se, se.index]`|
+|4|`ProtoBuf`<br> `serialization_4.[se, se.index]` |`ProtoBuf` <br> `serialization_4.[se, se.index]`|`Bson` <br> `serialization_4.[se, se.index]`|
+|5|`BSON` <br> `serialization_5.[se, se.index]`|`Kryo` <br> `serialization_5.[se, se.index]`|`FlexBuffers` <br> `serialization_5.[se, se.index]`|
+|6|`FlatBuffers` <br> `serialization_6.[se, se.index]` |`Byte Buffer` <br> `serialization_6.[se, se.index]`|---|
+|7|--- |`FlatBuffers` <br> `serialization_7.[se, se.index]`|---|
+|8|--- |`Json` <br> `serialization_8.[se, se.index]`|---|
+
+The experiment was based on 5 million data.The final log file results for write objects experiment available at the related path:
+```bash
+{project/path}/bin/benchmark/writeobjects
+```
+Example of files:
+```bash
+result_java_writeobjects_5000000_1.txt
+result_java_writeobjects_5000000_2.txt
+result_java_writeobjects_5000000_3.txt
+```
+
+Example of result content:
+```bash
+language#taskset#method#seq#datatype#iotime#totaltime
+[WriteTimeJAVA]#false#Java Default#true#TweetStatus#46.533803422#402.846320084
+[WriteTimeJAVA]#true#Java Default#true#TweetStatus#57.150347609#548.940365011
+[WriteTimeJAVA]#false#Java Json+Gzip#true#TweetStatus#17.098395421#1589.679004718
+[WriteTimeJAVA]#true#Java Json+Gzip#true#TweetStatus#28.520531689#2014.750860796
+...
+[WriteTimeJAVA]#false#Java FlatBuffers#true#TweetStatus#45.86361197#171.276057655
+[WriteTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#53.48092523#254.482728354
+```
+
+The table below present the all of the experiments results and distribution.
 
 <table>  
   <tr>
     <td rowspan="3">Method</td>
-    <td colspan="4">Read Time (Sec.) <b>#4M</b></td>
-    <td colspan="2" rowspan="2" >Write Time (Sec.) <b>#5M</b></td>
-    <td rowspan="2"> External Sort Time (Sec.) <b>#10M</b></td>
+    <td colspan="2">IO</td>
+    <td colspan="2">Total</td>    
   </tr> 
+
+  <tr>  
+    <td colspan="2">Mean(SD)</td>
+    <td colspan="2">Mean(SD)</td>    
+  </tr>  
   <tr>
-    <td colspan="2">Sequential</td>
-    <td colspan="2">Random</td>
-  </tr>
-  <tr>
-    <td >ts=True</td>
-    <td >ts=False</td>
-    <td >ts=True</td>
-    <td >ts=False</td>
-    <td >ts=True</td>
-    <td >ts=False</td>
-    <td >ts=True</td>    
+    <td >TS=True</td>
+    <td >TS=False</td>
+    <td >TS=True</td>
+    <td >TS=False</td>   
   </tr>   
-<tr><td>Java Default</td><td>, 1550.006837168, 1568.623307347, 1525.707184066 - 1548.11(21.52)</td><td>, 657.363255815, 670.112892007, 661.446076141 - 662.97(6.51)</td><td>, 24650.674425145, 26088.098373471, 25453.350209473 - 25397.37(720.34)</td><td>, 24529.199114347, 25032.219987129, 25221.323362567 - 24927.58(357.73)</td><td>, 548.940365011, 602.141861652, 600.45665025 - 583.85(30.24)</td><td>, 402.846320084, 435.504958107, 435.985482489 - 424.78(19)</td><td>, 7468.930163797, 7376.94951589, 7392.844467016 - 7412.91(49.16)</td></tr>
-
-<tr><td>Java Json+Gzip</td><td>, 1464.524958244, 1442.756680177, 1447.84655921 - 1451.71(11.39)</td><td>, 623.332057367, 607.08820861, 608.522700188 - 612.98(8.99)</td><td>, 5252.238897625, 5075.063565694, 5278.931178295 - 5202.08(110.8)</td><td>, 4936.513017004, 4786.309488189, 5045.314845134 - 4922.71(130.05)</td><td>, 2014.750860796, 2032.593096046, 2134.341536903 - 2060.56(64.51)</td><td>, 1589.679004718, 1594.823924019, 1676.731624048 - 1620.41(48.84)</td><td>, 11828.854714182, 12002.721420328, 12124.079104356 - 11985.22(148.39)</td></tr>
-
-<tr><td>Java Bson</td><td>, 1050.873057342, 1275.214573227, 1087.65315063 - 1137.91(120.32)</td><td>, 363.524391668, 437.119695369, 373.371791983 - 391.34(39.95)</td><td>, 27057.653732003, 27714.790185068, 26408.077549358 - 27060.17(653.36)</td><td>, 27836.642593939, 27362.302428799, 26041.49975918 - 27080.15(930.24)</td><td>, 805.755123283, 822.406447336, 913.304354482 - 847.16(57.89)</td><td>, 413.198397838, 408.940959823, 442.706206169 - 421.62(18.39)</td><td>, 6710.894317534, 6860.285690077, 6756.770250226 - 6775.98(76.53)</td></tr>
-
-<tr><td>Java ProtoBuf</td><td>, 397.341244282, 478.19650097, 402.718054606 - 426.09(45.21)</td><td>, 142.593741588, 167.344102822, 146.521648331 - 152.15(13.3)</td><td>, 5891.223951331, 6280.791004382, 6125.225467018 - 6099.08(196.1)</td><td>, 6099.717050692, 6401.543977946, 6061.414698622 - 6187.56(186.3)</td><td>, 310.625049226, 300.228906454, 329.539493937 - 313.46(14.86)</td><td>, 156.098283696, 162.195029814, 178.485737222 - 165.59(11.57)</td><td>, 4910.193966126, 5037.537542371, 4983.099306775 - 4976.94(63.89) </td></tr>
-
-<tr><td>Java Kryo</td><td>, 376.868854601, 436.643094473, 378.025708443 - 397.18(34.18)</td><td>, 149.321091967, 170.243299139, 153.876184243 - 157.81(11)</td><td>, 6833.657832205, 7051.454671525, 6804.533705462 - 6896.55(134.94)</td><td>, 7062.528004027, 7408.458847635, 6966.681701721 - 7145.89(232.39)</td><td>, 185.596572817, 188.750288803, 229.171479284 - 201.17(24.3)</td><td>, 122.849232761, 117.546535219, 127.212099768 - 122.54(4.84)</td><td>, 5316.57596994, 5267.471433065, 5311.556504573 - 5298.53(27.02)</td></tr>
-
-<tr><td>Java Byte Buffer</td><td>, 511.819837792, 542.164189407, 484.498936067 - 512.83(28.85)</td><td>, 256.887347653, 276.256901325, 276.256901325 - 269.8(11.18)</td><td>, 13100.500899339, 13823.359015505, 12954.9738787 - 13292.94(465.08)</td><td>, 13746.999252807, 14938.238316157, 13471.35808531 - 14052.2(779.61)</td><td>, 245.534922711, 244.596777146, 277.065323374 - 255.73(18.48)</td><td>, 136.155696412, 136.743353948, 146.932612193 - 139.94(6.06)</td><td>, 4372.685817586, 4470.970581353, 4427.423087314 - 4423.69(49.25)</td></tr>
-
-<tr><td>Java FlatBuffers</td><td>, 96.967689438, 125.984330132, 122.948958054 - 115.3(15.95)</td><td>, 80.690761571, 89.210857929, 86.410177901 - 85.44(4.34)</td><td>, 1160.078407886, 1248.481484037, 1279.880466843 - 1229.48(62.12)</td><td>, 1129.104736848, 1186.011720838, 1185.873610749 - 1167(32.82)</td><td>, 254.482728354, 257.07674347, 294.350474735 - 268.64(22.31)</td><td>, 171.276057655, 177.132192105, 182.028360156 - 176.81(5.38)</td><td>, 3085.491586263, 3095.087968356, 3101.538310703 - 3094.04(8.07)</td></tr>
-
-<tr><td>C++ HandCoded</td><td>, 56.9826, 65.81, 66.8199 - 63.2(5.41)</td><td>, 64.7532, 69.3216, 67.3566 - 67.14(2.29)</td><td>, 1222.15, 1296.1, 1327.02 - 1281.76(53.89)</td><td>, 1208.94, 1362.93, 1363.39 - 1311.75(89.04)</td><td>, 54.1029, 51.6157, 63.2266 - 56.32(6.11)</td><td>, 33.5771, 25.6007, 38.8866 - 32.69(6.69)</td><td>, 480.394, 485.962, 513.22 - 493.19(17.57)</td></tr>
-
-<tr><td>C++ inPlace</td><td>, 84.684, 93.7531, 100.848 - 93.1(8.1)</td><td>, 81.5687, 88.1461, 102.861 - 90.86(10.9)</td><td>, 1783.92, 1995.95, 2092.06 - 1957.31(157.66)</td><td>, 1824.06, 2045.56, 2065.57 - 1978.4(134.03)</td><td>, 79.2564, 74.4139, 84.4061 - 79.36(5)</td><td>, 38.0497, 38.6901, 52.5513 - 43.1(8.19)</td><td>, 486.828, 489.581, 496.239 - 490.88(4.84)</td></tr>
-
-<tr><td>C++ Boost</td><td>, 175.133, 178.555, 171.358 - 175.02(3.6)</td><td>, 180.328, 182.917, 180.945 - 181.4(1.35)</td><td>, 1448.16, 1553.02, 1574.18 - 1525.12(67.48)</td><td>, 1478.08, 1547.71, 1613.02 - 1546.27(67.48)</td><td>, 419.458, 415.86, 424.086 - 419.8(4.12)</td><td>, 205.566, 206.651, 218.719 - 210.31(7.3)</td><td>, 1754.92, 1772.12, 1791.3 - 1772.78(18.2)</td></tr>
-
-<tr><td>C++ ProtoBuf</td><td>, 67.0681, 72.0598, 70.9882 - 70.04(2.63)</td><td>, 78.9668, 78.8724, 79.2904 - 79.04(0.22)</td><td>, 1678.07, 1843.02, 1918.75 - 1813.28(123.07)</td><td>, 1651.87, 1884.33, 1919.21 - 1818.47(145.33)</td><td>, 159.788, 161.743, 172.322 - 164.62(6.74)</td><td>, 80.2178, 82.0007, 88.8612 - 83.69(4.56)</td><td>, 737.996, 760.614, 804.321 - 767.64(33.72)</td></tr>
-
-<tr><td>C++ Bson</td><td>, 1106.14, 1120.82, 1123.93 - 1116.96(9.5)</td><td>, 1107.17, 1133.48, 1119.36 - 1120(13.17)</td><td>, 39974.1, 47159.1, 47240.9 - 44791.37(4172.08)</td><td>, 39322, 46578.9, 47437.1 - 44446(4458.21)</td><td>, 2331.86, 2327.19, 2377.85 - 2345.63(28)</td><td>, 1181.92, 1198.19, 1205.83 - 1195.31(12.21)</td><td>, 9394.75, 9395.01, 9377.25 - 9389(10.18)</td></tr>
-
-<tr><td>C++ FlatBuffers</td><td>, 82.5506, 85.6951, 99.6713 - 89.31(9.11)</td><td>, 80.2687, 89.5279, 94.0057 - 87.93(7.01)</td><td>, 2952.98, 2981.53, 3305.98 - 3080.16(196.08)</td><td>, 2953.71, 2817.07, 3399.97 - 3056.92(304.85)</td><td>, 114.757, 104.521, 115.569 - 111.62(6.16)</td><td>, 64.4684, 71.6487, 74.1571 - 70.09(5.03)</td><td>, 587.364, 601.179, 605.73 - 598.09(9.56) </td></tr>
-
-<tr><td>Rust Json</td><td>, 463.351628857, 412.798199351, 433.241048492 - 436.46(25.43)</td><td>, 457.753907621, 413.458163394, 398.006109584 - 423.07(31.01)</td><td>, 46671.95889388, 24907.592483589, 21352.354727286 - 30977.3(13707.72)</td><td>, 47164.350045447, 25143.982146536, 21818.01330402 - 31375.45(13774.34)</td><td>, 103.472587531, 100.983250667, 105.761198214 - 103.41(2.39)</td><td>, 113.552440984, 100.995627046, 107.082044317 - 107.21(6.28)</td><td>, 1631.068005548, 1629.499056241, 1624.123182536 - 1628.23(3.64)</td></tr>
-
-<tr><td>Rust Bincode</td><td>, 267.309225356, 298.836008742, 251.96958229 - 272.7(23.89)</td><td>, 255.474574898, 256.731490013, 246.062464597 - 252.76(5.83)</td><td>, 6833.980985279, 6238.198700535, 2662.748362302 - 5244.98(2256.03)</td><td>, 6712.628937551, 6202.766880336, 2801.387201629 - 5238.93(2126.31)</td><td>, 46.547628273, 44.933261392, 42.045577676 - 44.51(2.28)</td><td>, 43.348175907, 44.737442789, 41.24874109 - 43.11(1.76)</td><td>, 1121.063068351, 1128.292923725, 1120.093581724 - 1123.15(4.48)</td></tr>
-
-<tr><td>Rust MessagePack</td><td>, 266.850348443, 248.413624921, 260.857421074 - 258.71(9.4)</td><td>, 243.24669871, 240.829364204, 241.706182195 - 241.93(1.22)</td><td>, 2343.293741491, 1965.368492593, 1096.176959386 - 1801.61(639.48)</td><td>, 2348.435476208, 2048.200390665, 1011.158460692 - 1802.6(701.65)</td><td>, 37.500421979, 39.614483038, 40.051260778 - 39.06(1.36)</td><td>, 37.507209593, 39.550707537, 40.809230362 - 39.29(1.67)</td><td>, 1137.470479736, 1138.993456506, 1125.176853936 - 1133.88(7.58)</td></tr>
-
-<tr><td>Rust Bson</td><td>, 887.456094127, 772.958999086, 802.858605538 - 821.09(59.39)</td><td>, 864.739309478, 754.225387048, 793.822407572 - 804.26(55.99)</td><td>, 71049.546855589, 74231.782195173, 29754.182349532 - 58345.17(24811.59)</td><td>, 70054.726651163, 74863.206181931, 77304.912928696 - 74074.28(3688.92)</td><td>, 458.460550117, 453.142844502, 460.090955512 - 457.23(3.63)</td><td>, 448.003042664, 466.612496217, 463.986979059 - 459.53(10.07)</td><td>, 4765.080346667, 4746.171205368, 4754.384497828 - 4755.21(9.48) </td></tr>
-
-<tr><td>Rust FlexBuffers</td><td>, 434.888038908, 364.985756725, 401.124247905 - 400.33(34.96)</td><td>, 423.754263446, 348.912075979, 395.284237538 - 389.32(37.78)</td><td>, 35488.987133851, 21005.143545304, 17561.649986558 - 24685.26(9513.4)</td><td>, 34555.894042051, 21402.759163235, 17481.381262122 - 24480.01(8943.54)</td><td>, 297.343626366, 300.946928319, 305.328012024 - 301.21(4)</td><td>, 295.689149957, 297.659800744, 300.11800123 - 297.82(2.22)</td><td>, 2034.686802975, 2027.748720539, 2046.981199148 - 2036.47(9.74) </td></tr>
+<tr><td>Java Default</td><td>57.22(10.24)</td><td>55.2(15.61)</td><td>583.85(30.24)</td><td>424.78(19)</td><td></td></tr>
+<tr><td>Java Json+Gzip</td><td>25.11(3.03)</td><td>24.65(10.12)</td><td>2060.56(64.51)</td><td>1620.41(48.84)</td><td></td></tr>
+<tr><td>Java Bson</td><td>83.42(3)</td><td>80.77(8.55)</td><td>847.16(57.89)</td><td>421.62(18.39)</td><td></td></tr>
+<tr><td>Java ProtoBuf</td><td>40.38(4.4)</td><td>28.81(4.24)</td><td>313.46(14.86)</td><td>165.59(11.57)</td><td></td></tr>
+<tr><td>Java Kryo</td><td>40.58(5.59)</td><td>31.27(4.5)</td><td>201.17(24.3)</td><td>122.54(4.84)</td><td></td></tr>
+<tr><td>Java Byte Buffer</td><td>44.63(3.82)</td><td>37.75(2.64)</td><td>255.73(18.48)</td><td>139.94(6.06)</td><td></td></tr>
+<tr><td>Java FlatBuffers</td><td>55.49(4.66)</td><td>44.62(1.46)</td><td>268.64(22.31)</td><td>176.81(5.38)</td><td></td></tr>
+<tr><td>Java Json</td><td>61.19(4.59)</td><td>54.28(5.36)</td><td>1098.67(22.31)</td><td>985.71(12.14)</td><td></td></tr>
+<tr><td>C++ HandCoded</td><td>28.12(5.71)</td><td>17.79(6.61)</td><td>56.32(6.11)</td><td>32.69(6.69)</td><td></td></tr>
+<tr><td>C++ inPlace</td><td>42.99(4.66)</td><td>23.45(7.2)</td><td>79.36(5)</td><td>43.1(8.19)</td><td></td></tr>
+<tr><td>C++ Boost</td><td>36.8(1.47)</td><td>17.35(3.67)</td><td>419.8(4.12)</td><td>210.31(7.3)</td><td></td></tr>
+<tr><td>C++ ProtoBuf</td><td>29.24(5.94)</td><td>15.13(3.24)</td><td>164.62(6.74)</td><td>83.69(4.56)</td><td></td></tr>
+<tr><td>C++ Bson</td><td>112.52(26.2)</td><td>66.91(10.83)</td><td>2345.63(28)</td><td>1195.31(12.21)</td><td></td></tr>
+<tr><td>C++ FlatBuffers</td><td>40.07(6.13)</td><td>31.38(3.89)</td><td>111.62(6.16)</td><td>70.09(5.03)</td><td></td></tr>
+<tr><td>Rust Json</td><td>22.17(1.65)</td><td>25.15(5.28)</td><td>103.41(2.39)</td><td>107.21(6.28)</td><td></td></tr>
+<tr><td>Rust Bincode</td><td>13.09(2.14)</td><td>11.93(1.49)</td><td>44.51(2.28)</td><td>43.11(1.76)</td><td></td></tr>
+<tr><td>Rust MessagePack</td><td>9.34(1.23)</td><td>8.89(1.08)</td><td>39.06(1.36)</td><td>39.29(1.67)</td><td></td></tr>
+<tr><td>Rust Bson</td><td>27.5(3.59)</td><td>30.62(8.99)</td><td>457.23(3.63)</td><td>459.53(10.07)</td><td></td></tr>
+<tr><td>Rust FlexBuffers</td><td>24.56(3.36)</td><td>21.35(3.65)</td><td>301.21(4)</td><td>297.82(2.22)</td><td></td></tr>
 </table>
+
+
+
+
+![Image of Yaktocat](images/write.png)
+
+## Citation
+
