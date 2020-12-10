@@ -163,77 +163,75 @@ Example:
 The content of `twitterSerialization.sh` is:
 * C++:
 ```
-            for r in 1 2 3
-            do
-                for serialization_type in   1 2 3 4 5 6
-                do
-                    outpath="serialization_$serialization_type.se"
-                    #clear the OS cache
-                    echo 3 > /proc/sys/vm/drop_caches && sync
-                    
-                    #Run normal experiment 
-                    time ./bin/TwitterSerialization $datapath $serialization_type $outpath $numberOfTweets $r 0
-                    
-                    # wait a short time for back to stable state
-                    sleep 200
-            
-                    #clear the OS cache
-                    echo 3 > /proc/sys/vm/drop_caches && sync
-                   
-                    # Run the experiment just on Core 0
-                   time taskset -c 0 ./bin/TwitterSerialization $datapath $serialization_type $outpath $numberOfTweets $r 1
-                done
-            done
+for r in 1 2 3
+ do
+   for serialization_type in   1 2 3 4 5 6
+    do
+         outpath="serialization_$serialization_type.se"
+         #clear the OS cache
+         echo 3 > /proc/sys/vm/drop_caches && sync
+                        
+         #Run normal experiment 
+         time ./bin/TwitterSerialization $datapath $serialization_type $outpath $numberOfTweets $r 0
+             
+         # wait a short time for back to stable state
+         sleep 200
+                
+         #clear the OS cache
+         echo 3 > /proc/sys/vm/drop_caches && sync
+                       
+         # Run the experiment just on Core 0
+         time taskset -c 0 ./bin/TwitterSerialization $datapath $serialization_type $outpath $numberOfTweets $r 1
+    done
+ done
 ```
 * Java: set `-XmsXg` `-XmxXg` based on your system configuration
 ```
-            for r in 1 2 3
-            do
-                for serialization_type in   1 2 3 4 5 6 7 8
-                do
-                    outpath="serialization_$serialization_type.se"
-                    #clear the OS cache
-                    echo 3 > /proc/sys/vm/drop_caches && sync
+for r in 1 2 3
+  do
+    for serialization_type in   1 2 3 4 5 6 7 8
+      do
+        outpath="serialization_$serialization_type.se"
+        #clear the OS cache
+        echo 3 > /proc/sys/vm/drop_caches && sync
                     
-                    #Run normal experiment 
-                    time java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r false
+        #Run normal experiment 
+        time java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r false
                     
-                    # wait a short time for back to stable state
-                    sleep 200
+        # wait a short time for back to stable state
+        sleep 200
             
-                    #clear the OS cache
-                    echo 3 > /proc/sys/vm/drop_caches && sync
+        #clear the OS cache
+        echo 3 > /proc/sys/vm/drop_caches && sync
                    
-                    # Run the experiment just on Core 0
-                    time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r true
-            
-                done
-            
-            done 
+        # Run the experiment just on Core 0
+        time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r true
+        done
+  done 
 ```
 * Rust:
 ```
-            for r in 1 2 3
-            do
-                for serialization_type in   1 2 3 4 5
-                do
-                    outpath="serialization_$serialization_type.se"
-                    #clear the OS cache
-                    echo 3 > /proc/sys/vm/drop_caches && sync
+for r in 1 2 3
+  do
+     for serialization_type in   1 2 3 4 5
+       do
+        outpath="serialization_$serialization_type.se"
+        #clear the OS cache
+        echo 3 > /proc/sys/vm/drop_caches && sync
                     
-                    #Run normal experiment 
-                    time cargo run --release write  $datapath $serialization_type $outpath $numberOfTweets $r false
+        #Run normal experiment 
+        time cargo run --release write  $datapath $serialization_type $outpath $numberOfTweets $r false
                     
-                    # wait a short time for back to stable state
-                    sleep 200
+        # wait a short time for back to stable state
+        sleep 200
             
-                    #clear the OS cache
-                    echo 3 > /proc/sys/vm/drop_caches && sync
+        #clear the OS cache
+        echo 3 > /proc/sys/vm/drop_caches && sync
                    
-                    # Run the experiment just on Core 0
-                    time taskset -c 0 cargo run --release write  $datapath $serialization_type $outpath $numberOfTweets $r true
-                done
-            done
+        # Run the experiment just on Core 0
+        time taskset -c 0 cargo run --release write  $datapath $serialization_type $outpath $numberOfTweets $r true
+        done
+  done
 ```
 After finish the serialization task in the out path(the second parameter) you can see the following files:
 
@@ -271,13 +269,13 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [WriteTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#53.48092523#254.482728354
 ```
 
-The table below present the all of the experiments results and distribution.
+The table below present the all of the experiments results for 5 million Tweet objects(the data based on `Second`).
 
 <table>  
   <tr>
     <td rowspan="3">Method</td>
     <td colspan="2">IO</td>
-    <td colspan="2">Total</td>    
+    <td colspan="2">Total(CPU+IO)</td>    
   </tr> 
 
   <tr>  
@@ -310,9 +308,6 @@ The table below present the all of the experiments results and distribution.
   <tr><td>Rust Bson</td><td>27.5(3.59)</td><td>30.62(8.99)</td><td>457.23(3.63)</td><td>459.53(10.07)</td></tr>
   <tr><td>Rust FlexBuffers</td><td>24.56(3.36)</td><td>21.35(3.65)</td><td>301.21(4)</td><td>297.82(2.22)</td></tr>
 </table>
-
-
-
 
 ![Image of Yaktocat](images/write.png)
 
