@@ -290,25 +290,25 @@ The table below present the all of the experiments results and distribution.
     <td >TS=True</td>
     <td >TS=False</td>   
   </tr>   
-<tr><td>Java Default</td><td>57.22(10.24)</td><td>55.2(15.61)</td><td>583.85(30.24)</td><td>424.78(19)</td><td></td></tr>
-<tr><td>Java Json+Gzip</td><td>25.11(3.03)</td><td>24.65(10.12)</td><td>2060.56(64.51)</td><td>1620.41(48.84)</td><td></td></tr>
-<tr><td>Java Bson</td><td>83.42(3)</td><td>80.77(8.55)</td><td>847.16(57.89)</td><td>421.62(18.39)</td><td></td></tr>
-<tr><td>Java ProtoBuf</td><td>40.38(4.4)</td><td>28.81(4.24)</td><td>313.46(14.86)</td><td>165.59(11.57)</td><td></td></tr>
-<tr><td>Java Kryo</td><td>40.58(5.59)</td><td>31.27(4.5)</td><td>201.17(24.3)</td><td>122.54(4.84)</td><td></td></tr>
-<tr><td>Java Byte Buffer</td><td>44.63(3.82)</td><td>37.75(2.64)</td><td>255.73(18.48)</td><td>139.94(6.06)</td><td></td></tr>
-<tr><td>Java FlatBuffers</td><td>55.49(4.66)</td><td>44.62(1.46)</td><td>268.64(22.31)</td><td>176.81(5.38)</td><td></td></tr>
-<tr><td>Java Json</td><td>61.19(4.59)</td><td>54.28(5.36)</td><td>1098.67(22.31)</td><td>985.71(12.14)</td><td></td></tr>
-<tr><td>C++ HandCoded</td><td>28.12(5.71)</td><td>17.79(6.61)</td><td>56.32(6.11)</td><td>32.69(6.69)</td><td></td></tr>
-<tr><td>C++ inPlace</td><td>42.99(4.66)</td><td>23.45(7.2)</td><td>79.36(5)</td><td>43.1(8.19)</td><td></td></tr>
-<tr><td>C++ Boost</td><td>36.8(1.47)</td><td>17.35(3.67)</td><td>419.8(4.12)</td><td>210.31(7.3)</td><td></td></tr>
-<tr><td>C++ ProtoBuf</td><td>29.24(5.94)</td><td>15.13(3.24)</td><td>164.62(6.74)</td><td>83.69(4.56)</td><td></td></tr>
-<tr><td>C++ Bson</td><td>112.52(26.2)</td><td>66.91(10.83)</td><td>2345.63(28)</td><td>1195.31(12.21)</td><td></td></tr>
-<tr><td>C++ FlatBuffers</td><td>40.07(6.13)</td><td>31.38(3.89)</td><td>111.62(6.16)</td><td>70.09(5.03)</td><td></td></tr>
-<tr><td>Rust Json</td><td>22.17(1.65)</td><td>25.15(5.28)</td><td>103.41(2.39)</td><td>107.21(6.28)</td><td></td></tr>
-<tr><td>Rust Bincode</td><td>13.09(2.14)</td><td>11.93(1.49)</td><td>44.51(2.28)</td><td>43.11(1.76)</td><td></td></tr>
-<tr><td>Rust MessagePack</td><td>9.34(1.23)</td><td>8.89(1.08)</td><td>39.06(1.36)</td><td>39.29(1.67)</td><td></td></tr>
-<tr><td>Rust Bson</td><td>27.5(3.59)</td><td>30.62(8.99)</td><td>457.23(3.63)</td><td>459.53(10.07)</td><td></td></tr>
-<tr><td>Rust FlexBuffers</td><td>24.56(3.36)</td><td>21.35(3.65)</td><td>301.21(4)</td><td>297.82(2.22)</td><td></td></tr>
+  <tr><td>Java Default</td><td>57.22(10.24)</td><td>55.2(15.61)</td><td>583.85(30.24)</td><td>424.78(19)</td></tr>
+  <tr><td>Java Json+Gzip</td><td>25.11(3.03)</td><td>24.65(10.12)</td><td>2060.56(64.51)</td><td>1620.41(48.84)</td></tr>
+  <tr><td>Java Bson</td><td>83.42(3)</td><td>80.77(8.55)</td><td>847.16(57.89)</td><td>421.62(18.39)</td></tr>
+  <tr><td>Java ProtoBuf</td><td>40.38(4.4)</td><td>28.81(4.24)</td><td>313.46(14.86)</td><td>165.59(11.57)</td></tr>
+  <tr><td>Java Kryo</td><td>40.58(5.59)</td><td>31.27(4.5)</td><td>201.17(24.3)</td><td>122.54(4.84)</td></tr>
+  <tr><td>Java Byte Buffer</td><td>44.63(3.82)</td><td>37.75(2.64)</td><td>255.73(18.48)</td><td>139.94(6.06)</td></tr>
+  <tr><td>Java FlatBuffers</td><td>55.49(4.66)</td><td>44.62(1.46)</td><td>268.64(22.31)</td><td>176.81(5.38)</td></tr>
+  <tr><td>Java Json</td><td>61.19(4.59)</td><td>54.28(5.36)</td><td>1098.67(22.31)</td><td>985.71(12.14)</td></tr>
+  <tr><td>C++ HandCoded</td><td>28.12(5.71)</td><td>17.79(6.61)</td><td>56.32(6.11)</td><td>32.69(6.69)</td></tr>
+  <tr><td>C++ inPlace</td><td>42.99(4.66)</td><td>23.45(7.2)</td><td>79.36(5)</td><td>43.1(8.19)</td></tr>
+  <tr><td>C++ Boost</td><td>36.8(1.47)</td><td>17.35(3.67)</td><td>419.8(4.12)</td><td>210.31(7.3)</td></tr>
+  <tr><td>C++ ProtoBuf</td><td>29.24(5.94)</td><td>15.13(3.24)</td><td>164.62(6.74)</td><td>83.69(4.56)</td></tr>
+  <tr><td>C++ Bson</td><td>112.52(26.2)</td><td>66.91(10.83)</td><td>2345.63(28)</td><td>1195.31(12.21)</td></tr>
+  <tr><td>C++ FlatBuffers</td><td>40.07(6.13)</td><td>31.38(3.89)</td><td>111.62(6.16)</td><td>70.09(5.03)</td></tr>
+  <tr><td>Rust Json</td><td>22.17(1.65)</td><td>25.15(5.28)</td><td>103.41(2.39)</td><td>107.21(6.28)</td></tr>
+  <tr><td>Rust Bincode</td><td>13.09(2.14)</td><td>11.93(1.49)</td><td>44.51(2.28)</td><td>43.11(1.76)</td></tr>
+  <tr><td>Rust MessagePack</td><td>9.34(1.23)</td><td>8.89(1.08)</td><td>39.06(1.36)</td><td>39.29(1.67)</td></tr>
+  <tr><td>Rust Bson</td><td>27.5(3.59)</td><td>30.62(8.99)</td><td>457.23(3.63)</td><td>459.53(10.07)</td></tr>
+  <tr><td>Rust FlexBuffers</td><td>24.56(3.36)</td><td>21.35(3.65)</td><td>301.21(4)</td><td>297.82(2.22)</td></tr>
 </table>
 
 
