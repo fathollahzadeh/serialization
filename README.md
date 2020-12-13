@@ -8,9 +8,9 @@
 
 
 <!-- Table of content -->
-|Section|Description|
+|Section|Description| 
 | --- |---|
-| [Installation](#installation) | Installing the dependencies |
+| [Installation](#installation) | Installing the dependencies. Tested Versions:  C++( [clang v6.0](https://releases.llvm.org/6.0.0/tools/clang/docs/ReleaseNotes.html), [Boost v1_75](https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.bz2), [Google Protobuf v3.11.0](https://github.com/protocolbuffers/protobuf/releases/tag/v3.11.0), [Mongo-c-driver 1.16.2](https://github.com/mongodb/mongo-c-driver/releases/tag/1.16.2), [MongoDB C++11 Driver r3.4.2](https://github.com/mongodb/mongo-cxx-driver/releases/tag/r3.4.2)) <br> Java [SE 8u241](https://www.oracle.com/java/technologies/javase-downloads.html) <br> Rust & Cargo [1.43](https://www.rust-lang.org/tools/install) |
 | [Getting started](#getting-started) | A quick introduction on how to run benchmarks |
 | [Experimental Results](#experimental_results) | An extensive overview of experimental results|
 | [Citation](#referencing-tslearn) | A citation for scholarly articles |
@@ -26,7 +26,7 @@ Our implementation has been compiled, built, and tested in Ubuntu 18.04 LTS. For
 * Rapid-json: `$ sudo apt-get install rapidjson-dev` 
 #### 1.3. Install libboost:
 * Download last version of `Boost` [`https://www.boost.org/users/download/`](https://www.boost.org/users/download/)
-* Steps for install from source(`tested version 1_72`):
+* Steps for install from source(`tested version 1_75`):
    ```bash 
      $ tar -xf boost_1_72_0.tar.bz2 
      $ cd boost_1_72_0
@@ -49,9 +49,9 @@ $ sudo apt-get install autoconf automake libtool curl make g++ unzip
 ```
 To get the source, download one of the release .tar.gz or .zip packages in the release page:
 (download `.cpp` version)
-```bash 
-https://github.com/protocolbuffers/protobuf/releases/latest
-```
+
+[`https://github.com/protocolbuffers/protobuf/releases/tag/v3.11.0`](https://github.com/protocolbuffers/protobuf/releases/tag/v3.11.0)
+
 
 To build and install the C++ Protocol Buffer runtime and the Protocol Buffer compiler (protoc) execute the following:
 
@@ -69,7 +69,7 @@ The official url for install `MongoDB` driver available at [`http://mongocxx.org
 
 * Step 1: Install the latest version of the `MongoDB C` driver:
     - You will need to download and build from the source code. Get a tarball from the C Driver releases page.
-     [`https://github.com/mongodb/mongo-c-driver/releases`](https://github.com/mongodb/mongo-c-driver/releases)
+     [`https://github.com/mongodb/mongo-c-driver/releases/tag/1.16.2`](https://github.com/mongodb/mongo-c-driver/releases/tag/1.16.2)
     - Follow the instructions for building from a tarball at Installing `libmongoc`.
       ```bash
       $ tar xzf mongo-c-driver-x.y.z.tar.gz
@@ -80,33 +80,33 @@ The official url for install `MongoDB` driver available at [`http://mongocxx.org
       $ sudo make install
       ```
 * Step 2: Download the latest version of the `mongocxx` driver:
-    - Download source:[`https://github.com/mongodb/mongo-cxx-driver/releases`](https://github.com/mongodb/mongo-cxx-driver/releases) 
+    - Download source:[`https://github.com/mongodb/mongo-cxx-driver/releases/tag/r3.4.2`](https://github.com/mongodb/mongo-cxx-driver/releases/tag/r3.4.2) 
     - Extract the source and goto to the build path:
         ```bash
-        $ tar -xzf r3.4.1.tar.gz
+        $ tar -xzf r3.4.2.tar.gz
         $ cd mongo-cxx-driver-r3.4.1/build
         ```
 * Step 3: Configure the driver:
     * On Unix systems, `libmongoc` installs into `/usr/local` by default. Without additional configuration, `mongocxx` installs into its local build directory as a courtesy to those who build from source. To configure `mongocxx` for installation into `/usr/local` as well, use the following cmake command:
         ```bash
-        cmake ..                                \
+        $ cmake ..                                \
             -DCMAKE_BUILD_TYPE=Release          \
             -DCMAKE_INSTALL_PREFIX=/usr/local
         ``` 
 * Step 4: Build and install the driver:
     ```bash
-    make && sudo make install
+    $ make && sudo make install
     ```
 ### 2. Java
 #### 2.1 install Maven
-* `python -m pip install tslearn`
+* `$ sudo apt-get install maven`
     
 #### 2.2 install JDK(1.8)
 * Download Java SE 8u241 [`https://www.oracle.com/java/technologies/javase-downloads.html`](https://www.oracle.com/java/technologies/javase-downloads.html)
  
 * Extract and move Java source:
-    * Extract: `tar -xvf jdk-8u241-linux-x64.tar.gz`
-    * Move: `sudo mv jdk1.8.0_241/ /usr/lib/jvm/`
+    * Extract: `$ tar -xvf jdk-8u241-linux-x64.tar.gz`
+    * Move: `$ sudo mv jdk1.8.0_241/ /usr/lib/jvm/`
 
 * Install JDK 1.8:
     -     $ sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_241/bin/java" 1
@@ -145,20 +145,20 @@ A sample of `Twitter` dataset available in bellow link. This data is in text for
 
 ####  2. Compile the project:
 There is a bash script in each subdirectories `C++`, `Java`, and `Rust`. Run the related bash script for compile the project:
-* C++:`$./C++/makeClean.sh`
-* Java:`$./Java/makeClean.sh`
-* Rust:`$./Rust/makeClean.sh` 
+* C++:`$ ./C++/makeClean.sh`
+* Java:`$ ./Java/makeClean.sh`
+* Rust:`$ ./Rust/makeClean.sh` 
  
 ## Experimental Results
 ####  1. Write object experiments:
 This experiment include sequential write serialized objects.  One round of this experimentation need for next `Read Experiments`. We run all of our experiments 3 times and observed that the results have low variance. Run this script for write objects:
-* C++: `$./C++/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}`
-* Java: `$./Java/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}`
-* Rust: `$./Rust/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}` 
+* C++: `$ ./C++/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}`
+* Java: `$ ./Java/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}`
+* Rust: `$ ./Rust/twitterSerialization.sh {path/to/data} {path/to/out/} {number/of/tweets/want/to/serialize}` 
 
 Example:
 ```bash
-./C++/twitterSerialization.sh /mnt/tweets_1M_rows.txt /mnt/cppdata 1000
+$ ./C++/twitterSerialization.sh /mnt/tweets_1M_rows.txt /mnt/cppdata 1000
 ```
 The content of `twitterSerialization.sh` is:
 * C++:
@@ -269,7 +269,7 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [WriteTimeJAVA]#true#Java FlatBuffers#true#TweetStatus#53.48092523#254.482728354
 ```
 
-The table below present the all of the experiments results for 5 million Tweet objects(the data based on `Second`).
+The table below present the all of the experiments results for 5 million Tweet objects(the data based on `Second` timestamp).
 
 <table>  
   <tr>
