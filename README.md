@@ -426,19 +426,20 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeJAVA]#false#Java FlatBuffers#false#TweetStatus#936.032555176#947.904076846
 ```
 
-<p align="center">
+
+The table below present the all of the experiments results for 4 million Tweet objects.
 <table>  
   <tr>
     <td rowspan="4">Method</td>
-    <td colspan="4">Sequential(sec.)</td>
-    <td colspan="4">Random(min.)</td>    
+    <td colspan="4"><p align="center">Sequential(Second)</p></td>
+    <td colspan="4"><p align="center">Random(Minutes)</p></td>    
   </tr>
   
   <tr>
-      <td colspan="2">IO</td>
-      <td colspan="2">Total(CPU+IO)</td>
-      <td colspan="2">IO</td>
-      <td colspan="2">Total(CPU+IO)</td>    
+      <td colspan="2"><p align="center">IO</p></td>
+      <td colspan="2"><p align="center">Total (CPU + IO)</p></td>
+      <td colspan="2"><p align="center">IO</p></td>
+      <td colspan="2"><p align="center">Total (CPU + IO)</p></td>    
     </tr> 
  
 
@@ -478,6 +479,6 @@ language#taskset#method#seq#datatype#iotime#totaltime
  <tr><td>Rust Bson</td><td>180.13(55.89)</td><td>168.19(41.99)</td><td>821.09(59.39)</td><td>804.26(55.99)</td><td>955.26(412.97)</td><td>1216.95(61.1)</td><td>972.42(413.53)</td><td>1234.57(61.48)</td></tr>
  <tr><td>Rust FlexBuffers</td><td>185.32(39.48)</td><td>177.2(34.77)</td><td>400.33(34.96)</td><td>389.32(37.78)</td><td>405.54(158.34)</td><td>402.16(148.79)</td><td>411.42(158.56)</td><td>408(149.06)</td></tr>
 </table>
-</p>
+
 ## Citation
 
