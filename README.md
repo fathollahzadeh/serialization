@@ -425,8 +425,7 @@ language#taskset#method#seq#datatype#iotime#totaltime
 [ReadTimeJAVA]#true#Java FlatBuffers#false#TweetStatus#960.76642819#980.017399323
 [ReadTimeJAVA]#false#Java FlatBuffers#false#TweetStatus#936.032555176#947.904076846
 ```
-<font size="2" face="Courier New" >
-<table>  
+<table style="font-size: 1px;">  
   <tr>
     <td rowspan="4">Method</td>
     <td colspan="4">Sequential</td>
@@ -477,6 +476,6 @@ language#taskset#method#seq#datatype#iotime#totaltime
   <tr><td>Rust Bson</td><td>180.13(55.89)</td><td>168.19(41.99)</td><td>821.09(59.39)</td><td>804.26(55.99)</td><td>57315.57(24778.44)</td><td>73017.14(3666.08)</td><td>58345.17(24811.59)</td><td>74074.28(3688.92)</td></tr>
   <tr><td>Rust FlexBuffers</td><td>185.32(39.48)</td><td>177.2(34.77)</td><td>400.33(34.96)</td><td>389.32(37.78)</td><td>24332.12(9500.37)</td><td>24129.32(8927.43)</td><td>24685.26(9513.4)</td><td>24480.01(8943.54)</td></tr>
 </table>
-</font>
+
 ## Citation
 
