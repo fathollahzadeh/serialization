@@ -1,64 +1,50 @@
 package edu.bu.benchmarks;
 
-import com.google.gson.Gson;
 import edu.bu.filehandler.FileHandler;
 import edu.bu.filehandler.LogFileHandler;
-import edu.bu.tweet.TweetStatus;
 import org.apache.log4j.PropertyConfigurator;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Properties;
-import java.util.stream.Stream;
 
 public class SequentialRead {
 
-    public static void main(String[] args) throws IOException {
-        Properties prop = new Properties();
+	public static void main(String[] args) throws IOException {
+		Properties prop = new Properties();
 
-        PropertyConfigurator.configure(prop);
-        prop.setProperty("log4j.appender.WORKLOG.File", "log4j.properties");
+		PropertyConfigurator.configure(prop);
+		prop.setProperty("log4j.appender.WORKLOG.File", "log4j.properties");
 
-        PropertyConfigurator.configure("log4j.properties");
+		PropertyConfigurator.configure("log4j.properties");
 
-        // Before any experiments create a hot gc
-        // Create a hot garbage collector
-//        Garbage.activateGarbageCollector();
-//
-//        System.out.println("Activating Java garbage collector!");
-//        System.gc();
-//        System.out.println("Java garbage collector is made hot!");
+		//Set serialized file path
+		String inFile = args[0];
 
+		int serializationType = Integer.parseInt(args[1]);
 
-        //Set serialized file path
-        String inFile = args[0];
+		int from = Integer.parseInt(args[2]);
 
-        int serializationType = Integer.parseInt(args[1]);
+		int numberofobjects = Integer.parseInt(args[3]);
 
-        int from = Integer.parseInt(args[2]);
+		int round = Integer.parseInt(args[4]);
 
-        int numberofobjects = Integer.parseInt(args[3]);
+		boolean taskset = Boolean.parseBoolean(args[5]);
 
-        int round=Integer.parseInt(args[4]);
+		String logFileName = "bin/benchmark/readobjects/result_java_readobjects_" + numberofobjects + "_" + round + ".txt";
 
-        boolean taskset=Boolean.parseBoolean(args[5]);
+		FileHandler fileHandler = new FileHandler(inFile, serializationType);
+		fileHandler.prepareToRead();
 
-        String logFileName="bin/benchmark/readobjects/result_java_readobjects_" + numberofobjects + "_" + round + ".txt";
+		// Start Calculation time:
+		long tmpTime = System.nanoTime();
 
-        FileHandler fileHandler = new FileHandler(inFile, serializationType);
-        fileHandler.prepareToRead();
+		fileHandler.getObjectsFromFile(from, numberofobjects);
 
-        // Start Calculation time:
-        long tmpTime = System.nanoTime();
+		// Time Calculation
+		double elapsedSeconds = (System.nanoTime() - tmpTime) / 1000000000.0;
 
-        fileHandler.getObjectsFromFile(from,numberofobjects);
-
-        // Time Calculation
-        double elapsedSeconds= (System.nanoTime() - tmpTime) / 1000000000.0;
-
-        LogFileHandler logFileHandler=new LogFileHandler(logFileName);
-        logFileHandler.addLog(true,serializationType,true,"TweetStatus",fileHandler.getIoTime(),elapsedSeconds,taskset);
-    }
+		LogFileHandler logFileHandler = new LogFileHandler(logFileName);
+		logFileHandler
+			.addLog(true, serializationType, true, "TweetStatus", fileHandler.getIoTime(), elapsedSeconds, taskset);
+	}
 
 }
