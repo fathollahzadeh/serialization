@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
 import edu.bu.tweet.flatbuffers.EntitiesFBS;
 import edu.bu.tweet.flatbuffers.ExtendedEntitiesFBS;
 import edu.bu.util.Base;
@@ -15,23 +14,17 @@ import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-
-import org.apache.log4j.Logger;
 import org.bson.BsonBinary;
 import org.bson.BsonBinaryReader;
 import org.bson.BsonBinaryWriter;
 import org.bson.io.BasicOutputBuffer;
 
-
 public class ExtendedEntities extends Base implements RootData {
 
-	private static final long serialVersionUID = -2991751584291760543L;
-	static Logger logger = Logger.getLogger(ExtendedEntities.class);
-
-	private List<MediaEntity > media;
+	private List<MediaEntity> media;
 
 	public ExtendedEntities() {
-		this.media=new ArrayList<>();
+		this.media = new ArrayList<>();
 	}
 
 	public List<MediaEntity> getMedia() {
@@ -78,19 +71,19 @@ public class ExtendedEntities extends Base implements RootData {
 		int allocatedBufferSize = 0;
 
 		ArrayList<byte[]> mediasBytes = new ArrayList<byte[]>();
-		for (MediaEntity mediaEntity:media){
-			byte[] mediaBytes=mediaEntity.writeByteBuffer();
+		for(MediaEntity mediaEntity : media) {
+			byte[] mediaBytes = mediaEntity.writeByteBuffer();
 			mediasBytes.add(mediaBytes);
-			allocatedBufferSize+=mediaBytes.length;
-			allocatedBufferSize+=4;
+			allocatedBufferSize += mediaBytes.length;
+			allocatedBufferSize += 4;
 		}
-		allocatedBufferSize+=4;
+		allocatedBufferSize += 4;
 
 		// array fields
 		ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
 
 		byteBuffer.putInt(mediasBytes.size());
-		for (byte[] b:mediasBytes){
+		for(byte[] b : mediasBytes) {
 			byteBuffer.putInt(b.length);
 			byteBuffer.put(b);
 		}
@@ -100,12 +93,12 @@ public class ExtendedEntities extends Base implements RootData {
 	public RootData readByteBuffer(byte[] buffData) {
 		ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
 
-		int numberOfMedias=byteBuffer.getInt();
-		this.media=new ArrayList<>();
-		for (int i=0;i<numberOfMedias;i++){
-			byte[] mediaBytes=new byte[byteBuffer.getInt()];
+		int numberOfMedias = byteBuffer.getInt();
+		this.media = new ArrayList<>();
+		for(int i = 0; i < numberOfMedias; i++) {
+			byte[] mediaBytes = new byte[byteBuffer.getInt()];
 			byteBuffer.get(mediaBytes, 0, mediaBytes.length);
-			MediaEntity mediaEntity=new MediaEntity();
+			MediaEntity mediaEntity = new MediaEntity();
 			mediaEntity.readByteBuffer(mediaBytes);
 			this.media.add(mediaEntity);
 		}
@@ -117,12 +110,12 @@ public class ExtendedEntities extends Base implements RootData {
 		return 0;
 	}
 
-    public JsonObject jsonObjectBuilder() {
+	public JsonObject jsonObjectBuilder() {
 		JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
 
-		if (this.media.size()>0) {
+		if(this.media.size() > 0) {
 			JsonArrayBuilder jsonMediaArray = Json.createArrayBuilder();
-			for (MediaEntity mediaEntity : this.media) {
+			for(MediaEntity mediaEntity : this.media) {
 				jsonMediaArray.add(mediaEntity.jsonObjectBuilder());
 			}
 			objectBuilder.add("media", jsonMediaArray);
@@ -130,28 +123,29 @@ public class ExtendedEntities extends Base implements RootData {
 
 		JsonObject jsonObject = objectBuilder.build();
 		return jsonObject;
-    }
+	}
 
 	public ExtendedEntities readJSONExtendedEntities(JsonObject jsonObject) {
-		if (jsonObject.getJsonArray("media") != null) {
+		if(jsonObject.getJsonArray("media") != null) {
 			JsonArray jsonMediaArray = jsonObject.getJsonArray("media");
-			for (int i = 0; i < jsonMediaArray.size(); i++) {
+			for(int i = 0; i < jsonMediaArray.size(); i++) {
 				JsonObject mediaJsonObject = jsonMediaArray.getJsonObject(i);
 				this.media.add(new MediaEntity().readJSONMediaEntity(mediaJsonObject));
 			}
 		}
 		return this;
 	}
+
 	public byte[] bsonSerialization() {
 		BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-		BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+		BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
 		writer.writeStartDocument();
 
 		writer.writeInt32("media_size", this.media.size());
 		writer.writeName("media");
 		writer.writeStartArray();
-		for (MediaEntity mediaEntity : this.media) {
+		for(MediaEntity mediaEntity : this.media) {
 			writer.writeBinaryData(new BsonBinary(mediaEntity.bsonSerialization()));
 		}
 		writer.writeEndArray();
@@ -163,14 +157,14 @@ public class ExtendedEntities extends Base implements RootData {
 
 	public RootData bsonDeSerialization(byte[] buffData) {
 		ByteBuffer buf = ByteBuffer.wrap(buffData);
-		BsonBinaryReader reader=new BsonBinaryReader(buf);
+		BsonBinaryReader reader = new BsonBinaryReader(buf);
 
 		reader.readStartDocument();
 
 		int list_size = reader.readInt32("media_size");
 		reader.readName("media");
 		reader.readStartArray();
-		for (int i = 0; i < list_size; i++) {
+		for(int i = 0; i < list_size; i++) {
 			MediaEntity mediaEntity = new MediaEntity();
 			mediaEntity.bsonDeSerialization(reader.readBinaryData().getData());
 			this.media.add(mediaEntity);
@@ -180,11 +174,12 @@ public class ExtendedEntities extends Base implements RootData {
 
 		return this;
 	}
+
 	public int flatBuffersWriter(FlatBufferBuilder builder) {
 		int[] mediaList = new int[this.media.size()];
 		int i = 0;
-		for (MediaEntity mediaEntity : this.media) {
-			mediaList[i]= mediaEntity.flatBuffersWriter(builder);
+		for(MediaEntity mediaEntity : this.media) {
+			mediaList[i] = mediaEntity.flatBuffersWriter(builder);
 			i++;
 		}
 		int mediaBuilder = EntitiesFBS.createMediaVector(builder, mediaList);
@@ -194,10 +189,11 @@ public class ExtendedEntities extends Base implements RootData {
 		int orc = ExtendedEntitiesFBS.endExtendedEntitiesFBS(builder);
 		return orc;
 	}
+
 	public ExtendedEntities flatBuffersDeserialization(ExtendedEntitiesFBS extendedEntitiesFBS) {
 
-		for (int i=0;i<extendedEntitiesFBS.mediaLength();i++){
-			MediaEntity mediaEntity=new MediaEntity();
+		for(int i = 0; i < extendedEntitiesFBS.mediaLength(); i++) {
+			MediaEntity mediaEntity = new MediaEntity();
 			mediaEntity.flatBuffersDeserialization(extendedEntitiesFBS.media(i));
 			this.media.add(mediaEntity);
 		}

@@ -5,10 +5,7 @@ import java.util.List;
 import javax.json.*;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
-import edu.bu.tweet.flatbuffers.PollEntityFBS;
 import edu.bu.tweet.flatbuffers.SizeEntityFBS;
-import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.bson.BsonBinaryReader;
@@ -17,179 +14,178 @@ import org.bson.io.BasicOutputBuffer;
 
 public class SizeEntity extends Base implements RootData {
 
-	private static final long serialVersionUID = -7101997427441983771L;
-	static Logger logger = Logger.getLogger(SizeEntity.class);
-
 	private int width;
-    private int height;
-    private String resize;
+	private int height;
+	private String resize;
 
-    public int getWidth() {
-        return width;
-    }
+	public int getWidth() {
+		return width;
+	}
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
+	public void setWidth(int width) {
+		this.width = width;
+	}
 
-    public int getHeight() {
-        return height;
-    }
+	public int getHeight() {
+		return height;
+	}
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
+	public void setHeight(int height) {
+		this.height = height;
+	}
 
-    public String getResize() {
-        return resize;
-    }
+	public String getResize() {
+		return resize;
+	}
 
-    public void setResize(String resize) {
-        this.resize = resize;
-    }
+	public void setResize(String resize) {
+		this.resize = resize;
+	}
 
-    public List<RootData> generateObjects(int number) {
-        return null;
-    }
+	public List<RootData> generateObjects(int number) {
+		return null;
+	}
 
-    public RootData javaDefaultDeserialization(byte[] buf) {
-        return null;
-    }
+	public RootData javaDefaultDeserialization(byte[] buf) {
+		return null;
+	}
 
-    public byte[] jsonSerialization() {
-        return new byte[0];
-    }
+	public byte[] jsonSerialization() {
+		return new byte[0];
+	}
 
-    public RootData jsonDeserialization(byte[] buf) {
-        return null;
-    }
+	public RootData jsonDeserialization(byte[] buf) {
+		return null;
+	}
 
-    public byte[] jsonSerialization_withGZIP() {
-        return new byte[0];
-    }
+	public byte[] jsonSerialization_withGZIP() {
+		return new byte[0];
+	}
 
-    public RootData jsonDeserialization_withGZIP(byte[] buf) {
-        return null;
-    }
+	public RootData jsonDeserialization_withGZIP(byte[] buf) {
+		return null;
+	}
 
-    public byte[] protocolBufferWrite() {
-        return new byte[0];
-    }
+	public byte[] protocolBufferWrite() {
+		return new byte[0];
+	}
 
-    public RootData protocolBufferRead(byte[] buf) {
-        return null;
-    }
+	public RootData protocolBufferRead(byte[] buf) {
+		return null;
+	}
 
-    public byte[] writeByteBuffer() {
-        int allocatedBufferSize = 0;
+	public byte[] writeByteBuffer() {
+		int allocatedBufferSize = 0;
 
-        byte[] resizeBytes = (resize != null) ? resize.getBytes() : new byte[0];
-        allocatedBufferSize += resizeBytes.length + 4;
+		byte[] resizeBytes = (resize != null) ? resize.getBytes() : new byte[0];
+		allocatedBufferSize += resizeBytes.length + 4;
 
-        allocatedBufferSize+=4;//width
-        allocatedBufferSize+=4;//height
+		allocatedBufferSize += 4;//width
+		allocatedBufferSize += 4;//height
 
-        // array fields
-        ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
-        byteBuffer.putInt(resizeBytes.length);
-        byteBuffer.put(resizeBytes);
-        byteBuffer.putInt(width);
-        byteBuffer.putInt(height);
+		// array fields
+		ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+		byteBuffer.putInt(resizeBytes.length);
+		byteBuffer.put(resizeBytes);
+		byteBuffer.putInt(width);
+		byteBuffer.putInt(height);
 
-        return byteBuffer.array();
-    }
+		return byteBuffer.array();
+	}
 
-    public RootData readByteBuffer(byte[] buffData) {
-        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
-        int stringSize;
+	public RootData readByteBuffer(byte[] buffData) {
+		ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+		int stringSize;
 
-        stringSize = byteBuffer.getInt();
-        this.resize = extractString(byteBuffer, stringSize);
+		stringSize = byteBuffer.getInt();
+		this.resize = extractString(byteBuffer, stringSize);
 
-        this.width=byteBuffer.getInt();
-        this.height=byteBuffer.getInt();
+		this.width = byteBuffer.getInt();
+		this.height = byteBuffer.getInt();
 
-        return this;
-    }
+		return this;
+	}
 
-    public JsonObject jsonObjectBuilder() {
+	public JsonObject jsonObjectBuilder() {
 
-        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        objectBuilder.add("width",this.width);
-        objectBuilder.add("height",this.height);
+		JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+		objectBuilder.add("width", this.width);
+		objectBuilder.add("height", this.height);
 
-        if (this.resize != null && !this.resize.isEmpty()) {
-            objectBuilder.add("resize", this.resize);
-        }
-        JsonObject jsonObject = objectBuilder.build();
-        return jsonObject;
-    }
+		if(this.resize != null && !this.resize.isEmpty()) {
+			objectBuilder.add("resize", this.resize);
+		}
+		JsonObject jsonObject = objectBuilder.build();
+		return jsonObject;
+	}
 
-    public SizeEntity readJSONSizeEntity(JsonObject jsonObject) {
-        this.width=jsonObject.getInt("width");
-        this.height=jsonObject.getInt("height");
+	public SizeEntity readJSONSizeEntity(JsonObject jsonObject) {
+		this.width = jsonObject.getInt("width");
+		this.height = jsonObject.getInt("height");
 
-        if (jsonObject.get("resize") != null && jsonObject.get("resize") != JsonValue.NULL) {
-            this.resize = jsonObject.getString("resize");
-        }
-        return  this;
-    }
-    public byte[] bsonSerialization() {
-        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+		if(jsonObject.get("resize") != null && jsonObject.get("resize") != JsonValue.NULL) {
+			this.resize = jsonObject.getString("resize");
+		}
+		return this;
+	}
 
-        writer.writeStartDocument();
-        if (this.resize!=null)
-            writer.writeString("resize",this.resize);
+	public byte[] bsonSerialization() {
+		BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+		BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
-        writer.writeInt32("width",this.width);
-        writer.writeInt32("height",this.height);
+		writer.writeStartDocument();
+		if(this.resize != null)
+			writer.writeString("resize", this.resize);
 
-        writer.writeEndDocument();
+		writer.writeInt32("width", this.width);
+		writer.writeInt32("height", this.height);
 
-        return outputBuffer.toByteArray();
-    }
+		writer.writeEndDocument();
 
-    public RootData bsonDeSerialization(byte[] buffData) {
-        ByteBuffer buf = ByteBuffer.wrap(buffData);
-        BsonBinaryReader reader=new BsonBinaryReader(buf);
+		return outputBuffer.toByteArray();
+	}
 
-        reader.readStartDocument();
+	public RootData bsonDeSerialization(byte[] buffData) {
+		ByteBuffer buf = ByteBuffer.wrap(buffData);
+		BsonBinaryReader reader = new BsonBinaryReader(buf);
 
-        String currentName=reader.readName();
-        if (currentName.equals("resize")){
-            this.resize=reader.readString();
-            reader.readName();
-        }
+		reader.readStartDocument();
 
-        this.width=reader.readInt32();
-        this.height=reader.readInt32("height");
-        reader.readEndDocument();
+		String currentName = reader.readName();
+		if(currentName.equals("resize")) {
+			this.resize = reader.readString();
+			reader.readName();
+		}
 
-        return this;
-    }
+		this.width = reader.readInt32();
+		this.height = reader.readInt32("height");
+		reader.readEndDocument();
 
-    public int compareTo(RootData o) {
-        return 0;
-    }
+		return this;
+	}
 
-    public int flatBuffersWriter(FlatBufferBuilder builder) {
+	public int compareTo(RootData o) {
+		return 0;
+	}
 
-        int resizeBuilder=this.resize!=null? builder.createString(this.resize):0;
+	public int flatBuffersWriter(FlatBufferBuilder builder) {
 
-        SizeEntityFBS.startSizeEntityFBS(builder);
-        SizeEntityFBS.addWidth(builder, this.width);
-        SizeEntityFBS.addHeight(builder, this.height);
-        SizeEntityFBS.addResize(builder, resizeBuilder);
-        int orc = SizeEntityFBS.endSizeEntityFBS(builder);
-        return orc;
-    }
-    public SizeEntity flatBuffersDeserialization(SizeEntityFBS sizeEntityFBS) {
+		int resizeBuilder = this.resize != null ? builder.createString(this.resize) : 0;
 
-        this.width=sizeEntityFBS.width();
-        this.height=sizeEntityFBS.height();
-        this.resize=sizeEntityFBS.resize();
-        return this;
-    }
+		SizeEntityFBS.startSizeEntityFBS(builder);
+		SizeEntityFBS.addWidth(builder, this.width);
+		SizeEntityFBS.addHeight(builder, this.height);
+		SizeEntityFBS.addResize(builder, resizeBuilder);
+		int orc = SizeEntityFBS.endSizeEntityFBS(builder);
+		return orc;
+	}
+
+	public SizeEntity flatBuffersDeserialization(SizeEntityFBS sizeEntityFBS) {
+
+		this.width = sizeEntityFBS.width();
+		this.height = sizeEntityFBS.height();
+		this.resize = sizeEntityFBS.resize();
+		return this;
+	}
 }
 

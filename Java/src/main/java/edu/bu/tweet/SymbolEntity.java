@@ -6,214 +6,210 @@ import java.util.List;
 import javax.json.*;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
-import edu.bu.tweet.flatbuffers.SizeEntityFBS;
 import edu.bu.tweet.flatbuffers.SymbolEntityFBS;
 import edu.bu.tweet.flatbuffers.URLEntityFBS;
-import org.apache.log4j.Logger;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
 import org.bson.BsonBinaryReader;
 import org.bson.BsonBinaryWriter;
 import org.bson.io.BasicOutputBuffer;
 
-
 public class SymbolEntity extends Base implements RootData {
 
-    private static final long serialVersionUID = -1393301876954386760L;
-    static Logger logger = Logger.getLogger(SymbolEntity.class);
+	private List<Integer> indices;
+	private String text;
 
-    private List<Integer> indices;
-    private String text;
+	public SymbolEntity() {
+		this.indices = new ArrayList<>();
+	}
 
-    public SymbolEntity() {
-        this.indices = new ArrayList<>();
-    }
+	public List<Integer> getIndices() {
+		return indices;
+	}
 
-    public List<Integer> getIndices() {
-        return indices;
-    }
+	public void setIndices(List<Integer> indices) {
+		this.indices = indices;
+	}
 
-    public void setIndices(List<Integer> indices) {
-        this.indices = indices;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public List<RootData> generateObjects(int number) {
+		return null;
+	}
 
-    public List<RootData> generateObjects(int number) {
-        return null;
-    }
+	public RootData javaDefaultDeserialization(byte[] buf) {
+		return null;
+	}
 
-    public RootData javaDefaultDeserialization(byte[] buf) {
-        return null;
-    }
+	public byte[] jsonSerialization() {
+		return new byte[0];
+	}
 
-    public byte[] jsonSerialization() {
-        return new byte[0];
-    }
+	public RootData jsonDeserialization(byte[] buf) {
+		return null;
+	}
 
-    public RootData jsonDeserialization(byte[] buf) {
-        return null;
-    }
+	public byte[] jsonSerialization_withGZIP() {
+		return new byte[0];
+	}
 
-    public byte[] jsonSerialization_withGZIP() {
-        return new byte[0];
-    }
+	public RootData jsonDeserialization_withGZIP(byte[] buf) {
+		return null;
+	}
 
-    public RootData jsonDeserialization_withGZIP(byte[] buf) {
-        return null;
-    }
+	public byte[] protocolBufferWrite() {
+		return new byte[0];
+	}
 
-    public byte[] protocolBufferWrite() {
-        return new byte[0];
-    }
+	public RootData protocolBufferRead(byte[] buf) {
+		return null;
+	}
 
-    public RootData protocolBufferRead(byte[] buf) {
-        return null;
-    }
+	public byte[] writeByteBuffer() {
+		int allocatedBufferSize = 0;
 
-    public byte[] writeByteBuffer() {
-        int allocatedBufferSize = 0;
+		byte[] textBytes = (text != null) ? text.getBytes() : new byte[0];
+		allocatedBufferSize += textBytes.length + 4;
 
-        byte[] textBytes = (text != null) ? text.getBytes() : new byte[0];
-        allocatedBufferSize += textBytes.length + 4;
+		allocatedBufferSize += 4 * (indices.size() + 1); //indices * sizeof integer
 
-        allocatedBufferSize += 4 * (indices.size() + 1); //indices * sizeof integer
+		// array fields
+		ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+		byteBuffer.putInt(textBytes.length);
+		byteBuffer.put(textBytes);
 
-        // array fields
-        ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
-        byteBuffer.putInt(textBytes.length);
-        byteBuffer.put(textBytes);
+		byteBuffer.putInt(indices.size());
+		for(int i = 0; i < indices.size(); i++) {
+			byteBuffer.putInt(indices.get(i));
+		}
+		return byteBuffer.array();
+	}
 
-        byteBuffer.putInt(indices.size());
-        for (int i = 0; i < indices.size(); i++) {
-            byteBuffer.putInt(indices.get(i));
-        }
-        return byteBuffer.array();
-    }
+	public RootData readByteBuffer(byte[] buffData) {
+		ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+		int stringSize;
 
-    public RootData readByteBuffer(byte[] buffData) {
-        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
-        int stringSize;
+		stringSize = byteBuffer.getInt();
+		this.text = extractString(byteBuffer, stringSize);
 
-        stringSize = byteBuffer.getInt();
-        this.text = extractString(byteBuffer, stringSize);
+		int numberOfIndices = byteBuffer.getInt();
+		for(int i = 0; i < numberOfIndices; i++) {
+			this.indices.add(byteBuffer.getInt());
+		}
+		return this;
+	}
 
-        int numberOfIndices = byteBuffer.getInt();
-        for (int i = 0; i < numberOfIndices; i++) {
-            this.indices.add(byteBuffer.getInt());
-        }
-        return this;
-    }
-    public JsonObject jsonObjectBuilder() {
+	public JsonObject jsonObjectBuilder() {
 
-        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        JsonArrayBuilder jsonIndicesArray = Json.createArrayBuilder();
-        for (Integer integer : indices) {
-            jsonIndicesArray.add(integer);
-        }
-        objectBuilder.add("indices", jsonIndicesArray);
+		JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+		JsonArrayBuilder jsonIndicesArray = Json.createArrayBuilder();
+		for(Integer integer : indices) {
+			jsonIndicesArray.add(integer);
+		}
+		objectBuilder.add("indices", jsonIndicesArray);
 
-        if (this.text != null && !this.text.isEmpty()) {
-            objectBuilder.add("text", this.text);
-        }
-        JsonObject jsonObject = objectBuilder.build();
-        return jsonObject;
-    }
+		if(this.text != null && !this.text.isEmpty()) {
+			objectBuilder.add("text", this.text);
+		}
+		JsonObject jsonObject = objectBuilder.build();
+		return jsonObject;
+	}
 
-    public SymbolEntity readJSONSymbolEntity(JsonObject jsonObject) {
-        if (jsonObject.getJsonArray("indices") != null) {
-            JsonArray indicesArray = jsonObject.getJsonArray("indices");
-            for (int i = 0; i < indicesArray.size(); i++) {
-                this.indices.add(indicesArray.getInt(i));
-            }
-        }
+	public SymbolEntity readJSONSymbolEntity(JsonObject jsonObject) {
+		if(jsonObject.getJsonArray("indices") != null) {
+			JsonArray indicesArray = jsonObject.getJsonArray("indices");
+			for(int i = 0; i < indicesArray.size(); i++) {
+				this.indices.add(indicesArray.getInt(i));
+			}
+		}
 
-        if (jsonObject.get("text") != null && jsonObject.get("text") != JsonValue.NULL) {
-            this.text = jsonObject.getString("text");
-        }
-        return  this;
-    }
-    public byte[] bsonSerialization() {
-        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-        BsonBinaryWriter writer=new BsonBinaryWriter(outputBuffer);
+		if(jsonObject.get("text") != null && jsonObject.get("text") != JsonValue.NULL) {
+			this.text = jsonObject.getString("text");
+		}
+		return this;
+	}
 
-        writer.writeStartDocument();
+	public byte[] bsonSerialization() {
+		BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+		BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
-        if (this.text!=null){
-            writer.writeString("text",this.text);
-        }
-        writer.writeInt32("indices_size",this.indices.size());
-        writer.writeName("indices");
-        writer.writeStartArray();
-        for (Integer i : this.indices) {
-            writer.writeInt32(i);
-        }
-        writer.writeEndArray();
+		writer.writeStartDocument();
 
-        writer.writeEndDocument();
+		if(this.text != null) {
+			writer.writeString("text", this.text);
+		}
+		writer.writeInt32("indices_size", this.indices.size());
+		writer.writeName("indices");
+		writer.writeStartArray();
+		for(Integer i : this.indices) {
+			writer.writeInt32(i);
+		}
+		writer.writeEndArray();
 
-        return outputBuffer.toByteArray();
-    }
+		writer.writeEndDocument();
 
-    public RootData bsonDeSerialization(byte[] buffData) {
-        ByteBuffer buf = ByteBuffer.wrap(buffData);
-        BsonBinaryReader reader=new BsonBinaryReader(buf);
+		return outputBuffer.toByteArray();
+	}
 
-        reader.readStartDocument();
+	public RootData bsonDeSerialization(byte[] buffData) {
+		ByteBuffer buf = ByteBuffer.wrap(buffData);
+		BsonBinaryReader reader = new BsonBinaryReader(buf);
 
-        String currentName=reader.readName();
-        if (currentName.equals("text")){
-            this.text=reader.readString();
-            reader.readName();
-        }
+		reader.readStartDocument();
 
-        int indices_size = reader.readInt32();
-        reader.readName("indices");
-        reader.readStartArray();
-        for (int i = 0; i < indices_size; i++) {
-            this.indices.add(reader.readInt32());
-        }
-        reader.readEndArray();
+		String currentName = reader.readName();
+		if(currentName.equals("text")) {
+			this.text = reader.readString();
+			reader.readName();
+		}
 
-        reader.readEndDocument();
+		int indices_size = reader.readInt32();
+		reader.readName("indices");
+		reader.readStartArray();
+		for(int i = 0; i < indices_size; i++) {
+			this.indices.add(reader.readInt32());
+		}
+		reader.readEndArray();
 
-        return this;
-    }
+		reader.readEndDocument();
 
-    public int compareTo(RootData o) {
-        return 0;
-    }
+		return this;
+	}
 
-    public int flatBuffersWriter(FlatBufferBuilder builder) {
+	public int compareTo(RootData o) {
+		return 0;
+	}
 
-        int textBuilder=this.text!=null? builder.createString(this.text):0;
-        int[] indicesList=new int[this.indices.size()];
-        for (int i=0;i<this.indices.size();i++) {
-            indicesList[i]=this.indices.get(i);
-        }
-        int indicesBuilder= URLEntityFBS.createIndicesVector(builder,indicesList);
+	public int flatBuffersWriter(FlatBufferBuilder builder) {
 
-        SymbolEntityFBS.startSymbolEntityFBS(builder);
-        SymbolEntityFBS.addIndices(builder, indicesBuilder);
-        SymbolEntityFBS.addText(builder, textBuilder);
-        int orc = SymbolEntityFBS.endSymbolEntityFBS(builder);
-        return orc;
-    }
-    public SymbolEntity flatBuffersDeserialization(SymbolEntityFBS symbolEntityFBS) {
+		int textBuilder = this.text != null ? builder.createString(this.text) : 0;
+		int[] indicesList = new int[this.indices.size()];
+		for(int i = 0; i < this.indices.size(); i++) {
+			indicesList[i] = this.indices.get(i);
+		}
+		int indicesBuilder = URLEntityFBS.createIndicesVector(builder, indicesList);
 
-        for (int i=0;i<symbolEntityFBS.indicesLength();i++){
-            this.indices.add(symbolEntityFBS.indices(i));
-        }
-        this.text=symbolEntityFBS.text();
+		SymbolEntityFBS.startSymbolEntityFBS(builder);
+		SymbolEntityFBS.addIndices(builder, indicesBuilder);
+		SymbolEntityFBS.addText(builder, textBuilder);
+		int orc = SymbolEntityFBS.endSymbolEntityFBS(builder);
+		return orc;
+	}
 
-        return this;
-    }
+	public SymbolEntity flatBuffersDeserialization(SymbolEntityFBS symbolEntityFBS) {
+
+		for(int i = 0; i < symbolEntityFBS.indicesLength(); i++) {
+			this.indices.add(symbolEntityFBS.indices(i));
+		}
+		this.text = symbolEntityFBS.text();
+
+		return this;
+	}
 }
 

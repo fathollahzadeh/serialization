@@ -1,212 +1,206 @@
 package edu.bu.tweet;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import edu.bu.tweet.flatbuffers.AdditionalMediaInfoEntityFBS;
-import edu.bu.tweet.flatbuffers.HashtagEntityFBS;
 import edu.bu.tweet.flatbuffers.MatchingRulesEntityFBS;
 import edu.bu.util.Base;
 import edu.bu.util.RootData;
-import org.apache.log4j.Logger;
 import org.bson.BsonBinaryReader;
 import org.bson.BsonBinaryWriter;
 import org.bson.io.BasicOutputBuffer;
-
 import javax.json.*;
 import java.nio.ByteBuffer;
 import java.util.List;
 
 public class MatchingRulesEntity extends Base implements RootData {
+	private String tag;
+	private long id;
+	private String id_str;
 
-    static Logger logger = Logger.getLogger(MatchingRulesEntity.class);
+	public String getTag() {
+		return tag;
+	}
 
-    private String tag;
-    private long id;
-    private String id_str;
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 
-    public String getTag() {
-        return tag;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public String getId_str() {
+		return id_str;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId_str(String id_str) {
+		this.id_str = id_str;
+	}
 
-    public String getId_str() {
-        return id_str;
-    }
+	public List<RootData> generateObjects(int number) {
+		return null;
+	}
 
-    public void setId_str(String id_str) {
-        this.id_str = id_str;
-    }
+	public RootData javaDefaultDeserialization(byte[] buf) {
+		return null;
+	}
 
-    public List<RootData> generateObjects(int number) {
-        return null;
-    }
+	public byte[] jsonSerialization() {
+		return new byte[0];
+	}
 
-    public RootData javaDefaultDeserialization(byte[] buf) {
-        return null;
-    }
+	public RootData jsonDeserialization(byte[] buf) {
+		return null;
+	}
 
-    public byte[] jsonSerialization() {
-        return new byte[0];
-    }
+	public byte[] jsonSerialization_withGZIP() {
+		return new byte[0];
+	}
 
-    public RootData jsonDeserialization(byte[] buf) {
-        return null;
-    }
+	public RootData jsonDeserialization_withGZIP(byte[] buf) {
+		return null;
+	}
 
-    public byte[] jsonSerialization_withGZIP() {
-        return new byte[0];
-    }
+	public byte[] protocolBufferWrite() {
+		return new byte[0];
+	}
 
-    public RootData jsonDeserialization_withGZIP(byte[] buf) {
-        return null;
-    }
+	public RootData protocolBufferRead(byte[] buf) {
+		return null;
+	}
 
-    public byte[] protocolBufferWrite() {
-        return new byte[0];
-    }
+	public byte[] writeByteBuffer() {
+		int allocatedBufferSize = 0;
 
-    public RootData protocolBufferRead(byte[] buf) {
-        return null;
-    }
+		byte[] tagBytes = (tag != null) ? tag.getBytes() : new byte[0];
+		allocatedBufferSize += tagBytes.length + 4;
 
-    public byte[] writeByteBuffer() {
-        int allocatedBufferSize = 0;
+		byte[] id_strBytes = (id_str != null) ? id_str.getBytes() : new byte[0];
+		allocatedBufferSize += id_strBytes.length + 4;
 
-        byte[] tagBytes = (tag != null) ? tag.getBytes() : new byte[0];
-        allocatedBufferSize += tagBytes.length + 4;
+		allocatedBufferSize += 8;// id
 
-        byte[] id_strBytes = (id_str != null) ? id_str.getBytes() : new byte[0];
-        allocatedBufferSize += id_strBytes.length + 4;
+		// array fields
+		ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
+		byteBuffer.putInt(tagBytes.length);
+		byteBuffer.put(tagBytes);
+		byteBuffer.putInt(id_strBytes.length);
+		byteBuffer.put(id_strBytes);
+		byteBuffer.putLong(id);
 
-        allocatedBufferSize += 8;// id
+		return byteBuffer.array();
+	}
 
-        // array fields
-        ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
-        byteBuffer.putInt(tagBytes.length);
-        byteBuffer.put(tagBytes);
-        byteBuffer.putInt(id_strBytes.length);
-        byteBuffer.put(id_strBytes);
-        byteBuffer.putLong(id);
+	public RootData readByteBuffer(byte[] buffData) {
+		ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
+		int stringSize;
 
-        return byteBuffer.array();
-    }
+		stringSize = byteBuffer.getInt();
+		this.tag = extractString(byteBuffer, stringSize);
+		stringSize = byteBuffer.getInt();
+		this.id_str = extractString(byteBuffer, stringSize);
+		this.id = byteBuffer.getLong();
+		return this;
+	}
 
-    public RootData readByteBuffer(byte[] buffData) {
-        ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
-        int stringSize;
+	public int compareTo(RootData o) {
+		return 0;
+	}
 
-        stringSize = byteBuffer.getInt();
-        this.tag = extractString(byteBuffer, stringSize);
-        stringSize = byteBuffer.getInt();
-        this.id_str = extractString(byteBuffer, stringSize);
-        this.id = byteBuffer.getLong();
-        return this;
-    }
+	public JsonObject jsonObjectBuilder() {
 
-    public int compareTo(RootData o) {
-        return 0;
-    }
+		JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+		if(this.tag != null && !this.tag.isEmpty()) {
+			objectBuilder.add("tag", this.tag);
+		}
 
-    public JsonObject jsonObjectBuilder() {
+		objectBuilder.add("id", this.id);
 
-        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        if (this.tag != null && !this.tag.isEmpty()) {
-            objectBuilder.add("tag", this.tag);
-        }
+		if(this.id_str != null && !this.id_str.isEmpty()) {
+			objectBuilder.add("id_str", this.id_str);
+		}
+		JsonObject jsonObject = objectBuilder.build();
+		return jsonObject;
+	}
 
-        objectBuilder.add("id", this.id);
+	public MatchingRulesEntity readJSONMatchingRulesEntity(JsonObject jsonObject) {
+		if(jsonObject.get("tag") != null && jsonObject.get("tag") != JsonValue.NULL) {
+			this.tag = jsonObject.getString("tag");
+		}
+		this.id = Long.parseLong(jsonObject.getJsonNumber("id").toString());
 
-        if (this.id_str != null && !this.id_str.isEmpty()) {
-            objectBuilder.add("id_str", this.id_str);
-        }
-        JsonObject jsonObject = objectBuilder.build();
-        return jsonObject;
-    }
+		if(jsonObject.get("id_str") != null && jsonObject.get("id_str") != JsonValue.NULL) {
+			this.id_str = jsonObject.getString("id_str");
+		}
 
-    public MatchingRulesEntity readJSONMatchingRulesEntity(JsonObject jsonObject) {
-        if (jsonObject.get("tag") != null && jsonObject.get("tag") != JsonValue.NULL) {
-            this.tag = jsonObject.getString("tag");
-        }
-        this.id = Long.parseLong(jsonObject.getJsonNumber("id").toString());
+		return this;
+	}
 
-        if (jsonObject.get("id_str") != null && jsonObject.get("id_str") != JsonValue.NULL) {
-            this.id_str = jsonObject.getString("id_str");
-        }
+	public byte[] bsonSerialization() {
+		BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
+		BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
-        return this;
-    }
+		writer.writeStartDocument();
 
-    public byte[] bsonSerialization() {
-        BasicOutputBuffer outputBuffer = new BasicOutputBuffer();
-        BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
+		if(this.tag != null) {
+			writer.writeString("tag", this.tag);
+		}
 
-        writer.writeStartDocument();
+		if(this.id_str != null) {
+			writer.writeString("id_str", this.id_str);
+		}
 
-        if (this.tag != null) {
-            writer.writeString("tag", this.tag);
-        }
+		writer.writeInt64("id", this.id);
+		writer.writeEndDocument();
 
-        if (this.id_str != null) {
-            writer.writeString("id_str", this.id_str);
-        }
+		return outputBuffer.toByteArray();
 
-        writer.writeInt64("id", this.id);
-        writer.writeEndDocument();
+	}
 
-        return outputBuffer.toByteArray();
+	public RootData bsonDeSerialization(byte[] buffData) {
+		ByteBuffer buf = ByteBuffer.wrap(buffData);
+		BsonBinaryReader reader = new BsonBinaryReader(buf);
 
-    }
+		reader.readStartDocument();
+		String currentName = reader.readName();
+		if(currentName.equals("tag")) {
+			this.tag = reader.readString();
+			currentName = reader.readName();
+		}
 
-    public RootData bsonDeSerialization(byte[] buffData) {
-        ByteBuffer buf = ByteBuffer.wrap(buffData);
-        BsonBinaryReader reader = new BsonBinaryReader(buf);
+		if(currentName.equals("id_str")) {
+			this.id_str = reader.readString();
+			reader.readName();
+		}
 
-        reader.readStartDocument();
-        String currentName = reader.readName();
-        if (currentName.equals("tag")) {
-            this.tag = reader.readString();
-            currentName = reader.readName();
-        }
+		this.id = reader.readInt64();
 
-        if (currentName.equals("id_str")) {
-            this.id_str = reader.readString();
-            reader.readName();
-        }
+		reader.readEndDocument();
 
-        this.id = reader.readInt64();
+		return this;
+	}
 
-        reader.readEndDocument();
+	public int flatBuffersWriter(FlatBufferBuilder builder) {
 
-        return this;
-    }
+		int tagBuilder = this.tag != null ? builder.createString(this.tag) : 0;
+		int id_strBuilder = this.id_str != null ? builder.createString(this.id_str) : 0;
 
-    public int flatBuffersWriter(FlatBufferBuilder builder) {
+		MatchingRulesEntityFBS.startMatchingRulesEntityFBS(builder);
+		MatchingRulesEntityFBS.addTag(builder, tagBuilder);
+		MatchingRulesEntityFBS.addId(builder, this.id);
+		MatchingRulesEntityFBS.addIdStr(builder, id_strBuilder);
+		int orc = MatchingRulesEntityFBS.endMatchingRulesEntityFBS(builder);
+		return orc;
+	}
 
-        int tagBuilder = this.tag != null ? builder.createString(this.tag) : 0;
-        int id_strBuilder = this.id_str != null ? builder.createString(this.id_str) : 0;
+	public MatchingRulesEntity flatBuffersDeserialization(MatchingRulesEntityFBS matchingRulesEntityFBS) {
 
-        MatchingRulesEntityFBS.startMatchingRulesEntityFBS(builder);
-        MatchingRulesEntityFBS.addTag(builder, tagBuilder);
-        MatchingRulesEntityFBS.addId(builder, this.id);
-        MatchingRulesEntityFBS.addIdStr(builder, id_strBuilder);
-        int orc = MatchingRulesEntityFBS.endMatchingRulesEntityFBS(builder);
-        return orc;
-    }
-    public MatchingRulesEntity flatBuffersDeserialization(MatchingRulesEntityFBS matchingRulesEntityFBS) {
-
-        this.tag=matchingRulesEntityFBS.tag();
-        this.id=matchingRulesEntityFBS.id();
-        this.id_str=matchingRulesEntityFBS.idStr();
-        return this;
-    }
+		this.tag = matchingRulesEntityFBS.tag();
+		this.id = matchingRulesEntityFBS.id();
+		this.id_str = matchingRulesEntityFBS.idStr();
+		return this;
+	}
 }
