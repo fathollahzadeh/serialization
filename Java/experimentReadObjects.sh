@@ -6,10 +6,10 @@ data_path=$1
 random_list_path=$2
 
 # for round:
-for r in 1 2 3 4 5
+for r in 1 2 3
 do
     # for serialization types:
-    for i in 1 2 3 4 5 6 7
+    for i in 1 2 3 4 5 6 7 8
     do
         #for number of objects:
         for n in  1000000 2000000 3000000 4000000

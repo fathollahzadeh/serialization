@@ -3,7 +3,6 @@
 mkdir -p "bin/tmp"
 
 ./resultPath.sh
-#serialization type
 serialization_type=$1
 number_of_files=$4
 

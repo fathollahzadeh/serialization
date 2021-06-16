@@ -3,7 +3,6 @@
 mkdir -p "bin/tmp"
 
 ./resultPath.sh
-#serialization type
 serialization_type=$1
 number_of_files=$4
 
@@ -19,7 +18,6 @@ file_external_sort="bin/benchmark/externalsort/result_java_externalsort_$2.txt"
        touch $file_external_sort
        echo "language#taskset#method#seq#datatype#iotime#totaltime" > $file_external_sort
    fi
-
 
 #clear the OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
