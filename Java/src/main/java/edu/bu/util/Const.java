@@ -2,16 +2,14 @@ package edu.bu.util;
 
 public class Const {
 
-	
 	public final static int NumberOfObjects = 10000;
 	public final static int NumberOfObjectsToRead = 1000;
-	
-	// 1 MB Page Size 
-    public final static int PAGESIZE=262144;
-    
-    public final static int IndexPAGESIZE=800000; // this must be a number divisible by 4. 
 
-	
+	// 1 MB Page Size 
+	public final static int PAGESIZE = 262144;
+
+	public final static int IndexPAGESIZE = 800000; // this must be a number divisible by 4.
+
 	public final static int serverPort = 10009;
 
 	// In a cluster of 10 machines, access N objects from each machine's local
@@ -20,7 +18,7 @@ public class Const {
 	// from that JSON file we read randomly "NumberOfRandomReads" values
 	public final static int vectorSize = 1000000;
 	public final static int NumberOfRandomReads = 10;
-	public final static String OutputFileVectorJSON ="output-PDB-Vector-JSON.json";
+	public final static String OutputFileVectorJSON = "output-PDB-Vector-JSON.json";
 
 	// other configurations about the example with data encapsulated -
 	// University, classes and students

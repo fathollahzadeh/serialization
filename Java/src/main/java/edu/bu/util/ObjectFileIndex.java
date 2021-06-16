@@ -4,11 +4,10 @@ public class ObjectFileIndex implements Comparable<ObjectFileIndex> {
 	private RootData myObject;
 	private int fileIndex;
 
-	public ObjectFileIndex( int fileIndex,RootData myObject) {
+	public ObjectFileIndex(int fileIndex, RootData myObject) {
 		this.myObject = myObject;
 		this.fileIndex = fileIndex;
 	}
-
 
 	public RootData getValue() {
 		return myObject;
@@ -26,8 +25,7 @@ public class ObjectFileIndex implements Comparable<ObjectFileIndex> {
 		this.fileIndex = fileIndex;
 	}
 
-	@Override
-	public int compareTo(ObjectFileIndex o) {
+	@Override public int compareTo(ObjectFileIndex o) {
 		return this.myObject.compareTo(o.myObject);
 	}
 }

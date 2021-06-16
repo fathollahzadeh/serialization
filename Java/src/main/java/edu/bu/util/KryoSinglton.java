@@ -8,37 +8,30 @@ import com.esotericsoftware.kryo.Kryo;
 import edu.bu.tweet.*;
 import edu.bu.tweet.flatbuffers.*;
 
-
 public class KryoSinglton {
-	
-    static class SingletonHolder {
-    	static 	final KryoSinglton instance = new KryoSinglton();
-    }
-    
-    
-    public static KryoSinglton getInstance() {
+
+	static class SingletonHolder {
+		static final KryoSinglton instance = new KryoSinglton();
+	}
+
+	public static KryoSinglton getInstance() {
 		return SingletonHolder.instance;
 
-    }
-    
-    public  Kryo getKryo() {
+	}
+
+	public Kryo getKryo() {
 		return kryo;
 	}
 
-
 	private Kryo kryo;
 
-    private KryoSinglton() {
-    	kryo = new Kryo();
-    	
-    	kryo.register(LinkedHashMap.class);
-    	
-    	//kryo.register(long.class);
-    	//kryo.register(Long.class);
-    	//kryo.register(Integer.class);
-    	kryo.register(ArrayList.class);
+	private KryoSinglton() {
+		kryo = new Kryo();
+
+		kryo.register(LinkedHashMap.class);
+
+		kryo.register(ArrayList.class);
 		kryo.register(HashMap.class);
-//		kryo.register(double.class);
 		kryo.register(double[].class);
 		kryo.register(com.google.gson.internal.LinkedTreeMap.class);
 
@@ -85,6 +78,6 @@ public class KryoSinglton {
 		kryo.register(VideoEntityFBS.class);
 
 		kryo.register(edu.bu.tweet.proto.TweetStatusProtos.TweetStatusP.class);
-		
+
 	}
 }
