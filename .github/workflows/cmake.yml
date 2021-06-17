@@ -48,7 +48,7 @@ jobs:
             && sudo ldconfig
             
     - name: Cache Mongo-C-Driver
-      id: cache-Mongo-C-Driver
+      id: cache-mongo-c-driver
       uses: actions/cache@v2
       with:
         path: Apps/mongo-c-driver-1.16.2
@@ -56,6 +56,7 @@ jobs:
         
         
     - name: Install Mongo-C-Driver
+      if: steps.cache-mongo-c-driver.outputs.cache-hit != 'true'
       run: cd ${{github.workspace}}/Apps && sudo wget https://github.com/mongodb/mongo-c-driver/releases/download/1.16.2/mongo-c-driver-1.16.2.tar.gz &&
            sudo tar -xvzf mongo-c-driver-1.16.2.tar.gz && cd mongo-c-driver-1.16.2 && sudo mkdir cmake-build && sudo cd cmake-build &&
            sudo cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF .. && sudo make install 
