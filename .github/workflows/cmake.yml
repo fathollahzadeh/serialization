@@ -62,6 +62,23 @@ jobs:
            sudo tar -xvzf mongo-c-driver-1.16.2.tar.gz && cd mongo-c-driver-1.16.2 && sudo mkdir cmake-build && cd cmake-build &&
            sudo cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF .. && sudo make install 
     
+    - name: Cache MongoDB-C++-Driver
+      id: cache-mongodb-c++-driver
+      uses: actions/cache@v2
+      with:
+        path: Apps/mongodb-c-driver-3.4.2
+        key: ${{ runner.os }}-mongodb-c++-driver-3.4.2
+        
+    - name: Install MongoDB-C++-Driver
+      if: steps.cache-mongodb-c++-driver.outputs.cache-hit != 'true'
+      run: cd ${{github.workspace}}/Apps && sudo rm -rf mongo-cxx-driver-r3.4.2.tar.gz && sudo rm -rf mongo-cxx-driver-r3.4.2 &&      
+           sudo wget https://github.com/mongodb/mongo-cxx-driver/archive/refs/tags/r3.4.2.tar.gz &&           
+           sudo tar -xvzf mongo-cxx-driver-r3.4.2.tar.gz && cd mongo-cxx-driver-r3.4.2/build && 
+           sudo cmake ..                                \
+           -DCMAKE_BUILD_TYPE=Release          \
+           -DCMAKE_INSTALL_PREFIX=/usr/local &&
+           sudo make && sudo make install           
+        
 #     - name: Create Build Environment
 #       run: cmake -E make_directory ${{github.workspace}}/build/C++
 #       working-directory: ${{github.workspace}}/C++/src
