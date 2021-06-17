@@ -23,4 +23,4 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Build
-      run: mvn clean compile assembly:single
+      run: cd Java && mvn clean compile assembly:single
