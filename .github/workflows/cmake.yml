@@ -71,9 +71,9 @@ jobs:
         
     - name: Install MongoDB-CPP-Driver
       if: steps.cache-mongodb-cpp-driver.outputs.cache-hit != 'true'
-      run: cd ${{github.workspace}}/Apps && sudo rm -rf mongo-cxx-driver-r3.4.2.tar.gz && sudo rm -rf mongo-cxx-driver-r3.4.2 &&      
+      run: cd ${{github.workspace}}/Apps && sudo rm -rf r3.4.2.tar && sudo rm -rf mongo-cxx-driver-r3.4.2 &&      
            sudo wget https://github.com/mongodb/mongo-cxx-driver/archive/refs/tags/r3.4.2.tar.gz &&           
-           sudo tar -xvzf mongo-cxx-driver-r3.4.2.tar.gz && cd mongo-cxx-driver-r3.4.2/build && 
+           sudo tar -xvzf r3.4.2.tar && cd mongo-cxx-driver-r3.4.2/build && 
            sudo cmake ..                                \
            -DCMAKE_BUILD_TYPE=Release          \
            -DCMAKE_INSTALL_PREFIX=/usr/local &&
