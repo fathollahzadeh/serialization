@@ -16,13 +16,13 @@ jobs:
     # well on Windows or Mac.  You can convert this to a matrix build if you need
     # cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     
-    - name: Update OS
-      run: sudo apt-get update
+#     - name: Update OS
+#       run: sudo apt-get update
     
     - name: Install clang
       run: sudo apt-get install -yq clang
@@ -33,7 +33,20 @@ jobs:
     - name: Install Boost
       run: sudo apt-get install -yq libboost-dev libgsl-dev && ls -hl
       
-      
+    - name: Cache Google Protobuf
+      id: cache-google-protobuf
+      uses: actions/cache@v2
+      with:
+        path: Apps/protobuf-3.11.0
+        key: ${{ runner.os }}-protobuf-3.11.0
+        
+    - name: Install Google Protobuf
+      if: steps.cache-google-protobuf.outputs.cache-hit != 'true'
+      run:  sudo apt-get install autoconf automake libtool curl make g++ unzip && rm -rf Apps && mkdir Apps && cd Apps && 
+            wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.0/protobuf-cpp-3.11.0.tar.gz && ls -l && 
+            tar -xvzf protobuf-cpp-3.11.0.tar.gz && cd protobuf-3.11.0 && sudo ./configure && sudo make && sudo make check && make install &&
+            sudo ldconfig
+        
 #     - name: Install Google Protobuf
       
 #       run: sudo apt-get install autoconf automake libtool curl make g++ unzip && rm -rf Apps && mkdir Apps && cd Apps && 
