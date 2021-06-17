@@ -44,7 +44,7 @@ jobs:
       if: steps.cache-google-protobuf.outputs.cache-hit != 'true'
       run:  sudo apt-get install autoconf automake libtool curl make g++ unzip && rm -rf Apps && mkdir Apps && cd Apps && 
             wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.0/protobuf-cpp-3.11.0.tar.gz && 
-            sudo tar -xvzf protobuf-cpp-3.11.0.tar.gz &&sudo cd protobuf-3.11.0 && sudo ./configure && sudo make && sudo make check && sudo make install
+            sudo tar -xvzf protobuf-cpp-3.11.0.tar.gz && cd protobuf-3.11.0 && sudo ./configure && sudo make && sudo make check && sudo make install
             && sudo ldconfig
         
 #     - name: Install Google Protobuf
