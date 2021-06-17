@@ -6,7 +6,7 @@ mkdir -p "$2"
 numberOfTweets=$3
 
 # for round:
-for r in 1 2 3 #4 5
+for r in 1 2 3
 do
     for serialization_type in 1 2 3 4 5
     do

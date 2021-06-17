@@ -8,10 +8,10 @@ use crate::tweetStructs::MediaEntity::MediaEntity;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Entities {
-    hashtags: Option<Vec<HashtagEntity>>,
-    media: Option<Vec<MediaEntity>>,
-    urls: Option<Vec<URLEntity>>,
-    user_mentions: Option<Vec<UserMentionEntity>>,
-    symbols: Option<Vec<SymbolEntity>>,
-    polls: Option<Vec<PollEntity>>,
+	hashtags: Option<Vec<HashtagEntity>>,
+	media: Option<Vec<MediaEntity>>,
+	urls: Option<Vec<URLEntity>>,
+	user_mentions: Option<Vec<UserMentionEntity>>,
+	symbols: Option<Vec<SymbolEntity>>,
+	polls: Option<Vec<PollEntity>>,
 }
