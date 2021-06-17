@@ -1,7 +1,3 @@
-//
-// Created by saeed on 11/8/19.
-//
-
 #ifndef C_OPTIONENTITY_H
 #define C_OPTIONENTITY_H
 

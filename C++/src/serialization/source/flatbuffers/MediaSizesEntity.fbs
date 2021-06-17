@@ -2,9 +2,7 @@ include "SizeEntity.fbs";
 
 namespace tweetstatusflatbuffers;
 
-
 table MediaSizesEntityFBS {
-
   thumb:SizeEntityFBS;
   large:SizeEntityFBS;
   medium:SizeEntityFBS;

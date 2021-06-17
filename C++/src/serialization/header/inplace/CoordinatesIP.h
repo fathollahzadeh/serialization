@@ -1,30 +1,25 @@
-//
-// Created by saeed on 11/29/19.
-//
-
 #ifndef TWITTER_COORDINATESIP_H
 #define TWITTER_COORDINATESIP_H
 
-
-#include "../../header/Coordinates.h"
+#include "Coordinates.h"
 #include "Object.h"
 
-class CoordinatesIP: public Object {
+class CoordinatesIP : public Object {
 private:
-    offset_ptr <char> type;
-    double* coordinates;
+	offset_ptr<char> type;
+	double *coordinates;
 
 public:
-    CoordinatesIP();
+	CoordinatesIP();
 
-    virtual ~CoordinatesIP();
+	virtual ~CoordinatesIP();
 
-    //Create InPlace object:
-    CoordinatesIP(Coordinates *coordinates);
+	//Create InPlace object:
+	CoordinatesIP(Coordinates *coordinates);
 
-    void serialize(Coordinates *coordinates);
+	void serialize(Coordinates *coordinates);
 
-    string getType();
+	string getType();
 };
 
 

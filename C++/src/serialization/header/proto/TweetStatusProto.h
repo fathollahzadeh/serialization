@@ -1,7 +1,3 @@
-//
-// Created by saeed on 12/27/19.
-//
-
 #ifndef TWITTER_TWEETSTATUSPROTO_H
 #define TWITTER_TWEETSTATUSPROTO_H
 
@@ -11,72 +7,68 @@
 #include "TweetStatusP.pb.h"
 
 
-
-class TweetStatusProto: public RootData {
+class TweetStatusProto : public RootData {
 
 private:
 
-    proto::TweetStatusP * proto;
+	proto::TweetStatusP *proto;
 
-    void setMediaEntityP(proto::MediaEntityP *mediaEntityP, MediaEntity *mediaEntity);
+	void setMediaEntityP(proto::MediaEntityP *mediaEntityP, MediaEntity *mediaEntity);
 
-    void setSizeEntityP(proto::SizeEntityP *sizeEntityP,SizeEntity *sizeEntity);
+	void setSizeEntityP(proto::SizeEntityP *sizeEntityP, SizeEntity *sizeEntity);
 
-    bool isPointer;
+	bool isPointer;
 
 public:
 
-    int objectsize=0;
+	int objectsize = 0;
 
-    TweetStatusProto();
+	TweetStatusProto();
 
-    TweetStatusProto(bool isPointer);
+	TweetStatusProto(bool isPointer);
 
-    virtual ~TweetStatusProto();
+	virtual ~TweetStatusProto();
 
-    // Create an proto object:
-    TweetStatusProto(TweetStatus *tweetStatus);
+	// Create an proto object:
+	TweetStatusProto(TweetStatus *tweetStatus);
 
-    //Proto buffer serialization
-    char *serializeProto(char *buffer, int &objectSize);
+	//Proto buffer serialization
+	char *serializeProto(char *buffer, int &objectSize);
 
-    //proto buffer de-serialization
-    TweetStatusProto* deserializeProto(char *buffer, int &bytesRead);
+	//proto buffer de-serialization
+	TweetStatusProto *deserializeProto(char *buffer, int &bytesRead);
 
+	//New API: Writes directly to File Page:
+	char *serializeHandcoded(char *buffer, int &objectSize);
 
-    //***********
-    //Hand Coded C++ serialization:
-    //New API: Writes directly to File Page:
-    char *serializeHandcoded(char *buffer, int &objectSize);
+	//Hand Coded C++ de-serialization:
+	TweetStatusProto *deserializeHandcoded(char *buffer, int &bytesRead);
 
-    //Hand Coded C++ de-serialization:
-    TweetStatusProto *deserializeHandcoded(char *buffer, int &bytesRead);
+	//Boost serialization:
+	char *serializeBoost(char *buffer, int &objectSize);
 
-    //Boost serialization:
-    char *serializeBoost(char *buffer, int &objectSize);
+	//Boost de-serialization:
+	TweetStatusProto *deserializeBoost(char *buffer, int &bytesRead);
 
-    //Boost de-serialization:
-    TweetStatusProto * deserializeBoost(char *buffer, int &bytesRead);
+	TweetStatusProto *deserializeInPlace(char *buffer);
 
-    TweetStatusProto * deserializeInPlace(char *buffer);
+	//BSON buffer serialization
+	bsoncxx::document::value serializeBSON();
 
-    //BSON buffer serialization
-    bsoncxx::document::value serializeBSON();
+	//BSON de-serialization:
+	TweetStatusProto *deserializeBSON(bsoncxx::document::view doc);
 
-    //BSON de-serialization:
-    TweetStatusProto * deserializeBSON(bsoncxx::document::view doc);
+	//flatbuffers buffer serialization
+	void serializeFlatBuffers(char *buffer, int &objectSize);
 
-    //flatbuffers buffer serialization
-    void serializeFlatBuffers(char *buffer, int &objectSize);
+	//proto buffer de-serialization
+	TweetStatusProto *deserializeFlatBuffers(char *buffer, int &bytesRead);
 
-    //proto buffer de-serialization
-    TweetStatusProto* deserializeFlatBuffers(char *buffer, int &bytesRead);
+	void setBsonDoc(bsoncxx::document::value bsonDoc);
 
-    void setBsonDoc(bsoncxx::document::value bsonDoc);
+	proto::TweetStatusP *getProto() const;
 
-    proto::TweetStatusP *getProto() const;
-
-    bool operator<(TweetStatusProto &other);
+	bool operator<(TweetStatusProto &other);
 };
 
 

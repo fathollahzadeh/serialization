@@ -1,7 +1,6 @@
 #ifndef SizeEntity_H
 #define SizeEntity_H
 
-
 #include<iostream>
 #include<cstring>
 #include <vector>
@@ -10,61 +9,58 @@
 
 using namespace std;
 
-
-/*
- *	Contains only the declaration of SizeEntity Class.
- */
-
 class SizeEntity : public RootData {
 
 public:
-    int width;
-    int height;
-    string resize;
+	int width;
+	int height;
+	string resize;
 private:
-    //Boost Serialization:
-    friend class boost::serialization::access;
+	//Boost Serialization:
+	friend class boost::serialization::access;
 
-    //Serialize method for boost:
-    template<class Archive>
-    void serialize(Archive &ar, const unsigned int version) {
+	//Serialize method for boost:
+	template<class Archive>
+	void serialize(Archive &ar, const unsigned int version) {
 
-        // Simply list all the fields to be serialized/deserialized.
-        ar & width;
-        ar & height;
-        ar & resize;
-    }
+		// Simply list all the fields to be serialized/deserialized.
+		ar & width;
+		ar & height;
+		ar & resize;
+	}
 
 public:
-    //Default destructor:
-    virtual ~SizeEntity();
+	//Default destructor:
+	virtual ~SizeEntity();
 
-    //Copy constructor:
-    SizeEntity(const SizeEntity &obj);
+	//Copy constructor:
+	SizeEntity(const SizeEntity &obj);
 
-    //Default constructor:
-    SizeEntity();
+	//Default constructor:
+	SizeEntity();
 
-    //Constructor with arguments:
-    SizeEntity(int width, int height, string resize);
+	//Constructor with arguments:
+	SizeEntity(int width, int height, string resize);
 
-    //C++: Use explicitly for printing.
-    string toJSON();
+	//C++: Use explicitly for printing.
+	string toJSON();
 
-    //Hand Coded C++ serialization:
-    //New API: Writes directly to File Page:
-    char *serializeHandcoded(char *buffer, int &objectSize);
+	//Hand Coded C++ serialization:
+	//New API: Writes directly to File Page:
+	char *serializeHandcoded(char *buffer, int &objectSize);
 
-    //Hand Coded C++ de-serialization:
-    SizeEntity *deserializeHandcoded(char *buffer, int &bytesRead);
+	//Hand Coded C++ de-serialization:
+	SizeEntity *deserializeHandcoded(char *buffer, int &bytesRead);
 
-    //BSON buffer serialization
-    bsoncxx::document::value serializeBSON();
+	//BSON buffer serialization
+	bsoncxx::document::value serializeBSON();
 
-    //BSON de-serialization:
-    SizeEntity * deserializeBSON(bsoncxx::document::view doc);
+	//BSON de-serialization:
+	SizeEntity *deserializeBSON(bsoncxx::document::view doc);
 
 };
-BOOST_CLASS_TRACKING(SizeEntity, boost::serialization::track_never)
+
+BOOST_CLASS_TRACKING(SizeEntity, boost::serialization::track_never
+)
 
 #endif

@@ -1,7 +1,3 @@
-//
-// Created by saeed on 11/17/19.
-//
-
 #ifndef TWITTER_RANDOMREAD_H
 #define TWITTER_RANDOMREAD_H
 
@@ -16,80 +12,81 @@ using namespace std;
 template<class T>
 class RandomRead {
 private:
-    string fileName;
+	string fileName;
 
-    int serializationType;
+	int serializationType;
 
-    long cuntToRead;
+	long cuntToRead;
 
-    //Vector variable for store random variables
-    vector<long> objectIndexes;
+	//Vector variable for store random variables
+	vector<long> objectIndexes;
 
-    LogFileHandler *logFileHandler;
+	LogFileHandler *logFileHandler;
 
-    bool taskset;
+	bool taskset;
 public:
-    void setObjectIndexes(const vector<long> &objectIndexes);
+	void setObjectIndexes(const vector<long> &objectIndexes);
 
 
 public:
 
-    RandomRead();
+	RandomRead();
 
-    virtual ~RandomRead();
+	virtual ~RandomRead();
 
-    RandomRead(string fileName, int serializationType, long cuntToRead, int round,bool taskset);
+	RandomRead(string fileName, int serializationType, long cuntToRead, int round, bool taskset);
 
-    void runTheRandomRead();
+	void runTheRandomRead();
 
 };
 
 template<class T>
 void RandomRead<T>::runTheRandomRead() {
 
-    //Defile objects from serialization types:
-    FileHandler<T> *fileHandler = new FileHandler<T>(fileName, serializationType);
+	//Defile objects from serialization types:
+	FileHandler <T> *fileHandler = new FileHandler<T>(fileName, serializationType);
 
-    fileHandler->prepareToRead();
+	fileHandler->prepareToRead();
 
-    // start of time calculation
-    auto tmpTime = chrono::steady_clock::now();
+	// start of time calculation
+	auto tmpTime = chrono::steady_clock::now();
 
-     vector<T *> objectList;
-    for (long j = 0; j < cuntToRead; ++j) {
-        fileHandler->getObjectsFromFile(objectIndexes.at(j), 1, objectList);
-    }
+	vector < T * > objectList;
+	for (long j = 0; j < cuntToRead; ++j) {
+		fileHandler->getObjectsFromFile(objectIndexes.at(j), 1, objectList);
+	}
 
-    double elapsedSeconds = chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
+	double elapsedSeconds = chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
 
-    // add times to the log file
-    this->logFileHandler->addLog(true,serializationType, false, "TweetStatus", fileHandler->getIoTime(), elapsedSeconds,taskset);
-    this->logFileHandler->flushLogFile();
+	// add times to the log file
+	this->logFileHandler->addLog(true, serializationType, false, "TweetStatus", fileHandler->getIoTime(),
+								 elapsedSeconds, taskset);
+	this->logFileHandler->flushLogFile();
 
-    // free memory:
-    for (long i = 0; i < cuntToRead; ++i){
-        if (serializationType!=2){
-            delete objectList.at(i);
-        } else{
-            char * tbuffer=(char *)objectList.at(i);
-            delete[] tbuffer;
-        }
-    }
+	// free memory:
+	for (long i = 0; i < cuntToRead; ++i) {
+		if (serializationType != 2) {
+			delete objectList.at(i);
+		} else {
+			char *tbuffer = (char *) objectList.at(i);
+			delete[] tbuffer;
+		}
+	}
 
-    fileHandler->getObjectsFromFileFlush();
-    delete fileHandler;
+	fileHandler->getObjectsFromFileFlush();
+	delete fileHandler;
 }
 
 
 template<class T>
-RandomRead<T>::RandomRead(string fileName, int serializationType, long cuntToRead, int round,bool taskset) {
-    this->fileName = fileName;
-    this->serializationType = serializationType;
-    this->cuntToRead = cuntToRead;
-    this->taskset=taskset;
-    this->logFileHandler = new LogFileHandler(
-            "bin/benchmark/readobjects/result_cpp_readobjects_" + to_string(cuntToRead) + "_" + to_string(round) +
-            ".txt");
+RandomRead<T>::RandomRead(string fileName, int serializationType, long cuntToRead, int round, bool taskset) {
+	this->fileName = fileName;
+	this->serializationType = serializationType;
+	this->cuntToRead = cuntToRead;
+	this->taskset = taskset;
+	this->logFileHandler = new LogFileHandler(
+			"bin/benchmark/readobjects/result_cpp_readobjects_" + to_string(cuntToRead) + "_" + to_string(round) +
+			".txt");
 }
 
 template<class T>
@@ -97,12 +94,12 @@ RandomRead<T>::RandomRead() {}
 
 template<class T>
 RandomRead<T>::~RandomRead() {
-    delete logFileHandler;
+	delete logFileHandler;
 }
 
 template<class T>
 void RandomRead<T>::setObjectIndexes(const vector<long> &objectIndexes) {
-    RandomRead::objectIndexes = objectIndexes;
+	RandomRead::objectIndexes = objectIndexes;
 }
 
 

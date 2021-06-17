@@ -2,7 +2,7 @@
 data_path=$1
 random_list_path=$2
 # for round:
-for r in 1 2 3 4 5
+for r in 1 2 3
 do
     # for serialization types:
     for i in 1 2 3 4 5 6

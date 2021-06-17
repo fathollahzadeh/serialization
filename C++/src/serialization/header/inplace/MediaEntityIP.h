@@ -1,52 +1,49 @@
-//
-// Created by saeed on 11/29/19.
-//
-
 #ifndef TWITTER_MEDIAENTITYIP_H
 #define TWITTER_MEDIAENTITYIP_H
 
 #include <iostream>
 #include <vector>
-#include "../../header/MediaSizesEntity.h"
-#include "../../header/VideoEntity.h"
-#include "../../header/AdditionalMediaInfoEntity.h"
-#include "../../header/MediaEntity.h"
+#include "MediaSizesEntity.h"
+#include "VideoEntity.h"
+#include "AdditionalMediaInfoEntity.h"
+#include "MediaEntity.h"
 #include "Object.h"
 #include "MediaSizesEntityIP.h"
 #include "VideoEntityIP.h"
 #include "AdditionalMediaInfoEntityIP.h"
 
 using namespace std;
-class MediaEntityIP: public Object {
+
+class MediaEntityIP : public Object {
 
 private:
-    offset_ptr <char> displayURL;
-    offset_ptr <char> expandedURL;
-    long id;
-    vector<int> indices;
-    offset_ptr <char> mediaURL;
-    offset_ptr <char> mediaURLHttps;
-    offset_ptr<MediaSizesEntityIP>sizes;
-    bool hasSizes;
-    offset_ptr <char> type;
-    long sourceStatusId;
-    offset_ptr <char> sourceStatusIdStr;
-    offset_ptr <char> url;
-    offset_ptr<VideoEntityIP> videoInfo;
-    bool hasVideoInfo;
-    offset_ptr<AdditionalMediaInfoEntityIP> additionalMediaInfo;
-    bool hasAdditionalMediaInfo;
+	offset_ptr<char> displayURL;
+	offset_ptr<char> expandedURL;
+	long id;
+	vector<int> indices;
+	offset_ptr<char> mediaURL;
+	offset_ptr<char> mediaURLHttps;
+	offset_ptr<MediaSizesEntityIP> sizes;
+	bool hasSizes;
+	offset_ptr<char> type;
+	long sourceStatusId;
+	offset_ptr<char> sourceStatusIdStr;
+	offset_ptr<char> url;
+	offset_ptr<VideoEntityIP> videoInfo;
+	bool hasVideoInfo;
+	offset_ptr<AdditionalMediaInfoEntityIP> additionalMediaInfo;
+	bool hasAdditionalMediaInfo;
 
 public:
 
-    MediaEntityIP();
+	MediaEntityIP();
 
-    virtual ~MediaEntityIP();
+	virtual ~MediaEntityIP();
 
-    //In place object:
-    MediaEntityIP(MediaEntity *mediaEntity);
+	//In place object:
+	MediaEntityIP(MediaEntity *mediaEntity);
 
-    void serialize(MediaEntity *mediaEntity);
+	void serialize(MediaEntity *mediaEntity);
 };
 
 

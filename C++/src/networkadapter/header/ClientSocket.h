@@ -1,25 +1,23 @@
-// Definition of the ClientSocket class
-
 #ifndef ClientSocket_class
 #define ClientSocket_class
 
 #include "Socket.h"
 
+class ClientSocket : private Socket {
+public:
 
-class ClientSocket : private Socket
-{
- public:
+	ClientSocket(std::string host, int port);
 
-  ClientSocket ( std::string host, int port );
-  virtual ~ClientSocket(){};
+	virtual ~ClientSocket() {};
 
-  const ClientSocket& operator << ( const std::string& ) const;
-  const ClientSocket& operator >> ( std::string& ) const;
+	const ClientSocket &operator<<(const std::string &) const;
 
-  long write(char * buffer, long contentSize);
-  long read(char * buffer, long contentSize);
+	const ClientSocket &operator>>(std::string &) const;
+
+	long write(char *buffer, long contentSize);
+
+	long read(char *buffer, long contentSize);
 
 };
-
 
 #endif

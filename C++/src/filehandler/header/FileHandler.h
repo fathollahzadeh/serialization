@@ -1,7 +1,3 @@
-//
-// Created by saeed on 11/4/19.
-//
-
 #ifndef C_FILEHANDLER_H
 #define C_FILEHANDLER_H
 
@@ -25,101 +21,101 @@ class FileHandler : public RootData {
 
 private:
 
-    string fileName;
+	string fileName;
 
-    int pageSize;
+	int pageSize;
 
-    long currentPageNumber;
+	long currentPageNumber;
 
-    int currentOffset;
+	int currentOffset;
 
-    int countObject;
+	int countObject;
 
-    char *pageBuffer;
+	char *pageBuffer;
 
-    //total number of objects in serialized file:
-    long  totalOfObjects;
+	//total number of objects in serialized file:
+	long totalOfObjects;
 
-    //Output Stream: For Writing:
-    ofstream outStreamRegularFile;
+	//Output Stream: For Writing:
+	ofstream outStreamRegularFile;
 
-    //Output Stream: For Index Writing:
-    ofstream outIndexFile;
+	//Output Stream: For Index Writing:
+	ofstream outIndexFile;
 
-    //Input Stream: For Reading:
-    ifstream inStreamRegularFile;
+	//Input Stream: For Reading:
+	ifstream inStreamRegularFile;
 
-    //Page index:
-    vector<long > pageIndex;
+	//Page index:
+	vector<long> pageIndex;
 
-    //Object index:
-    vector<long> objectIndex;
+	//Object index:
+	vector<long> objectIndex;
 
-    //Object in each page:
-    map<long,long> objectInEachPage;
+	//Object in each page:
+	map<long, long> objectInEachPage;
 
-    //Write data index to the an index file:
-    void writeIndexToFile(vector<long> indexMap);
+	//Write data index to the an index file:
+	void writeIndexToFile(vector<long> indexMap);
 
-    void readIndexesFromFile();
+	void readIndexesFromFile();
 
-    char *readPageFromFile(long id);
+	char *readPageFromFile(long id);
 
-    int serializationType;
+	int serializationType;
 
-    void appendInPlaceObjectToFile(TweetStatus *object);
+	void appendInPlaceObjectToFile(TweetStatus *object);
 
-    //benchmark times:
-    double ioTime;
-    double indexTime;
+	//benchmark times:
+	double ioTime;
+	double indexTime;
 
-    //Network Experiments:
-    long networkPageSize;
+	//Network Experiments:
+	long networkPageSize;
 
 public:
 
-    FileHandler();
+	FileHandler();
 
-    FileHandler(string fileName,int serializationType);
+	FileHandler(string fileName, int serializationType);
 
-    void prepareToWrite();
+	void prepareToWrite();
 
-    void prepareToRead();
+	void prepareToRead();
 
-    virtual ~FileHandler();
+	virtual ~FileHandler();
 
-    void appendObjectToFile(TweetStatus *object);
+	void appendObjectToFile(TweetStatus *object);
 
-    void appendObjectToFile(TweetStatusIP *object);
+	void appendObjectToFile(TweetStatusIP *object);
 
-    void appendObjectToFile(TweetStatusProto *object);
+	void appendObjectToFile(TweetStatusProto *object);
 
-    void appendObjectToFile(TweetStatusFlatBuffers *object);
+	void appendObjectToFile(TweetStatusFlatBuffers *object);
 
-    void appendObjectToFileFlush();
+	void appendObjectToFileFlush();
 
-    void getObjectsFromFile(long i, long n, vector<T*>& objectList);
+	void getObjectsFromFile(long i, long n, vector<T *> &objectList);
 
-    // define a method for get network page count from RAM object list
-    int getNextNetworkPage(vector <T *>& objectList, int startIndex, int numObjects, char * networkBuffer);
+	// define a method for get network page count from RAM object list
+	int getNextNetworkPage(vector<T *> &objectList, int startIndex, int numObjects, char *networkBuffer);
 
-    int parseNetworkPage(vector <T *>& curObjectList, char * networkBuffer);
+	int parseNetworkPage(vector<T *> &curObjectList, char *networkBuffer);
 
-    //Number of network pages to be sent from disk:
-    long getNetworkPageCount(int numObjects);
+	//Number of network pages to be sent from disk:
+	long getNetworkPageCount(int numObjects);
 
-    //Simply reads the next network page from file:
-    long getNextNetworkPage(char * networkBuffer);
+	//Simply reads the next network page from file:
+	long getNextNetworkPage(char *networkBuffer);
 
-    void getObjectsFromFileFlush();
+	void getObjectsFromFileFlush();
 
-    long getNumberOfObjects();
+	long getNumberOfObjects();
 
-    map<long,long> getEachPageObjectCount();
+	map<long, long> getEachPageObjectCount();
 
-    double getIoTime() const;
+	double getIoTime() const;
 
-    void setNetworkPageSize(long networkPageSize);
+	void setNetworkPageSize(long networkPageSize);
 };
 
 

@@ -1,7 +1,3 @@
-//
-// Created by saeed on 11/1/19.
-//
-
 #ifndef C_DATAREADER_H
 #define C_DATAREADER_H
 
@@ -24,28 +20,27 @@ using namespace std;
 class DataReader {
 
 private:
-    Entities *getEntities(Value &d);
+	Entities *getEntities(Value &d);
 
-    User* getUser(Value &d);
+	User *getUser(Value &d);
 
-    Coordinates* getCoordinates(Value &d);
+	Coordinates *getCoordinates(Value &d);
 
-    Place* getPlace(Value &d);
+	Place *getPlace(Value &d);
 
-    vector<MediaEntity*> getMedia(Value &d);
+	vector<MediaEntity *> getMedia(Value &d);
 
-    vector<MatchingRulesEntity*>getMatchingRulesEntity(Value &d);
-
+	vector<MatchingRulesEntity *> getMatchingRulesEntity(Value &d);
 
 
 public:
-    DataReader();
+	DataReader();
 
-    virtual ~DataReader();
+	virtual ~DataReader();
 
-    TweetStatus* generateTweetObject(Document &d);
-
+	TweetStatus *generateTweetObject(Document &d);
 
 
 };
+
 #endif //C_DATAREADER_H

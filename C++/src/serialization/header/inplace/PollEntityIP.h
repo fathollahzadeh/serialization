@@ -1,36 +1,32 @@
-//
-// Created by saeed on 11/29/19.
-//
-
 #ifndef TWITTER_POLLENTITYIP_H
 #define TWITTER_POLLENTITYIP_H
 
 #include <iostream>
-#include "../../header/OptionEntity.h"
-#include "../../header/PollEntity.h"
+#include "OptionEntity.h"
+#include "PollEntity.h"
 #include "Object.h"
 #include "OptionEntityIP.h"
 
 using namespace std;
 
-class PollEntityIP: public Object {
+class PollEntityIP : public Object {
 
 private:
-    offset_ptr<OptionEntityIP> options;
-    int numOfOptionEntity;
-    offset_ptr <char> endDatetime;
-    offset_ptr <char> durationMinutes;
+	offset_ptr<OptionEntityIP> options;
+	int numOfOptionEntity;
+	offset_ptr<char> endDatetime;
+	offset_ptr<char> durationMinutes;
 
 public:
 
-    PollEntityIP();
+	PollEntityIP();
 
-    virtual ~PollEntityIP();
+	virtual ~PollEntityIP();
 
-    //In place object:
-    PollEntityIP(PollEntity *pollEntity);
+	//In place object:
+	PollEntityIP(PollEntity *pollEntity);
 
-    void serialize(PollEntity *pollEntity);
+	void serialize(PollEntity *pollEntity);
 };
 
 

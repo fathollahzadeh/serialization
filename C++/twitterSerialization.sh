@@ -8,9 +8,9 @@ datapath=$1
 mkdir -p "$2"
 numberOfTweets=$3
 # for round:
-for r in 1 2 3 4 5
+for r in 1 2 3
 do
-    for serialization_type in 1 2 3 4 5 6 #1-Handcoded, 2-InPlace, 3-Boost, 4-Proto 5-BSON 6-FlatBufers
+    for serialization_type in 1 2 3 4 5 6
     do
       ./resultPath.sh $numberOfTweets $r
 

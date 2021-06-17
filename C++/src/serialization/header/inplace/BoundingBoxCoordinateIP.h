@@ -1,28 +1,23 @@
-//
-// Created by saeed on 11/29/19.
-//
-
 #ifndef TWITTER_BOUNDINGBOXCOORDINATEIP_H
 #define TWITTER_BOUNDINGBOXCOORDINATEIP_H
 
-
-#include "../../header/BoundingBoxCoordinate.h"
+#include "BoundingBoxCoordinate.h"
 #include "Object.h"
 
 class BoundingBoxCoordinateIP : public Object {
 private:
-    offset_ptr <char> type;
-    vector<vector<double *>> coordinates;
+	offset_ptr<char> type;
+	vector <vector<double *>> coordinates;
 
 public:
-    BoundingBoxCoordinateIP();
+	BoundingBoxCoordinateIP();
 
-    virtual ~BoundingBoxCoordinateIP();
+	virtual ~BoundingBoxCoordinateIP();
 
-    //Create InPlace object:
-    BoundingBoxCoordinateIP(BoundingBoxCoordinate *boundingBoxCoordinate);
+	//Create InPlace object:
+	BoundingBoxCoordinateIP(BoundingBoxCoordinate *boundingBoxCoordinate);
 
-    void serialize(BoundingBoxCoordinate *boundingBoxCoordinate);
+	void serialize(BoundingBoxCoordinate *boundingBoxCoordinate);
 };
 
 

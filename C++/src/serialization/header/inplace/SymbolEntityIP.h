@@ -1,32 +1,29 @@
-//
-// Created by saeed on 11/29/19.
-//
-
 #ifndef TWITTER_SYMBOLENTITYIP_H
 #define TWITTER_SYMBOLENTITYIP_H
 
 #include <iostream>
 #include <vector>
-#include "../../header/SymbolEntity.h"
+#include "SymbolEntity.h"
 #include "Object.h"
 
 using namespace std;
-class SymbolEntityIP: public Object {
+
+class SymbolEntityIP : public Object {
 
 private:
-    vector<int> indices;
-    offset_ptr <char> text;
+	vector<int> indices;
+	offset_ptr<char> text;
 
 public:
 
-    SymbolEntityIP();
+	SymbolEntityIP();
 
-    virtual ~SymbolEntityIP();
+	virtual ~SymbolEntityIP();
 
-    //In place object:
-    SymbolEntityIP(SymbolEntity *symbolEntity);
+	//In place object:
+	SymbolEntityIP(SymbolEntity *symbolEntity);
 
-    void serialize(SymbolEntity *symbolEntity);
+	void serialize(SymbolEntity *symbolEntity);
 };
 
 

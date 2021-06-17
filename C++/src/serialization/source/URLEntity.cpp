@@ -1,8 +1,6 @@
-
 #include "URLEntity.h"
 
 using namespace std;
-
 
 //Copy constructor:
 URLEntity::URLEntity(const URLEntity &obj) {

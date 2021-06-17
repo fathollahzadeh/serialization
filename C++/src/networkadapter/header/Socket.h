@@ -1,8 +1,5 @@
-// Definition of the Socket class
-
 #ifndef Socket_class
 #define Socket_class
-
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -17,36 +14,41 @@ const int MAXHOSTNAME = 200;
 const int MAXCONNECTIONS = 10;
 const int MAXRECV = 500;
 
-class Socket
-{
- public:
-  Socket();
-  virtual ~Socket();
+class Socket {
+public:
+	Socket();
 
-  // Server initialization
-  bool create();
-  bool bind ( const int port );
-  bool listen() const;
-  bool accept ( Socket& ) const;
+	virtual ~Socket();
 
-  // Client initialization
-  bool connect ( const std::string host, const int port );
+	// Server initialization
+	bool create();
 
-  // Data Transimission
-  bool send ( const std::string ) const;
-  int recv ( std::string& ) const;
+	bool bind(const int port);
 
-  long write(char * buffer, long contentSize);
-  long read(char * buffer, long contentSize);
+	bool listen() const;
 
-  void set_non_blocking ( const bool );
+	bool accept(Socket &) const;
 
-  bool is_valid() const { return m_sock != -1; }
+	// Client initialization
+	bool connect(const std::string host, const int port);
 
- private:
+	// Data Transimission
+	bool send(const std::string) const;
 
-  int m_sock;
-  sockaddr_in m_addr;
+	int recv(std::string &) const;
+
+	long write(char *buffer, long contentSize);
+
+	long read(char *buffer, long contentSize);
+
+	void set_non_blocking(const bool);
+
+	bool is_valid() const { return m_sock != -1; }
+
+private:
+
+	int m_sock;
+	sockaddr_in m_addr;
 
 
 };

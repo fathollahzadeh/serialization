@@ -1,7 +1,6 @@
 #ifndef SymbolEntity_H
 #define SymbolEntity_H
 
-
 #include<iostream>
 #include<cstring>
 #include <vector>
@@ -10,56 +9,53 @@
 
 using namespace std;
 
-
-/*
- *	Contains only the declaration of SymbolEntity Class.
- */
-
 class SymbolEntity : public RootData {
 
 public:
-    vector<int> indices;
-    string text;
+	vector<int> indices;
+	string text;
 private:
-    //Boost Serialization:
-    friend class boost::serialization::access;
+	//Boost Serialization:
+	friend class boost::serialization::access;
 
-    //Serialize method for boost:
-    template<class Archive>
-    void serialize(Archive &ar, const unsigned int version) {
+	//Serialize method for boost:
+	template<class Archive>
+	void serialize(Archive &ar, const unsigned int version) {
 
-        // Simply list all the fields to be serialized/deserialized.
-        ar & indices;
-        ar & text;
-    }
+		// Simply list all the fields to be serialized/deserialized.
+		ar & indices;
+		ar & text;
+	}
 
 public:
-    //Default destructor:
-    virtual ~SymbolEntity();
+	//Default destructor:
+	virtual ~SymbolEntity();
 
-    //Default constructor:
-    SymbolEntity();
+	//Default constructor:
+	SymbolEntity();
 
-    //Constructor with arguments:
-    SymbolEntity(vector<int> indices, string text);
+	//Constructor with arguments:
+	SymbolEntity(vector<int> indices, string text);
 
-    //C++: Use explicitly for printing.
-    string toJSON();
+	//C++: Use explicitly for printing.
+	string toJSON();
 
-    //Hand Coded C++ serialization:
-    //New API: Writes directly to File Page:
-    char *serializeHandcoded(char *buffer, int &objectSize);
+	//Hand Coded C++ serialization:
+	//New API: Writes directly to File Page:
+	char *serializeHandcoded(char *buffer, int &objectSize);
 
-    //Hand Coded C++ de-serialization:
-    SymbolEntity *deserializeHandcoded(char *buffer, int &bytesRead);
+	//Hand Coded C++ de-serialization:
+	SymbolEntity *deserializeHandcoded(char *buffer, int &bytesRead);
 
-    //BSON buffer serialization
-    bsoncxx::document::value serializeBSON();
+	//BSON buffer serialization
+	bsoncxx::document::value serializeBSON();
 
-    //BSON de-serialization:
-    SymbolEntity * deserializeBSON(bsoncxx::document::view doc);
+	//BSON de-serialization:
+	SymbolEntity *deserializeBSON(bsoncxx::document::view doc);
 
 };
-BOOST_CLASS_TRACKING(SymbolEntity, boost::serialization::track_never)
+
+BOOST_CLASS_TRACKING(SymbolEntity, boost::serialization::track_never
+)
 
 #endif

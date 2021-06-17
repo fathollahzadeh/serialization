@@ -1,34 +1,31 @@
-//
-// Created by saeed on 11/29/19.
-//
-
 #ifndef TWITTER_USERMENTIONENTITYIP_H
 #define TWITTER_USERMENTIONENTITYIP_H
 
 #include <iostream>
 #include <vector>
-#include "../../header/UserMentionEntity.h"
+#include "UserMentionEntity.h"
 #include "Object.h"
 
-using  namespace std;
-class UserMentionEntityIP: public Object {
+using namespace std;
+
+class UserMentionEntityIP : public Object {
 
 private:
-    long id;
-    offset_ptr <char> idStr;
-    vector<int> indices;
-    offset_ptr <char> name;
-    offset_ptr <char> screenName;
+	long id;
+	offset_ptr<char> idStr;
+	vector<int> indices;
+	offset_ptr<char> name;
+	offset_ptr<char> screenName;
 
 public:
-    UserMentionEntityIP();
+	UserMentionEntityIP();
 
-    virtual ~UserMentionEntityIP();
+	virtual ~UserMentionEntityIP();
 
-    //In place serialization:
-    UserMentionEntityIP(UserMentionEntity *userMentionEntity);
+	//In place serialization:
+	UserMentionEntityIP(UserMentionEntity *userMentionEntity);
 
-    void serialize(UserMentionEntity *userMentionEntity);
+	void serialize(UserMentionEntity *userMentionEntity);
 };
 
 

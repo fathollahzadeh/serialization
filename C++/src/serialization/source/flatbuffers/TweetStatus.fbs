@@ -1,4 +1,3 @@
-
 include "User.fbs";
 include "Coordinates.fbs";
 include "Place.fbs";

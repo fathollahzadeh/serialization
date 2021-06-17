@@ -1,4 +1,3 @@
-
 include "MediaSizesEntity.fbs";
 include "VideoEntity.fbs";
 include "AdditionalMediaInfoEntity.fbs";
