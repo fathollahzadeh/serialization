@@ -59,7 +59,7 @@ jobs:
       if: steps.cache-mongo-c-driver.outputs.cache-hit != 'true'
       run: cd ${{github.workspace}}/Apps && sudo rm -rf mongo-c-driver-1.16.2.tar.gz && sudo rm -rf mongo-c-driver-1.16.2 && 
            sudo wget https://github.com/mongodb/mongo-c-driver/releases/download/1.16.2/mongo-c-driver-1.16.2.tar.gz &&
-           sudo tar -xvzf mongo-c-driver-1.16.2.tar.gz && cd mongo-c-driver-1.16.2 && sudo mkdir cmake-build && sudo cd cmake-build &&
+           sudo tar -xvzf mongo-c-driver-1.16.2.tar.gz && cd mongo-c-driver-1.16.2 && sudo mkdir cmake-build && cd cmake-build &&
            sudo cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF .. && sudo make install 
     
 #     - name: Create Build Environment
