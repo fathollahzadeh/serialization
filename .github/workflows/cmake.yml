@@ -20,18 +20,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-#     - name: Update OS
-#       run: sudo apt-get update
-    
+         
     - name: Install clang
-      run: sudo apt-get install -yq clang
+      run: |
+            sudo apt-get install -yq clang
       
     - name: Install Rapidjson   
-      run: sudo apt-get install -yq rapidjson-dev
+      run: |
+            sudo apt-get install -yq rapidjson-dev
       
     - name: Install Boost
-      run: sudo apt-get install -yq libboost-dev libgsl-dev && ls -hl
+      run: |
+            sudo apt-get install -yq libboost-dev libgsl-dev && ls -hl
       
     - name: Cache Google Protobuf
       id: cache-google-protobuf
@@ -56,7 +56,7 @@ jobs:
         
         
     - name: Install Mongo-C-Driver
-      #if: steps.cache-mongo-c-driver.outputs.cache-hit != 'true'
+      if: steps.cache-mongo-c-driver.outputs.cache-hit != 'true'
       run: sudo apt-get install libmongoc-1.0-0 && cd ${{github.workspace}}/Apps && sudo rm -rf mongo-c-driver-1.16.2.tar.gz && 
            sudo rm -rf mongo-c-driver-1.16.2 && 
            sudo wget https://github.com/mongodb/mongo-c-driver/releases/download/1.16.2/mongo-c-driver-1.16.2.tar.gz &&
