@@ -21,7 +21,6 @@ template<class T>
 class DataSerialization {
 
 private:
-
 	ifstream infile;
 	string line;
 	string inputFileName;
