@@ -1,4 +1,4 @@
-name: CMake
+name: C++ CMake 
 
 on:
   push:
@@ -46,18 +46,19 @@ jobs:
             wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.0/protobuf-cpp-3.11.0.tar.gz && 
             sudo tar -xvzf protobuf-cpp-3.11.0.tar.gz && cd protobuf-3.11.0 && sudo ./configure && sudo make && sudo make check && sudo make install
             && sudo ldconfig
-        
-#     - name: Install Google Protobuf
-      
-#       run: sudo apt-get install autoconf automake libtool curl make g++ unzip && rm -rf Apps && mkdir Apps && cd Apps && 
-#             wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.0/protobuf-cpp-3.11.0.tar.gz && ls -l && 
-#             tar -xvzf protobuf-cpp-3.11.0.tar.gz && cd protobuf-3.11.0 && sudo ./configure && sudo make && sudo make check && make install &&
-#             sudo ldconfig
             
-#     - name: Install BSON
-#       run: cd Apps && sudo wget https://github.com/mongodb/mongo-c-driver/releases/download/1.16.2/mongo-c-driver-1.16.2.tar.gz &&
-#            tar -xvzf mongo-c-driver-1.16.2.tar.gz && cd mongo-c-driver-1.16.2 && sudo mkdir cmake-build && sudo cd cmake-build &&
-#            sudo cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF .. && sudo make install && cd ..
+    - name: Cache Mongo-C-Driver
+      id: cache-Mongo-C-Driver
+      uses: actions/cache@v2
+      with:
+        path: Apps/mongo-c-driver-1.16.2
+        key: ${{ runner.os }}-mongo-c-driver-1.16.2
+        
+        
+    - name: Install Mongo-C-Driver
+      run: cd ${{github.workspace}}/Apps && sudo wget https://github.com/mongodb/mongo-c-driver/releases/download/1.16.2/mongo-c-driver-1.16.2.tar.gz &&
+           sudo tar -xvzf mongo-c-driver-1.16.2.tar.gz && cd mongo-c-driver-1.16.2 && sudo mkdir cmake-build && sudo cd cmake-build &&
+           sudo cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF .. && sudo make install 
     
 #     - name: Create Build Environment
 #       run: cmake -E make_directory ${{github.workspace}}/build/C++
