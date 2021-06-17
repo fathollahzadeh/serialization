@@ -1,7 +1,3 @@
-//
-// Created by saeed on 12/14/19.
-//
-
 #ifndef TWITTER_DATASERIALIZATION_H
 #define TWITTER_DATASERIALIZATION_H
 
