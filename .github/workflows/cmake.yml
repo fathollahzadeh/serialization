@@ -73,4 +73,4 @@ jobs:
     - name: Build CPP
       #working-directory: ${{github.workspace}}/C++/
       #shell: bash    
-      run: pwd #cd C++ && ./mackeClean.sh  
+      run: cd C++ && ./makeClean.sh  
