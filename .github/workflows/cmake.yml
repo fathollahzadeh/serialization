@@ -21,17 +21,20 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Update OS
+      run: sudo apt-get update
+    
     - name: Install clang
-      run: sudo apt-get update && sudo apt-get install -yq clang
+      run: sudo apt-get install -yq clang
     
     - name: Install Rapidjson   
-      run: sudo apt-get update &&  sudo apt-get install -yq rapidjson-dev
+      run: sudo apt-get install -yq rapidjson-dev
       
     - name: Install Boost
-      run: sudo apt-get update && sudo apt-get install -yq libboost-dev libgsl-dev
+      run: sudo apt-get install -yq libboost-dev libgsl-dev
       
     - name: Install Google Protobuf
-      run: sudo apt-get update && sudo apt-get install autoconf automake libtool curl make g++ unzip
+      run: sudo apt-get install autoconf automake libtool curl make g++ unzip
     
     - name: Create Build Environment
       # Some projects don't allow in-source building, so create a separate build directory
