@@ -71,6 +71,6 @@ jobs:
            sudo make && sudo make install           
         
     - name: Build CPP
-      working-directory: ${{github.workspace}}/C++/
-      shell: bash    
-      run: ./mackeClean.sh  
+      #working-directory: ${{github.workspace}}/C++/
+      #shell: bash    
+      run: cd C++ && ./mackeClean.sh  
