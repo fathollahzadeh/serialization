@@ -76,7 +76,7 @@ jobs:
            sudo tar -xzf r3.4.2.tar.gz && cd mongo-cxx-driver-r3.4.2/build && 
            sudo cmake ..                                \
            -DCMAKE_BUILD_TYPE=Release          \
-           -DCMAKE_INSTALL_PREFIX=/usr/local &&
+           -DCMAKE_INSTALL_PREFIX=$HOME/.local &&
            sudo make && sudo make install           
         
 #     - name: Create Build Environment
