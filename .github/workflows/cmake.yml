@@ -57,7 +57,8 @@ jobs:
         
     - name: Install Mongo-C-Driver
       if: steps.cache-mongo-c-driver.outputs.cache-hit != 'true'
-      run: cd ${{github.workspace}}/Apps && sudo rm -rf mongo-c-driver-1.16.2.tar.gz && sudo rm -rf mongo-c-driver-1.16.2 && 
+      run: sudo apt-get install libmongoc-1.0-0 && cd ${{github.workspace}}/Apps && sudo rm -rf mongo-c-driver-1.16.2.tar.gz && 
+           sudo rm -rf mongo-c-driver-1.16.2 && 
            sudo wget https://github.com/mongodb/mongo-c-driver/releases/download/1.16.2/mongo-c-driver-1.16.2.tar.gz &&
            sudo tar -xvzf mongo-c-driver-1.16.2.tar.gz && cd mongo-c-driver-1.16.2 && sudo mkdir cmake-build && cd cmake-build &&
            sudo cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF .. && sudo make install 
@@ -74,7 +75,7 @@ jobs:
       run: cd ${{github.workspace}}/Apps && sudo rm -rf r3.4.2.tar && sudo rm -rf mongo-cxx-driver-r3.4.2 &&      
            sudo wget https://github.com/mongodb/mongo-cxx-driver/archive/refs/tags/r3.4.2.tar.gz &&           
            sudo tar -xzf r3.4.2.tar.gz && cd mongo-cxx-driver-r3.4.2/build &&
-           sudo cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${{github.workspace}}/Apps/mongodb-c-driver-3.4.2 -DCMAKE_INSTALL_PREFIX=/usr/local &&
+           sudo cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local &&
            sudo make && sudo make install           
         
 #     - name: Create Build Environment
