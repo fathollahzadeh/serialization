@@ -34,7 +34,7 @@ jobs:
       run: sudo apt-get install -yq libboost-dev libgsl-dev && ls -hl
       
       
-    - name: Install Google Protobuf
+#     - name: Install Google Protobuf
       
 #       run: sudo apt-get install autoconf automake libtool curl make g++ unzip && rm -rf Apps && mkdir Apps && cd Apps && 
 #             wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.0/protobuf-cpp-3.11.0.tar.gz && ls -l && 
