@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project(C__)
 
-
 # set clang as the default compiler
 set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
@@ -10,14 +9,8 @@ set(CMAKE_CXX_COMPILER "clang++")
 find_package(libmongocxx REQUIRED)
 find_package(libbsoncxx REQUIRED)
 
-include_directories(${LIBMONGOCXX_INCLUDE_DIR})
-include_directories(${LIBBSONCXX_INCLUDE_DIR})
-
 include_directories("/usr/local/include/mongocxx/v_noabi")
 include_directories("/usr/local/include/bsoncxx/v_noabi")
-include_directories("/usr/local/include/libmongoc-1.0")
-include_directories("/usr/local/include/libbson-1.0")
-include_directories("/usr/local/lib")
 
 # set the output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
@@ -76,7 +69,6 @@ add_executable(TwitterSerialization
         ${flatBuffersSerializationSource}
         ${rootDataSource}
         )
-
 target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
 target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})
 
