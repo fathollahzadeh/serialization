@@ -5,7 +5,7 @@ project(C__)
 # set clang as the default compiler
 set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
-
+set(CMAKE_FIND_DEBUG_MODE 1)
 find_package(libmongocxx REQUIRED)
 find_package(libbsoncxx REQUIRED)
 
