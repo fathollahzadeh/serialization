@@ -59,11 +59,11 @@ jobs:
       id: cache-mongodb-cpp-driver
       uses: actions/cache@v2
       with:
-        path: Apps/mongodb-c-driver-3.4.2
+        path: /usr/local/include/mongocxx #Apps/mongodb-c-driver-3.4.2
         key: ${{ runner.os }}-mongodb-cpp-driver-3.4.2
         
     - name: Install MongoDB-CPP-Driver
-      if: steps.cache-mongodb-cpp-driver.outputs.cache-hit != 'true'
+      #if: steps.cache-mongodb-cpp-driver.outputs.cache-hit != 'true'
       run: cd ${{github.workspace}}/Apps && sudo rm -rf r3.4.2.tar && sudo rm -rf mongo-cxx-driver-r3.4.2 &&      
            sudo wget https://github.com/mongodb/mongo-cxx-driver/archive/refs/tags/r3.4.2.tar.gz &&           
            sudo tar -xzf r3.4.2.tar.gz && cd mongo-cxx-driver-r3.4.2/build &&
