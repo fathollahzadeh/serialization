@@ -1,9 +1,0 @@
-namespace edu.bu.tweet.flatbuffers;
-
-table URLEntityFBS {
-        indices:[int];
-        display_url:string;
-        expanded_url:string;
-        url:string;
-}
-root_type URLEntityFBS;

@@ -1,0 +1,7 @@
+namespace at.tugraz.tweet.flatbuffers;
+
+table SymbolEntityFBS {
+    indices:[int];
+    text:string;
+}
+root_type SymbolEntityFBS;

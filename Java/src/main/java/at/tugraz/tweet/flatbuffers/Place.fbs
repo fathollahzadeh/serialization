@@ -1,0 +1,15 @@
+include "BoundingBoxCoordinate.fbs";
+
+namespace at.tugraz.tweet.flatbuffers;
+
+table PlaceFBS {
+      name:string;
+	  country_code:string;
+	  id:string;
+	  country:string;
+	  place_type:string;
+	  url:string;
+	  full_name:string;
+	  bounding_box:BoundingBoxCoordinateFBS;
+}
+root_type PlaceFBS;

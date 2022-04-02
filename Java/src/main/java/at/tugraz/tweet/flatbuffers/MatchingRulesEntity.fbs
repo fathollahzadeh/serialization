@@ -1,0 +1,8 @@
+namespace at.tugraz.tweet.flatbuffers;
+
+table MatchingRulesEntityFBS {
+        tag:string;
+        id:long;
+        id_str:string;
+}
+root_type MatchingRulesEntityFBS;

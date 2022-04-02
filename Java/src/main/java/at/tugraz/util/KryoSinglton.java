@@ -1,0 +1,102 @@
+package at.tugraz.util;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
+import at.tugraz.tweet.AdditionalMediaInfoEntity;
+import at.tugraz.tweet.BoundingBoxCoordinate;
+import at.tugraz.tweet.Coordinates;
+import at.tugraz.tweet.Entities;
+import at.tugraz.tweet.ExtendedEntities;
+import at.tugraz.tweet.HashtagEntity;
+import at.tugraz.tweet.MatchingRulesEntity;
+import at.tugraz.tweet.MediaEntity;
+import at.tugraz.tweet.MediaSizesEntity;
+import at.tugraz.tweet.OptionEntity;
+import at.tugraz.tweet.Place;
+import at.tugraz.tweet.PollEntity;
+import at.tugraz.tweet.SizeEntity;
+import at.tugraz.tweet.SymbolEntity;
+import at.tugraz.tweet.TweetStatus;
+import at.tugraz.tweet.URLEntity;
+import at.tugraz.tweet.User;
+import at.tugraz.tweet.UserMentionEntity;
+import at.tugraz.tweet.VariantEntity;
+import at.tugraz.tweet.VideoEntity;
+import com.esotericsoftware.kryo.Kryo;
+import at.tugraz.tweet.flatbuffers.*;
+
+public class KryoSinglton {
+
+	static class SingletonHolder {
+		static final KryoSinglton instance = new KryoSinglton();
+	}
+
+	public static KryoSinglton getInstance() {
+		return SingletonHolder.instance;
+
+	}
+
+	public Kryo getKryo() {
+		return kryo;
+	}
+
+	private Kryo kryo;
+
+	private KryoSinglton() {
+		kryo = new Kryo();
+
+		kryo.register(LinkedHashMap.class);
+
+		kryo.register(ArrayList.class);
+		kryo.register(HashMap.class);
+		kryo.register(double[].class);
+		kryo.register(com.google.gson.internal.LinkedTreeMap.class);
+
+		kryo.register(AdditionalMediaInfoEntity.class);
+		kryo.register(BoundingBoxCoordinate.class);
+		kryo.register(Coordinates.class);
+		kryo.register(Entities.class);
+		kryo.register(ExtendedEntities.class);
+		kryo.register(HashtagEntity.class);
+		kryo.register(MatchingRulesEntity.class);
+		kryo.register(MediaEntity.class);
+		kryo.register(MediaSizesEntity.class);
+		kryo.register(OptionEntity.class);
+		kryo.register(Place.class);
+		kryo.register(PollEntity.class);
+		kryo.register(SizeEntity.class);
+		kryo.register(SymbolEntity.class);
+		kryo.register(TweetStatus.class);
+		kryo.register(URLEntity.class);
+		kryo.register(User.class);
+		kryo.register(UserMentionEntity.class);
+		kryo.register(VariantEntity.class);
+		kryo.register(VideoEntity.class);
+
+		kryo.register(AdditionalMediaInfoEntityFBS.class);
+		kryo.register(BoundingBoxCoordinateFBS.class);
+		kryo.register(CoordinatesFBS.class);
+		kryo.register(EntitiesFBS.class);
+		kryo.register(ExtendedEntitiesFBS.class);
+		kryo.register(HashtagEntityFBS.class);
+		kryo.register(MatchingRulesEntityFBS.class);
+		kryo.register(MediaEntityFBS.class);
+		kryo.register(MediaSizesEntityFBS.class);
+		kryo.register(OptionEntityFBS.class);
+		kryo.register(PlaceFBS.class);
+		kryo.register(PollEntityFBS.class);
+		kryo.register(SizeEntityFBS.class);
+		kryo.register(SymbolEntityFBS.class);
+		kryo.register(TweetStatusFBS.class);
+		kryo.register(URLEntityFBS.class);
+		kryo.register(UserFBS.class);
+		kryo.register(UserMentionEntityFBS.class);
+		kryo.register(VariantEntityFBS.class);
+		kryo.register(VideoEntityFBS.class);
+
+		kryo.register(at.tugraz.tweet.proto.TweetStatusProtos.TweetStatusP.class);
+
+	}
+}
