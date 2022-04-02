@@ -1,0 +1,10 @@
+namespace at.tugraz.tweet.flatbuffers;
+
+table UserMentionEntityFBS {
+        id:long;
+        id_str:string;
+        indices:[int];
+        name:string;
+        screen_name:string;
+}
+root_type UserMentionEntityFBS;
