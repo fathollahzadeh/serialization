@@ -11,10 +11,14 @@ package at.tugraz.objects.tpch;
 //      O_SHIPPRIORITY      INTEGER NOT NULL,
 //      O_COMMENT           VARCHAR(79) NOT NULL);
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order{
 
+	private List<LineItem> lineItems;
 	private Integer orderKey;
-	private Customer customer;
+	private Integer custKey;
 	private String orderStatus;
 	private Double totalPrice;
 	private String orderDate;
@@ -23,10 +27,12 @@ public class Order{
 	private Integer shipPriority;
 	private String comment;
 
-	public Order(Integer orderKey, Customer customer, String orderStatus, Double totalPrice,
+
+	public Order(Integer orderKey, List<LineItem> lineItems, Integer custKey, String orderStatus, Double totalPrice,
 		String orderDate, String orderPriority, String clerk, Integer shipPriority, String comment) {
 		this.orderKey = orderKey;
-		this.customer = customer;
+		this.lineItems = lineItems;
+		this.custKey = custKey;
 		this.orderStatus = orderStatus;
 		this.totalPrice = totalPrice;
 		this.orderDate = orderDate;
@@ -34,6 +40,19 @@ public class Order{
 		this.clerk = clerk;
 		this.shipPriority = shipPriority;
 		this.comment = comment;
+		this.lineItems = new ArrayList<>();
+	}
+
+	public void addLineItem(LineItem lineItem){
+		this.lineItems.add(lineItem);
+	}
+
+	public List<LineItem> getLineItems() {
+		return lineItems;
+	}
+
+	public void setLineItems(List<LineItem> lineItems) {
+		this.lineItems = lineItems;
 	}
 
 	public Integer getOrderKey() {
@@ -44,12 +63,12 @@ public class Order{
 		this.orderKey = orderKey;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Integer getCustKey() {
+		return custKey;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustKey(Integer custKey) {
+		this.custKey = custKey;
 	}
 
 	public String getOrderStatus() {

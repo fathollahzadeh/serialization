@@ -15,4 +15,28 @@ public class Region{
 		this.name = name;
 		this.comment = comment;
 	}
+
+	public Integer getRegionKey() {
+		return regionKey;
+	}
+
+	public void setRegionKey(Integer regionKey) {
+		this.regionKey = regionKey;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 }
