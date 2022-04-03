@@ -1,12 +1,12 @@
 package at.tugraz.io;
 
-import at.tugraz.objects.tpch.Customer;
-import at.tugraz.objects.tpch.LineItem;
-import at.tugraz.objects.tpch.Nation;
-import at.tugraz.objects.tpch.Order;
-import at.tugraz.objects.tpch.Part;
-import at.tugraz.objects.tpch.Region;
-import at.tugraz.objects.tpch.Supplier;
+import at.tugraz.datamodel.tpch.Customer;
+import at.tugraz.datamodel.tpch.LineItem;
+import at.tugraz.datamodel.tpch.Nation;
+import at.tugraz.datamodel.tpch.Order;
+import at.tugraz.datamodel.tpch.Part;
+import at.tugraz.datamodel.tpch.Region;
+import at.tugraz.datamodel.tpch.Supplier;
 import at.tugraz.util.RootObject;
 
 import java.io.BufferedReader;

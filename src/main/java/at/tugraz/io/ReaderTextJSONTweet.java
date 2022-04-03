@@ -1,7 +1,6 @@
 package at.tugraz.io;
 
-import at.tugraz.objects.twitter.TweetStatus;
-import at.tugraz.util.Const;
+import at.tugraz.datamodel.twitter.TweetStatus;
 import at.tugraz.util.RootObject;
 import com.google.gson.Gson;
 

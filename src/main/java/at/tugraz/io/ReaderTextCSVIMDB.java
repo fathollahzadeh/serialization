@@ -1,12 +1,12 @@
 package at.tugraz.io;
 
-import at.tugraz.objects.imdb.Actors;
-import at.tugraz.objects.imdb.Directors;
-import at.tugraz.objects.imdb.DirectorsGenres;
-import at.tugraz.objects.imdb.Movies;
-import at.tugraz.objects.imdb.MoviesDirectors;
-import at.tugraz.objects.imdb.MoviesGenres;
-import at.tugraz.objects.imdb.Roles;
+import at.tugraz.datamodel.imdb.Actors;
+import at.tugraz.datamodel.imdb.Directors;
+import at.tugraz.datamodel.imdb.DirectorsGenres;
+import at.tugraz.datamodel.imdb.Movies;
+import at.tugraz.datamodel.imdb.MoviesDirectors;
+import at.tugraz.datamodel.imdb.MoviesGenres;
+import at.tugraz.datamodel.imdb.Roles;
 import at.tugraz.util.RootObject;
 
 import java.io.BufferedReader;

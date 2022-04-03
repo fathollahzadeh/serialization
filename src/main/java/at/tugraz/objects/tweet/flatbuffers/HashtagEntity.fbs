@@ -1,7 +1,0 @@
-namespace at.tugraz.tweet.flatbuffers;
-
-table HashtagEntityFBS {
-        indices:[int];
-        text:string;
-}
-root_type HashtagEntityFBS;

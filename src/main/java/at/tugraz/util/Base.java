@@ -19,7 +19,7 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import at.tugraz.objects.twitter.TweetStatus;
+import at.tugraz.datamodel.twitter.TweetStatus;
 
 public class Base {
 

@@ -1,7 +1,0 @@
-namespace at.tugraz.tweet.flatbuffers;
-
-table OptionEntityFBS {
-        position:int;
-        text:string;
-}
-root_type OptionEntityFBS;
