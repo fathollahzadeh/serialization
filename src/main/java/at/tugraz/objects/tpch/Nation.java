@@ -19,4 +19,35 @@ public class Nation {
 		this.comment = comment;
 	}
 
+	public Integer getNationKey() {
+		return nationKey;
+	}
+
+	public void setNationKey(Integer nationKey) {
+		this.nationKey = nationKey;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 }

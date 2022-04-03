@@ -2,6 +2,18 @@ package at.tugraz.util;
 
 public class Const {
 
+	public enum Dataset {
+		TWITTER,
+		TPCH,
+		IMDB;
+		@Override
+		public String toString() {
+			return this.name().toLowerCase();
+		}
+	}
+
+
+
 	public final static int NumberOfObjects = 10000;
 	public final static int NumberOfObjectsToRead = 1000;
 
