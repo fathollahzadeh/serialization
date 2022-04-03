@@ -1,8 +1,10 @@
 package at.tugraz.objects.imdb;
 
+import at.tugraz.util.RootObject;
+
 import java.util.List;
 
-public class Movies {
+public class Movies extends RootObject {
 
 	private Integer id;
 	private String name;
