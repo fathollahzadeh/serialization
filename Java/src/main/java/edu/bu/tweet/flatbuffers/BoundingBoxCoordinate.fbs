@@ -1,0 +1,15 @@
+namespace edu.bu.tweet.flatbuffers;
+
+table BoundingBoxCoordinateFBS {
+        type:string;
+        coordinates:[DoubleList1];
+}
+table DoubleList1{
+    values:[DoubleList2];
+}
+
+table DoubleList2{
+    values:[double];
+}
+
+root_type BoundingBoxCoordinateFBS;

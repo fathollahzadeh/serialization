@@ -1,0 +1,9 @@
+namespace edu.bu.tweet.flatbuffers;
+
+table SizeEntityFBS {
+	width:int;
+    height:int;
+    resize:string;
+
+}
+root_type SizeEntityFBS;

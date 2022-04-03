@@ -1,8 +1,0 @@
-include "MediaEntity.fbs";
-
-namespace at.tugraz.tweet.flatbuffers;
-
-table ExtendedEntitiesFBS {
-    media:[MediaEntityFBS];
-}
-root_type ExtendedEntitiesFBS;
