@@ -1,9 +1,0 @@
-namespace edu.bu.tweet.flatbuffers;
-
-table VariantEntityFBS {
-
-        bitrate:long;
-        content_type:string;
-        url:string;
-}
-root_type VariantEntityFBS;

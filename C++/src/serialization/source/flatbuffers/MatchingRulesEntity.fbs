@@ -1,8 +1,0 @@
-namespace tweetstatusflatbuffers;
-
-table MatchingRulesEntityFBS {
-        tag:string;
-        id:long;
-        id_str:string;
-}
-root_type MatchingRulesEntityFBS;
