@@ -7,6 +7,6 @@ export jCMD="java -Xms15g -Xmx15g"
 # 1. sub-exp: Load Object to a List
 experiment1a="Experiment1a_times"
 echo "language,dataset,time" >>results/$experiment1a.dat # write a header
-./explocal/runExperiment1_load_obj_Java.sh twitter.dat Twitter $experiment1a
+./explocal/runExperiment1a_load_obj_Java.sh twitter.dat Twitter $experiment1a
 
 
