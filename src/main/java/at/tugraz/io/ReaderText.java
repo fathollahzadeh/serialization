@@ -8,5 +8,10 @@ public abstract class ReaderText {
 	protected String fileName;
 	protected ArrayList<RootObject> objects;
 
-	public abstract ArrayList<RootObject> getObjects(String fileName);
+	public ReaderText(String fileName) {
+		this.fileName = fileName;
+		this.objects = new ArrayList<>();
+	}
+
+	public abstract ArrayList<RootObject> getObjects();
 }

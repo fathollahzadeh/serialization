@@ -1,6 +1,6 @@
 package at.tugraz.util;
 
-public enum SerializationType {
+public enum SerializationMethod {
 	JAVADEFAULT,
 	JSON_GZIP,
 	BSON,

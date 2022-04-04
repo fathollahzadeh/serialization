@@ -44,6 +44,14 @@ public class TweetStatus extends RootObject {
 	private List<String> withheld_in_countries;//nullable
 	private String withheld_scope;//nullable
 
+	public String getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+
 	@Override public KryoSingleton getKryoInstance() {
 		return KryoSingletonTweet.getInstance();
 	}

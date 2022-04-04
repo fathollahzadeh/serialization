@@ -32,7 +32,11 @@ public class ReaderTextCSVTPCH extends ReaderText {
 	private HashMap<Integer, ArrayList<LineItem>> lineItemMap = new HashMap<Integer, ArrayList<LineItem>>();
 	private HashMap<Integer, ArrayList<Order>> orderMap = new HashMap<>();
 
-	@Override public ArrayList<RootObject> getObjects(String fileName) {
+	public ReaderTextCSVTPCH(String fileName) {
+		super(fileName);
+	}
+
+	@Override public ArrayList<RootObject> getObjects() {
 		this.nationPath = fileName + "/nation.tbl";
 		this.regionPath = fileName + "/region.tbl";
 		this.partPath = fileName + "/part.tbl";

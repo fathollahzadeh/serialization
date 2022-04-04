@@ -2,14 +2,15 @@ package at.tugraz.io;
 
 import at.tugraz.util.Const;
 import at.tugraz.util.RootObject;
-import at.tugraz.util.SerializationType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,60 @@ public abstract class Serializer {
 		}
 		catch(Exception ex) {
 			logger.error(ex);
+		}
+	}
+
+	public void flush() {
+
+		//Write last page in file:
+		try {
+			long tmpTime = System.nanoTime();
+			randOutStreamRegularFile.seek(currentPageNumber * Const.PAGESIZE);
+			randOutStreamRegularFile.write(this.pageBuffer);
+		}
+		catch(Exception e) {
+			logger.error("can't write last page to the serialization file!");
+		}
+		this.writeIndexToFile(this.pageIndex);
+		this.writeIndexToFile(this.objectIndex);
+		this.writeIndexToFile(this.objectLength);
+		try {
+			// flush BufferedOutputStream
+			bosIndexFile.flush();
+		}
+		catch(Exception e) {
+			logger.error("can't close bosIndexFile file! ", e);
+		}
+
+		try {
+			this.randOutStreamRegularFile.close();
+		}
+		catch(IOException e) {
+			logger.error("can't close randOutStreamRegularFile file! ", e);
+		}
+	}
+
+	//Write data index to an index file:
+	private void writeIndexToFile(List<Long> indexList) {
+
+		ByteBuffer byteBufferLengths = ByteBuffer.allocate(8 + (indexList.size() * 8));
+		try {
+			byte[] data = null;
+			// first write total number of Objects into file.
+			byteBufferLengths.putLong(indexList.size()); // 8 bytes
+
+			// then the whole list array.
+			for(Long l : indexList) {
+				byteBufferLengths.putLong(l);
+			}
+			// write the list to disk.
+			data = byteBufferLengths.array();
+
+			long tmpTime = System.nanoTime();
+			bosIndexFile.write(data); // write the data
+		}
+		catch(Exception e) {
+			logger.error("write index to file error! ", e);
 		}
 	}
 }

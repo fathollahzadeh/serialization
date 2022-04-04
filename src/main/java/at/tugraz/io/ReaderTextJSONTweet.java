@@ -12,7 +12,11 @@ import java.util.ArrayList;
 
 public class ReaderTextJSONTweet extends ReaderText {
 
-	@Override public ArrayList<RootObject> getObjects(String fileName) {
+	public ReaderTextJSONTweet(String fileName) {
+		super(fileName);
+	}
+
+	@Override public ArrayList<RootObject> getObjects() {
 		Gson gson = new Gson();
 		try(BufferedReader br = new BufferedReader(new FileReader(fileName, StandardCharsets.UTF_8))) {
 			String line;

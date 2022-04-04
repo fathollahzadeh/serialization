@@ -12,8 +12,6 @@ public class Const {
 		}
 	}
 
-
-
 	public final static int NumberOfObjects = 10000;
 	public final static int NumberOfObjectsToRead = 1000;
 

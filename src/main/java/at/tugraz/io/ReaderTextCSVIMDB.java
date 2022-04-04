@@ -32,7 +32,11 @@ public class ReaderTextCSVIMDB extends ReaderText {
 	HashMap<Integer, ArrayList<MoviesDirectors>> moviesDirectorsMap = new HashMap<Integer, ArrayList<MoviesDirectors>>();
 	HashMap<Integer, ArrayList<MoviesGenres>> moviesGenresMap = new HashMap<Integer, ArrayList<MoviesGenres>>();
 
-	@Override public ArrayList<RootObject> getObjects(String fileName) {
+	public ReaderTextCSVIMDB(String fileName) {
+		super(fileName);
+	}
+
+	@Override public ArrayList<RootObject> getObjects() {
 		this.actorsPath = fileName + "/actors.csv";
 		this.directorsGenresPath = fileName + "/directors_genres.csv";
 		this.directorsPath = fileName + "/directors.csv";
