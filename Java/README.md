@@ -123,7 +123,7 @@ do
         echo 3 > /proc/sys/vm/drop_caches && sync
         
         #Run normal experiment 
-        time java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r false
+        time java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r false
         
         # wait a short time for back to stable state
         sleep 200
@@ -132,7 +132,7 @@ do
         echo 3 > /proc/sys/vm/drop_caches && sync
        
         # Run the experiment just on Core 0
-        time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar edu.bu.benchmarks.DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r true
+        time taskset -c 0 java   -XX:-UseGCOverheadLimit -XX:+UseConcMarkSweepGC -Xms4g -Xmx7g -cp  ./target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar DataSerialization $datapath $serialization_type $outpath $numberOfTweets $r true
 
     done
 
