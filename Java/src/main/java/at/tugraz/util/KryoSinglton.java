@@ -8,8 +8,6 @@ import at.tugraz.tweet.*;
 import at.tugraz.tweet.flatbuffers.*;
 import at.tugraz.tweet.proto.TweetStatusProtos;
 import com.esotericsoftware.kryo.Kryo;
-import edu.bu.tweet.*;
-import edu.bu.tweet.flatbuffers.*;
 
 public class KryoSinglton {
 

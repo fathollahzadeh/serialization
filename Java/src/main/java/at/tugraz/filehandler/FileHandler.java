@@ -6,7 +6,6 @@ import at.tugraz.util.KryoSinglton;
 import at.tugraz.util.RootData;
 import at.tugraz.util.SerializationType;
 import com.esotericsoftware.kryo.Kryo;
-import edu.bu.util.*;
 import org.apache.log4j.Logger;
 
 import java.io.*;

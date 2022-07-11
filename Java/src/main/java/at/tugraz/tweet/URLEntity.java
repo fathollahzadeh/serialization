@@ -7,7 +7,6 @@ import javax.json.*;
 
 import at.tugraz.tweet.flatbuffers.URLEntityFBS;
 import com.google.flatbuffers.FlatBufferBuilder;
-import edu.bu.tweet.flatbuffers.*;
 import at.tugraz.util.Base;
 import at.tugraz.util.RootData;
 import org.bson.BsonBinaryReader;

@@ -38,9 +38,9 @@ public interface RootData extends Serializable, Comparable<RootData> {
 
 	RootData bsonDeSerialization(byte[] buffData);
 
-	public byte[] gsonSerialization();
+	byte[] gsonSerialization();
 
-	public TweetStatus gsonDeSerialization(byte[] buff);
+	TweetStatus gsonDeSerialization(byte[] buff);
 
 	String toString();
 
