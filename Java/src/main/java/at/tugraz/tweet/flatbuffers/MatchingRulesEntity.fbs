@@ -1,4 +1,4 @@
-namespace edu.bu.tweet.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 
 table MatchingRulesEntityFBS {
         tag:string;

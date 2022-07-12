@@ -6,7 +6,7 @@ include "UserMentionEntity.fbs";
 include "SymbolEntity.fbs";
 include "PollEntity.fbs";
 
-namespace edu.bu.tweet.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 
 table EntitiesFBS {
         hashtags:[HashtagEntityFBS];

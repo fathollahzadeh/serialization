@@ -5,6 +5,8 @@ import at.tugraz.tweet.TweetStatus;
 import at.tugraz.util.Const;
 import at.tugraz.util.KryoSinglton;
 import at.tugraz.util.RootData;
+import com.esotericsoftware.kryo.Kryo;
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedOutputStream;
@@ -22,6 +24,9 @@ public class ObjectWriter {
     protected RandomAccessFile randOutStreamRegularFile;
     protected FileOutputStream outIndexFile;
     protected BufferedOutputStream bosIndexFile;
+
+
+
     protected int currentPageNumber;
     protected int currentOffset;
     protected int row;
@@ -31,7 +36,7 @@ public class ObjectWriter {
     int[] pageIndex;
     int[] objectIndex;
     int[] objectLength;
-
+    protected Kryo kryo;
 
     public ObjectWriter(String fname, String method, int rlen) throws FileNotFoundException {
         this(method, rlen);
@@ -42,6 +47,7 @@ public class ObjectWriter {
     }
 
     public ObjectWriter(String method, int rlen){
+        this.kryo = new KryoSinglton().getKryo();
         this.currentPageNumber = 0;
         this.currentOffset = 0;
         this.method = method;
@@ -55,8 +61,9 @@ public class ObjectWriter {
 
 
     public void serializeObjects(RootData[] objects) {
-        for (RootData object : objects)
-            serializeObject(object);
+        for (RootData object : objects){
+            this.serializeObject(object);
+        }
     }
 
     public byte[] serializeObject(RootData object) {
@@ -76,7 +83,7 @@ public class ObjectWriter {
                     buffer = object.protocolBufferWrite();
                     break;
                 case "Kryo":
-                    buffer = object.kryoSerialization(KryoSinglton.getInstance().getKryo());
+                    buffer = object.kryoSerialization(kryo);
                     break;
                 case "ByteBuffer":
                     buffer = object.writeByteBuffer();
@@ -93,7 +100,8 @@ public class ObjectWriter {
 
             }
         } catch (Exception ex) {
-            logger.error(ex);
+            ex.printStackTrace();
+            logger.error("ObjectWriter(serializeObject):"+ex.getMessage());
         }
         return buffer;
     }
@@ -112,7 +120,7 @@ public class ObjectWriter {
             //if current page is full should write to the file and then reset the page
             if ((currentOffset + objectSize) > Const.PAGESIZE) {
                 //Write in file:
-                randOutStreamRegularFile.seek(currentPageNumber * Const.PAGESIZE);
+                randOutStreamRegularFile.seek((long) currentPageNumber * Const.PAGESIZE);
                 randOutStreamRegularFile.write(this.pageBuffer);
                 currentPageNumber++;
                 currentOffset = 0;
@@ -126,20 +134,26 @@ public class ObjectWriter {
             this.row++;
         } catch (Exception ex) {
             logger.error(ex);
-            ex.printStackTrace();
         }
     }
 
     public void flush() {
         //Write last page in file:
         try {
-            randOutStreamRegularFile.seek(currentPageNumber * Const.PAGESIZE);
+            randOutStreamRegularFile.seek((long) currentPageNumber * Const.PAGESIZE);
             randOutStreamRegularFile.write(this.pageBuffer);
         } catch (Exception e) {
             logger.error("can't write last page to the serialization file!");
         }
+        //System.out.println("Page Index:");
         this.writeIndexToFile(this.pageIndex);
+
+        //System.out.println("");
+        //System.out.println("objectIndex:");
         this.writeIndexToFile(this.objectIndex);
+
+        //System.out.println("");
+        //System.out.println("objectLength:");
         this.writeIndexToFile(this.objectLength);
         try {
             // flush BufferedOutputStream
@@ -166,6 +180,7 @@ public class ObjectWriter {
             // then the whole list array.
             for (Integer i : indexList) {
                 bb.putInt(i);
+                //System.out.print(i+",");
             }
             // write the list to disk.
             data = bb.array();

@@ -1,6 +1,6 @@
 include "MediaEntity.fbs";
 
-namespace edu.bu.tweet.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 
 table ExtendedEntitiesFBS {
     media:[MediaEntityFBS];

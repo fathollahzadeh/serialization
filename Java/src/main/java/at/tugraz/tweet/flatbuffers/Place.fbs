@@ -1,6 +1,6 @@
 include "BoundingBoxCoordinate.fbs";
 
-namespace edu.bu.tweet.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 
 table PlaceFBS {
       name:string;

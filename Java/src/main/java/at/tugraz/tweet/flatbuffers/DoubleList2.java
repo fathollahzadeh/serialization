@@ -9,7 +9,7 @@ import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class DoubleList2 extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_1_12_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
   public static DoubleList2 getRootAsDoubleList2(ByteBuffer _bb) { return getRootAsDoubleList2(_bb, new DoubleList2()); }
   public static DoubleList2 getRootAsDoubleList2(ByteBuffer _bb, DoubleList2 obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }

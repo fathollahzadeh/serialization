@@ -5,7 +5,7 @@ include "Place.fbs";
 include "Entities.fbs";
 include "ExtendedEntities.fbs";
 include "MatchingRulesEntity.fbs";
-namespace edu.bu.tweet.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 
 table MapStringBool {
          key:string;

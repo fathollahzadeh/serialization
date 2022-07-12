@@ -242,7 +242,7 @@ public class FileHandler {
 			this.bbPageBuffer.get(buffData_each_obecjt, 0, (int) lenght_each_object);
 			// NOW read each object
 			readListOfObject.add(readObjectWithSerialization(new TweetStatus(), buffData_each_obecjt, this.method,
-				KryoSinglton.getInstance().getKryo()));
+				new KryoSinglton().getKryo()));
 		}
 		return readListOfObject;
 	}
@@ -320,7 +320,7 @@ public class FileHandler {
 					buffer = object.protocolBufferWrite();
 					break;
 				case KRYO:
-					buffer = object.kryoSerialization(KryoSinglton.getInstance().getKryo());
+					buffer = object.kryoSerialization(new KryoSinglton().getKryo());
 					break;
 				case BYTEBUFFER:
 					buffer = object.writeByteBuffer();

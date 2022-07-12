@@ -11,22 +11,22 @@ import com.esotericsoftware.kryo.Kryo;
 
 public class KryoSinglton {
 
-	static class SingletonHolder {
-		static final KryoSinglton instance = new KryoSinglton();
-	}
-
-	public static KryoSinglton getInstance() {
-		return SingletonHolder.instance;
-
-	}
-
+//	static class SingletonHolder {
+//		static final KryoSinglton instance = new KryoSinglton();
+//	}
+//
+//	public static KryoSinglton getInstance() {
+//		return SingletonHolder.instance;
+//
+//	}
+//
 	public Kryo getKryo() {
 		return kryo;
 	}
 
 	private Kryo kryo;
 
-	private KryoSinglton() {
+	public KryoSinglton() {
 		kryo = new Kryo();
 
 		kryo.register(LinkedHashMap.class);

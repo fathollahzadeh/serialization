@@ -3,7 +3,7 @@ include "MediaSizesEntity.fbs";
 include "VideoEntity.fbs";
 include "AdditionalMediaInfoEntity.fbs";
 
-namespace edu.bu.tweet.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 
 table MediaEntityFBS {
 

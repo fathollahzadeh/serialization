@@ -1,7 +1,7 @@
 
 include "URLEntity.fbs";
 
-namespace edu.bu.tweet.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 table UserFBS {
         id:long;
         name:string;

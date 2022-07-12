@@ -5,6 +5,7 @@ import at.tugraz.util.Const;
 import at.tugraz.util.KryoSinglton;
 import at.tugraz.util.RootData;
 import com.esotericsoftware.kryo.Kryo;
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -28,11 +29,13 @@ public class ObjectReader {
     protected HashMap<Integer, Integer> objectInEachPage;
     protected FileChannel inStreamRegularFile;
     protected ByteBuffer bbPageBuffer;
+    protected Kryo kryo;
 
     public ObjectReader(String fname, String method) {
         this.method = method;
         this.currentOffset = 0;
         this.row = 0;
+        this.kryo = new KryoSinglton().getKryo();
 
         //Allocates write page buffer:
         this.pageBuffer = new byte[2 * Const.PAGESIZE];
@@ -58,8 +61,7 @@ public class ObjectReader {
             int a = 1000;
 
         } catch (Exception ex) {
-            ex.printStackTrace();
-            //logger.error("prepareToRead! ", ex);
+            logger.error("prepareToRead! ", ex);
         }
     }
 
@@ -143,7 +145,7 @@ public class ObjectReader {
             this.bbPageBuffer.position(relativePosition);
             this.bbPageBuffer.get(buffer, 0, this.objectLength[j]);
             // NOW read each object
-            readListOfObject[index++] = readObjectWithSerialization(new TweetStatus(), buffer, this.method, KryoSinglton.getInstance().getKryo());
+            readListOfObject[index++] = readObjectWithSerialization(new TweetStatus(), buffer);
         }
         return readListOfObject;
     }
@@ -165,7 +167,7 @@ public class ObjectReader {
     /*
      * This method reads the objects based on their serialization and prints them out
      */
-    protected RootData readObjectWithSerialization(TweetStatus myData, byte[] buffData, String method, Kryo kryo) {
+    public RootData readObjectWithSerialization(TweetStatus myData, byte[] buffData) {
         RootData myDeserlizedObject = null;
         switch (method) {
             case "Default":

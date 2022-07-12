@@ -9,7 +9,7 @@ import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class SizeEntityFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_1_12_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
   public static SizeEntityFBS getRootAsSizeEntityFBS(ByteBuffer _bb) { return getRootAsSizeEntityFBS(_bb, new SizeEntityFBS()); }
   public static SizeEntityFBS getRootAsSizeEntityFBS(ByteBuffer _bb, SizeEntityFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }

@@ -6,7 +6,7 @@ import at.tugraz.util.RootData;
 
 import java.io.IOException;
 
-public class DataSerialization {
+public class DataSerializationSingle {
 
 	public static void main(String[] args) throws IOException {
 
@@ -20,7 +20,7 @@ public class DataSerialization {
 		for (int i=0; i<nrow;){
 			RootData[] rd = reader.readObjects(i, batch);
 			writer.serializeObjects(rd);
-			i += batch;
+			i += rd.length;
 		}
 	}
 }
