@@ -2,7 +2,7 @@ package at.tugraz.experiments;
 
 import at.tugraz.runtime.ObjectReader;
 
-public class DataLoadToMemory {
+public class DataLoadToMemorySingle {
 
 	public static void main(String[] args){
 

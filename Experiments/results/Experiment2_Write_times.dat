@@ -1,8 +1,0 @@
-DefaultJava,Java,false,total,Parallel,2574
-Json+GzipJava,Java,false,total,Parallel,5954
-BsonJava,Java,false,total,Parallel,3005
-ProtoBufJava,Java,false,total,Parallel,2024
-KryoJava,Java,false,total,Parallel,1788
-ByteBufferJava,Java,false,total,Parallel,1740
-JsonJava,Java,false,total,Parallel,4160
-FlatBuffersJava,Java,false,total,Parallel,1882
