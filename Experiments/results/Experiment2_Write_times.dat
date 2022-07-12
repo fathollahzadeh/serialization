@@ -1,0 +1,9 @@
+baseline,language,taskset,execution,platform,time
+DefaultJava,Java,false,CPU,Parallel,2247
+Json+GzipJava,Java,false,CPU,Parallel,5898
+BsonJava,Java,false,CPU,Parallel,2816
+ProtoBufJava,Java,false,CPU,Parallel,1869
+KryoJava,Java,false,CPU,Parallel,1671
+ByteBufferJava,Java,false,CPU,Parallel,1541
+JsonJava,Java,false,CPU,Parallel,4051
+FlatBuffersJava,Java,false,CPU,Parallel,1877
