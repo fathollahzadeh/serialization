@@ -13,7 +13,6 @@ if [ "$task_set" = false ] ; then
 fi
 
 declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") #"Gson" 
-#declare -a methods=("Default")
 
 for method in "${methods[@]}"; do
     for rp in {1..1}; do

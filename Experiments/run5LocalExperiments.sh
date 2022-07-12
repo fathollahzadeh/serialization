@@ -13,9 +13,10 @@ nrow=100000
 # Seralization (just CPU time)
 #./explocal/runExperiment1b_Serialization.sh $inDataPath $nrow Single false Experiment1_Write_times
 #./explocal/runExperiment1b_Serialization.sh $inDataPath $nrow Single true Experiment1_Write_times
-./explocal/runExperiment1b_Serialization.sh $inDataPath $nrow Parallel false Experiment2_Write_times
+#./explocal/runExperiment1b_Serialization.sh $inDataPath $nrow Parallel false Experiment2_Write_times
 
 
 # # Write (CPU+IO)
-# ./explocal/runExperiment1c_Write.sh $inDataPath $outDataPath $nrow single false Experiment1_Write_times
-# ./explocal/runExperiment1c_Write.sh $inDataPath $outDataPath $nrow single true Experiment1_Write_times
+#./explocal/runExperiment1c_Write.sh $inDataPath $outDataPath $nrow Single false Experiment1_Write_times
+#./explocal/runExperiment1c_Write.sh $inDataPath $outDataPath $nrow Single true Experiment1_Write_times
+./explocal/runExperiment1c_Write.sh $inDataPath $outDataPath $nrow Parallel false Experiment2_Write_times

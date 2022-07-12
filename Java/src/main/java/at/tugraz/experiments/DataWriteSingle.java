@@ -6,7 +6,7 @@ import at.tugraz.util.RootData;
 
 import java.io.IOException;
 
-public class DataWrite {
+public class DataWriteSingle {
 
 	public static void main(String[] args) throws IOException {
 

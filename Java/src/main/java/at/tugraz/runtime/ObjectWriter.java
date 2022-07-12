@@ -24,9 +24,6 @@ public class ObjectWriter {
     protected RandomAccessFile randOutStreamRegularFile;
     protected FileOutputStream outIndexFile;
     protected BufferedOutputStream bosIndexFile;
-
-
-
     protected int currentPageNumber;
     protected int currentOffset;
     protected int row;
@@ -145,15 +142,9 @@ public class ObjectWriter {
         } catch (Exception e) {
             logger.error("can't write last page to the serialization file!");
         }
-        //System.out.println("Page Index:");
+
         this.writeIndexToFile(this.pageIndex);
-
-        //System.out.println("");
-        //System.out.println("objectIndex:");
         this.writeIndexToFile(this.objectIndex);
-
-        //System.out.println("");
-        //System.out.println("objectLength:");
         this.writeIndexToFile(this.objectLength);
         try {
             // flush BufferedOutputStream
@@ -180,7 +171,6 @@ public class ObjectWriter {
             // then the whole list array.
             for (Integer i : indexList) {
                 bb.putInt(i);
-                //System.out.print(i+",");
             }
             // write the list to disk.
             data = bb.array();

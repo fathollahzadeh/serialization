@@ -9,15 +9,17 @@ log_file_name=$6
 
 declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") #"Gson" 
 
+#declare -a methods=("Default")
+
 for method in "${methods[@]}"; do
-    for rp in {1..5}; do
+    for rp in {1..1}; do
         start=$(date +%s%N)
         SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
                        -DoutDataPath=${outDataPath}.${method}\
                        -Dnrow=${nrow}\
                        -Dplatform=${platform}\
                        -Dmethod=${method}\
-                       -cp ./SerializationJava.jar at.tugraz.experiments.DataWrite
+                       -cp ./SerializationJava.jar at.tugraz.experiments.DataWrite${platform}
                 "
         echo $SCRIPT
         if [ "$task_set" = true ] ; then
