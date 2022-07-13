@@ -17,7 +17,6 @@ for method in "${methods[@]}"; do
         SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
                        -DoutDataPath=${outDataPath}.${method}\
                        -Dnrow=${nrow}\
-                       -Dplatform=${platform}\
                        -Dmethod=${method}\
                        -cp ./SerializationJava.jar at.tugraz.experiments.DataWrite${platform}
                 "

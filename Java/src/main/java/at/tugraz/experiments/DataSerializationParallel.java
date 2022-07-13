@@ -3,6 +3,7 @@ package at.tugraz.experiments;
 import at.tugraz.runtime.ObjectReader;
 import at.tugraz.runtime.ObjectWriter;
 import at.tugraz.util.CommonThreadPool;
+import at.tugraz.util.Const;
 import at.tugraz.util.OptimizerUtils;
 import at.tugraz.util.RootData;
 
@@ -26,12 +27,11 @@ public class DataSerializationParallel {
         ExecutorService pool = CommonThreadPool.get(numThreads);
         ArrayList<SerializeTask> tasks = new ArrayList<>();
         int blklen = (int) Math.ceil((double) nrow / numThreads);
-        int batch = 256;
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
             ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
             int rlen = Math.min((i + 1) * blklen, nrow) - i * blklen + 1;
             ObjectWriter writer = new ObjectWriter(method, rlen);
-            tasks.add(new SerializeTask(reader, writer, i * blklen, Math.min((i + 1) * blklen, nrow), batch));
+            tasks.add(new SerializeTask(reader, writer, i * blklen, Math.min((i + 1) * blklen, nrow)));
         }
 
         //wait until all tasks have been executed
@@ -50,24 +50,22 @@ public class DataSerializationParallel {
         private final ObjectWriter writer;
         private final int beginPos;
         private final int endPos;
-        private final int batch;
 
-        public SerializeTask(ObjectReader reader, ObjectWriter writer, int beginPos, int endPos, int batch) {
+        public SerializeTask(ObjectReader reader, ObjectWriter writer, int beginPos, int endPos) {
             this.reader = reader;
             this.writer = writer;
             this.beginPos = beginPos;
             this.endPos = endPos;
-            this.batch = batch;
         }
 
         @Override
         public Integer call() {
-            int size = batch;
+            int size = Const.BATCHSIZE;
             for (int i = beginPos; i < endPos; ) {
                 RootData[] rd = reader.readObjects(i, size);
                 writer.serializeObjects(rd);
                 i += rd.length;
-                size = Math.min(endPos - i, batch);
+                size = Math.min(endPos - i + 1, Const.BATCHSIZE);
             }
             return null;
         }

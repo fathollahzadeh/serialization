@@ -2,6 +2,7 @@ package at.tugraz.experiments;
 
 import at.tugraz.runtime.ObjectReader;
 import at.tugraz.runtime.ObjectWriter;
+import at.tugraz.util.Const;
 import at.tugraz.util.RootData;
 
 import java.io.IOException;
@@ -16,11 +17,12 @@ public class DataSerializationSingle {
 
 		ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
 		ObjectWriter writer = new ObjectWriter(method, nrow);
-		int batch = 256;
+		int size = Const.BATCHSIZE;
 		for (int i=0; i<nrow;){
-			RootData[] rd = reader.readObjects(i, batch);
+			RootData[] rd = reader.readObjects(i, size);
 			writer.serializeObjects(rd);
 			i += rd.length;
+			size = Math.min(nrow - i + 1, Const.BATCHSIZE);
 		}
 	}
 }
