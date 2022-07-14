@@ -10,5 +10,5 @@ export jCMD="java -Xms30g -Xmx30g -Xmn4g --illegal-access=deny -Dlog4j.configura
 
 
 ./run2SetupSerialization.sh
-#./run4PrepareData.sh
+./run4PrepareData.sh
 ./run5LocalExperiments.sh

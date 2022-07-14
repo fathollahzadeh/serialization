@@ -388,3 +388,9 @@ Java/target/classes/at/tugraz/util/SerializationType.class
 Java/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 Java/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 Experiments/loging.log
+Java/target/classes/at/tugraz/experiments/DataReadIOParallel.class
+Java/target/classes/at/tugraz/experiments/DataReadIOParallel$ReadIOTask.class
+Java/target/classes/at/tugraz/experiments/DataReadIOSingle.class
+Java/target/classes/at/tugraz/experiments/DataReadParallel.class
+Java/target/classes/at/tugraz/experiments/DataReadParallel$ReadIOTask.class
+Java/target/classes/at/tugraz/experiments/DataReadSingle.class

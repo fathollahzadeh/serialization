@@ -20,19 +20,20 @@ public class DataPrepare {
 
         ObjectWriter writer = new ObjectWriter(outDataPath, "Kryo", nrow);
         AtomicInteger index = new AtomicInteger();
-        try(Stream<String> stream = Files.lines(Paths.get(inDataPath))) {
-            stream.forEach(e -> {
-                if (index.get()<nrow) {
-                    Gson gson = new Gson();
-                    TweetStatus tweetStatus = gson.fromJson(e, TweetStatus.class);
-                    writer.writeObjectToFile(tweetStatus);
-                }
-                index.getAndIncrement();
+        for (int r=0; r<8; r++) {
+            try (Stream<String> stream = Files.lines(Paths.get(inDataPath))) {
+                stream.forEach(e -> {
+                    if (index.get() < nrow) {
+                        Gson gson = new Gson();
+                        TweetStatus tweetStatus = gson.fromJson(e, TweetStatus.class);
+                        writer.writeObjectToFile(tweetStatus);
+                    }
+                    index.getAndIncrement();
 
-            });
-        }
-        catch(IOException e) {
-            e.printStackTrace();
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         writer.flush();
