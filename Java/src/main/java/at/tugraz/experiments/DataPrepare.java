@@ -20,7 +20,6 @@ public class DataPrepare {
 
         ObjectWriter writer = new ObjectWriter(outDataPath, "Kryo", nrow);
         AtomicInteger index = new AtomicInteger();
-        for (int r=0; r<8; r++) {
             try (Stream<String> stream = Files.lines(Paths.get(inDataPath))) {
                 stream.forEach(e -> {
                     if (index.get() < nrow) {
@@ -34,11 +33,8 @@ public class DataPrepare {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
 
         writer.flush();
-
-
 
 //        BlockingQueue<String> queue = new ArrayBlockingQueue<>(1000);
 //        ReadTweet readTweet = new ReadTweet(queue, inDataPath);
