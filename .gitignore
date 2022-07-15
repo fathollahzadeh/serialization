@@ -394,3 +394,4 @@ Java/target/classes/at/tugraz/experiments/DataReadIOSingle.class
 Java/target/classes/at/tugraz/experiments/DataReadParallel.class
 Java/target/classes/at/tugraz/experiments/DataReadParallel$ReadIOTask.class
 Java/target/classes/at/tugraz/experiments/DataReadSingle.class
+Experiments/data/tweets.zip

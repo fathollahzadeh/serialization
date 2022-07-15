@@ -1,24 +1,20 @@
 #!/bin/bash
 
 inDataPath=$1
-outDataPath=$2
-nrow=$3
-platform=$4
-task_set=$5
-log_file_name=$6
+nrow=$2
+platform=$3
+task_set=$4
+log_file_name=$5
 
 declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") #"Gson" 
-
-#declare -a methods=("Default")
 
 for method in "${methods[@]}"; do
     for rp in {1..5}; do
         start=$(date +%s%N)
         SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
-                       -DoutDataPath=${outDataPath}.${method}\
                        -Dnrow=${nrow}\
                        -Dmethod=${method}\
-                       -cp ./SerializationJava.jar at.tugraz.experiments.DataWrite${platform}
+                       -cp ./SerializationJava.jar at.tugraz.experiments.DataReadIO${platform}
                 "
         echo $SCRIPT
         if [ "$task_set" = true ] ; then
@@ -26,7 +22,7 @@ for method in "${methods[@]}"; do
         fi
         $SCRIPT
         end=$(date +%s%N)
-        echo ${method}"Java,Java,"${task_set}",total,"${platform}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+        echo ${method}"Java,Java,"${task_set}",IO,"${platform}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
     done
 done    
 
