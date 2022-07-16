@@ -10,12 +10,11 @@ public class GenerateRandomNumbers {
         int low= 0;
         int high= 8000000;
         String fname = "../Experiments/data";
-        for (int i=1; i<=8;i++){
-            int length = i*1000000;
-            int[] randomList = new int[length];
-            for (int j=0; j<length; j++)
+        for (int i=1000000; i<=8000000;i+=1000000){
+            int[] randomList = new int[i];
+            for (int j=0; j<i; j++)
                 randomList[j] = getRandomNumber(low, high);
-            writeToFile(fname+"/random_list"+i+"m.dat", randomList);
+            writeToFile(fname+"/random_list_"+i+".dat", randomList);
         }
     }
 
