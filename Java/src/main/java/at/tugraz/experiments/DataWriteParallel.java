@@ -80,7 +80,7 @@ public class DataWriteParallel {
                 RootData[] rd = reader.readObjects(i, size);
                 writer.writeObjectToFile(rd);
                 i += rd.length;
-                size = Math.min(endPos - i +1 , Const.BATCHSIZE);
+                size = Math.min(endPos - i , Const.BATCHSIZE);
             }
             writer.flush();
             return null;

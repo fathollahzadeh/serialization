@@ -22,7 +22,7 @@ public class DataSerializationSingle {
 			RootData[] rd = reader.readObjects(i, size);
 			writer.serializeObjects(rd);
 			i += rd.length;
-			size = Math.min(nrow - i + 1, Const.BATCHSIZE);
+			size = Math.min(nrow - i, Const.BATCHSIZE);
 		}
 	}
 }

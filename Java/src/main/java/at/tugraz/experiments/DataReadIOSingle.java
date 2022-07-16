@@ -32,7 +32,7 @@ public class DataReadIOSingle {
                     randomIDs[index++] = Integer.parseInt(line);
                 }
                 for (int i: randomIDs ) {
-                    reader.readObjects(i, 1);
+                    reader.readIO(i, 1);
                 }
 
             } catch (IOException e) {

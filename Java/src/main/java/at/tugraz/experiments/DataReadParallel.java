@@ -89,7 +89,7 @@ public class DataReadParallel {
 
         @Override
         public Integer call() {
-            reader.readObjects(beginPos, endPos - beginPos +1, this.rd);
+            reader.readObjects(beginPos, endPos - beginPos, this.rd);
             return null;
         }
     }
@@ -107,9 +107,6 @@ public class DataReadParallel {
             for (int i = beginPos; i < endPos; i++) {
                 RootData[] r = reader.readObjects(randomList[i], 1);
                 this.rd[i] = r[0];
-
-                Gson gson = new Gson();
-                System.out.println(gson.toJson(r[0]));
             }
             return null;
         }

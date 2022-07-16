@@ -65,7 +65,7 @@ public class DataSerializationParallel {
                 RootData[] rd = reader.readObjects(i, size);
                 writer.serializeObjects(rd);
                 i += rd.length;
-                size = Math.min(endPos - i + 1, Const.BATCHSIZE);
+                size = Math.min(endPos - i, Const.BATCHSIZE);
             }
             return null;
         }

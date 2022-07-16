@@ -136,6 +136,7 @@ public class ObjectReader {
 
         //Iterate over all objects that you aspire to read.
         int index = 0;
+        //System.out.println(">>>>>>>>>>. "+listSize+"  i="+i+"  n="+n);
         for (int j = i; j < listSize; j++) {
             readPage(this.pageIndex[j]);
             byte[] buffer = new byte[this.objectLength[j]];
