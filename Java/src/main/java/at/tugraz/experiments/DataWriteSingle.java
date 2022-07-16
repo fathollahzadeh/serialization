@@ -23,7 +23,7 @@ public class DataWriteSingle {
 		for (int i=0; i<nrow;){
 			RootData[] rd = reader.readObjects(i, size);
 			writer.writeObjectToFile(rd);
-			i += Const.BATCHSIZE;
+			i += rd.length;
 			size = Math.min(nrow - i +1 , Const.BATCHSIZE);
 		}
 		writer.flush();
