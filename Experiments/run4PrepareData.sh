@@ -2,14 +2,16 @@
 
 # prepare data for Java experiments
 
-nrow=100000
-
 # cleanup
 rm -rf data/tweets.bin
 rm -rf data/tweets.bin.index
 
-SCRIPT="$jCMD  -DinDataPath=data/tweets.txt\
-                -DoutDataPath=data/tweets.bin\
+inDataPath="data/tweets.txt"
+outDataPathJava="data/tweets.jbin"
+nrow=$(sed -n '$=' $inDataPath)
+
+SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
+                -DoutDataPath=${outDataPathJava}\
                 -Dnrow=${nrow}\
                 -cp ./SerializationJava.jar at.tugraz.experiments.DataPrepare
         "
