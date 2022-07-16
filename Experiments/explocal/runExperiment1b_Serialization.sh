@@ -9,7 +9,7 @@ log_file_name=$5
 declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") #"Gson" 
 
 for method in "${methods[@]}"; do
-    for rp in {1..5}; do
+    for rp in {1..1}; do
         start=$(date +%s%N)
         SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
                        -Dnrow=${nrow}\
@@ -20,7 +20,7 @@ for method in "${methods[@]}"; do
         if [ "$task_set" = true ] ; then
             SCRIPT="taskset -c 0 $SCRIPT"
         fi
-        $SCRIPT
+       time $SCRIPT
         end=$(date +%s%N)
         echo ${method}"Java,Java,"${task_set}",CPU,"${platform}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
     done

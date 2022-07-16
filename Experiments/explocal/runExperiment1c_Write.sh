@@ -9,13 +9,11 @@ log_file_name=$6
 
 declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") #"Gson" 
 
-#declare -a methods=("Default")
-
 for method in "${methods[@]}"; do
-    for rp in {1..5}; do
+    for rp in {1..1}; do
         start=$(date +%s%N)
         SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
-                       -DoutDataPath=${outDataPath}.${method}\
+                       -DoutDataPath=${outDataPath}.${method}Java\
                        -Dnrow=${nrow}\
                        -Dmethod=${method}\
                        -cp ./SerializationJava.jar at.tugraz.experiments.DataWrite${platform}
@@ -24,9 +22,9 @@ for method in "${methods[@]}"; do
         if [ "$task_set" = true ] ; then
             SCRIPT="taskset -c 0 $SCRIPT"
         fi
-        $SCRIPT
+        time $SCRIPT
         end=$(date +%s%N)
-        echo ${method}"Java,Java,"${task_set}",total,"${platform}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+        echo ${method}"Java,Java,"${task_set}",Total,"${platform}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
     done
 done    
 

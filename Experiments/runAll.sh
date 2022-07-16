@@ -11,5 +11,5 @@ repeats=5
 
 #./run1SetupDependencies.sh
 ./run2SetupSerialization.sh
-./run4PrepareData.sh
+#./run4PrepareData.sh
 ./run5LocalExperiments.sh

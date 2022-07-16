@@ -11,9 +11,9 @@ public class DataDuplicate {
 
     public static void main(String[] args) throws IOException {
 
-        FileWriter myWriter = new FileWriter("/mnt/8m.txt");
-        String inDataPath="/home/saeed/Documents/Github/serialization/Experiments/data/tweets.txt";
-
+        String inDataPath = System.getProperty("inDataPath");
+        String outDataPath =System.getProperty("outDataPath");
+        FileWriter myWriter = new FileWriter(outDataPath);
         ArrayList<String> list= new ArrayList<>();
 
         try (Stream<String> stream = Files.lines(Paths.get(inDataPath))) {

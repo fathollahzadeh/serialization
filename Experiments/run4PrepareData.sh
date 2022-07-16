@@ -3,8 +3,8 @@
 # prepare data for Java experiments
 
 # cleanup
-rm -rf data/tweets.bin
-rm -rf data/tweets.bin.index
+rm -rf data/tweets.jbin
+rm -rf data/tweets.jbin.index
 
 inDataPath="data/tweets.txt"
 outDataPathJava="data/tweets.jbin"

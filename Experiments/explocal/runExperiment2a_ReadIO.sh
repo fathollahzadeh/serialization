@@ -4,15 +4,19 @@ inDataPath=$1
 nrow=$2
 platform=$3
 task_set=$4
-log_file_name=$5
+seq_rand=$5
+log_file_name=$6
+randomDataPath=$7
 
 declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") #"Gson" 
 
 for method in "${methods[@]}"; do
-    for rp in {1..5}; do
+    for rp in {1..1}; do
         start=$(date +%s%N)
-        SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
+        SCRIPT="$jCMD  -DinDataPath=${inDataPath}.${method}\
                        -Dnrow=${nrow}\
+                       -DseqRand=${seq_rand}\
+                       -DrandomDataPath=${randomDataPath}\
                        -Dmethod=${method}\
                        -cp ./SerializationJava.jar at.tugraz.experiments.DataReadIO${platform}
                 "
@@ -20,9 +24,8 @@ for method in "${methods[@]}"; do
         if [ "$task_set" = true ] ; then
             SCRIPT="taskset -c 0 $SCRIPT"
         fi
-        $SCRIPT
+        time $SCRIPT
         end=$(date +%s%N)
-        echo ${method}"Java,Java,"${task_set}",IO,"${platform}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+        echo ${method}"Java,Java,"${task_set}",IO,"${platform}","${seq_rand}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
     done
 done    
-
