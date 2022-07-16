@@ -35,27 +35,5 @@ public class DataPrepare {
             }
 
         writer.flush();
-
-//        BlockingQueue<String> queue = new ArrayBlockingQueue<>(1000);
-//        ReadTweet readTweet = new ReadTweet(queue, inDataPath);
-//        Thread rt = new Thread(readTweet);
-//        readTweet.setReadStatus(true);
-//        rt.start();
-//
-//        ObjectWriter writer = new ObjectWriter(outDataPath, "ProtoBuf", nrow);
-//        try {
-//            String line;
-//            for (long i = 0; i < nrow; i++) {
-//                line = queue.take();
-//                Gson gson = new Gson();
-//                TweetStatus tweetStatus = gson.fromJson(line, TweetStatus.class);
-//                writer.writeObjectToFile(tweetStatus);
-//            }
-//            readTweet.setReadStatus(false);
-//            queue.take();
-//            writer.flush();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 }
