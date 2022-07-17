@@ -13,7 +13,7 @@ declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" 
 for method in "${methods[@]}"; do
     for rp in {1..1}; do
         start=$(date +%s%N)
-        SCRIPT="$jCMD  -DinDataPath=${inDataPath}.${method}\
+        SCRIPT="$jCMD  -DinDataPath=${inDataPath}.${method}Java\
                        -Dnrow=${nrow}\
                        -DseqRand=${seq_rand}\
                        -DrandomDataPath=${randomDataPath}\
