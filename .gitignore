@@ -1,16 +1,3 @@
-Experiments/data/random_lists.tar.xz
-Experiments/data/random_lists.zip
-Experiments/data/tweets.jbin
-Experiments/data/tweets.jbin.index
-Experiments/data/tweets.txt
-Experiments/data/tweets.zip
-Experiments/data/random_lists/random_list_1000000.dat
-Experiments/data/random_lists/random_list_2000000.dat
-Experiments/data/random_lists/random_list_3000000.dat
-Experiments/data/random_lists/random_list_4000000.dat
-Experiments/data/random_lists/random_list_5000000.dat
-Experiments/data/random_lists/random_list_6000000.dat
-Experiments/data/random_lists/random_list_7000000.dat
-Experiments/data/random_lists/random_list_8000000.dat
+Experiments/data/*
 Experiments/SerializationJava.jar
 Experiments/loging.log

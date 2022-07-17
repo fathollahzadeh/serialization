@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class ObjectReader {
     static Logger logger = Logger.getLogger(ObjectReader.class);
-    protected int currentPageNumber;
+    protected long currentPageNumber;
     protected int currentOffset;
     protected int row;
     protected int rlen;
@@ -182,11 +182,11 @@ public class ObjectReader {
         }
     }
 
-    protected void readPage(int id) {
+    protected void readPage(long id) {
         if (currentPageNumber != id) {
             try {
                 this.bbPageBuffer.clear();
-                int newPosition = id * Const.PAGESIZE;
+                long newPosition = id * Const.PAGESIZE;
                 inStreamRegularFile.position(newPosition);
                 inStreamRegularFile.read(bbPageBuffer); // read object data from disk
                 currentPageNumber = id;

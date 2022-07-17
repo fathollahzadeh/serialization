@@ -24,7 +24,7 @@ public class ObjectWriter {
     protected RandomAccessFile randOutStreamRegularFile;
     protected FileOutputStream outIndexFile;
     protected BufferedOutputStream bosIndexFile;
-    protected int currentPageNumber;
+    protected long currentPageNumber;
     protected int currentOffset;
     protected int row;
     protected String method;
@@ -117,14 +117,14 @@ public class ObjectWriter {
             //if current page is full should write to the file and then reset the page
             if ((currentOffset + objectSize) > Const.PAGESIZE) {
                 //Write in file:
-                randOutStreamRegularFile.seek((long) currentPageNumber * Const.PAGESIZE);
+                randOutStreamRegularFile.seek(currentPageNumber * Const.PAGESIZE);
                 randOutStreamRegularFile.write(this.pageBuffer);
                 currentPageNumber++;
                 currentOffset = 0;
                 this.pageBuffer = new byte[2 * Const.PAGESIZE];
             }
             System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset, objectSize);
-            this.pageIndex[row] = currentPageNumber;
+            this.pageIndex[row] = (int) currentPageNumber;
             this.objectIndex[row] = currentOffset;
             this.objectLength[row] = objectSize;
             currentOffset += objectSize;
