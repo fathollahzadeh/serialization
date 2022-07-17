@@ -1,3 +1,4 @@
 Experiments/data/*
 Experiments/SerializationJava.jar
 Experiments/loging.log
+Java/target/*

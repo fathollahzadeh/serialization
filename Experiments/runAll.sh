@@ -10,6 +10,7 @@ export jCMD="java -Xms60g -Xmx60g -Xmn7g --illegal-access=deny -Dlog4j.configura
 repeats=5
 
 #./run1SetupDependencies.sh
-./run2SetupSerialization.sh
+#./run2SetupSerialization.sh
+./run3DownloadData.sh
 #./run4PrepareData.sh
-./run5LocalExperiments.sh
+#./run5LocalExperiments.sh

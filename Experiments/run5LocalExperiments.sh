@@ -3,7 +3,7 @@
 # This script runs all local experiments on the specified scale-up machine.
 inDataPathJava="data/tweets.jbin"
 randomDataPath="data/random_list_"
-outDataPath="/mnt/tweets"
+outDataPath="data/tmp/tweets"
 declare -a nrows=(1000000 2000000 3000000 4000000 5000000 6000000 7000000 8000000)
 
 # Load data into memory
@@ -15,12 +15,12 @@ echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results
 echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results/Experiment2_Read_times.dat
 
 for nrow in "${nrows[@]}"; do
-    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single true Sequential $nrow Experiment1a_LoadToMemory_times
-    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single false Sequential $nrow Experiment1a_LoadToMemory_times
-    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Parallel false Sequential $nrow Experiment1a_LoadToMemory_times
-    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single true Random $nrow Experiment1a_LoadToMemory_times "$randomDataPath$nrow.dat"
-    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single false Random $nrow Experiment1a_LoadToMemory_times "$randomDataPath$nrow.dat"
-    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Parallel false Random $nrow Experiment1a_LoadToMemory_times "$randomDataPath$nrow.dat"
+    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single true Sequential $nrow Experiment1_LoadToMemory_times
+    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single false Sequential $nrow Experiment1_LoadToMemory_times
+    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Parallel false Sequential $nrow Experiment1_LoadToMemory_times
+    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single true Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
+    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single false Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
+    ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Parallel false Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
 
 
     # Seralization (just CPU time)
