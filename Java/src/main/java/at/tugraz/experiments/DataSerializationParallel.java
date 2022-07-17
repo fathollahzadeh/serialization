@@ -48,10 +48,10 @@ public class DataSerializationParallel {
     private static class SerializeTask implements Callable<Integer> {
         private final ObjectReader reader;
         private final ObjectWriter writer;
-        private final int beginPos;
-        private final int endPos;
+        private final long beginPos;
+        private final long endPos;
 
-        public SerializeTask(ObjectReader reader, ObjectWriter writer, int beginPos, int endPos) {
+        public SerializeTask(ObjectReader reader, ObjectWriter writer, long beginPos, long endPos) {
             this.reader = reader;
             this.writer = writer;
             this.beginPos = beginPos;
@@ -61,11 +61,11 @@ public class DataSerializationParallel {
         @Override
         public Integer call() {
             int size = Const.BATCHSIZE;
-            for (int i = beginPos; i < endPos; ) {
+            for (int i = (int)beginPos; i < endPos; ) {
                 RootData[] rd = reader.readObjects(i, size);
                 writer.serializeObjects(rd);
                 i += rd.length;
-                size = Math.min(endPos - i, Const.BATCHSIZE);
+                size = (int) Math.min(endPos - i, Const.BATCHSIZE);
             }
             return null;
         }

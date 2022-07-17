@@ -18,11 +18,11 @@ public class DataSerializationSingle {
 		ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
 		ObjectWriter writer = new ObjectWriter(method, nrow);
 		int size = Const.BATCHSIZE;
-		for (int i=0; i<nrow;){
+		for (long i=0; i<nrow;){
 			RootData[] rd = reader.readObjects(i, size);
 			writer.serializeObjects(rd);
 			i += rd.length;
-			size = Math.min(nrow - i, Const.BATCHSIZE);
+			size = (int) Math.min(nrow - i, Const.BATCHSIZE);
 		}
 	}
 }

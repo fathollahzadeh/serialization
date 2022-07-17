@@ -5,7 +5,6 @@ import at.tugraz.util.Const;
 import at.tugraz.util.KryoSinglton;
 import at.tugraz.util.RootData;
 import com.esotericsoftware.kryo.Kryo;
-import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -57,9 +56,6 @@ public class ObjectReader {
                 if (objectInEachPage.containsKey(index)) objectInEachPage.put(index, objectInEachPage.get(index) + 1);
                 else objectInEachPage.put(index, 0);
             }
-
-            int a = 1000;
-
         } catch (Exception ex) {
             logger.error("prepareToRead! ", ex);
         }
@@ -129,15 +125,14 @@ public class ObjectReader {
         }
     }
 
-    public RootData[] readObjects(int i, int n) {
+    public RootData[] readObjects(long i, int n) {
 
-        int listSize = Math.min((i + n), this.rlen);
-        RootData[] readListOfObject = new RootData[listSize - i];
+        long listSize = Math.min((i + n), this.rlen);
+        RootData[] readListOfObject = new RootData[(int) (listSize - i)];
 
         //Iterate over all objects that you aspire to read.
         int index = 0;
-        //System.out.println(">>>>>>>>>>. "+listSize+"  i="+i+"  n="+n);
-        for (int j = i; j < listSize; j++) {
+        for (int j = (int) i; j < listSize; j++) {
             readPage(this.pageIndex[j]);
             byte[] buffer = new byte[this.objectLength[j]];
 
@@ -151,11 +146,11 @@ public class ObjectReader {
         return readListOfObject;
     }
 
-    public void readObjects(int i, int n, RootData[] rd) {
+    public void readObjects(long i, int n, RootData[] rd) {
 
-        int listSize = Math.min((i + n), this.rlen);
+        long listSize = Math.min((i + n), this.rlen);
         //Iterate over all objects that you aspire to read.
-        for (int j = i; j < listSize; j++) {
+        for (int j = (int) i; j < listSize; j++) {
             readPage(this.pageIndex[j]);
             byte[] buffer = new byte[this.objectLength[j]];
 
@@ -168,11 +163,11 @@ public class ObjectReader {
         }
     }
 
-    public void readIO(int i, int n) {
+    public void readIO(long i, int n) {
 
-        int listSize = Math.min((i + n), this.rlen);
+        long listSize = Math.min((i + n), this.rlen);
         //Iterate over all objects that you aspire to read.
-        for (int j = i; j < listSize; j++) {
+        for (int j = (int) i; j < listSize; j++) {
             readPage(this.pageIndex[j]);
             byte[] buffer = new byte[this.objectLength[j]];
             // Copy part of the byte buffer to another byte array

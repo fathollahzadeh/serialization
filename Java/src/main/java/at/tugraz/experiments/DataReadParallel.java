@@ -4,7 +4,6 @@ import at.tugraz.runtime.ObjectReader;
 import at.tugraz.util.CommonThreadPool;
 import at.tugraz.util.OptimizerUtils;
 import at.tugraz.util.RootData;
-import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -36,8 +35,7 @@ public class DataReadParallel {
                 ObjectReader reader = new ObjectReader(inDataPath, method);
                 tasks.add(new ReadIOTask(reader, i * blklen, Math.min((i + 1) * blklen, nrow), rd));
             }
-        }
-        else {
+        } else {
             String randomDataPath = System.getProperty("randomDataPath");
             int[] randomIDs = new int[nrow];
             try (BufferedReader br = new BufferedReader(new FileReader(randomDataPath))) {
@@ -51,7 +49,7 @@ public class DataReadParallel {
             }
             for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
                 ObjectReader reader = new ObjectReader(inDataPath, method);
-                tasks.add(new ReadIOTaskRandom(reader ,randomIDs,i * blklen, Math.min((i + 1) * blklen, nrow), rd));
+                tasks.add(new ReadIOTaskRandom(reader, randomIDs, i * blklen, Math.min((i + 1) * blklen, nrow), rd));
             }
         }
 
@@ -60,7 +58,7 @@ public class DataReadParallel {
         pool.shutdown();
 
         //check for exceptions
-        for (Future<Integer> f: rt){
+        for (Future<Integer> f : rt) {
             f.get();
         }
 
@@ -68,11 +66,11 @@ public class DataReadParallel {
 
     private static abstract class Task implements Callable<Integer> {
         protected final ObjectReader reader;
-        protected final int beginPos;
-        protected final int endPos;
+        protected final long beginPos;
+        protected final long endPos;
         protected final RootData[] rd;
 
-        public Task(ObjectReader reader, int beginPos, int endPos, RootData[] rd) {
+        public Task(ObjectReader reader, long beginPos, long endPos, RootData[] rd) {
             this.reader = reader;
             this.beginPos = beginPos;
             this.endPos = endPos;
@@ -83,13 +81,13 @@ public class DataReadParallel {
 
     private static class ReadIOTask extends Task {
 
-        public ReadIOTask(ObjectReader reader, int beginPos, int endPos, RootData[] rd) {
+        public ReadIOTask(ObjectReader reader, long beginPos, long endPos, RootData[] rd) {
             super(reader, beginPos, endPos, rd);
         }
 
         @Override
         public Integer call() {
-            reader.readObjects(beginPos, endPos - beginPos, this.rd);
+            reader.readObjects(beginPos, (int) (endPos - beginPos), this.rd);
             return null;
         }
     }
@@ -104,7 +102,7 @@ public class DataReadParallel {
 
         @Override
         public Integer call() {
-            for (int i = beginPos; i < endPos; i++) {
+            for (int i = (int) beginPos; i < endPos; i++) {
                 RootData[] r = reader.readObjects(randomList[i], 1);
                 this.rd[i] = r[0];
             }
