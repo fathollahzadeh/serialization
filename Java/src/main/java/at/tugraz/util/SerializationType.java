@@ -11,3 +11,4 @@ public enum SerializationType {
 	GSON,
 	FLATBUFFERS
 }
+

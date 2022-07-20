@@ -30,7 +30,7 @@ public class DataSerializationParallel {
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
             ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
             int rlen = Math.min((i + 1) * blklen, nrow) - i * blklen + 1;
-            ObjectWriter writer = new ObjectWriter(method, rlen);
+            ObjectWriter writer = new ObjectWriter(method, rlen, Const.PAGESIZE);
             tasks.add(new SerializeTask(reader, writer, i * blklen, Math.min((i + 1) * blklen, nrow)));
         }
 

@@ -12,6 +12,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ObjectReader {
@@ -31,10 +32,7 @@ public class ObjectReader {
     protected Kryo kryo;
 
     public ObjectReader(String fname, String method) {
-        this.method = method;
-        this.currentOffset = 0;
-        this.row = 0;
-        this.kryo = new KryoSinglton().getKryo();
+        this(method);
 
         //Allocates write page buffer:
         this.pageBuffer = new byte[2 * Const.PAGESIZE];
@@ -59,6 +57,13 @@ public class ObjectReader {
         } catch (Exception ex) {
             logger.error("prepareToRead! ", ex);
         }
+    }
+
+    public ObjectReader(String method) {
+        this.method = method;
+        this.currentOffset = 0;
+        this.row = 0;
+        this.kryo = new KryoSinglton().getKryo();
     }
 
     private void readIndexesFromFile(String fname) {
@@ -146,7 +151,7 @@ public class ObjectReader {
         return readListOfObject;
     }
 
-    public void readObjects(long i, int n, RootData[] rd) {
+    public long readObjects(long i, int n, RootData[] rd) {
 
         long listSize = Math.min((i + n), this.rlen);
         //Iterate over all objects that you aspire to read.
@@ -161,6 +166,25 @@ public class ObjectReader {
             // NOW read each object
             rd[j] = readObjectWithSerialization(new TweetStatus(), buffer);
         }
+        return listSize;
+    }
+
+    public long readObjects(long i, int n, ArrayList<RootData> rd) {
+
+        long listSize = Math.min((i + n), this.rlen);
+        //Iterate over all objects that you aspire to read.
+        for (int j = (int) i; j < listSize; j++) {
+            readPage(this.pageIndex[j]);
+            byte[] buffer = new byte[this.objectLength[j]];
+
+            // Copy part of the byte buffer to another byte array
+            int relativePosition = Math.toIntExact(this.objectIndex[j]);
+            this.bbPageBuffer.position(relativePosition);
+            this.bbPageBuffer.get(buffer, 0, this.objectLength[j]);
+            // NOW read each object
+            rd.add(readObjectWithSerialization(new TweetStatus(), buffer));
+        }
+        return listSize;
     }
 
     public void readIO(long i, int n) {

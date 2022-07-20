@@ -40,12 +40,12 @@ public class DataReadIOParallel {
         }
         else {
             String randomDataPath = System.getProperty("randomDataPath");
-            int[] randomIDs = new int[nrow];
+            long[] randomIDs = new long[nrow];
             try (BufferedReader br = new BufferedReader(new FileReader(randomDataPath))) {
                 String line;
                 int index = 0;
                 while ((line = br.readLine()) != null) {
-                    randomIDs[index++] = Integer.parseInt(line);
+                    randomIDs[index++] = Long.parseLong(line);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,9 +92,9 @@ public class DataReadIOParallel {
     }
 
     private static class ReadIOTaskRandom extends Task {
-        private final int[] randomList;
+        private final long[] randomList;
 
-        public ReadIOTaskRandom(ObjectReader reader, int[] randomList, int beginPos, int endPos) {
+        public ReadIOTaskRandom(ObjectReader reader, long[] randomList, int beginPos, int endPos) {
             super(reader, beginPos, endPos);
             this.randomList = randomList;
         }

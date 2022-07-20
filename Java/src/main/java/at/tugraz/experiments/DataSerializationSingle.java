@@ -16,7 +16,7 @@ public class DataSerializationSingle {
 		int nrow = Integer.parseInt(System.getProperty("nrow"));
 
 		ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
-		ObjectWriter writer = new ObjectWriter(method, nrow);
+		ObjectWriter writer = new ObjectWriter(method, nrow, Const.PAGESIZE);
 		int size = Const.BATCHSIZE;
 		for (long i=0; i<nrow;){
 			RootData[] rd = reader.readObjects(i, size);

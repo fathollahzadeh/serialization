@@ -6,10 +6,11 @@ import at.tugraz.util.Const;
 import at.tugraz.util.KryoSinglton;
 import at.tugraz.util.RootData;
 import com.esotericsoftware.kryo.Kryo;
-import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -36,19 +37,19 @@ public class ObjectWriter {
     protected Kryo kryo;
 
     public ObjectWriter(String fname, String method, int rlen) throws FileNotFoundException {
-        this(method, rlen);
+        this(method, rlen, Const.PAGESIZE);
         this.outStreamRegularFile = new File(fname);
         this.outIndexFile = new FileOutputStream(fname + ".index");
         this.randOutStreamRegularFile = new RandomAccessFile(outStreamRegularFile, "rw");
         this.bosIndexFile = new BufferedOutputStream(outIndexFile);
     }
 
-    public ObjectWriter(String method, int rlen){
+    public ObjectWriter(String method, int rlen, int pageSize){
         this.kryo = new KryoSinglton().getKryo();
         this.currentPageNumber = 0;
         this.currentOffset = 0;
         this.method = method;
-        this.pageBuffer = new byte[2 * Const.PAGESIZE]; // this is our page
+        this.pageBuffer = new byte[2 * pageSize]; // this is our page
         this.rlen = rlen;
         this.row = 0;
         this.pageIndex = new int[rlen];
@@ -97,7 +98,6 @@ public class ObjectWriter {
 
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
             logger.error("ObjectWriter(serializeObject):"+ex.getMessage());
         }
         return buffer;
@@ -134,6 +134,35 @@ public class ObjectWriter {
         }
     }
 
+    public void writeObjectToNetworkPage(RootData object, DataOutputStream dos, DataInputStream dis) {
+        byte[] buffer = serializeObject(object);
+        int objectSize;
+        try {
+            objectSize = buffer.length;
+            //check capacity of the current page size
+            //if current page is full should write to the socket and then reset the page
+            if ((currentOffset + objectSize) > Const.NETWORK_PAGESIZE) {
+                //Write in socket:
+                dos.writeInt(currentOffset);
+                dos.write(this.pageBuffer,0, currentOffset);
+                currentOffset = 0;
+                this.pageBuffer = new byte[2 * Const.NETWORK_PAGESIZE];
+
+                byte ack = dis.readByte();
+                if (ack != 1){
+                    throw new RuntimeException("writeObjectToNetworkPage "+ack);
+                }
+            }
+            // write object size
+            byte[] bytes = ByteBuffer.allocate(4).putInt(objectSize).array();
+            System.arraycopy(bytes, 0, this.pageBuffer, this.currentOffset, 4);
+            System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset+4, objectSize);
+            currentOffset += objectSize+4;
+        } catch (Exception ex) {
+            logger.error("writeObjectToNetworkPage:"+ex);
+        }
+    }
+
     public void flush() {
         //Write last page in file:
         try {
@@ -158,6 +187,24 @@ public class ObjectWriter {
         } catch (IOException e) {
             logger.error("can't close randOutStreamRegularFile file! ", e);
         }
+    }
+
+    public void flushToNetwork(DataOutputStream dos, DataInputStream dis) {
+        try {
+            dos.writeInt(currentOffset);
+            dos.write(this.pageBuffer,0, currentOffset);
+
+            byte ack = dis.readByte();
+            if (ack != 1){
+                throw new RuntimeException("flushToNetwork "+ack);
+            }
+            dos.close();
+            dis.close();
+
+        } catch (Exception e) {
+            logger.error("can't write last page to the serialization network!");
+        }
+
     }
 
     //Write data index to an index file:

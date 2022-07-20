@@ -8,6 +8,7 @@ public class Const {
 	// 1 MB Page Size 
 	public final static int PAGESIZE = 1024*1024;
 	public final static int BATCHSIZE = 512;
+	public final static int NETWORK_PAGESIZE = 20*1024*1024;
 
 
 	public final static int IndexPAGESIZE = 800000; // this must be a number divisible by 4.
