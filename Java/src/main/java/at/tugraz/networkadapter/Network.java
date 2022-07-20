@@ -2,6 +2,7 @@ package at.tugraz.networkadapter;
 
 import at.tugraz.util.NodeType;
 import at.tugraz.util.Pair;
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -25,6 +26,7 @@ public class Network {
     public void readConfigFile(String config) throws IOException {
         HashMap<String, ArrayList<Pair<String,Integer>>> middleNodes = new HashMap<>();
         HashMap<String, Integer> nodes = new HashMap<>();
+        String rootIP = "";
         // IP, PORT, ROOT
         try (BufferedReader br = new BufferedReader(new FileReader(config, StandardCharsets.UTF_8))) {
             String line;
@@ -40,6 +42,9 @@ public class Network {
                     middleNodes.put(root, new ArrayList<>());
                 middleNodes.get(root).add(newNode);
 
+                if (root.equalsIgnoreCase("root"))
+                    rootIP = ip;
+
                 nodes.put(ip, port);
             }
         }
@@ -47,11 +52,10 @@ public class Network {
         this.machineInfos = new HashMap<>();
         for (String ip: nodes.keySet()){
             MachineInfo machineInfo = new MachineInfo(ip,nodes.get(ip), middleNodes.get(ip));
-            if (ip.equalsIgnoreCase("root"))
+            if (ip.equalsIgnoreCase(rootIP))
                 machineInfo.setNodeType(NodeType.ROOT);
             this.machineInfos.put(ip, machineInfo);
         }
-
     }
 
     public MachineInfo getCurrentMachine(){

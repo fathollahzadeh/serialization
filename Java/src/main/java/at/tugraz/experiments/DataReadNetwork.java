@@ -10,6 +10,7 @@ import at.tugraz.util.Const;
 import at.tugraz.util.NodeType;
 import at.tugraz.util.Pair;
 import at.tugraz.util.RootData;
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
 import java.io.DataInputStream;
@@ -110,7 +111,7 @@ public class DataReadNetwork {
     private static Pair<DataInputStream, DataOutputStream> initServer(MachineInfo machineInfo) throws IOException {
         ServerSocket server = new ServerSocket(machineInfo.getPort());
         logger.trace(machineInfo.getNodeType() + " >> " + machineInfo.getIp() + ":" + machineInfo.getPort() + "  Server Started!");
-        server.setSoTimeout(20 * 1000);
+        server.setSoTimeout(2000 * 1000);
         Socket socket = server.accept();
         logger.trace(machineInfo.getNodeType() + " >> " + machineInfo.getIp() + ":" + machineInfo.getPort() + "  Server Accepted!");
 
