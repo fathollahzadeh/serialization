@@ -135,6 +135,7 @@ public class DataReadNetwork {
     private static Client initClient(String ip, int port) {
         try {
             Socket socket = new Socket(ip, port);
+            socket.setSoTimeout(2000*1000);
             Client client = new Client(socket, new DataOutputStream(socket.getOutputStream()), new DataInputStream(socket.getInputStream()));
             return client;
         } catch (Exception ignored) {

@@ -22,7 +22,7 @@ public class DataDuplicate {
             e.printStackTrace();
         }
 
-        for (int i=0; i<8; i++){
+        for (int i=0; i<1; i++){
             for (String e: list) {
                 try {
                     myWriter.write(e + "\n");
