@@ -10,7 +10,7 @@ inDataPath="data/tweets.txt"
 outDataPathJava="data/tweets.jbin"
 nrow=$(sed -n '$=' $inDataPath)
 
-SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
+SCRIPT="$jnCMD   -DinDataPath=${inDataPath}\
                 -DoutDataPath=${outDataPathJava}\
                 -Dnrow=${nrow}\
                 -cp ./SerializationJava.jar at.tugraz.experiments.DataPrepare

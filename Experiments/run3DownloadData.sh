@@ -12,10 +12,12 @@ unzip random_lists.zip
 
 mv random_lists/*.dat .
 # duplicate data
-mv tweets.txt tweets_1m.txt
+head -100000 tweets.txt > tweets_1m.txt
+rm -rf tweets.txt
 
+#mv tweets.txt tweets_1m.txt
 cd ..
-SCRIPT="$jCMD  -DinDataPath=data/tweets_1m.txt\
+SCRIPT="$jnCMD  -DinDataPath=data/tweets_1m.txt\
                -DoutDataPath=data/tweets.txt\
                -cp ./SerializationJava.jar at.tugraz.experiments.DataDuplicate
                 "          

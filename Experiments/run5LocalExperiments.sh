@@ -4,7 +4,7 @@
 inDataPathJava="data/tweets.jbin"
 randomDataPath="data/random_list_"
 outDataPath="data/tmp/tweets"
-declare -a nrows=(1000000 2000000 3000000 4000000 5000000 6000000 7000000 8000000)
+declare -a nrows=(1000000 2000000 3000000 4000000 5000000 6000000)
 
 # Load data into memory
 # 1.a Java enviroments
