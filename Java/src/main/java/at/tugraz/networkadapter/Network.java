@@ -1,8 +1,5 @@
 package at.tugraz.networkadapter;
 
-import at.tugraz.util.NodeType;
-import at.tugraz.util.Pair;
-import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -10,8 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Network {
     private Logger logger = Logger.getLogger(Network.class);
@@ -24,10 +21,9 @@ public class Network {
     }
 
     public void readConfigFile(String config) throws IOException {
-        HashMap<String, ArrayList<Pair<String,Integer>>> middleNodes = new HashMap<>();
-        HashMap<String, Integer> nodes = new HashMap<>();
-        String rootIP = "";
-        // IP, PORT, ROOT
+        machineInfos = new HashMap<>();
+        Map<String, String> rootLeaf = new HashMap<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(config, StandardCharsets.UTF_8))) {
             String line;
             br.readLine();
@@ -36,29 +32,28 @@ public class Network {
                 String ip = cols[0];
                 int port = Integer.parseInt(cols[1]);
                 String root = cols[2];
-
-                Pair<String, Integer> newNode = new Pair<>(ip, port);
-                if (!middleNodes.containsKey(root))
-                    middleNodes.put(root, new ArrayList<>());
-                middleNodes.get(root).add(newNode);
-
-                if (root.equalsIgnoreCase("root"))
-                    rootIP = ip;
-
-                nodes.put(ip, port);
+                int nrow = Integer.parseInt(cols[3]);
+                rootLeaf.put(ip, root);
+                MachineInfo nsi = new MachineInfo(ip, port, nrow);
+                machineInfos.put(ip, nsi);
             }
         }
 
-        this.machineInfos = new HashMap<>();
-        for (String ip: nodes.keySet()){
-            MachineInfo machineInfo = new MachineInfo(ip,nodes.get(ip), middleNodes.get(ip));
-            if (ip.equalsIgnoreCase(rootIP))
-                machineInfo.setNodeType(NodeType.ROOT);
-            this.machineInfos.put(ip, machineInfo);
+        for (String ip: rootLeaf.keySet()){
+            String root = rootLeaf.get(ip);
+            if (root.equalsIgnoreCase("root"))
+                continue;
+            machineInfos.get(root).addLeaf(machineInfos.get(ip));
+            machineInfos.get(ip).setRoot(machineInfos.get(root));
+        }
+
+        for (String ip: machineInfos.keySet()){
+            int sumLeaf = computeNRow(machineInfos.get(ip)) - machineInfos.get(ip).getNrow();
+            machineInfos.get(ip).setNrowLeaf(sumLeaf);
         }
     }
 
-    public MachineInfo getCurrentMachine(){
+    public MachineInfo getCurrentMachine() {
         try {
             String ipstr;
             InetAddress ip;
@@ -66,10 +61,20 @@ public class Network {
             ipstr = ip.getHostAddress();
             return machineInfos.get(ipstr);
 
-        }
-        catch (Exception ignored) {
-            logger.error("Get Current Machine IP:"+ignored);
+        } catch (Exception ignored) {
+            logger.error("Get Current Machine IP:" + ignored);
         }
         throw new RuntimeException("The machine IP address is not in the config list");
+    }
+
+    private int computeNRow(MachineInfo node){
+        if (node.getLeaves().size() == 0)
+            return node.getNrow();
+        else {
+            int sum = node.getNrow();
+            for (MachineInfo nsi: node.getLeaves())
+                sum += computeNRow(nsi);
+            return sum;
+        }
     }
 }

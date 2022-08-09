@@ -1,9 +1,11 @@
 #!/bin/bash
 
 inDataPath=$1
-task_set=$2
-nrow=$3
-log_file_name=$4
+outDataPath=$2
+task_set=$3
+nrow=$4
+log_file_name=$5
+
 
 
 declare -a methods=("Default") #"Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers"
@@ -11,7 +13,7 @@ declare -a methods=("Default") #"Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer
 for method in "${methods[@]}"; do
     for rp in {1..1}; do
         start=$(date +%s%N)
-        SCRIPT="$jnCMD  -DinDataPath=${inDataPath}\
+        SCRIPT="$jnCMD -DinDataPath=${inDataPath}\
                        -DoutDataPath=${outDataPath}.${method}Java\
                        -Dnrow=${nrow}\
                        -Dmethod=${method}\

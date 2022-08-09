@@ -11,4 +11,4 @@ nrow=100000
 ##########################
 echo "language,platform,taskset,seq_rand,nrow,time" >>results/Experiment5_LoadToMemory_times.dat
 
-./expnetwork/runExperiment5b_ExternalSort.sh $inDataPathJava false $nrow Experiment5_LoadToMemory_times
+./expnetwork/runExperiment5b_ExternalSort.sh $inDataPathJava $outDataPath false $nrow Experiment5_LoadToMemory_times

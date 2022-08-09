@@ -9,7 +9,7 @@ src_data="$src/Experiments/data"
 for server in "${servers[@]}"; do
     echo ">>>>>>>>>>>>>>>> $server"
     ssh $server "rm -rf $src_data/*"
-    ssh $server "mkdir -p $src_data/tmp"
+    ssh $server "mkdir -p $src_data/tmp"     
     ssh -n -f $server "sh -c 'cd $src/Experiments && nohup ./runAll.sh > nohup.out 2>&1 &'"    
     
 done

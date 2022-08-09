@@ -1,10 +1,12 @@
 #!/bin/bash
 
-declare -a servers=("34.170.156.248" "35.232.213.107" "34.69.16.90" "34.69.16.90" "34.134.20.134" "34.134.20.134" "34.173.159.86") 
+#ufw allow 8080:9999/tcp
+declare -a servers=("128.31.27.128") 
 
 for server in "${servers[@]}"; do
     echo ">>>>>>>>>>>>>>>>>>>>> $server"
-    src="/home/saeed/serialization"
+    server="ubuntu@$server"
+    src="/home/ubuntu/serialization"
     src_exp="$src/Experiments"
     src_data="$src/Experiments/data"
     ssh $server "mkdir -p $src"
