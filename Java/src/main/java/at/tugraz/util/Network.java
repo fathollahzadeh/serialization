@@ -1,4 +1,4 @@
-package at.tugraz.networkadapter;
+package at.tugraz.util;
 
 import org.apache.log4j.Logger;
 

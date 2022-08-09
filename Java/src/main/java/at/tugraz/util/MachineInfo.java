@@ -1,6 +1,4 @@
-package at.tugraz.networkadapter;
-
-import at.tugraz.util.NodeType;
+package at.tugraz.util;
 
 import java.util.ArrayList;
 

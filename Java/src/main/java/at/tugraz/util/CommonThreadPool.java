@@ -12,18 +12,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/**
- * This common thread pool provides an abstraction to obtain a shared
- * thread pool, specifically the ForkJoinPool.commonPool, for all requests
- * of the maximum degree of parallelism. If pools of different size are
- * requested, we create new pool instances of FixedThreadPool.
- */
+
 public class CommonThreadPool implements ExecutorService
 {
-	//shared thread pool used system-wide, potentially by concurrent parfor workers
-	//we use the ForkJoinPool.commonPool() to avoid explicit cleanup, including
-	//unnecessary initialization (e.g., problematic in jmlc) and because this commonPool
-	//resulted in better performance than a dedicated fixed thread pool.
 	private static final int size = InfrastructureAnalyzer.getLocalParallelism();
 	private static final ExecutorService shared = ForkJoinPool.commonPool();
 	private final ExecutorService _pool;

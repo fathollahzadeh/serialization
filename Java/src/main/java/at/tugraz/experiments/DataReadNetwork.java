@@ -1,7 +1,7 @@
 package at.tugraz.experiments;
 
-import at.tugraz.networkadapter.MachineInfo;
-import at.tugraz.networkadapter.Network;
+import at.tugraz.util.MachineInfo;
+import at.tugraz.util.Network;
 import at.tugraz.runtime.ObjectReader;
 import at.tugraz.runtime.ObjectWriter;
 import at.tugraz.tweet.TweetStatus;
