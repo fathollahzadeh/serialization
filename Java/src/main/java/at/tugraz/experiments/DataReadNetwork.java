@@ -126,7 +126,6 @@ public class DataReadNetwork {
 
             List<Future<Boolean>> rt = pool.invokeAll(tasks);
             pool.shutdown();
-            System.out.println("**************  shutdown  *********************** ");
 
             //check for exceptions
             for (Future<Boolean> f : rt) {
@@ -151,8 +150,7 @@ public class DataReadNetwork {
         }
         if (!flag) throw new RuntimeException("Client can't start >> " + ip + ":" + port);
         else {
-            System.out.println("Client " + ip + ":" + port);
-            return client;
+           return client;
         }
     }
 
@@ -206,13 +204,11 @@ public class DataReadNetwork {
                     list.add(reader.readObjectWithSerialization(new TweetStatus(), objectBuffer));
                 } while (relativePosition < pageSize);
                 this.queue.put(list);
-                System.out.println("One page read from: " + client.socket.getRemoteSocketAddress().toString());
             }
             this.status = false;
             client.dos.close();
             client.dis.close();
             client.socket.close();
-            System.out.println(client.socket.getRemoteSocketAddress().toString() + "++++++++++++++++++++++++ Client: " + client.socket.getInetAddress() + "  " + client.socket.getLocalAddress().getHostAddress());
             return false;
         }
     }
@@ -239,7 +235,6 @@ public class DataReadNetwork {
                 for (int j = i * Const.NETWORK_LOCAL_READ_LENGTH; j < Math.min((i + 1) * Const.NETWORK_LOCAL_READ_LENGTH, nrow); j++) {
                     tmpList.add(list.get(j));
                 }
-                System.out.println(i * Const.NETWORK_LOCAL_READ_LENGTH + "   ++++ " + Math.min((i + 1) * Const.NETWORK_LOCAL_READ_LENGTH, nrow));
                 this.queue.put(tmpList);
             }
             this.status = false;

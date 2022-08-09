@@ -73,12 +73,12 @@ public class MachineInfo {
     }
 
     public NodeType getNodeType() {
-        if (root.getIp().equalsIgnoreCase("root"))
+        if (root == null)
             return NodeType.ROOT;
         else if (leaves.size() == 0)
-            return NodeType.MIDDLE;
-        else
             return NodeType.LEAF;
+        else
+            return NodeType.MIDDLE;
     }
 
     public int getTotalNRow(){
