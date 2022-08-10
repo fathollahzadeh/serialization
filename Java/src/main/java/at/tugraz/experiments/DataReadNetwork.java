@@ -35,11 +35,21 @@ public class DataReadNetwork {
 
     public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
 
+        // disk-to-disk (d2d)
+        // disk-to-memory (d2m)
+        // memory-to-memory (m2m)
+        // memory-to-disk (m2d)
+
         String inDataPath = System.getProperty("inDataPath");
         String method = System.getProperty("method");
         String config = System.getProperty("config");
+        String plan = System.getProperty("plan");
 
         String localMethod = "Kryo";
+
+        if (plan.equalsIgnoreCase("d2d") || plan.equalsIgnoreCase("d2m"))
+            localMethod = method;
+
         Network network = new Network(config);
         MachineInfo machineInfo = network.getCurrentMachine();
         ObjectReader reader = new ObjectReader(inDataPath, localMethod);
@@ -122,7 +132,11 @@ public class DataReadNetwork {
             dataTasks.add(clientTask);
 
             // add external sort task
-            tasks.add(new ExternalSortTask(dataTasks, writer, true, null, null));
+            if (plan.equalsIgnoreCase("d2d") || plan.equalsIgnoreCase("m2d"))
+                tasks.add(new ExternalSortTask(dataTasks, writer, true, null, null));
+            else
+                tasks.add(new ExternalSortTask(dataTasks, null, true, null, null));
+
 
             List<Future<Boolean>> rt = pool.invokeAll(tasks);
             pool.shutdown();
@@ -303,6 +317,7 @@ public class DataReadNetwork {
         protected final DataInputStream dis;
         protected final DataOutputStream dos;
         protected final boolean onDisk;
+        protected final ArrayList<RootData> dataList;
 
         public ExternalSortTask(ArrayList<Task> tasks, ObjectWriter writer, boolean onDisk, DataInputStream dis, DataOutputStream dos) {
             super(null);
@@ -311,6 +326,10 @@ public class DataReadNetwork {
             this.onDisk = onDisk;
             this.dis = dis;
             this.dos = dos;
+            if (writer == null)
+                this.dataList = new ArrayList<>();
+            else
+                this.dataList = null;
         }
 
         @Override
@@ -357,12 +376,18 @@ public class DataReadNetwork {
                         }
                     }
                 }
-                if (onDisk) writer.writeObjectToFile(tmpObjectNetworkIndex.myObject);
-                else writer.writeObjectToNetworkPage(tmpObjectNetworkIndex.myObject, dos, dis);
+                if (writer !=null) {
+                    if (onDisk) writer.writeObjectToFile(tmpObjectNetworkIndex.myObject);
+                    else writer.writeObjectToNetworkPage(tmpObjectNetworkIndex.myObject, dos, dis);
+                }
+                else
+                    this.dataList.add(tmpObjectNetworkIndex.myObject);
             }
             logger.info("Network External Sort: Done!");
-            if (onDisk) writer.flush();
-            else writer.flushToNetwork(dos, dis);
+            if (writer != null) {
+                if (onDisk) writer.flush();
+                else writer.flushToNetwork(dos, dis);
+            }
             return null;
         }
     }

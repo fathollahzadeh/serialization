@@ -162,6 +162,27 @@ public class ObjectWriter {
         }
     }
 
+    public void writeObjectToNetworkPage(RootData object) {
+        byte[] buffer = serializeObject(object);
+        int objectSize;
+        try {
+            objectSize = buffer.length;
+            //check capacity of the current page size
+            //if current page is full should write to the socket and then reset the page
+            if ((currentOffset + objectSize) > Const.NETWORK_PAGESIZE) {
+                currentOffset = 0;
+                this.pageBuffer = new byte[2 * Const.NETWORK_PAGESIZE];
+            }
+            // write object size
+            byte[] bytes = ByteBuffer.allocate(4).putInt(objectSize).array();
+            System.arraycopy(bytes, 0, this.pageBuffer, this.currentOffset, 4);
+            System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset+4, objectSize);
+            currentOffset += objectSize+4;
+        } catch (Exception ex) {
+            logger.error("writeObjectToNetworkPage:"+ex);
+        }
+    }
+
     public void flush() {
         //Write last page in file:
         try {
