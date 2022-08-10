@@ -1,36 +1,17 @@
 package at.tugraz.experiments;
 
-import at.tugraz.filehandler.FileHandler;
-import at.tugraz.filehandler.LogFileHandler;
 import at.tugraz.runtime.ObjectReader;
 import at.tugraz.runtime.ObjectWriter;
-import at.tugraz.tweet.TweetStatus;
-import at.tugraz.util.CommonThreadPool;
-import at.tugraz.util.Const;
-import at.tugraz.util.MachineInfo;
-import at.tugraz.util.Network;
-import at.tugraz.util.NodeType;
 import at.tugraz.util.ObjectFileIndex;
 import at.tugraz.util.RootData;
 import org.apache.log4j.Logger;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 public class ExternalSortSingle {
 
@@ -57,11 +38,10 @@ public class ExternalSortSingle {
 
 		for(int i = 0; i < fileCount & i * chunkSize < reader.getRlen(); i++) {
 			ArrayList<RootData> list = new ArrayList<>();
-
-			reader.readObjects((long) i * reader.getRlen(), chunkSize, list);
+			reader.readObjects((long) i * chunkSize, chunkSize, list);
 			Collections.sort(list);
 
-			ObjectWriter writer = new ObjectWriter(outDataPath+"/"+method+"-sorted-"+i+".java", method, list.size());
+			ObjectWriter writer = new ObjectWriter(outDataPath+"/tmp/"+method+"Java-sorted-"+i+".bin", method, list.size());
 			writer.writeObjectToFile(list);
 			writer.flush();
 		}
@@ -69,7 +49,7 @@ public class ExternalSortSingle {
 		// open all of data files and keep them open to read partially.
 		List<ObjectReader> readerArray = new ArrayList<>();
 		for(int i = 0; i < fileCount; ++i) {
-			String sortedFileName = outDataPath+"/"+method+"-sorted-"+i+".java";
+			String sortedFileName = outDataPath+"/tmp/"+method+"Java-sorted-"+i+".bin";
 			ObjectReader tmpReader = new ObjectReader(sortedFileName, method);
 			readerArray.add(tmpReader);
 		}
@@ -86,8 +66,7 @@ public class ExternalSortSingle {
 			}
 		}
 		logger.info("Single-Thread External Sort: First page reading is done! ");
-
-		ObjectWriter writer = new ObjectWriter(outDataPath+"/"+method+"-sorted.java", method, reader.getRlen());
+		ObjectWriter writer = new ObjectWriter(outDataPath+"/"+method+"Java-sorted.bin", method, reader.getRlen());
 
 		while(!queue.isEmpty()) {
 			ObjectFileIndex tmpObjectFileIndex = queue.remove();
