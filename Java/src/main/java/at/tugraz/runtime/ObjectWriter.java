@@ -17,7 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
-
+import java.util.ArrayList;
 
 public class ObjectWriter {
     static Logger logger = Logger.getLogger(ObjectWriter.class);
@@ -104,6 +104,11 @@ public class ObjectWriter {
     }
 
     public void writeObjectToFile(RootData[] objects) {
+        for (RootData object : objects)
+            writeObjectToFile(object);
+    }
+
+    public void writeObjectToFile(ArrayList<RootData> objects) {
         for (RootData object : objects)
             writeObjectToFile(object);
     }

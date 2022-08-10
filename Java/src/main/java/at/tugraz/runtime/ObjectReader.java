@@ -251,4 +251,12 @@ public class ObjectReader {
         }
         return myDeserlizedObject;
     }
+
+    public int getRlen() {
+        return rlen;
+    }
+
+    public HashMap<Integer, Integer> getObjectInEachPage() {
+        return objectInEachPage;
+    }
 }
