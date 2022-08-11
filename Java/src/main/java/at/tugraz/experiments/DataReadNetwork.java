@@ -153,7 +153,7 @@ public class DataReadNetwork {
         Socket socket;
         Client client = null;
         for (int i = 0; i < 10 && !flag; i++) {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(1);
             try {
                 socket = new Socket(ip, port);
                 socket.setSoTimeout(Const.NETWORK_TIMEOUT);

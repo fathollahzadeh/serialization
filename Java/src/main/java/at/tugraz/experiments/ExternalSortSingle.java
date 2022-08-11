@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.concurrent.ExecutionException;
@@ -37,11 +37,10 @@ public class ExternalSortSingle {
 		}
 
 		for(int i = 0; i < fileCount & i * chunkSize < reader.getRlen(); i++) {
-			ArrayList<RootData> list = new ArrayList<>();
-			reader.readObjects((long) i * chunkSize, chunkSize, list);
-			Collections.sort(list);
+			RootData[] list = reader.readObjects((long) i * chunkSize, chunkSize);
+			Arrays.sort(list);
 
-			ObjectWriter writer = new ObjectWriter(outDataPath+"/tmp/"+method+"Java-sorted-"+i+".bin", method, list.size());
+			ObjectWriter writer = new ObjectWriter(outDataPath+"/tmp/"+method+"Java-sorted-"+i+".bin", method, list.length);
 			writer.writeObjectToFile(list);
 			writer.flush();
 		}
@@ -60,8 +59,8 @@ public class ExternalSortSingle {
 			RootData[] rd = reader.readObjects(0, n);
 			pageObjectCounter[i] = n;
 			readFileObject[i] = n;
-			for(int j = 0; j < rd.length; ++j) {
-				ObjectFileIndex objectFileIndex = new ObjectFileIndex(i, rd[j]);
+			for (RootData rootData : rd) {
+				ObjectFileIndex objectFileIndex = new ObjectFileIndex(i, rootData);
 				queue.add(objectFileIndex);
 			}
 		}
@@ -86,8 +85,8 @@ public class ExternalSortSingle {
 				RootData[] rd = readerArray.get(fileNumber).readObjects(readFileObject[fileNumber], (int) pageObjectCounter[fileNumber]);
 				readFileObject[fileNumber] += rd.length;
 
-				for(int j = 0; j < rd.length; ++j) {
-					ObjectFileIndex objectFileIndex = new ObjectFileIndex(fileNumber, rd[j]);
+				for (RootData rootData : rd) {
+					ObjectFileIndex objectFileIndex = new ObjectFileIndex(fileNumber, rootData);
 					queue.add(objectFileIndex);
 				}
 			}
