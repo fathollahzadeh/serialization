@@ -8,10 +8,10 @@ outDataPath="data/tmp/tweets"
 # 1.a Java enviroments
 # write header to log file
 ##########################
-echo baseline,language,taskset,platform,plan,machineip,time >>results/runExperiment5b_ExternalSort.dat
+echo baseline,language,plan,machineip,time >>results/Experiment4_ExternalSort_times.dat
 
-./expnetwork/runExperiment5b_ExternalSort.sh $inDataPathJava $outDataPath m2m false Experiment5_LoadToMemory_times
-./expnetwork/runExperiment5b_ExternalSort.sh $inDataPathJava $outDataPath m2d false Experiment5_LoadToMemory_times
-./expnetwork/runExperiment5b_ExternalSort.sh $inDataPathJava $outDataPath d2m false Experiment5_LoadToMemory_times
-./expnetwork/runExperiment5b_ExternalSort.sh $inDataPathJava $outDataPath d2d false Experiment5_LoadToMemory_times
+./expnetwork/runExperiment4_ExternalSort.sh $inDataPathJava $outDataPath m2m Experiment4_ExternalSort_times
+./expnetwork/runExperiment4_ExternalSort.sh $inDataPathJava $outDataPath m2d Experiment4_ExternalSort_times
+./expnetwork/runExperiment4_ExternalSort.sh $inDataPathJava $outDataPath d2m Experiment4_ExternalSort_times
+./expnetwork/runExperiment4_ExternalSort.sh $inDataPathJava $outDataPath d2d Experiment4_ExternalSort_times
 

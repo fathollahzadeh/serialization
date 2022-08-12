@@ -13,6 +13,7 @@ declare -a nrows=(1000000 2000000 3000000 4000000 5000000 6000000)
 echo "language,platform,taskset,seq_rand,nrow,time" >>results/Experiment1_LoadToMemory_times.dat
 echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results/Experiment1_Write_times.dat
 echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results/Experiment2_Read_times.dat
+echo "baseline,language,taskset,chunk_size,nrow,time" >>results/Experiment3_Read_times.dat
 
 for nrow in "${nrows[@]}"; do
     ./explocal/runExperiment1a_LoadToMemory.sh $inDataPathJava Single true Sequential $nrow Experiment1_LoadToMemory_times
@@ -25,7 +26,6 @@ for nrow in "${nrows[@]}"; do
 
     # Seralization (just CPU time)
     ##############################
-
     ./explocal/runExperiment1b_Serialization.sh $inDataPathJava $nrow Single false Experiment1_Write_times
     ./explocal/runExperiment1b_Serialization.sh $inDataPathJava $nrow Single true Experiment1_Write_times
     ./explocal/runExperiment1b_Serialization.sh $inDataPathJava $nrow Parallel false Experiment1_Write_times
@@ -56,6 +56,11 @@ for nrow in "${nrows[@]}"; do
 
     ./explocal/runExperiment2a_Read.sh $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
     ./explocal/runExperiment2a_Read.sh $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
-    ./explocal/runExperiment2a_Read.sh $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
-
+    ./explocal/runExperiment2a_Read.sh $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"    
 done
+
+# External Sort
+###############
+nrow=10000000
+./explocal/runExperiment3a_ExternalSort.sh $outDataPath $outDataPath $nrow false Experiment3_ExternalSort_times
+./explocal/runExperiment3a_ExternalSort.sh $outDataPath $outDataPath $nrow true Experiment3_ExternalSort_times

@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.concurrent.ExecutionException;
 
-public class ExternalSortSingle {
+public class ExternalSort {
 
-	private static Logger logger = Logger.getLogger(ExternalSortSingle.class);
+	private static Logger logger = Logger.getLogger(ExternalSort.class);
 
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
 
