@@ -1,9 +1,6 @@
 package at.tugraz.experiments;
 
 import at.tugraz.runtime.ObjectReader;
-import at.tugraz.runtime.ObjectWriter;
-import at.tugraz.util.Const;
-import at.tugraz.util.RootData;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
