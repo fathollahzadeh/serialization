@@ -13,6 +13,7 @@ public class DataDuplicate {
 
         String inDataPath = System.getProperty("inDataPath");
         String outDataPath =System.getProperty("outDataPath");
+        int count = Integer.parseInt(System.getProperty("count"));
         FileWriter myWriter = new FileWriter(outDataPath);
         ArrayList<String> list= new ArrayList<>();
 
@@ -22,7 +23,7 @@ public class DataDuplicate {
             e.printStackTrace();
         }
 
-        for (int i=0; i<1; i++){
+        for (int i=0; i<count; i++){
             for (String e: list) {
                 try {
                     myWriter.write(e + "\n");

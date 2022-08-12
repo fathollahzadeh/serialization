@@ -15,8 +15,10 @@ mv random_lists/*.dat .
 # duplicate data
 mv tweets.txt tweets_1m.txt
 cd ..
+
 SCRIPT="$jnCMD -DinDataPath=data/tweets_1m.txt\
                -DoutDataPath=data/tweets.txt\
+               -Dcount=1\
                -cp ./SerializationJava.jar at.tugraz.experiments.DataDuplicate
                 "          
 echo $SCRIPT
