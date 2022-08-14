@@ -1,0 +1,7 @@
+namespace tweetstatusflatbuffers;
+
+table HashtagEntityFBS {
+        indices:[int];
+        text:string;
+}
+root_type HashtagEntityFBS;

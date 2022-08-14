@@ -6,11 +6,12 @@ project(cpp)
 set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 set(CMAKE_FIND_DEBUG_MODE 1)
-#find_package(libmongocxx REQUIRED)
-#find_package(libbsoncxx REQUIRED)
 
-#include_directories("/usr/local/include/mongocxx/v_noabi")
-#include_directories("/usr/local/include/bsoncxx/v_noabi")
+find_package(libmongocxx REQUIRED)
+find_package(libbsoncxx REQUIRED)
+
+include_directories("/usr/local/include/mongocxx/v_noabi")
+include_directories("/usr/local/include/bsoncxx/v_noabi")
 
 # set the output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
@@ -29,45 +30,41 @@ endif ()
 
 # set the directories with the common header files
 include_directories("${PROJECT_SOURCE_DIR}/runtime/header")
+include_directories("${PROJECT_SOURCE_DIR}/util/header")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/header")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/header/inplace")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/header/proto")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/header/flatbuffers")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/header/flatbuffers/flatbuffers")
 
-
-#include_directories("${PROJECT_SOURCE_DIR}/src/filehandler/header")
-#include_directories("${PROJECT_SOURCE_DIR}/src/rootdata/header")
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header")
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header/inplace")
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header/proto")
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header/flatbuffers")
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/header/flatbuffers/flatbuffers")
-#include_directories("${PROJECT_SOURCE_DIR}/src/benchmarks/header")
-#include_directories("${PROJECT_SOURCE_DIR}/src/networkadapter/header")
-#
 # set the directories with the common source files
 include_directories("${PROJECT_SOURCE_DIR}/runtime/source")
+include_directories("${PROJECT_SOURCE_DIR}/util/source")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/source/")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/source/inplace/")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/source/proto/")
+include_directories("${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/")
 
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/source/")
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/source/inplace/")
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/source/proto/")
-#include_directories("${PROJECT_SOURCE_DIR}/src/serialization/source/flatbuffers/")
-#include_directories("${PROJECT_SOURCE_DIR}/src/rootdata/source/")
-#include_directories("${PROJECT_SOURCE_DIR}/src/filehandler/source/")
-#include_directories("${PROJECT_SOURCE_DIR}/src/networkadapter/source")
-#
 # set serialization source files
-file(GLOB serializationSource "${PROJECT_SOURCE_DIR}/runtime/source/*.cpp")
-
-#file(GLOB serializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/*.cpp")
-#file(GLOB inPlaceSerializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/inplace/*.cpp")
-#file(GLOB protSerializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/proto/*.cpp")
-#file(GLOB flatBuffersSerializationSource "${PROJECT_SOURCE_DIR}/src/serialization/source/flatbuffers/*.cpp")
-#file(GLOB rootDataSource "${PROJECT_SOURCE_DIR}/src/rootdata/source/*.cpp")
-#file(GLOB rootDataHeader "${PROJECT_SOURCE_DIR}/src/rootdata/header/*.h")
-#file(GLOB networkAdapterSource "${PROJECT_SOURCE_DIR}/src/networkadapter/source/*.cpp")
+file(GLOB srcIO "${PROJECT_SOURCE_DIR}/runtime/source/*.cpp")
+file(GLOB srcUtil "${PROJECT_SOURCE_DIR}/util/source/*.cpp")
+file(GLOB srcSerialization "${PROJECT_SOURCE_DIR}/src/serialization/source/*.cpp")
+file(GLOB srcInPlace "${PROJECT_SOURCE_DIR}/serialization/source/inplace/*.cpp")
+file(GLOB srcProtobuf "${PROJECT_SOURCE_DIR}/serialization/source/proto/*.cc")
+file(GLOB srcFlatbuf "${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/*.cpp")
 
 # data serialization
 add_executable(TwitterSerialization
-        ExternalSort.cpp
-        runtime/source/ObjectReader.cpp
+        test.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcFlatbuf}
         )
+target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})
 
 ## data serialization
 #add_executable(TwitterSerialization

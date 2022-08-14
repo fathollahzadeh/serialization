@@ -1,5 +1,5 @@
-#ifndef C___OBJECTREADER_H
-#define C___OBJECTREADER_H
+#ifndef CPP_OBJECTREADER_H
+#define CPP_OBJECTREADER_H
 
 #include <iostream>
 #include <map>
@@ -13,6 +13,11 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 //#include <TweetStatusFlatBuffers.h>
+
+
+#include "Const.h"
+#include "RootData.h"
+#include "Object.h"
 
 using namespace std;
 
@@ -28,11 +33,12 @@ protected:
     int *objectIndex;
     int *objectLength;
     map<int, int> objectInEachPage;
-    //FileChannel inStreamRegularFile;
+    ifstream inStreamRegularFile;
     //ByteBuffer bbPageBuffer;
     //Kryo kryo;
 private:
-    void readIndexesFromFile(string fname);
+    RootData rootData;
+    void  readIndexesFromFile(const string & fname);
 
 public:
     ObjectReader(const string & fname, const string &method);
@@ -48,4 +54,4 @@ public:
     //int getRlen()
     //HashMap<Integer, Integer> getObjectInEachPage()
 };
-#endif //C___OBJECTREADER_H
+#endif //CPP_OBJECTREADER_H

@@ -1,0 +1,10 @@
+include "OptionEntity.fbs";
+
+namespace tweetstatusflatbuffers;
+
+table PollEntityFBS {
+        options:[OptionEntityFBS];
+        end_datetime:string;
+        duration_minutes:string;
+}
+root_type PollEntityFBS;

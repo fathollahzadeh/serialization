@@ -67,6 +67,8 @@ The official url for install MongoDB driver is here: http://mongocxx.org/mongocx
     https://github.com/mongodb/mongo-c-driver/releases
     ```
   - Follow the instructions for building from a tarball at Installing libmongoc.
+  - sudo apt-get install libssl-dev
+
   ```bash
   $ tar xzf mongo-c-driver-x.y.z.tar.gz
   $ cd mongo-c-driver-x.y.z
@@ -88,6 +90,7 @@ The official url for install MongoDB driver is here: http://mongocxx.org/mongocx
 * Step 3: Configure the driver
  
 On Unix systems, libmongoc installs into /usr/local by default. Without additional configuration, mongocxx installs into its local build directory as a courtesy to those who build from source. To configure mongocxx for installation into /usr/local as well, use the following cmake command:
+SUDO
 ```bash
 cmake ..                                \
     -DCMAKE_BUILD_TYPE=Release          \

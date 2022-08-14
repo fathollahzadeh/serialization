@@ -1,0 +1,7 @@
+namespace tweetstatusflatbuffers;
+
+table OptionEntityFBS {
+        position:int;
+        text:string;
+}
+root_type OptionEntityFBS;

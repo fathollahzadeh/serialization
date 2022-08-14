@@ -1,0 +1,10 @@
+namespace tweetstatusflatbuffers;
+
+table UserMentionEntityFBS {
+        id:long;
+        id_str:string;
+        indices:[int];
+        name:string;
+        screen_name:string;
+}
+root_type UserMentionEntityFBS;
