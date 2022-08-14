@@ -12,7 +12,10 @@
 //#include <TweetStatusProto.h>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-//#include <TweetStatusFlatBuffers.h>
+#include <TweetStatus.h>
+#include <TweetStatusIP.h>
+#include <TweetStatusProto.h>
+#include <TweetStatusFlatBuffers.h>
 
 
 #include "Const.h"
@@ -36,12 +39,28 @@ protected:
     int *objectLength;
 
 private:
+    RootData rootData;
+    void appendInPlaceObjectToFile(TweetStatus *object);
 public:
     virtual ~ObjectWriter();
 
     ObjectWriter(const string &fname, const string &method, int rlen);
 
     ObjectWriter(const string &method, int rlen, int pageSize);
+
+
+    void appendObjectToFile(TweetStatus *object);
+
+    void appendObjectToFile(TweetStatusIP *object);
+
+    void appendObjectToFile(TweetStatusProto *object);
+
+    void appendObjectToFile(TweetStatusFlatBuffers *object);
+
+    void writeIndexToFile(int* indexVector);
+
+    void appendObjectToFileFlush();
+
 
 };
 
