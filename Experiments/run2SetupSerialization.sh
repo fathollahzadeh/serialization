@@ -15,8 +15,8 @@ rm -rf CMakeCache.txt
 rm -rf Makefile
 rm -rf cpp.cbp
 rm -rf bin
-# cmake .
-# make clean
-# make -j10
+cmake .
+make clean
+make -j10
 
 # compile Rust baselines
