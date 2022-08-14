@@ -36,11 +36,12 @@ protected:
     int rlen;
     int *pageIndex;
     int *objectIndex;
-    int *objectLength;
 
 private:
     RootData rootData;
+
     void appendInPlaceObjectToFile(TweetStatus *object);
+
 public:
     virtual ~ObjectWriter();
 
@@ -48,20 +49,13 @@ public:
 
     ObjectWriter(const string &method, int rlen, int pageSize);
 
+    void serializeObject(TweetStatus *object);
 
-    void appendObjectToFile(TweetStatus *object);
+    void writeObjectToFile(TweetStatus *object);
 
-    void appendObjectToFile(TweetStatusIP *object);
+    void writeIndexToFile(int *indexVector);
 
-    void appendObjectToFile(TweetStatusProto *object);
-
-    void appendObjectToFile(TweetStatusFlatBuffers *object);
-
-    void writeIndexToFile(int* indexVector);
-
-    void appendObjectToFileFlush();
-
-
+    void flush();
 };
 
 

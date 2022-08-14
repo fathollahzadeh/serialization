@@ -17,13 +17,12 @@ ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
     this->row = 0;
     this->pageIndex = new int[rlen];
     this->objectIndex = new int[rlen];
-    this->objectLength = new int[rlen];
 
     if (strcasecmp(this->method.c_str(), "inplace") == 0)
         Object::allocator.setUp(this->pageBuffer, 2 * PAGESIZE);
 }
 
-void ObjectWriter::appendObjectToFile(TweetStatus *object) {
+void ObjectWriter::writeObjectToFile(TweetStatus *object) {
     //if serialization type is InPlace:
     if (strcasecmp(this->method.c_str(), "inPlace")) {
         this->appendInPlaceObjectToFile(object);
@@ -73,7 +72,6 @@ void ObjectWriter::appendObjectToFile(TweetStatus *object) {
         if ((currentOffset + objectSize) > PAGESIZE) {
 
             //Write in file:
-            auto tmpTime = chrono::steady_clock::now();
             outStreamRegularFile.write(pageBuffer, PAGESIZE);
 
             //At this point, previous page is written in file.
@@ -90,15 +88,7 @@ void ObjectWriter::appendObjectToFile(TweetStatus *object) {
     }
 }
 
-void ObjectWriter::appendObjectToFile(TweetStatusIP *object) {
-
-}
-
-void ObjectWriter::appendObjectToFile(TweetStatusProto *object) {
-
-}
-
-void ObjectWriter::appendObjectToFileFlush() {
+void ObjectWriter::flush() {
     //Write last page in file:
     this->outStreamRegularFile.write(pageBuffer, currentOffset);
 
@@ -116,10 +106,6 @@ void ObjectWriter::appendObjectToFileFlush() {
 
     //free memory:
     delete[] pageBuffer;
-}
-
-void ObjectWriter::appendObjectToFile(TweetStatusFlatBuffers *object) {
-
 }
 
 void ObjectWriter::appendInPlaceObjectToFile(TweetStatus *object) {
@@ -186,4 +172,42 @@ void ObjectWriter::writeIndexToFile(int *indexVector) {
 
     delete[] indexVector;
     delete[] tbuffer;
+}
+
+void ObjectWriter::serializeObject(TweetStatus *object) {
+
+    //if serialization type is InPlace:
+    if (strcasecmp(this->method.c_str(), "inPlace")) {
+        Object::allocator.setBytesUsed(0);
+        new TweetStatusIP(object);
+    } else {
+        char *buffer = pageBuffer;
+        int objectSize = 0;
+
+        // if serialization type is Handcoded:
+        if (strcasecmp(this->method.c_str(), "Handcoded")) {
+            object->serializeHandcoded(buffer, objectSize);
+        }
+            // if serialization type is Boost:
+        else if (strcasecmp(this->method.c_str(), "Boost")) {
+            object->serializeBoost(buffer, objectSize);
+        }
+            // if serialization type is ProtoBuf:
+        else if (strcasecmp(this->method.c_str(), "ProtoBuf")) {
+            TweetStatusProto *tweetStatusProto = new TweetStatusProto(object);
+            tweetStatusProto->serializeProto(buffer, objectSize);
+            delete tweetStatusProto;
+        }
+
+            // if serialization type is Bson:
+        else if (strcasecmp(this->method.c_str(), "Bson")) {
+            bsoncxx::to_json(object->serializeBSON());
+        }
+
+            // if serialization type is FlatBuffers:
+        else if (strcasecmp(this->method.c_str(), "FlatBuf")) {
+            TweetStatusFlatBuffers *tweetStatusFlatBuffers = new TweetStatusFlatBuffers(object);
+            tweetStatusFlatBuffers->serializeFlatBuffers(buffer, objectSize);
+        }
+    }
 }
