@@ -9,8 +9,7 @@ int main(int argc, char *argv[]) {
 
     string inDataPath = argv[1];
     string seqRand = argv[2];
-    string method = argv[3];
-    int nrow = atoi(argv[4]);
+    int nrow = atoi(argv[3]);
 
     ObjectReader *reader = new ObjectReader(inDataPath, "HandCoded");
     int size = BATCHSIZE;
@@ -18,12 +17,16 @@ int main(int argc, char *argv[]) {
         for (int i = 0; i < nrow;) {
             TweetStatus **tweets = new TweetStatus *[size];
             int rdSize = reader->readObjects(i, size, tweets);
+            for (int j = 0; j < rdSize ; j++) {
+                delete tweets[j];
+            }
             i += rdSize;
             size = min(nrow - i, BATCHSIZE);
             delete[] tweets;
         }
     } else{
-        //TODO: parallel load to memory
+        //TODO: Random load to memory
+        string randomDataPath = argv[4];
     }
 
     delete reader;

@@ -241,7 +241,7 @@ char *ObjectReader::readPageFromFile(int id) {
     }
         //Page not in RAM: Disk IO:
     else {
-        long newPosition = id * PAGESIZE;
+        long newPosition = (long)id * PAGESIZE;
         inStreamRegularFile.clear();
         inStreamRegularFile.seekg(newPosition, std::ifstream::beg);
         currentPageNumber = id;

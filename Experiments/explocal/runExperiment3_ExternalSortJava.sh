@@ -7,7 +7,7 @@ task_set=$4
 log_file_name=$5
 chunk_size=1000000
 
-declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") #"Gson" 
+declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers")
 
 for method in "${methods[@]}"; do
     for rp in {1..1}; do

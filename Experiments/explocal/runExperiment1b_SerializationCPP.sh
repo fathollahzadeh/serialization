@@ -6,7 +6,7 @@ platform=$3
 task_set=$4
 log_file_name=$5
 
-declare -a methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf" )
+declare -a methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf")
 
 for method in "${methods[@]}"; do
     for rp in {1..1}; do
