@@ -72,6 +72,20 @@ add_executable(DataPrepare
 target_link_libraries(DataPrepare PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(DataPrepare PRIVATE mongo::mongocxx_shared)
 
+# prepare data
+add_executable(DataLoadToMemorySingle
+        experiments/DataLoadToMemorySingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataLoadToMemorySingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataLoadToMemorySingle PRIVATE mongo::mongocxx_shared)
+
 # serialize data single thread
 add_executable(DataSerializationSingle
         experiments/DataSerializationSingle.cpp

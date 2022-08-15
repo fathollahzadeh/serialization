@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
     int size = BATCHSIZE;
     for (int i=0; i<nrow;){
-        TweetStatus ** tweets = new TweetStatus*[nrow];
+        TweetStatus ** tweets = new TweetStatus*[size];
         int rdSize =  reader->readObjects(i, size, tweets);
         for (int j = 0; j < rdSize ; j++) {
             tweets[j]->hasBsonDoc = false;

@@ -1,7 +1,19 @@
 #include "ObjectReader.h"
 
 ObjectReader::ObjectReader(const string &method) {
-    this->method = method;
+    if (strcasecmp(method.c_str(), "HandCoded") == 0){
+        this->method = HANDCODED;
+    } else if (strcasecmp(method.c_str(), "InPlace") == 0){
+        this->method = INPLACE;
+    } else if (strcasecmp(method.c_str(), "Boost") == 0){
+        this->method = BOOST;
+    }else if (strcasecmp(method.c_str(), "ProtoBuf") == 0){
+        this->method = PROTOBUF;
+    }else if (strcasecmp(method.c_str(), "Bson") == 0){
+        this->method = BSON;
+    }else if (strcasecmp(method.c_str(), "FlatBuf") == 0){
+        this->method = FLATBUF;
+    }
     this->currentOffset = 0;
     this->row = 0;
 }
@@ -28,7 +40,7 @@ ObjectReader::ObjectReader(const string &fname, const string &method) : ObjectRe
         objectInEachPage[pageIndex[i]] = objectInEachPage[pageIndex[i]] + 1;
     }
 
-    if (strcasecmp(this->method.c_str(), "inplace") == 0)
+    if (this->method == INPLACE)
         Object::allocator.setUp(this->pageBuffer, 2 * PAGESIZE);
 }
 
@@ -109,12 +121,12 @@ int ObjectReader::readObjects(int i, int n, TweetStatus **objectList) {
         //Deserialize object based on preference:
         tempObjectSize = 0;
 
-        if (strcasecmp(this->method.c_str(), "HandCoded") == 0) {
+        if (this->method == HANDCODED) {
             object = new TweetStatus();
             object->deserializeHandcoded(curBuffer + objectIndex[j], tempObjectSize);
-        } else if (strcasecmp(this->method.c_str(), "Boost") == 0) {
+        } else if (this->method == BOOST) {
             object = TweetStatus(false).deserializeBoost(curBuffer + objectIndex[j], tempObjectSize);
-        } else if (strcasecmp(this->method.c_str(), "Bson") == 0) {
+        } else if (this->method == BSON) {
             object = new TweetStatus();
             memcpy(&tempObjectSize, curBuffer + objectIndex[j], sizeof(int));
             //keep data in heap

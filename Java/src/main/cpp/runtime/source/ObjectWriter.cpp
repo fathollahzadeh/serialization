@@ -8,9 +8,22 @@ ObjectWriter::ObjectWriter(const string &fname, const string &method, int rlen) 
 }
 
 ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
+    if (strcasecmp(method.c_str(), "HandCoded") == 0){
+        this->method = HANDCODED;
+    } else if (strcasecmp(method.c_str(), "InPlace") == 0){
+        this->method = INPLACE;
+    } else if (strcasecmp(method.c_str(), "Boost") == 0){
+        this->method = BOOST;
+    }else if (strcasecmp(method.c_str(), "ProtoBuf") == 0){
+        this->method = PROTOBUF;
+    }else if (strcasecmp(method.c_str(), "Bson") == 0){
+        this->method = BSON;
+    }else if (strcasecmp(method.c_str(), "FlatBuf") == 0){
+        this->method = FLATBUF;
+    }
+
     this->currentPageNumber = 0;
     this->currentOffset = 0;
-    this->method = method;
     this->pageBuffer = new char[2 * pageSize]; // this is our page
     memset(pageBuffer, '\0', 2 * PAGESIZE);
 
@@ -19,7 +32,7 @@ ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
     this->pageIndex = new int[rlen];
     this->objectIndex = new int[rlen];
 
-    if (strcasecmp(this->method.c_str(), "inplace") == 0)
+    if (this->method == INPLACE)
         Object::allocator.setUp(this->pageBuffer, 2 * PAGESIZE);
 }
 
@@ -32,22 +45,22 @@ void ObjectWriter::writeObjectToFile(TweetStatus *object) {
         int objectSize = 0;
 
         // if serialization type is Handcoded:
-        if (strcasecmp(this->method.c_str(), "HandCoded") == 0) {
+        if (this->method == HANDCODED) {
             object->serializeHandcoded(buffer + currentOffset, objectSize);
         }
             // if serialization type is Boost:
-        else if (strcasecmp(this->method.c_str(), "Boost") == 0) {
+        else if (this->method == BOOST) {
             object->serializeBoost(buffer + currentOffset, objectSize);
         }
             // if serialization type is ProtoBuf:
-        else if (strcasecmp(this->method.c_str(), "ProtoBuf") == 0) {
+        else if (this->method == PROTOBUF) {
             TweetStatusProto *tweetStatusProto = new TweetStatusProto(object);
             tweetStatusProto->serializeProto(buffer + currentOffset, objectSize);
             delete tweetStatusProto;
         }
 
             // if serialization type is Bson:
-        else if (strcasecmp(this->method.c_str(), "Bson") == 0) {
+        else if (this->method == BSON) {
             string jsonString = bsoncxx::to_json(object->serializeBSON());
             objectSize = jsonString.size();
 
@@ -63,7 +76,7 @@ void ObjectWriter::writeObjectToFile(TweetStatus *object) {
         }
 
             // if serialization type is FlatBuffers:
-        else if (strcasecmp(this->method.c_str(), "FlatBuf") == 0) {
+        else if (this->method == FLATBUF) {
             TweetStatusFlatBuffers *tweetStatusFlatBuffers = new TweetStatusFlatBuffers(object);
             tweetStatusFlatBuffers->serializeFlatBuffers(buffer + currentOffset, objectSize);
         }
@@ -176,7 +189,7 @@ void ObjectWriter::writeIndexToFile(int *indexVector) {
 void ObjectWriter::serializeObject(TweetStatus *object) {
 
     //if serialization type is InPlace:
-    if (strcasecmp(this->method.c_str(), "inPlace") == 0) {
+    if (this->method == INPLACE) {
         Object::allocator.setBytesUsed(0);
         new TweetStatusIP(object);
     } else {
@@ -184,27 +197,27 @@ void ObjectWriter::serializeObject(TweetStatus *object) {
         int objectSize = 0;
 
         // if serialization type is Handcoded:
-        if (strcasecmp(this->method.c_str(), "Handcoded") == 0) {
+        if (this->method == HANDCODED) {
             object->serializeHandcoded(buffer, objectSize);
         }
             // if serialization type is Boost:
-        else if (strcasecmp(this->method.c_str(), "Boost") == 0) {
+        else if (this->method == BOOST) {
             object->serializeBoost(buffer, objectSize);
         }
             // if serialization type is ProtoBuf:
-        else if (strcasecmp(this->method.c_str(), "ProtoBuf") == 0) {
+        else if (this->method == PROTOBUF) {
             TweetStatusProto *tweetStatusProto = new TweetStatusProto(object);
             tweetStatusProto->serializeProto(buffer, objectSize);
             delete tweetStatusProto;
         }
 
             // if serialization type is Bson:
-        else if (strcasecmp(this->method.c_str(), "Bson") == 0) {
+        else if (this->method == BSON) {
             bsoncxx::to_json(object->serializeBSON());
         }
 
             // if serialization type is FlatBuffers:
-        else if (strcasecmp(this->method.c_str(), "FlatBuf") == 0) {
+        else if (this->method == FLATBUF) {
             TweetStatusFlatBuffers *tweetStatusFlatBuffers = new TweetStatusFlatBuffers(object);
             tweetStatusFlatBuffers->serializeFlatBuffers(buffer, objectSize);
         }

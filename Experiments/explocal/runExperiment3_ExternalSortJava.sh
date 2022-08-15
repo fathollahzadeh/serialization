@@ -5,7 +5,7 @@ outDataPath=$2
 nrow=$3
 task_set=$4
 log_file_name=$5
-chunk_size=100000
+chunk_size=1000000
 
 declare -a methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") #"Gson" 
 

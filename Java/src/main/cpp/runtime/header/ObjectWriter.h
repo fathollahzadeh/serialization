@@ -31,7 +31,7 @@ protected:
     int currentPageNumber;
     int currentOffset;
     int row;
-    string method;
+    int method;
     char *pageBuffer;
     int rlen;
     int *pageIndex;

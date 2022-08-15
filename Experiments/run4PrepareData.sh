@@ -14,19 +14,19 @@ outDataPathJava="data/tweets.jbin"
 outDataPathCPP="data/tweets.cbin"
 nrow=$(sed -n '$=' $inDataPath)
 
-# SCRIPT="$jnCMD  -DinDataPath=${inDataPath}\
-#                 -DoutDataPath=${outDataPathJava}\
-#                 -Dnrow=${nrow}\
-#                 -cp ./SerializationJava.jar at.tugraz.experiments.DataPrepare
-#         "
-# echo $SCRIPT
-# time $SCRIPT
+SCRIPT="$jnCMD  -DinDataPath=${inDataPath}\
+                -DoutDataPath=${outDataPathJava}\
+                -Dnrow=${nrow}\
+                -cp ./SerializationJava.jar at.tugraz.experiments.DataPrepare
+        "
+echo $SCRIPT
+time $SCRIPT
 
 # prepare data for C++ experiments
 
-SCRIPT="./cppbin/DataPrepare ${inDataPath} ${outDataPathCPP} ${nrow}"
-echo $SCRIPT
-time $SCRIPT
+# SCRIPT="./cppbin/DataPrepare ${inDataPath} ${outDataPathCPP} ${nrow}"
+# echo $SCRIPT
+# time $SCRIPT
 
 
 

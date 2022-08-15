@@ -5,15 +5,12 @@
 #include <map>
 #include <cstring>
 #include <fstream>
-//#include "RootData.h"
 #include "TweetStatus.h"
-//#include <Object.h>
 #include <TweetStatusIP.h>
 #include <TweetStatusProto.h>
 #include <TweetStatusFlatBuffers.h>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-
 #include "Const.h"
 #include "RootData.h"
 #include "Object.h"
@@ -26,15 +23,12 @@ protected:
     int currentOffset;
     int row;
     int rlen;
-    string method;
+    int method;
     char *pageBuffer;
     int *pageIndex;
     int *objectIndex;
-    int *objectLength;
     map<int, int> objectInEachPage;
     ifstream inStreamRegularFile;
-    //ByteBuffer bbPageBuffer;
-    //Kryo kryo;
 private:
     RootData rootData;
 
