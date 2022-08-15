@@ -32,8 +32,6 @@ int main(int argc, char *argv[]) {
     delete reader;
     delete writer;
     return 0;
-
-
 }
 
 
