@@ -28,7 +28,7 @@ class ObjectWriter {
 protected:
     ofstream outStreamRegularFile;
     ofstream outIndexFile;
-    long currentPageNumber;
+    int currentPageNumber;
     int currentOffset;
     int row;
     string method;
@@ -40,7 +40,9 @@ protected:
 private:
     RootData rootData;
 
-    void appendInPlaceObjectToFile(TweetStatus *object);
+    void writeInPlaceObjectToFile(TweetStatus *object);
+
+    void writeIndexToFile(int *indexVector);
 
 public:
     virtual ~ObjectWriter();
@@ -52,8 +54,6 @@ public:
     void serializeObject(TweetStatus *object);
 
     void writeObjectToFile(TweetStatus *object);
-
-    void writeIndexToFile(int *indexVector);
 
     void flush();
 };

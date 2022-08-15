@@ -57,7 +57,7 @@ public:
 	string withheldScope;//nullable
 
 	bsoncxx::document::value bsonDoc = bsoncxx::document::value(nullptr, 0, nullptr);
-	bool hasBsonDoc;
+	bool hasBsonDoc = false;
 
 	bool isPointer;
 

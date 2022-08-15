@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#cleanup
+rm -rf SerializationJava.jar
+rm -rf cppbin
+
 # compile Java baselines
 cd ..
 cd Java
@@ -17,6 +21,9 @@ rm -rf cpp.cbp
 rm -rf bin
 cmake .
 make clean
-make -j10
+make -j12
+
+mv  bin/ ../../../../Experiments/cppbin
+
 
 # compile Rust baselines

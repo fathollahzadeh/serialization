@@ -7,17 +7,19 @@ set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 set(CMAKE_FIND_DEBUG_MODE 1)
 
-find_package(libmongocxx REQUIRED)
-find_package(libbsoncxx REQUIRED)
+find_package(mongocxx CONFIG REQUIRED)
+find_package(bsoncxx CONFIG REQUIRED)
 
-include_directories("/usr/local/include/mongocxx/v_noabi")
-include_directories("/usr/local/include/bsoncxx/v_noabi")
+include_directories(${LIBMONGOCXX_INCLUDE_DIR})
+include_directories(${LIBBSONCXX_INCLUDE_DIR})
 
 # set the output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/libraries")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/tools/cmake")
 set(CTEST_BINARY_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
+
+#target_compile_options (cpp PUBLIC -fexceptions)
 
 # check the operating system and add the appropriate flags
 if (APPLE)
@@ -44,27 +46,60 @@ include_directories("${PROJECT_SOURCE_DIR}/serialization/source/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/inplace/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/proto/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/")
+include_directories("${PROJECT_SOURCE_DIR}/experiments/")
 
 # set serialization source files
 file(GLOB srcIO "${PROJECT_SOURCE_DIR}/runtime/source/*.cpp")
 file(GLOB srcUtil "${PROJECT_SOURCE_DIR}/util/source/*.cpp")
-file(GLOB srcSerialization "${PROJECT_SOURCE_DIR}/src/serialization/source/*.cpp")
+file(GLOB srcSerialization "${PROJECT_SOURCE_DIR}/serialization/source/*.cpp")
 file(GLOB srcInPlace "${PROJECT_SOURCE_DIR}/serialization/source/inplace/*.cpp")
-file(GLOB srcProtobuf "${PROJECT_SOURCE_DIR}/serialization/source/proto/*.cc")
+file(GLOB srcProtobuf "${PROJECT_SOURCE_DIR}/serialization/source/proto/*.cpp")
+file(GLOB srcProtobufcc "${PROJECT_SOURCE_DIR}/serialization/source/proto/*.cc")
 file(GLOB srcFlatbuf "${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/*.cpp")
 
-# data serialization
-add_executable(TwitterSerialization
-        test.cpp
+
+# prepare data
+add_executable(DataPrepare
+        experiments/DataPrepare.cpp
         ${srcIO}
         ${srcUtil}
         ${srcSerialization}
         ${srcInPlace}
         ${srcProtobuf}
+        ${srcProtobufcc}
         ${srcFlatbuf}
         )
-target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
-target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})
+target_link_libraries(DataPrepare PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataPrepare PRIVATE mongo::mongocxx_shared)
+
+# serialize data single thread
+add_executable(DataSerializationSingle
+        experiments/DataSerializationSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataSerializationSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataSerializationSingle PRIVATE mongo::mongocxx_shared)
+
+
+## data serialization
+#add_executable(TwitterSerialization
+#        test.cpp
+#        ${srcIO}
+#        ${srcUtil}
+#        ${srcSerialization}
+#        ${srcInPlace}
+#        ${srcProtobuf}
+#        ${srcProtobufcc}
+#        ${srcFlatbuf}
+#        )
+#target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
+#target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})
 
 ## data serialization
 #add_executable(TwitterSerialization
