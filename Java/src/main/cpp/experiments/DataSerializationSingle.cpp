@@ -20,7 +20,6 @@ int main(int argc, char *argv[]) {
         TweetStatus ** tweets = new TweetStatus*[size];
         int rdSize =  reader->readObjects(i, size, tweets);
         for (int j = 0; j < rdSize ; j++) {
-            tweets[j]->hasBsonDoc = false;
             writer->serializeObject(tweets[j]);
             delete tweets[j];
         }

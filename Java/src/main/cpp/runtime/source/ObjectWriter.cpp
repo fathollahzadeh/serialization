@@ -38,7 +38,7 @@ ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
 
 void ObjectWriter::writeObjectToFile(TweetStatus *object) {
     //if serialization type is InPlace:
-    if (strcasecmp(this->method.c_str(), "inPlace") == 0) {
+    if (this->method == INPLACE) {
         this->writeInPlaceObjectToFile(object);
     } else {
         char *buffer = pageBuffer;
@@ -64,7 +64,6 @@ void ObjectWriter::writeObjectToFile(TweetStatus *object) {
             string jsonString = bsoncxx::to_json(object->serializeBSON());
             objectSize = jsonString.size();
 
-            auto tmpTime = chrono::steady_clock::now();
             // insert json size to the first 4 byte of buffer
             memcpy(buffer + currentOffset, &objectSize, sizeof(int));
 
@@ -78,7 +77,7 @@ void ObjectWriter::writeObjectToFile(TweetStatus *object) {
             // if serialization type is FlatBuffers:
         else if (this->method == FLATBUF) {
             TweetStatusFlatBuffers *tweetStatusFlatBuffers = new TweetStatusFlatBuffers(object);
-            tweetStatusFlatBuffers->serializeFlatBuffers(buffer + currentOffset, objectSize);
+            tweetStatusFlatBuffers->serializeFlatBuffersIO(buffer + currentOffset, objectSize);
         }
 
         //check capacity of the current page size

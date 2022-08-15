@@ -20,8 +20,6 @@ private:
 
     TweetStatus *tweetStatus;
 
-    double ioTime;
-
     flatbuffers::Offset<TweetStatusFBS> addTOFlatBuffers(TweetStatus *tweetStatus,flatbuffers::FlatBufferBuilder &builder);
     flatbuffers::Offset<UserFBS> getUserBuilder(User *user, flatbuffers::FlatBufferBuilder &builder);
     flatbuffers::Offset<AdditionalMediaInfoEntityFBS> getAdditionalMediaInfoEntityBuilder(AdditionalMediaInfoEntity *additionalMediaInfoEntity,flatbuffers::FlatBufferBuilder &builder);
@@ -59,6 +57,9 @@ public:
     //flatbuffers buffer serialization
     void serializeFlatBuffers(char *buffer, int &objectSize);
 
+    //flatbuffers buffer serialization
+    void serializeFlatBuffersIO(char *buffer, int &objectSize);
+
     //proto buffer de-serialization
     TweetStatusFlatBuffers* deserializeFlatBuffers(char *buffer, int &bytesRead);
 
@@ -69,8 +70,6 @@ public:
     //proto buffer de-serialization
     TweetStatusFlatBuffers* deserializeProto(char *buffer, int &bytesRead);
 
-
-    //***********
     //Hand Coded C++ serialization:
     //New API: Writes directly to File Page:
     char *serializeHandcoded(char *buffer, int &objectSize);
@@ -96,7 +95,6 @@ public:
 
     void setBsonDoc(bsoncxx::document::value bsonDoc);
 
-    double getIoTime() const;
 };
 
 

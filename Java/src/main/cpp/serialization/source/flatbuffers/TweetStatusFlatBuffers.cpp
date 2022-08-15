@@ -33,20 +33,33 @@ void TweetStatusFlatBuffers::serializeFlatBuffers(char *buffer, int &objectSize)
 		bp = builder.GetBufferPointer();
 		objectSize = builder.GetSize();
 	}
-
-
-	//add size of object size to objectsize:
-	auto tmpTime = chrono::steady_clock::now();
-
-	// insert json size to the first 4 byte of buffer
-	memcpy(buffer, &objectSize, sizeof(int));
-
-	//copy serialized to the page buffer:
-	memmove(buffer + sizeof(int), (char *) bp, objectSize);
-
-	ioTime = chrono::duration<double>(chrono::steady_clock::now() - tmpTime).count();
-
 	objectSize += sizeof(objectSize);
+}
+
+void TweetStatusFlatBuffers::serializeFlatBuffersIO(char *buffer, int &objectSize) {
+    uint8_t *bp;
+    if (this->tweetStatus != nullptr) {
+        flatbuffers::FlatBufferBuilder builder(4096);
+        auto orc = this->addTOFlatBuffers(this->tweetStatus, builder);
+        builder.Finish(orc);
+        bp = builder.GetBufferPointer();
+        objectSize = builder.GetSize();
+
+
+    } else {
+        flatbuffers::FlatBufferBuilder builder;
+        builder.Finish(tweetstatusflatbuffers::TweetStatusFBS::Pack(builder, this->tweetStatusFbs));
+        bp = builder.GetBufferPointer();
+        objectSize = builder.GetSize();
+    }
+
+    // insert json size to the first 4 byte of buffer
+    memcpy(buffer, &objectSize, sizeof(int));
+
+    //copy serialized to the page buffer:
+    memmove(buffer + sizeof(int), (char *) bp, objectSize);
+
+    objectSize += sizeof(objectSize);
 }
 
 flatbuffers::Offset <TweetStatusFBS>
@@ -641,8 +654,5 @@ TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeProto(char *buffer, i
 	return nullptr;
 }
 
-double TweetStatusFlatBuffers::getIoTime() const {
-	return ioTime;
-}
 
 void TweetStatusFlatBuffers::setBsonDoc(bsoncxx::document::value bsonDoc) {}
