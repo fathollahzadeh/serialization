@@ -18,8 +18,18 @@ int main(int argc, char *argv[]) {
         reader->readIO(0, nrow);
     }
     else{
-        //TODO: Random load to memory
         string randomDataPath = argv[5];
+        ifstream infile;
+        infile.open(randomDataPath);
+        if (!infile.is_open()) {
+            throw runtime_error("cannot find random list file!!.");
+        }
+
+        string line;
+        while (getline(infile, line)) {
+            int id = atoi(line.c_str());
+            reader->readIO(id);
+        }
     }
 }
 

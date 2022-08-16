@@ -1,17 +1,17 @@
 #include "ObjectReader.h"
 
 ObjectReader::ObjectReader(const string &method) {
-    if (strcasecmp(method.c_str(), "HandCoded") == 0){
+    if (strcasecmp(method.c_str(), "HandCoded") == 0) {
         this->method = HANDCODED;
-    } else if (strcasecmp(method.c_str(), "InPlace") == 0){
+    } else if (strcasecmp(method.c_str(), "InPlace") == 0) {
         this->method = INPLACE;
-    } else if (strcasecmp(method.c_str(), "Boost") == 0){
+    } else if (strcasecmp(method.c_str(), "Boost") == 0) {
         this->method = BOOST;
-    }else if (strcasecmp(method.c_str(), "ProtoBuf") == 0){
+    } else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
         this->method = PROTOBUF;
-    }else if (strcasecmp(method.c_str(), "Bson") == 0){
+    } else if (strcasecmp(method.c_str(), "Bson") == 0) {
         this->method = BSON;
-    }else if (strcasecmp(method.c_str(), "FlatBuf") == 0){
+    } else if (strcasecmp(method.c_str(), "FlatBuf") == 0) {
         this->method = FLATBUF;
     }
     this->currentOffset = 0;
@@ -104,133 +104,119 @@ void ObjectReader::readIndexesFromFile(const string &fname) {
 }
 
 int ObjectReader::readObjects(int i, int n, TweetStatus **objectList) {
-    int tempObjectSize;
-    //Initialize the buffer with the existing page:
-    char *curBuffer = nullptr;
-
-    // tem TweetStatus object:
-    TweetStatus *object;
-
     int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
     //Iterate over all objects that you aspire to read.
     int index = 0;
     for (int j = i; j < listSize; j++) {
-        curBuffer = readPageFromFile(pageIndex[j]);
-
-        //Read the object using a object index.
-        //Deserialize object based on preference:
-        tempObjectSize = 0;
-
-        if (this->method == HANDCODED) {
-            object = new TweetStatus();
-            object->deserializeHandcoded(curBuffer + objectIndex[j], tempObjectSize);
-        } else if (this->method == BOOST) {
-            object = TweetStatus(false).deserializeBoost(curBuffer + objectIndex[j], tempObjectSize);
-        } else if (this->method == BSON) {
-            object = new TweetStatus();
-            memcpy(&tempObjectSize, curBuffer + objectIndex[j], sizeof(int));
-            //keep data in heap
-            char *tBuffer = new char[tempObjectSize + 1];
-            memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(int), tempObjectSize);
-            memcpy(tBuffer + tempObjectSize, "\0", 1);
-
-            bsoncxx::document::value bsonObj = bsoncxx::from_json(tBuffer);
-            bsoncxx::document::view doc = bsonObj.view();
-            object->deserializeBSON(doc);
-            object->setBsonDoc(bsonObj);
-            delete[] tBuffer;
-        }
-        objectList[index++] = object;
+        objectList[index++] = this->readObject(j);
     }
     return index;
+}
+
+TweetStatus *ObjectReader::readObject(int i) {
+    TweetStatus *object = nullptr;
+    char *curBuffer = readPageFromFile(pageIndex[i]);
+
+    //Read the object using a object index.
+    //Deserialize object based on preference:
+    int tempObjectSize = 0;
+
+    if (this->method == HANDCODED) {
+        object = new TweetStatus();
+        object->deserializeHandcoded(curBuffer + objectIndex[i], tempObjectSize);
+    } else if (this->method == BOOST) {
+        object = TweetStatus(false).deserializeBoost(curBuffer + objectIndex[i], tempObjectSize);
+    } else if (this->method == BSON) {
+        object = new TweetStatus();
+        memcpy(&tempObjectSize, curBuffer + objectIndex[i], sizeof(int));
+        //keep data in heap
+        char *tBuffer = new char[tempObjectSize + 1];
+        memcpy(tBuffer, curBuffer + objectIndex[i] + sizeof(int), tempObjectSize);
+        memcpy(tBuffer + tempObjectSize, "\0", 1);
+
+        bsoncxx::document::value bsonObj = bsoncxx::from_json(tBuffer);
+        bsoncxx::document::view doc = bsonObj.view();
+        object->deserializeBSON(doc);
+        object->setBsonDoc(bsonObj);
+        delete[] tBuffer;
+    }
+    return object;
 }
 
 int ObjectReader::readObjects(int i, int n, TweetStatusIP **objectList) {
-
-     //Initialize the buffer with the existing page:
-    char *curBuffer = nullptr;
-
-    // tem TweetStatus object:
-    TweetStatusIP *object;
-
     int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
     //Iterate over all objects that you aspire to read.
     int index = 0;
-    for (int j = i; j < listSize; j++) {
-        curBuffer = readPageFromFile(pageIndex[j]);
-
-         int objectSize = 0;
-        //Read object size:
-        objectSize = this->rootData.parseInPlaceInt(curBuffer + objectIndex[j]);
-
-        //keep data in heap
-        char *tBuffer = new char[objectSize];
-        memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(objectSize), objectSize);
-
-        object = (TweetStatusIP *) tBuffer;
-        object->objectsize = objectSize;
-        objectList[index++] = object;
-    }
+    for (int j = i; j < listSize; j++)
+        objectList[index++] = this->readObjectIP(j);
 
     return index;
+}
+
+TweetStatusIP *ObjectReader::readObjectIP(int i) {
+
+    //Initialize the buffer with the existing page:
+    char *curBuffer = readPageFromFile(pageIndex[i]);
+
+    int objectSize = this->rootData.parseInPlaceInt(curBuffer + objectIndex[i]);
+
+    //keep data in heap
+    char *tBuffer = new char[objectSize];
+    memcpy(tBuffer, curBuffer + objectIndex[i] + sizeof(objectSize), objectSize);
+
+    TweetStatusIP *object = (TweetStatusIP *) tBuffer;
+    object->objectsize = objectSize;
+    return object;
 }
 
 int ObjectReader::readObjects(int i, int n, TweetStatusProto **objectList) {
+    int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
+    //Iterate over all objects that you aspire to read.
+    int index = 0;
+    for (int j = i; j < listSize; j++)
+        objectList[index++] = this->readObjectProto(j);
+    return index;
+}
 
-    int tempObjectSize;
-    //Initialize the buffer with the existing page:
-    char *curBuffer = nullptr;
+TweetStatusProto *ObjectReader::readObjectProto(int i) {
+    char *curBuffer = readPageFromFile(pageIndex[i]);
 
-    // tem TweetStatus object:
-    TweetStatusProto *object;
+    //Read the object using a object index.
+    //Deserialize object based on preference:
+    int tempObjectSize = 0;
+
+    TweetStatusProto *object = new TweetStatusProto();
+    object->deserializeProto(curBuffer + objectIndex[i], tempObjectSize);
+    return object;
+}
+
+int ObjectReader::readObjects(int i, int n, TweetStatusFlatBuffers **objectList) {
 
     int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
     //Iterate over all objects that you aspire to read.
     int index = 0;
-    for (int j = i; j < listSize; j++) {
-        curBuffer = readPageFromFile(pageIndex[j]);
-
-        //Read the object using a object index.
-        //Deserialize object based on preference:
-        tempObjectSize = 0;
-
-        object = new TweetStatusProto();
-        object->deserializeProto(curBuffer + objectIndex[j], tempObjectSize);
-        objectList[index++] = object;
-    }
+    for (int j = i; j < listSize; j++)
+        objectList[index++] = this->readObjectFlatBuffers(j);
 
     return index;
 }
 
-int ObjectReader::readObjects(int i, int n, TweetStatusFlatBuffers **objectList) {
-    int tempObjectSize;
-    //Initialize the buffer with the existing page:
-    char *curBuffer = nullptr;
+TweetStatusFlatBuffers *ObjectReader::readObjectFlatBuffers(int i) {
+    char *curBuffer = readPageFromFile(pageIndex[i]);
 
-    // tem TweetStatus object:
-    TweetStatusFlatBuffers *object;
+    //Read the object using a object index.
+    //Deserialize object based on preference:
+    int tempObjectSize = 0;
 
-    int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
-    //Iterate over all objects that you aspire to read.
-    int index = 0;
-    for (int j = i; j < listSize; j++) {
-        curBuffer = readPageFromFile(pageIndex[j]);
+    //keep data in heap
+    memcpy(&tempObjectSize, curBuffer + objectIndex[i], sizeof(int));
+    char *tBuffer = new char[tempObjectSize];
+    memcpy(tBuffer, curBuffer + objectIndex[i] + sizeof(tempObjectSize), tempObjectSize);
 
-        //Read the object using a object index.
-        //Deserialize object based on preference:
-        tempObjectSize = 0;
-
-        //keep data in heap
-        memcpy(&tempObjectSize, curBuffer + objectIndex[j], sizeof(int));
-        char *tBuffer = new char[tempObjectSize];
-        memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(tempObjectSize), tempObjectSize);
-
-        object = new TweetStatusFlatBuffers();
-        object->deserializeFlatBuffers(tBuffer, tempObjectSize);
-        delete[] tBuffer;
-        objectList[index++] = object;
-    }
-    return index;
+    TweetStatusFlatBuffers *object = new TweetStatusFlatBuffers();
+    object->deserializeFlatBuffers(tBuffer, tempObjectSize);
+    delete[] tBuffer;
+    return object;
 }
 
 
@@ -241,7 +227,7 @@ char *ObjectReader::readPageFromFile(int id) {
     }
         //Page not in RAM: Disk IO:
     else {
-        long newPosition = (long)id * PAGESIZE;
+        long newPosition = (long) id * PAGESIZE;
         inStreamRegularFile.clear();
         inStreamRegularFile.seekg(newPosition, std::ifstream::beg);
         currentPageNumber = id;
@@ -260,26 +246,25 @@ int ObjectReader::getMethod() const {
 
 void ObjectReader::readIO(long i, int n) {
 
-    int tempObjectSize;
-    //Initialize the buffer with the existing page:
-    char *curBuffer = nullptr;
-
-    // tem TweetStatus object:
-    TweetStatusFlatBuffers *object;
-
     int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
     //Iterate over all objects that you aspire to read.
-    for (int j = i; j < listSize; j++) {
-        curBuffer = readPageFromFile(pageIndex[j]);
-
-        //Read the object using a object index.
-        //Deserialize object based on preference:
-        tempObjectSize = 0;
-
-        //keep data in heap
-        memcpy(&tempObjectSize, curBuffer + objectIndex[j], sizeof(int));
-        char *tBuffer = new char[tempObjectSize];
-        memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(tempObjectSize), tempObjectSize);
-        delete[] tBuffer;
-    }
+    for (int j = i; j < listSize; j++)
+        this->readPageFromFile(j);
 }
+
+void ObjectReader::readIO(long i) {
+    //Initialize the buffer with the existing page:
+    char *curBuffer = readPageFromFile(pageIndex[i]);
+
+    //Read the object using a object index.
+    //Deserialize object based on preference:
+    int tempObjectSize = 0;
+
+    //keep data in heap
+    memcpy(&tempObjectSize, curBuffer + objectIndex[i], sizeof(int));
+    char *tBuffer = new char[tempObjectSize];
+    memcpy(tBuffer, curBuffer + objectIndex[i] + sizeof(tempObjectSize), tempObjectSize);
+    delete[] tBuffer;
+}
+
+

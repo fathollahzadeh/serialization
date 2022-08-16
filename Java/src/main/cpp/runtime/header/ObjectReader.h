@@ -42,20 +42,20 @@ public:
     ObjectReader(const string &method);
 
     int readObjects(int i, int n, TweetStatus ** objectList);
+    TweetStatus * readObject(int i);
 
     int readObjects(int i, int n, TweetStatusIP ** objectList);
+    TweetStatusIP * readObjectIP(int i);
 
     int readObjects(int i, int n, TweetStatusProto ** objectList);
+    TweetStatusProto * readObjectProto(int i);
 
     int readObjects(int i, int n, TweetStatusFlatBuffers ** objectList);
+    TweetStatusFlatBuffers * readObjectFlatBuffers(int i);
 
     void readIO(long i, int n);
+    void readIO(long i);
 
-    //long readObjects(long i, int n, RootData[] rd)
-    //long readObjects(long i, int n, ArrayList<RootData> rd)
-
-    //protected void readPage(long id)
-    //RootData readObjectWithSerialization(TweetStatus myData, byte[] buffData)
     int getRlen();
 
     int getMethod() const;
