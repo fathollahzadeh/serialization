@@ -49,12 +49,16 @@ public:
 
     int readObjects(int i, int n, TweetStatusFlatBuffers ** objectList);
 
+    void readIO(long i, int n);
+
     //long readObjects(long i, int n, RootData[] rd)
     //long readObjects(long i, int n, ArrayList<RootData> rd)
-    //void readIO(long i, int n)
+
     //protected void readPage(long id)
     //RootData readObjectWithSerialization(TweetStatus myData, byte[] buffData)
-    //int getRlen()
+    int getRlen();
+
+    int getMethod() const;
     //HashMap<Integer, Integer> getObjectInEachPage()
 };
 #endif //CPP_OBJECTREADER_H

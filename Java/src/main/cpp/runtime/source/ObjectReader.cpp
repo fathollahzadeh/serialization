@@ -249,3 +249,37 @@ char *ObjectReader::readPageFromFile(int id) {
         return pageBuffer;
     }
 }
+
+int ObjectReader::getRlen() {
+    return this->rlen;
+}
+
+int ObjectReader::getMethod() const {
+    return method;
+}
+
+void ObjectReader::readIO(long i, int n) {
+
+    int tempObjectSize;
+    //Initialize the buffer with the existing page:
+    char *curBuffer = nullptr;
+
+    // tem TweetStatus object:
+    TweetStatusFlatBuffers *object;
+
+    int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
+    //Iterate over all objects that you aspire to read.
+    for (int j = i; j < listSize; j++) {
+        curBuffer = readPageFromFile(pageIndex[j]);
+
+        //Read the object using a object index.
+        //Deserialize object based on preference:
+        tempObjectSize = 0;
+
+        //keep data in heap
+        memcpy(&tempObjectSize, curBuffer + objectIndex[j], sizeof(int));
+        char *tBuffer = new char[tempObjectSize];
+        memcpy(tBuffer, curBuffer + objectIndex[j] + sizeof(tempObjectSize), tempObjectSize);
+        delete[] tBuffer;
+    }
+}

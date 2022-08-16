@@ -100,129 +100,48 @@ add_executable(DataSerializationSingle
 target_link_libraries(DataSerializationSingle PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(DataSerializationSingle PRIVATE mongo::mongocxx_shared)
 
+# serialize data single thread
+add_executable(DataWriteSingle
+        experiments/DataWriteSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataWriteSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataWriteSingle PRIVATE mongo::mongocxx_shared)
 
-## data serialization
-#add_executable(TwitterSerialization
-#        test.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})
+# read data single thread
+add_executable(DataReadSingle
+        experiments/DataReadSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadSingle PRIVATE mongo::mongocxx_shared)
 
-## data serialization
-#add_executable(TwitterSerialization
-#        src/benchmarks/source/DataSerialization.cpp
-#        src/filehandler/source/FileHandler.cpp
-#        src/filehandler/source/DataReader.cpp
-#        src/filehandler/source/LogFileHandler.cpp
-#        src/serialization/source/proto/TweetStatusP.pb.cc
-#        ${serializationSource}
-#        ${inPlaceSerializationSource}
-#        ${protSerializationSource}
-#        ${flatBuffersSerializationSource}
-#        ${rootDataSource}
-#        )
-#target_link_libraries(TwitterSerialization ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterSerialization ${LIBBSONCXX_LIBRARIES})
-#
-## generate random list for benchmark random read
-#add_executable(TwitterGenerateRandomList
-#        src/benchmarks/source/GenerateRandomList.cpp
-#        )
-#target_link_libraries(TwitterGenerateRandomList ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterGenerateRandomList ${LIBBSONCXX_LIBRARIES})
-#
-## data generate
-#add_executable(TwitterGenerateData
-#        src/benchmarks/source/GenerateData.cpp
-#        )
-#target_link_libraries(TwitterGenerateData ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterGenerateData ${LIBBSONCXX_LIBRARIES})
-#
-#
-## sequential read benchmark
-#add_executable(TwitterSequentialRead
-#        src/benchmarks/source/SequentialRead.cpp
-#        src/filehandler/source/FileHandler.cpp
-#        src/filehandler/source/DataReader.cpp
-#        src/filehandler/source/LogFileHandler.cpp
-#        src/serialization/source/proto/TweetStatusP.pb.cc
-#        ${serializationSource}
-#        ${inPlaceSerializationSource}
-#        ${protSerializationSource}
-#        ${flatBuffersSerializationSource}
-#        ${rootDataSource}
-#        )
-#target_link_libraries(TwitterSequentialRead ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterSequentialRead ${LIBBSONCXX_LIBRARIES})
-#
-## random read benchmark
-#add_executable(TwitterRandomRead
-#        src/benchmarks/source/RandomRead.cpp
-#        src/filehandler/source/FileHandler.cpp
-#        src/filehandler/source/DataReader.cpp
-#        src/filehandler/source/LogFileHandler.cpp
-#        src/serialization/source/proto/TweetStatusP.pb.cc
-#        ${serializationSource}
-#        ${inPlaceSerializationSource}
-#        ${protSerializationSource}
-#        ${flatBuffersSerializationSource}
-#        ${rootDataSource}
-#        )
-#target_link_libraries(TwitterRandomRead ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterRandomRead ${LIBBSONCXX_LIBRARIES})
-#
-## external sort benchmark
-#add_executable(TwitterExternalSort
-#        src/benchmarks/source/ExternalSort.cpp
-#        src/filehandler/source/FileHandler.cpp
-#        src/filehandler/source/DataReader.cpp
-#        src/filehandler/source/LogFileHandler.cpp
-#        src/serialization/source/proto/TweetStatusP.pb.cc
-#        ${serializationSource}
-#        ${inPlaceSerializationSource}
-#        ${protSerializationSource}
-#        ${flatBuffersSerializationSource}
-#        ${rootDataSource}
-#        )
-#target_link_libraries(TwitterExternalSort ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterExternalSort ${LIBBSONCXX_LIBRARIES})
-#
-## network benchmark
-#add_executable(TwitterNetworkServer
-#        src/benchmarks/source/NetworkServer.cpp
-#        ${serializationSource}
-#        ${networkAdapterSource}
-#        ${serializationSource}
-#        ${inPlaceSerializationSource}
-#        ${protSerializationSource}
-#        ${flatBuffersSerializationSource}
-#        ${rootDataSource}
-#        src/serialization/source/proto/TweetStatusP.pb.cc
-#        )
-#target_link_libraries(TwitterNetworkServer ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterNetworkServer ${LIBBSONCXX_LIBRARIES})
-#
-## network benchmark client
-#add_executable(TwitterNetworkClient
-#        src/benchmarks/source/NetworkClient.cpp
-#        src/filehandler/source/FileHandler.cpp
-#        src/filehandler/source/DataReader.cpp
-#        src/filehandler/source/LogFileHandler.cpp
-#        src/serialization/source/proto/TweetStatusP.pb.cc
-#        ${serializationSource}
-#        ${inPlaceSerializationSource}
-#        ${protSerializationSource}
-#        ${flatBuffersSerializationSource}
-#        ${rootDataSource}
-#        ${networkAdapterSource}
-#        )
-#target_link_libraries(TwitterNetworkClient ${LIBMONGOCXX_LIBRARIES})
-#target_link_libraries(TwitterNetworkClient ${LIBBSONCXX_LIBRARIES})
+# read I/O data single thread
+add_executable(DataReadIOSingle
+        experiments/DataReadIOSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadIOSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadIOSingle PRIVATE mongo::mongocxx_shared)
+
+
+
 
