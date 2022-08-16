@@ -13,7 +13,6 @@ randomDataPath=$7
 for rp in {1..1}; do
     start=$(date +%s%N)
     SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
-                   -DseqRand=${seq_rand}\
                    -DrandomDataPath=${randomDataPath}\
                    -Dnrow=${nrow}\
                    -cp ./SerializationJava.jar at.tugraz.experiments.DataLoadToMemory${platform}
@@ -24,5 +23,5 @@ for rp in {1..1}; do
     echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)
-    echo "Java,"${platform}","${task_set}","${seq_rand}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+    echo "Java,"${platform}","${task_set}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
 done    

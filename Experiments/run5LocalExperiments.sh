@@ -12,27 +12,20 @@ declare -a nrows=(1000000)
 # 1.a Java enviroments
 # write header to log file
 ##########################
-echo "language,platform,taskset,seq_rand,nrow,time" >>results/Experiment1_LoadToMemory_times.dat
+echo "language,platform,taskset,nrow,time" >>results/Experiment1_LoadToMemory_times.dat
 echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results/Experiment1_Write_times.dat
 echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results/Experiment2_Read_times.dat
 echo "baseline,language,taskset,chunk_size,nrow,time" >>results/Experiment3_Read_times.dat
 
 for nrow in "${nrows[@]}"; do
-    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single true Sequential $nrow Experiment1_LoadToMemory_times
-    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single false Sequential $nrow Experiment1_LoadToMemory_times
-    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Parallel false Sequential $nrow Experiment1_LoadToMemory_times
-    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single true Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
-    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single false Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
-    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Parallel false Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
-
-    #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true Sequential $nrow Experiment1_LoadToMemory_times
-    #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false Sequential $nrow Experiment1_LoadToMemory_times
-    #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Parallel false Sequential $nrow Experiment1_LoadToMemory_times
+    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single true $nrow Experiment1_LoadToMemory_times
+    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single false $nrow Experiment1_LoadToMemory_times
+    # ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Parallel false $nrow Experiment1_LoadToMemory_times
     
-     ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
-     ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
-    # ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Parallel false Random $nrow Experiment1_LoadToMemory_times "$randomDataPath$nrow.dat"
-
+    #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true $nrow Experiment1_LoadToMemory_times
+    #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false $nrow Experiment1_LoadToMemory_times
+    #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Parallel false $nrow Experiment1_LoadToMemory_times
+    
 
     # # Seralization (just CPU time)
     # ##############################
