@@ -26,7 +26,7 @@ for method in "${methods[@]}"; do
         fi
         time $SCRIPT
         end=$(date +%s%N)
-        echo ${method}"Java,Java,"${task_set}",Total,"${platform}","${seq_rand}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+        echo ${method}"Java,Java,"${task_set}",Total,"${platform}","${seq_rand}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
     done
 done    
 

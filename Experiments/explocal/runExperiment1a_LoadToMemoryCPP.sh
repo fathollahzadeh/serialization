@@ -18,5 +18,5 @@ for rp in {1..1}; do
     echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)
-    echo "CPP,"${platform}","${task_set}","${nrow}","${seq_rand}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+    echo "CPP,"${platform}","${task_set}","${seq_rand}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
 done 

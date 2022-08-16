@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 inDataPath=$1
 platform=$2
 task_set=$3
@@ -11,13 +12,17 @@ randomDataPath=$7
 
 for rp in {1..1}; do
     start=$(date +%s%N)
-    SCRIPT="./cppbin/DataLoadToMemory${platform} ${inDataPath} ${seq_rand} ${nrow} ${randomDataPath}"
+    SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
+                   -DseqRand=${seq_rand}\
+                   -DrandomDataPath=${randomDataPath}\
+                   -Dnrow=${nrow}\
+                   -cp ./SerializationJava.jar at.tugraz.experiments.DataLoadToMemory${platform}
+                "
     if [ "$task_set" = true ] ; then
             SCRIPT="taskset -c 0 $SCRIPT"
     fi            
     echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)
-    echo "CPP,"${platform}","${task_set}","${nrow}","${seq_rand}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+    echo "Java,"${platform}","${task_set}","${seq_rand}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
 done    
-
