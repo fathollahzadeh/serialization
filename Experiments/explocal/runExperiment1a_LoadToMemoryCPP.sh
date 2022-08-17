@@ -3,10 +3,9 @@
 inDataPath=$1
 platform=$2
 task_set=$3
-seq_rand=$4
-nrow=$5
-log_file_name=$6
-randomDataPath=$7
+nrow=$4
+log_file_name=$5
+randomDataPath=$6
 
 
 for rp in {1..1}; do

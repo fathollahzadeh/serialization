@@ -23,12 +23,12 @@ public class DataLoadToMemoryParallel {
 
         int numThreads = OptimizerUtils.getParallelWriteParallelism();
         ExecutorService pool = CommonThreadPool.get(numThreads);
-        ArrayList<SerializeTask> tasks = new ArrayList<>();
+        ArrayList<DeSerializeTask> tasks = new ArrayList<>();
         int blklen = (int) Math.ceil((double) nrow / numThreads);
 
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
             ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
-            tasks.add(new SerializeTask(reader, i * blklen, Math.min((i + 1) * blklen, nrow)));
+            tasks.add(new DeSerializeTask(reader, i * blklen, Math.min((i + 1) * blklen, nrow)));
         }
 
         //wait until all tasks have been executed
@@ -42,12 +42,12 @@ public class DataLoadToMemoryParallel {
     }
 
 
-    static class SerializeTask implements Callable<Integer> {
+    static class DeSerializeTask implements Callable<Integer> {
         protected final ObjectReader reader;
         protected final int beginPos;
         protected final int endPos;
 
-        public SerializeTask(ObjectReader reader, int beginPos, int endPos) {
+        public DeSerializeTask(ObjectReader reader, int beginPos, int endPos) {
 
             this.reader = reader;
             this.beginPos = beginPos;

@@ -1,5 +1,6 @@
 #if !defined(CONST_H)
 #define CONST_H 1
+#include <thread>
 
 static const int PAGESIZE = 1024*1024;
 static const int BATCHSIZE = 512;
@@ -14,6 +15,9 @@ static const int BOOST = 3;
 static const int PROTOBUF = 4;
 static const int BSON = 5;
 static const int FLATBUF = 6;
+
+const auto NUM_THREADS = std::thread::hardware_concurrency();
+
 
 #endif
 

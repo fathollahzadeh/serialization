@@ -82,7 +82,7 @@ public class DataReadIOParallel {
 
         @Override
         public Integer call() {
-            reader.readIO(beginPos, endPos - beginPos);
+            reader.readIO(beginPos, endPos - beginPos+1);
             return null;
         }
     }

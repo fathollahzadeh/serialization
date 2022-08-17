@@ -33,10 +33,9 @@ for nrow in "${nrows[@]}"; do
     # ./explocal/runExperiment1b_SerializationJava.sh $inDataPathJava $nrow Single true Experiment1_Write_times
     # ./explocal/runExperiment1b_SerializationJava.sh $inDataPathJava $nrow Parallel false Experiment1_Write_times
 
-    #./explocal/runExperiment1b_SerializationCPP.sh $inDataPathCPP $nrow Single false Experiment1_Write_times
-    #./explocal/runExperiment1b_SerializationCPP.sh $inDataPathCPP $nrow Single true Experiment1_Write_times
-    
-    #./explocal/runExperiment1b_SerializationCPP.sh $inDataPathCPP $nrow Parallel false Experiment1_Write_times
+    ./explocal/runExperiment1b_SerializationCPP.sh $inDataPathCPP $nrow Single false Experiment1_Write_times
+    #./explocal/runExperiment1b_SerializationCPP.sh $inDataPathCPP $nrow Single true Experiment1_Write_times    
+    ./explocal/runExperiment1b_SerializationCPP.sh $inDataPathCPP $nrow Parallel false Experiment1_Write_times
 
 
     # # Write (CPU+IO)
@@ -57,15 +56,15 @@ for nrow in "${nrows[@]}"; do
     # ./explocal/runExperiment2a_ReadIOJava.sh $outDataPath $nrow Single true Sequential Experiment2_Read_times
     # ./explocal/runExperiment2a_ReadIOJava.sh $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
 
-    #./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Single false Sequential Experiment2_Read_times
-    #./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Single true Sequential Experiment2_Read_times
+    # ./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Single false Sequential Experiment2_Read_times
+    # ./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Single true Sequential Experiment2_Read_times
     # ./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
 
     # ./explocal/runExperiment2a_ReadIOJava.sh $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
     # ./explocal/runExperiment2a_ReadIOJava.sh $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
     # ./explocal/runExperiment2a_ReadIOJava.sh $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
 
-    ./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+    #./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
     #./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
     #./explocal/runExperiment2a_ReadIOCPP.sh $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
 
@@ -77,12 +76,16 @@ for nrow in "${nrows[@]}"; do
 
     #./explocal/runExperiment2a_ReadCPP.sh $outDataPath $nrow Single false Sequential Experiment2_Read_times
     # ./explocal/runExperiment2a_ReadCPP.sh $outDataPath $nrow Single true Sequential Experiment2_Read_times
-    # ./explocal/runExperiment2a_ReadCPP.sh $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
+    #./explocal/runExperiment2a_ReadCPP.sh $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
 
 
     # ./explocal/runExperiment2a_ReadJava.sh $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
     # ./explocal/runExperiment2a_ReadJava.sh $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
     # ./explocal/runExperiment2a_ReadJava.sh $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"    
+
+    #./explocal/runExperiment2a_ReadCPP.sh $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+    # ./explocal/runExperiment2a_ReadCPP.sh $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+    #./explocal/runExperiment2a_ReadCPP.sh $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"    
 done
 
 # External Sort
