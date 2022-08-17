@@ -32,10 +32,8 @@ public class DataReadSingle {
                 }
                 RootData[] list = new RootData[nrow];
                 index = 0;
-                for (int i: randomIDs ) {
-                    RootData[] rd = reader.readObjects(i, 1);
-                    list[index++] = rd[0];
-                }
+                for (int i: randomIDs )
+                    list[index++] = reader.readObject(i);
 
             } catch (IOException e) {
                 e.printStackTrace();

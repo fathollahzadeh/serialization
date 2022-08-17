@@ -102,10 +102,8 @@ public class DataReadParallel {
 
         @Override
         public Integer call() {
-            for (int i = (int) beginPos; i < endPos; i++) {
-                RootData[] r = reader.readObjects(randomList[i], 1);
-                this.rd[i] = r[0];
-            }
+            for (int i = (int) beginPos; i < endPos; i++)
+                this.rd[i] = reader.readObject(randomList[i]);
             return null;
         }
     }

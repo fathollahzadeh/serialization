@@ -29,7 +29,7 @@ public class DataReadIOSingle {
                     randomIDs[index++] = Integer.parseInt(line);
                 }
                 for (int i: randomIDs ) {
-                    reader.readIO(i, 1);
+                    reader.readIO(i);
                 }
 
             } catch (IOException e) {

@@ -137,17 +137,9 @@ public class ObjectReader {
 
         //Iterate over all objects that you aspire to read.
         int index = 0;
-        for (int j = (int) i; j < listSize; j++) {
-            readPage(this.pageIndex[j]);
-            byte[] buffer = new byte[this.objectLength[j]];
+        for (int j = (int) i; j < listSize; j++)
+           readListOfObject[index++] = readObject(j);
 
-            // Copy part of the byte buffer to another byte array
-            int relativePosition = Math.toIntExact(this.objectIndex[j]);
-            this.bbPageBuffer.position(relativePosition);
-            this.bbPageBuffer.get(buffer, 0, this.objectLength[j]);
-            // NOW read each object
-            readListOfObject[index++] = readObjectWithSerialization(new TweetStatus(), buffer);
-        }
         return readListOfObject;
     }
 
@@ -155,17 +147,8 @@ public class ObjectReader {
 
         long listSize = Math.min((i + n), this.rlen);
         //Iterate over all objects that you aspire to read.
-        for (int j = (int) i; j < listSize; j++) {
-            readPage(this.pageIndex[j]);
-            byte[] buffer = new byte[this.objectLength[j]];
-
-            // Copy part of the byte buffer to another byte array
-            int relativePosition = Math.toIntExact(this.objectIndex[j]);
-            this.bbPageBuffer.position(relativePosition);
-            this.bbPageBuffer.get(buffer, 0, this.objectLength[j]);
-            // NOW read each object
-            rd[j] = readObjectWithSerialization(new TweetStatus(), buffer);
-        }
+        for (int j = (int) i; j < listSize; j++)
+            rd[j] = readObject(j);
         return listSize;
     }
 
@@ -173,33 +156,40 @@ public class ObjectReader {
 
         long listSize = Math.min((i + n), this.rlen);
         //Iterate over all objects that you aspire to read.
-        for (int j = (int) i; j < listSize; j++) {
-            readPage(this.pageIndex[j]);
-            byte[] buffer = new byte[this.objectLength[j]];
+        for (int j = (int) i; j < listSize; j++)
+            rd.add(readObject(j));
 
-            // Copy part of the byte buffer to another byte array
-            int relativePosition = Math.toIntExact(this.objectIndex[j]);
-            this.bbPageBuffer.position(relativePosition);
-            this.bbPageBuffer.get(buffer, 0, this.objectLength[j]);
-            // NOW read each object
-            rd.add(readObjectWithSerialization(new TweetStatus(), buffer));
-        }
         return listSize;
     }
 
-    public void readIO(long i, int n) {
+    public RootData readObject(int i) {
+        readPage(this.pageIndex[i]);
+        byte[] buffer = new byte[this.objectLength[i]];
 
+        // Copy part of the byte buffer to another byte array
+        int relativePosition = Math.toIntExact(this.objectIndex[i]);
+        this.bbPageBuffer.position(relativePosition);
+        this.bbPageBuffer.get(buffer, 0, this.objectLength[i]);
+        // NOW read each object
+        return readObjectWithSerialization(new TweetStatus(), buffer);
+    }
+
+    public void readIO(long i, int n) {
         long listSize = Math.min((i + n), this.rlen);
         //Iterate over all objects that you aspire to read.
-        for (int j = (int) i; j < listSize; j++) {
-            readPage(this.pageIndex[j]);
-            byte[] buffer = new byte[this.objectLength[j]];
-            // Copy part of the byte buffer to another byte array
-            int relativePosition = Math.toIntExact(this.objectIndex[j]);
-            this.bbPageBuffer.position(relativePosition);
-            this.bbPageBuffer.get(buffer, 0, this.objectLength[j]);
-        }
+        for (int j = (int) i; j < listSize; j++)
+            readIO(j);
     }
+
+    public void readIO(int i) {
+        readPage(this.pageIndex[i]);
+        byte[] buffer = new byte[this.objectLength[i]];
+        // Copy part of the byte buffer to another byte array
+        int relativePosition = Math.toIntExact(this.objectIndex[i]);
+        this.bbPageBuffer.position(relativePosition);
+        this.bbPageBuffer.get(buffer, 0, this.objectLength[i]);
+    }
+
 
     protected void readPage(long id) {
         if (currentPageNumber != id) {
