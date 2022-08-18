@@ -8,7 +8,7 @@
 using namespace std;
 
 void SerializeTask(ObjectReader *reader, string method, int beginPos, int endPos) {
-    ObjectWriter *writer = new ObjectWriter(method, endPos - beginPos +1, PAGESIZE);
+    ObjectWriter *writer = new ObjectWriter(method, endPos - beginPos + 1, PAGESIZE);
     int size = BATCHSIZE;
     for (int i = beginPos; i < endPos;) {
         TweetStatus **tweets = new TweetStatus *[size];

@@ -141,6 +141,20 @@ add_executable(DataWriteSingle
 target_link_libraries(DataWriteSingle PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(DataWriteSingle PRIVATE mongo::mongocxx_shared)
 
+# serialize data multi thread
+add_executable(DataWriteParallel
+        experiments/DataWriteParallel.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataWriteParallel PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataWriteParallel PRIVATE mongo::mongocxx_shared)
+
 # read data single thread
 add_executable(DataReadSingle
         experiments/DataReadSingle.cpp
