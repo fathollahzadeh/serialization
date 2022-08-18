@@ -13,17 +13,17 @@ cd Java
 cd ..
 # compile C++ baslelines
 cd Java/src/main/cpp
-# rm -rf CMakeFiles
-# rm -rf cmake_install.cmake
-# rm -rf CMakeCache.txt
-# rm -rf Makefile
-# rm -rf cpp.cbp
-# rm -rf bin
-cmake .
-#make clean
-make -j12
+rm -rf CMakeFiles
+rm -rf cmake_install.cmake
+rm -rf CMakeCache.txt
+rm -rf Makefile
+rm -rf cpp.cbp
+rm -rf bin
+# cmake .
+make clean
+# make -j12
 
-mv  bin/ ../../../../Experiments/cppbin
+# mv  bin/ ../../../../Experiments/cppbin
 
 
 
