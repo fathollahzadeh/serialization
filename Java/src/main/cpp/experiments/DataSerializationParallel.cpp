@@ -7,7 +7,8 @@
 
 using namespace std;
 
-void SerializeTask(ObjectReader *reader, ObjectWriter *writer, int beginPos, int endPos) {
+void SerializeTask(ObjectReader *reader, string method, int beginPos, int endPos) {
+    ObjectWriter *writer = new ObjectWriter(method, endPos - beginPos +1, PAGESIZE);
     int size = BATCHSIZE;
     for (int i = beginPos; i < endPos;) {
         TweetStatus **tweets = new TweetStatus *[size];
@@ -34,8 +35,7 @@ int main(int argc, char *argv[]) {
     int blklen = (int) ceil((double) nrow / NUM_THREADS);
     for (int i = 0; i < NUM_THREADS & i * blklen < nrow; i++) {
         ObjectReader *reader = new ObjectReader(inDataPath,"HandCoded");
-        ObjectWriter *writer = new ObjectWriter(method, nrow, PAGESIZE);
-        pool.push_back(std::thread(SerializeTask, reader, writer, i * blklen, min((i + 1) * blklen, nrow)));
+        pool.push_back(std::thread(SerializeTask, reader, method, i * blklen, min((i + 1) * blklen, nrow)));
     }
 
     for (auto &th: pool) {

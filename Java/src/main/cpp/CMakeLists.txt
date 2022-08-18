@@ -56,20 +56,20 @@ file(GLOB srcProtobufcc "${PROJECT_SOURCE_DIR}/serialization/source/proto/*.cc")
 file(GLOB srcFlatbuf "${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/*.cpp")
 
 
-## prepare data
-#add_executable(DataPrepare
-#        experiments/DataPrepare.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataPrepare PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataPrepare PRIVATE mongo::mongocxx_shared)
-#
+# prepare data
+add_executable(DataPrepare
+        experiments/DataPrepare.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataPrepare PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataPrepare PRIVATE mongo::mongocxx_shared)
+
 # load data to memory- single thread
 add_executable(DataLoadToMemorySingle
         experiments/DataLoadToMemorySingle.cpp
@@ -127,21 +127,19 @@ add_executable(DataSerializationParallel
 target_link_libraries(DataSerializationParallel PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(DataSerializationParallel PRIVATE mongo::mongocxx_shared)
 
-
-#
-## serialize data single thread
-#add_executable(DataWriteSingle
-#        experiments/DataWriteSingle.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataWriteSingle PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataWriteSingle PRIVATE mongo::mongocxx_shared)
+# serialize data single thread
+add_executable(DataWriteSingle
+        experiments/DataWriteSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataWriteSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataWriteSingle PRIVATE mongo::mongocxx_shared)
 
 # read data single thread
 add_executable(DataReadSingle
@@ -198,6 +196,3 @@ add_executable(DataReadIOParallel
         )
 target_link_libraries(DataReadIOParallel PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(DataReadIOParallel PRIVATE mongo::mongocxx_shared)
-
-
-

@@ -5,11 +5,7 @@
 #include <map>
 #include <cstring>
 #include <fstream>
-//#include "RootData.h"
-//#include "TweetStatus.h"
-//#include <Object.h>
-//#include <TweetStatusIP.h>
-//#include <TweetStatusProto.h>
+#include "thread"
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <TweetStatus.h>
@@ -36,6 +32,7 @@ protected:
     int rlen;
     int *pageIndex;
     int *objectIndex;
+
 
 private:
     RootData rootData;

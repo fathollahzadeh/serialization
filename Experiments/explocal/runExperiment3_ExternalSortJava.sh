@@ -6,9 +6,9 @@ outDataPath=$3
 nrow=$4
 task_set=$5
 log_file_name=$6
-chunk_size=1000000
+chunk_size=5000000
 
-for rp in {1..1}; do
+for rp in {1..5}; do
     start=$(date +%s%N)
     SCRIPT="$jCMD  -DinDataPath=${inDataPath}.${method}Java\
                    -DinDataPath=${outDataPath}\

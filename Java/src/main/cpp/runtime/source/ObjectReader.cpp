@@ -39,9 +39,6 @@ ObjectReader::ObjectReader(const string &fname, const string &method) : ObjectRe
             objectInEachPage[pageIndex[i]] = 0;
         objectInEachPage[pageIndex[i]] = objectInEachPage[pageIndex[i]] + 1;
     }
-
-    if (this->method == INPLACE)
-        Object::allocator.setUp(this->pageBuffer, 2 * PAGESIZE);
 }
 
 void ObjectReader::readIndexesFromFile(const string &fname) {

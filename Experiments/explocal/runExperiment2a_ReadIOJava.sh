@@ -9,7 +9,7 @@ seq_rand=$6
 log_file_name=$7
 randomDataPath=$8
 
-for rp in {1..1}; do
+for rp in {1..5}; do
     start=$(date +%s%N)
     SCRIPT="$jCMD  -DinDataPath=${inDataPath}.${method}Java\
                    -Dnrow=${nrow}\

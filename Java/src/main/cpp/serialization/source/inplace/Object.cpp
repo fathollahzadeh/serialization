@@ -1,3 +1,3 @@
 #include "Object.h"
 
-Allocator Object::allocator;
+map<thread::id, Allocator> Object::allocator;

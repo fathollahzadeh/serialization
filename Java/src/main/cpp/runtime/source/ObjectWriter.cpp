@@ -32,8 +32,12 @@ ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
     this->pageIndex = new int[rlen];
     this->objectIndex = new int[rlen];
 
-    if (this->method == INPLACE)
-        Object::allocator.setUp(this->pageBuffer, 2 * PAGESIZE);
+    if (this->method == INPLACE) {
+        thread::id this_id = this_thread::get_id();
+        Allocator allocator;
+        allocator.setUp(this->pageBuffer, 2 * PAGESIZE);
+        Object::allocator[this_id] = allocator;
+    }
 }
 
 void ObjectWriter::writeObjectToFile(TweetStatus *object) {
@@ -124,18 +128,19 @@ void ObjectWriter::flush() {
 void ObjectWriter::writeInPlaceObjectToFile(TweetStatus *object) {
     int objectSize;
     int sizeofObject = sizeof(objectSize);
+    thread::id this_id = this_thread::get_id();
 
     //Define a pointer for size of object:
     char *tPoint;
 
     // reserve space for object size:
-    tPoint = this->pageBuffer + Object::allocator.getBytesUsed();
-    Object::allocator.setBytesUsed(this->currentOffset + sizeofObject);
+    tPoint = this->pageBuffer + Object::allocator[this_id].getBytesUsed();
+    Object::allocator[this_id].setBytesUsed(this->currentOffset + sizeofObject);
 
 
     //Serialize object:
     new TweetStatusIP(object);
-    objectSize = Object::allocator.getBytesUsed() - (this->currentOffset + sizeofObject);
+    objectSize = Object::allocator[this_id].getBytesUsed() - (this->currentOffset + sizeofObject);
 
     //Set object size in the reserved place:
     this->rootData.copyInPlaceInt(tPoint, objectSize);
@@ -152,7 +157,7 @@ void ObjectWriter::writeInPlaceObjectToFile(TweetStatus *object) {
 
         //Re-write the last object again at correct place:
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize + sizeofObject);
-        Object::allocator.setBytesUsed(objectSize + sizeofObject);
+        Object::allocator[this_id].setBytesUsed(objectSize + sizeofObject);
         currentPageNumber++;
         currentOffset = 0;
     }
@@ -189,7 +194,8 @@ void ObjectWriter::serializeObject(TweetStatus *object) {
 
     //if serialization type is InPlace:
     if (this->method == INPLACE) {
-        Object::allocator.setBytesUsed(0);
+        thread::id this_id = this_thread::get_id();
+        Object::allocator[this_id].setBytesUsed(0);
         new TweetStatusIP(object);
     } else {
         char *buffer = pageBuffer;

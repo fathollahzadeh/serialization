@@ -7,7 +7,7 @@ nrow=$4
 log_file_name=$5
 
 
-for rp in {1..1}; do
+for rp in {1..5}; do
     start=$(date +%s%N)
     SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
                    -Dnrow=${nrow}\
