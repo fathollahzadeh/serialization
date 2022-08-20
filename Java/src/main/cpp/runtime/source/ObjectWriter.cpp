@@ -228,3 +228,88 @@ void ObjectWriter::serializeObject(TweetStatus *object) {
         }
     }
 }
+
+void ObjectWriter::writeObjectToFile(TweetStatusIP *object) {
+    char *buffer = pageBuffer;
+    int objectSize = object->objectsize;
+    int sizeofObject = sizeof(objectSize);
+
+    //Set object size in the reserved place:
+    this->rootData.copyInPlaceInt(buffer + currentOffset, objectSize);
+
+    //copy object to page:
+    memcpy(buffer + currentOffset + sizeofObject, (char *) object, objectSize);
+
+    //check capacity of the current page size
+    //if current page is full should be write to the file and then reset the page
+    if ((currentOffset + objectSize + sizeofObject) > PAGESIZE) {
+
+        //Write in file:
+        outStreamRegularFile.write(pageBuffer, PAGESIZE);
+
+        //At this point, previous page is written in file.
+        //All you need is to write this object in the new current page.
+        //Re-write the last object again at correct place:
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize + sizeofObject);
+
+        currentPageNumber++;
+        currentOffset = 0;
+    }
+    pageIndex[row] = currentPageNumber;
+    objectIndex[row] =currentOffset;
+    currentOffset += objectSize + sizeofObject;
+    row++;
+}
+
+void ObjectWriter::writeObjectToFile(TweetStatusProto *object) {
+    char *buffer = pageBuffer;
+    int objectSize = 0;
+    object->serializeProto(buffer + currentOffset, objectSize);
+
+    //check capacity of the current page size
+    //if current page is full should be write to the file and then reset the page
+    if ((currentOffset + objectSize) > PAGESIZE) {
+
+        //Write in file:
+        auto tmpTime = chrono::steady_clock::now();
+        outStreamRegularFile.write(pageBuffer, PAGESIZE);
+
+        //At this point, previous page is written in file.
+        //All you need is to write this object in the new current page.
+        //Re-write the last object again at correct place:
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
+
+        currentPageNumber++;
+        currentOffset = 0;
+    }
+    pageIndex[row] = currentPageNumber;
+    objectIndex[row] =currentOffset;
+    currentOffset += objectSize;
+    row++;
+}
+
+void ObjectWriter::writeObjectToFile(TweetStatusFlatBuffers *object) {
+    char *buffer = pageBuffer;
+    int objectSize = 0;
+
+    object->serializeFlatBuffers(buffer + currentOffset, objectSize);
+
+    if ((currentOffset + objectSize) > PAGESIZE) {
+
+        //Write in file:
+        auto tmpTime = chrono::steady_clock::now();
+        outStreamRegularFile.write(pageBuffer, PAGESIZE);
+
+        //At this point, previous page is written in file.
+        //All you need is to write this object in the new current page.
+        //Re-write the last object again at correct place:
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
+
+        currentPageNumber++;
+        currentOffset = 0;
+    }
+    pageIndex[row] = currentPageNumber;
+    objectIndex[row] =currentOffset;
+    currentOffset += objectSize;
+    row++;
+}

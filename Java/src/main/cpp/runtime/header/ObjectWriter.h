@@ -52,6 +52,12 @@ public:
 
     void writeObjectToFile(TweetStatus *object);
 
+    void writeObjectToFile(TweetStatusIP *object);
+
+    void writeObjectToFile(TweetStatusProto *object);
+
+    void writeObjectToFile(TweetStatusFlatBuffers *object);
+
     void flush();
 };
 

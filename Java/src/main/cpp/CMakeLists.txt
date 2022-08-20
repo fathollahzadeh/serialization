@@ -210,3 +210,17 @@ add_executable(DataReadIOParallel
         )
 target_link_libraries(DataReadIOParallel PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(DataReadIOParallel PRIVATE mongo::mongocxx_shared)
+
+# External sort
+add_executable(ExternalSort
+        experiments/ExternalSort.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(ExternalSort PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(ExternalSort PRIVATE mongo::mongocxx_shared)

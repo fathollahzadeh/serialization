@@ -59,6 +59,7 @@ public:
     int getRlen();
 
     int getMethod() const;
-    //HashMap<Integer, Integer> getObjectInEachPage()
+
+    map<int, int> getObjectInEachPage();
 };
 #endif //CPP_OBJECTREADER_H

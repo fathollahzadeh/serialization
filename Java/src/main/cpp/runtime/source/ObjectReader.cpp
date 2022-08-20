@@ -52,7 +52,7 @@ void ObjectReader::readIndexesFromFile(const string &fname) {
 
     //Check index file available:
     if (!inIndexFile.is_open()) {
-        throw runtime_error("cannot find index file!!");
+        throw runtime_error("cannot find index file!!>> "+ fname + ".index");
     }
 
     //Find index file size:
@@ -262,6 +262,10 @@ void ObjectReader::readIO(long i) {
     char *tBuffer = new char[tempObjectSize];
     memcpy(tBuffer, curBuffer + objectIndex[i] + sizeof(tempObjectSize), tempObjectSize);
     delete[] tBuffer;
+}
+
+map<int, int> ObjectReader::getObjectInEachPage() {
+    return this->objectInEachPage;
 }
 
 
