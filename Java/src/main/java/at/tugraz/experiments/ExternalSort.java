@@ -40,7 +40,7 @@ public class ExternalSort {
 			RootData[] list = reader.readObjects((long) i * chunkSize, chunkSize);
 			Arrays.sort(list);
 
-			ObjectWriter writer = new ObjectWriter(outDataPath+"/tmp/"+method+"Java-sorted-"+i+".bin", method, list.length);
+			ObjectWriter writer = new ObjectWriter(outDataPath+"/"+method+"Java-sorted-"+i+".bin", method, list.length);
 			writer.writeObjectToFile(list);
 			writer.flush();
 		}
@@ -48,7 +48,7 @@ public class ExternalSort {
 		// open all of data files and keep them open to read partially.
 		List<ObjectReader> readerArray = new ArrayList<>();
 		for(int i = 0; i < fileCount; ++i) {
-			String sortedFileName = outDataPath+"/tmp/"+method+"Java-sorted-"+i+".bin";
+			String sortedFileName = outDataPath+"/"+method+"Java-sorted-"+i+".bin";
 			ObjectReader tmpReader = new ObjectReader(sortedFileName, method);
 			readerArray.add(tmpReader);
 		}
