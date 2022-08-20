@@ -11,3 +11,5 @@ Java/src/main/cpp/CMakeFiles/*
 Java/src/main/cpp/cpp.cbp
 Experiments/cppbin/*
 Java/src/main/cpp/CMakeCache.txt
+Java/src/main/cpp/cmake_install.cmake
+Java/src/main/cpp/Makefile

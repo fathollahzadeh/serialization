@@ -5,8 +5,9 @@ inDataPath=$2
 outDataPath=$3
 nrow=$4
 task_set=$5
-log_file_name=$6
-chunk_size=100000
+chunk_size=$6
+log_file_name=$7
+
 
 for rp in {1..1}; do
     start=$(date +%s%N)
@@ -18,4 +19,4 @@ for rp in {1..1}; do
     time $SCRIPT
     end=$(date +%s%N)
     echo ${method}"CPP,CPP,"${task_set}","${chunk_size}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
-done    
+done  
