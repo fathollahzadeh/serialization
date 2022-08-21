@@ -224,3 +224,19 @@ add_executable(ExternalSort
         )
 target_link_libraries(ExternalSort PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(ExternalSort PRIVATE mongo::mongocxx_shared)
+
+
+# Data Read Network
+add_executable(DataReadNetwork
+        experiments/DataReadNetwork.cpp
+        util/header/
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadNetwork PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadNetwork PRIVATE mongo::mongocxx_shared)

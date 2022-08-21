@@ -18,6 +18,7 @@ static const int FLATBUF = 6;
 
 const auto NUM_THREADS = std::thread::hardware_concurrency();
 
+enum NodeType {  ROOT,  MIDDLE,  LEAF };
 
 #endif
 

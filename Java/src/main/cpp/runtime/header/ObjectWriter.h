@@ -12,6 +12,7 @@
 #include <TweetStatusIP.h>
 #include <TweetStatusProto.h>
 #include <TweetStatusFlatBuffers.h>
+#include <netinet/in.h>
 
 
 #include "Const.h"
@@ -57,6 +58,16 @@ public:
     void writeObjectToFile(TweetStatusProto *object);
 
     void writeObjectToFile(TweetStatusFlatBuffers *object);
+
+    void writeObjectToNetworkPage(TweetStatus *object, int mSocket);
+
+    bool readACKFromSocket(int mSocket);
+
+    bool writeACKToSocket(int mSocket);
+
+    long readFromSocket(int mSocket, char* buffer, long contentSize);
+
+    long writeToSocket(int mSocket, char* buffer, long contentSize);
 
     void flush();
 };

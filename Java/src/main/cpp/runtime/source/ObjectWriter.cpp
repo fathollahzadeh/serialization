@@ -8,17 +8,17 @@ ObjectWriter::ObjectWriter(const string &fname, const string &method, int rlen) 
 }
 
 ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
-    if (strcasecmp(method.c_str(), "HandCoded") == 0){
+    if (strcasecmp(method.c_str(), "HandCoded") == 0) {
         this->method = HANDCODED;
-    } else if (strcasecmp(method.c_str(), "InPlace") == 0){
+    } else if (strcasecmp(method.c_str(), "InPlace") == 0) {
         this->method = INPLACE;
-    } else if (strcasecmp(method.c_str(), "Boost") == 0){
+    } else if (strcasecmp(method.c_str(), "Boost") == 0) {
         this->method = BOOST;
-    }else if (strcasecmp(method.c_str(), "ProtoBuf") == 0){
+    } else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
         this->method = PROTOBUF;
-    }else if (strcasecmp(method.c_str(), "Bson") == 0){
+    } else if (strcasecmp(method.c_str(), "Bson") == 0) {
         this->method = BSON;
-    }else if (strcasecmp(method.c_str(), "FlatBuf") == 0){
+    } else if (strcasecmp(method.c_str(), "FlatBuf") == 0) {
         this->method = FLATBUF;
     }
 
@@ -256,7 +256,7 @@ void ObjectWriter::writeObjectToFile(TweetStatusIP *object) {
         currentOffset = 0;
     }
     pageIndex[row] = currentPageNumber;
-    objectIndex[row] =currentOffset;
+    objectIndex[row] = currentOffset;
     currentOffset += objectSize + sizeofObject;
     row++;
 }
@@ -283,7 +283,7 @@ void ObjectWriter::writeObjectToFile(TweetStatusProto *object) {
         currentOffset = 0;
     }
     pageIndex[row] = currentPageNumber;
-    objectIndex[row] =currentOffset;
+    objectIndex[row] = currentOffset;
     currentOffset += objectSize;
     row++;
 }
@@ -309,7 +309,92 @@ void ObjectWriter::writeObjectToFile(TweetStatusFlatBuffers *object) {
         currentOffset = 0;
     }
     pageIndex[row] = currentPageNumber;
-    objectIndex[row] =currentOffset;
+    objectIndex[row] = currentOffset;
     currentOffset += objectSize;
     row++;
+}
+
+void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, int mSocket) {
+    char *buffer = pageBuffer;
+    int objectSize = 0;
+    char *tPoint = pageBuffer;
+
+    // reserve buffer for object size
+    pageBuffer = pageBuffer + sizeof(objectSize);
+
+    // if serialization type is Handcoded:
+    if (this->method == HANDCODED) {
+        object->serializeHandcoded(buffer + currentOffset + sizeof(objectSize), objectSize);
+    }
+        // if serialization type is Boost:
+    else if (this->method == BOOST) {
+        object->serializeBoost(buffer + currentOffset + sizeof(objectSize), objectSize);
+    } else if (this->method == BSON) {
+        string jsonString = bsoncxx::to_json(object->serializeBSON());
+        objectSize = jsonString.size();
+
+        // insert json size to the first 4 byte of buffer
+        memcpy(buffer + currentOffset + sizeof(objectSize), &objectSize, sizeof(int));
+
+        // add json string to the buffer:
+        strcpy(buffer + currentOffset + 2 * sizeof(objectSize), jsonString.c_str());
+
+        // add json size to the object size:
+        objectSize += sizeof(objectSize);
+    }
+
+    memcpy(tPoint, &objectSize, sizeof(objectSize));
+    objectSize += sizeof(objectSize);
+
+    //check capacity of the current page size
+    //if current page is full should write to the socket and then reset the page
+    if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
+        readACKFromSocket(mSocket);
+        writeToSocket(mSocket, pageBuffer, currentOffset);
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
+        currentOffset = 0;
+    }
+    currentOffset += objectSize + sizeof(objectSize);
+}
+
+long ObjectWriter::readFromSocket(int mSocket, char *buffer, long contentSize) {
+    //New Code:
+    long bytesRead = 0;
+    long status = 0;
+    while (bytesRead < contentSize) {
+        status = ::read(mSocket, buffer + bytesRead, contentSize - bytesRead);
+        bytesRead += status;
+
+        //Error Handling:
+        if (!status)
+            throw std::runtime_error("Can't read from socket");
+    }
+    return bytesRead;
+}
+
+long ObjectWriter::writeToSocket(int mSocket, char *buffer, long contentSize) {
+    long bytesWritten = 0;
+    long status = 0;
+    while (bytesWritten < contentSize) {
+        status = ::write(mSocket, buffer + bytesWritten, contentSize - bytesWritten);
+        bytesWritten += status;
+
+        //Error Handling:
+        if (!status) std::runtime_error("Can't write to socket");
+    }
+    return bytesWritten;
+}
+
+bool ObjectWriter::readACKFromSocket(int mSocket) {
+    char *ack = new char[1];
+    long ackSize = readFromSocket(mSocket, ack, 1);
+    if (ackSize != 1 && ack[0] != '1') {
+        throw std::runtime_error("Can't read correct ACK from socket !");
+    }
+    return true;
+}
+
+bool ObjectWriter::writeACKToSocket(int mSocket) {
+
+    return false;
 }
