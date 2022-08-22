@@ -14,7 +14,7 @@
 #include <TweetStatusFlatBuffers.h>
 #include <netinet/in.h>
 
-
+#include "Client.h"
 #include "Const.h"
 #include "RootData.h"
 #include "Object.h"
@@ -59,15 +59,9 @@ public:
 
     void writeObjectToFile(TweetStatusFlatBuffers *object);
 
-    void writeObjectToNetworkPage(TweetStatus *object, int mSocket);
+    void writeObjectToNetworkPage(TweetStatus *object, Client client);
 
-    bool readACKFromSocket(int mSocket);
-
-    bool writeACKToSocket(int mSocket);
-
-    long readFromSocket(int mSocket, char* buffer, long contentSize);
-
-    long writeToSocket(int mSocket, char* buffer, long contentSize);
+    void flushToNetwork(Client client);
 
     void flush();
 };

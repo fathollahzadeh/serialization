@@ -2,7 +2,6 @@
 #define CPP_EXTERNALSORT_H
 
 #include <iostream>
-//#include <boost/serialization/vector.hpp>
 #include <queue>
 #include "math.h"
 #include "ObjectWriter.h"

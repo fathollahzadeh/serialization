@@ -1,24 +1,19 @@
 #ifndef CPP_CLIENT_H
 #define CPP_CLIENT_H
 
-#include <netinet/in.h>
+#include "Socket.h"
 
 using namespace std;
-class Client {
+
+class Client: public Socket {
 private:
-    int mSocket;
-    sockaddr_in mAddr;
+
 public:
 
-    Client(int mSocket);
-
-    Client(const sockaddr_in &mAddr);
+    Client(string ip, int port);
 
     virtual ~Client();
 
-    const sockaddr_in &getMAddr() const;
-
-    int getMSocket() const;
 };
 
 

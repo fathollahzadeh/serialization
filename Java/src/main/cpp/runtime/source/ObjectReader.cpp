@@ -52,7 +52,7 @@ void ObjectReader::readIndexesFromFile(const string &fname) {
 
     //Check index file available:
     if (!inIndexFile.is_open()) {
-        throw runtime_error("cannot find index file!!>> "+ fname + ".index");
+        throw runtime_error("cannot find index file!!>> " + fname + ".index");
     }
 
     //Find index file size:
@@ -266,6 +266,89 @@ void ObjectReader::readIO(long i) {
 
 map<int, int> ObjectReader::getObjectInEachPage() {
     return this->objectInEachPage;
+}
+
+void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatus *> *list) {
+    list = new vector<TweetStatus *>;
+    int relativePosition = 0;
+    do {
+        int objectSize;
+
+        TweetStatus *object;
+        if (this->method == HANDCODED) {
+            object = new TweetStatus();
+            object->deserializeHandcoded(buffer + relativePosition, objectSize);
+        } else if (this->method == BOOST) {
+            object = TweetStatus(false).deserializeBoost(buffer + relativePosition, objectSize);
+        } else if (this->method == BSON) {
+            object = new TweetStatus();
+            memcpy(&objectSize, buffer + relativePosition, sizeof(int));
+            //keep data in heap
+            char *tBuffer = new char[objectSize + 1];
+            memcpy(tBuffer, buffer + relativePosition + sizeof(int), objectSize);
+            memcpy(tBuffer + objectSize, "\0", 1);
+
+            bsoncxx::document::value bsonObj = bsoncxx::from_json(tBuffer);
+            bsoncxx::document::view doc = bsonObj.view();
+            object->deserializeBSON(doc);
+            object->setBsonDoc(bsonObj);
+            delete[] tBuffer;
+            relativePosition += sizeof(objectSize);
+        }
+        list->push_back(object);
+        relativePosition += objectSize;
+    } while (relativePosition < pageSize);
+}
+
+void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusIP *> *list) {
+    list = new vector<TweetStatusIP *>;
+    int relativePosition = 0;
+    do {
+        int objectSize;
+        objectSize = this->rootData.parseInPlaceInt(buffer + relativePosition);
+
+        char *tBuffer = new char[objectSize];
+        memcpy(tBuffer, buffer + relativePosition + sizeof(objectSize), objectSize);
+
+        TweetStatusIP *object = (TweetStatusIP *) tBuffer;
+        object->objectsize = objectSize;
+
+        list->push_back(object);
+        relativePosition += objectSize + sizeof(objectSize);
+    } while (relativePosition < pageSize);
+}
+
+void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusProto *> *list) {
+    list = new vector<TweetStatusProto *>;
+    int relativePosition = 0;
+    do {
+        int objectSize;
+        TweetStatusProto *object = new TweetStatusProto();
+        object->deserializeProto(buffer + relativePosition, objectSize);
+
+        list->push_back(object);
+        relativePosition += objectSize;
+    } while (relativePosition < pageSize);
+}
+
+void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusFlatBuffers *> *list) {
+    list = new vector<TweetStatusFlatBuffers *>;
+    int relativePosition = 0;
+    do {
+        int objectSize;
+
+        //keep data in heap
+        memcpy(&objectSize, buffer + relativePosition, sizeof(int));
+        char *tBuffer = new char[objectSize];
+        memcpy(tBuffer, buffer + relativePosition + sizeof(objectSize), objectSize);
+
+        TweetStatusFlatBuffers *object = new TweetStatusFlatBuffers();
+        object->deserializeFlatBuffers(tBuffer, objectSize);
+        delete[] tBuffer;
+
+        list->push_back(object);
+        relativePosition += objectSize + sizeof(objectSize);
+    } while (relativePosition < pageSize);
 }
 
 

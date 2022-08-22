@@ -314,13 +314,9 @@ void ObjectWriter::writeObjectToFile(TweetStatusFlatBuffers *object) {
     row++;
 }
 
-void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, int mSocket) {
+void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client client) {
     char *buffer = pageBuffer;
     int objectSize = 0;
-    char *tPoint = pageBuffer;
-
-    // reserve buffer for object size
-    pageBuffer = pageBuffer + sizeof(objectSize);
 
     // if serialization type is Handcoded:
     if (this->method == HANDCODED) {
@@ -337,64 +333,29 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, int mSocket) {
         memcpy(buffer + currentOffset + sizeof(objectSize), &objectSize, sizeof(int));
 
         // add json string to the buffer:
-        strcpy(buffer + currentOffset + 2 * sizeof(objectSize), jsonString.c_str());
+        strcpy(buffer + currentOffset + sizeof(objectSize), jsonString.c_str());
 
         // add json size to the object size:
         objectSize += sizeof(objectSize);
     }
 
-    memcpy(tPoint, &objectSize, sizeof(objectSize));
-    objectSize += sizeof(objectSize);
-
     //check capacity of the current page size
     //if current page is full should write to the socket and then reset the page
     if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
-        readACKFromSocket(mSocket);
-        writeToSocket(mSocket, pageBuffer, currentOffset);
+        client.readACK();
+        client.write(currentOffset);
+        client.write(pageBuffer, currentOffset);
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
         currentOffset = 0;
     }
-    currentOffset += objectSize + sizeof(objectSize);
+    currentOffset += objectSize;
 }
 
-long ObjectWriter::readFromSocket(int mSocket, char *buffer, long contentSize) {
-    //New Code:
-    long bytesRead = 0;
-    long status = 0;
-    while (bytesRead < contentSize) {
-        status = ::read(mSocket, buffer + bytesRead, contentSize - bytesRead);
-        bytesRead += status;
 
-        //Error Handling:
-        if (!status)
-            throw std::runtime_error("Can't read from socket");
-    }
-    return bytesRead;
-}
-
-long ObjectWriter::writeToSocket(int mSocket, char *buffer, long contentSize) {
-    long bytesWritten = 0;
-    long status = 0;
-    while (bytesWritten < contentSize) {
-        status = ::write(mSocket, buffer + bytesWritten, contentSize - bytesWritten);
-        bytesWritten += status;
-
-        //Error Handling:
-        if (!status) std::runtime_error("Can't write to socket");
-    }
-    return bytesWritten;
-}
-
-bool ObjectWriter::readACKFromSocket(int mSocket) {
-    char *ack = new char[1];
-    long ackSize = readFromSocket(mSocket, ack, 1);
-    if (ackSize != 1 && ack[0] != '1') {
-        throw std::runtime_error("Can't read correct ACK from socket !");
-    }
-    return true;
-}
-
-bool ObjectWriter::writeACKToSocket(int mSocket) {
-
-    return false;
+void ObjectWriter::flushToNetwork(Client client) {
+    client.readACK();
+    client.write(currentOffset);
+    client.write(pageBuffer, currentOffset);
+    client.readACK();
+    client.write(-1);
 }

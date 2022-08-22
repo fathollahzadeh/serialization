@@ -1,15 +1,16 @@
 #include "Client.h"
 
-Client::Client(const sockaddr_in &mAddr) : sockaddr(mAddr) {}
-
-Client::~Client() {}
-
-const sockaddr_in &Client::getMAddr() const {
-    return mAddr;
+Client::~Client() {
+    if (isValid())
+        close(mSocket);
 }
 
-Client::Client(int mSocket) : mSocket(mSocket) {}
+Client::Client(string ip, int port) {
+    if (!Socket::create()) {
+        throw SocketException("Could not create client socket.");
+    }
 
-int Client::getMSocket() const {
-    return mSocket;
+    if (!Socket::connect(ip, port)) {
+        throw SocketException("Could not bind to port.");
+    }
 }

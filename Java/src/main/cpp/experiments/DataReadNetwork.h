@@ -4,11 +4,16 @@
 #include "MachineInfo.h"
 #include "Network.h"
 #include "Client.h"
+#include "Server.h"
 #include <thread>
 #include <chrono>
 #include "ObjectReader.h"
 #include "ObjectWriter.h"
+#include "readerwriterqueue.h"
+#include "math.h"
+#include <queue>
 
+using namespace moodycamel;
 using namespace std;
 
 //ObjectFileIndex
@@ -47,11 +52,18 @@ private:
     string inDataPath;
     string method;
     string localMethod;
+    int methodID;
+    bool **status;
+    BlockingReaderWriterQueue <vector<T*>> **queues;
+    int numberOfClients;
 
-    Client *initClient(string ip, int port);
+    Client initClient(string ip, int port);
 
-    bool isValid(int mSocket);
+    void NetworkReadTask(ObjectReader *reader, Socket *client, BlockingReaderWriterQueue <vector<T*>> *queues ,bool *status);
 
+    void LocalReadTask(ObjectReader *reader, int nrow, BlockingReaderWriterQueue <vector<T*>> *queues ,bool *status);
+
+    void ExternalSortTask(ObjectWriter *writer, bool onDisk, Client * client);
 
 public:
     void runDataReader();
@@ -64,6 +76,7 @@ void DataReadNetwork<T>::runDataReader() {
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader reader(inDataPath, localMethod);
+    methodID = reader.getMethod();
 
     if (machineInfo->getNodeType() == LEAF) {
         T **list = new T *[machineInfo->getNrow()];
@@ -71,57 +84,157 @@ void DataReadNetwork<T>::runDataReader() {
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
 
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
-        Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
+        Client client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         for (T rd : list)
-            writer.writeObjectToNetworkPage(rd, client.dos, client.dis);
+            writer.writeObjectToNetworkPage(rd, client);
 
-        writer.flushToNetwork(client.dos, client.dis);
-        client.socket.close();
+        writer.flushToNetwork(client);
+
+    } else if (machineInfo->getNodeType() == MIDDLE) {
+        Server server(machineInfo->getPort());
+        //server.setSoTimeout(Const.NETWORK_TIMEOUT);
+        Client client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
+        numberOfClients = machineInfo->getLeaves().size()+1;
+        queues = new BlockingReaderWriterQueue <vector<T*>>*[numberOfClients];
+
+        status = new bool *[numberOfClients];
+
+        vector<thread> pool;
+        for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
+            Socket *client;
+            server.accept(client);
+            ObjectReader *clientReader = new ObjectReader(method);
+            queues[i] = new BlockingReaderWriterQueue <vector<T*>>(NETWORK_CLIENT_QUEUE_SIZE);
+            pool.push_back(std::thread(NetworkReadTask, reader, client, queues[i], &status[i]));
+        }
+        pool.push_back(std::thread(LocalReadTask, reader, machineInfo->getNrow(),
+                                   queues[numberOfClients -1], &status[numberOfClients -1]));
+
+
+        ObjectWriter *writer = new ObjectWriter(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
+        // add external sort task
+        tasks.add(new ExternalSortTask(dataTasks, writer, false, client.dis, client.dos));
+
 
     }
 }
 
 template<class T>
-Client* DataReadNetwork<T>::initClient(string ip, int port) {
-    bool flag = false;
-    int mSocket;
-    sockaddr_in mAddr;
-    //Socket socket;
-    Client *client = nullptr;
-    for (int i = 0; i < 10 && !flag; i++) {
+Client DataReadNetwork<T>::initClient(string ip, int port) {
+    for (int i = 0; i < 10; i++) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        mSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-        if (!isValid())
-            throw std::runtime_error("Client can't start (mSocket is not valid) >> " + ip + ":" + to_string(port));
+        try {
+            Client client(ip, port);
+            return client;
+        } catch (const exception& e) { }
+    }
+    throw SocketException("Client can't start >> " + ip + ":" + to_string(port));
+}
 
-        int on = 1;
-        if (setsockopt(mSocket, SOL_SOCKET, SO_REUSEADDR, (const char *) &on, sizeof(on)) == -1)
-            throw std::runtime_error("Client can't start (setsockopt = -1) >> " + ip + ":" + to_string(port));
-
-        mAddr.sin_family = AF_INET;
-        mAddr.sin_port = htons(port);
-
-        int status = inet_pton(AF_INET, ip.c_str(), &mAddr.sin_addr);
-        if (errno == EAFNOSUPPORT)
-            throw std::runtime_error("EAFNOSUPPORT ? >> " + ip + ":" + to_string(port));
-
-        status = ::connect(mSocket, (sockaddr * ) & mAddr, sizeof(mAddr));
-        if (status == 0){
-            flag = true;
-            client = new Client(mSocket);
+template<class T>
+void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, BlockingReaderWriterQueue <vector<T*>> *queue, bool *status) {
+    *status = true;
+    while (true) {
+        client->writeACK();
+        int pageSize =  client->readInt();
+        if (pageSize == -1) {
+            client->writeACK();
             break;
         }
+        char *buffer = new char[pageSize];
+        client->read(buffer, pageSize);
+
+        vector<T*> list;
+        reader->deSerializeNetworkBuffer(buffer+sizeof(int), pageSize, &list);
+        queue->enqueue(list);
     }
-    if (!flag)
-        throw std::runtime_error("Client can't start >> " + ip + ":" + to_string(port));
-    else {
-        return client;
-    }
+    *status = false;
+    delete client;
 }
 
 template<class T>
-bool DataReadNetwork<T>::isValid(int mSocket) {
-    return mSocket != -1;
+void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, BlockingReaderWriterQueue <vector<T*>> *queue ,bool *status) {
+    *status = true;
+    TweetStatus **list = new TweetStatus *[nrow];
+    int rdSize = reader->readObjects(0, nrow, list);
+    sort(list, list + nrow, UniversalPointerComparatorAscending<T>());
+    int chunks = (int) ceil((double) nrow / NETWORK_LOCAL_READ_LENGTH);
+
+    for (int i = 0; i < chunks & i * NETWORK_LOCAL_READ_LENGTH < nrow; i++) {
+        vector<T*> tmpList;
+        for (int j = i * NETWORK_LOCAL_READ_LENGTH; j < min((i + 1) * NETWORK_LOCAL_READ_LENGTH, nrow); j++) {
+            tmpList.add(list[j]);
+        }
+        queue->enqueue(tmpList);
+    }
+    *status = false;
+}
+
+template<class T>
+void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Client *client) {
+    priority_queue<ObjectNetworkIndex<T> *, vector < ObjectNetworkIndex<T> *>, UniversalPointerComparatorDescending<T> > queue;
+    long *pageObjectCounter = new long[numberOfClients];
+
+    // reading objects from the first pages and adding them to a priority queue
+    for (int i = 0; i < numberOfClients; i++) {
+        BlockingReaderWriterQueue <vector<T*>>* q = queues[i];
+        vector<T*> listReadFromFile;
+        q->wait_dequeue(&listReadFromFile);
+        pageObjectCounter[i] = listReadFromFile.size();
+        for (T* rd : listReadFromFile) {
+            ObjectNetworkIndex<T> *objectNetworkIndex = new ObjectNetworkIndex<T>();
+            objectNetworkIndex->clientIndex = i;
+            objectNetworkIndex->myObject = rd;
+            queue.push(objectNetworkIndex);
+        }
+    }
+    cout<<"Network External Sort: First page reading is done! "<<endl;
+
+    while (!queue.isEmpty()) {
+        ObjectNetworkIndex<T> *tmpObjectNetworkIndex = queue.top();
+        queue.pop();
+        int clientNumber = tmpObjectNetworkIndex->getClientIndex();
+
+        // reduce the number of objects read from that file.
+        pageObjectCounter[clientNumber]--;
+
+        // If needed load more objects from files.
+        // if zero load the next page from file and add objects.
+        if (pageObjectCounter[clientNumber] == 0) {
+            vector<T*> *listReadFromFile;
+            BlockingReaderWriterQueue <vector<T*>>* q = queues[clientNumber];
+            if (q-> !tasks.get(clientNumber).queue.isEmpty()) {
+                listReadFromFile = tasks.get(clientNumber).queue.take();
+            } else {
+                while (tasks.get(clientNumber).status && tasks.get(clientNumber).queue.isEmpty()) ;
+                if (!tasks.get(clientNumber).queue.isEmpty()) {
+                    listReadFromFile = tasks.get(clientNumber).queue.take();
+                }
+            }
+            if (listReadFromFile != null) {
+                pageObjectCounter[clientNumber] = listReadFromFile.size();
+                for (RootData rd : listReadFromFile) {
+                    ObjectNetworkIndex objectNetworkIndex = new ObjectNetworkIndex(clientNumber, rd);
+                    queue.add(objectNetworkIndex);
+                }
+            }
+        }
+        if (writer !=null) {
+            if (onDisk) writer.writeObjectToFile(tmpObjectNetworkIndex.myObject);
+            else writer.writeObjectToNetworkPage(tmpObjectNetworkIndex.myObject, dos, dis);
+        }
+        else
+            this.dataList.add(tmpObjectNetworkIndex.myObject);
+    }
+    logger.info("Network External Sort: Done!");
+    if (writer != null) {
+        if (onDisk) writer.flush();
+        else writer.flushToNetwork(dos, dis);
+    }
+
+
+
+
 }
 
 
