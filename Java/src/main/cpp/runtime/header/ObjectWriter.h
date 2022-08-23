@@ -59,9 +59,15 @@ public:
 
     void writeObjectToFile(TweetStatusFlatBuffers *object);
 
-    void writeObjectToNetworkPage(TweetStatus *object, Client client);
+    void writeObjectToNetworkPage(TweetStatus *object, Client *client);
 
-    void flushToNetwork(Client client);
+    void writeObjectToNetworkPage(TweetStatusIP *object, Client *client);
+
+    void writeObjectToNetworkPage(TweetStatusProto *object, Client *client);
+
+    void writeObjectToNetworkPage(TweetStatusFlatBuffers *object, Client *client);
+
+    void flushToNetwork(Client *client);
 
     void flush();
 };

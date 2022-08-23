@@ -1,39 +1,57 @@
 #include "DataReadNetwork.h"
-
 #include <iostream>
-#include "ObjectWriter.h"
-#include "DataReader.h"
 
 using namespace std;
-
 int main(int argc, char *argv[]) {
 
-    string inDataPath =argv[1];
-    string method = argv[2];
-    string config = argv[3];
-    string plan = argv[4];
+    string inDataPath = argv[1];
+    string outDataPath = argv[2];
+    string method = argv[3];
+    string config = argv[4];
+    string plan = argv[5];
     string localMethod = "Kryo";
+
+    int methodID = -1;
+    if (strcasecmp(method.c_str(), "HandCoded") == 0) {
+        methodID = HANDCODED;
+    } else if (strcasecmp(method.c_str(), "InPlace") == 0) {
+        methodID = INPLACE;
+    } else if (strcasecmp(method.c_str(), "Boost") == 0) {
+        methodID = BOOST;
+    } else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
+        methodID = PROTOBUF;
+    } else if (strcasecmp(method.c_str(), "Bson") == 0) {
+        methodID = BSON;
+    } else if (strcasecmp(method.c_str(), "FlatBuf") == 0) {
+        methodID = FLATBUF;
+    }
 
     if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "d2m") == 0)
         localMethod = method;
 
-    Network network(config);
-    MachineInfo *machineInfo = network.getCurrentMachine();
-    ObjectReader reader(inDataPath, localMethod);
-
-    if (machineInfo->getNodeType() == LEAF) {
-        ArrayList<RootData> list = new ArrayList<>();
-        reader.readObjects(0, machineInfo.getNrow(), list);
-        Collections.sort(list);
-
-        ObjectWriter writer = new ObjectWriter(method, machineInfo.getTotalNRow(), Const.NETWORK_PAGESIZE);
-        Client client = initClient(machineInfo.getRoot().getIp(), machineInfo.getPort());
-        for (RootData rd : list)
-            writer.writeObjectToNetworkPage(rd, client.dos, client.dis);
-
-        writer.flushToNetwork(client.dos, client.dis);
-        client.socket.close();
-
+    switch (methodID) {
+        case HANDCODED:
+        case BOOST:
+        case BSON: {
+            DataReadNetwork<TweetStatus> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
+            dataReadNetwork.runDataReader();
+            break;
+        }
+        case INPLACE: {
+            DataReadNetwork<TweetStatusIP> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
+            dataReadNetwork.runDataReader();
+            break;
+        }
+        case PROTOBUF: {
+            DataReadNetwork<TweetStatusProto> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
+            dataReadNetwork.runDataReader();
+            break;
+        }
+        case FLATBUF: {
+            DataReadNetwork<TweetStatusFlatBuffers> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
+            dataReadNetwork.runDataReader();
+            break;
+        }
     }
 
     return 0;

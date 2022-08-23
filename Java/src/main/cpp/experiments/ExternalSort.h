@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <queue>
-#include "math.h"
+#include <cmath>
 #include "ObjectWriter.h"
 #include "ObjectReader.h"
 

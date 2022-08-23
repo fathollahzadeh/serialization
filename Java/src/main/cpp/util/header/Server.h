@@ -15,3 +15,5 @@ public:
     virtual ~Server();
 
 };
+
+#endif //CPP_SERVER_H

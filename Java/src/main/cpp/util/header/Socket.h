@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <unistd.h>
-#include <string>
+#include <string.h>
 #include <arpa/inet.h>
 #include "SocketException.h"
 
@@ -15,7 +15,7 @@ using namespace std;
 
 class Socket {
 
-private:
+protected:
     int mSocket;
     sockaddr_in mAddr;
 

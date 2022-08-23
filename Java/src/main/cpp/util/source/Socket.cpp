@@ -61,7 +61,7 @@ bool Socket::listen() const {
 }
 
 bool Socket::connect(const string& ip, int port) {
-    if (!is_valid()) return false;
+    if (!isValid()) return false;
 
     mAddr.sin_family = AF_INET;
     mAddr.sin_port = htons(port);
@@ -89,7 +89,6 @@ void Socket::write(char *buffer, long contentSize) {
     if (bytesWritten != contentSize)
         throw SocketException("ClientSocket: Mismatch in write()");
 
-    return bytesWritten;
 }
 
 void Socket::read(char *buffer, long contentSize) {
@@ -116,8 +115,8 @@ bool Socket::isValid() const {
 
 bool Socket::readACK() {
     char *ack = new char[1];
-    long ackSize = read(ack, 1);
-    if (ackSize != 1 && ack[0] != '1') {
+    read(ack, 1);
+    if (ack[0] != '1') {
         throw SocketException("Can't read correct ACK from socket !");
     }
     return true;
@@ -126,27 +125,20 @@ bool Socket::readACK() {
 bool Socket::writeACK() {
     char *ack = new char[1];
     ack[0] = '1';
-    long status = write(ack, 1);
-    if (!status) throw SocketException("Can't write to ACK socket");
+    write(ack, 1);
     return true;
 }
 
 void Socket::write(int value) {
     char *buf = new char[sizeof(value)];
     memcpy(buf, &value, sizeof(value));
-    long status = write(buf, sizeof(value));
-    if (!status)
-        throw SocketException("Can't write int value to socket");
+    write(buf, sizeof(value));
 }
 
 int Socket::readInt() {
     char *val = new char[sizeof(int)];
-    long readSize = read(val, sizeof(int));
-    if (readSize != sizeof(int)) {
-        throw SocketException("Can't read correct int value from socket !");
-    }
-
-    int intVal=-1;
-    memcpy(&intVal, val, sizeof(int));
+    read(val, sizeof(int));
+    int intVal;
+    memcpy(&intVal, val, sizeof(intVal));
     return intVal;
 }

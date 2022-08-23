@@ -314,7 +314,7 @@ void ObjectWriter::writeObjectToFile(TweetStatusFlatBuffers *object) {
     row++;
 }
 
-void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client client) {
+void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client *client) {
     char *buffer = pageBuffer;
     int objectSize = 0;
 
@@ -342,9 +342,9 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client client) 
     //check capacity of the current page size
     //if current page is full should write to the socket and then reset the page
     if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
-        client.readACK();
-        client.write(currentOffset);
-        client.write(pageBuffer, currentOffset);
+        client->readACK();
+        client->write(currentOffset);
+        client->write(pageBuffer, currentOffset);
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
         currentOffset = 0;
     }
@@ -352,10 +352,72 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client client) 
 }
 
 
-void ObjectWriter::flushToNetwork(Client client) {
-    client.readACK();
-    client.write(currentOffset);
-    client.write(pageBuffer, currentOffset);
-    client.readACK();
-    client.write(-1);
+void ObjectWriter::flushToNetwork(Client *client) {
+    client->readACK();
+    client->write(currentOffset);
+    client->write(pageBuffer, currentOffset);
+    client->readACK();
+    client->write(-1);
+}
+
+void ObjectWriter::writeObjectToNetworkPage(TweetStatusIP *object, Client *client) {
+
+    char *buffer = pageBuffer;
+    int objectSize = object->objectsize;
+    int sizeofObject = sizeof(objectSize);
+
+    //Set object size in the reserved place:
+    this->rootData.copyInPlaceInt(buffer + currentOffset, objectSize);
+
+    //copy object to page:
+    memcpy(buffer + currentOffset + sizeofObject, (char *) object, objectSize);
+
+    //check capacity of the current page size
+    //if current page is full should write to the socket and then reset the page
+    if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
+        client->readACK();
+        client->write(currentOffset);
+        client->write(pageBuffer, currentOffset);
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
+        currentOffset = 0;
+    }
+    currentOffset += objectSize;
+
+}
+
+void ObjectWriter::writeObjectToNetworkPage(TweetStatusProto *object, Client *client) {
+
+    char *buffer = pageBuffer;
+    int objectSize = 0;
+    object->serializeProto(buffer + currentOffset, objectSize);
+
+    //check capacity of the current page size
+    //if current page is full should write to the socket and then reset the page
+    if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
+        client->readACK();
+        client->write(currentOffset);
+        client->write(pageBuffer, currentOffset);
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
+        currentOffset = 0;
+    }
+    currentOffset += objectSize;
+}
+
+void ObjectWriter::writeObjectToNetworkPage(TweetStatusFlatBuffers *object, Client *client) {
+
+    char *buffer = pageBuffer;
+    int objectSize = 0;
+
+    object->serializeFlatBuffers(buffer + currentOffset, objectSize);
+
+    //check capacity of the current page size
+    //if current page is full should write to the socket and then reset the page
+    if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
+        client->readACK();
+        client->write(currentOffset);
+        client->write(pageBuffer, currentOffset);
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
+        currentOffset = 0;
+    }
+    currentOffset += objectSize;
 }
