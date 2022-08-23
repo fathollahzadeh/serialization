@@ -1,6 +1,8 @@
 #include "Network.h"
 
-Network::Network(const string &config) : config(config) { }
+Network::Network(const string &config) {
+    this->readConfigFile(config);
+}
 
 Network::~Network() {}
 
@@ -11,12 +13,12 @@ void Network::readConfigFile(const string &config) {
     string line;
     string val;
     const char separator = ',';
+    getline(infile, line);
     while (getline(infile, line)) {
         stringstream streamData(line);
         vector<string> cols;
-        while (getline(streamData, val, separator)) {
+        while (getline(streamData, val, separator))
             cols.push_back(val);
-        }
         string ip = cols[0];
         int port = atoi(cols[1].c_str());
         string root = cols[2];
@@ -30,7 +32,7 @@ void Network::readConfigFile(const string &config) {
     infile.clear();
 
     for (auto const &rl: rootLeaf) {
-        string root = rl.first;
+        string root = rootLeaf[rl.first];
         if (strcasecmp(root.c_str(), "root") == 0)
             continue;
         machineInfos[root]->addLeaf(machineInfos[rl.first]);
@@ -44,22 +46,25 @@ void Network::readConfigFile(const string &config) {
 }
 
 int Network::computeNRow(MachineInfo *node) {
-    if (node->getLeaves().size() == 0)
+    if (node->getLeaves().empty())
         return node->getNrow();
     else {
         int sum = node->getNrow();
-        for (int i = 0; i < node->getLeaves().size(); ++i)
-            sum += computeNRow(node->getLeaves().at(i));
+        for (auto i: node->getLeaves())
+            sum += computeNRow(i);
 
         return sum;
     }
 }
 
 MachineInfo *Network::getCurrentMachine() {
-    char host[256];
+    char hostbuffer[256];
+    char *IPbuffer;
     struct hostent *host_entry;
-    host_entry = gethostbyname(host); //find host information
-    string ipstr(inet_ntoa(*((struct in_addr*) host_entry->h_addr_list[0]))); //Convert into IP string
+    int hostname = gethostname(hostbuffer, sizeof(hostbuffer));
+    host_entry = gethostbyname(hostbuffer);
+    IPbuffer = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
+    string ipstr(IPbuffer);
     return machineInfos[ipstr];
 }
 

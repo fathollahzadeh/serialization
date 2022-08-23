@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
     string method = argv[3];
     string config = argv[4];
     string plan = argv[5];
-    string localMethod = "Kryo";
+    string localMethod = "HandCoded";
 
     int methodID = -1;
     if (strcasecmp(method.c_str(), "HandCoded") == 0) {
@@ -51,6 +51,9 @@ int main(int argc, char *argv[]) {
             DataReadNetwork<TweetStatusFlatBuffers> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
             dataReadNetwork.runDataReader();
             break;
+        }
+        default: {
+            throw std::runtime_error("The selected serialization method is not support!! ");
         }
     }
 

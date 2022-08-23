@@ -12,6 +12,7 @@
 #include "readerwriterqueue.h"
 #include <cmath>
 #include <queue>
+#include <utility>
 
 using namespace moodycamel;
 using namespace std;
@@ -69,8 +70,8 @@ private:
 
 
 public:
-    DataReadNetwork(const string &config, const string &inDataPath, const string &outDataPath, const string &method,
-                    const string &localMethod, const string &plan);
+    DataReadNetwork(string config, string inDataPath, string outDataPath, string method,
+                    string localMethod, string plan);
 
     void runDataReader();
 
@@ -78,7 +79,6 @@ public:
 
 template<class T>
 void DataReadNetwork<T>::runDataReader() {
-
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, localMethod);
@@ -259,17 +259,17 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
 }
 
 template<class T>
-DataReadNetwork<T>::DataReadNetwork(const string &config,
-                                    const string &inDataPath,
-                                    const string &outDataPath,
-                                    const string &method,
-                                    const string &localMethod,
-                                    const string &plan):
-                                    config(config),
-                                    inDataPath(inDataPath),
-                                    outDataPath(outDataPath),
-                                    method(method),
-                                    localMethod(localMethod),
-                                    plan(plan) {}
+DataReadNetwork<T>::DataReadNetwork(string config,
+                                    string inDataPath,
+                                    string outDataPath,
+                                    string method,
+                                    string localMethod,
+                                    string plan):
+                                    config(std::move(config)),
+                                    inDataPath(std::move(inDataPath)),
+                                    outDataPath(std::move(outDataPath)),
+                                    method(std::move(method)),
+                                    localMethod(std::move(localMethod)),
+                                    plan(std::move(plan)) {}
 
 #endif //CPP_DATAREADNETWORK_H
