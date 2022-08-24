@@ -31,9 +31,6 @@ public:
 
 	MatchingRulesEntity(const string &tag, long id, const string &idStr);
 
-	//C++: Use explicitly for printing.
-	string toJSON();
-
 	//Hand Coded C++ serialization:
 	//New API: Writes directly to File Page:
 	char *serializeHandcoded(char *buffer, int &objectSize);

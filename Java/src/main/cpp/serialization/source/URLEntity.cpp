@@ -24,25 +24,6 @@ URLEntity::URLEntity(vector<int> indices, string displayURL, string expandedURL,
     this->url = url;
 }
 
-
-//C++: Explicit call needed for printing content:
-
-string URLEntity::toJSON() {
-    string stringS = "{";
-    stringS += "\"indices\":[";
-    if (indices.size() > 0) {
-        for (int j = 0; j < indices.size() - 1; ++j) {
-            stringS += itos(indices[j]) + ",";
-        }
-        stringS += itos(indices[indices.size() - 1]);
-    }
-    stringS += "]," +
-               getStringKeyValue("DisplayURL", this->displayURL) + " , " +
-               getStringKeyValue("ExpandedURL", this->expandedURL) + " , " +
-               getStringKeyValue("Url", this->url) + "}";
-    return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *URLEntity::serializeHandcoded(char *buffer, int &objectSize) {
     //Serialize the object.

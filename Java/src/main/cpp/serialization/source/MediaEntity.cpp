@@ -26,34 +26,6 @@ MediaEntity::MediaEntity(string displayURL, string expandedURL, long id, vector<
 	this->videoInfo = videoInfo;
 }
 
-
-//C++: Explicit call needed for printing content:
-string MediaEntity::toJSON() {
-	string stringS = "{" +
-					 getStringKeyValue("DisplayURL", this->displayURL) + "," +
-					 getStringKeyValue("ExpandedURL", this->expandedURL) + "," +
-					 getLongKeyValue("Id", this->id) + ",";
-	stringS += "\"indices\":[";
-	for (int j = 0; j < indices.size() - 1; ++j) {
-		stringS += itos(indices[j]) + ",";
-	}
-	if (indices.size() > 0)
-		stringS += itos(indices[indices.size() - 1]);
-	stringS += "]," +
-
-			   getStringKeyValue("MediaURL", this->mediaURL) + " , " +
-			   getStringKeyValue("MediaURLHttps", this->mediaURLHttps) + " , " +
-			   "\"Sizes\":" + this->sizes->toJSON() + " , " +
-			   getLongKeyValue("SourceStatusId", this->sourceStatusId) + ", " +
-			   getStringKeyValue("SourceStatusIdStr", this->sourceStatusIdStr) + ", " +
-			   getStringKeyValue("Type", this->type) + ", " +
-			   getStringKeyValue("Url", this->url);
-
-	stringS += "}";
-
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *MediaEntity::serializeHandcoded(char *buffer, int &objectSize) {
 

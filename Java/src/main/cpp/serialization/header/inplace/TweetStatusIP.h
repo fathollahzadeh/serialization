@@ -56,8 +56,6 @@ public:
 	//vector<string> withheldInCountries;//nullable
 	offset_ptr<char> withheldScope;//nullable
 
-	bool isPointer;
-
 public:
 
 	TweetStatusIP();
@@ -71,45 +69,8 @@ public:
 
 	void serialize(TweetStatus *tweetStatus);
 
-	//In place de-serialization:
-	TweetStatusIP *deserializeInPlace(char *buffer);
-
-	//***********
-	//Hand Coded C++ serialization:
-	//New API: Writes directly to File Page:
-	char *serializeHandcoded(char *buffer, int &objectSize);
-
-	//Hand Coded C++ de-serialization:
-	TweetStatus *deserializeHandcoded(char *buffer, int &bytesRead);
-
-	//Boost serialization:
-	char *serializeBoost(char *buffer, int &objectSize);
-
-	//Boost de-serialization:
-	TweetStatusIP *deserializeBoost(char *buffer, int &bytesRead);
-
-	//Proto buffer serialization
-	char *serializeProto(char *buffer, int &objectSize);
-
-	//proto buffer de-serialization
-	TweetStatusIP *deserializeProto(char *buffer, int &bytesRead);
-
-	//BSON buffer serialization
-	bsoncxx::document::value serializeBSON();
-
-	//BSON de-serialization:
-	TweetStatusIP *deserializeBSON(bsoncxx::document::view doc);
-
-	//flatbuffers buffer serialization
-	void serializeFlatBuffers(char *buffer, int &objectSize);
-
-	//proto buffer de-serialization
-	TweetStatusIP *deserializeFlatBuffers(char *buffer, int &bytesRead);
-
 	//Implement your own custom comparator:
 	bool operator<(TweetStatusIP &other);
-
-	void setBsonDoc(bsoncxx::document::value bsonDoc);
 
 	//print order number:
 	int getOrder();

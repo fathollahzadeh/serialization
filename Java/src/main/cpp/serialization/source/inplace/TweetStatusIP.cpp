@@ -129,51 +129,6 @@ void TweetStatusIP::serialize(TweetStatus *tweetStatus) {
 
 }
 
-
-TweetStatusIP *TweetStatusIP::deserializeInPlace(char *buffer) {
-	int objectSize = 0;
-	//Read object size:
-	objectSize = parseInPlaceInt(buffer);
-
-	//keep data in heap
-	char *tBuffer = new char[objectSize];
-	memcpy(tBuffer, buffer + sizeof(objectSize), objectSize);
-
-	TweetStatusIP *object = (TweetStatusIP *) tBuffer;
-	object->objectsize = objectSize;
-	return object;
-}
-
-
-char *TweetStatusIP::serializeHandcoded(char *buffer, int &objectSize) {
-	return nullptr;
-}
-
-TweetStatus *TweetStatusIP::deserializeHandcoded(char *buffer, int &bytesRead) {
-	return nullptr;
-}
-
-char *TweetStatusIP::serializeBoost(char *buffer, int &objectSize) {
-	return nullptr;
-}
-
-TweetStatusIP *TweetStatusIP::deserializeBoost(char *buffer, int &bytesRead) {
-	return nullptr;
-}
-
-char *TweetStatusIP::serializeProto(char *buffer, int &objectSize) {
-	return nullptr;
-}
-
-TweetStatusIP *TweetStatusIP::deserializeProto(char *buffer, int &bytesRead) {
-	return nullptr;
-}
-
-bsoncxx::document::value TweetStatusIP::serializeBSON() {
-	return bsoncxx::document::value(nullptr, 0, nullptr);
-}
-
-
 //Implement your own custom comparator:
 bool TweetStatusIP::operator<(TweetStatusIP &other) {
 
@@ -201,10 +156,6 @@ bool TweetStatusIP::operator<(TweetStatusIP &other) {
 	return countLevel < countLevelOtherTweet;
 }
 
-TweetStatusIP *TweetStatusIP::deserializeBSON(bsoncxx::document::view doc) {
-	return nullptr;
-}
-
 int TweetStatusIP::getOrder() {
 
 	int countLevel = 0;
@@ -222,16 +173,4 @@ int TweetStatusIP::getOrder() {
 
 	return countLevel;
 }
-
-TweetStatusIP::TweetStatusIP(bool isPointer) : isPointer(isPointer) {}
-
-void TweetStatusIP::serializeFlatBuffers(char *buffer, int &objectSize) {
-
-}
-
-TweetStatusIP *TweetStatusIP::deserializeFlatBuffers(char *buffer, int &bytesRead) {
-	return nullptr;
-}
-
-void TweetStatusIP::setBsonDoc(bsoncxx::document::value bsonDoc) {}
 

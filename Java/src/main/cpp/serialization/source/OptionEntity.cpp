@@ -8,14 +8,6 @@ OptionEntity::~OptionEntity() {
 
 OptionEntity::OptionEntity(int position, const string &text) : position(position), text(text) {}
 
-//C++: Explicit call needed for printing content:
-string OptionEntity::toJSON() {
-	string stringS = "{" +
-					 getIntKeyValue("position", this->position) + " , " +
-					 getStringKeyValue("Text", this->text) + "}";
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *OptionEntity::serializeHandcoded(char *buffer, int &objectSize) {
 	//Serialize the object.

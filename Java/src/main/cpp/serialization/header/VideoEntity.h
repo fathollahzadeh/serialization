@@ -34,8 +34,6 @@ public:
 
 	VideoEntity(const vector<int> &aspectRatio, int durationMillis, const vector<VariantEntity *> &variants);
 
-	string toJSON();
-
 	//Hand Coded C++ serialization:
 	//New API: Writes directly to File Page:
 	char *serializeHandcoded(char *buffer, int &objectSize);

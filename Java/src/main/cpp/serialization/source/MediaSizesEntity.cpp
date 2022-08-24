@@ -15,18 +15,6 @@ MediaSizesEntity::MediaSizesEntity(SizeEntity *thumb, SizeEntity *large, SizeEnt
 	this->small = small;
 }
 
-
-//C++: Explicit call needed for printing content:
-string MediaSizesEntity::toJSON() {
-	string stringS = "{\"0\":" + this->thumb->toJSON() + " , " +
-					 "\"1\":" + this->large->toJSON() + " , " +
-					 "\"2\":" + this->medium->toJSON() + "," +
-					 "\"3\":" + this->small->toJSON() +
-					 "}";
-
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *MediaSizesEntity::serializeHandcoded(char *buffer, int &objectSize) {
 

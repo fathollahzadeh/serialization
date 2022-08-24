@@ -15,41 +15,6 @@ BoundingBoxCoordinate::BoundingBoxCoordinate(const string &type, const vector <v
 
 type (type), coordinates(coordinates) {}
 
-
-string BoundingBoxCoordinate::toJSON() {
-	string stringS = "{" + getStringKeyValue("Type", this->type) + ",";
-	stringS += "\"coordinates\":[";
-	if (coordinates.size() > 0) {
-		stringS += "[";
-		for (int i = 0; i < coordinates.size() - 1; ++i) {
-			for (int j = 0; j < coordinates.at(i).size() - 1; ++j) {
-				stringS += "[" + dtos(coordinates.at(i).at(j).at(0)) + "," + dtos(coordinates.at(i).at(j).at(1)) + "],";
-			}
-			if (coordinates.at(i).size() > 0) {
-				stringS += "[" + dtos(coordinates.at(i).at(coordinates.at(i).size() - 1).at(0)) + "," +
-						   dtos(coordinates.at(i).at(coordinates.at(i).size() - 1).at(1)) + "],";
-			}
-
-		}
-
-		for (int j = 0; j < coordinates.at(coordinates.size() - 1).size() - 1; ++j) {
-			stringS += "[" + dtos(coordinates.at(coordinates.size() - 1).at(j).at(0)) + "," +
-					   dtos(coordinates.at(coordinates.size() - 1).at(j).at(1)) + "],";
-		}
-		if (coordinates.at(coordinates.size() - 1).size() > 0) {
-			stringS += "[" + dtos(coordinates.at(coordinates.size() - 1).at(
-					coordinates.at(coordinates.size() - 1).size() - 1).at(0)) + "," +
-					   dtos(coordinates.at(coordinates.size() - 1).at(
-							   coordinates.at(coordinates.size() - 1).size() - 1).at(1)) + "]";
-		}
-		stringS += "]";
-
-	}
-
-	stringS += "]";
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *BoundingBoxCoordinate::serializeHandcoded(char *buffer, int &objectSize) {
 	//Serialize the object.

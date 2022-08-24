@@ -14,17 +14,6 @@ Coordinates::Coordinates(string type, double *coordinates) {
 	this->coordinates[1] = *(coordinates + 1);
 }
 
-
-//C++: Explicit call needed for printing content:
-string Coordinates::toJSON() {
-	string stringS = "{" + getStringKeyValue("Type", this->type) + "," +
-					 "\"coordinates\":[" +
-					 dtos(this->coordinates[0]) + "," + dtos(this->coordinates[1]) + "]"
-
-																					 "}";
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *Coordinates::serializeHandcoded(char *buffer, int &objectSize) {
 	//Serialize the object.

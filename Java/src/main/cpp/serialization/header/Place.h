@@ -53,9 +53,6 @@ public:
 	Place(string name, string countryCode, string id, string country, string placeType, string url, string fullName,
 		  BoundingBoxCoordinate *boundingBoxCoordinates);
 
-	//C++: Use explicitly for printing.
-	string toJSON();
-
 	//Hand Coded C++ serialization:
 	//New API: Writes directly to File Page:
 	char *serializeHandcoded(char *buffer, int &objectSize);

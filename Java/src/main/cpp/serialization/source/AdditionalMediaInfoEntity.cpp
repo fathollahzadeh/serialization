@@ -10,18 +10,6 @@ AdditionalMediaInfoEntity::AdditionalMediaInfoEntity(const string &title, const 
 																						  embeddable(embeddable),
 																						  monetizable(
 																								  monetizable) {}
-
-
-string AdditionalMediaInfoEntity::toJSON() {
-	string stringS = "{";
-	stringS += getStringKeyValue("title", title) + "," +
-			   getStringKeyValue("description", description) + "," +
-			   getBoolKeyValue("embeddable", embeddable) + "," +
-			   getBoolKeyValue("monetizable", monetizable) + "}";
-
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *AdditionalMediaInfoEntity::serializeHandcoded(char *buffer, int &objectSize) {
 	//Copy Strings:

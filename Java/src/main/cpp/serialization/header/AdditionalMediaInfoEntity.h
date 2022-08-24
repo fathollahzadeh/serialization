@@ -35,9 +35,6 @@ public:
 
 	AdditionalMediaInfoEntity(const string &title, const string &description, bool embeddable, bool monetizable);
 
-	//C++: Use explicitly for printing.
-	string toJSON();
-
 	//Hand Coded C++ serialization:
 	//New API: Writes directly to File Page:
 	char *serializeHandcoded(char *buffer, int &objectSize);

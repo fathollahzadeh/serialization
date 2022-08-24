@@ -61,25 +61,6 @@ UserMentionEntity *UserMentionEntity::deserializeHandcoded(char *buffer, int &by
 	return this;
 }
 
-
-//C++: Explicit call needed for printing content:
-string UserMentionEntity::toJSON() {
-	string stringS = "{" +
-					 getIntKeyValue("Id", this->id) + " , " +
-					 getStringKeyValue("IdStr", this->idStr) + " , ";
-	stringS += "\"indices\":[";
-	if (indices.size() > 0) {
-		for (int j = 0; j < indices.size() - 1; ++j) {
-			stringS += itos(indices[j]) + ",";
-		}
-		stringS += itos(indices[indices.size() - 1]);
-	}
-	stringS += "]," +
-			   getStringKeyValue("Name", this->name) + " , " +
-			   getStringKeyValue("ScreenName", this->screenName) + "}";
-	return stringS;
-}
-
 UserMentionEntity::~UserMentionEntity() {
 	//free memory:
 	indices.shrink_to_fit();

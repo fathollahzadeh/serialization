@@ -23,7 +23,7 @@ TweetStatus::~TweetStatus() {
 		for (int i = 0; i < matchingRules.size(); ++i) {
 			delete matchingRules.at(i);
 		}
-		withheldInCountries.shrink_to_fit();
+        withheldInCountries.shrink_to_fit();
 	}
 
 }

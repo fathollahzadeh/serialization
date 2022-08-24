@@ -40,8 +40,6 @@ public:
 
     TweetStatusFlatBuffers();
 
-    TweetStatusFlatBuffers(bool isPointer);
-
     virtual ~TweetStatusFlatBuffers();
 
     // Create an flatbuffers object:

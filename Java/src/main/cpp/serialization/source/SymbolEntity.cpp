@@ -12,23 +12,6 @@ SymbolEntity::SymbolEntity(vector<int> indices, string text) {
 	this->text = text;
 }
 
-//C++: Explicit call needed for printing content:
-
-string SymbolEntity::toJSON() {
-	string stringS = "{";
-
-	stringS += "\"indices\":[";
-	if (indices.size() > 0) {
-		for (int j = 0; j < indices.size() - 1; ++j) {
-			stringS += itos(indices[j]) + ",";
-		}
-
-		stringS += itos(indices[indices.size() - 1]);
-	}
-	stringS += "],";
-	getStringKeyValue("Text", this->text) + "}";
-	return stringS;
-}
 
 //Hand Coded C++ serialization:
 char *SymbolEntity::serializeHandcoded(char *buffer, int &objectSize) {

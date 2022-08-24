@@ -86,6 +86,7 @@ void ObjectWriter::writeObjectToFile(TweetStatus *object) {
         else if (this->method == FLATBUF) {
             TweetStatusFlatBuffers *tweetStatusFlatBuffers = new TweetStatusFlatBuffers(object);
             tweetStatusFlatBuffers->serializeFlatBuffersIO(buffer + currentOffset, objectSize);
+            //object->tweetStatusFlatBuffers = tweetStatusFlatBuffers;
         }
 
         //check capacity of the current page size
@@ -225,6 +226,7 @@ void ObjectWriter::serializeObject(TweetStatus *object) {
         else if (this->method == FLATBUF) {
             TweetStatusFlatBuffers *tweetStatusFlatBuffers = new TweetStatusFlatBuffers(object);
             tweetStatusFlatBuffers->serializeFlatBuffers(buffer, objectSize);
+            //object->tweetStatusFlatBuffers = tweetStatusFlatBuffers;
         }
     }
 }

@@ -35,8 +35,6 @@ public:
 
 	PollEntity(const vector<OptionEntity *> &options, const string &endDatetime, const string &durationMinutes);
 
-	string toJSON();
-
 	//Hand Coded C++ serialization:
 	//New API: Writes directly to File Page:
 	char *serializeHandcoded(char *buffer, int &objectSize);

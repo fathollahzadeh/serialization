@@ -30,8 +30,6 @@ public:
 
     OptionEntity(int position, const string &text);
 
-    string toJSON();
-
     //Hand Coded C++ serialization:
     //New API: Writes directly to File Page:
     char *serializeHandcoded(char *buffer, int &objectSize);

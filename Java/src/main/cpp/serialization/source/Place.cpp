@@ -20,21 +20,6 @@ Place::Place(string name, string countryCode, string id, string country, string 
 	this->boundingBoxCoordinates = boundingBoxCoordinates;
 }
 
-//C++: Explicit call needed for printing content:
-string Place::toJSON() {
-	string stringS = "{" +
-					 getStringKeyValue("Name", this->name) + " , " +
-					 getStringKeyValue("CountryCode", this->countryCode) + " , " +
-					 getStringKeyValue("Id", this->id) + " , " +
-					 getStringKeyValue("Country", this->country) + " , " +
-					 getStringKeyValue("PlaceType", this->placeType) + " , " +
-					 getStringKeyValue("Url", this->url) + " , " +
-					 getStringKeyValue("FullName", this->fullName) + " , " +
-					 "\"BoundingBoxCoordinates\":" + this->boundingBoxCoordinates->toJSON() + "}";
-	return stringS;
-}
-
-
 //Hand Coded C++ serialization:
 char *Place::serializeHandcoded(char *buffer, int &objectSize) {
 

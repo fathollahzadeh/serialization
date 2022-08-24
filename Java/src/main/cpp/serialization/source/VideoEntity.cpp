@@ -7,30 +7,6 @@ VideoEntity::VideoEntity(const vector<int> &aspectRatio, int durationMillis,
 																	durationMillis(durationMillis),
 																	variants(variants) {}
 
-
-string VideoEntity::toJSON() {
-	string stringS = "{\"aspect_ratio\":[";
-	for (int i = 0; i < aspectRatio.size() - 1; ++i) {
-		stringS += itos(aspectRatio.at(i)) + ",";
-	}
-	if (aspectRatio.size() > 0)
-		stringS += itos(aspectRatio.at(aspectRatio.size() - 1));
-	stringS += "],";
-
-	stringS += getIntKeyValue("DurationMillis", durationMillis) + ",";
-	stringS += "\"variants\":[";
-	for (int i = 0; i < variants.size() - 1; ++i) {
-		stringS += variants.at(i)->toJSON() + ",";
-	}
-	if (variants.size() > 0) {
-		stringS += variants.at(variants.size() - 1)->toJSON();
-	}
-	stringS += "]";
-
-	return stringS;
-}
-
-
 char *VideoEntity::serializeHandcoded(char *buffer, int &objectSize) {
 
 	//Serialize the object.

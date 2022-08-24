@@ -42,9 +42,6 @@ public:
 	//Constructor with arguments:
 	SizeEntity(int width, int height, string resize);
 
-	//C++: Use explicitly for printing.
-	string toJSON();
-
 	//Hand Coded C++ serialization:
 	//New API: Writes directly to File Page:
 	char *serializeHandcoded(char *buffer, int &objectSize);

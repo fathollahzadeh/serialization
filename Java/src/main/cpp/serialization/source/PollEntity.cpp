@@ -14,24 +14,6 @@ PollEntity::PollEntity(const vector<OptionEntity *> &options, const string &endD
 					   const string &durationMinutes) : options(options), endDatetime(endDatetime),
 														durationMinutes(durationMinutes) {}
 
-
-//C++: Explicit call needed for printing content:
-string PollEntity::toJSON() {
-	string stringS = "{";
-	stringS += "\"Options\":[";
-	if (options.size() > 0) {
-		for (int i = 0; i < options.size() - 1; i++) {
-			stringS += options[i]->toJSON() + " , ";
-		}
-		stringS += options[options.size() - 1]->toJSON();
-	}
-	stringS += "]," +
-			   getStringKeyValue("EndDatetime", this->endDatetime) + " , " +
-			   getStringKeyValue("DurationMinutes", this->durationMinutes) + "}";
-	return stringS;
-}
-
-
 //Hand Coded C++ serialization:
 char *PollEntity::serializeHandcoded(char *buffer, int &objectSize) {
 	//Serialize the object.

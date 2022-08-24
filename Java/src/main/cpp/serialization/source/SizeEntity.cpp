@@ -20,15 +20,6 @@ SizeEntity::SizeEntity(int width, int height, string resize) {
 	this->resize = resize;
 }
 
-//C++: Explicit call needed for printing content:
-string SizeEntity::toJSON() {
-	string stringS = "{" +
-					 getIntKeyValue("w", this->width) + " , " +
-					 getIntKeyValue("h", this->height) + " , " +
-					 getStringKeyValue("Resize", this->resize) + "}";
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *SizeEntity::serializeHandcoded(char *buffer, int &objectSize) {
 	//Serialize the object.

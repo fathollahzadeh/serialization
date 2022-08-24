@@ -11,19 +11,6 @@ ExtendedEntities::ExtendedEntities(vector<MediaEntity *> media) {
 	this->media = media;
 }
 
-//C++: Explicit call needed for printing content:
-string ExtendedEntities::toJSON() {
-	string stringS = "\"Media\":[";
-	//All media:
-	for (int i = 0; i < media.size() - 1; i++) {
-		stringS += media[i]->toJSON() + ",";
-	}
-	stringS += media[media.size() - 1]->toJSON();
-	stringS += "]";
-
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *ExtendedEntities::serializeHandcoded(char *buffer, int &objectSize) {
 	//Serialize the object.

@@ -12,22 +12,6 @@ HashtagEntity::HashtagEntity(vector<int> indices, string text) {
 	this->text = text;
 }
 
-
-//C++: Explicit call needed for printing content:
-string HashtagEntity::toJSON() {
-	string stringS = "{\"indices\":[";
-	for (int i = 0; i < indices.size() - 1; i++) {
-		stringS += itos(indices[i]) + ",";
-	}
-	if (indices.size() > 0) {
-		stringS += itos(indices[indices.size() - 1]);
-	}
-	stringS += "],";
-
-	getStringKeyValue("Text", this->text) + "}";
-	return stringS;
-}
-
 //Hand Coded C++ serialization:
 char *HashtagEntity::serializeHandcoded(char *buffer, int &objectSize) {
 	//Serialize the object.

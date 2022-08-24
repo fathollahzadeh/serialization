@@ -47,15 +47,6 @@ VariantEntity *VariantEntity::deserializeHandcoded(char *buffer, int &bytesRead)
 	return this;
 }
 
-//C++: Explicit call needed for printing content:
-string VariantEntity::toJSON() {
-	string stringS = "{" +
-					 getLongKeyValue("Bitrate", this->bitrate) + " , " +
-					 getStringKeyValue("ContentType", this->contentType) + ", " +
-					 getStringKeyValue("Url", this->url) + "}";
-	return stringS;
-}
-
 VariantEntity::~VariantEntity() {}
 
 bsoncxx::document::value VariantEntity::serializeBSON() {

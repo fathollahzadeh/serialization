@@ -38,34 +38,6 @@ public:
 	//proto buffer de-serialization
 	TweetStatusProto *deserializeProto(char *buffer, int &bytesRead);
 
-	//New API: Writes directly to File Page:
-	char *serializeHandcoded(char *buffer, int &objectSize);
-
-	//Hand Coded C++ de-serialization:
-	TweetStatusProto *deserializeHandcoded(char *buffer, int &bytesRead);
-
-	//Boost serialization:
-	char *serializeBoost(char *buffer, int &objectSize);
-
-	//Boost de-serialization:
-	TweetStatusProto *deserializeBoost(char *buffer, int &bytesRead);
-
-	TweetStatusProto *deserializeInPlace(char *buffer);
-
-	//BSON buffer serialization
-	bsoncxx::document::value serializeBSON();
-
-	//BSON de-serialization:
-	TweetStatusProto *deserializeBSON(bsoncxx::document::view doc);
-
-	//flatbuffers buffer serialization
-	void serializeFlatBuffers(char *buffer, int &objectSize);
-
-	//proto buffer de-serialization
-	TweetStatusProto *deserializeFlatBuffers(char *buffer, int &bytesRead);
-
-	void setBsonDoc(bsoncxx::document::value bsonDoc);
-
 	proto::TweetStatusP *getProto() const;
 
 	bool operator<(TweetStatusProto &other);

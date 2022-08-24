@@ -5,15 +5,6 @@ MatchingRulesEntity::MatchingRulesEntity(const string &tag, long id, const strin
 
 MatchingRulesEntity::MatchingRulesEntity() {}
 
-string MatchingRulesEntity::toJSON() {
-	string stringS = "{" +
-					 getStringKeyValue("tag", tag) + "," +
-					 getLongKeyValue("id", id) + "," +
-					 getStringKeyValue("id_str", idStr) + "}";
-	return stringS;
-}
-
-
 char *MatchingRulesEntity::serializeHandcoded(char *buffer, int &objectSize) {
 	//Copy Longs:
 	buffer = copyLong(buffer, this->id, objectSize);
