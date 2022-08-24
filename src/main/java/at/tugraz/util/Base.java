@@ -11,19 +11,18 @@ import java.nio.charset.Charset;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import at.tugraz.tweet.TweetStatus;
+import org.apache.log4j.Logger;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import at.tugraz.objects.twitter.TweetStatus;
 
 public class Base {
 
-	static Logger logger = LogManager.getLogger(Base.class);
+	static Logger logger = Logger.getLogger(Base.class);
 
 	public byte[] javaDefaultSerialization() {
 		// Serialize to a byte array

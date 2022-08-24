@@ -2,6 +2,8 @@ package at.tugraz.util;
 
 import java.io.Serializable;
 import java.util.List;
+
+import at.tugraz.tweet.TweetStatus;
 import com.esotericsoftware.kryo.Kryo;
 
 public interface RootData extends Serializable, Comparable<RootData> {
@@ -36,9 +38,9 @@ public interface RootData extends Serializable, Comparable<RootData> {
 
 	RootData bsonDeSerialization(byte[] buffData);
 
-	public byte[] gsonSerialization();
+	byte[] gsonSerialization();
 
-	//public TweetStatus gsonDeSerialization(byte[] buff);
+	TweetStatus gsonDeSerialization(byte[] buff);
 
 	String toString();
 

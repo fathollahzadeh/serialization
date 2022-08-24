@@ -2,8 +2,13 @@
 
 # This script runs all network experiments on the cluster scale-up machines.
 inDataPathMemoryJava="data/tweets.jbin"
-inDataPathDiskJava="data/tweets"
+inDataPathMemoryCPP="data/tweets.cbin"
+inDataPathDisk="data/tmp/tweets"
 outDataPath="data/tmp/tweets"
+
+declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
+declare -a cpp_methods=("Handcoded") # "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf"
+
 nrow=1000000
 
 # Load data into memory
@@ -12,12 +17,45 @@ nrow=1000000
 ##########################
 echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_times.dat
 
-# Serialize data into disk and keep it
-./expnetwork/runExperiment4_Write.sh $inDataPathMemoryJava $outDataPath $nrow 
+# for method in "${java_methods[@]}"; do
+#     #clean up
+#     rm -rf data/tmp
+#     mkdir -p data/tmp
 
-./expnetwork/runExperiment4_ExternalSort_Memory.sh $inDataPathMemoryJava $outDataPath m2m Experiment4_ExternalSort_times
-./expnetwork/runExperiment4_ExternalSort_Memory.sh $inDataPathMemoryJava $outDataPath m2d Experiment4_ExternalSort_times
+#     # serialize data into disk
+#     ./expnetwork/runExperiment4_WriteJava.sh $method $inDataPathMemoryJava $outDataPath $nrow 
 
-./expnetwork/runExperiment4_ExternalSort_Disk.sh $inDataPathDiskJava $outDataPath d2m Experiment4_ExternalSort_times
-./expnetwork/runExperiment4_ExternalSort_Disk.sh $inDataPathDiskJava $outDataPath d2d Experiment4_ExternalSort_times
+#     # 1. Memory-to-Memory (m2m)
+#     ./expnetwork/runExperiment4_ExternalSortJava.sh $method $inDataPathMemoryJava $outDataPath m2m Experiment4_ExternalSort_times
 
+#     # 2. Memory-to-Disk
+#     ./expnetwork/runExperiment4_ExternalSortJava.sh $method $inDataPathMemoryJava $outDataPath m2d Experiment4_ExternalSort_times
+
+#     # 3. Disk-to-Memory (d2m)
+#     ./expnetwork/runExperiment4_ExternalSortJava.sh $method $inDataPathDisk $outDataPath d2m Experiment4_ExternalSort_times
+
+#     # 4. Disk-to-Disk (d2d)
+#     ./expnetwork/runExperiment4_ExternalSortJava.sh $method $inDataPathDisk $outDataPath d2d Experiment4_ExternalSort_times
+# done    
+
+
+for method in "${cpp_methods[@]}"; do
+    #clean up
+    rm -rf data/tmp
+    mkdir -p data/tmp
+
+    # serialize data into disk
+    #./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP $outDataPath $nrow 
+
+    # 1. Memory-to-Memory (m2m)
+    ./expnetwork/runExperiment4_ExternalSortCPP.sh $method $inDataPathMemoryCPP $outDataPath m2m Experiment4_ExternalSort_times
+
+    # # 2. Memory-to-Disk
+    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method $inDataPathMemoryCPP $outDataPath m2d Experiment4_ExternalSort_times
+
+    # # 3. Disk-to-Memory (d2m)
+    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method $inDataPathDisk $outDataPath d2m Experiment4_ExternalSort_times
+
+    # # 4. Disk-to-Disk (d2d)
+    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method $inDataPathDisk $outDataPath d2d Experiment4_ExternalSort_times
+done   

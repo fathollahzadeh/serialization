@@ -1,7 +1,0 @@
-namespace at.tugraz.tweet.flatbuffers;
-
-table CoordinatesFBS {
-        type:string;
-        coordinates:[double];
-}
-root_type CoordinatesFBS;

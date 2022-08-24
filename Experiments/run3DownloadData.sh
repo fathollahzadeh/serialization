@@ -18,7 +18,7 @@ cd ..
 
 SCRIPT="$jnCMD -DinDataPath=data/tweets_1m.txt\
                -DoutDataPath=data/tweets.txt\
-               -Dcount=1\
+               -Dcount=10\
                -cp ./SerializationJava.jar at.tugraz.experiments.DataDuplicate
                 "          
 echo $SCRIPT
