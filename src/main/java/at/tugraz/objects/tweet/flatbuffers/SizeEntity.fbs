@@ -1,9 +1,0 @@
-namespace at.tugraz.tweet.flatbuffers;
-
-table SizeEntityFBS {
-	width:int;
-    height:int;
-    resize:string;
-
-}
-root_type SizeEntityFBS;
