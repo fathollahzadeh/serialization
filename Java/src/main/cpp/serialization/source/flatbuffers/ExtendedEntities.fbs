@@ -1,8 +1,0 @@
-include "MediaEntity.fbs";
-
-namespace tweetstatusflatbuffers;
-
-table ExtendedEntitiesFBS {
-    media:[MediaEntityFBS];
-}
-root_type ExtendedEntitiesFBS;
