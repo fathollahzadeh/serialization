@@ -124,9 +124,6 @@ void ObjectWriter::flush() {
 
     //Close Index file:
     this->outIndexFile.close();
-
-    //free memory:
-    delete[] pageBuffer;
 }
 
 void ObjectWriter::writeInPlaceObjectToFile(TweetStatus *object) {
@@ -190,7 +187,6 @@ void ObjectWriter::writeIndexToFile(int *indexVector) {
     }
     this->outIndexFile.write(tbuffer, tempItemSize);
 
-    delete[] indexVector;
     delete[] tbuffer;
 }
 

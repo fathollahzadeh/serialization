@@ -44,8 +44,6 @@ void TweetStatusFlatBuffers::serializeFlatBuffersIO(char *buffer, int &objectSiz
         builder.Finish(orc);
         bp = builder.GetBufferPointer();
         objectSize = builder.GetSize();
-
-
     } else {
         flatbuffers::FlatBufferBuilder builder;
         builder.Finish(tweetstatusflatbuffers::TweetStatusFBS::Pack(builder, this->tweetStatusFbs));
@@ -53,13 +51,12 @@ void TweetStatusFlatBuffers::serializeFlatBuffersIO(char *buffer, int &objectSiz
         objectSize = builder.GetSize();
     }
 
-    // insert json size to the first 4 byte of buffer
+    // insert  size to the first 4 byte of buffer
     memcpy(buffer, &objectSize, sizeof(int));
-
     //copy serialized to the page buffer:
     memmove(buffer + sizeof(int), (char *) bp, objectSize);
-
     objectSize += sizeof(objectSize);
+
 }
 
 flatbuffers::Offset <TweetStatusFBS>

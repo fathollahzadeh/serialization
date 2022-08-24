@@ -8,7 +8,7 @@ outDataPath="data/tmp/tweets"
 outExternalSort="data/tmp/externalsort"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
-declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") #"Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf"
+declare -a cpp_methods=("FlatBuf") #"Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf"
 
 #max_nrow=10000000
 #externalsort_nrow=20000000
@@ -102,13 +102,13 @@ for method in "${cpp_methods[@]}"; do
 #     # serialize/write data into disk
 #     ################################
 #     # Seralization (just CPU time)
-      ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single false Experiment1_Write_times
-#     #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single true Experiment1_Write_times
-#     #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Parallel false Experiment1_Write_times
+      #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single false Experiment1_Write_times
+      #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single true Experiment1_Write_times
+      #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Parallel false Experiment1_Write_times
 
 #     # Write (CPU+IO)
 #     ###############
-#     # ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times
+      ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times
 #     # ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single true Experiment1_Write_times
 #     # ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Parallel false Experiment1_Write_times
 
