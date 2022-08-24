@@ -998,3 +998,17 @@ src/main/cpp/Testing/Temporary/LastTest.log
 src/main/cpp/cmake_install.cmake
 src/main/cpp/CMakeCache.txt
 src/main/cpp/cpp.cbp
+/.idea/
+src/.idea/.gitignore
+src/.idea/misc.xml
+src/.idea/modules.xml
+src/.idea/vcs.xml
+src/.idea/workspace.xml
+src/main/cpp/cmake-build-debug/CMakeFiles/DataReadNetwork.dir/build.make
+src/main/cpp/cmake-build-debug/CMakeFiles/DataReadNetwork.dir/cmake_clean.cmake
+src/main/cpp/cmake-build-debug/CMakeFiles/DataReadNetwork.dir/depend.make
+src/main/cpp/cmake-build-debug/CMakeFiles/DataReadNetwork.dir/DependInfo.cmake
+src/main/cpp/cmake-build-debug/CMakeFiles/DataReadNetwork.dir/flags.make
+src/main/cpp/cmake-build-debug/CMakeFiles/DataReadNetwork.dir/link.txt
+src/main/cpp/cmake-build-debug/CMakeFiles/DataReadNetwork.dir/progress.make
+src/serialization.iml
