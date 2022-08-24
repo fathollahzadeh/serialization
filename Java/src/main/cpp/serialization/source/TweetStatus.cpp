@@ -23,7 +23,6 @@ TweetStatus::~TweetStatus() {
 		for (int i = 0; i < matchingRules.size(); ++i) {
 			delete matchingRules.at(i);
 		}
-
 		withheldInCountries.shrink_to_fit();
 	}
 
@@ -80,55 +79,8 @@ TweetStatus::TweetStatus(string createdAt, long id, string text, string source,
 
 }
 
-
-//C++: Explicit call needed for printing content:
-string TweetStatus::toJSON() {
-
-	string stringS = "{" +
-					 getStringKeyValue("createdAt", this->createdAt) + "," +
-					 getLongKeyValue("id", this->id) + ", " +
-					 getStringKeyValue("text", this->text) + "," +
-					 getStringKeyValue("source", this->source) + " , " +
-					 getBoolKeyValue("isTruncated", this->isTruncated) + " , " +
-					 "\"user\":" + (*this->user).toJSON() + " , " +
-					 getLongKeyValue("quotedStatusId", this->quotedStatusId) + " , " +
-					 getIntKeyValue("replyCount", this->replyCount) + ", " +
-					 getIntKeyValue("retweetCount", this->retweetCount) + " , ";
-	stringS += "\"entities\":" + entities->toJSON() + ",";
-
-	stringS += getBoolKeyValue("isRetweeted", this->isRetweeted) + " , " +
-			   getLongKeyValue("inReplyToStatusId", this->inReplyToStatusId) + " , " +
-			   getLongKeyValue("inReplyToUserId", this->inReplyToUserId) + " , " +
-			   getStringKeyValue("inReplyToScreenName", this->inReplyToScreenName) + " , ";
-	if (this->coordinates != nullptr)
-		stringS += "\"coordinates\": " + (*this->coordinates).toJSON() + " , ";
-	if (place != nullptr)
-		stringS += "\"place\": " + (*this->place).toJSON() + " , ";
-	/* getBoolKeyValue("isQuoteStatus ", this->getIsQuoteStatus()) + " , " +*/
-	if (this->quotedStatus != nullptr)
-		stringS += "\"quotedStatus\": " + (*this->quotedStatus).toJSON() + " , ";
-	/*
-	 "\"retweetedStatus\": " + (*this->getRetweetedStatus()).toJSON() + " - " +
-	 "quoteCount: " + itos(this->getQuoteCount()) + " , " +*/
-	stringS += getIntKeyValue("favoriteCount", this->favoriteCount) + " , " +
-			   getBoolKeyValue("isFavorited", this->isFavorited) + " , " +
-			   getBoolKeyValue("isPossiblySensitive ", this->isPossiblySensitive) + " , " +
-			   getStringKeyValue("lang ", this->lang) + " , " +
-			   getLongKeyValue("currentUserRetweetId", this->currentUserRetweetedId);
-
-
-	stringS += "}";
-
-
-	return stringS;
-
-}
-
-
 //Hand Coded C++ serialization:
 char *TweetStatus::serializeHandcoded(char *buffer, int &objectSize) {
-
-
 	//Copy Integers:
 	buffer = copyInt(buffer, this->replyCount, objectSize);
 	buffer = copyInt(buffer, this->retweetCount, objectSize);
@@ -418,20 +370,6 @@ TweetStatus *TweetStatus::deserializeBoost(char *buffer, int &bytesRead) {
 	return boostObject;
 }
 
-//proto serialization:
-char *TweetStatus::serializeProto(char *buffer, int &objectSize) {
-	return nullptr;
-}
-
-//Proto de-serialization:
-TweetStatus *TweetStatus::deserializeProto(char *buffer, int &bytesRead) {
-	return nullptr;
-}
-
-TweetStatus *TweetStatus::deserializeInPlace(char *buffer) {
-	return nullptr;
-}
-
 bsoncxx::document::value TweetStatus::serializeBSON() {
 
 	if (this->hasBsonDoc) {
@@ -688,13 +626,6 @@ int TweetStatus::getOrder() {
 
 TweetStatus::TweetStatus(bool isPointer) : isPointer(isPointer) {}
 
-void TweetStatus::serializeFlatBuffers(char *buffer, int &objectSize) {
-
-}
-
-TweetStatus *TweetStatus::deserializeFlatBuffers(char *buffer, int &bytesRead) {
-	return nullptr;
-}
 
 void TweetStatus::setBsonDoc(bsoncxx::document::value bsonDoc) {
 	this->bsonDoc = bsonDoc;

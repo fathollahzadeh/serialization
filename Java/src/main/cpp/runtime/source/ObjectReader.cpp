@@ -272,7 +272,7 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
     list = new vector<TweetStatus *>;
     int relativePosition = 0;
     do {
-        int objectSize;
+        int objectSize = 0;
 
         TweetStatus *object;
         if (this->method == HANDCODED) {
@@ -349,6 +349,12 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
         list->push_back(object);
         relativePosition += objectSize + sizeof(objectSize);
     } while (relativePosition < pageSize);
+}
+
+ObjectReader::~ObjectReader() {
+    delete[] pageBuffer;
+    delete[] pageIndex;
+    delete[] objectIndex;
 }
 
 

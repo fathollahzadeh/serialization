@@ -12,7 +12,7 @@ rm -rf data/tweets.cbin.index
 inDataPath="data/tweets.txt"
 outDataPathJava="data/tweets.jbin"
 outDataPathCPP="data/tweets.cbin"
-nrow=$(sed -n '$=' $inDataPath)
+nrow=100000 #$(sed -n '$=' $inDataPath)
 
 # prepare data for Java experiments
 ##################################

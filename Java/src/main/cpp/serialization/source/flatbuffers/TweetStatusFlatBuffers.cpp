@@ -588,30 +588,6 @@ TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeFlatBuffers(char *buf
 	return this;
 }
 
-char *TweetStatusFlatBuffers::serializeHandcoded(char *buffer, int &objectSize) {
-	return nullptr;
-}
-
-TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeHandcoded(char *buffer, int &bytesRead) {
-	return nullptr;
-}
-
-char *TweetStatusFlatBuffers::serializeBoost(char *buffer, int &objectSize) {
-	return nullptr;
-}
-
-TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeBoost(char *buffer, int &bytesRead) {
-	return nullptr;
-}
-
-
-TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeInPlace(char *buffer) {
-	return nullptr;
-}
-
-bsoncxx::document::value TweetStatusFlatBuffers::serializeBSON() {
-	return bsoncxx::document::value(nullptr, 0, nullptr);
-}
 
 //Implement your own custom comparator:
 bool TweetStatusFlatBuffers::operator<(TweetStatusFlatBuffers &other) {
@@ -639,20 +615,3 @@ bool TweetStatusFlatBuffers::operator<(TweetStatusFlatBuffers &other) {
 
 	return countLevel < countLevelOtherTweet;
 }
-
-TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeBSON(bsoncxx::document::view doc) {
-	return nullptr;
-}
-
-TweetStatusFlatBuffers::TweetStatusFlatBuffers(bool isPointer) : isPointer(isPointer) {}
-
-char *TweetStatusFlatBuffers::serializeProto(char *buffer, int &objectSize) {
-	return nullptr;
-}
-
-TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeProto(char *buffer, int &bytesRead) {
-	return nullptr;
-}
-
-
-void TweetStatusFlatBuffers::setBsonDoc(bsoncxx::document::value bsonDoc) {}

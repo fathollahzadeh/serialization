@@ -8,7 +8,7 @@ task_set=$5
 log_file_name=$6
 
 for rp in {1..1}; do
-    start=$(date +%s%N)
+    start=$(date +%s%N) #  
     SCRIPT="./cppbin/DataSerialization${platform} ${inDataPath} ${method} ${nrow}"    
     if [ "$task_set" = true ] ; then
         SCRIPT="taskset -c 0 $SCRIPT"

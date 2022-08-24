@@ -1,6 +1,10 @@
 #include "ObjectWriter.h"
 
-ObjectWriter::~ObjectWriter() {}
+ObjectWriter::~ObjectWriter() {
+    delete[] pageBuffer;
+    delete[] pageIndex;
+    delete[] objectIndex;
+}
 
 ObjectWriter::ObjectWriter(const string &fname, const string &method, int rlen) : ObjectWriter(method, rlen, PAGESIZE) {
     this->outStreamRegularFile.open(fname.c_str(), ofstream::binary | ofstream::trunc);

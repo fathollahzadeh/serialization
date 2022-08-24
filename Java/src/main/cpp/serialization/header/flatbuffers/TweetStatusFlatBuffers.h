@@ -1,10 +1,5 @@
-//
-// Created by saeed on 12/27/19.
-//
-
 #ifndef TWITTER_TWEETSTATUSPFLATBUFFERS_H
 #define TWITTER_TWEETSTATUSPFLATBUFFERS_H
-
 
 #include <TweetStatus.h>
 #include "TweetStatusFBS.h"
@@ -13,8 +8,6 @@ using namespace tweetstatusflatbuffers;
 class TweetStatusFlatBuffers: public RootData {
 
 private:
-
-    bool isPointer;
 
     TweetStatusFBST *tweetStatusFbs;
 
@@ -63,37 +56,7 @@ public:
     //proto buffer de-serialization
     TweetStatusFlatBuffers* deserializeFlatBuffers(char *buffer, int &bytesRead);
 
-
-    //Proto buffer serialization
-    char *serializeProto(char *buffer, int &objectSize);
-
-    //proto buffer de-serialization
-    TweetStatusFlatBuffers* deserializeProto(char *buffer, int &bytesRead);
-
-    //Hand Coded C++ serialization:
-    //New API: Writes directly to File Page:
-    char *serializeHandcoded(char *buffer, int &objectSize);
-
-    //Hand Coded C++ de-serialization:
-    TweetStatusFlatBuffers *deserializeHandcoded(char *buffer, int &bytesRead);
-
-    //Boost serialization:
-    char *serializeBoost(char *buffer, int &objectSize);
-
-    //Boost de-serialization:
-    TweetStatusFlatBuffers * deserializeBoost(char *buffer, int &bytesRead);
-
-    TweetStatusFlatBuffers * deserializeInPlace(char *buffer);
-
-    //BSON buffer serialization
-    bsoncxx::document::value serializeBSON();
-
-    //BSON de-serialization:
-    TweetStatusFlatBuffers * deserializeBSON(bsoncxx::document::view doc);
-
     bool operator<(TweetStatusFlatBuffers &other);
-
-    void setBsonDoc(bsoncxx::document::value bsonDoc);
 
 };
 

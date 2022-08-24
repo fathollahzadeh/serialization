@@ -17,7 +17,7 @@ private:
 
 	void setSizeEntityP(proto::SizeEntityP *sizeEntityP, SizeEntity *sizeEntity);
 
-	bool isPointer;
+	bool isPointer = false;
 
 public:
 

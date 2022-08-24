@@ -3,7 +3,7 @@
 TweetStatusProto::TweetStatusProto() {}
 
 TweetStatusProto::~TweetStatusProto() {
-	if (this->proto != nullptr) {
+	if (this->proto != nullptr && !this->isPointer) {
 		delete this->proto;
 	}
 }
@@ -125,12 +125,16 @@ TweetStatusProto::TweetStatusProto(TweetStatus *tweetStatus) {
 
 	if (tweetStatus->quotedStatus != nullptr) {
 		TweetStatusProto * tweetStatusProto = new TweetStatusProto(tweetStatus->quotedStatus);
+        tweetStatusProto->isPointer = true;
 		this->proto->set_allocated_quotedstatus(tweetStatusProto->getProto());
+        delete tweetStatusProto;
 	}
 
 	if (tweetStatus->retweetedStatus != nullptr) {
 		TweetStatusProto * tweetStatusProto = new TweetStatusProto(tweetStatus->retweetedStatus);
+        tweetStatusProto->isPointer = true;
 		this->proto->set_allocated_retweetedstatus(tweetStatusProto->getProto());
+        delete tweetStatusProto;
 	}
 
 	this->proto->set_quotecount(tweetStatus->quoteCount);

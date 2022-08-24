@@ -129,9 +129,6 @@ public:
 				vector <string> withheldInCountries, string withheldScope);
 
 
-	//C++: Use explicitly for printing.
-	string toJSON();
-
 	//Hand Coded C++ serialization:
 	//New API: Writes directly to File Page:
 	char *serializeHandcoded(char *buffer, int &objectSize);
@@ -145,14 +142,6 @@ public:
 	//Boost de-serialization:
 	TweetStatus *deserializeBoost(char *buffer, int &bytesRead);
 
-	//Proto buffer serialization
-	char *serializeProto(char *buffer, int &objectSize);
-
-	//proto buffer de-serialization
-	TweetStatus *deserializeProto(char *buffer, int &bytesRead);
-
-	TweetStatus *deserializeInPlace(char *buffer);
-
 	//BSON buffer serialization
 	bsoncxx::document::value serializeBSON();
 
@@ -162,14 +151,7 @@ public:
 	//Implement your own custom comparator:
 	bool operator<(TweetStatus &other);
 
-	//flatbuffers buffer serialization
-	void serializeFlatBuffers(char *buffer, int &objectSize);
-
-	//proto buffer de-serialization
-	TweetStatus *deserializeFlatBuffers(char *buffer, int &bytesRead);
-
 	//print order number:
-
 	int getOrder();
 
 	void setBsonDoc(bsoncxx::document::value bsonDoc);

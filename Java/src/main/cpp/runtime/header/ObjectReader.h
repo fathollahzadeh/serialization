@@ -41,6 +41,8 @@ public:
 
     ObjectReader(const string &method);
 
+    virtual ~ObjectReader();
+
     int readObjects(int i, int n, TweetStatus ** objectList);
     TweetStatus * readObject(int i);
 
