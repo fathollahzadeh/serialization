@@ -29,6 +29,8 @@ int main(int argc, char *argv[]) {
             reader->readIO(id);
         }
     }
+
+    delete reader;
 }
 
 

@@ -23,9 +23,7 @@ struct ObjectNetworkIndex {
     T *myObject;
     int clientIndex;
 
-    virtual ~ObjectNetworkIndex() {
-        delete myObject;
-    }
+    virtual ~ObjectNetworkIndex() { }
 };
 
 //Ascending Sorter:
@@ -93,10 +91,12 @@ void DataReadNetwork<T>::runDataReader() {
 
         for (int i = 0; i < listSize; ++i) {
             writer.writeObjectToNetworkPage(list[i], client);
+            delete list[i];
         }
 
         writer.flushToNetwork(client);
-
+        delete[] list;
+        delete client;
     }
     else if (machineInfo->getNodeType() == MIDDLE) {
         Server server(machineInfo->getPort());
@@ -118,6 +118,13 @@ void DataReadNetwork<T>::runDataReader() {
 
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
+
+        delete client;
+        for (int i = 0; i < numberOfClients; ++i) {
+            delete queues[i];
+        }
+        delete queues;
+
     }
     else if (machineInfo->getNodeType() == ROOT) {
         ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
@@ -144,6 +151,9 @@ void DataReadNetwork<T>::runDataReader() {
         else
             ExternalSortTask(nullptr, true, nullptr);
     }
+
+    delete machineInfo;
+    delete reader;
 }
 
 template<class T>
@@ -256,6 +266,8 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         if (onDisk) writer->flush();
         else writer->flushToNetwork(client);
     }
+
+    delete[] pageObjectCounter;
 }
 
 template<class T>

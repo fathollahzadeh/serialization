@@ -10,7 +10,7 @@ log_file_name=$7
 randomDataPath=$8
 
 for rp in {1..1}; do
-    start=$(date +%s%N)
+    start=$(date +%s%N) 
     SCRIPT="./cppbin/DataReadIO${platform} ${inDataPath}.${method}CPP ${method} ${seq_rand} ${nrow} ${randomDataPath}"    
     if [ "$task_set" = true ] ; then
         SCRIPT="taskset -c 0 $SCRIPT"

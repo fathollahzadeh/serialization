@@ -15,9 +15,7 @@ struct ObjectFileIndex {
     T *myObject;
     int fileIndex;
 
-    virtual ~ObjectFileIndex() {
-        delete myObject;
-    }
+    virtual ~ObjectFileIndex() { }
 };
 
 //Ascending Sorter:
@@ -92,6 +90,7 @@ void ExternalSort<T>::runExternalSort() {
             writer->writeObjectToFile(list[j]);
         }
         writer->flush();
+        delete writer;
         //free memory:
         for (int k = 0; k < listSize; ++k) {
             if (reader->getMethod() != INPLACE) {
@@ -125,6 +124,7 @@ void ExternalSort<T>::runExternalSort() {
             objectFileIndex->fileIndex = i;
             queue.push(objectFileIndex);
         }
+        delete[] list;
     }
     ObjectWriter *writer = new ObjectWriter(outDataPath + "/" + method + "CPP-sorted.bin", method, reader->getRlen());
 
@@ -156,6 +156,7 @@ void ExternalSort<T>::runExternalSort() {
                 objectFileIndex->fileIndex = fileNumber;
                 queue.push(objectFileIndex);
             }
+            delete[] list;
         }
         writer->writeObjectToFile(tmpObjectFileIndex->myObject);
 
@@ -165,8 +166,18 @@ void ExternalSort<T>::runExternalSort() {
             char *tbuffer = (char *) tmpObjectFileIndex->myObject;
             delete[] tbuffer;
         }
+        delete tmpObjectFileIndex;
     }
     writer->flush();
+    delete writer;
+    delete reader;
+    delete[] pageObjectCounter;
+    delete[] readFileObject;
+    delete[] pageCounter;
+
+    for (int i = 0; i < fileCount; ++i) {
+       delete readerArray.at(i);
+    }
 }
 
 template<class T>

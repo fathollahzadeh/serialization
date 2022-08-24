@@ -9,7 +9,7 @@ log_file_name=$5
 
 for rp in {1..1}; do
     start=$(date +%s%N)
-    SCRIPT="valgrind --leak-check=yes ./cppbin/DataLoadToMemory${platform} ${inDataPath} ${nrow}"
+    SCRIPT="./cppbin/DataLoadToMemory${platform} ${inDataPath} ${nrow}"
     if [ "$task_set" = true ] ; then
             SCRIPT="taskset -c 0 $SCRIPT"
     fi            
