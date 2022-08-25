@@ -99,7 +99,7 @@ void DataReadNetwork<T>::runDataReader() {
     }
     else if (machineInfo->getNodeType() == MIDDLE) {
         cout<<"****************************** MIDDLE>>  "<< machineInfo->getIp()<<endl;
-        Server server(machineInfo->getPort());
+        Server server(machineInfo->getPort(), numberOfClients -1);
         //server.setSoTimeout(Const.NETWORK_TIMEOUT);
         Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         numberOfClients = machineInfo->getLeaves().size() + 1;
@@ -107,7 +107,7 @@ void DataReadNetwork<T>::runDataReader() {
         statuses = new bool *[numberOfClients];
         vector<thread> pool;
         for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
-            Socket *client;
+            Socket *client = new Socket();
             server.accept(client);
             cout<< ">>>>>>>>>>>>>>> accept"<<endl;
             ObjectReader *clientReader = new ObjectReader(method);
@@ -129,10 +129,11 @@ void DataReadNetwork<T>::runDataReader() {
     }
     else if (machineInfo->getNodeType() == ROOT) {
         cout<<"****************************** ROOT>>  "<< machineInfo->getIp()<<endl;
-        ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
-        Server server(machineInfo->getPort());
-        //serverSocket.setSoTimeout(Const.NETWORK_TIMEOUT);
         numberOfClients = machineInfo->getLeaves().size() + 1;
+        ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
+        Server server(machineInfo->getPort(), numberOfClients -1);
+        //serverSocket.setSoTimeout(Const.NETWORK_TIMEOUT);
+
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
         statuses = new bool *[numberOfClients];
         vector<thread> pool;
@@ -140,7 +141,7 @@ void DataReadNetwork<T>::runDataReader() {
         //Socket socket;
         for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
             cout<<"++++++++++++++++++  "<<i<<endl;
-            Socket *client;
+            Socket *client = new Socket();
             server.accept(client);
             cout<< ">>>>>>>>>>>>>>> accept"<<endl;
             ObjectReader clientReader(method);
@@ -166,6 +167,7 @@ Client* DataReadNetwork<T>::initClient(string ip, int port) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         try {
             Client *client = new Client(ip, port);
+            cout<< "Client Connected !"<<endl;
             return client;
         } catch (const exception &e) {}
     }

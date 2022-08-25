@@ -1,7 +1,7 @@
 #include "Server.h"
 
 
-Server::Server(int port) {
+Server::Server(int port, int count) {
     if (!Socket::create()) {
         throw std::runtime_error("Could not create server socket.");
     }
@@ -10,7 +10,7 @@ Server::Server(int port) {
         throw std::runtime_error("Could not bind to port.");
     }
 
-    if (!Socket::listen()) {
+    if (!Socket::listen(count)) {
         throw std::runtime_error("Could not listen to socket.");
     }
 }

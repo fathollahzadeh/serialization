@@ -10,7 +10,7 @@ class Server: public Socket{
 private:
 
 public:
-    Server(int port);
+    Server(int port, int count);
 
     ~Server() override;
 

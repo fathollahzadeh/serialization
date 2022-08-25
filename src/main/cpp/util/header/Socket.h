@@ -29,7 +29,7 @@ public:
 
     bool bind(int port);
 
-    bool listen() const;
+    bool listen(int count) const;
 
     bool accept(Socket *newSocket) const;
 
