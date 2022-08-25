@@ -13,10 +13,7 @@ MachineInfo::MachineInfo(const string &ip, int port, int nrow){
 }
 
 NodeType MachineInfo::getNodeType() {
-    if (root!= nullptr){
-        cout<<"ROOT: "<< root->getIp()<<endl;
-    }
-   if (root == nullptr)
+    if (root == nullptr)
         return ROOT;
     else if (leaves.empty())
         return LEAF;
