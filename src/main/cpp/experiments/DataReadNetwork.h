@@ -81,11 +81,11 @@ void DataReadNetwork<T>::runDataReader() {
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, localMethod);
     if (machineInfo->getNodeType() == LEAF) {
-        cout<<"LEAF"<<endl;
+
         T **list = new T *[machineInfo->getNrow()];
         int listSize = reader->readObjects(0, machineInfo->getNrow(), list);
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
-
+        cout<<"LEAF"<<endl;
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
 
@@ -101,6 +101,7 @@ void DataReadNetwork<T>::runDataReader() {
     else if (machineInfo->getNodeType() == MIDDLE) {
         cout<<"MIDDLE"<<endl;
         Server server(machineInfo->getPort());
+        cout<<"---------------------------- MIDDLE"<<endl;
         //server.setSoTimeout(Const.NETWORK_TIMEOUT);
         Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         numberOfClients = machineInfo->getLeaves().size() + 1;
@@ -131,6 +132,7 @@ void DataReadNetwork<T>::runDataReader() {
         cout<<"ROOT"<<endl;
         ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
         Server server(machineInfo->getPort());
+        cout<<"****************************ROOT"<<endl;
         //serverSocket.setSoTimeout(Const.NETWORK_TIMEOUT);
         numberOfClients = machineInfo->getLeaves().size() + 1;
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
