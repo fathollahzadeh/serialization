@@ -139,6 +139,7 @@ void DataReadNetwork<T>::runDataReader() {
 
         //Socket socket;
         for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
+            cout<<"++++++++++++++++++  "<<i<<endl;
             Socket *client;
             server.accept(client);
             cout<< ">>>>>>>>>>>>>>> accept"<<endl;
