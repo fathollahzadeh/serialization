@@ -80,8 +80,8 @@ void DataReadNetwork<T>::runDataReader() {
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, localMethod);
-    cout<<">>>>>>>>>>>>>>>>>>>> "<< machineInfo->getNodeType()<<endl;
     if (machineInfo->getNodeType() == LEAF) {
+        cout<<"LEAF"<<endl;
         T **list = new T *[machineInfo->getNrow()];
         int listSize = reader->readObjects(0, machineInfo->getNrow(), list);
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
@@ -99,6 +99,7 @@ void DataReadNetwork<T>::runDataReader() {
         delete client;
     }
     else if (machineInfo->getNodeType() == MIDDLE) {
+        cout<<"MIDDLE"<<endl;
         Server server(machineInfo->getPort());
         //server.setSoTimeout(Const.NETWORK_TIMEOUT);
         Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
@@ -127,6 +128,7 @@ void DataReadNetwork<T>::runDataReader() {
 
     }
     else if (machineInfo->getNodeType() == ROOT) {
+        cout<<"ROOT"<<endl;
         ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
         Server server(machineInfo->getPort());
         //serverSocket.setSoTimeout(Const.NETWORK_TIMEOUT);

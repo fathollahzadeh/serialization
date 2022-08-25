@@ -58,7 +58,6 @@ int Network::computeNRow(MachineInfo *node) {
 }
 
 MachineInfo *Network::getCurrentMachine() {
-    cout<<"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"<<endl;
     char hostbuffer[256];
     char *IPbuffer;
     struct hostent *host_entry;
@@ -66,7 +65,6 @@ MachineInfo *Network::getCurrentMachine() {
     host_entry = gethostbyname(hostbuffer);
     IPbuffer = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
     string ipstr(IPbuffer);
-    cout<<"++++++++++++++++  "<< ipstr<<endl;
     return machineInfos[ipstr];
 }
 
