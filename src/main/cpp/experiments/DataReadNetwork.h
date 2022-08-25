@@ -165,7 +165,7 @@ Client* DataReadNetwork<T>::initClient(string ip, int port) {
             return client;
         } catch (const exception &e) {}
     }
-    throw SocketException("Client can't start >> " + ip + ":" + to_string(port));
+    throw std::runtime_error("Client can't start >> " + ip + ":" + to_string(port));
 }
 
 template<class T>

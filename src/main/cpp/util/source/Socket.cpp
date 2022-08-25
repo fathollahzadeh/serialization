@@ -101,7 +101,7 @@ void Socket::read(char *buffer, long contentSize) {
 
         //Error Handling:
         if (!status)
-            throw std::runtime_error("Could not read to socket.");
+            throw std::runtime_error("Could not read from socket.");
     }
     if (bytesRead != contentSize) {
         throw std::runtime_error("ClientSocket: Mismatch in read()");

@@ -9,7 +9,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <arpa/inet.h>
-#include "SocketException.h"
 
 using namespace std;
 
