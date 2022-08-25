@@ -80,7 +80,7 @@ void DataReadNetwork<T>::runDataReader() {
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, localMethod);
-
+    cout<<">>>>>>>>>>>>>>>>>>>> "<< machineInfo->getNodeType()<<endl;
     if (machineInfo->getNodeType() == LEAF) {
         T **list = new T *[machineInfo->getNrow()];
         int listSize = reader->readObjects(0, machineInfo->getNrow(), list);
