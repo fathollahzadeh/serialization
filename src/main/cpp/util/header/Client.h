@@ -10,9 +10,9 @@ private:
 
 public:
 
-    Client(string ip, int port);
+    Client(const string& ip, int port);
 
-    virtual ~Client();
+    ~Client() override;
 
 };
 

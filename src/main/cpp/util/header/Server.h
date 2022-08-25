@@ -12,7 +12,7 @@ private:
 public:
     Server(int port);
 
-    virtual ~Server();
+    ~Server() override;
 
 };
 

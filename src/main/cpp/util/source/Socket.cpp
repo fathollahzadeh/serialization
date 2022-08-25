@@ -84,10 +84,10 @@ void Socket::write(char *buffer, long contentSize) {
 
         //Error Handling:
         if (!status)
-            throw SocketException("Could not write to socket.");;
+            throw std::runtime_error("Could not write to socket.");;
     }
     if (bytesWritten != contentSize)
-        throw SocketException("ClientSocket: Mismatch in write()");
+        throw std::runtime_error("ClientSocket: Mismatch in write()");
 
 }
 
@@ -101,10 +101,10 @@ void Socket::read(char *buffer, long contentSize) {
 
         //Error Handling:
         if (!status)
-            throw SocketException("Could not read to socket.");
+            throw std::runtime_error("Could not read to socket.");
     }
     if (bytesRead != contentSize) {
-        throw SocketException("ClientSocket: Mismatch in read()");
+        throw std::runtime_error("ClientSocket: Mismatch in read()");
     }
 }
 
@@ -117,7 +117,7 @@ bool Socket::readACK() {
     char *ack = new char[1];
     read(ack, 1);
     if (ack[0] != '1') {
-        throw SocketException("Can't read correct ACK from socket !");
+        throw std::runtime_error("Can't read correct ACK from socket !");
     }
     return true;
 }

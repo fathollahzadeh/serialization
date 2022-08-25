@@ -5,12 +5,12 @@ Client::~Client() {
         close(mSocket);
 }
 
-Client::Client(string ip, int port) {
+Client::Client(const string& ip, int port) {
     if (!Socket::create()) {
-        throw SocketException("Could not create client socket.");
+        throw std::runtime_error("Could not create client socket.");
     }
 
     if (!Socket::connect(ip, port)) {
-        throw SocketException("Could not bind to port.");
+        throw std::runtime_error("Could not bind to port.");
     }
 }

@@ -3,16 +3,16 @@
 
 Server::Server(int port) {
     if (!Socket::create()) {
-        throw SocketException("Could not create server socket.");
+        throw std::runtime_error("Could not create server socket.");
     }
 
     if (!Socket::bind(port)) {
-        throw SocketException("Could not bind to port.");
+        throw std::runtime_error("Could not bind to port.");
     }
 
     if (!Socket::listen()) {
-        throw SocketException("Could not listen to socket.");
+        throw std::runtime_error("Could not listen to socket.");
     }
 }
 
-Server::~Server() {}
+Server::~Server() = default;
