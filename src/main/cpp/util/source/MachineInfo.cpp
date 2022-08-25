@@ -1,8 +1,6 @@
 #include "MachineInfo.h"
 
-MachineInfo::MachineInfo() {
-    this->root = nullptr;
-}
+MachineInfo::MachineInfo() {}
 
 MachineInfo::~MachineInfo() {}
 
@@ -11,9 +9,13 @@ MachineInfo::MachineInfo(const string &ip, int port, int nrow){
     this->port = port;
     this->nrow = nrow;
     this->nrowLeaf = 0;
+    this->root = nullptr;
 }
 
 NodeType MachineInfo::getNodeType() {
+    if (root!= nullptr){
+        cout<<"ROOT: "<< root->getIp()<<endl;
+    }
    if (root == nullptr)
         return ROOT;
     else if (leaves.empty())
