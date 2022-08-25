@@ -1,16 +1,14 @@
 #!/bin/bash
 
 #cleanup
-rm -rf SerializationJava.jar
-rm -rf cppbin
+# rm -rf SerializationJava.jar
+# rm -rf cppbin
+cd ..
 
 # compile Java baselines
-cd ..
-cd src
 #mvn clean compile assembly:single
-#mv target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar ../Experiments/SerializationJava.jar
+#mv target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar Experiments/SerializationJava.jar
 
-cd ..
 # compile C++ baslelines
 cd src/main/cpp
 # rm -rf CMakeFiles
@@ -23,9 +21,6 @@ cmake .
 #make clean
 make -j12
 
-mv  bin/ ../../../../Experiments/cppbin
-
-
-
+mv  bin/ ../../../Experiments/cppbin
 
 # compile Rust baselines
