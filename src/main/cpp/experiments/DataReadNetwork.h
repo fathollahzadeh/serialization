@@ -178,8 +178,10 @@ Client* DataReadNetwork<T>::initClient(string ip, int port) {
 template<class T>
  void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, BlockingReaderWriterQueue<vector<T *>> *queue, bool *status) {
     *status = true;
+    cout<<"GGGGGGGGGGGGGGGGGGGGGGGG"<<endl;
     while (true) {
         client->writeACK();
+        cout<<"CCCCCCCCCCCCCCCCCCCCCCCCC"<<endl;
         int pageSize = client->readInt();
         if (pageSize == -1) {
             client->writeACK();
