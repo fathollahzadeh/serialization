@@ -146,16 +146,16 @@ void DataReadNetwork<T>::runDataReader() {
             cout<< ">>>>>>>>>>>>>>> accept"<<endl;
             ObjectReader * clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
-           // pool.push_back(std::thread(& DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, queues[i], statuses[i]));
+            pool.push_back(std::thread(& DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, queues[i], statuses[i]));
         }
         cout<< "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"<<endl;
-//        pool.push_back(std::thread(& DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(),
-//                                   queues[numberOfClients - 1], statuses[numberOfClients - 1]));
-//
-//        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
-//            ExternalSortTask(&writer, false, nullptr);
-//        else
-//            ExternalSortTask(nullptr, true, nullptr);
+        pool.push_back(std::thread(& DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(),
+                                   queues[numberOfClients - 1], statuses[numberOfClients - 1]));
+
+        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
+            ExternalSortTask(&writer, false, nullptr);
+        else
+            ExternalSortTask(nullptr, true, nullptr);
     }
 
     delete machineInfo;
