@@ -144,7 +144,7 @@ void DataReadNetwork<T>::runDataReader() {
             Socket *client = new Socket();
             server.accept(client);
             cout<< ">>>>>>>>>>>>>>> accept"<<endl;
-            ObjectReader clientReader(method);
+            //ObjectReader clientReader(method);
            // queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
             //pool.push_back(std::thread(& DataReadNetwork<T>::NetworkReadTask, this, &clientReader, client, queues[i], statuses[i]));
         }
