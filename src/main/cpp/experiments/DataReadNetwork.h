@@ -151,6 +151,8 @@ void DataReadNetwork<T>::runDataReader() {
             ExternalSortTask(&writer, false, nullptr);
         else
             ExternalSortTask(nullptr, true, nullptr);
+
+        cout<<"==============================================================="<<endl;
     }
 
     delete machineInfo;
