@@ -66,8 +66,7 @@ private:
     void ExternalSortTask(ObjectWriter *writer, bool onDisk, Client *client);
 
 public:
-    DataReadNetwork(string config, string inDataPath, string outDataPath, string method,
-                    string localMethod, string plan);
+    DataReadNetwork(string config, string inDataPath, string outDataPath, string method, string localMethod, string plan);
 
     void runDataReader();
 
@@ -79,7 +78,6 @@ void DataReadNetwork<T>::runDataReader() {
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, localMethod);
     if (machineInfo->getNodeType() == LEAF) {
-        cout << "****************************** LEAF>>  " << machineInfo->getIp() << endl;
         T **list = new T *[machineInfo->getNrow()];
         int listSize = reader->readObjects(0, machineInfo->getNrow(), list);
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
@@ -95,9 +93,7 @@ void DataReadNetwork<T>::runDataReader() {
         delete[] list;
         delete client;
     } else if (machineInfo->getNodeType() == MIDDLE) {
-        cout << "****************************** MIDDLE>>  " << machineInfo->getIp() << endl;
         Server server(machineInfo->getPort(), numberOfClients - 1);
-        //server.setSoTimeout(Const.NETWORK_TIMEOUT);
         Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         numberOfClients = machineInfo->getLeaves().size() + 1;
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
@@ -106,7 +102,6 @@ void DataReadNetwork<T>::runDataReader() {
         for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
             Socket *client = new Socket();
             server.accept(client);
-            cout << ">>>>>>>>>>>>>>> accept" << endl;
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
@@ -124,11 +119,9 @@ void DataReadNetwork<T>::runDataReader() {
         delete queues;
 
     } else if (machineInfo->getNodeType() == ROOT) {
-        cout << "****************************** ROOT>>  " << machineInfo->getIp() << endl;
         numberOfClients = machineInfo->getLeaves().size() + 1;
         ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
         Server server(machineInfo->getPort(), numberOfClients - 1);
-        //serverSocket.setSoTimeout(Const.NETWORK_TIMEOUT);
 
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
         statuses = new bool[numberOfClients];
@@ -136,15 +129,12 @@ void DataReadNetwork<T>::runDataReader() {
 
         //Socket socket;
         for (int i = 0; i < numberOfClients -1; i++) {
-            cout << "++++++++++++++++++  " << i << endl;
             Socket *client = new Socket();
             server.accept(client);
-            cout << ">>>>>>>>>>>>>>> accept" << endl;
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
         }
-        cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
         if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
@@ -152,7 +142,9 @@ void DataReadNetwork<T>::runDataReader() {
         else
             ExternalSortTask(nullptr, true, nullptr);
 
-        cout<<"==============================================================="<<endl;
+        for (auto &th: pool) {
+            th.join();
+        }
     }
 
     delete machineInfo;
@@ -165,7 +157,6 @@ Client *DataReadNetwork<T>::initClient(string ip, int port) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         try {
             Client *client = new Client(ip, port);
-            cout << "Client Connected !" << endl;
             return client;
         } catch (const exception &e) {}
     }
@@ -197,12 +188,9 @@ template<class T>
 void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     statuses[id] = true;
     T **list = new T *[nrow];
-    cout<<"BBBBBBBBBBBBB LocalReadTask"<<endl;
     reader->readObjects(0, nrow, list);
-    cout<<"AAAAAAAAAAAAAAAAA LocalReadTask"<<endl;
     sort(list, list + nrow, UniversalPointerComparatorAscending<T>());
     int chunks = (int) ceil((double) nrow / NETWORK_LOCAL_READ_LENGTH);
-    cout<<"CHUNKS = "<< chunks<<endl;
 
     for (int i = 0; i < chunks & i * NETWORK_LOCAL_READ_LENGTH < nrow; i++) {
         vector<T *> tmpList;
@@ -210,7 +198,6 @@ void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
             tmpList.push_back(list[j]);
         }
         queues[id]->enqueue(tmpList);
-        cout<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL >> "<< id<<endl;
     }
     statuses[id] = false;
 }
@@ -226,7 +213,6 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         vector<T *> listReadFromFile;
         queues[i]->wait_dequeue(listReadFromFile);
         pageObjectCounter[i] = listReadFromFile.size();
-        cout<<"<<<<<<<<  AZ MAN RAD SHOD  ??????????????"<< endl;
         for (T *rd: listReadFromFile) {
             ObjectNetworkIndex<T> *objectNetworkIndex = new ObjectNetworkIndex<T>();
             objectNetworkIndex->clientIndex = i;
@@ -235,7 +221,6 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         }
     }
     cout << "Network External Sort: First page reading is done! " << endl;
-
 
     while (!queue.empty()) {
         ObjectNetworkIndex<T> *tmpObjectNetworkIndex = queue.top();
