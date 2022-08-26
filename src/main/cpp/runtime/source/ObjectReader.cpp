@@ -102,6 +102,7 @@ void ObjectReader::readIndexesFromFile(const string &fname) {
 
 int ObjectReader::readObjects(int i, int n, TweetStatus **objectList) {
     int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
+    cout<< "listSize ="<<listSize<<endl;
     //Iterate over all objects that you aspire to read.
     int index = 0;
     for (int j = i; j < listSize; j++) {
