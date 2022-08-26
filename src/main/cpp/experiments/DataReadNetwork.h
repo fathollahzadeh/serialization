@@ -250,8 +250,8 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         if (writer != nullptr) {
             if (onDisk) writer->writeObjectToFile(tmpObjectNetworkIndex->myObject);
             else writer->writeObjectToNetworkPage(tmpObjectNetworkIndex->myObject, client);
-        } else
-            dataList.push_back(tmpObjectNetworkIndex->myObject);
+        } //else
+           // dataList.push_back(tmpObjectNetworkIndex->myObject);
     }
     cout << "Network External Sort: Done!" << endl;
     if (writer != nullptr) {
