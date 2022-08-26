@@ -187,7 +187,7 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
 
         vector<T *> list;
         reader->deSerializeNetworkBuffer(buffer + sizeof(int), pageSize, &list);
-        queues[id]->enqueue(list);
+       // queues[id]->enqueue(list);
     }
     statuses[id] = false;
     delete client;

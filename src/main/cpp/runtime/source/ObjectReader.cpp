@@ -269,6 +269,7 @@ map<int, int> ObjectReader::getObjectInEachPage() {
 }
 
 void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatus *> *list) {
+    cout<<"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"<<endl;
     list = new vector<TweetStatus *>;
     int relativePosition = 0;
     do {
