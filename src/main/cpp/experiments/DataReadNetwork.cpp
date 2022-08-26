@@ -9,7 +9,6 @@ int main(int argc, char *argv[]) {
     string method = argv[3];
     string config = argv[4];
     string plan = argv[5];
-    string localMethod = "HandCoded";
 
     int methodID = -1;
     if (strcasecmp(method.c_str(), "HandCoded") == 0) {
@@ -26,29 +25,26 @@ int main(int argc, char *argv[]) {
         methodID = FLATBUF;
     }
 
-    if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "d2m") == 0)
-        localMethod = method;
-
     switch (methodID) {
         case HANDCODED:
         case BOOST:
         case BSON: {
-            DataReadNetwork<TweetStatus> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
+            DataReadNetwork<TweetStatus> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
             dataReadNetwork.runDataReader();
             break;
         }
         case INPLACE: {
-            DataReadNetwork<TweetStatusIP> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
+            DataReadNetwork<TweetStatusIP> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
             dataReadNetwork.runDataReader();
             break;
         }
         case PROTOBUF: {
-            DataReadNetwork<TweetStatusProto> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
+            DataReadNetwork<TweetStatusProto> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
             dataReadNetwork.runDataReader();
             break;
         }
         case FLATBUF: {
-            DataReadNetwork<TweetStatusFlatBuffers> dataReadNetwork(config,inDataPath, outDataPath,method, localMethod, plan);
+            DataReadNetwork<TweetStatusFlatBuffers> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
             dataReadNetwork.runDataReader();
             break;
         }

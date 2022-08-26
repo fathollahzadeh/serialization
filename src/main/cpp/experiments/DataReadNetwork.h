@@ -51,7 +51,6 @@ private:
     string inDataPath;
     string outDataPath;
     string method;
-    string localMethod;
     string plan;
     bool *statuses;
     BlockingReaderWriterQueue<vector<T *>> **queues;
@@ -66,17 +65,16 @@ private:
     void ExternalSortTask(ObjectWriter *writer, bool onDisk, Client *client);
 
 public:
-    DataReadNetwork(string config, string inDataPath, string outDataPath, string method, string localMethod, string plan);
+    DataReadNetwork(string config, string inDataPath, string outDataPath, string method, string plan);
 
     void runDataReader();
-
 };
 
 template<class T>
 void DataReadNetwork<T>::runDataReader() {
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
-    ObjectReader *reader = new ObjectReader(inDataPath, localMethod);
+    ObjectReader *reader = new ObjectReader(inDataPath, method);
     if (machineInfo->getNodeType() == LEAF) {
         T **list = new T *[machineInfo->getNrow()];
         int listSize = reader->readObjects(0, machineInfo->getNrow(), list);
@@ -250,8 +248,8 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         if (writer != nullptr) {
             if (onDisk) writer->writeObjectToFile(tmpObjectNetworkIndex->myObject);
             else writer->writeObjectToNetworkPage(tmpObjectNetworkIndex->myObject, client);
-        } //else
-           // dataList.push_back(tmpObjectNetworkIndex->myObject);
+        } else
+            dataList.push_back(tmpObjectNetworkIndex->myObject);
     }
     cout << "Network External Sort: Done!" << endl;
     if (writer != nullptr) {
@@ -267,13 +265,11 @@ DataReadNetwork<T>::DataReadNetwork(string config,
                                     string inDataPath,
                                     string outDataPath,
                                     string method,
-                                    string localMethod,
                                     string plan):
         config(std::move(config)),
         inDataPath(std::move(inDataPath)),
         outDataPath(std::move(outDataPath)),
         method(std::move(method)),
-        localMethod(std::move(localMethod)),
         plan(std::move(plan)) {}
 
 #endif //CPP_DATAREADNETWORK_H
