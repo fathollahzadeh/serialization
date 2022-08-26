@@ -2,7 +2,7 @@
 
 #cleanup
 # rm -rf SerializationJava.jar
-# rm -rf cppbin
+rm -rf cppbin
 cd ..
 
 # compile Java baselines

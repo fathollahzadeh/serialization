@@ -7,9 +7,9 @@ inDataPathDisk="data/tmp/tweets"
 outDataPath="data/tmp/tweets"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
-declare -a cpp_methods=("Handcoded") # "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf"
+declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 
-nrow=1000000
+nrow=10000000
 
 # Load data into memory
 # 1.a Java enviroments
@@ -45,7 +45,7 @@ for method in "${cpp_methods[@]}"; do
     mkdir -p data/tmp
 
     # serialize data into disk
-    #./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP $outDataPath $nrow 
+    ./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP $outDataPath $nrow 
 
     # 1. Memory-to-Memory (m2m)
     ./expnetwork/runExperiment4_ExternalSortCPP.sh $method $inDataPathMemoryCPP $outDataPath m2m Experiment4_ExternalSort_times
