@@ -181,7 +181,6 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
             client->writeACK();
             break;
         }
-        cout << "CCCCCCCCCCCCCCCCCCCCCCCCC >>> " << pageSize << endl;
         char *buffer = new char[pageSize];
         client->read(buffer, pageSize);
 
@@ -219,10 +218,10 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
 
     // reading objects from the first pages and adding them to a priority queue
     for (int i = 0; i < numberOfClients; i++) {
-        BlockingReaderWriterQueue<vector<T *>> *q = queues[i];
         vector<T *> listReadFromFile;
-        q->wait_dequeue(listReadFromFile);
+        queues[i]->wait_dequeue(listReadFromFile);
         pageObjectCounter[i] = listReadFromFile.size();
+        cout<<"<<<<<<<<  AZ MAN RAD SHOD  ??????????????"<< endl;
         for (T *rd: listReadFromFile) {
             ObjectNetworkIndex<T> *objectNetworkIndex = new ObjectNetworkIndex<T>();
             objectNetworkIndex->clientIndex = i;
