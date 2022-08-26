@@ -145,6 +145,7 @@ void DataReadNetwork<T>::runDataReader() {
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
         }
         cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
+        queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
         for (auto &th: pool) {
@@ -213,7 +214,7 @@ void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
         for (int j = i * NETWORK_LOCAL_READ_LENGTH; j < min((i + 1) * NETWORK_LOCAL_READ_LENGTH, nrow); j++) {
             tmpList.push_back(list[j]);
         }
-        //queues[id]->enqueue(tmpList);
+        queues[id]->enqueue(tmpList);
         cout<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL >> "<< id<<endl;
     }
     statuses[id] = false;
