@@ -124,6 +124,10 @@ void DataReadNetwork<T>::runDataReader() {
         delete queues;
 
     } else if (machineInfo->getNodeType() == ROOT) {
+        T **list = new T *[ machineInfo->getNrow()];
+        cout<<"BBBBBBBBBBBBB LocalReadTask"<<endl;
+        reader->readObjects(0,  machineInfo->getNrow(), list);
+
         cout << "****************************** ROOT>>  " << machineInfo->getIp() << endl;
         numberOfClients = machineInfo->getLeaves().size() + 1;
         ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
