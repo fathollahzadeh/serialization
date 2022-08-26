@@ -152,7 +152,7 @@ void DataReadNetwork<T>::runDataReader() {
 template<class T>
 Client *DataReadNetwork<T>::initClient(string ip, int port) {
     for (int i = 0; i < 10; i++) {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::seconds(2));
         try {
             Client *client = new Client(ip, port);
             return client;
