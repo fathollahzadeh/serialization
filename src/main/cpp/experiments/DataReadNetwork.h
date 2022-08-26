@@ -124,10 +124,6 @@ void DataReadNetwork<T>::runDataReader() {
         delete queues;
 
     } else if (machineInfo->getNodeType() == ROOT) {
-        T **list = new T *[ machineInfo->getNrow()];
-        cout<<"BBBBBBBBBBBBB LocalReadTask"<<endl;
-        reader->readObjects(0,  machineInfo->getNrow(), list);
-
         cout << "****************************** ROOT>>  " << machineInfo->getIp() << endl;
         numberOfClients = machineInfo->getLeaves().size() + 1;
         ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
@@ -197,10 +193,11 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
 
 template<class T>
 void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
+    ObjectReader *rr = new ObjectReader(method, localMethod);
     statuses[id] = true;
     T **list = new T *[nrow];
     cout<<"BBBBBBBBBBBBB LocalReadTask"<<endl;
-    reader->readObjects(0, nrow, list);
+    rr->readObjects(0, nrow, list);
     cout<<"AAAAAAAAAAAAAAAAA LocalReadTask"<<endl;
     sort(list, list + nrow, UniversalPointerComparatorAscending<T>());
     int chunks = (int) ceil((double) nrow / NETWORK_LOCAL_READ_LENGTH);
