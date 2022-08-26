@@ -59,7 +59,7 @@ private:
 
      Client *initClient(string ip, int port);
 
-    void NetworkReadTask(ObjectReader *reader, Socket *client, BlockingReaderWriterQueue<vector<T *>> *queues, bool *status);
+    void NetworkReadTask(ObjectReader *reader, Socket *client, BlockingReaderWriterQueue<vector<T *>> *queues, bool status);
 
     void LocalReadTask(ObjectReader *reader, int nrow, BlockingReaderWriterQueue<vector<T *>> *queues, bool *status);
 
@@ -112,7 +112,7 @@ void DataReadNetwork<T>::runDataReader() {
             cout<< ">>>>>>>>>>>>>>> accept"<<endl;
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
-            pool.push_back(std::thread(& DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, queues[i], statuses[i]));
+            pool.push_back(std::thread(& DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, queues[i], &statuses[i]));
         }
         pool.push_back(std::thread(& DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(),
                                    queues[numberOfClients - 1], statuses[numberOfClients - 1]));
@@ -176,9 +176,9 @@ Client* DataReadNetwork<T>::initClient(string ip, int port) {
 }
 
 template<class T>
- void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, BlockingReaderWriterQueue<vector<T *>> *queue, bool *status) {
+ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, BlockingReaderWriterQueue<vector<T *>> *queue, bool status) {
     cout<<"iiiiiiiiiiiiiiiiiiiiiiiiiiiii"<<endl;
-    *status = true;
+    status = true;
     cout<<"GGGGGGGGGGGGGGGGGGGGGGGG"<<endl;
     while (true) {
         client->writeACK();
@@ -195,7 +195,7 @@ template<class T>
         reader->deSerializeNetworkBuffer(buffer + sizeof(int), pageSize, &list);
         queue->enqueue(list);
     }
-    *status = false;
+    status = false;
     delete client;
 }
 
