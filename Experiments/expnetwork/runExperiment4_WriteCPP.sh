@@ -5,6 +5,6 @@ inDataPath=$2
 outDataPath=$3
 nrow=$4
 
-SCRIPT=" ./cppbin/DataWriteSingle ${inDataPath} ${outDataPath}.${method}CPP ${nrow} ${method}"
+SCRIPT=" ./cppbin/DataWriteSingle ${inDataPath} ${outDataPath} ${nrow} ${method}"
 echo $SCRIPT
 time $SCRIPT
