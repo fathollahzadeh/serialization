@@ -23,7 +23,7 @@ struct ObjectNetworkIndex {
     T *myObject;
     int clientIndex;
 
-    virtual ~ObjectNetworkIndex() { }
+    virtual ~ObjectNetworkIndex() {}
 };
 
 //Ascending Sorter:
@@ -57,15 +57,13 @@ private:
     BlockingReaderWriterQueue<vector<T *>> **queues;
     int numberOfClients;
 
-     Client *initClient(string ip, int port);
+    Client *initClient(string ip, int port);
 
     void NetworkReadTask(ObjectReader *reader, Socket *client, int id);
 
     void LocalReadTask(ObjectReader *reader, int nrow, int id);
 
     void ExternalSortTask(ObjectWriter *writer, bool onDisk, Client *client);
-
-
 
 public:
     DataReadNetwork(string config, string inDataPath, string outDataPath, string method,
@@ -81,7 +79,7 @@ void DataReadNetwork<T>::runDataReader() {
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, localMethod);
     if (machineInfo->getNodeType() == LEAF) {
-        cout<<"****************************** LEAF>>  "<< machineInfo->getIp()<<endl;
+        cout << "****************************** LEAF>>  " << machineInfo->getIp() << endl;
         T **list = new T *[machineInfo->getNrow()];
         int listSize = reader->readObjects(0, machineInfo->getNrow(), list);
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
@@ -96,10 +94,9 @@ void DataReadNetwork<T>::runDataReader() {
         writer.flushToNetwork(client);
         delete[] list;
         delete client;
-    }
-    else if (machineInfo->getNodeType() == MIDDLE) {
-        cout<<"****************************** MIDDLE>>  "<< machineInfo->getIp()<<endl;
-        Server server(machineInfo->getPort(), numberOfClients -1);
+    } else if (machineInfo->getNodeType() == MIDDLE) {
+        cout << "****************************** MIDDLE>>  " << machineInfo->getIp() << endl;
+        Server server(machineInfo->getPort(), numberOfClients - 1);
         //server.setSoTimeout(Const.NETWORK_TIMEOUT);
         Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         numberOfClients = machineInfo->getLeaves().size() + 1;
@@ -109,12 +106,13 @@ void DataReadNetwork<T>::runDataReader() {
         for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
             Socket *client = new Socket();
             server.accept(client);
-            cout<< ">>>>>>>>>>>>>>> accept"<<endl;
+            cout << ">>>>>>>>>>>>>>> accept" << endl;
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
-            pool.push_back(std::thread(& DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
+            pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
         }
-        pool.push_back(std::thread(& DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
+        pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(),
+                                   numberOfClients - 1));
 
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
@@ -125,30 +123,30 @@ void DataReadNetwork<T>::runDataReader() {
         }
         delete queues;
 
-    }
-    else if (machineInfo->getNodeType() == ROOT) {
-        cout<<"****************************** ROOT>>  "<< machineInfo->getIp()<<endl;
+    } else if (machineInfo->getNodeType() == ROOT) {
+        cout << "****************************** ROOT>>  " << machineInfo->getIp() << endl;
         numberOfClients = machineInfo->getLeaves().size() + 1;
         ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
-        Server server(machineInfo->getPort(), numberOfClients -1);
+        Server server(machineInfo->getPort(), numberOfClients - 1);
         //serverSocket.setSoTimeout(Const.NETWORK_TIMEOUT);
 
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
-        statuses = new bool [numberOfClients];
+        statuses = new bool[numberOfClients];
         vector<thread> pool;
 
         //Socket socket;
         for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
-            cout<<"++++++++++++++++++  "<<i<<endl;
+            cout << "++++++++++++++++++  " << i << endl;
             Socket *client = new Socket();
             server.accept(client);
-            cout<< ">>>>>>>>>>>>>>> accept"<<endl;
-            ObjectReader * clientReader = new ObjectReader(method);
+            cout << ">>>>>>>>>>>>>>> accept" << endl;
+            ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
-            pool.push_back(std::thread(& DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
+            pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
         }
-        cout<< "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"<<endl;
-        pool.push_back(std::thread(& DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(),numberOfClients - 1));
+        cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
+        pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(),
+                                   numberOfClients - 1));
 
         if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
             ExternalSortTask(&writer, false, nullptr);
@@ -161,12 +159,12 @@ void DataReadNetwork<T>::runDataReader() {
 }
 
 template<class T>
-Client* DataReadNetwork<T>::initClient(string ip, int port) {
+Client *DataReadNetwork<T>::initClient(string ip, int port) {
     for (int i = 0; i < 10; i++) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         try {
             Client *client = new Client(ip, port);
-            cout<< "Client Connected !"<<endl;
+            cout << "Client Connected !" << endl;
             return client;
         } catch (const exception &e) {}
     }
@@ -174,7 +172,7 @@ Client* DataReadNetwork<T>::initClient(string ip, int port) {
 }
 
 template<class T>
- void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
+void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
     statuses[id] = true;
     while (true) {
         client->writeACK();
@@ -183,7 +181,7 @@ template<class T>
             client->writeACK();
             break;
         }
-        cout<<"CCCCCCCCCCCCCCCCCCCCCCCCC >>> "<< pageSize <<endl;
+        cout << "CCCCCCCCCCCCCCCCCCCCCCCCC >>> " << pageSize << endl;
         char *buffer = new char[pageSize];
         client->read(buffer, pageSize);
 
@@ -260,11 +258,10 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
             }
         }
 
-       if (writer != nullptr) {
+        if (writer != nullptr) {
             if (onDisk) writer->writeObjectToFile(tmpObjectNetworkIndex->myObject);
             else writer->writeObjectToNetworkPage(tmpObjectNetworkIndex->myObject, client);
-        }
-        else
+        } else
             dataList.push_back(tmpObjectNetworkIndex->myObject);
     }
     cout << "Network External Sort: Done!" << endl;
@@ -283,11 +280,11 @@ DataReadNetwork<T>::DataReadNetwork(string config,
                                     string method,
                                     string localMethod,
                                     string plan):
-                                    config(std::move(config)),
-                                    inDataPath(std::move(inDataPath)),
-                                    outDataPath(std::move(outDataPath)),
-                                    method(std::move(method)),
-                                    localMethod(std::move(localMethod)),
-                                    plan(std::move(plan)) {}
+        config(std::move(config)),
+        inDataPath(std::move(inDataPath)),
+        outDataPath(std::move(outDataPath)),
+        method(std::move(method)),
+        localMethod(std::move(localMethod)),
+        plan(std::move(plan)) {}
 
 #endif //CPP_DATAREADNETWORK_H
