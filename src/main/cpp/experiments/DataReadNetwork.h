@@ -145,8 +145,7 @@ void DataReadNetwork<T>::runDataReader() {
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
         }
         cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
-        pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(),
-                                   numberOfClients - 1));
+        pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
         if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
             ExternalSortTask(&writer, false, nullptr);
@@ -206,6 +205,7 @@ void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
             tmpList.push_back(list[j]);
         }
         queues[id]->enqueue(tmpList);
+        cout<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL >> "<< id<<endl;
     }
     statuses[id] = false;
 }
