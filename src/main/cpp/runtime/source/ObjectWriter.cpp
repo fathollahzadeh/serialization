@@ -322,20 +322,20 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client *client)
 
     // if serialization type is Handcoded:
     if (this->method == HANDCODED) {
-        object->serializeHandcoded(buffer + currentOffset + sizeof(objectSize), objectSize);
+        object->serializeHandcoded(buffer + currentOffset , objectSize);
     }
         // if serialization type is Boost:
     else if (this->method == BOOST) {
-        object->serializeBoost(buffer + currentOffset + sizeof(objectSize), objectSize);
+        object->serializeBoost(buffer + currentOffset , objectSize);
     } else if (this->method == BSON) {
         string jsonString = bsoncxx::to_json(object->serializeBSON());
         objectSize = jsonString.size();
 
         // insert json size to the first 4 byte of buffer
-        memcpy(buffer + currentOffset + sizeof(objectSize), &objectSize, sizeof(int));
+        memcpy(buffer + currentOffset, &objectSize, sizeof(int));
 
         // add json string to the buffer:
-        strcpy(buffer + currentOffset + sizeof(objectSize), jsonString.c_str());
+        strcpy(buffer + currentOffset, jsonString.c_str());
 
         // add json size to the object size:
         objectSize += sizeof(objectSize);
