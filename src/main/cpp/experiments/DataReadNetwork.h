@@ -177,6 +177,7 @@ Client* DataReadNetwork<T>::initClient(string ip, int port) {
 
 template<class T>
  void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, BlockingReaderWriterQueue<vector<T *>> *queue, bool *status) {
+    cout<<"iiiiiiiiiiiiiiiiiiiiiiiiiiiii"<<endl;
     *status = true;
     cout<<"GGGGGGGGGGGGGGGGGGGGGGGG"<<endl;
     while (true) {
