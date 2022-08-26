@@ -101,9 +101,7 @@ void Socket::read(char *buffer, long contentSize) {
     long bytesRead = 0;
     long status = 0;
     while (bytesRead < contentSize) {
-        cout<<" 8888888888888 "<<endl;
         status = ::read(mSocket, buffer + bytesRead, contentSize - bytesRead);
-        cout<<"000000000000000000000000000 +++ "<<status<<endl;
         bytesRead += status;
 
         //Error Handling:
@@ -121,7 +119,6 @@ bool Socket::isValid() const {
 
 
 bool Socket::readACK() {
-    cout<< "+++++++++++++?  readACK()"<<endl;
     char *ack = new char[1];
     read(ack, 1);
     if (ack[0] != '1') {

@@ -178,12 +178,12 @@ template<class T>
     statuses[id] = true;
     while (true) {
         client->writeACK();
-        cout<<"CCCCCCCCCCCCCCCCCCCCCCCCC"<<endl;
         int pageSize = client->readInt();
         if (pageSize == -1) {
             client->writeACK();
             break;
         }
+        cout<<"CCCCCCCCCCCCCCCCCCCCCCCCC >>> "<< pageSize <<endl;
         char *buffer = new char[pageSize];
         client->read(buffer, pageSize);
 
