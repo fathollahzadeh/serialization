@@ -147,15 +147,10 @@ void DataReadNetwork<T>::runDataReader() {
         cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
-
-        for (auto &th: pool) {
-            th.join();
-        }
-
-//        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
-//            ExternalSortTask(&writer, false, nullptr);
-//        else
-//            ExternalSortTask(nullptr, true, nullptr);
+        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
+            ExternalSortTask(&writer, false, nullptr);
+        else
+            ExternalSortTask(nullptr, true, nullptr);
 
         cout<<"==============================================================="<<endl;
     }
