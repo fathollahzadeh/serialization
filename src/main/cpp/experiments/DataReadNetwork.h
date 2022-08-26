@@ -193,7 +193,7 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
 
 template<class T>
 void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
-    ObjectReader *rr = new ObjectReader(method, localMethod);
+    ObjectReader *rr = new ObjectReader(inDataPath, localMethod);
     statuses[id] = true;
     T **list = new T *[nrow];
     cout<<"BBBBBBBBBBBBB LocalReadTask"<<endl;
