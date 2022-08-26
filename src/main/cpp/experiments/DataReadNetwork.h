@@ -135,7 +135,7 @@ void DataReadNetwork<T>::runDataReader() {
         vector<thread> pool;
 
         //Socket socket;
-        for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
+        for (int i = 0; i < numberOfClients -1; i++) {
             cout << "++++++++++++++++++  " << i << endl;
             Socket *client = new Socket();
             server.accept(client);
@@ -213,7 +213,7 @@ void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
         for (int j = i * NETWORK_LOCAL_READ_LENGTH; j < min((i + 1) * NETWORK_LOCAL_READ_LENGTH, nrow); j++) {
             tmpList.push_back(list[j]);
         }
-        queues[id]->enqueue(tmpList);
+        //queues[id]->enqueue(tmpList);
         cout<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL >> "<< id<<endl;
     }
     statuses[id] = false;
