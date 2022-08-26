@@ -198,6 +198,7 @@ void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     reader->readObjects(0, nrow, list);
     sort(list, list + nrow, UniversalPointerComparatorAscending<T>());
     int chunks = (int) ceil((double) nrow / NETWORK_LOCAL_READ_LENGTH);
+    cout<<"CHUNKS = "<< chunks<<endl;
 
     for (int i = 0; i < chunks & i * NETWORK_LOCAL_READ_LENGTH < nrow; i++) {
         vector<T *> tmpList;
