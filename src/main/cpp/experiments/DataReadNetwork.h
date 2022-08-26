@@ -195,7 +195,9 @@ template<class T>
 void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     statuses[id] = true;
     T **list = new T *[nrow];
+    cout<<"BBBBBBBBBBBBB LocalReadTask"<<endl;
     reader->readObjects(0, nrow, list);
+    cout<<"AAAAAAAAAAAAAAAAA LocalReadTask"<<endl;
     sort(list, list + nrow, UniversalPointerComparatorAscending<T>());
     int chunks = (int) ceil((double) nrow / NETWORK_LOCAL_READ_LENGTH);
     cout<<"CHUNKS = "<< chunks<<endl;
