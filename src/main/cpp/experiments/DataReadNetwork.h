@@ -147,10 +147,14 @@ void DataReadNetwork<T>::runDataReader() {
         cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
-        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
-            ExternalSortTask(&writer, false, nullptr);
-        else
-            ExternalSortTask(nullptr, true, nullptr);
+        for (auto &th: pool) {
+            th.join();
+        }
+
+//        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
+//            ExternalSortTask(&writer, false, nullptr);
+//        else
+//            ExternalSortTask(nullptr, true, nullptr);
 
         cout<<"==============================================================="<<endl;
     }
@@ -195,11 +199,10 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
 
 template<class T>
 void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
-    ObjectReader *rr = new ObjectReader(inDataPath, localMethod);
     statuses[id] = true;
     T **list = new T *[nrow];
     cout<<"BBBBBBBBBBBBB LocalReadTask"<<endl;
-    rr->readObjects(0, nrow, list);
+    reader->readObjects(0, nrow, list);
     cout<<"AAAAAAAAAAAAAAAAA LocalReadTask"<<endl;
     sort(list, list + nrow, UniversalPointerComparatorAscending<T>());
     int chunks = (int) ceil((double) nrow / NETWORK_LOCAL_READ_LENGTH);
