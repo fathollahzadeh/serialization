@@ -106,6 +106,9 @@ int ObjectReader::readObjects(int i, int n, TweetStatus **objectList) {
     //Iterate over all objects that you aspire to read.
     int index = 0;
     for (int j = i; j < listSize; j++) {
+        cout<< "J= "<<j<<endl;
+        this->readObject(j);
+        cout<<"**==============="<<endl;
         objectList[index++] = this->readObject(j);
     }
     return index;
