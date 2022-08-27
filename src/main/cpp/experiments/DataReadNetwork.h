@@ -241,7 +241,10 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         if (pageObjectCounter[clientNumber] == 0) {
             vector<T *> *listReadFromFile = nullptr;
             BlockingReaderWriterQueue<vector<T *>> *q = queues[clientNumber];
-            while (statuses[clientNumber] && (listReadFromFile = q->peek()) == nullptr);
+            while (statuses[clientNumber] && listReadFromFile){
+                listReadFromFile = q->peek();
+            }
+            //while (statuses[clientNumber] && (listReadFromFile = q->peek()) == nullptr);
             if (listReadFromFile != nullptr) {
                 pageObjectCounter[clientNumber] = listReadFromFile->size();
                 for (auto it = listReadFromFile->begin(); it != listReadFromFile->end(); ++it) {
