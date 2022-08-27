@@ -203,7 +203,7 @@ void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
         for (int j = i * NETWORK_LOCAL_READ_LENGTH; j < min((i + 1) * NETWORK_LOCAL_READ_LENGTH, nrow); j++) {
             tmpList.push_back(list[j]);
         }
-        queues[id]->enqueue(tmpList);
+        while (!queues[id]->try_enqueue(tmpList));
     }
     statuses[id] = false;
 }
