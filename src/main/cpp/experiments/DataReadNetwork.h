@@ -181,7 +181,7 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
         cout<<"Page Size = "<< pageSize<<endl;
         char *buffer = new char[pageSize];
         client->read(buffer, pageSize);
-        vector<T *> list; //= new vector<TweetStatusIP *>;
+        vector<T *> list;
         reader->deSerializeNetworkBuffer(buffer, pageSize, list);
         while (!queues[id]->try_enqueue(list));
     }
@@ -244,14 +244,14 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
             if (listReadFromFile == nullptr)
                 listReadFromFile = q->peek();
             if (listReadFromFile != nullptr) {
-                q->pop();
                 pageObjectCounter[clientNumber] = listReadFromFile->size();
-                for (auto it = listReadFromFile->begin(); it != listReadFromFile->end(); ++it) {
+                for (int i=0; i< pageObjectCounter[clientNumber]; i++) {
                     ObjectNetworkIndex<T> *objectNetworkIndex = new ObjectNetworkIndex<T>();
                     objectNetworkIndex->clientIndex = clientNumber;
-                    objectNetworkIndex->myObject = *it;
+                    objectNetworkIndex->myObject = listReadFromFile->at(0);
                     queue.push(objectNetworkIndex);
                 }
+                q->pop();
             }
         }
 

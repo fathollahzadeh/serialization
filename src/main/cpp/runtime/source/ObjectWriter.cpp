@@ -335,7 +335,7 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client *client)
         memcpy(buffer + currentOffset, &objectSize, sizeof(int));
 
         // add json string to the buffer:
-        strcpy(buffer + currentOffset, jsonString.c_str());
+        strcpy(buffer + currentOffset+ sizeof(objectSize), jsonString.c_str());
 
         // add json size to the object size:
         objectSize += sizeof(objectSize);
@@ -396,12 +396,6 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusProto *object, Client *cl
         client->readACK();
         client->write(currentOffset);
         client->write(pageBuffer, currentOffset);
-//        //////////////////////////////////////////////////
-//        cout<<"----------------- >> "<< currentOffset << "  "<< NETWORK_PAGESIZE<<endl;
-//        ObjectReader *rr = new ObjectReader("ProtoBuf");
-//        vector<TweetStatusProto *> *mm;
-//        rr->deSerializeNetworkBuffer(this->pageBuffer, currentOffset, mm);
-//        ///////////////////////////////////////////////
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
         currentOffset = 0;
     }

@@ -298,7 +298,6 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
         list.push_back(object);
         relativePosition += objectSize;
     } while (relativePosition < pageSize);
-
 }
 
 void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusIP *> &list) {
