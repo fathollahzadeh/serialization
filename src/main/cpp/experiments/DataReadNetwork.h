@@ -184,7 +184,7 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
 
         vector<T *> list;
         reader->deSerializeNetworkBuffer(buffer, pageSize, &list);
-        queues[id]->enqueue(list);
+        while (!queues[id]->try_enqueue(list));
     }
     statuses[id] = false;
     delete client;
@@ -234,18 +234,18 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         int clientNumber = tmpObjectNetworkIndex->clientIndex;
 
         // reduce the number of objects read from that file.
-        pageObjectCounter[clientNumber]--;
+        pageObjectCounter[clientNumber] =  pageObjectCounter[clientNumber] - 1;
 
         // If needed load more objects from files.
         // if zero load the next page from file and add objects.
         if (pageObjectCounter[clientNumber] == 0) {
             vector<T *> *listReadFromFile = nullptr;
             BlockingReaderWriterQueue<vector<T *>> *q = queues[clientNumber];
-            while (statuses[clientNumber] && listReadFromFile){
+            while (statuses[clientNumber] && (listReadFromFile=q->peek()) == nullptr);
+            if (listReadFromFile == nullptr)
                 listReadFromFile = q->peek();
-            }
-            //while (statuses[clientNumber] && (listReadFromFile = q->peek()) == nullptr);
             if (listReadFromFile != nullptr) {
+                q->pop();
                 pageObjectCounter[clientNumber] = listReadFromFile->size();
                 for (auto it = listReadFromFile->begin(); it != listReadFromFile->end(); ++it) {
                     ObjectNetworkIndex<T> *objectNetworkIndex = new ObjectNetworkIndex<T>();
