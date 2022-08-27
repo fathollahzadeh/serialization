@@ -98,9 +98,9 @@ void DataReadNetwork<T>::runDataReader() {
         delete[] list;
         delete client;
     } else if (machineInfo->getNodeType() == MIDDLE) {
+        numberOfClients = machineInfo->getLeaves().size() + 1;
         Server server(machineInfo->getPort(), numberOfClients - 1);
         Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
-        numberOfClients = machineInfo->getLeaves().size() + 1;
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
         statuses = new bool[numberOfClients];
         vector<thread> pool;
@@ -111,8 +111,8 @@ void DataReadNetwork<T>::runDataReader() {
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
         }
-        pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(),
-                                   numberOfClients - 1));
+        queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
+        pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
@@ -147,11 +147,11 @@ void DataReadNetwork<T>::runDataReader() {
         else
             ExternalSortTask(nullptr, true, nullptr);
 
-        for (auto &th: pool) {
-            th.join();
+        for (int i = 0; i < numberOfClients; ++i) {
+            delete queues[i];
         }
+        delete queues;
     }
-
     delete machineInfo;
     delete reader;
 }
@@ -178,7 +178,6 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
             client->writeACK();
             break;
         }
-        cout<<"Page Size = "<< pageSize<<endl;
         char *buffer = new char[pageSize];
         client->read(buffer, pageSize);
         vector<T *> list;

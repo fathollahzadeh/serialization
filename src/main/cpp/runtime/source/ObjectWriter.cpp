@@ -294,7 +294,7 @@ void ObjectWriter::writeObjectToFile(TweetStatusFlatBuffers *object) {
     char *buffer = pageBuffer;
     int objectSize = 0;
 
-    object->serializeFlatBuffers(buffer + currentOffset, objectSize);
+    object->serializeFlatBuffersIO(buffer + currentOffset, objectSize);
 
     if ((currentOffset + objectSize) > PAGESIZE) {
 
@@ -407,7 +407,7 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusFlatBuffers *object, Clie
     char *buffer = pageBuffer;
     int objectSize = 0;
 
-    object->serializeFlatBuffers(buffer + currentOffset, objectSize);
+    object->serializeFlatBuffersIO(buffer + currentOffset, objectSize);
 
     //check capacity of the current page size
     //if current page is full should write to the socket and then reset the page
