@@ -171,6 +171,7 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
             client->writeACK();
             break;
         }
+        cout<<"Page Size = "<< pageSize<<endl;
         char *buffer = new char[pageSize];
         client->read(buffer, pageSize);
 

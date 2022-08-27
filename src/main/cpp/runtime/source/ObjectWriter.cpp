@@ -363,13 +363,12 @@ void ObjectWriter::flushToNetwork(Client *client) {
 }
 
 void ObjectWriter::writeObjectToNetworkPage(TweetStatusIP *object, Client *client) {
-
     char *buffer = pageBuffer;
     int objectSize = object->objectsize;
     int sizeofObject = sizeof(objectSize);
 
     //Set object size in the reserved place:
-    this->rootData.copyInPlaceInt(buffer + currentOffset, objectSize);
+    new(buffer + currentOffset)int(objectSize);
 
     //copy object to page:
     memcpy(buffer + currentOffset + sizeofObject, (char *) object, objectSize);
@@ -379,8 +378,9 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusIP *object, Client *clien
     if ((currentOffset + objectSize + sizeofObject) > NETWORK_PAGESIZE) {
         client->readACK();
         client->write(currentOffset);
+        cout<<"Page Size = "<< currentOffset<<endl;
         client->write(pageBuffer, currentOffset);
-        memmove(pageBuffer, pageBuffer + currentOffset, objectSize+  sizeofObject);
+        memmove(pageBuffer, pageBuffer + currentOffset, objectSize + sizeofObject);
         currentOffset = 0;
     }
     currentOffset += objectSize + sizeofObject;
