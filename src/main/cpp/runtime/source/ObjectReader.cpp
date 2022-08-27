@@ -270,7 +270,6 @@ map<int, int> ObjectReader::getObjectInEachPage() {
 }
 
 void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatus *> *list) {
-    list = new vector<TweetStatus *>;
     int relativePosition = 0;
     do {
         int objectSize = 0;
@@ -303,7 +302,6 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
 }
 
 void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusIP *> *list) {
-    list = new vector<TweetStatusIP *>;
     int relativePosition = 0;
     do {
         int objectSize;
@@ -321,7 +319,6 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
 }
 
 void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusProto *> *list) {
-    list = new vector<TweetStatusProto *>;
     int relativePosition = 0;
     do {
          int objectSize = 0;
@@ -333,7 +330,6 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
 }
 
 void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusFlatBuffers *> *list) {
-    list = new vector<TweetStatusFlatBuffers *>;
     int relativePosition = 0;
     do {
         int objectSize;

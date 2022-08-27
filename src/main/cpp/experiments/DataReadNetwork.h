@@ -181,10 +181,9 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
         cout<<"Page Size = "<< pageSize<<endl;
         char *buffer = new char[pageSize];
         client->read(buffer, pageSize);
-
-        vector<T *> list;
-        reader->deSerializeNetworkBuffer(buffer, pageSize, &list);
-        while (!queues[id]->try_enqueue(list));
+        vector<T *> *list = new vector<TweetStatusIP *>;
+        reader->deSerializeNetworkBuffer(buffer, pageSize, list);
+        while (!queues[id]->try_enqueue(*list));
     }
     statuses[id] = false;
     delete client;
