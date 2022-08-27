@@ -118,9 +118,7 @@ void DataReadNetwork<T>::runDataReader() {
 
     } else if (machineInfo->getNodeType() == ROOT) {
         numberOfClients = machineInfo->getLeaves().size() + 1;
-        ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
         Server server(machineInfo->getPort(), numberOfClients - 1);
-
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
         statuses = new bool[numberOfClients];
         vector<thread> pool;
@@ -135,8 +133,10 @@ void DataReadNetwork<T>::runDataReader() {
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
-        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0)
+        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
+            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
             ExternalSortTask(&writer, false, nullptr);
+        }
         else
             ExternalSortTask(nullptr, true, nullptr);
 
