@@ -82,11 +82,19 @@ void DataReadNetwork<T>::runDataReader() {
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
 
-        for (int i = 0; i < listSize; ++i) {
+        for (int i = 0; i < listSize; ++i)
             writer.writeObjectToNetworkPage(list[i], client);
-            delete list[i];
-        }
 
+        if (reader->getMethod() != INPLACE) {
+            for (int i = 0; i < listSize; ++i) {
+                delete list[i];
+            }
+        } else{
+            for (int i = 0; i < listSize; ++i) {
+                char *tbuffer = (char *) list[i];
+                delete[] tbuffer;
+            }
+        }
         writer.flushToNetwork(client);
         delete[] list;
         delete client;

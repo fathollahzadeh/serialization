@@ -368,17 +368,15 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusIP *object, Client *clien
     int sizeofObject = sizeof(objectSize);
 
     //Set object size in the reserved place:
-    new(buffer + currentOffset)int(objectSize);
+    this->rootData.copyInPlaceInt(buffer + currentOffset, objectSize);
 
     //copy object to page:
     memcpy(buffer + currentOffset + sizeofObject, (char *) object, objectSize);
-
     //check capacity of the current page size
     //if current page is full should write to the socket and then reset the page
     if ((currentOffset + objectSize + sizeofObject) > NETWORK_PAGESIZE) {
         client->readACK();
         client->write(currentOffset);
-        cout<<"Page Size = "<< currentOffset<<endl;
         client->write(pageBuffer, currentOffset);
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize + sizeofObject);
         currentOffset = 0;
