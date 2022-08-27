@@ -269,7 +269,7 @@ map<int, int> ObjectReader::getObjectInEachPage() {
     return this->objectInEachPage;
 }
 
-void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatus *> *list) {
+void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatus *> &list) {
     int relativePosition = 0;
     do {
         int objectSize = 0;
@@ -295,13 +295,13 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
             delete[] tBuffer;
             relativePosition += sizeof(objectSize);
         }
-        list->push_back(object);
+        list.push_back(object);
         relativePosition += objectSize;
     } while (relativePosition < pageSize);
 
 }
 
-void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusIP *> *list) {
+void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusIP *> &list) {
     int relativePosition = 0;
     do {
         int objectSize;
@@ -313,23 +313,23 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
         TweetStatusIP *object = (TweetStatusIP *) tBuffer;
         object->objectsize = objectSize;
 
-        list->push_back(object);
+        list.push_back(object);
         relativePosition += objectSize + sizeof(objectSize);
     } while (relativePosition < pageSize);
 }
 
-void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusProto *> *list) {
+void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusProto *> &list) {
     int relativePosition = 0;
     do {
          int objectSize = 0;
         TweetStatusProto *object = new TweetStatusProto();
         object->deserializeProto(buffer + relativePosition, objectSize);
-        list->push_back(object);
+        list.push_back(object);
         relativePosition += objectSize;
     } while (relativePosition < pageSize);
 }
 
-void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusFlatBuffers *> *list) {
+void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusFlatBuffers *> &list) {
     int relativePosition = 0;
     do {
         int objectSize;
@@ -343,7 +343,7 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
         object->deserializeFlatBuffers(tBuffer, objectSize);
         delete[] tBuffer;
 
-        list->push_back(object);
+        list.push_back(object);
         relativePosition += objectSize + sizeof(objectSize);
     } while (relativePosition < pageSize);
 }

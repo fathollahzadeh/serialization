@@ -64,13 +64,13 @@ public:
 
     map<int, int> getObjectInEachPage();
 
-    void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatus *> *list);
+    void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatus *> &list);
 
-    void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatusIP *> *list);
+    void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatusIP *> &list);
 
-    void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatusProto *> *list);
+    void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatusProto *> &list);
 
-    void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatusFlatBuffers *> *list);
+    void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatusFlatBuffers *> &list);
 
 };
 #endif //CPP_OBJECTREADER_H
