@@ -98,6 +98,7 @@ void DataReadNetwork<T>::runDataReader() {
         delete[] list;
         delete client;
     } else if (machineInfo->getNodeType() == MIDDLE) {
+        cout<<"+++++++++++++++++++++ MIDDLE +++++++++++++++++++"<<endl;
         numberOfClients = machineInfo->getLeaves().size() + 1;
         Server server(machineInfo->getPort(), numberOfClients - 1);
         Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
@@ -107,6 +108,7 @@ void DataReadNetwork<T>::runDataReader() {
         for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
             Socket *client = new Socket();
             server.accept(client);
+            cout<<"ACCEPT"<<endl;
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
@@ -128,6 +130,7 @@ void DataReadNetwork<T>::runDataReader() {
         delete queues;
 
     } else if (machineInfo->getNodeType() == ROOT) {
+        cout<<"+++++++++++++++++++++ ROOT +++++++++++++++++++"<<endl;
         numberOfClients = machineInfo->getLeaves().size() + 1;
         Server server(machineInfo->getPort(), numberOfClients - 1);
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
@@ -138,6 +141,7 @@ void DataReadNetwork<T>::runDataReader() {
         for (int i = 0; i < numberOfClients -1; i++) {
             Socket *client = new Socket();
             server.accept(client);
+            cout<<"ACCEPT"<<endl;
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
