@@ -84,7 +84,6 @@ void DataReadNetwork<T>::runDataReader() {
 
         for (int i = 0; i < listSize; ++i)
             writer.writeObjectToNetworkPage(list[i], client);
-
         if (reader->getMethod() != INPLACE) {
             for (int i = 0; i < listSize; ++i) {
                 delete list[i];

@@ -396,6 +396,12 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusProto *object, Client *cl
         client->readACK();
         client->write(currentOffset);
         client->write(pageBuffer, currentOffset);
+//        //////////////////////////////////////////////////
+//        cout<<"----------------- >> "<< currentOffset << "  "<< NETWORK_PAGESIZE<<endl;
+//        ObjectReader *rr = new ObjectReader("ProtoBuf");
+//        vector<TweetStatusProto *> *mm;
+//        rr->deSerializeNetworkBuffer(this->pageBuffer, currentOffset, mm);
+//        ///////////////////////////////////////////////
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
         currentOffset = 0;
     }

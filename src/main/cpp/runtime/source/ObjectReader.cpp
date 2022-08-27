@@ -324,10 +324,9 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
     list = new vector<TweetStatusProto *>;
     int relativePosition = 0;
     do {
-        int objectSize;
+         int objectSize = 0;
         TweetStatusProto *object = new TweetStatusProto();
         object->deserializeProto(buffer + relativePosition, objectSize);
-
         list->push_back(object);
         relativePosition += objectSize;
     } while (relativePosition < pageSize);
