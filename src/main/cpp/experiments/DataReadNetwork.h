@@ -117,6 +117,10 @@ void DataReadNetwork<T>::runDataReader() {
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
 
+        for (auto &th: pool) {
+            th.join();
+        }
+
         delete client;
         for (int i = 0; i < numberOfClients; ++i) {
             delete queues[i];
@@ -146,6 +150,10 @@ void DataReadNetwork<T>::runDataReader() {
         }
         else
             ExternalSortTask(nullptr, true, nullptr);
+
+        for (auto &th: pool) {
+            th.join();
+        }
 
         for (int i = 0; i < numberOfClients; ++i) {
             delete queues[i];

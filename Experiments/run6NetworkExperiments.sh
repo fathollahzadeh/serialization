@@ -7,7 +7,7 @@ inDataPathDisk="data/tmp/tweets"
 outDataPath="data/tmp/tweets"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
-declare -a cpp_methods=("inPlace") #("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
+declare -a cpp_methods=("FlatBuf") #("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 
 nrow=100000
 
