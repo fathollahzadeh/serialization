@@ -7,9 +7,9 @@ inDataPathDisk="data/tmp/tweets"
 outDataPath="data/tmp/tweets"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
-declare -a cpp_methods=("FlatBuf") #("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
+declare -a cpp_methods=("Handcoded") #("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 
-nrow=100000
+nrow=1000
 
 # Load data into memory
 # 1.a Java enviroments
@@ -50,12 +50,12 @@ for method in "${cpp_methods[@]}"; do
     # 1. Memory-to-Memory (m2m)
     ./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2m Experiment4_ExternalSort_times
 
-    # # 2. Memory-to-Disk
-    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method $inDataPathMemoryCPP $outDataPath m2d Experiment4_ExternalSort_times
+    # 2. Memory-to-Disk
+    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath} ${outDataPath}.${method}SortedCPP m2d Experiment4_ExternalSort_times
 
-    # # 3. Disk-to-Memory (d2m)
-    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method $inDataPathDisk $outDataPath d2m Experiment4_ExternalSort_times
+    # 3. Disk-to-Memory (d2m)
+    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath} ${outDataPath}.${method}SortedCPP d2m Experiment4_ExternalSort_times
 
-    # # 4. Disk-to-Disk (d2d)
-    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method $inDataPathDisk $outDataPath d2d Experiment4_ExternalSort_times
+    # 4. Disk-to-Disk (d2d)
+    # ./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath} ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
 done   
