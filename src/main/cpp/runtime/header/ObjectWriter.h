@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <map>
-#include <cstring>
+#include <string>
 #include <fstream>
 #include "thread"
 #include <boost/archive/text_oarchive.hpp>

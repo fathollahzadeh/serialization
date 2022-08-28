@@ -344,9 +344,9 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client *client)
     //check capacity of the current page size
     //if current page is full should write to the socket and then reset the page
     if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
-        client->readACK();
-        client->write(currentOffset);
-        client->write(pageBuffer, currentOffset);
+       // client->readACK();
+       // client->write(currentOffset);
+       // client->write(pageBuffer, currentOffset);
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
         currentOffset = 0;
     }
@@ -375,9 +375,9 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusIP *object, Client *clien
     //check capacity of the current page size
     //if current page is full should write to the socket and then reset the page
     if ((currentOffset + objectSize + sizeofObject) > NETWORK_PAGESIZE) {
-        client->readACK();
-        client->write(currentOffset);
-        client->write(pageBuffer, currentOffset);
+       // client->readACK();
+       // client->write(currentOffset);
+       // client->write(pageBuffer, currentOffset);
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize + sizeofObject);
         currentOffset = 0;
     }
@@ -393,9 +393,9 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusProto *object, Client *cl
     //check capacity of the current page size
     //if current page is full should write to the socket and then reset the page
     if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
-        client->readACK();
-        client->write(currentOffset);
-        client->write(pageBuffer, currentOffset);
+       // client->readACK();
+       // client->write(currentOffset);
+       // client->write(pageBuffer, currentOffset);
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
         currentOffset = 0;
     }
@@ -412,9 +412,9 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusFlatBuffers *object, Clie
     //check capacity of the current page size
     //if current page is full should write to the socket and then reset the page
     if ((currentOffset + objectSize) > NETWORK_PAGESIZE) {
-        client->readACK();
-        client->write(currentOffset);
-        client->write(pageBuffer, currentOffset);
+        //client->readACK();
+        //client->write(currentOffset);
+        //client->write(pageBuffer, currentOffset);
         memmove(pageBuffer, pageBuffer + currentOffset, objectSize);
         currentOffset = 0;
     }

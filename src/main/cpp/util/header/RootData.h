@@ -8,7 +8,7 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/string.hpp>
 #include <iostream>
-#include <cstring>
+#include <string>
 #include <sstream>
 #include <stdexcept>
 #include <boost/archive/text_iarchive.hpp>
