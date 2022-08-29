@@ -48,6 +48,7 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, method);
+
     if (machineInfo->getNodeType() == LEAF) {
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         char ** pages;
@@ -80,7 +81,7 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
-        ExternalSortTask(&writer, false, client);
+        //ExternalSortTask(&writer, false, client);
 
         for (auto &th: pool) {
             th.join();
@@ -118,12 +119,12 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
-        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
-            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
-            ExternalSortTask(&writer, true, nullptr);
-        }
-        else
-            ExternalSortTask(nullptr, false, nullptr);
+//        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
+//            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
+//            ExternalSortTask(&writer, true, nullptr);
+//        }
+//        else
+//            ExternalSortTask(nullptr, false, nullptr);
 
         for (auto &th: pool) {
             th.join();
@@ -167,6 +168,7 @@ void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *
         char *buffer = new char[pageSize];
         client->read(buffer, pageSize);
         while (!queues[id]->try_enqueue(buffer));
+        cout<<pageSize<<endl;
     }
     statuses[id] = false;
 }
@@ -179,6 +181,7 @@ void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, 
 
     for (int i = 0; i < reader->getObjectInEachPage().size(); i++) {
        while (!queues[id]->try_enqueue(pages[i]));
+       cout<<"local page "<<i<<endl;
     }
     statuses[id] = false;
 }
