@@ -11,6 +11,6 @@ Client::Client(const string& ip, int port) {
     }
 
     if (!Socket::connect(ip, port)) {
-        throw std::runtime_error("Could not bind to port.");
+        throw std::runtime_error("Could not bind to port (Client).");
     }
 }

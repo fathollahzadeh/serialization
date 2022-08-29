@@ -186,6 +186,7 @@ Client *DataReadNetwork<T>::initClient(string ip, int port) {
 template<class T>
 void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
     while (!ready);
+    cout<<"Start!!!!!!!!!!!!!!!!!!!!!!"<<endl;
 
     statuses[id] = true;
     while (true) {
@@ -208,6 +209,8 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
 template<class T>
 void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     while (!ready);
+    cout<<"Start!!!!!!!!!!!!!!!!!!!!!!"<<endl;
+
     statuses[id] = true;
     T **list = new T *[nrow];
     reader->readObjects(0, nrow, list);
