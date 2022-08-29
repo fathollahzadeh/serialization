@@ -14,5 +14,5 @@ for rp in {1..1}; do
     echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)
-    echo ${method}"Java,Java,Total,"${plan}","${IP}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+    echo ${method}"CPP,CPP,Total,"${plan}","${IP}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
 done    

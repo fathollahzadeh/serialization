@@ -421,3 +421,28 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusFlatBuffers *object, Clie
     }
     currentOffset += objectSize;
 }
+
+void ObjectWriter::writeToNetworkPage(char *page, Client *client) {
+    client->readACK();
+    client->write(NETWORK_PAGESIZE);
+    client->write(page, NETWORK_PAGESIZE);
+}
+
+void ObjectWriter::writeNetworkPageToFile(char *page) {
+    outStreamRegularFile.write(page, NETWORK_PAGESIZE);
+    delete []page;
+}
+
+void ObjectWriter::flushNetworkPageWriter() {
+    //Close Serialized Data file:
+    this->outStreamRegularFile.close();
+
+    //Write PageIndex Vector to the File:
+    this->writeIndexToFile(pageIndex);
+
+    //Write objectIndex Vector to the File:
+    this->writeIndexToFile(objectIndex);
+
+    //Close Index file:
+    this->outIndexFile.close();
+}

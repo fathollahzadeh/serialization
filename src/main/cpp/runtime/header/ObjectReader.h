@@ -72,5 +72,7 @@ public:
 
     void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatusFlatBuffers *> &list);
 
+    void readAllPages(char **pages);
+
 };
 #endif //CPP_OBJECTREADER_H

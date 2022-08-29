@@ -352,3 +352,15 @@ ObjectReader::~ObjectReader() {
     delete[] pageIndex;
     delete[] objectIndex;
 }
+
+void ObjectReader::readAllPages(char **pages) {
+    int pageCount = objectInEachPage.size();
+    pages = new char*[pageCount];
+    for (int i = 0; i < pageCount; ++i) {
+        pages[i] = new char[NETWORK_PAGESIZE];
+        long newPosition = (long) i * NETWORK_PAGESIZE;
+        inStreamRegularFile.clear();
+        inStreamRegularFile.seekg(newPosition, std::ifstream::beg);
+        inStreamRegularFile.read( pages[i], NETWORK_PAGESIZE);
+    }
+}
