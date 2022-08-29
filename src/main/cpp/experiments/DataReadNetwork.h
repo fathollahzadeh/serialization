@@ -116,6 +116,7 @@ void DataReadNetwork<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
         ready = true;
+        cout<<"RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR "<<endl;
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
 
@@ -148,6 +149,7 @@ void DataReadNetwork<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
         ready = true;
+        cout<<"RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR "<<endl;
 
         if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
             ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
@@ -172,11 +174,11 @@ void DataReadNetwork<T>::runDataReader() {
 template<class T>
 Client *DataReadNetwork<T>::initClient(string ip, int port) {
     for (int i = 0; i < 1000; i++) {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
         try {
             Client *client = new Client(ip, port);
             return client;
         } catch (const exception &e) {}
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     throw std::runtime_error("Client can't start >> " + ip + ":" + to_string(port));
 }
