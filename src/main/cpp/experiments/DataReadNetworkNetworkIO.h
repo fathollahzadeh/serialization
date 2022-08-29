@@ -163,6 +163,7 @@ void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *
     while (true) {
         client->writeACK();
         int pageSize = client->readInt();
+        cout<<"Page Size = "<<pageSize<<endl;
         if (pageSize == -1) {
             break;
         }
