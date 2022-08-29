@@ -158,6 +158,7 @@ Client *DataReadNetworkNetworkIO<T>::initClient(string ip, int port) {
 
 template<class T>
 void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
+    cout<<"+++++++++++++++++++ Start"<<endl;
     statuses[id] = true;
     while (true) {
         client->writeACK();
@@ -175,6 +176,7 @@ void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *
 
 template<class T>
 void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
+    cout<<"0000000000000000000000000 Start"<<endl;
     statuses[id] = true;
     char **pages;
     reader->readAllPages(pages);
