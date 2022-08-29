@@ -55,7 +55,6 @@ private:
     bool *statuses;
     BlockingReaderWriterQueue<vector<T *>> **queues;
     int numberOfClients;
-    bool ready;
 
     Client *initClient(string ip, int port);
 
@@ -99,8 +98,7 @@ void DataReadNetwork<T>::runDataReader() {
         delete[] list;
         delete client;
     } else if (machineInfo->getNodeType() == MIDDLE) {
-        ready = false;
-        Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
+        Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         numberOfClients = machineInfo->getLeaves().size() + 1;
         Server server(machineInfo->getPort(), numberOfClients - 1);
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
@@ -115,8 +113,6 @@ void DataReadNetwork<T>::runDataReader() {
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
-        ready = true;
-        cout<<"RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR "<<endl;
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
 
@@ -131,7 +127,6 @@ void DataReadNetwork<T>::runDataReader() {
         delete queues;
 
     } else if (machineInfo->getNodeType() == ROOT) {
-        ready = false;
         numberOfClients = machineInfo->getLeaves().size() + 1;
         Server server(machineInfo->getPort(), numberOfClients - 1);
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
@@ -148,8 +143,6 @@ void DataReadNetwork<T>::runDataReader() {
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
-        ready = true;
-        cout<<"RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR "<<endl;
 
         if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
             ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
@@ -185,9 +178,6 @@ Client *DataReadNetwork<T>::initClient(string ip, int port) {
 
 template<class T>
 void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
-    while (!ready);
-    cout<<"Start!!!!!!!!!!!!!!!!!!!!!!"<<endl;
-
     statuses[id] = true;
     while (true) {
         client->writeACK();
@@ -208,9 +198,6 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
 
 template<class T>
 void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
-    while (!ready);
-    cout<<"Start!!!!!!!!!!!!!!!!!!!!!!"<<endl;
-
     statuses[id] = true;
     T **list = new T *[nrow];
     reader->readObjects(0, nrow, list);
