@@ -55,6 +55,7 @@ private:
     bool *statuses;
     BlockingReaderWriterQueue<vector<T *>> **queues;
     int numberOfClients;
+    bool ready;
 
     Client *initClient(string ip, int port);
 
@@ -76,11 +77,11 @@ void DataReadNetwork<T>::runDataReader() {
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, method);
     if (machineInfo->getNodeType() == LEAF) {
+        Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         T **list = new T *[machineInfo->getNrow()];
         int listSize = reader->readObjects(0, machineInfo->getNrow(), list);
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
-        Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
 
         for (int i = 0; i < listSize; ++i)
             writer.writeObjectToNetworkPage(list[i], client);
@@ -98,9 +99,10 @@ void DataReadNetwork<T>::runDataReader() {
         delete[] list;
         delete client;
     } else if (machineInfo->getNodeType() == MIDDLE) {
+        ready = false;
+        Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         numberOfClients = machineInfo->getLeaves().size() + 1;
         Server server(machineInfo->getPort(), numberOfClients - 1);
-        Client *client = new Client(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
         statuses = new bool[numberOfClients];
         vector<thread> pool;
@@ -113,7 +115,7 @@ void DataReadNetwork<T>::runDataReader() {
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
-
+        ready = true;
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
 
@@ -128,6 +130,7 @@ void DataReadNetwork<T>::runDataReader() {
         delete queues;
 
     } else if (machineInfo->getNodeType() == ROOT) {
+        ready = false;
         numberOfClients = machineInfo->getLeaves().size() + 1;
         Server server(machineInfo->getPort(), numberOfClients - 1);
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
@@ -144,6 +147,8 @@ void DataReadNetwork<T>::runDataReader() {
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
+        ready = true;
+
         if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
             ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
             ExternalSortTask(&writer, true, nullptr);
@@ -166,8 +171,8 @@ void DataReadNetwork<T>::runDataReader() {
 
 template<class T>
 Client *DataReadNetwork<T>::initClient(string ip, int port) {
-    for (int i = 0; i < 10; i++) {
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+    for (int i = 0; i < 1000; i++) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
         try {
             Client *client = new Client(ip, port);
             return client;
@@ -178,6 +183,8 @@ Client *DataReadNetwork<T>::initClient(string ip, int port) {
 
 template<class T>
 void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
+    while (!ready);
+
     statuses[id] = true;
     while (true) {
         client->writeACK();
@@ -198,6 +205,7 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
 
 template<class T>
 void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
+    while (!ready);
     statuses[id] = true;
     T **list = new T *[nrow];
     reader->readObjects(0, nrow, list);
