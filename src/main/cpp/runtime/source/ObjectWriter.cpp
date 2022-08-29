@@ -360,6 +360,7 @@ void ObjectWriter::flushToNetwork(Client *client) {
     client->write(pageBuffer, currentOffset);
     client->readACK();
     client->write(-1);
+    client->readACK();
 }
 
 void ObjectWriter::writeObjectToNetworkPage(TweetStatusIP *object, Client *client) {

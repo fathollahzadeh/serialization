@@ -104,12 +104,15 @@ void DataReadNetwork<T>::runDataReader() {
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
         statuses = new bool[numberOfClients];
         vector<thread> pool;
+        Socket **clients = new Socket*[numberOfClients -1];
+
         for (int i = 0; i < machineInfo->getLeaves().size(); i++) {
             Socket *client = new Socket();
             server.accept(client);
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
+            clients[i] = client;
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
@@ -119,6 +122,12 @@ void DataReadNetwork<T>::runDataReader() {
         for (auto &th: pool) {
             th.join();
         }
+
+        for (int i = 0; i < numberOfClients -1 ; ++i) {
+            clients[i]->writeACK();
+            delete clients[i];
+        }
+        delete[] clients;
 
         delete client;
         for (int i = 0; i < numberOfClients; ++i) {
@@ -132,6 +141,7 @@ void DataReadNetwork<T>::runDataReader() {
         queues = new BlockingReaderWriterQueue<vector<T *>> *[numberOfClients];
         statuses = new bool[numberOfClients];
         vector<thread> pool;
+        Socket **clients = new Socket*[numberOfClients -1];
 
         //Socket socket;
         for (int i = 0; i < numberOfClients -1; i++) {
@@ -140,6 +150,7 @@ void DataReadNetwork<T>::runDataReader() {
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
             pool.push_back(std::thread(&DataReadNetwork<T>::NetworkReadTask, this, clientReader, client, i));
+            clients[i] = client;
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<vector<T *>>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetwork<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
@@ -154,6 +165,11 @@ void DataReadNetwork<T>::runDataReader() {
         for (auto &th: pool) {
             th.join();
         }
+        for (int i = 0; i < numberOfClients -1 ; ++i) {
+            clients[i]->writeACK();
+            delete clients[i];
+        }
+        delete[] clients;
 
         for (int i = 0; i < numberOfClients; ++i) {
             delete queues[i];
@@ -183,7 +199,7 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
         client->writeACK();
         int pageSize = client->readInt();
         if (pageSize == -1) {
-            client->writeACK();
+            //client->writeACK();
             break;
         }
         char *buffer = new char[pageSize];
@@ -193,7 +209,7 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
         while (!queues[id]->try_enqueue(list));
     }
     statuses[id] = false;
-    delete client;
+    //delete client;
 }
 
 template<class T>
