@@ -6,7 +6,7 @@ outDataPath=$3
 nrow=$4
 
 SCRIPT="$jnCMD -DinDataPath=${inDataPath}\
-               -DoutDataPath=${outDataPath}.${method}Java\
+               -DoutDataPath=${outDataPath}\
                -Dnrow=${nrow}\
                -Dmethod=${method}\
                -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle

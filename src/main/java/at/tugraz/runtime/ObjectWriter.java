@@ -44,7 +44,7 @@ public class ObjectWriter {
         this.bosIndexFile = new BufferedOutputStream(outIndexFile);
     }
 
-    public ObjectWriter(String method, int rlen, int pageSize){
+    public ObjectWriter(String method, int rlen, int pageSize) {
         this.kryo = new KryoSinglton().getKryo();
         this.currentPageNumber = 0;
         this.currentOffset = 0;
@@ -59,7 +59,7 @@ public class ObjectWriter {
 
 
     public void serializeObjects(RootData[] objects) {
-        for (RootData object : objects){
+        for (RootData object : objects) {
             this.serializeObject(object);
         }
     }
@@ -98,7 +98,7 @@ public class ObjectWriter {
 
             }
         } catch (Exception ex) {
-            logger.error("ObjectWriter(serializeObject):"+ex.getMessage());
+            logger.error("ObjectWriter(serializeObject):" + ex.getMessage());
         }
         return buffer;
     }
@@ -135,7 +135,7 @@ public class ObjectWriter {
             currentOffset += objectSize;
             this.row++;
         } catch (Exception ex) {
-            logger.error("writeObjectToFile:"+ex+"  "+row);
+            logger.error("writeObjectToFile:" + ex + "  " + row);
         }
     }
 
@@ -148,43 +148,22 @@ public class ObjectWriter {
             //if current page is full should write to the socket and then reset the page
             if ((currentOffset + objectSize) > Const.NETWORK_PAGESIZE) {
                 byte ack = dis.readByte();
-                if (ack != 1){
-                    throw new RuntimeException("writeObjectToNetworkPage "+ack);
+                if (ack != 1) {
+                    throw new RuntimeException("writeObjectToNetworkPage " + ack);
                 }
                 //Write in socket:
                 dos.writeInt(currentOffset);
-                dos.write(this.pageBuffer,0, currentOffset);
+                dos.write(this.pageBuffer, 0, currentOffset);
                 currentOffset = 0;
                 this.pageBuffer = new byte[2 * Const.NETWORK_PAGESIZE];
             }
             // write object size
             byte[] bytes = ByteBuffer.allocate(4).putInt(objectSize).array();
             System.arraycopy(bytes, 0, this.pageBuffer, this.currentOffset, 4);
-            System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset+4, objectSize);
-            currentOffset += objectSize+4;
+            System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset + 4, objectSize);
+            currentOffset += objectSize + 4;
         } catch (Exception ex) {
-            logger.error("writeObjectToNetworkPage:"+ex);
-        }
-    }
-
-    public void writeObjectToNetworkPage(RootData object) {
-        byte[] buffer = serializeObject(object);
-        int objectSize;
-        try {
-            objectSize = buffer.length;
-            //check capacity of the current page size
-            //if current page is full should write to the socket and then reset the page
-            if ((currentOffset + objectSize) > Const.NETWORK_PAGESIZE) {
-                currentOffset = 0;
-                this.pageBuffer = new byte[2 * Const.NETWORK_PAGESIZE];
-            }
-            // write object size
-            byte[] bytes = ByteBuffer.allocate(4).putInt(objectSize).array();
-            System.arraycopy(bytes, 0, this.pageBuffer, this.currentOffset, 4);
-            System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset+4, objectSize);
-            currentOffset += objectSize+4;
-        } catch (Exception ex) {
-            logger.error("writeObjectToNetworkPage:"+ex);
+            logger.error("writeObjectToNetworkPage:" + ex);
         }
     }
 
@@ -217,22 +196,26 @@ public class ObjectWriter {
     public void flushToNetwork(DataOutputStream dos, DataInputStream dis) {
         try {
             byte ack = dis.readByte();
-            if (ack != 1){
-                throw new RuntimeException("flushToNetwork "+ack);
+            if (ack != 1) {
+                throw new RuntimeException("flushToNetwork " + ack);
             }
             dos.writeInt(currentOffset);
-            dos.write(this.pageBuffer,0, currentOffset);
+            dos.write(this.pageBuffer, 0, currentOffset);
 
             ack = dis.readByte();
-            if (ack != 1){
-                throw new RuntimeException("flushToNetwork "+ack);
+            if (ack != 1) {
+                throw new RuntimeException("flushToNetwork " + ack);
             }
             dos.writeInt(-1);
+            ack = dis.readByte();
+            if (ack != 1) {
+                throw new RuntimeException("flushToNetwork " + ack);
+            }
             dos.close();
             dis.close();
 
         } catch (Exception e) {
-            logger.error("can't write last page to the serialization network!"+e.getMessage());
+            logger.error("can't write last page to the serialization network!" + e.getMessage());
         }
     }
 

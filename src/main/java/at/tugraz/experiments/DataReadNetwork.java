@@ -35,32 +35,22 @@ public class DataReadNetwork {
 
     public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
 
-        // disk-to-disk (d2d)
-        // disk-to-memory (d2m)
-        // memory-to-memory (m2m)
-        // memory-to-disk (m2d)
-
         String inDataPath = System.getProperty("inDataPath");
         String method = System.getProperty("method");
         String config = System.getProperty("config");
         String plan = System.getProperty("plan");
 
-        String localMethod = "Kryo";
-
-        if (plan.equalsIgnoreCase("d2d") || plan.equalsIgnoreCase("d2m"))
-            localMethod = method;
-
         Network network = new Network(config);
         MachineInfo machineInfo = network.getCurrentMachine();
-        ObjectReader reader = new ObjectReader(inDataPath, localMethod);
+        ObjectReader reader = new ObjectReader(inDataPath, method);
 
         if (machineInfo.getNodeType() == NodeType.LEAF) {
+            Client client = initClient(machineInfo.getRoot().getIp(), machineInfo.getPort());
             ArrayList<RootData> list = new ArrayList<>();
             reader.readObjects(0, machineInfo.getNrow(), list);
             Collections.sort(list);
 
             ObjectWriter writer = new ObjectWriter(method, machineInfo.getTotalNRow(), Const.NETWORK_PAGESIZE);
-            Client client = initClient(machineInfo.getRoot().getIp(), machineInfo.getPort());
             for (RootData rd : list)
                 writer.writeObjectToNetworkPage(rd, client.dos, client.dis);
 
@@ -74,18 +64,18 @@ public class DataReadNetwork {
 
             ArrayList<Task> tasks = new ArrayList<>();
             ArrayList<Task> dataTasks = new ArrayList<>();
+            ArrayList<Client> clients = new ArrayList<>();
             ExecutorService pool = CommonThreadPool.get(machineInfo.getLeaves().size() + 3);
             Socket socket;
 
             for (int i = 0; i < machineInfo.getLeaves().size(); i++) {
                 socket = serverSocket.accept();
-                logger.info("Accepted Client In MIDDLE node:" + machineInfo.getIp() + " Client >> " + socket.getLocalAddress() + " - " + socket.getInetAddress().getHostAddress());
-
                 Client cli = new Client(socket, new DataOutputStream(socket.getOutputStream()), new DataInputStream(socket.getInputStream()));
                 ObjectReader clientReader = new ObjectReader(method);
                 NetworkReadTask clientTask = new NetworkReadTask(cli, clientReader);
                 tasks.add(clientTask);
                 dataTasks.add(clientTask);
+                clients.add(cli);
             }
 
             // read objects from local
@@ -105,6 +95,16 @@ public class DataReadNetwork {
             for (Future<Boolean> f : rt) {
                 f.get();
             }
+
+            // terminate all sockets
+            byte ack = 1;
+            for (Client c: clients){
+                c.dos.writeByte(ack);
+                c.dos.close();
+                c.dis.close();
+                c.socket.close();
+            }
+
         } else if (machineInfo.getNodeType() == NodeType.ROOT) {
             String outDataPath = System.getProperty("outDataPath");
             ObjectWriter writer = new ObjectWriter(outDataPath, method, machineInfo.getTotalNRow());
@@ -113,18 +113,17 @@ public class DataReadNetwork {
 
             ArrayList<Task> tasks = new ArrayList<>();
             ArrayList<Task> dataTasks = new ArrayList<>();
+            ArrayList<Client> clients = new ArrayList<>();
             ExecutorService pool = CommonThreadPool.get(machineInfo.getLeaves().size() + 3);
             Socket socket;
             for (int i = 0; i < machineInfo.getLeaves().size(); i++) {
                 socket = serverSocket.accept();
-                logger.info("Accepted Client In ROOT node:" + machineInfo.getIp() + " Client >> " + socket.getInetAddress().getHostAddress());
-
                 Client cli = new Client(socket, new DataOutputStream(socket.getOutputStream()), new DataInputStream(socket.getInputStream()));
                 ObjectReader clientReader = new ObjectReader(method);
                 NetworkReadTask clientTask = new NetworkReadTask(cli, clientReader);
                 tasks.add(clientTask);
                 dataTasks.add(clientTask);
-
+                clients.add(cli);
             }
             // read objects from local
             Task clientTask = new LocalReadTask(reader, machineInfo.getNrow());
@@ -145,6 +144,15 @@ public class DataReadNetwork {
             for (Future<Boolean> f : rt) {
                 f.get();
             }
+
+            // terminate all sockets
+            byte ack = 1;
+            for (Client c: clients){
+                c.dos.writeByte(ack);
+                c.dos.close();
+                c.dis.close();
+                c.socket.close();
+            }
         }
     }
 
@@ -152,8 +160,7 @@ public class DataReadNetwork {
         boolean flag = false;
         Socket socket;
         Client client = null;
-        for (int i = 0; i < 10 && !flag; i++) {
-            TimeUnit.SECONDS.sleep(1);
+        for (int i = 0; i < 1000 && !flag; i++) {
             try {
                 socket = new Socket(ip, port);
                 socket.setSoTimeout(Const.NETWORK_TIMEOUT);
@@ -161,6 +168,7 @@ public class DataReadNetwork {
                 flag = socket.isConnected();
             } catch (Exception ignored) {
             }
+            TimeUnit.SECONDS.sleep(1);
         }
         if (!flag) throw new RuntimeException("Client can't start >> " + ip + ":" + port);
         else {
@@ -195,7 +203,7 @@ public class DataReadNetwork {
                 client.dos.writeByte(ack);
                 int pageSize = client.dis.readInt();
                 if (pageSize == -1) {
-                    client.dos.writeByte(ack);
+                    //client.dos.writeByte(ack);
                     break;
                 }
                 byte[] buffer = new byte[pageSize];
@@ -220,9 +228,6 @@ public class DataReadNetwork {
                 this.queue.put(list);
             }
             this.status = false;
-            client.dos.close();
-            client.dis.close();
-            client.socket.close();
             return false;
         }
     }
