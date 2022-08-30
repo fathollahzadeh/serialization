@@ -121,12 +121,12 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
-        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
-            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
-            ExternalSortTask(&writer, true, nullptr);
-        }
-        else
-            ExternalSortTask(nullptr, false, nullptr);
+//        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
+//            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
+//            ExternalSortTask(&writer, true, nullptr);
+//        }
+//        else
+//            ExternalSortTask(nullptr, false, nullptr);
 
         for (auto &th: pool) {
             th.join();
@@ -187,6 +187,7 @@ void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, 
 
     for (int i = 0; i < reader->getNetworkPageCount(); i++) {
        while (!queues[id]->try_enqueue(pages[i]));
+       cout<< "local page="<<i<<endl;
     }
     statuses[id] = false;
 }
