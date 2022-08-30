@@ -17,6 +17,7 @@ for rp in {1..1}; do
                    -Dconfig=${NETWORKCONFIG}\
                    -cp ./SerializationJava.jar at.tugraz.experiments.DataReadNetwork
            "
+    echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)
     echo ${method}"Java,Java,Total,"${plan}","${IP}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
