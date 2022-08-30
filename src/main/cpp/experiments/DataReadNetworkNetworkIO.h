@@ -61,7 +61,10 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
             writer.writeToNetworkPage(pages[i], client);
             delete[] pages[i];
         }
-        writer.flushToNetwork(client);
+        client->readACK();
+        client->write(-1);
+        client->readACK();
+
         delete[] pages;
         delete client;
     } else if (machineInfo->getNodeType() == MIDDLE) {
