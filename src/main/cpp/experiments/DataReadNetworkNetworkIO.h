@@ -50,8 +50,6 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
     ObjectReader *reader = new ObjectReader(inDataPath, method);
     int QUEUE_SIZE = ceil(NETWORK_CLIENT_QUEUE_SIZE * ((double )PAGESIZE/NETWORK_PAGESIZE));
 
-    cout<< ">>>>>>>>>>>>>>>>>>>>>>>>>>> "<< reader->getNetworkPageCount()<<"  "<< reader->getObjectInEachPage().size()<<endl;
-
     if (machineInfo->getNodeType() == LEAF) {
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         char ** pages = new char*[reader->getNetworkPageCount()];
@@ -61,10 +59,13 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
             writer.writeToNetworkPage(pages[i], client);
             delete[] pages[i];
         }
+
+        // flush client
         client->readACK();
         client->write(-1);
         client->readACK();
 
+        // free memory
         delete[] pages;
         delete client;
     } else if (machineInfo->getNodeType() == MIDDLE) {
@@ -125,12 +126,12 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
-//        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
-//            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
-//            ExternalSortTask(&writer, true, nullptr);
-//        }
-//        else
-//            ExternalSortTask(nullptr, false, nullptr);
+        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
+            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
+            ExternalSortTask(&writer, true, nullptr);
+        }
+        else
+            ExternalSortTask(nullptr, false, nullptr);
 
         for (auto &th: pool) {
             th.join();
@@ -169,7 +170,6 @@ void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *
     while (true) {
         client->writeACK();
         int pageSize = client->readInt();
-        cout<<"Page Size = "<<pageSize<<endl;
         if (pageSize == -1) {
             break;
         }
@@ -177,7 +177,7 @@ void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *
         memcpy(buffer, &pageSize, sizeof(int));
         client->read(buffer+sizeof(int), pageSize);
         while (!queues[id]->try_enqueue(buffer));
-        cout<<pageSize<<endl;
+        cout<<"Page Size = "<<pageSize<<endl;
     }
     statuses[id] = false;
 }

@@ -430,7 +430,8 @@ void ObjectWriter::writeToNetworkPage(char *page, Client *client) {
 }
 
 void ObjectWriter::writeNetworkPageToFile(char *page) {
-    outStreamRegularFile.write(page, NETWORK_PAGESIZE);
+    int pageSize = rootData.parseInt(page);
+    outStreamRegularFile.write(page+sizeof(int ), pageSize);
     delete []page;
 }
 
