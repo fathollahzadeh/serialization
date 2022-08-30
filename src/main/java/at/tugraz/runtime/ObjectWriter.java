@@ -175,6 +175,7 @@ public class ObjectWriter {
             }
             dos.write(page.array(), 0, page.capacity());
         } catch (Exception ex) {
+            ex.printStackTrace();
             logger.error("writeToNetworkPage:", ex);
         }
     }
