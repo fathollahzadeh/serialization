@@ -28,14 +28,14 @@ for method in "${java_methods[@]}"; do
     # 1. Memory-to-Memory (m2m)
     ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2m Experiment4_ExternalSort_times
 
-#     # 2. Memory-to-Disk (m2d)
-#     ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2d Experiment4_ExternalSort_times
+    # 2. Memory-to-Disk (m2d)
+    ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2d Experiment4_ExternalSort_times
 
-#     # 3. Disk-to-Memory (d2m)
-#     ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2m Experiment4_ExternalSort_times
+    # 3. Disk-to-Memory (d2m)
+    ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2m Experiment4_ExternalSort_times
 
-#     # 4. Disk-to-Disk (d2d)
-#     ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2d Experiment4_ExternalSort_times
+    # 4. Disk-to-Disk (d2d)
+    ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2d Experiment4_ExternalSort_times
 
 #     # 5. IO (m2m)
 #     ./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2m Experiment4_ExternalSort_times
