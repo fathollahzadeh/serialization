@@ -166,13 +166,15 @@ public class ObjectWriter {
             logger.error("writeObjectToNetworkPage:" + ex);
         }
     }
+
     public void writeToNetworkPage(ByteBuffer page, DataOutputStream dos, DataInputStream dis) {
+        System.out.println("  >>>>>>>>>>>  "+ page.capacity());
         try {
-        byte ack = dis.readByte();
-        if (ack != 1) {
-            throw new RuntimeException("writeObjectToNetworkPage " + ack);
-        }
-        dos.write(page.array());
+            byte ack = dis.readByte();
+            if (ack != 1) {
+                throw new RuntimeException("writeObjectToNetworkPage  ACK " + ack);
+            }
+            dos.write(page.array());
         } catch (Exception ex) {
             logger.error("writeToNetworkPage:", ex);
         }
@@ -250,17 +252,16 @@ public class ObjectWriter {
         }
     }
 
-    public void writeNetworkPageToFile(ByteBuffer page) {
+    public void writeNetworkPageToFile(byte[] page) {
         try {
             randOutStreamRegularFile.seek(randOutStreamRegularFile.length());
-            randOutStreamRegularFile.write(page.array());
-        }
-        catch (Exception ex){
+            randOutStreamRegularFile.write(page);
+        } catch (Exception ex) {
             logger.error("writeNetworkPageToFile! ", ex);
         }
     }
 
-    public void flushNetworkPageWriter(){
+    public void flushNetworkPageWriter() {
         try {
             // flush BufferedOutputStream
             bosIndexFile.flush();

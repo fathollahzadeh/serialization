@@ -299,7 +299,8 @@ public class DataReadNetworkIO {
                     if (!tasks.get(i).queue.isEmpty()) {
                         ByteBuffer bb = tasks.get(i).queue.take();
                         if (writer != null) {
-                            if (onDisk) writer.writeNetworkPageToFile(bb);
+                            bb.position(4);
+                            if (onDisk) writer.writeNetworkPageToFile(bb.array());
                             else writer.writeToNetworkPage(bb, dos, dis);
                         }
                         flag = true;
