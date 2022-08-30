@@ -169,8 +169,9 @@ void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *
         if (pageSize == -1) {
             break;
         }
-        char *buffer = new char[pageSize];
-        client->read(buffer, pageSize);
+        char *buffer = new char[pageSize+sizeof(int)];
+        memcpy(buffer, &pageSize, sizeof(int));
+        client->read(buffer+sizeof(int), pageSize);
         while (!queues[id]->try_enqueue(buffer));
         cout<<pageSize<<endl;
     }
