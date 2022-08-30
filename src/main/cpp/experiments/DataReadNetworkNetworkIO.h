@@ -49,6 +49,8 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, method);
 
+    cout<< ">>>>>>>>>>>>>>>>>>>>>>>>>>> "<< reader->getNetworkPageCount()<<"  "<< reader->getObjectInEachPage().size()<<endl;
+
     if (machineInfo->getNodeType() == LEAF) {
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         char ** pages = new char*[reader->getNetworkPageCount()];

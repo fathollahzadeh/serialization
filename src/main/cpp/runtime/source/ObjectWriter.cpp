@@ -424,8 +424,8 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusFlatBuffers *object, Clie
 
 void ObjectWriter::writeToNetworkPage(char *page, Client *client) {
     client->readACK();
-    client->write(NETWORK_PAGESIZE);
-    client->write(page, NETWORK_PAGESIZE);
+    int pageSize = rootData.parseInt(page);
+    client->write(page, pageSize+sizeof(int));
 }
 
 void ObjectWriter::writeNetworkPageToFile(char *page) {

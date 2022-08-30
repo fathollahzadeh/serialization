@@ -39,6 +39,7 @@ private:
     char * readPageFromFile(int id);
 
     int networkPageCount;
+    long fileSize;
 
 public:
     ObjectReader(const string & fname, const string &method);

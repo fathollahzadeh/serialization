@@ -40,8 +40,11 @@ ObjectReader::ObjectReader(const string &fname, const string &method) : ObjectRe
         objectInEachPage[pageIndex[i]] = objectInEachPage[pageIndex[i]] + 1;
     }
 
-    int alpha = (int)ceil((double) NETWORK_PAGESIZE / PAGESIZE);
-    networkPageCount = ceil((double) objectInEachPage.size() / alpha);
+    inStreamRegularFile.seekg(0, std::ifstream::end);
+    fileSize= inStreamRegularFile.tellg();
+    inStreamRegularFile.seekg(0, std::ifstream::beg);
+
+    networkPageCount = ceil((double) fileSize / NETWORK_PAGESIZE);
 }
 
 void ObjectReader::readIndexesFromFile(const string &fname) {
@@ -358,11 +361,15 @@ ObjectReader::~ObjectReader() {
 
 void ObjectReader::readAllPages(char **pages) {
     for (int i = 0; i < networkPageCount; ++i) {
-        pages[i] = new char[NETWORK_PAGESIZE];
-        long newPosition = (long) i * NETWORK_PAGESIZE;
+        int pageSize = NETWORK_PAGESIZE;
+        if (fileSize - i*NETWORK_PAGESIZE < 0)
+            pageSize = (int)(fileSize - (i-1) * NETWORK_PAGESIZE);
+        pages[i] = new char[pageSize+sizeof(int)];
+        long newPosition = (long) i * pageSize;
         inStreamRegularFile.clear();
         inStreamRegularFile.seekg(newPosition, std::ifstream::beg);
-        inStreamRegularFile.read( pages[i], NETWORK_PAGESIZE);
+        inStreamRegularFile.read( pages[i]+sizeof(int), pageSize);
+        memcpy(&pageSize, pages[i], sizeof(int));
     }
 }
 
