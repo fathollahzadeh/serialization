@@ -199,7 +199,6 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
         client->writeACK();
         int pageSize = client->readInt();
         if (pageSize == -1) {
-            //client->writeACK();
             break;
         }
         char *buffer = new char[pageSize];
@@ -209,7 +208,6 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
         while (!queues[id]->try_enqueue(list));
     }
     statuses[id] = false;
-    //delete client;
 }
 
 template<class T>
