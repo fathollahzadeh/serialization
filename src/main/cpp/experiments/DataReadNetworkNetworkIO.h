@@ -51,10 +51,10 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
 
     if (machineInfo->getNodeType() == LEAF) {
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
-        char ** pages = new char*[reader->getObjectInEachPage().size()];
+        char ** pages = new char*[reader->getNetworkPageCount()];
         reader->readAllPages(pages);
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
-        for (int i = 0; i < reader->getObjectInEachPage().size(); ++i) {
+        for (int i = 0; i < reader->getNetworkPageCount(); ++i) {
             writer.writeToNetworkPage(pages[i], client);
             delete[] pages[i];
         }
@@ -179,10 +179,10 @@ template<class T>
 void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     cout<<"0000000000000000000000000 Start"<<endl;
     statuses[id] = true;
-    char ** pages = new char*[reader->getObjectInEachPage().size()];
+    char ** pages = new char*[reader->getNetworkPageCount()];
     reader->readAllPages(pages);
 
-    for (int i = 0; i < reader->getObjectInEachPage().size(); i++) {
+    for (int i = 0; i < reader->getNetworkPageCount(); i++) {
        while (!queues[id]->try_enqueue(pages[i]));
     }
     statuses[id] = false;

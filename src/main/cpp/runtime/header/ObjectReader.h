@@ -14,6 +14,7 @@
 #include "Const.h"
 #include "RootData.h"
 #include "Object.h"
+#include "math.h"
 
 using namespace std;
 
@@ -29,12 +30,15 @@ protected:
     int *objectIndex;
     map<int, int> objectInEachPage;
     ifstream inStreamRegularFile;
+
 private:
     RootData rootData;
 
     void  readIndexesFromFile(const string & fname);
 
     char * readPageFromFile(int id);
+
+    int networkPageCount;
 
 public:
     ObjectReader(const string & fname, const string &method);
@@ -73,6 +77,8 @@ public:
     void deSerializeNetworkBuffer(char* buffer, int pageSize, vector<TweetStatusFlatBuffers *> &list);
 
     void readAllPages(char **pages);
+
+    int getNetworkPageCount() const;
 
 };
 #endif //CPP_OBJECTREADER_H
