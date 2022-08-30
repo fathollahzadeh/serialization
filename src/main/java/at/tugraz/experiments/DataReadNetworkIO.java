@@ -210,21 +210,24 @@ public class DataReadNetworkIO {
             while (true) {
                 byte ack = 1;
                 client.dos.writeByte(ack);
-                int pageSize = client.dis.readInt();
+
+                byte[] pageSizeBytes = new byte[4];
+                client.dis.read(pageSizeBytes);
+                int pageSize = ByteBuffer.wrap(pageSizeBytes).getInt();
                 if (pageSize == -1) {
                     //client.dos.writeByte(ack);
                     break;
                 }
                 System.out.println("NetworkReadTask>>>>>>>>>>> "+ pageSize);
                 byte[] buffer = new byte[pageSize+4];
-                ByteBuffer tmpBB = ByteBuffer.allocate(4);
-                tmpBB.putInt(pageSize);
-                tmpBB.get(buffer);
-
+                buffer[0] = pageSizeBytes[0];
+                buffer[1] = pageSizeBytes[1];
+                buffer[2] = pageSizeBytes[2];
+                buffer[3] = pageSizeBytes[3];
                 int off = 4;
                 do {
                     off += client.dis.read(buffer, off, pageSize - off);
-                } while (off < pageSize);
+                } while (off < pageSize+4);
                 this.queue.put(buffer);
             }
             this.status = false;
