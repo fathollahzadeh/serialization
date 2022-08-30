@@ -262,10 +262,9 @@ public class ObjectReader {
                 if (fileSize - (long) (i + 1) * Const.NETWORK_PAGESIZE < 0) pageSize = (int) (fileSize - i * Const.NETWORK_PAGESIZE);
                 ByteBuffer page = ByteBuffer.allocateDirect(pageSize);
                 page.putInt(pageSize);
-                page.position(4);
                 long newPosition = (long) i * pageSize;
                 inStreamRegularFile.position(newPosition);
-                inStreamRegularFile.read(page);
+                inStreamRegularFile.read(page, 4);
                 page = page.flip();
                 byte[] bytes = new byte[page.capacity()];
                 page.get(bytes, 0, page.capacity());
