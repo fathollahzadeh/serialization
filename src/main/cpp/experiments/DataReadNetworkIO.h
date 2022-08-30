@@ -1,5 +1,5 @@
-#ifndef CPP_DATAREADNETWORKNETWORKIO_H
-#define CPP_DATAREADNETWORKNETWORKIO_H
+#ifndef CPP_DATAREADNETWORKIO_H
+#define CPP_DATAREADNETWORKIO_H
 
 #include "MachineInfo.h"
 #include "Network.h"
@@ -18,7 +18,7 @@ using namespace moodycamel;
 using namespace std;
 
 template<class T>
-class DataReadNetworkNetworkIO {
+class DataReadNetworkIO {
 private:
     string config;
     string inDataPath;
@@ -38,13 +38,13 @@ private:
     void ExternalSortTask(ObjectWriter *writer, bool onDisk, Client *client);
 
 public:
-    DataReadNetworkNetworkIO(string config, string inDataPath, string outDataPath, string method, string plan);
+    DataReadNetworkIO(string config, string inDataPath, string outDataPath, string method, string plan);
 
     void runDataReader();
 };
 
 template<class T>
-void DataReadNetworkNetworkIO<T>::runDataReader() {
+void DataReadNetworkIO<T>::runDataReader() {
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, method);
@@ -82,11 +82,11 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
             server.accept(client);
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<char *>(QUEUE_SIZE);
-            pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::NetworkReadTask, this, clientReader, client, i));
+            pool.push_back(std::thread(&DataReadNetworkIO<T>::NetworkReadTask, this, clientReader, client, i));
             clients[i] = client;
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(QUEUE_SIZE);
-        pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
+        pool.push_back(std::thread(&DataReadNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
 
@@ -120,11 +120,11 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
             server.accept(client);
             ObjectReader *clientReader = new ObjectReader(method);
             queues[i] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
-            pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::NetworkReadTask, this, clientReader, client, i));
+            pool.push_back(std::thread(&DataReadNetworkIO<T>::NetworkReadTask, this, clientReader, client, i));
             clients[i] = client;
         }
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
-        pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
+        pool.push_back(std::thread(&DataReadNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
         if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
             ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
@@ -152,7 +152,7 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
 }
 
 template<class T>
-Client *DataReadNetworkNetworkIO<T>::initClient(string ip, int port) {
+Client *DataReadNetworkIO<T>::initClient(string ip, int port) {
     for (int i = 0; i < 1000; i++) {
         try {
             Client *client = new Client(ip, port);
@@ -164,7 +164,7 @@ Client *DataReadNetworkNetworkIO<T>::initClient(string ip, int port) {
 }
 
 template<class T>
-void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
+void DataReadNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
     statuses[id] = true;
     while (true) {
         client->writeACK();
@@ -181,7 +181,7 @@ void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *
 }
 
 template<class T>
-void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
+void DataReadNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     statuses[id] = true;
     char ** pages = new char*[reader->getNetworkPageCount()];
     reader->readAllPages(pages);
@@ -193,7 +193,7 @@ void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, 
 }
 
 template<class T>
-void DataReadNetworkNetworkIO<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Client *client) {
+void DataReadNetworkIO<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Client *client) {
     // reading objects from the first pages and adding them to a priority queue
     bool flag;
     do {
@@ -225,7 +225,7 @@ void DataReadNetworkNetworkIO<T>::ExternalSortTask(ObjectWriter *writer, bool on
 }
 
 template<class T>
-DataReadNetworkNetworkIO<T>::DataReadNetworkNetworkIO(string config,
+DataReadNetworkIO<T>::DataReadNetworkIO(string config,
                                     string inDataPath,
                                     string outDataPath,
                                     string method,
@@ -236,4 +236,4 @@ DataReadNetworkNetworkIO<T>::DataReadNetworkNetworkIO(string config,
         method(std::move(method)),
         plan(std::move(plan)) {}
 
-#endif //CPP_DATAREADNETWORKNETWORKIO_H
+#endif //CPP_DATAREADNETWORKIO_H

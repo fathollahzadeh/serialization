@@ -243,8 +243,8 @@ target_link_libraries(DataReadNetwork PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(DataReadNetwork PRIVATE mongo::mongocxx_shared)
 
 # Data Read Network NetworkIO
-add_executable(DataReadNetworkNetworkIO
-        experiments/DataReadNetworkNetworkIO.cpp
+add_executable(DataReadNetworkIO
+        experiments/DataReadNetworkIO.cpp
         util/header/
         ${srcIO}
         ${srcUtil}
@@ -254,5 +254,5 @@ add_executable(DataReadNetworkNetworkIO
         ${srcProtobufcc}
         ${srcFlatbuf}
         )
-target_link_libraries(DataReadNetworkNetworkIO PRIVATE mongo::bsoncxx_shared)
-target_link_libraries(DataReadNetworkNetworkIO PRIVATE mongo::mongocxx_shared)
+target_link_libraries(DataReadNetworkIO PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadNetworkIO PRIVATE mongo::mongocxx_shared)

@@ -11,7 +11,7 @@ IP="${IP%%*( )}"
 
 for rp in {1..1}; do
     start=$(date +%s%N)
-    SCRIPT="./cppbin/DataReadNetworkNetworkIO ${inDataPath} ${outDataPath} ${method} ${NETWORKCONFIG} ${plan}"
+    SCRIPT="./cppbin/DataReadNetworkIO ${inDataPath} ${outDataPath} ${method} ${NETWORKCONFIG} ${plan}"
     echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)

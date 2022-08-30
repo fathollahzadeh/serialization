@@ -166,6 +166,17 @@ public class ObjectWriter {
             logger.error("writeObjectToNetworkPage:" + ex);
         }
     }
+    public void writeToNetworkPage(ByteBuffer page, DataOutputStream dos, DataInputStream dis) {
+        try {
+        byte ack = dis.readByte();
+        if (ack != 1) {
+            throw new RuntimeException("writeObjectToNetworkPage " + ack);
+        }
+        dos.write(page.array());
+        } catch (Exception ex) {
+            logger.error("writeToNetworkPage:", ex);
+        }
+    }
 
     public void flush() {
         //Write last page in file:
@@ -236,6 +247,31 @@ public class ObjectWriter {
             this.bosIndexFile.write(data); // write the data
         } catch (Exception e) {
             logger.error("write index to file error! ", e);
+        }
+    }
+
+    public void writeNetworkPageToFile(ByteBuffer page) {
+        try {
+            randOutStreamRegularFile.seek(randOutStreamRegularFile.length());
+            randOutStreamRegularFile.write(page.array());
+        }
+        catch (Exception ex){
+            logger.error("writeNetworkPageToFile! ", ex);
+        }
+    }
+
+    public void flushNetworkPageWriter(){
+        try {
+            // flush BufferedOutputStream
+            bosIndexFile.flush();
+        } catch (Exception e) {
+            logger.error("can't close bosIndexFile file! ", e);
+        }
+
+        try {
+            this.randOutStreamRegularFile.close();
+        } catch (IOException e) {
+            logger.error("can't close randOutStreamRegularFile file! ", e);
         }
     }
 }

@@ -30,6 +30,8 @@ public class ObjectReader {
     protected FileChannel inStreamRegularFile;
     protected ByteBuffer bbPageBuffer;
     protected Kryo kryo;
+    protected int networkPageCount;
+    protected long fileSize;
 
     public ObjectReader(String fname, String method) {
         this(method);
@@ -54,6 +56,8 @@ public class ObjectReader {
                 if (objectInEachPage.containsKey(index)) objectInEachPage.put(index, objectInEachPage.get(index) + 1);
                 else objectInEachPage.put(index, 0);
             }
+            fileSize = inStreamRegularFile.size();
+            networkPageCount = (int) Math.ceil((double) fileSize / Const.NETWORK_PAGESIZE);
         } catch (Exception ex) {
             logger.error("prepareToRead! ", ex);
         }
@@ -138,7 +142,7 @@ public class ObjectReader {
         //Iterate over all objects that you aspire to read.
         int index = 0;
         for (int j = (int) i; j < listSize; j++)
-           readListOfObject[index++] = readObject(j);
+            readListOfObject[index++] = readObject(j);
 
         return readListOfObject;
     }
@@ -248,5 +252,27 @@ public class ObjectReader {
 
     public HashMap<Integer, Integer> getObjectInEachPage() {
         return objectInEachPage;
+    }
+
+    public ArrayList<ByteBuffer> readAllPages() {
+        ArrayList<ByteBuffer> result = new ArrayList<>();
+        try {
+            for (int i = 0; i < networkPageCount; ++i) {
+                int pageSize = Const.NETWORK_PAGESIZE;
+                if (fileSize - (long) (i + 1) * Const.NETWORK_PAGESIZE < 0) pageSize = (int) (fileSize - i * Const.NETWORK_PAGESIZE);
+                ByteBuffer page = ByteBuffer.allocateDirect(pageSize +4);
+                page.putInt(pageSize);
+                page.position(4);
+                long newPosition = (long) i * pageSize;
+                inStreamRegularFile.position(newPosition);
+                int bbb = inStreamRegularFile.read(page);
+                System.out.println(">>>>>>>> "+bbb);
+                page.flip();
+                result.add(page);
+            }
+        } catch (Exception ex) {
+            logger.error("read new page error!", ex);
+        }
+        return result;
     }
 }

@@ -1,4 +1,4 @@
-#include "DataReadNetworkNetworkIO.h"
+#include "DataReadNetworkIO.h"
 #include <iostream>
 
 using namespace std;
@@ -29,22 +29,22 @@ int main(int argc, char *argv[]) {
         case HANDCODED:
         case BOOST:
         case BSON: {
-            DataReadNetworkNetworkIO<TweetStatus> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
+            DataReadNetworkIO<TweetStatus> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
             dataReadNetwork.runDataReader();
             break;
         }
         case INPLACE: {
-            DataReadNetworkNetworkIO<TweetStatusIP> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
+            DataReadNetworkIO<TweetStatusIP> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
             dataReadNetwork.runDataReader();
             break;
         }
         case PROTOBUF: {
-            DataReadNetworkNetworkIO<TweetStatusProto> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
+            DataReadNetworkIO<TweetStatusProto> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
             dataReadNetwork.runDataReader();
             break;
         }
         case FLATBUF: {
-            DataReadNetworkNetworkIO<TweetStatusFlatBuffers> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
+            DataReadNetworkIO<TweetStatusFlatBuffers> dataReadNetwork(config,inDataPath, outDataPath,method, plan);
             dataReadNetwork.runDataReader();
             break;
         }
