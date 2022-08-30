@@ -174,7 +174,7 @@ public class ObjectWriter {
             if (ack != 1) {
                 throw new RuntimeException("writeObjectToNetworkPage  ACK " + ack);
             }
-            dos.write(page.array());
+            dos.write(page.array(), 0, page.capacity());
         } catch (Exception ex) {
             logger.error("writeToNetworkPage:", ex);
         }
