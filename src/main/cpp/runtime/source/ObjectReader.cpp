@@ -41,7 +41,7 @@ ObjectReader::ObjectReader(const string &fname, const string &method) : ObjectRe
     }
 
     inStreamRegularFile.seekg(0, std::ifstream::end);
-    fileSize= inStreamRegularFile.tellg();
+    fileSize = inStreamRegularFile.tellg();
     inStreamRegularFile.seekg(0, std::ifstream::beg);
 
     networkPageCount = ceil((double) fileSize / NETWORK_PAGESIZE);
@@ -326,7 +326,7 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
 void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<TweetStatusProto *> &list) {
     int relativePosition = 0;
     do {
-         int objectSize = 0;
+        int objectSize = 0;
         TweetStatusProto *object = new TweetStatusProto();
         object->deserializeProto(buffer + relativePosition, objectSize);
         list.push_back(object);
@@ -362,14 +362,15 @@ ObjectReader::~ObjectReader() {
 void ObjectReader::readAllPages(char **pages) {
     for (int i = 0; i < networkPageCount; ++i) {
         int pageSize = NETWORK_PAGESIZE;
-        if (fileSize - i*NETWORK_PAGESIZE < 0)
-            pageSize = (int)(fileSize - (i-1) * NETWORK_PAGESIZE);
-        pages[i] = new char[pageSize+sizeof(int)];
+        if (fileSize - i * NETWORK_PAGESIZE < 0)
+            pageSize = (int) (fileSize - (i - 1) * NETWORK_PAGESIZE);
+        pages[i] = new char[pageSize + sizeof(int)];
+        memcpy(pages[i], &pageSize, sizeof(int));
         long newPosition = (long) i * pageSize;
         inStreamRegularFile.clear();
         inStreamRegularFile.seekg(newPosition, std::ifstream::beg);
-        inStreamRegularFile.read( pages[i]+sizeof(int), pageSize);
-        memcpy(&pageSize, pages[i], sizeof(int));
+        inStreamRegularFile.read(pages[i] + sizeof(int), pageSize);
+
     }
 }
 
