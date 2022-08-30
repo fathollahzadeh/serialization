@@ -88,7 +88,7 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
-       // ExternalSortTask(&writer, false, client);
+        ExternalSortTask(&writer, false, client);
 
         for (auto &th: pool) {
             th.join();
@@ -199,20 +199,23 @@ void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, 
 template<class T>
 void DataReadNetworkNetworkIO<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Client *client) {
     // reading objects from the first pages and adding them to a priority queue
-    for (int i = 0; i < numberOfClients; i++) {
-        BlockingReaderWriterQueue<char *> *q = queues[i];
-        char *page = nullptr;
-        while (statuses[i] && (page = *q->peek()) == nullptr);
-        if (page == nullptr)
-            page = *q->peek();
-        if (page != nullptr) {
-            if (writer != nullptr) {
-                if (onDisk) writer->writeNetworkPageToFile(page);
-                else writer->writeToNetworkPage(page, client);
+    bool flag;
+    do {
+        flag = false;
+        for (int i = 0; i < numberOfClients; i++) {
+            BlockingReaderWriterQueue<char *> *q = queues[i];
+            while (statuses[i] && q->peek() == nullptr);
+            if (q->peek() != nullptr) {
+                char *page = *q->peek();
+                if (writer != nullptr) {
+                    if (onDisk) writer->writeNetworkPageToFile(page);
+                    else writer->writeToNetworkPage(page, client);
+                }
+                q->pop();
+                flag = true;
             }
-            q->pop();
         }
-    }
+    } while (flag);
 
     cout << "Network External Sort Data Transfer: Done!" << endl;
     if (writer != nullptr) {
