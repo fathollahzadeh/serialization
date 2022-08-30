@@ -322,11 +322,11 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client *client)
 
     // if serialization type is Handcoded:
     if (this->method == HANDCODED) {
-        object->serializeHandcoded(buffer + currentOffset , objectSize);
+        object->serializeHandcoded(buffer + currentOffset, objectSize);
     }
         // if serialization type is Boost:
     else if (this->method == BOOST) {
-        object->serializeBoost(buffer + currentOffset , objectSize);
+        object->serializeBoost(buffer + currentOffset, objectSize);
     } else if (this->method == BSON) {
         string jsonString = bsoncxx::to_json(object->serializeBSON());
         objectSize = jsonString.size();
@@ -335,7 +335,7 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client *client)
         memcpy(buffer + currentOffset, &objectSize, sizeof(int));
 
         // add json string to the buffer:
-        strcpy(buffer + currentOffset+ sizeof(objectSize), jsonString.c_str());
+        strcpy(buffer + currentOffset + sizeof(objectSize), jsonString.c_str());
 
         // add json size to the object size:
         objectSize += sizeof(objectSize);
@@ -425,14 +425,13 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatusFlatBuffers *object, Clie
 void ObjectWriter::writeToNetworkPage(char *page, Client *client) {
     client->readACK();
     int pageSize = rootData.parseInt(page);
-    client->write(page, pageSize+sizeof(int));
-    cout<<"write="<< pageSize<<endl;
+    client->write(page, pageSize + sizeof(int));
 }
 
 void ObjectWriter::writeNetworkPageToFile(char *page) {
     int pageSize = rootData.parseInt(page);
-    outStreamRegularFile.write(page+sizeof(int ), pageSize);
-    delete []page;
+    outStreamRegularFile.write(page + sizeof(int), pageSize);
+    delete[]page;
 }
 
 void ObjectWriter::flushNetworkPageWriter() {

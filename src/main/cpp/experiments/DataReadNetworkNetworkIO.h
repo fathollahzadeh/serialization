@@ -165,7 +165,6 @@ Client *DataReadNetworkNetworkIO<T>::initClient(string ip, int port) {
 
 template<class T>
 void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
-    cout<<"+++++++++++++++++++ Start"<<endl;
     statuses[id] = true;
     while (true) {
         client->writeACK();
@@ -177,21 +176,18 @@ void DataReadNetworkNetworkIO<T>::NetworkReadTask(ObjectReader *reader, Socket *
         memcpy(buffer, &pageSize, sizeof(int));
         client->read(buffer+sizeof(int), pageSize);
         while (!queues[id]->try_enqueue(buffer));
-        cout<<"Page Size = "<<pageSize<<endl;
     }
     statuses[id] = false;
 }
 
 template<class T>
 void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
-    cout<<"0000000000000000000000000 Start"<<endl;
     statuses[id] = true;
     char ** pages = new char*[reader->getNetworkPageCount()];
     reader->readAllPages(pages);
 
     for (int i = 0; i < reader->getNetworkPageCount(); i++) {
        while (!queues[id]->try_enqueue(pages[i]));
-       cout<< "local page="<<i<<endl;
     }
     statuses[id] = false;
 }
@@ -215,7 +211,6 @@ void DataReadNetworkNetworkIO<T>::ExternalSortTask(ObjectWriter *writer, bool on
                 flag = true;
             }
         }
-        cout<<" ++++++++++++ "<<endl;
     } while (flag);
 
     cout << "Network External Sort Data Transfer: Done!" << endl;

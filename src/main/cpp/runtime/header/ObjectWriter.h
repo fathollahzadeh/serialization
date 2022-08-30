@@ -14,7 +14,6 @@
 #include <TweetStatusFlatBuffers.h>
 #include <netinet/in.h>
 #include "ObjectReader.h"
-
 #include "Client.h"
 #include "Const.h"
 #include "RootData.h"
