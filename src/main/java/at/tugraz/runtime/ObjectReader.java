@@ -265,8 +265,7 @@ public class ObjectReader {
                 page.position(4);
                 long newPosition = (long) i * pageSize;
                 inStreamRegularFile.position(newPosition);
-                int bbb = inStreamRegularFile.read(page);
-                System.out.println(">>>>>>>> "+bbb);
+                inStreamRegularFile.read(page);
                 page.flip();
                 result.add(page);
             }

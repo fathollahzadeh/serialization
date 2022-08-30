@@ -168,7 +168,6 @@ public class ObjectWriter {
     }
 
     public void writeToNetworkPage(ByteBuffer page, DataOutputStream dos, DataInputStream dis) {
-        System.out.println("  >>>>>>>>>>>  "+ page.capacity());
         try {
             byte ack = dis.readByte();
             if (ack != 1) {
@@ -255,7 +254,7 @@ public class ObjectWriter {
     public void writeNetworkPageToFile(byte[] page) {
         try {
             randOutStreamRegularFile.seek(randOutStreamRegularFile.length());
-            randOutStreamRegularFile.write(page);
+            randOutStreamRegularFile.write(page, 4, page.length -4);
         } catch (Exception ex) {
             logger.error("writeNetworkPageToFile! ", ex);
         }
