@@ -51,7 +51,7 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
 
     if (machineInfo->getNodeType() == LEAF) {
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
-        char ** pages;
+        char ** pages = new char*[reader->getObjectInEachPage().size()];
         reader->readAllPages(pages);
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         for (int i = 0; i < reader->getObjectInEachPage().size(); ++i) {
@@ -81,7 +81,7 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
-        //ExternalSortTask(&writer, false, client);
+        ExternalSortTask(&writer, false, client);
 
         for (auto &th: pool) {
             th.join();
@@ -119,12 +119,12 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
         queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
 
-//        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
-//            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
-//            ExternalSortTask(&writer, true, nullptr);
-//        }
-//        else
-//            ExternalSortTask(nullptr, false, nullptr);
+        if (strcasecmp(plan.c_str(), "d2d") == 0 || strcasecmp(plan.c_str(), "m2d") == 0) {
+            ObjectWriter writer(outDataPath, method, machineInfo->getTotalNRow());
+            ExternalSortTask(&writer, true, nullptr);
+        }
+        else
+            ExternalSortTask(nullptr, false, nullptr);
 
         for (auto &th: pool) {
             th.join();
@@ -179,12 +179,11 @@ template<class T>
 void DataReadNetworkNetworkIO<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     cout<<"0000000000000000000000000 Start"<<endl;
     statuses[id] = true;
-    char **pages;
+    char ** pages = new char*[reader->getObjectInEachPage().size()];
     reader->readAllPages(pages);
 
     for (int i = 0; i < reader->getObjectInEachPage().size(); i++) {
        while (!queues[id]->try_enqueue(pages[i]));
-       cout<<"local page "<<i<<endl;
     }
     statuses[id] = false;
 }

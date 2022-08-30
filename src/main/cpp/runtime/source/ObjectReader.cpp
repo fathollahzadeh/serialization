@@ -354,9 +354,7 @@ ObjectReader::~ObjectReader() {
 }
 
 void ObjectReader::readAllPages(char **pages) {
-    int pageCount = objectInEachPage.size();
-    pages = new char*[pageCount];
-    for (int i = 0; i < pageCount; ++i) {
+    for (int i = 0; i < objectInEachPage.size(); ++i) {
         pages[i] = new char[NETWORK_PAGESIZE];
         long newPosition = (long) i * NETWORK_PAGESIZE;
         inStreamRegularFile.clear();
