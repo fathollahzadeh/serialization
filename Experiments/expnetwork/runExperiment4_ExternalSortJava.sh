@@ -7,7 +7,7 @@ plan=$4
 log_file_name=$5
 
 IP=$(hostname -I)
-IP="${IP%%*( )}
+IP="${IP%%*( )}"
 
 for rp in {1..1}; do
     start=$(date +%s%N)
