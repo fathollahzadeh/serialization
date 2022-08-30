@@ -136,15 +136,16 @@ public class DataReadNetworkIO {
                 dataTasks.add(clientTask);
                 clients.add(cli);
             }
+            System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
             // read objects from local
             Task clientTask = new LocalReadTask(reader, machineInfo.getNrow());
             tasks.add(clientTask);
             dataTasks.add(clientTask);
 
             // add external sort task
-            if (plan.equalsIgnoreCase("d2d") || plan.equalsIgnoreCase("m2d")) tasks.add(new ExternalSortTask(dataTasks, writer, true, null, null));
+            if (plan.equalsIgnoreCase("d2d") || plan.equalsIgnoreCase("m2d"))
+                tasks.add(new ExternalSortTask(dataTasks, writer, true, null, null));
             else tasks.add(new ExternalSortTask(dataTasks, null, true, null, null));
-
 
             List<Future<Boolean>> rt = pool.invokeAll(tasks);
             pool.shutdown();
@@ -303,7 +304,9 @@ public class DataReadNetworkIO {
             do {
                 flag = false;
                 for (int i = 0; i < numberOfClients; i++) {
+                    System.out.println("waiting");
                     while (tasks.get(i).status && tasks.get(i).queue.isEmpty()) ;
+                    System.out.println("release");
                     if (!tasks.get(i).queue.isEmpty()) {
                         byte[] bb = tasks.get(i).queue.take();
                         if (writer != null) {
@@ -311,6 +314,7 @@ public class DataReadNetworkIO {
                             else writer.writeToNetworkPage(bb, dos, dis);
                         }
                         flag = true;
+                        System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFF");
                     }
                 }
             } while (flag);

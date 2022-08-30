@@ -268,18 +268,9 @@ public class ObjectReader {
                 page = page.flip();
                 byte[] bytes = new byte[page.capacity()];
                 page.get(bytes, 0, page.capacity());
-
-                byte[] aa = new byte[4];
-                aa[0] = bytes[0];
-                aa[1] = bytes[1];
-                aa[2] = bytes[2];
-                aa[3] = bytes[3];
-                int g = ByteBuffer.wrap(aa).getInt();
-                System.out.println(">>>>>>>>>>> "+ g);
                 result.add(bytes);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
             logger.error("read new page error!", ex);
         }
         return result;
