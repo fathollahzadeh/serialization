@@ -215,6 +215,7 @@ void DataReadNetworkNetworkIO<T>::ExternalSortTask(ObjectWriter *writer, bool on
                 flag = true;
             }
         }
+        cout<<" ++++++++++++ "<<endl;
     } while (flag);
 
     cout << "Network External Sort Data Transfer: Done!" << endl;
