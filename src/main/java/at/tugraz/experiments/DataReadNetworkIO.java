@@ -45,13 +45,15 @@ public class DataReadNetworkIO {
         MachineInfo machineInfo = network.getCurrentMachine();
         ObjectReader reader = new ObjectReader(inDataPath, method);
 
+
         if (machineInfo.getNodeType() == NodeType.LEAF) {
             Client client = initClient(machineInfo.getRoot().getIp(), machineInfo.getPort());
-            ArrayList<ByteBuffer> pages = reader.readAllPages();
+            ArrayList<byte[]> pages = reader.readAllPages();
 
             ObjectWriter writer = new ObjectWriter(method, machineInfo.getTotalNRow(), Const.NETWORK_PAGESIZE);
-            for (ByteBuffer bb : pages)
+            for (byte[] bb : pages) {
                 writer.writeToNetworkPage(bb, client.dos, client.dis);
+            }
 
             byte ack = client.dis.readByte();
             if (ack != 1) {
@@ -185,7 +187,7 @@ public class DataReadNetworkIO {
 
     private static abstract class Task implements Callable<Boolean> {
         protected final ObjectReader reader;
-        protected final BlockingQueue<ByteBuffer> queue;
+        protected final BlockingQueue<byte[]> queue;
         protected boolean status;
 
         public Task(ObjectReader reader) {
@@ -213,14 +215,17 @@ public class DataReadNetworkIO {
                     //client.dos.writeByte(ack);
                     break;
                 }
-                byte[] buffer = new byte[pageSize];
-                int off = 0;
+                System.out.println("NetworkReadTask>>>>>>>>>>> "+ pageSize);
+                byte[] buffer = new byte[pageSize+4];
+                ByteBuffer tmpBB = ByteBuffer.allocate(4);
+                tmpBB.putInt(pageSize);
+                tmpBB.get(buffer);
+
+                int off = 4;
                 do {
                     off += client.dis.read(buffer, off, pageSize - off);
                 } while (off < pageSize);
-
-                ByteBuffer bb = ByteBuffer.allocate(pageSize + 4).putInt(pageSize).put(buffer);
-                this.queue.put(bb);
+                this.queue.put(buffer);
             }
             this.status = false;
             return false;
@@ -238,8 +243,8 @@ public class DataReadNetworkIO {
         @Override
         public Boolean call() throws IOException, InterruptedException {
             this.status = true;
-            ArrayList<ByteBuffer> pages = reader.readAllPages();
-            for (ByteBuffer bb : pages) {
+            ArrayList<byte[]> pages = reader.readAllPages();
+            for (byte[] bb : pages) {
                 this.queue.put(bb);
             }
             this.status = false;
@@ -297,9 +302,9 @@ public class DataReadNetworkIO {
                 for (int i = 0; i < numberOfClients; i++) {
                     while (tasks.get(i).status && tasks.get(i).queue.isEmpty()) ;
                     if (!tasks.get(i).queue.isEmpty()) {
-                        ByteBuffer bb = tasks.get(i).queue.take();
+                        byte[] bb = tasks.get(i).queue.take();
                         if (writer != null) {
-                            if (onDisk) writer.writeNetworkPageToFile(bb.array());
+                            if (onDisk) writer.writeNetworkPageToFile(bb);
                             else writer.writeToNetworkPage(bb, dos, dis);
                         }
                         flag = true;

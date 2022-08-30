@@ -254,22 +254,25 @@ public class ObjectReader {
         return objectInEachPage;
     }
 
-    public ArrayList<ByteBuffer> readAllPages() {
-        ArrayList<ByteBuffer> result = new ArrayList<>();
+    public ArrayList<byte[]> readAllPages() {
+        ArrayList<byte[]> result = new ArrayList<>();
         try {
             for (int i = 0; i < networkPageCount; ++i) {
                 int pageSize = Const.NETWORK_PAGESIZE;
                 if (fileSize - (long) (i + 1) * Const.NETWORK_PAGESIZE < 0) pageSize = (int) (fileSize - i * Const.NETWORK_PAGESIZE);
-                ByteBuffer page = ByteBuffer.allocateDirect(pageSize +4);
+                ByteBuffer page = ByteBuffer.allocateDirect(pageSize);
                 page.putInt(pageSize);
                 page.position(4);
                 long newPosition = (long) i * pageSize;
                 inStreamRegularFile.position(newPosition);
                 inStreamRegularFile.read(page);
-                page.flip();
-                result.add(page);
+                page = page.flip();
+                byte[] bytes = new byte[page.capacity()];
+                page.get(bytes, 0, page.capacity());
+                result.add(bytes);
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             logger.error("read new page error!", ex);
         }
         return result;

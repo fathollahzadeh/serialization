@@ -167,13 +167,13 @@ public class ObjectWriter {
         }
     }
 
-    public void writeToNetworkPage(ByteBuffer page, DataOutputStream dos, DataInputStream dis) {
+    public void writeToNetworkPage(byte[] page, DataOutputStream dos, DataInputStream dis) {
         try {
             byte ack = dis.readByte();
             if (ack != 1) {
                 throw new RuntimeException("writeObjectToNetworkPage  ACK " + ack);
             }
-            dos.write(page.array(), 0, page.capacity());
+            dos.write(page, 4, page.length -4);
         } catch (Exception ex) {
             ex.printStackTrace();
             logger.error("writeToNetworkPage:", ex);
