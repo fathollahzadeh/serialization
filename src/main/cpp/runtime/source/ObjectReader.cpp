@@ -370,7 +370,7 @@ void ObjectReader::readAllPages(char **pages) {
         inStreamRegularFile.clear();
         inStreamRegularFile.seekg(newPosition, std::ifstream::beg);
         inStreamRegularFile.read(pages[i] + sizeof(int), pageSize);
-
+        cout<<"Reade Page from file = "<< pageSize<<endl;
     }
 }
 
