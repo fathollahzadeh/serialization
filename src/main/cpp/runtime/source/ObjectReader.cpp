@@ -362,8 +362,8 @@ ObjectReader::~ObjectReader() {
 void ObjectReader::readAllPages(char **pages) {
     for (int i = 0; i < networkPageCount; ++i) {
         int pageSize = NETWORK_PAGESIZE;
-        if (fileSize - i * NETWORK_PAGESIZE < 0)
-            pageSize = (int) (fileSize - (i - 1) * NETWORK_PAGESIZE);
+        if (fileSize - (i+1) * NETWORK_PAGESIZE < 0)
+            pageSize = (int) (fileSize - i * NETWORK_PAGESIZE);
         pages[i] = new char[pageSize + sizeof(int)];
         memcpy(pages[i], &pageSize, sizeof(int));
         long newPosition = (long) i * pageSize;
