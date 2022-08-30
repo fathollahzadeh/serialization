@@ -221,7 +221,7 @@ void DataReadNetworkNetworkIO<T>::ExternalSortTask(ObjectWriter *writer, bool on
     cout << "Network External Sort Data Transfer: Done!" << endl;
     if (writer != nullptr) {
         if (onDisk) writer->flushNetworkPageWriter();
-        else{ writer->flushToNetwork(client);
+        else{
             client->readACK();
             client->write(-1);
             client->readACK();
