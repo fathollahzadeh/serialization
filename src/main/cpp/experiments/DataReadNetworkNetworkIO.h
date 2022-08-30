@@ -48,6 +48,7 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, method);
+    int QUEUE_SIZE = ceil(NETWORK_CLIENT_QUEUE_SIZE * ((double )PAGESIZE/NETWORK_PAGESIZE));
 
     cout<< ">>>>>>>>>>>>>>>>>>>>>>>>>>> "<< reader->getNetworkPageCount()<<"  "<< reader->getObjectInEachPage().size()<<endl;
 
@@ -76,11 +77,11 @@ void DataReadNetworkNetworkIO<T>::runDataReader() {
             Socket *client = new Socket();
             server.accept(client);
             ObjectReader *clientReader = new ObjectReader(method);
-            queues[i] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
+            queues[i] = new BlockingReaderWriterQueue<char *>(QUEUE_SIZE);
             pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::NetworkReadTask, this, clientReader, client, i));
             clients[i] = client;
         }
-        queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(NETWORK_CLIENT_QUEUE_SIZE);
+        queues[numberOfClients - 1] = new BlockingReaderWriterQueue<char *>(QUEUE_SIZE);
         pool.push_back(std::thread(&DataReadNetworkNetworkIO<T>::LocalReadTask, this, reader, machineInfo->getNrow(), numberOfClients - 1));
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         ExternalSortTask(&writer, false, client);
