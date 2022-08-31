@@ -231,7 +231,7 @@ public class DataReadNetworkIO {
                 this.queue.put(buffer);
             }
             this.status = false;
-            System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+            System.out.println("NetworkReadTask FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
             return false;
         }
     }
@@ -252,7 +252,7 @@ public class DataReadNetworkIO {
                 this.queue.put(bb);
             }
             this.status = false;
-            System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+            System.out.println("LocalReadTask FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
             return false;
         }
     }
@@ -305,8 +305,9 @@ public class DataReadNetworkIO {
             do {
                 flag = false;
                 for (int i = 0; i < numberOfClients; i++) {
-                    System.out.println("Waiting  >> "+i);
+                    System.out.println("Waiting  >> "+i + " >>> "+tasks.get(i).status+" +++ "+ tasks.get(i).queue.isEmpty());
                     while (tasks.get(i).status && tasks.get(i).queue.isEmpty());
+                    System.out.println("Release");
                     if (!tasks.get(i).queue.isEmpty()) {
                         byte[] bb = tasks.get(i).queue.take();
                         if (writer != null) {
