@@ -227,6 +227,7 @@ public class DataReadNetworkIO {
                 do {
                     off += client.dis.read(buffer, off, pageSize + 4 - off);
                 } while (off < pageSize+3);
+                System.out.println(">>>>>>>>>>> "+pageSize);
                 this.queue.put(buffer);
             }
             this.status = false;
