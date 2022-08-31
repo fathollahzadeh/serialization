@@ -260,7 +260,7 @@ public class ObjectReader {
             for (int i = 0; i < networkPageCount; ++i) {
                 int pageSize = Const.NETWORK_PAGESIZE;
                 if (fileSize - (long) (i + 1) * Const.NETWORK_PAGESIZE < 0) pageSize = (int) (fileSize - i * Const.NETWORK_PAGESIZE);
-                ByteBuffer page = ByteBuffer.allocateDirect(pageSize);
+                ByteBuffer page = ByteBuffer.allocateDirect(pageSize+4);
                 page.putInt(pageSize);
                 long newPosition = (long) i * pageSize;
                 inStreamRegularFile.position(newPosition);
