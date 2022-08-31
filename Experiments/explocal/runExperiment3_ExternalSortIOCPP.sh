@@ -11,12 +11,12 @@ log_file_name=$7
 
 for rp in {1..1}; do
     start=$(date +%s%N)
-    SCRIPT="./cppbin/ExternalSort  ${inDataPath} ${outDataPath} ${method} ${chunk_size}"
+    SCRIPT="./cppbin/ExternalSortIO  ${inDataPath} ${outDataPath} ${method} ${chunk_size}"
     if [ "$task_set" = true ] ; then
         SCRIPT="taskset -c 0 $SCRIPT"
     fi
     echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)
-    echo ${method}"CPP,CPP,"${task_set}",Total,"${chunk_size}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+    echo ${method}"CPP,CPP,"${task_set}",IO,"${chunk_size}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
 done  
