@@ -227,8 +227,10 @@ public class DataReadNetworkIO {
                 buffer[3] = pageSizeBytes[3];
                 int off = 4;
                 do {
-                    off += client.dis.read(buffer, off, pageSize+4 - off);
+                    off += client.dis.read(buffer, off, pageSize + 4 - off);
+                    System.out.println("+++++ "+ off);
                 } while (off < pageSize+4);
+                System.out.println("RRRRRRRRRRRRRR");
                 this.queue.put(buffer);
             }
             this.status = false;
@@ -305,7 +307,7 @@ public class DataReadNetworkIO {
                 flag = false;
                 for (int i = 0; i < numberOfClients; i++) {
                     System.out.println("waiting");
-                    while (tasks.get(i).status && tasks.get(i).queue.isEmpty()) ;
+                    while (tasks.get(i).status && tasks.get(i).queue.isEmpty());
                     System.out.println("release");
                     if (!tasks.get(i).queue.isEmpty()) {
                         byte[] bb = tasks.get(i).queue.take();
