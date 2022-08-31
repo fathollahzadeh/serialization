@@ -229,7 +229,7 @@ public class DataReadNetworkIO {
                 do {
                     off += client.dis.read(buffer, off, pageSize + 4 - off);
                     System.out.println("+++++ "+ off);
-                } while (off < pageSize+4);
+                } while (off < pageSize+3);
                 System.out.println("RRRRRRRRRRRRRR");
                 this.queue.put(buffer);
             }
