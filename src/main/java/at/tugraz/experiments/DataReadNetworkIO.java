@@ -217,6 +217,7 @@ public class DataReadNetworkIO {
                 byte[] pageSizeBytes = new byte[4];
                 client.dis.read(pageSizeBytes);
                 int pageSize = ByteBuffer.wrap(pageSizeBytes).getInt();
+                System.out.println(">>>>>>>>>>> "+pageSize);
                 if (pageSize == -1) {
                     //client.dos.writeByte(ack);
                     break;
@@ -230,7 +231,7 @@ public class DataReadNetworkIO {
                 do {
                     off += client.dis.read(buffer, off, pageSize + 4 - off);
                 } while (off < pageSize+4);
-                System.out.println(">>>>>>>>>>> "+pageSize);
+
                 this.queue.put(buffer);
             }
             this.status = false;
