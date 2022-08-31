@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd data
-rm -rf *
+#rm -rf *
 wget https://storage.googleapis.com/tweets_1m/tweets.zip
 wget https://storage.googleapis.com/tweets_1m/random_lists.zip
 
@@ -18,7 +18,7 @@ cd ..
 
 SCRIPT="$jnCMD -DinDataPath=data/tweets_1m.txt\
                -DoutDataPath=data/tweets.txt\
-               -Dcount=10\
+               -Dcount=14\
                -cp ./SerializationJava.jar at.tugraz.experiments.DataDuplicate
                 "          
 echo $SCRIPT
