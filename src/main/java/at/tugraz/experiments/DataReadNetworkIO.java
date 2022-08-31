@@ -60,7 +60,10 @@ public class DataReadNetworkIO {
             if (ack != 1) {
                 throw new RuntimeException("writeObjectToNetworkPage " + ack);
             }
-            client.dos.writeInt(-1);
+            ByteBuffer bb = ByteBuffer.allocate(4).putInt(-1);
+            byte[] tmp = new byte[4];
+            bb.get(tmp);
+            client.dos.write(tmp);
             System.out.println("-------------------1");
             ack = client.dis.readByte();
             System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
