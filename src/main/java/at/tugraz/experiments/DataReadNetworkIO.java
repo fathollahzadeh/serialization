@@ -2,13 +2,11 @@ package at.tugraz.experiments;
 
 import at.tugraz.runtime.ObjectReader;
 import at.tugraz.runtime.ObjectWriter;
-import at.tugraz.tweet.TweetStatus;
 import at.tugraz.util.CommonThreadPool;
 import at.tugraz.util.Const;
 import at.tugraz.util.MachineInfo;
 import at.tugraz.util.Network;
 import at.tugraz.util.NodeType;
-import at.tugraz.util.RootData;
 import org.apache.log4j.Logger;
 
 import java.io.DataInputStream;
@@ -18,9 +16,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
@@ -56,14 +52,11 @@ public class DataReadNetworkIO {
             }
 
             byte ack = client.dis.readByte();
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
             if (ack != 1) {
                 throw new RuntimeException("writeObjectToNetworkPage " + ack);
             }
             client.dos.writeInt(-1);
-            System.out.println("-------------------1");
             ack = client.dis.readByte();
-            System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
             if (ack != 1) {
                 throw new RuntimeException("LEAF read final network page " + ack);
             }
@@ -217,7 +210,6 @@ public class DataReadNetworkIO {
                 byte[] pageSizeBytes = new byte[4];
                 client.dis.read(pageSizeBytes);
                 int pageSize = ByteBuffer.wrap(pageSizeBytes).getInt();
-                System.out.println(">>>>>>>>>>> "+pageSize);
                 if (pageSize < 0) {
                     //client.dos.writeByte(ack);
                     break;
@@ -235,7 +227,6 @@ public class DataReadNetworkIO {
                 this.queue.put(buffer);
             }
             this.status = false;
-            System.out.println("NetworkReadTask FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
             return false;
         }
     }
@@ -256,7 +247,6 @@ public class DataReadNetworkIO {
                 this.queue.put(bb);
             }
             this.status = false;
-            System.out.println("LocalReadTask FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
             return false;
         }
     }
@@ -309,9 +299,7 @@ public class DataReadNetworkIO {
             do {
                 flag = false;
                 for (int i = 0; i < numberOfClients; i++) {
-                    System.out.println("Waiting  >> "+i + " >>> "+tasks.get(i).status+" +++ "+ tasks.get(i).queue.isEmpty());
                     while (tasks.get(i).status && tasks.get(i).queue.isEmpty());
-                    System.out.println("Release");
                     if (!tasks.get(i).queue.isEmpty()) {
                         byte[] bb = tasks.get(i).queue.take();
                         if (writer != null) {
