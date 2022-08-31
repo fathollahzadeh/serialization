@@ -56,11 +56,14 @@ public class DataReadNetworkIO {
             }
 
             byte ack = client.dis.readByte();
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
             if (ack != 1) {
                 throw new RuntimeException("writeObjectToNetworkPage " + ack);
             }
             client.dos.writeInt(-1);
+            System.out.println("-------------------1");
             ack = client.dis.readByte();
+            System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
             if (ack != 1) {
                 throw new RuntimeException("LEAF read final network page " + ack);
             }
