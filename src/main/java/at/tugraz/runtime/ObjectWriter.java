@@ -107,6 +107,10 @@ public class ObjectWriter {
         for (RootData object : objects)
             writeObjectToFile(object);
     }
+    public void writeBufferToFile(ArrayList<byte[]> buffers) {
+        for (byte[] ob : buffers)
+            writeObjectToFile(ob);
+    }
 
     public void writeObjectToFile(ArrayList<RootData> objects) {
         for (RootData object : objects)
@@ -115,6 +119,10 @@ public class ObjectWriter {
 
     public void writeObjectToFile(RootData object) {
         byte[] buffer = serializeObject(object);
+        writeObjectToFile(buffer);
+    }
+
+    public void writeObjectToFile(byte[] buffer) {
         int objectSize;
         try {
             objectSize = buffer.length;

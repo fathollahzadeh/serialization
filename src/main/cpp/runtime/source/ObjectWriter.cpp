@@ -4,6 +4,7 @@ ObjectWriter::~ObjectWriter() {
     delete[] pageBuffer;
     delete[] pageIndex;
     delete[] objectIndex;
+    delete[] objectLength;
 }
 
 ObjectWriter::ObjectWriter(const string &fname, const string &method, int rlen) : ObjectWriter(method, rlen, PAGESIZE) {
@@ -35,6 +36,7 @@ ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
     this->row = 0;
     this->pageIndex = new int[rlen];
     this->objectIndex = new int[rlen];
+    this->objectLength = new int[rlen];
 
     if (this->method == INPLACE) {
         thread::id this_id = this_thread::get_id();
@@ -42,6 +44,10 @@ ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
         allocator.setUp(this->pageBuffer, 2 * PAGESIZE);
         Object::allocator[this_id] = allocator;
     }
+}
+
+void ObjectWriter::writeBufferToFile(char *buffer, int bufferSize) {
+    outStreamRegularFile.write(buffer, bufferSize);
 }
 
 void ObjectWriter::writeObjectToFile(TweetStatus *object) {
@@ -105,6 +111,7 @@ void ObjectWriter::writeObjectToFile(TweetStatus *object) {
         }
         pageIndex[row] = currentPageNumber;
         objectIndex[row] = currentOffset;
+        objectLength[row] = objectSize;
         currentOffset += objectSize;
         row++;
     }
@@ -122,6 +129,26 @@ void ObjectWriter::flush() {
 
     //Write objectIndex Vector to the File:
     this->writeIndexToFile(objectIndex);
+
+    // Write ObjectLength Vector to the File
+    this->writeIndexToFile(objectLength);
+
+    //Close Index file:
+    this->outIndexFile.close();
+}
+
+void ObjectWriter::flush(int *pIndex, int *oIndex, int *oLength) {
+     //Close Serialized Data file:
+    this->outStreamRegularFile.close();
+
+    //Write PageIndex Vector to the File:
+    this->writeIndexToFile(pIndex);
+
+    //Write objectIndex Vector to the File:
+    this->writeIndexToFile(oIndex);
+
+    //Write objectLength Vector to the File:
+    this->writeIndexToFile(oLength);
 
     //Close Index file:
     this->outIndexFile.close();
@@ -166,6 +193,7 @@ void ObjectWriter::writeInPlaceObjectToFile(TweetStatus *object) {
 
     pageIndex[row] = currentPageNumber;
     objectIndex[row] = currentOffset;
+    objectLength[row] = objectSize + sizeofObject;
     currentOffset += sizeofObject + objectSize;
     row++;
 }
@@ -259,6 +287,7 @@ void ObjectWriter::writeObjectToFile(TweetStatusIP *object) {
     }
     pageIndex[row] = currentPageNumber;
     objectIndex[row] = currentOffset;
+    objectLength[row] = objectSize + sizeofObject;
     currentOffset += objectSize + sizeofObject;
     row++;
 }
@@ -286,6 +315,7 @@ void ObjectWriter::writeObjectToFile(TweetStatusProto *object) {
     }
     pageIndex[row] = currentPageNumber;
     objectIndex[row] = currentOffset;
+    objectLength[row] = objectSize;
     currentOffset += objectSize;
     row++;
 }
@@ -299,7 +329,6 @@ void ObjectWriter::writeObjectToFile(TweetStatusFlatBuffers *object) {
     if ((currentOffset + objectSize) > PAGESIZE) {
 
         //Write in file:
-        auto tmpTime = chrono::steady_clock::now();
         outStreamRegularFile.write(pageBuffer, PAGESIZE);
 
         //At this point, previous page is written in file.
@@ -312,6 +341,7 @@ void ObjectWriter::writeObjectToFile(TweetStatusFlatBuffers *object) {
     }
     pageIndex[row] = currentPageNumber;
     objectIndex[row] = currentOffset;
+    objectLength[row] = objectSize;
     currentOffset += objectSize;
     row++;
 }
@@ -444,6 +474,11 @@ void ObjectWriter::flushNetworkPageWriter() {
     //Write objectIndex Vector to the File:
     this->writeIndexToFile(objectIndex);
 
+    //Write objectLength Vector to the File:
+    this->writeIndexToFile(objectLength);
+
     //Close Index file:
     this->outIndexFile.close();
 }
+
+

@@ -8,7 +8,7 @@ platform=$5
 task_set=$6
 log_file_name=$7
 
-for rp in {1..5}; do
+for rp in {1..1}; do
     start=$(date +%s%N)
     SCRIPT="$jCMD  -DinDataPath=${inDataPath}\
                    -DoutDataPath=${outDataPath}.${method}Java\

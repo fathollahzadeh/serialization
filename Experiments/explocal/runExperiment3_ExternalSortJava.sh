@@ -10,8 +10,8 @@ log_file_name=$7
 
 for rp in {1..1}; do
     start=$(date +%s%N)
-    SCRIPT="$jCMD  -DinDataPath=${inDataPath}.${method}Java\
-                   -DinDataPath=${outDataPath}\
+    SCRIPT="$jnCMD -DinDataPath=${inDataPath}\
+                   -DoutDataPath=${outDataPath}\
                    -Dnrow=${nrow}\
                    -DchunkSize=${chunk_size}\
                    -Dmethod=${method}\
@@ -23,5 +23,5 @@ for rp in {1..1}; do
     echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)
-    echo ${method}"Java,Java,"${task_set}","${chunk_size}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+    echo ${method}"Java,Java,"${task_set}",Total,"${chunk_size}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
 done    

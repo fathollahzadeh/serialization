@@ -178,20 +178,24 @@ public class ObjectReader {
         return readObjectWithSerialization(new TweetStatus(), buffer);
     }
 
-    public void readIO(long i, int n) {
+    public ArrayList<byte[]> readIO(long i, int n) {
         long listSize = Math.min((i + n), this.rlen);
+        ArrayList<byte[]> listBytes = new ArrayList<>();
         //Iterate over all objects that you aspire to read.
-        for (int j = (int) i; j < listSize; j++)
-            readIO(j);
+        for (int j = (int) i; j < listSize; j++) {
+           listBytes.add(readIO(j));
+        }
+        return listBytes;
     }
 
-    public void readIO(int i) {
+    public byte[] readIO(int i) {
         readPage(this.pageIndex[i]);
         byte[] buffer = new byte[this.objectLength[i]];
         // Copy part of the byte buffer to another byte array
         int relativePosition = Math.toIntExact(this.objectIndex[i]);
         this.bbPageBuffer.position(relativePosition);
         this.bbPageBuffer.get(buffer, 0, this.objectLength[i]);
+        return buffer;
     }
 
 

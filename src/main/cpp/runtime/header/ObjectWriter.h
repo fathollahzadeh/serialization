@@ -33,6 +33,7 @@ protected:
     int rlen;
     int *pageIndex;
     int *objectIndex;
+    int *objectLength;
 
 
 private:
@@ -50,6 +51,8 @@ public:
     ObjectWriter(const string &method, int rlen, int pageSize);
 
     void serializeObject(TweetStatus *object);
+
+    void writeBufferToFile(char* buffer, int bufferSize);
 
     void writeObjectToFile(TweetStatus *object);
 
@@ -74,6 +77,8 @@ public:
     void flushToNetwork(Client *client);
 
     void flush();
+
+    void flush(int *pIndex, int *oIndex, int *oLength);
 
     void flushNetworkPageWriter();
 };

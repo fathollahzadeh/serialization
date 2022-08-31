@@ -97,6 +97,19 @@ void ObjectReader::readIndexesFromFile(const string &fname) {
         bytesRead += sizeof(value);
         objectIndex[i] = value;
     }
+
+    //Read ObjectIndex size:
+    int objectLengthVectorSize = this->rootData.parseInt(buffer + bytesRead);
+    bytesRead += sizeof(objectLengthVectorSize);
+
+    //Read ObjectIndex vector from buffer:
+    this->objectLength = new int[objectLengthVectorSize];
+    for (int i = 0; i < objectLengthVectorSize; i++) {
+        value = this->rootData.parseInt(buffer + bytesRead);
+        bytesRead += sizeof(value);
+        objectLength[i] = value;
+    }
+
     //Free for memory leak:
     delete[] buffer;
 
@@ -248,12 +261,46 @@ int ObjectReader::getMethod() const {
     return method;
 }
 
+int ObjectReader::readIO(long i, int n, vector<char*> &list, vector<int> &listLength, int *pIndex, int *oIndex, int *oLength) {
+    int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
+    int currOffset = 0;
+    int currPageNumber = 0;
+    char *tBuffer = new char[PAGESIZE];
+    //Iterate over all objects that you aspire to read.
+    int index = 0;
+    for (int j = i; j < listSize; j++){
+        //Initialize the buffer with the existing page:
+        char *curBuffer = readPageFromFile(pageIndex[j]);
+
+        //Read the object using a object index.
+        //Deserialize object based on preference:
+        int tempObjectSize = objectLength[j];
+
+        if ((currOffset + tempObjectSize) > PAGESIZE) {
+            list.push_back(tBuffer);
+            listLength.push_back(currOffset);
+            currOffset = 0;
+            currPageNumber++;
+            tBuffer = new char[PAGESIZE];
+        }
+        memcpy(tBuffer+currOffset, curBuffer + objectIndex[j], tempObjectSize);
+        pIndex[index] = currPageNumber;
+        oIndex[index] = currOffset;
+        oLength[index] = tempObjectSize;
+        currOffset += tempObjectSize;
+        index++;
+    }
+    list.push_back(tBuffer);
+    listLength.push_back(currOffset);
+    return index;
+}
+
 void ObjectReader::readIO(long i, int n) {
 
     int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
     //Iterate over all objects that you aspire to read.
     for (int j = i; j < listSize; j++)
-        this->readPageFromFile(j);
+        this->readIO(j);
 }
 
 void ObjectReader::readIO(long i) {
@@ -357,6 +404,7 @@ ObjectReader::~ObjectReader() {
     delete[] pageBuffer;
     delete[] pageIndex;
     delete[] objectIndex;
+    delete[] objectLength;
 }
 
 void ObjectReader::readAllPages(char **pages) {
@@ -376,3 +424,5 @@ void ObjectReader::readAllPages(char **pages) {
 int ObjectReader::getNetworkPageCount() const {
     return networkPageCount;
 }
+
+

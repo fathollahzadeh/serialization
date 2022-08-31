@@ -28,6 +28,7 @@ protected:
     char *pageBuffer;
     int *pageIndex;
     int *objectIndex;
+    int *objectLength;
     map<int, int> objectInEachPage;
     ifstream inStreamRegularFile;
 
@@ -60,6 +61,7 @@ public:
     int readObjects(int i, int n, TweetStatusFlatBuffers ** objectList);
     TweetStatusFlatBuffers * readObjectFlatBuffers(int i);
 
+    int readIO(long i, int n, vector<char*> &list, vector<int> &listLength, int *pIndex,int *oIndex, int *oLength);
     void readIO(long i, int n);
     void readIO(long i);
 

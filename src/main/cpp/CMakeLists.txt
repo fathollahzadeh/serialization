@@ -226,6 +226,20 @@ add_executable(ExternalSort
 target_link_libraries(ExternalSort PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(ExternalSort PRIVATE mongo::mongocxx_shared)
 
+# External sort IO
+add_executable(ExternalSortIO
+        experiments/ExternalSortIO.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(ExternalSortIO PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(ExternalSortIO PRIVATE mongo::mongocxx_shared)
+
 
 # Data Read Network
 add_executable(DataReadNetwork

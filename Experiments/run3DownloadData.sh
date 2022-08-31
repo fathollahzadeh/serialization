@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd data
-#rm -rf *
+rm -rf *
 wget https://storage.googleapis.com/tweets_1m/tweets.zip
 wget https://storage.googleapis.com/tweets_1m/random_lists.zip
 

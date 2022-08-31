@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Const.h"
-#include "ExternalSort.h"
+#include "ExternalSortIO.h"
 
 using namespace std;
 
@@ -28,22 +28,22 @@ int main(int argc, char *argv[]) {
 
     //if serialization type is Handcoded or Boost:
     if (methodID == HANDCODED || methodID == BOOST || methodID == BSON) {
-        ExternalSort<TweetStatus> externalSort(inDataPath, outDataPath, method, chunkSize);
+        ExternalSortIO<TweetStatus> externalSort(inDataPath, outDataPath, method, chunkSize);
         externalSort.runExternalSort();
     }
         //if serialization type is InPlace:
     else if (methodID == INPLACE) {
-        ExternalSort<TweetStatusIP> externalSort(inDataPath, outDataPath, method, chunkSize);
+        ExternalSortIO<TweetStatusIP> externalSort(inDataPath, outDataPath, method, chunkSize);
         externalSort.runExternalSort();
     }
         //if serialization type is Proto:
     else if (methodID == PROTOBUF) {
-        ExternalSort<TweetStatusProto> externalSort(inDataPath, outDataPath, method, chunkSize);
+        ExternalSortIO<TweetStatusProto> externalSort(inDataPath, outDataPath, method, chunkSize);
         externalSort.runExternalSort();
     }
         //if serialization type is Proto:
     else if (methodID == FLATBUF) {
-        ExternalSort<TweetStatusFlatBuffers> externalSort(inDataPath, outDataPath, method, chunkSize);
+        ExternalSortIO<TweetStatusFlatBuffers> externalSort(inDataPath, outDataPath, method, chunkSize);
         externalSort.runExternalSort();
     }
 
