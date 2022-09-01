@@ -35,7 +35,7 @@ sudo apt-get autoremove -y libprotobuf-dev protobuf-compiler
 sudo apt-get install -y autoconf automake libtool curl make g++ unzip
 wget https://github.com/protocolbuffers/protobuf/releases/download/v21.5/protobuf-cpp-3.21.5.tar.gz
 tar -xf protobuf-cpp-3.21.5.tar.gz
-cd protobuf-cpp-3.21.5
+cd "$path/protobuf-cpp-3.21.5"
 ./configure
 make
 make check
@@ -47,7 +47,7 @@ cd $path
 sudo apt-get install -y libssl-dev
 wget https://github.com/mongodb/mongo-c-driver/releases/download/1.22.1/mongo-c-driver-1.22.1.tar.gz
 tar xzf mongo-c-driver-1.22.1.tar.gz
-cd mongo-c-driver-1.22.1
+cd "$path/mongo-c-driver-1.22.1"
 mkdir cmake-build
 cd cmake-build
 cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF ..
