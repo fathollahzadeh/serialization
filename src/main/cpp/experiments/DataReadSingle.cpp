@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
             case HANDCODED:
             case BOOST:
             case BSON: {
-                TweetStatus **tweets = new TweetStatus *[reader->getRlen()];
+                TweetStatus **tweets = new TweetStatus *[nrow];
                 int listSize = reader->readObjects(0, nrow, tweets);
                 for (int i = 0; i < listSize; ++i) {
                     delete tweets[i];
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case INPLACE: {
-                TweetStatusIP **tweets = new TweetStatusIP *[reader->getRlen()];
+                TweetStatusIP **tweets = new TweetStatusIP *[nrow];
                 int listSize = reader->readObjects(0, nrow, tweets);
                 for (int i = 0; i < listSize; ++i) {
                     delete tweets[i];
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case PROTOBUF: {
-                TweetStatusProto **tweets = new TweetStatusProto *[reader->getRlen()];
+                TweetStatusProto **tweets = new TweetStatusProto *[nrow];
                 int listSize = reader->readObjects(0, nrow, tweets);
                 for (int i = 0; i < listSize; ++i) {
                     delete tweets[i];
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case FLATBUF: {
-                TweetStatusFlatBuffers **tweets = new TweetStatusFlatBuffers *[reader->getRlen()];
+                TweetStatusFlatBuffers **tweets = new TweetStatusFlatBuffers *[nrow];
                 int listSize = reader->readObjects(0, nrow, tweets);
                 for (int i = 0; i < listSize; ++i) {
                     delete tweets[i];
@@ -66,14 +66,14 @@ int main(int argc, char *argv[]) {
         int randomIDs[nrow];
         int index = 0;
         while (getline(infile, line)) {
-            randomIDs[index++] = atol(line.c_str());
+            randomIDs[index++] = atoi(line.c_str());
         }
         index = 0;
         switch (reader->getMethod()) {
             case HANDCODED:
             case BOOST:
             case BSON: {
-                TweetStatus **tweets = new TweetStatus *[reader->getRlen()];
+                TweetStatus **tweets = new TweetStatus *[nrow];
                 for (int i: randomIDs)
                     tweets[index++] = reader->readObject(i);
 
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case INPLACE: {
-                TweetStatusIP **tweets = new TweetStatusIP *[reader->getRlen()];
+                TweetStatusIP **tweets = new TweetStatusIP *[nrow];
                 for (int i: randomIDs)
                     tweets[index++] = reader->readObjectIP(i);
                 for (int i = 0; i < nrow; ++i) {
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case PROTOBUF: {
-                TweetStatusProto **tweets = new TweetStatusProto *[reader->getRlen()];
+                TweetStatusProto **tweets = new TweetStatusProto *[nrow];
                 for (int i: randomIDs)
                     tweets[index++] = reader->readObjectProto(i);
                 for (int i = 0; i < nrow; ++i) {
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case FLATBUF: {
-                TweetStatusFlatBuffers **tweets = new TweetStatusFlatBuffers *[reader->getRlen()];
+                TweetStatusFlatBuffers **tweets = new TweetStatusFlatBuffers *[nrow];
                 for (int i: randomIDs)
                     tweets[index++] = reader->readObjectFlatBuffers(i);
                 for (int i = 0; i < nrow; ++i) {
