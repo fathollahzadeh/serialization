@@ -61,9 +61,8 @@ int main(int argc, char *argv[]) {
         if (!infile.is_open()) {
             throw runtime_error("cannot find random list file!!.");
         }
-
         string line;
-        int randomIDs[nrow];
+        int *randomIDs = new int[nrow];
         int index = 0;
         while (getline(infile, line)) {
             randomIDs[index++] = atoi(line.c_str());
@@ -74,8 +73,8 @@ int main(int argc, char *argv[]) {
             case BOOST:
             case BSON: {
                 TweetStatus **tweets = new TweetStatus *[nrow];
-                for (int i: randomIDs)
-                    tweets[index++] = reader->readObject(i);
+                for (int i = 0; i< nrow; i++)
+                    tweets[index++] = reader->readObject(randomIDs[i]);
 
                 for (int i = 0; i < nrow; ++i) {
                     delete tweets[i];
@@ -85,8 +84,8 @@ int main(int argc, char *argv[]) {
             }
             case INPLACE: {
                 TweetStatusIP **tweets = new TweetStatusIP *[nrow];
-                for (int i: randomIDs)
-                    tweets[index++] = reader->readObjectIP(i);
+                for (int i = 0; i< nrow; i++)
+                    tweets[index++] = reader->readObjectIP(randomIDs[i]);
                 for (int i = 0; i < nrow; ++i) {
                     delete tweets[i];
                 }
@@ -95,8 +94,8 @@ int main(int argc, char *argv[]) {
             }
             case PROTOBUF: {
                 TweetStatusProto **tweets = new TweetStatusProto *[nrow];
-                for (int i: randomIDs)
-                    tweets[index++] = reader->readObjectProto(i);
+                for (int i = 0; i< nrow; i++)
+                    tweets[index++] = reader->readObjectProto(randomIDs[i]);
                 for (int i = 0; i < nrow; ++i) {
                     delete tweets[i];
                 }
@@ -105,8 +104,8 @@ int main(int argc, char *argv[]) {
             }
             case FLATBUF: {
                 TweetStatusFlatBuffers **tweets = new TweetStatusFlatBuffers *[nrow];
-                for (int i: randomIDs)
-                    tweets[index++] = reader->readObjectFlatBuffers(i);
+                for (int i = 0; i< nrow; i++)
+                    tweets[index++] = reader->readObjectFlatBuffers(randomIDs[i]);
                 for (int i = 0; i < nrow; ++i) {
                     delete tweets[i];
                 }
