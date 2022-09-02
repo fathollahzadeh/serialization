@@ -16,8 +16,8 @@ export jnCMD="java -Xms15g -Xmx15g -Xmn3g --illegal-access=deny -Dlog4j.configur
 #./run4PrepareData.sh
 #./run5LocalExperiments.sh
 #./run5LocalExperimentsExternalSort.sh
-#./run6NetworkExperiments.sh
+./run6NetworkExperiments.sh
 
 
 
-#cssh -l saeed 10.128.0.24 10.128.0.25 10.128.0.26 10.128.0.27 10.128.0.28 10.128.0.29 10.128.0.30
+#cssh -l saeed 35.192.32.89 35.188.42.222 34.71.219.114 34.134.19.16 34.69.98.252 35.239.253.95 34.172.44.209
