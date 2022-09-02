@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # clean original results
-rm -rf results
-mkdir -p results
+#rm -rf results
+#mkdir -p results
 
 rm -rf loging.log
 export LOG4JPROP='conf/log4j.properties'
