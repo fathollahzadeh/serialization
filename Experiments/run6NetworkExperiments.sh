@@ -82,6 +82,6 @@ for method in "${cpp_methods[@]}"; do
     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2m Experiment4_ExternalSort_times
 
     # 8. IO (d2d)
-    rm -rf ${outDataPath}.${method}SortedJava
+    rm -rf ${outDataPath}.${method}SortedCPP
     ./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
 done   
