@@ -171,7 +171,7 @@ public class ObjectWriter {
             System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset + 4, objectSize);
             currentOffset += objectSize + 4;
         } catch (Exception ex) {
-            logger.error("writeObjectToNetworkPage:" + ex);
+            logger.error("writeObjectToNetworkPage:", ex);
         }
     }
 
