@@ -47,6 +47,7 @@ for method in "${java_methods[@]}"; do
     #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2m Experiment4_ExternalSort_times
 
     # 8. IO (d2d)
+    rm -rf ${outDataPath}.${method}SortedJava
     ./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2d Experiment4_ExternalSort_times
 done    
 
@@ -81,5 +82,6 @@ for method in "${cpp_methods[@]}"; do
     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2m Experiment4_ExternalSort_times
 
     # 8. IO (d2d)
+    rm -rf ${outDataPath}.${method}SortedJava
     ./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
 done   
