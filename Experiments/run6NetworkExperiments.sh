@@ -9,7 +9,7 @@ outDataPath="data/tmp/tweets"
 declare -a java_methods=("Default") #("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers")
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 
-nrow=1000000
+nrow=500000
 
 # Load data into memory
 # 1.a Java enviroments
