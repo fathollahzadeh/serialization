@@ -123,10 +123,8 @@ int ObjectReader::readObjects(int i, int n, TweetStatus **objectList) {
     int listSize = (i + n) > this->rlen ? this->rlen : (i + n);
     //Iterate over all objects that you aspire to read.
     int index = 0;
-    for (int j = i; j < listSize; j++) {
-        this->readObject(j);
+    for (int j = i; j < listSize; j++)
         objectList[index++] = this->readObject(j);
-    }
     return index;
 }
 
