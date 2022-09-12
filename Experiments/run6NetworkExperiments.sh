@@ -38,7 +38,7 @@ for method in "${java_methods[@]}"; do
     ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2d Experiment4_ExternalSort_times
 
     # 5. IO (m2m)
-    ./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2m Experiment4_ExternalSort_times
+    #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2m Experiment4_ExternalSort_times
 
     # 6. IO (m2d)
     #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2d Experiment4_ExternalSort_times
