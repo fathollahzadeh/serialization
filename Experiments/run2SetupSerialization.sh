@@ -6,8 +6,8 @@ rm -rf cppbin
 cd ..
 
 # compile Java baselines
-# mvn clean compile assembly:single
-# mv target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar Experiments/SerializationJava.jar
+mvn clean compile assembly:single
+mv target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar Experiments/SerializationJava.jar
 
 # compile C++ baslelines
 cd src/main/cpp
