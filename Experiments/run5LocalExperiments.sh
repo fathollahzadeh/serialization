@@ -21,7 +21,7 @@ echo "language,platform,taskset,nrow,time" >>results/Experiment1_LoadToMemory_ti
 echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results/Experiment1_Write_times.dat
 echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results/Experiment2_Read_times.dat
 
-for rp in {1..5}; do
+for rp in {1..3}; do
     # for method in "${java_methods[@]}"; do
     #     #clean up
     #     rm -rf data/tmp

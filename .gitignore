@@ -15,3 +15,4 @@ src/main/cpp/cpp.cbp
 src/main/rust/.idea/*
 src/main/rust/target/*
 src/serialization.iml
+Experiments/CPPDependencies/*

@@ -35,7 +35,7 @@ sudo apt-get autoremove -y libprotobuf-dev protobuf-compiler
 sudo apt-get install -y autoconf automake libtool curl make g++ unzip
 wget https://github.com/protocolbuffers/protobuf/releases/download/v21.5/protobuf-cpp-3.21.5.tar.gz
 tar -xf protobuf-cpp-3.21.5.tar.gz
-cd "$path/protobuf-cpp-3.21.5"
+cd "$path/protobuf-3.21.5"
 ./configure
 make
 make check

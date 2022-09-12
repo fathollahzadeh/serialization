@@ -32,6 +32,11 @@ impl ObjectWriter {
         
     }
 
+    //ObjectWriter(const string &method, int rlen, int pageSize);
+    pub fn new(method: String, rlen: u64, pageSize: i32) -> ObjectWriter{
+
+    }
+
     // pub fn new(method: String, rlen: u64, pageSize:u32) -> ObjectWriter{
     //
     // }
