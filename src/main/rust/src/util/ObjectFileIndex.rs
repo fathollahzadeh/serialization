@@ -1,8 +1,6 @@
 use crate::tweetStructs::TweetStatus::TweetStatus;
 use std::cmp::Ordering;
 use std::hash::{Hash, Hasher};
-use std::fs::read;
-use serde::{Serialize, Deserialize};
 
 pub struct ObjectFileIndex {
 	myObject: TweetStatus,
