@@ -15,10 +15,10 @@ mod util;
 fn main() -> io::Result<()> {
     let args: Vec<String> = env::args().collect();
     let inDataPath: &str = args[1].as_str();
-    let outDataPath: &str = args[2].as_str();
+    let method: &str = args[2].as_str();
     let nrow: u64 = args[3].parse().unwrap();
 
-    let mut writer = ObjectWriter::new1(outDataPath, "MessagePack", nrow);
+    let mut writer = ObjectWriter::new2(method, nrow, );
     let f = File::open(&inDataPath)?;
     let f = BufReader::new(f);
     for line in f.lines() {

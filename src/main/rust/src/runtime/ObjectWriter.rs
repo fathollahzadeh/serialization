@@ -1,13 +1,12 @@
 use bytes::{BytesMut, BufMut, Buf};
 use std::fs::{File, OpenOptions};
 use crate::tweetStructs::TweetStatus::TweetStatus;
-//use std::convert::TryInto;
 use std::io::Write;
 use crate::util::Const;
 
 pub struct ObjectWriter {
-    outStreamRegularFile: File,
-    outIndexFile: File,
+    outStreamRegularFile:Option<File>,
+    outIndexFile: Option<File>,
     currentPageNumber: u32,
     currentOffset: u64,
     row: u64,
@@ -25,8 +24,8 @@ impl ObjectWriter {
     pub fn new1(fname: &str, method: &str, rlen: u64) -> Self {
         let indexFileName: String = format!("{}.{}", fname.clone(), "index");
         Self {
-            outStreamRegularFile: OpenOptions::new().write(true).create(true).open(fname).unwrap(),
-            outIndexFile: OpenOptions::new().write(true).create(true).open(indexFileName).unwrap(),
+            outStreamRegularFile: Option::from(OpenOptions::new().write(true).create(true).open(fname).unwrap()),
+            outIndexFile: Option::from(OpenOptions::new().write(true).create(true).open(indexFileName).unwrap()),
             currentPageNumber: 0,
             currentOffset: 0,
             pageBuffer: BytesMut::with_capacity((2 * Const::PAGESIZE) as usize),
@@ -41,23 +40,23 @@ impl ObjectWriter {
         }
     }
 
-    // pub fn new2(method: &str, rlen: u64, pageSize: usize) -> Self {
-    //     Self {
-    //         outStreamRegularFile: None,
-    //         outIndexFile: None,
-    //         currentPageNumber: 0,
-    //         currentOffset: 0,
-    //         pageBuffer: BytesMut::with_capacity(2 * pageSize),
-    //         rlen: rlen,
-    //         row: 0,
-    //         pageIndex: vec![],
-    //         objectIndex: vec![],
-    //         objectLength: vec![],
-    //         pagePosition: vec![],
-    //         method: Const::getMethodID(method),
-    //         currentPagePosition: 0,
-    //     }
-    // }
+    pub fn new2(method: &str, rlen: u64, pageSize: usize) -> Self {
+        Self {
+            outStreamRegularFile: None,
+            outIndexFile: None,
+            currentPageNumber: 0,
+            currentOffset: 0,
+            pageBuffer: BytesMut::with_capacity(2 * pageSize),
+            rlen: rlen,
+            row: 0,
+            pageIndex: vec![],
+            objectIndex: vec![],
+            objectLength: vec![],
+            pagePosition: vec![],
+            method: Const::getMethodID(method),
+            currentPagePosition: 0,
+        }
+    }
 
     pub fn serializeObject(&mut self, object: TweetStatus) {
         match self.method {

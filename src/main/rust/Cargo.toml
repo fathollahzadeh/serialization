@@ -9,6 +9,10 @@ authors = ["Saeed Fathollahzadeh <s.fathollahzadeh@gmail.com>"]
 name="DataPrepare"
 path = "src/DataPrepare.rs"
 
+[[bin]]
+name="DataSerializationSingle"
+path = "src/DataSerializationSingle.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build]
