@@ -33,4 +33,6 @@ cd "$path/src/main/rust"
 cargo build --release
 mkdir -p "$path/Experiments/rustbin"
 cp -r target/release/DataPrepare "$path/Experiments/rustbin/"
+cp -r target/release/DataSerializationSingle "$path/Experiments/rustbin/"
+
 

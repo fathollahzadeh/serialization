@@ -3,6 +3,7 @@
 # This script runs all local experiments on the specified scale-up machine.
 inDataPathJava="data/tweets.jbin"
 inDataPathCPP="data/tweets.cbin"
+inDataPathRust="data/tweets.rbin"
 randomDataPath="data/random_list_"
 outDataPath="data/tmp/tweets"
 
@@ -10,8 +11,12 @@ declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuf
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
-max_nrow=10000000
-declare -a nrows=(10000000 9000000 8000000 7000000 6000000 5000000 4000000 3000000 2000000 1000000)
+#max_nrow=10000000
+#declare -a nrows=(10000000 9000000 8000000 7000000 6000000 5000000 4000000 3000000 2000000 1000000)
+
+max_nrow=1000000
+declare -a nrows=(1000000)
+
 
 
 # Load data into memory
@@ -123,7 +128,7 @@ for rp in {1..1}; do
         ################################
         # Seralization (just CPU time)
         ./explocal/runExperiment1b_SerializationRust.sh $method $inDataPathRust $max_nrow Single false Experiment1_Write_times
-        ./explocal/runExperiment1b_SerializationRust.sh $method $inDataPathRust $max_nrow Single true Experiment1_Write_times
+        #./explocal/runExperiment1b_SerializationRust.sh $method $inDataPathRust $max_nrow Single true Experiment1_Write_times
         #./explocal/runExperiment1b_SerializationRust.sh $method $inDataPathRust $max_nrow Parallel false Experiment1_Write_times
 
         # # Write (CPU+IO)
