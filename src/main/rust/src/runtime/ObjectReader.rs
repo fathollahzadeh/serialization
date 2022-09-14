@@ -148,10 +148,28 @@ impl ObjectReader {
             let buffer = reader.fill_buf().unwrap();
             self.pageBuffer = BytesMut::with_capacity(buffer.len());
             self.pageBuffer.extend_from_slice(buffer);
+            self.currentPageNumber = id;
         }
     }
 
     pub fn flush(&mut self){
         self.inStreamRegularFile.flush();
+    }
+
+    pub fn readIO(&mut self, i: u32, n: u32){
+        let listSize = min(i + n, self.rlen);
+        for j in i..listSize {
+            self.readObjectIO(j as usize);
+        }
+    }
+    pub fn readObjectIO(&mut self, i: usize){
+        let pindex = self.pageIndex[i];
+        self.readPageFromFile(pindex);
+
+        // get Object size:
+        let lenght_each_object: u32 = self.objectLength[i];
+        let start = self.objectIndex[i];
+        let end = start + lenght_each_object;
+        let buff_data = self.pageBuffer.get(start as usize..end as usize).unwrap();
     }
 }

@@ -6,8 +6,20 @@ autobins = false
 authors = ["Saeed Fathollahzadeh <s.fathollahzadeh@gmail.com>"]
 
 [[bin]]
+name="DataLoadToMemorySingle"
+path = "src/DataLoadToMemorySingle.rs"
+
+[[bin]]
 name="DataPrepare"
 path = "src/DataPrepare.rs"
+
+[[bin]]
+name="DataReadSingle"
+path = "src/DataReadSingle.rs"
+
+[[bin]]
+name="DataReadIOSingle"
+path = "src/DataReadIOSingle.rs"
 
 [[bin]]
 name="DataSerializationSingle"
@@ -16,8 +28,6 @@ path = "src/DataSerializationSingle.rs"
 [[bin]]
 name="DataWriteSingle"
 path = "src/DataWriteSingle.rs"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build]
 rustflags = ["-Awarnings"]

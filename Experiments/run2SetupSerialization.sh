@@ -13,7 +13,7 @@ cd "$path"
 # mv target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar "$path/Experiments/SerializationJava.jar"
 
 # # compile C++ baslelines
-cd "$path/src/main/cpp"
+# cd "$path/src/main/cpp"
 # rm -rf CMakeFiles
 # rm -rf cmake_install.cmake
 # rm -rf CMakeCache.txt
@@ -33,6 +33,11 @@ cd "$path/src/main/rust"
 cargo build --release
 mkdir -p "$path/Experiments/rustbin"
 cp -r target/release/DataPrepare "$path/Experiments/rustbin/"
+cp -r target/release/DataLoadToMemorySingle "$path/Experiments/rustbin/"
+cp -r target/release/DataReadSingle "$path/Experiments/rustbin/"
+cp -r target/release/DataReadIOSingle "$path/Experiments/rustbin/"
 cp -r target/release/DataSerializationSingle "$path/Experiments/rustbin/"
+cp -r target/release/DataWriteSingle "$path/Experiments/rustbin/"
+
 
 
