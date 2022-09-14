@@ -2,7 +2,7 @@ use bytes::{BytesMut, BufMut, Buf};
 use std::io;
 use std::fs::{File, OpenOptions};
 use crate::tweetStructs::TweetStatus::TweetStatus;
-use std::io::{BufReader, BufRead, Seek, SeekFrom, Read, Cursor};
+use std::io::{BufReader, BufRead, Seek, SeekFrom, Read, Cursor, Write};
 use std::cmp::min;
 use std::collections::HashMap;
 use rand::seq::index::IndexVec;
@@ -10,16 +10,17 @@ use std::panic::resume_unwind;
 use bson::{Bson, Document, Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
 use crate::util::Const;
+use crate::util::Const::PAGESIZE;
 
 pub struct ObjectReader {
     currentPageNumber: u32,
-    currentOffset: u64,
-    row: u64,
-    rlen: u64,
+    currentOffset: u32,
+    row: u32,
+    rlen: u32,
     method: u16,
     pageBuffer: BytesMut,
-    objectInEachPage: HashMap<u64, u64>,
-    inStreamRegularFile: Option<File>,
+    objectInEachPage: HashMap<u32, u32>,
+    inStreamRegularFile: File,
     pageIndex: Vec<u32>,
     objectIndex: Vec<u32>,
     objectLength: Vec<u32>,
@@ -28,29 +29,33 @@ pub struct ObjectReader {
 }
 
 impl ObjectReader {
-    pub fn new1(&mut self, fname: &str, method: &str) -> Self {
-        ObjectReader::readIndexesFromFile(pageIndex, self.objectIndex, self.objectLength, self.pagePosition, fname.clone());
+    pub fn new1(fname: &str, method: &str) -> Self {
+        let mut tmpPageIndex: Vec<u32> = vec![];
+        let mut tmpObjectIndex: Vec<u32> = vec![];
+        let mut tmpObjectLength: Vec<u32> = vec![];
+        let mut tmpPagePosition: Vec<u64> = vec![];
+
+        ObjectReader::readIndexesFromFile(&mut tmpPageIndex, &mut tmpObjectIndex, &mut tmpObjectLength, &mut tmpPagePosition, fname.clone()).ok();
         Self {
-            inStreamRegularFile: Option::from(OpenOptions::new().read(true).open(fname).unwrap()),
+            inStreamRegularFile: OpenOptions::new().read(true).open(fname).unwrap(),
             currentPageNumber: 0,
             currentOffset: 0,
             pageBuffer: BytesMut::with_capacity((2 * Const::PAGESIZE) as usize),
-            rlen: rlen,
+            rlen: tmpPageIndex.len().try_into().unwrap(),
             row: 0,
-            pageIndex: ObjectReader:: vec![],
-            objectIndex: vec![],
-            objectLength: vec![],
-            pagePosition: vec![],
+            pageIndex: tmpPageIndex,
+            objectIndex: tmpObjectIndex,
+            objectLength: tmpObjectLength,
+            pagePosition: tmpPagePosition,
             method: Const::getMethodID(method),
             currentPagePosition: 0,
             objectInEachPage: Default::default(),
         }
-
     }
 
-    fn readIndexesFromFile(mut pageIndex: Vec<u32>, mut objectIndex: Vec<u32>, mut objectLength: Vec<u32>, mut pagePosition: Vec<u64>, fname: &str) {
+    fn readIndexesFromFile(pageIndex: &mut Vec<u32>, objectIndex: &mut Vec<u32>, objectLength: &mut Vec<u32>, pagePosition: &mut Vec<u64>, fname: &str) -> io::Result<()> {
         let indexFileName: String = format!("{}.{}", fname, "index");
-        let file = File::open(indexFileName)?;
+        let mut file = File::open(indexFileName)?;
         let file_size = file.metadata().unwrap().len();
 
         let mut reader = BufReader::with_capacity(file_size as usize, file);
@@ -82,42 +87,72 @@ impl ObjectReader {
         for u in 1..index_size + 1 {
             pagePosition.push(index_buffer.get_u64());
         }
+        file.flush();
+        Ok(())
+    }
+
+    //int readObjects(int i, int n, TweetStatus ** objectList);
+    pub fn readObjects(&mut self, i: u32, n: u32, objectList: &mut Vec<TweetStatus>) -> u32 {
+        let listSize = min(i + n, self.rlen);
+        let mut index = 0;
+        for j in i..listSize {
+            objectList.push(self.readObject(j as usize).unwrap());
+            index += 1;
+        }
+        return index;
+    }
+
+    pub fn readObject(&mut self, i: usize) -> Result<TweetStatus, Box<dyn std::error::Error>> {
+        let pindex = self.pageIndex[i];
+        self.readPageFromFile(pindex);
+
+        // get Object size:
+        let lenght_each_object: u32 = self.objectLength[i];
+        let start = self.objectIndex[i];
+        let end = start + lenght_each_object;
+        let buff_data = self.pageBuffer.get(start as usize..end as usize).unwrap();
+
+        match self.method {
+            Const::JSON => {
+                Ok(serde_json::from_slice(buff_data).unwrap())
+            }
+            Const::BINCODE => {
+                Ok(bincode::deserialize(&buff_data).unwrap())
+            }
+            Const::MESSAGEPACK => {
+                Ok(rmp_serde::from_slice(&buff_data).unwrap())
+            }
+            Const::BSON => {
+                let doc = Document::from_reader(&mut Cursor::new(&buff_data[..])).unwrap();
+                let bson_data = bson::bson!(doc);
+                Ok(bson::from_bson(bson_data).unwrap())
+            }
+            Const::FLEXBUF => {
+                Ok(flexbuffers::from_slice(&buff_data).unwrap())
+            }
+            _ => {
+                Err(Box::from("The method is not support!!"))
+            }
+        }
+    }
+
+    fn readPageFromFile(&mut self, id: u32) {
+        //If page is already in RAM: Use from RAM:
+        if self.currentPageNumber == id {
+            return;
+        }
+        //Page not in RAM: Disk IO:
+        else {
+            let newPosition: u64 = self.pagePosition[(id - 1) as usize];
+            self.inStreamRegularFile.seek(SeekFrom::Start(newPosition));
+            let mut reader = BufReader::with_capacity(PAGESIZE as usize, &self.inStreamRegularFile);
+            let buffer = reader.fill_buf().unwrap();
+            self.pageBuffer = BytesMut::with_capacity(buffer.len());
+            self.pageBuffer.extend_from_slice(buffer);
+        }
+    }
+
+    pub fn flush(&mut self){
+        self.inStreamRegularFile.flush();
     }
 }
-
-//self.outRegularFile = OpenOptions::new()
-// 			.read(true)
-// 			.open(&self.file_name).unwrap();
-//
-// 		self.current_page_number = 0;
-//
-// 		self.readIndexesFromFile();
-//
-// 		self.io_time = Duration::new(0, 0);
-// 		self.index_time = Duration::new(0, 0);
-//
-// 		self.total_of_objects = self.object_index.len().try_into().unwrap();
-//
-// 		//calculate object in each page:
-// 		for u in &self.page_index {
-// 			if !self.object_in_each_page.contains_key(&u) {
-// 				self.object_in_each_page.insert(u.clone(), 0);
-// 			}
-// 			let value = self.object_in_each_page[u] + 1;
-// 			self.object_in_each_page.insert(u.clone(), value);
-// 		}
-// 		Ok(())
-
-// ObjectReader(const string & fname, const string &method);
-
-// long currentPageNumber;
-//     int currentOffset;
-//     int row;
-//     int rlen;
-//     int method;
-//     char *pageBuffer;
-//     int *pageIndex;
-//     int *objectIndex;
-//     int *objectLength;
-//     map<int, int> objectInEachPage;
-//     ifstream inStreamRegularFile;

@@ -16,7 +16,7 @@ fn main() -> io::Result<()> {
     let args: Vec<String> = env::args().collect();
     let inDataPath: &str = args[1].as_str();
     let outDataPath: &str = args[2].as_str();
-    let nrow: u64 = args[3].parse().unwrap();
+    let nrow: u32 = args[3].parse().unwrap();
 
     let mut writer = ObjectWriter::new1(outDataPath, "MessagePack", nrow);
     let f = File::open(&inDataPath)?;

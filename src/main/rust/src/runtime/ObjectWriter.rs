@@ -5,14 +5,14 @@ use std::io::Write;
 use crate::util::Const;
 
 pub struct ObjectWriter {
-    outStreamRegularFile:Option<File>,
-    outIndexFile: Option<File>,
+    outStreamRegularFile:File,
+    outIndexFile: File,
     currentPageNumber: u32,
-    currentOffset: u64,
-    row: u64,
+    currentOffset: u32,
+    row: u32,
     method: u16,
     pageBuffer: BytesMut,
-    rlen: u64,
+    rlen: u32,
     pageIndex: Vec<u32>,
     objectIndex: Vec<u32>,
     objectLength: Vec<u32>,
@@ -21,14 +21,14 @@ pub struct ObjectWriter {
 }
 
 impl ObjectWriter {
-    pub fn new1(fname: &str, method: &str, rlen: u64) -> Self {
+    pub fn new1(fname: &str, method: &str, rlen: u32) -> Self {
         let indexFileName: String = format!("{}.{}", fname.clone(), "index");
         Self {
-            outStreamRegularFile: Option::from(OpenOptions::new().write(true).create(true).open(fname).unwrap()),
-            outIndexFile: Option::from(OpenOptions::new().write(true).create(true).open(indexFileName).unwrap()),
-            currentPageNumber: 0,
+            outStreamRegularFile: OpenOptions::new().write(true).create(true).open(fname).unwrap(),
+            outIndexFile: OpenOptions::new().write(true).create(true).open(indexFileName).unwrap(),
+            currentPageNumber: 1,
             currentOffset: 0,
-            pageBuffer: BytesMut::with_capacity((2 * Const::PAGESIZE) as usize),
+            pageBuffer: BytesMut::with_capacity((2u32 * Const::PAGESIZE) as usize),
             rlen: rlen,
             row: 0,
             pageIndex: vec![],
@@ -40,11 +40,11 @@ impl ObjectWriter {
         }
     }
 
-    pub fn new2(method: &str, rlen: u64, pageSize: usize) -> Self {
+    pub fn new2(method: &str, rlen: u32, pageSize: usize) -> Self {
         Self {
-            outStreamRegularFile: None,
-            outIndexFile: None,
-            currentPageNumber: 0,
+            outStreamRegularFile: OpenOptions::new().write(true).create(true).open("/tmp/tmp.txt").unwrap(),
+            outIndexFile: OpenOptions::new().write(true).create(true).open("/tmp/tmp.txt.index").unwrap(),
+            currentPageNumber: 1,
             currentOffset: 0,
             pageBuffer: BytesMut::with_capacity(2 * pageSize),
             rlen: rlen,
