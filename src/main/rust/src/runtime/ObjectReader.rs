@@ -55,7 +55,7 @@ impl ObjectReader {
 
     fn readIndexesFromFile(pageIndex: &mut Vec<u32>, objectIndex: &mut Vec<u32>, objectLength: &mut Vec<u32>, pagePosition: &mut Vec<u64>, fname: &str) -> io::Result<()> {
         let indexFileName: String = format!("{}.{}", fname, "index");
-        let mut file = File::open(indexFileName)?;
+        let file = File::open(indexFileName)?;
         let file_size = file.metadata().unwrap().len();
 
         let mut reader = BufReader::with_capacity(file_size as usize, file);
@@ -87,7 +87,6 @@ impl ObjectReader {
         for u in 1..index_size + 1 {
             pagePosition.push(index_buffer.get_u64());
         }
-        file.flush();
         Ok(())
     }
 
