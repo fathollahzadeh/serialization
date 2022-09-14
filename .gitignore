@@ -16,3 +16,5 @@ src/main/rust/.idea/*
 src/main/rust/target/*
 src/serialization.iml
 Experiments/CPPDependencies/*
+Experiments/rustbin/*
+SerializationJava.jar
