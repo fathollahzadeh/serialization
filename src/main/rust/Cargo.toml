@@ -41,10 +41,13 @@ path = "src/DataSerializationSingle.rs"
 name="DataSerializationParallel"
 path = "src/DataSerializationParallel.rs"
 
-
 [[bin]]
 name="DataWriteSingle"
 path = "src/DataWriteSingle.rs"
+
+[[bin]]
+name="DataWriteParallel"
+path = "src/DataWriteParallel.rs"
 
 [build]
 rustflags = ["-Awarnings"]
