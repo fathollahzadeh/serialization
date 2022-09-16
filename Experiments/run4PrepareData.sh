@@ -31,9 +31,9 @@ nrow=$(sed -n '$=' $inDataPath)
 
 # # prepare data for C++ experiments
 # ##################################
-# SCRIPT="./cppbin/DataPrepare ${inDataPath} ${outDataPathCPP} ${nrow}"
-# echo $SCRIPT
-# time $SCRIPT
+SCRIPT="./cppbin/DataPrepare ${inDataPath} ${outDataPathCPP} ${nrow}"
+echo $SCRIPT
+time $SCRIPT
 
 # prepare data for Rust experiments
 ##################################

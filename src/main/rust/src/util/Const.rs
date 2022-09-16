@@ -23,7 +23,4 @@ pub fn getMethodID( method: &str) -> u16 {
     }
     return methodID;
 }
-
-// const auto NUM_THREADS = std::thread::hardware_concurrency();
-//
 // enum NodeType {  ROOT,  MIDDLE, LEAF };
