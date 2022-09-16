@@ -40,6 +40,7 @@ cp -r target/release/DataReadSingle "$path/Experiments/rustbin/"
 cp -r target/release/DataReadParallel "$path/Experiments/rustbin/"
 cp -r target/release/DataReadIOSingle "$path/Experiments/rustbin/"
 cp -r target/release/DataSerializationSingle "$path/Experiments/rustbin/"
+cp -r target/release/DataSerializationParallel "$path/Experiments/rustbin/"
 cp -r target/release/DataWriteSingle "$path/Experiments/rustbin/"
 
 

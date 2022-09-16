@@ -38,6 +38,11 @@ name="DataSerializationSingle"
 path = "src/DataSerializationSingle.rs"
 
 [[bin]]
+name="DataSerializationParallel"
+path = "src/DataSerializationParallel.rs"
+
+
+[[bin]]
 name="DataWriteSingle"
 path = "src/DataWriteSingle.rs"
 

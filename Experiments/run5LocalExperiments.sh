@@ -137,10 +137,10 @@ for rp in {1..1}; do
         #./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single true Experiment1_Write_times
         # ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Parallel false Experiment1_Write_times
 
-         for nrow in "${nrows[@]}"; do
-             ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single true $nrow Experiment1_LoadToMemory_times
-             ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single false $nrow Experiment1_LoadToMemory_times
-             ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Parallel false $nrow Experiment1_LoadToMemory_times
+        # for nrow in "${nrows[@]}"; do
+        #     ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single true $nrow Experiment1_LoadToMemory_times
+        #     ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single false $nrow Experiment1_LoadToMemory_times
+        #     ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Parallel false $nrow Experiment1_LoadToMemory_times
 
         #     # De-Seralization (just IO time)
         #     ###############################
@@ -161,6 +161,6 @@ for rp in {1..1}; do
         #     ./explocal/runExperiment2a_ReadRust.sh $method $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
         #     ./explocal/runExperiment2a_ReadRust.sh $method $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
 
-        done
+        #done
     done
 done    
