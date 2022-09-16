@@ -26,7 +26,6 @@ fn main() -> io::Result<()> {
     let mut reader = ObjectReader::new1(inDataPath, method);
     if seqRand.to_lowercase().eq("sequential") {
         reader.readObjects(0, nrow, &mut tweets);
-        reader.flush();
     }
     else {
         let randomDataPath: &str = args[5].as_str();
@@ -36,5 +35,6 @@ fn main() -> io::Result<()> {
             tweets.push(reader.readObject(line.unwrap().parse().unwrap()).unwrap());
         }
     }
+    reader.flush();
     Ok(())
 }

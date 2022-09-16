@@ -69,7 +69,7 @@ fn main() -> io::Result<()> {
                 scope.spawn(move |_| {
                     let mut reader = ObjectReader::new1(inDataPath.as_str(), method.as_str());
                     for (i, e) in tweetsChunk.iter_mut().enumerate() {
-                        *e = Option::from(reader.readObject( randomIDChunk[i as usize]).unwrap());
+                        *e = Option::from(reader.readObject(randomIDChunk[i as usize]).unwrap());
                     }
                     reader.flush();
                 });

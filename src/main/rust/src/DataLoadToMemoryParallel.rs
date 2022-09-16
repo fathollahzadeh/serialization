@@ -36,10 +36,10 @@ fn main() -> io::Result<()> {
             scope.spawn(move |_| {
                 let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
                 let mut size = BATCHSIZE;
-                let mut j:u32 = beginPos;
-                while j<endPos {
+                let mut j: u32 = beginPos;
+                while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
-                    let rdSize:u32 = reader.readObjects(j, size, &mut tweets);
+                    let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
                     j += rdSize;
                     size = min(endPos - j, BATCHSIZE);
                 }

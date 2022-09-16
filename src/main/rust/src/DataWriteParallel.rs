@@ -54,7 +54,7 @@ fn main() -> io::Result<()> {
             let outDataPath = outDataPath.clone();
             scope.spawn(move |_| {
                 let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
-                let mut writer = ObjectWriter::new1(format!("{}/{}", outDataPath, i.clone()).as_str(), method.as_str(),endPos - beginPos +1);
+                let mut writer = ObjectWriter::new1(format!("{}/{}", outDataPath, i.clone()).as_str(), method.as_str(), endPos - beginPos + 1);
 
                 let mut size = BATCHSIZE;
                 let mut j: u32 = beginPos;

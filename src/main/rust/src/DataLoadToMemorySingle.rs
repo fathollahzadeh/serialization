@@ -22,10 +22,10 @@ fn main() -> io::Result<()> {
 
     let mut reader = ObjectReader::new1(inDataPath, "MessagePack");
     let mut size = BATCHSIZE;
-    let mut i:u32 = 0;
-    while i<nrow {
+    let mut i: u32 = 0;
+    while i < nrow {
         let mut tweets: Vec<TweetStatus> = vec![];
-        let rdSize:u32 = reader.readObjects(i, size, &mut tweets);
+        let rdSize: u32 = reader.readObjects(i, size, &mut tweets);
         i += rdSize;
         size = min(nrow - i, BATCHSIZE);
     }

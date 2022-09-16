@@ -25,8 +25,7 @@ fn main() -> io::Result<()> {
     let mut reader = ObjectReader::new1(inDataPath, method);
     if seqRand.to_lowercase().eq("sequential") {
         reader.readIO(0, nrow);
-    }
-    else {
+    } else {
         let randomDataPath: &str = args[5].as_str();
         let infile = File::open(randomDataPath)?;
         let f = BufReader::new(infile);
