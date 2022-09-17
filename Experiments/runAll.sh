@@ -12,7 +12,7 @@ export jnCMD="java -Xms15g -Xmx15g -Xmn3g --illegal-access=deny -Dlog4j.configur
 export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt"
 
 #./run1SetupDependencies.sh
-#./run2SetupSerialization.sh
+./run2SetupSerialization.sh
 #./run3DownloadData.sh
 #./run4PrepareData.sh
 ./run5LocalExperiments.sh
