@@ -31,9 +31,13 @@ fn main() -> io::Result<()> {
         let randomDataPath: &str = args[5].as_str();
         let infile = File::open(randomDataPath)?;
         let f = BufReader::new(infile);
+        let mut k = 0;
         for line in f.lines() {
-            tweets.push(reader.readObject(line.unwrap().parse().unwrap()).unwrap());
+            reader.readObject(line.unwrap().parse::<usize>().unwrap()).unwrap();
+            //tweets.push(reader.readObject(line.unwrap().parse().unwrap()).unwrap());
+            k +=1;
         }
+        println!("K={}", reader.getMissed());
     }
     reader.flush();
     Ok(())

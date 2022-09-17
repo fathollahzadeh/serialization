@@ -26,6 +26,7 @@ pub struct ObjectReader {
     objectLength: Vec<u32>,
     pagePosition: Vec<u64>,
     currentPagePosition: u64,
+    missed:u32,
 }
 
 impl ObjectReader {
@@ -50,6 +51,7 @@ impl ObjectReader {
             method: Const::getMethodID(method),
             currentPagePosition: 0,
             objectInEachPage: Default::default(),
+            missed:0,
         }
     }
 
@@ -149,6 +151,7 @@ impl ObjectReader {
             self.pageBuffer = BytesMut::with_capacity(buffer.len());
             self.pageBuffer.extend_from_slice(buffer);
             self.currentPageNumber = id;
+            self.missed +=1;
         }
     }
 
@@ -172,4 +175,30 @@ impl ObjectReader {
         let end = start + lenght_each_object;
         let buff_data = self.pageBuffer.get(start as usize..end as usize).unwrap();
     }
+    pub fn getMissed(&mut self)->u32{
+        return self.missed;
+    }
+
+
 }
+
+// impl Clone for ObjectReader {
+//     fn clone(&self) -> Self {
+//         ObjectReader {
+//             inStreamRegularFile: self.inStreamRegularFile.try_clone().unwrap(),
+//             currentPageNumber: self.currentPageNumber.clone(),
+//             currentOffset: self.currentOffset.clone(),
+//             pageBuffer: self.pageBuffer.clone(),
+//             rlen: self.rlen.clone(),
+//             row: self.row.clone(),
+//             pageIndex: self.pageIndex.clone(),
+//             objectIndex: self.objectIndex.clone(),
+//             objectLength: self.objectLength.clone(),
+//             pagePosition: self.pagePosition.clone(),
+//             method: self.method.clone(),
+//             currentPagePosition: self.currentPagePosition.clone(),
+//             objectInEachPage: self.objectInEachPage.clone(),
+//             missed:self.missed.clone(),
+//         }
+//     }
+// }

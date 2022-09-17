@@ -60,6 +60,7 @@ fn main() -> io::Result<()> {
 
         crossbeam::scope(|scope| {
             let mut sum = 0;
+            let mut kk = 0;
             for tweetsChunk in tweets.chunks_mut(blklen as usize) {
                 let beginPos = sum.clone();
                 sum += tweetsChunk.len();
@@ -74,7 +75,7 @@ fn main() -> io::Result<()> {
                     reader.flush();
                 });
             }
-        });
+        }).unwrap();
     }
     Ok(())
 }
