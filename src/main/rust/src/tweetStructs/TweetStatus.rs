@@ -68,6 +68,11 @@ impl TweetStatus {
 	pub fn getId(&self) -> i64 {
 		return self.id;
 	}
+
+
+	pub fn set_id(&mut self, id: i64) {
+		self.id = id;
+	}
 }
 
 impl Ord for TweetStatus {

@@ -1,14 +1,11 @@
-use bytes::{BytesMut, BufMut, Buf};
+use bytes::{BytesMut, Buf};
 use std::io;
 use std::fs::{File, OpenOptions};
 use crate::tweetStructs::TweetStatus::TweetStatus;
-use std::io::{BufReader, BufRead, Seek, SeekFrom, Read, Cursor, Write};
+use std::io::{BufReader, BufRead, Seek, SeekFrom, Cursor, Write};
 use std::cmp::min;
 use std::collections::HashMap;
-use rand::seq::index::IndexVec;
-use std::panic::resume_unwind;
-use bson::{Bson, Document, Deserializer, Serializer};
-use serde::{Deserialize, Serialize};
+use bson::Document;
 use crate::util::Const;
 use crate::util::Const::PAGESIZE;
 
@@ -26,7 +23,7 @@ pub struct ObjectReader {
     objectLength: Vec<u32>,
     pagePosition: Vec<u64>,
     currentPagePosition: u64,
-    missed:u32,
+    missed: u32,
 }
 
 impl ObjectReader {
@@ -44,14 +41,14 @@ impl ObjectReader {
             pageBuffer: BytesMut::with_capacity((2 * Const::PAGESIZE) as usize),
             rlen: tmpPageIndex.len().try_into().unwrap(),
             row: 0,
-            pageIndex: tmpPageIndex,
+            pageIndex: tmpPageIndex.clone(),
             objectIndex: tmpObjectIndex,
             objectLength: tmpObjectLength,
             pagePosition: tmpPagePosition,
             method: Const::getMethodID(method),
             currentPagePosition: 0,
-            objectInEachPage: Default::default(),
-            missed:0,
+            objectInEachPage: ObjectReader::getObjectsInEachPage(&mut tmpPageIndex),
+            missed: 0,
         }
     }
 
@@ -90,6 +87,19 @@ impl ObjectReader {
             pagePosition.push(index_buffer.get_u64());
         }
         Ok(())
+    }
+
+    fn getObjectsInEachPage(pageIndex: &mut Vec<u32>) -> HashMap<u32, u32> {
+        let mut objectInEachPage: HashMap<u32, u32> = HashMap::new();
+        //calculate object in each page:
+        for u in pageIndex {
+            if !objectInEachPage.contains_key(&u) {
+                objectInEachPage.insert(u.clone(), 0);
+            }
+            let value = objectInEachPage[u] + 1;
+            objectInEachPage.insert(u.clone(), value);
+        }
+        return objectInEachPage;
     }
 
     //int readObjects(int i, int n, TweetStatus ** objectList);
@@ -151,21 +161,21 @@ impl ObjectReader {
             self.pageBuffer = BytesMut::with_capacity(buffer.len());
             self.pageBuffer.extend_from_slice(buffer);
             self.currentPageNumber = id;
-            self.missed +=1;
+            self.missed += 1;
         }
     }
 
-    pub fn flush(&mut self){
+    pub fn flush(&mut self) {
         self.inStreamRegularFile.flush();
     }
 
-    pub fn readIO(&mut self, i: u32, n: u32){
+    pub fn readIO(&mut self, i: u32, n: u32) {
         let listSize = min(i + n, self.rlen);
         for j in i..listSize {
             self.readObjectIO(j as usize);
         }
     }
-    pub fn readObjectIO(&mut self, i: usize){
+    pub fn readObjectIO(&mut self, i: usize) {
         let pindex = self.pageIndex[i];
         self.readPageFromFile(pindex);
 
@@ -175,11 +185,17 @@ impl ObjectReader {
         let end = start + lenght_each_object;
         let buff_data = self.pageBuffer.get(start as usize..end as usize).unwrap();
     }
-    pub fn getMissed(&mut self)->u32{
+    pub fn getMissed(&mut self) -> u32 {
         return self.missed;
     }
 
+    pub fn getRlen(&self) -> u32 {
+        return self.rlen;
+    }
 
+    pub fn getObjectInEachPage(&self) -> HashMap<u32, u32> {
+        return self.objectInEachPage.to_owned();
+    }
 }
 
 // impl Clone for ObjectReader {

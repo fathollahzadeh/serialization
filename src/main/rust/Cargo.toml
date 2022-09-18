@@ -49,6 +49,10 @@ path = "src/DataWriteSingle.rs"
 name="DataWriteParallel"
 path = "src/DataWriteParallel.rs"
 
+[[bin]]
+name="ExternalSort"
+path = "src/ExternalSort.rs"
+
 [build]
 rustflags = ["-Awarnings"]
 

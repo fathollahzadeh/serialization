@@ -21,8 +21,11 @@ fn main() -> io::Result<()> {
     let mut writer = ObjectWriter::new1(outDataPath, "MessagePack", nrow);
     let f = File::open(&inDataPath)?;
     let f = BufReader::new(f);
+    let mut id = 0;
     for line in f.lines() {
-        let tweetStatus: TweetStatus = serde_json::from_str(&line.unwrap()).unwrap();
+        let mut tweetStatus: TweetStatus = serde_json::from_str(&line.unwrap()).unwrap();
+        tweetStatus.set_id(tweetStatus.getId() + id);
+        id += 1;
         writer.writeObjectToFile(tweetStatus);
     }
     writer.flush();

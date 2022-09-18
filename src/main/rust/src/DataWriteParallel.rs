@@ -4,7 +4,6 @@
 
 use std::{io, env};
 use std::cmp::min;
-use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::fs::metadata;
 use std::path::Path;
@@ -12,7 +11,7 @@ use std::fs;
 use crate::runtime::ObjectReader::ObjectReader;
 use crate::runtime::ObjectWriter::ObjectWriter;
 use crate::tweetStructs::TweetStatus::TweetStatus;
-use crate::util::Const::{BATCHSIZE, PAGESIZE};
+use crate::util::Const::BATCHSIZE;
 
 mod tweetStructs;
 mod runtime;
