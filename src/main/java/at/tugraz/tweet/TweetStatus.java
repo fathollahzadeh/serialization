@@ -1815,7 +1815,6 @@ public class TweetStatus extends Base implements RootData {
 				countLevelOtherTweet += other.tweetStatusFBS.retweetedStatus().retweetCount();
 		}
 		else {
-			Gson gson = new Gson();
 			// get text
 			countLevel += this.tweetStatusP.getText().length();
 

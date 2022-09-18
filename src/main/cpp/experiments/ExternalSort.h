@@ -79,7 +79,7 @@ void ExternalSort<T>::runExternalSort() {
         pageCounter[i] = 0;
     }
 
-    for (int i = 0; i < fileCount & i * chunkSize < reader->getRlen(); i++) {
+    for (int i = 0; i < fileCount && i * chunkSize < reader->getRlen(); i++) {
         T **list = new T *[chunkSize];
         int listSize = reader->readObjects((long) i * chunkSize, chunkSize, list);
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
@@ -115,7 +115,7 @@ void ExternalSort<T>::runExternalSort() {
     for (int i = 0; i < fileCount; i++) {
         int n = readerArray[i]->getObjectInEachPage()[0];
         T **list = new T *[n];
-        reader->readObjects(0, n, list);
+        readerArray[i]->readObjects(0, n, list);
         pageObjectCounter[i] = n;
         readFileObject[i] = n;
         for (int j = 0; j < n; ++j) {

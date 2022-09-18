@@ -36,7 +36,7 @@ public class ExternalSort {
 			pageCounter[i] = 0;
 		}
 
-		for(int i = 0; i < fileCount & i * chunkSize < reader.getRlen(); i++) {
+		for(int i = 0; i < fileCount && i * chunkSize < reader.getRlen(); i++) {
 			RootData[] list = reader.readObjects((long) i * chunkSize, chunkSize);
 			Arrays.sort(list);
 
@@ -56,7 +56,7 @@ public class ExternalSort {
 		// reading objects from the first pages and adding them to a priority queue
 		for (int i = 0; i < fileCount; i++) {
 			int n = readerArray.get(i).getObjectInEachPage().get(0);
-			RootData[] rd = reader.readObjects(0, n);
+			RootData[] rd = readerArray.get(i).readObjects(0, n);
 			pageObjectCounter[i] = n;
 			readFileObject[i] = n;
 			for (RootData rootData : rd) {
