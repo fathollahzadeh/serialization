@@ -18,5 +18,5 @@ for rp in {1..1}; do
     echo $SCRIPT
     time $SCRIPT
     end=$(date +%s%N)
-    echo ${method}"Rust,Rust,"${task_set}",Total,"${chunk_size}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
+    echo ${method}"Rust,Rust,"${task_set}",IO,"${chunk_size}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
 done  

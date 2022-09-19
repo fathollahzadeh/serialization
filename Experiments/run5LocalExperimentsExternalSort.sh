@@ -11,8 +11,8 @@ declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuf
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Bincode") #("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
-externalsort_nrow=10000
-externalsort_hunk_size=1000
+externalsort_nrow=1000000
+externalsort_hunk_size=100000
 
 
 # Load data into memory
@@ -95,19 +95,19 @@ for rp in {1..1}; do
         mkdir -p $outExternalSort
         ./explocal/runExperiment3_ExternalSortIORust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow false $externalsort_hunk_size Experiment3b_ExternalSort_times 
         
-        # rm -rf $outExternalSort
-        # mkdir -p $outExternalSort
-        # ./explocal/runExperiment3_ExternalSortRust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow false $externalsort_hunk_size Experiment3b_ExternalSort_times      
+        rm -rf $outExternalSort
+        mkdir -p $outExternalSort
+        ./explocal/runExperiment3_ExternalSortRust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow false $externalsort_hunk_size Experiment3b_ExternalSort_times      
         
 
-        # ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $externalsort_nrow Single true Experiment3a_ExternalSort_Write_times
+        ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $externalsort_nrow Single true Experiment3a_ExternalSort_Write_times
         
-        #  rm -rf $outExternalSort
-        #  mkdir -p $outExternalSort
-        # ./explocal/runExperiment3_ExternalSortRust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow true $externalsort_hunk_size Experiment3b_ExternalSort_times 
+        rm -rf $outExternalSort
+        mkdir -p $outExternalSort
+        ./explocal/runExperiment3_ExternalSortRust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow true $externalsort_hunk_size Experiment3b_ExternalSort_times 
         
-        #  rm -rf $outExternalSort
-        #  mkdir -p $outExternalSort
-        # ./explocal/runExperiment3_ExternalSortIORust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow true $externalsort_hunk_size Experiment3b_ExternalSort_times 
+        rm -rf $outExternalSort
+         mkdir -p $outExternalSort
+        ./explocal/runExperiment3_ExternalSortIORust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow true $externalsort_hunk_size Experiment3b_ExternalSort_times 
     done
 done  
