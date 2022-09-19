@@ -23,4 +23,5 @@ pub fn getMethodID( method: &str) -> u16 {
     }
     return methodID;
 }
-// enum NodeType {  ROOT,  MIDDLE, LEAF };
+
+pub enum NodeType {  ROOT,  MIDDLE, LEAF }
