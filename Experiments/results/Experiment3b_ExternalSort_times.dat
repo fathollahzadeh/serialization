@@ -1,0 +1,2 @@
+baseline,language,taskset,execution,chunk_size,nrow,time
+BincodeRust,Rust,false,Total,1000,10000,621

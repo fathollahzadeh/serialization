@@ -1,0 +1,2 @@
+baseline,language,taskset,execution,platform,seq_rand,nrow,time
+BincodeRust,Rust,false,Total,Single,Sequential,10000,479
