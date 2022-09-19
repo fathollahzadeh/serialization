@@ -22,7 +22,6 @@ fn main() -> io::Result<()> {
     let chunkSize: u32 = args[4].parse().unwrap();
 
     let mut queue: PriorityQueue<ObjectFileIndex, Reverse<usize>> = PriorityQueue::new();
-    //let mut queue = PriorityQueue::new();
     let mut reader = ObjectReader::new1(inDataPath, method);
     let fileCount = (reader.getRlen() as f32 / chunkSize as f32).ceil() as u32;
     let mut pageObjectCounter: Vec<u32> = vec![0; fileCount as usize];
@@ -46,8 +45,8 @@ fn main() -> io::Result<()> {
     let mut readerArray: Vec<ObjectReader> = vec![];
     for i in 0..fileCount {
         let sortedFileName = format!("{}/{}Rust-sorted-{}.bin", outDataPath, method, i);
-        let reader = ObjectReader::new1(sortedFileName.as_str(), method);
-        readerArray.push(reader);
+        let tmpReader = ObjectReader::new1(sortedFileName.as_str(), method);
+        readerArray.push(tmpReader);
     }
 
     // reading objects from the first pages and adding them to a priority queue

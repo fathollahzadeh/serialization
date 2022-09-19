@@ -125,6 +125,54 @@ impl ObjectWriter {
         self.row += 1;
     }
 
+    pub fn writeObjectBufferToFile(&mut self, buffer:&[u8]){
+        let object_size: u32 = buffer.len() as u32;
+        let mut last_len: u32 = self.pageBuffer.len().try_into().unwrap();
+        self.pageBuffer.put_slice(buffer);
+        let curren_len: u32 = self.pageBuffer.len().try_into().unwrap();
+
+        //check capacity of the current page size
+        //if current page is full should be write to the file
+        if curren_len > Const::PAGESIZE {
+            let tbuffer = self.pageBuffer.split_to(last_len.try_into().unwrap());
+            //Write in file:
+            self.outStreamRegularFile.write_all(&tbuffer).ok();
+            self.pagePosition.push(self.currentPagePosition);
+            self.currentPagePosition += tbuffer.len() as u64;
+            self.currentPageNumber += 1;
+            last_len = 0;
+        }
+        self.pageIndex.push(self.currentPageNumber);
+        self.objectIndex.push(last_len);
+        self.objectLength.push(object_size);
+        self.row += 1;
+    }
+
+    //    public void writeObjectToFile(byte[] buffer) {
+    //         int objectSize;
+    //         try {
+    //             objectSize = buffer.length;
+    //             //check capacity of the current page size
+    //             //if current page is full should write to the file and then reset the page
+    //             if ((currentOffset + objectSize) > Const.PAGESIZE) {
+    //                 //Write in file:
+    //                 randOutStreamRegularFile.seek(currentPageNumber * Const.PAGESIZE);
+    //                 randOutStreamRegularFile.write(this.pageBuffer);
+    //                 currentPageNumber++;
+    //                 currentOffset = 0;
+    //                 this.pageBuffer = new byte[2 * Const.PAGESIZE];
+    //             }
+    //             System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset, objectSize);
+    //             this.pageIndex[row] = (int) currentPageNumber;
+    //             this.objectIndex[row] = currentOffset;
+    //             this.objectLength[row] = objectSize;
+    //             currentOffset += objectSize;
+    //             this.row++;
+    //         } catch (Exception ex) {
+    //             logger.error("writeObjectToFile:" + ex + "  " + row);
+    //         }
+    //     }
+
     pub fn flush(&mut self) {
         self.outStreamRegularFile.write_all(self.pageBuffer.bytes()).ok();
         self.pagePosition.push(self.currentPagePosition);

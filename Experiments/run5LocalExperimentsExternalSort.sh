@@ -91,13 +91,13 @@ for rp in {1..1}; do
         ###############    
         ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $externalsort_nrow Single false Experiment3a_ExternalSort_Write_times
 
-        # rm -rf $outExternalSort
-        # mkdir -p $outExternalSort
-        # ./explocal/runExperiment3_ExternalSortIORust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow false $externalsort_hunk_size Experiment3b_ExternalSort_times 
-        
         rm -rf $outExternalSort
         mkdir -p $outExternalSort
-        ./explocal/runExperiment3_ExternalSortRust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow false $externalsort_hunk_size Experiment3b_ExternalSort_times      
+        ./explocal/runExperiment3_ExternalSortIORust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow false $externalsort_hunk_size Experiment3b_ExternalSort_times 
+        
+        # rm -rf $outExternalSort
+        # mkdir -p $outExternalSort
+        # ./explocal/runExperiment3_ExternalSortRust.sh $method ${outDataPath}.${method}Rust $outExternalSort $externalsort_nrow false $externalsort_hunk_size Experiment3b_ExternalSort_times      
         
 
         # ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $externalsort_nrow Single true Experiment3a_ExternalSort_Write_times

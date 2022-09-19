@@ -53,6 +53,10 @@ path = "src/DataWriteParallel.rs"
 name="ExternalSort"
 path = "src/ExternalSort.rs"
 
+[[bin]]
+name="ExternalSortIO"
+path = "src/ExternalSortIO.rs"
+
 [build]
 rustflags = ["-Awarnings"]
 
@@ -72,5 +76,4 @@ bytebuffer-rs = "0.4.0"
 priority-queue = "1.2.3"
 
 num_cpus = "1.13.1"
-threadpool = "1.8.1"
 crossbeam = "0.8"

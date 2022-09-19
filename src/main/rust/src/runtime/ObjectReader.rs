@@ -1,3 +1,4 @@
+use std::borrow::Borrow;
 use bytes::{BytesMut, Buf};
 use std::io;
 use std::fs::{File, OpenOptions};
@@ -169,13 +170,14 @@ impl ObjectReader {
         self.inStreamRegularFile.flush();
     }
 
-    pub fn readIO(&mut self, i: u32, n: u32) {
+    pub fn readIO(&mut self, i: u32, n: u32){
         let listSize = min(i + n, self.rlen);
         for j in i..listSize {
-            self.readObjectIO(j as usize);
+           self.readObjectIO(j as usize).to_owned();
         }
     }
-    pub fn readObjectIO(&mut self, i: usize) {
+
+    pub fn readObjectIO(&mut self, i: usize) -> &[u8] {
         let pindex = self.pageIndex[i];
         self.readPageFromFile(pindex);
 
@@ -184,7 +186,14 @@ impl ObjectReader {
         let start = self.objectIndex[i];
         let end = start + lenght_each_object;
         let buff_data = self.pageBuffer.get(start as usize..end as usize).unwrap();
+        return buff_data;
     }
+
+    pub fn getMaxLen(&mut self, i: u32, n: u32)->u32{
+        let listSize = min(i + n, self.rlen);
+        return listSize;
+    }
+
     pub fn getMissed(&mut self) -> u32 {
         return self.missed;
     }
