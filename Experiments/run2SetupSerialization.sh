@@ -12,7 +12,7 @@ cd "$path"
 # mvn clean compile assembly:single
 # mv target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar "$path/Experiments/SerializationJava.jar"
 
-# # compile C++ baslelines
+# compile C++ baslelines
 # cd "$path/src/main/cpp"
 # rm -rf CMakeFiles
 # rm -rf cmake_install.cmake
@@ -28,7 +28,7 @@ cd "$path"
 
 # compile Rust baselines
 cd "$path/src/main/rust"
-#cargo clean
+cargo clean
 
 cargo build --release
 mkdir -p "$path/Experiments/rustbin"
