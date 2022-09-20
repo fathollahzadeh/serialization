@@ -54,9 +54,10 @@ impl MachineInfo {
     pub fn root(&self) -> &Option<Box<MachineInfo>> {
         &self.root
     }
-    pub fn set_root(&mut self, root: MachineInfo) {
-        self.root = Box(root, ());
-    }
+
+    // pub fn set_root(&mut self, root: MachineInfo) {
+    //     self.root = Box(root, ());
+    // }
 
     pub fn addLeaf(&mut self, leaf: MachineInfo){
           self.leaves.push(leaf);

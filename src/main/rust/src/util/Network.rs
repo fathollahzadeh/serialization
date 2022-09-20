@@ -38,18 +38,18 @@ impl Network {
              result.insert(ip, nsi);
          }
 
-        for ip in rootLeaf.keys() {
-            let root = rootLeaf.get(ip.clone().as_str()).unwrap();
-            if root.to_lowercase().eq("root") {
-                continue;
-            }
-            let mut tmpRoot = result.get(root.clone().as_str()).unwrap();
-            let mut tmpLeaf = result.get(ip.clone().as_str()).unwrap();
-
-            tmpRoot.addLeaf(tmpLeaf.to_owned());
-            tmpLeaf.set_root(tmpRoot);
-            tmp.set_root()
-        }
+        // for ip in rootLeaf.keys() {
+        //     let root = rootLeaf.get(ip.clone().as_str()).unwrap();
+        //     if root.to_lowercase().eq("root") {
+        //         continue;
+        //     }
+        //     let mut tmpRoot = result.get(root.clone().as_str()).unwrap();
+        //     let mut tmpLeaf = result.get(ip.clone().as_str()).unwrap();
+        //
+        //     tmpRoot.addLeaf(tmpLeaf.to_owned());
+        //     tmpLeaf.set_root(tmpRoot);
+        //     tmp.set_root()
+        // }
         Ok(())
     }
 }
