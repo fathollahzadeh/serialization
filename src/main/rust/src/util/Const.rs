@@ -24,4 +24,5 @@ pub fn getMethodID( method: &str) -> u16 {
     return methodID;
 }
 
+#[derive(PartialEq)]
 pub enum NodeType {  ROOT,  MIDDLE, LEAF }

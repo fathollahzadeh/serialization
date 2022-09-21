@@ -6,6 +6,7 @@ use std::io;
 use std::process;
 use csv;
 use csv::Reader;
+use local_ip_address::local_ip;
 
 pub struct Network {
     config: String,
@@ -66,5 +67,10 @@ impl Network {
             }
             return sum;
         }
+    }
+
+    pub fn getCurrentMachine(&mut self) -> &MachineInfo {
+        let ipstr = local_ip().unwrap().to_string();
+        return self.machineInfo.get(ipstr.as_str()).unwrap();
     }
 }
