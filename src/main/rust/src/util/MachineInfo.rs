@@ -1,4 +1,4 @@
-use crate::util::Const::NodeType;
+use crate::util::Const::{ROOT, LEAF, MIDDLE};
 
 #[derive(Debug)]
 pub struct MachineInfo {
@@ -25,13 +25,13 @@ impl MachineInfo {
         self.leaves.push(leaf);
     }
 
-    pub fn getNodeType(&mut self) -> NodeType {
+    pub fn getNodeType(&mut self) -> u16 {
         if self.root == "root" {
-            return NodeType::ROOT;
+            return ROOT;
         } else if self.leaves.len() == 0 {
-            return NodeType::LEAF;
+            return LEAF;
         } else {
-            return NodeType::MIDDLE;
+            return MIDDLE;
         }
     }
 

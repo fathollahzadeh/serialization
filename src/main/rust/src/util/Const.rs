@@ -1,3 +1,5 @@
+use std::simd::u8x32;
+
 pub const PAGESIZE: u32 = 1024*1024;
 pub const BATCHSIZE: u32 = 10000;//512;
 pub const NETWORK_PAGESIZE: u64 = 20*1024*1024;
@@ -24,5 +26,9 @@ pub fn getMethodID( method: &str) -> u16 {
     return methodID;
 }
 
-#[derive(PartialEq)]
-pub enum NodeType {  ROOT,  MIDDLE, LEAF }
+// #[derive(PartialEq)]
+// pub enum NodeType {  ROOT,  MIDDLE, LEAF }
+
+pub const ROOT:u16 = 1;
+pub const MIDDLE:u16 = 2;
+pub const LEAF:u16 = 3;
