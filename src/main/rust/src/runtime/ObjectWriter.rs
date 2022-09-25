@@ -1,11 +1,14 @@
 use bytes::{BytesMut, BufMut, Buf};
 use std::fs::{File, OpenOptions};
+use std::hash::Hasher;
 use crate::tweetStructs::TweetStatus::TweetStatus;
-use std::io::Write;
+use std::io::{Read, Write};
+use std::net::TcpStream;
+use std::process::exit;
 use crate::util::Const;
 
 pub struct ObjectWriter {
-    outStreamRegularFile:File,
+    outStreamRegularFile: File,
     outIndexFile: File,
     currentPageNumber: u32,
     currentOffset: u32,
@@ -61,21 +64,21 @@ impl ObjectWriter {
     pub fn serializeObject(&mut self, object: TweetStatus) {
         match self.method {
             Const::JSON => {
-                self.pageBuffer.put_slice(serde_json::to_string(&object).unwrap().as_bytes());
+                serde_json::to_string(&object).unwrap().as_bytes();
             }
             Const::BINCODE => {
-                self.pageBuffer.put_slice(bincode::serialize(&object).unwrap().as_slice());
+                bincode::serialize(&object).unwrap().as_slice();
             }
             Const::MESSAGEPACK => {
-                self.pageBuffer.put_slice(rmp_serde::to_vec(&object).unwrap().as_slice());
+                rmp_serde::to_vec(&object).unwrap().as_slice();
             }
             Const::BSON => {
                 let mut buf = Vec::new();
                 bson::to_bson(&object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
-                self.pageBuffer.put_slice(buf.as_slice());
+                buf.as_slice();
             }
             Const::FLEXBUF => {
-                self.pageBuffer.put_slice(flexbuffers::to_vec(&object).unwrap().as_slice());
+                flexbuffers::to_vec(&object).unwrap().as_slice();
             }
             _ => {}
         }
@@ -125,7 +128,56 @@ impl ObjectWriter {
         self.row += 1;
     }
 
-    pub fn writeObjectBufferToFile(&mut self, buffer:&[u8]){
+    pub fn writeObjectToNetworkPage(&mut self, object: TweetStatus, mut stream: TcpStream) {
+        let object_size: i32;
+        let mut last_len: i32 = self.pageBuffer.len().try_into().unwrap();
+        match self.method {
+            Const::JSON => {
+                self.pageBuffer.put_slice(serde_json::to_string(&object).unwrap().as_bytes());
+            }
+            Const::BINCODE => {
+                self.pageBuffer.put_slice(bincode::serialize(&object).unwrap().as_slice());
+            }
+            Const::MESSAGEPACK => {
+                self.pageBuffer.put_slice(rmp_serde::to_vec(&object).unwrap().as_slice());
+            }
+            Const::BSON => {
+                let mut buf = Vec::new();
+                bson::to_bson(&object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
+                self.pageBuffer.put_slice(buf.as_slice());
+            }
+            Const::FLEXBUF => {
+                self.pageBuffer.put_slice(flexbuffers::to_vec(&object).unwrap().as_slice());
+            }
+            _ => {}
+        }
+        let curren_len: i32 = self.pageBuffer.len() as i32 + 4;
+        object_size = curren_len - last_len;
+        self.pageBuffer.put_i32(object_size);
+
+        if curren_len - 4 > Const::NETWORK_PAGESIZE as i32 {
+            let tbuffer = self.pageBuffer.split_to(last_len.try_into().unwrap());
+            let mut ack_data = [0 as u8; 1];
+            let ack = b"1";
+            match stream.read_exact(&mut ack_data) {
+                Ok(_) => {
+                    if &ack_data != ack {
+                        println!("writeObjectToNetworkPage!");
+                        return;
+                    }
+                    stream.write(&last_len.to_be_bytes());
+                    stream.write(tbuffer.bytes()).unwrap();
+                    last_len = 0;
+                }
+                _ => {
+                    println!("writeObjectToNetworkPage (pattern)!");
+                    return;
+                }
+            }
+        }
+    }
+
+    pub fn writeObjectBufferToFile(&mut self, buffer: &[u8]) {
         let object_size: u32 = buffer.len() as u32;
         let mut last_len: u32 = self.pageBuffer.len().try_into().unwrap();
         self.pageBuffer.put_slice(buffer);
@@ -148,31 +200,6 @@ impl ObjectWriter {
         self.row += 1;
     }
 
-    //    public void writeObjectToFile(byte[] buffer) {
-    //         int objectSize;
-    //         try {
-    //             objectSize = buffer.length;
-    //             //check capacity of the current page size
-    //             //if current page is full should write to the file and then reset the page
-    //             if ((currentOffset + objectSize) > Const.PAGESIZE) {
-    //                 //Write in file:
-    //                 randOutStreamRegularFile.seek(currentPageNumber * Const.PAGESIZE);
-    //                 randOutStreamRegularFile.write(this.pageBuffer);
-    //                 currentPageNumber++;
-    //                 currentOffset = 0;
-    //                 this.pageBuffer = new byte[2 * Const.PAGESIZE];
-    //             }
-    //             System.arraycopy(buffer, 0, this.pageBuffer, this.currentOffset, objectSize);
-    //             this.pageIndex[row] = (int) currentPageNumber;
-    //             this.objectIndex[row] = currentOffset;
-    //             this.objectLength[row] = objectSize;
-    //             currentOffset += objectSize;
-    //             this.row++;
-    //         } catch (Exception ex) {
-    //             logger.error("writeObjectToFile:" + ex + "  " + row);
-    //         }
-    //     }
-
     pub fn flush(&mut self) {
         self.outStreamRegularFile.write_all(self.pageBuffer.bytes()).ok();
         self.pagePosition.push(self.currentPagePosition);
@@ -192,6 +219,53 @@ impl ObjectWriter {
         self.outIndexFile.flush().ok();
         self.outStreamRegularFile.flush().ok();
     }
+
+    // pub fn flushToNetwork(&mut self, mut stream: TcpStream) {
+    //     let mut ack_data = [0 as u8; 1];
+    //     let ack = b"1";
+    //     match stream.read_exact(&mut ack_data) {
+    //         Ok(_) => {
+    //             if &ack_data != ack {
+    //                 println!("flushToNetwork!");
+    //                 return;
+    //             }
+    //             stream.write_i32(self.pageBuffer.len().try_into().unwrap()).unwrap();
+    //             stream.write(self.pageBuffer.bytes()).unwrap();
+    //
+    //             match stream.read_exact(&mut ack_data) {
+    //                 Ok(_) => {
+    //                     if &ack_data != ack {
+    //                         println!("flushToNetwork!");
+    //                         return;
+    //                     }
+    //                     stream.write_i32(-1 as i32).unwrap();
+    //
+    //                     match stream.read_exact(&mut ack_data) {
+    //                         Ok(_) => {
+    //                             if &ack_data != ack {
+    //                                 println!("flushToNetwork!");
+    //                                 return;
+    //                             }
+    //                             stream.write_i32(-1 as i32).unwrap();
+    //                         }
+    //                         _ => {
+    //                             println!("flushToNetwork (pattern)!");
+    //                             return;
+    //                         }
+    //                     }
+    //                 }
+    //                 _ => {
+    //                     println!("flushToNetwork (pattern)!");
+    //                     return;
+    //                 }
+    //             }
+    //         }
+    //         _ => {
+    //             println!("flushToNetwork (pattern)!");
+    //             return;
+    //         }
+    //     }
+    // }
 
     fn writeIndex32ToFile(&mut self, index_vector: Vec<u32>) {
         let buffer_size = (self.rlen + 1) * 4;

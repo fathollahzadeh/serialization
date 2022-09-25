@@ -37,6 +37,7 @@ impl Network {
 
             let nsi = MachineInfo::new(ip.clone(), port, root, nrow);
             list.insert(ip, nsi);
+
         }
 
         for ip in rootLeaf.keys() {
@@ -44,7 +45,6 @@ impl Network {
             if root.to_lowercase().eq("root") {
                 continue;
             }
-
             list.get_mut(root.clone().as_str()).unwrap().addLeaf(ip.clone());
             list.get_mut(ip.clone().as_str()).unwrap().set_root(root.clone());
         }
@@ -69,8 +69,8 @@ impl Network {
         }
     }
 
-    pub fn getCurrentMachine(&mut self) -> &MachineInfo {
+    pub fn getCurrentMachine(&mut self) -> &mut MachineInfo {
         let ipstr = local_ip().unwrap().to_string();
-        return self.machineInfo.get(ipstr.as_str()).unwrap();
+        return self.machineInfo.get_mut(ipstr.as_str()).unwrap();
     }
 }

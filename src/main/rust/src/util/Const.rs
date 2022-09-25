@@ -1,8 +1,6 @@
-use std::simd::u8x32;
-
 pub const PAGESIZE: u32 = 1024*1024;
-pub const BATCHSIZE: u32 = 10000;//512;
-pub const NETWORK_PAGESIZE: u64 = 20*1024*1024;
+pub const BATCHSIZE: u32 = 512;
+pub const NETWORK_PAGESIZE: u32 = 20*1024*1024;
 pub const NETWORK_LOCAL_READ_LENGTH: u32 = 20000;
 pub const NETWORK_CLIENT_QUEUE_SIZE: u16 = 10;
 pub const NETWORK_TIMEOUT: u32 = 2000*1000;
@@ -26,9 +24,14 @@ pub fn getMethodID( method: &str) -> u16 {
     return methodID;
 }
 
-// #[derive(PartialEq)]
-// pub enum NodeType {  ROOT,  MIDDLE, LEAF }
-
-pub const ROOT:u16 = 1;
-pub const MIDDLE:u16 = 2;
-pub const LEAF:u16 = 3;
+#[derive(PartialEq)]
+pub enum NodeType {  ROOT,  MIDDLE, LEAF }
+impl NodeType {
+    fn value(&self) -> u16 {
+        match *self {
+            NodeType::ROOT => 1,
+            NodeType::MIDDLE => 2,
+            NodeType::LEAF => 3,
+        }
+    }
+}
