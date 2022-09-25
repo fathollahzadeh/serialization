@@ -28,7 +28,7 @@ cd "$path"
 
 # compile Rust baselines
 cd "$path/src/main/rust"
-$HOME/.cargo/bin/cargo clean
+#$HOME/.cargo/bin/cargo clean
 
 $HOME/.cargo/bin/cargo build --release
 mkdir -p "$path/Experiments/rustbin"

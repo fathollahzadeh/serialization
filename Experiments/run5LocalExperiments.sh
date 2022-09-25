@@ -147,7 +147,7 @@ for rp in {1..3}; do
             ./explocal/runExperiment2a_ReadIORust.sh $method $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
             ./explocal/runExperiment2a_ReadIORust.sh $method $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
 
-            Read (CPU+IO)
+            #Read (CPU+IO)
             ./explocal/runExperiment2a_ReadRust.sh $method $outDataPath $nrow Single false Sequential Experiment2_Read_times
             ./explocal/runExperiment2a_ReadRust.sh $method $outDataPath $nrow Single true Sequential Experiment2_Read_times
             ./explocal/runExperiment2a_ReadRust.sh $method $outDataPath $nrow Parallel false Sequential Experiment2_Read_times

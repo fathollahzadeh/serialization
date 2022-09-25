@@ -23,8 +23,7 @@ pub struct ObjectReader {
     objectIndex: Vec<u32>,
     objectLength: Vec<u32>,
     pagePosition: Vec<u64>,
-    currentPagePosition: u64,
-    missed: u32,
+    currentPagePosition: u64
 }
 
 impl ObjectReader {
@@ -48,8 +47,7 @@ impl ObjectReader {
             pagePosition: tmpPagePosition,
             method: Const::getMethodID(method),
             currentPagePosition: 0,
-            objectInEachPage: ObjectReader::getObjectsInEachPage(&mut tmpPageIndex),
-            missed: 0,
+            objectInEachPage: ObjectReader::getObjectsInEachPage(&mut tmpPageIndex)
         }
     }
 
@@ -162,7 +160,6 @@ impl ObjectReader {
             self.pageBuffer = BytesMut::with_capacity(buffer.len());
             self.pageBuffer.extend_from_slice(buffer);
             self.currentPageNumber = id;
-            self.missed += 1;
         }
     }
 
@@ -192,10 +189,6 @@ impl ObjectReader {
     pub fn getMaxLen(&mut self, i: u32, n: u32)->u32{
         let listSize = min(i + n, self.rlen);
         return listSize;
-    }
-
-    pub fn getMissed(&mut self) -> u32 {
-        return self.missed;
     }
 
     pub fn getRlen(&self) -> u32 {
