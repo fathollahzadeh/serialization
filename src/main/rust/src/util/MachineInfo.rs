@@ -1,5 +1,6 @@
-use crate::NodeType;
 use crate::util::Const;
+use crate::util::Const::NodeType;
+
 
 #[derive(Debug)]
 pub struct MachineInfo {
