@@ -49,8 +49,9 @@ fn main() -> io::Result<()> {
     let mut arc_statuses = Arc::new((Mutex::new(statuses)));
     let mut job = Arc::new(Mutex::new(0 as usize));
 
+    println!("Current Machine IP={}", machineInfo.ip());
     if nodeType == NodeType::LEAF {
-
+        println!("LEAF Start !!!!!!!!!!!!!11");
         match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
             Ok(mut stream) => {
                 let mut list: Vec<TweetStatus> = vec![];
@@ -66,6 +67,7 @@ fn main() -> io::Result<()> {
             }
         }
     } else if nodeType == NodeType::MIDDLE {
+        println!("MIDDLE Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
 
         for i in 0..machineInfo.leaves().len() + 1 {
@@ -110,6 +112,7 @@ fn main() -> io::Result<()> {
             }
         }).unwrap();
     } else if nodeType == NodeType::ROOT {
+        println!("ROOT Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
         for i in 0..machineInfo.leaves().len() + 1 {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
