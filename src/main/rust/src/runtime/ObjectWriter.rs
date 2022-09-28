@@ -128,34 +128,42 @@ impl ObjectWriter {
         self.row += 1;
     }
 
-    pub fn writeObjectToNetworkPage(&mut self, object: TweetStatus, mut stream: TcpStream) {
+    pub fn writeObjectToNetworkPage(&mut self, object: TweetStatus, stream:&mut TcpStream) {
         let object_size: i32;
         let mut last_len: i32 = self.pageBuffer.len().try_into().unwrap();
+
         match self.method {
             Const::JSON => {
-                self.pageBuffer.put_slice(serde_json::to_string(&object).unwrap().as_bytes());
+                let data = serde_json::to_string(&object).unwrap();
+                self.pageBuffer.put_i32(data.len() as i32);
+                self.pageBuffer.put_slice(data.as_bytes());
             }
             Const::BINCODE => {
-                self.pageBuffer.put_slice(bincode::serialize(&object).unwrap().as_slice());
+                let data = bincode::serialize(&object).unwrap();
+                self.pageBuffer.put_i32(data.len() as i32);
+                self.pageBuffer.put_slice(data.as_slice());
             }
             Const::MESSAGEPACK => {
-                self.pageBuffer.put_slice(rmp_serde::to_vec(&object).unwrap().as_slice());
+                let data = rmp_serde::to_vec(&object).unwrap();
+                self.pageBuffer.put_i32(data.len() as i32);
+                self.pageBuffer.put_slice(data.as_slice());
             }
             Const::BSON => {
                 let mut buf = Vec::new();
                 bson::to_bson(&object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
+                self.pageBuffer.put_i32(buf.len() as i32);
                 self.pageBuffer.put_slice(buf.as_slice());
             }
             Const::FLEXBUF => {
-                self.pageBuffer.put_slice(flexbuffers::to_vec(&object).unwrap().as_slice());
+                let data = flexbuffers::to_vec(&object).unwrap();
+                self.pageBuffer.put_i32(data.len() as i32);
+                self.pageBuffer.put_slice(data.as_slice());
             }
             _ => {}
         }
-        let curren_len: i32 = self.pageBuffer.len() as i32 + 4;
-        object_size = curren_len - last_len;
-        self.pageBuffer.put_i32(object_size);
+        let curren_len: i32 = self.pageBuffer.len() as i32;
 
-        if curren_len - 4 > Const::NETWORK_PAGESIZE as i32 {
+        if curren_len > Const::NETWORK_PAGESIZE as i32 {
             let tbuffer = self.pageBuffer.split_to(last_len.try_into().unwrap());
             let mut ack_data = [0 as u8; 1];
             let ack = b"1";
@@ -220,52 +228,54 @@ impl ObjectWriter {
         self.outStreamRegularFile.flush().ok();
     }
 
-    // pub fn flushToNetwork(&mut self, mut stream: TcpStream) {
-    //     let mut ack_data = [0 as u8; 1];
-    //     let ack = b"1";
-    //     match stream.read_exact(&mut ack_data) {
-    //         Ok(_) => {
-    //             if &ack_data != ack {
-    //                 println!("flushToNetwork!");
-    //                 return;
-    //             }
-    //             stream.write_i32(self.pageBuffer.len().try_into().unwrap()).unwrap();
-    //             stream.write(self.pageBuffer.bytes()).unwrap();
-    //
-    //             match stream.read_exact(&mut ack_data) {
-    //                 Ok(_) => {
-    //                     if &ack_data != ack {
-    //                         println!("flushToNetwork!");
-    //                         return;
-    //                     }
-    //                     stream.write_i32(-1 as i32).unwrap();
-    //
-    //                     match stream.read_exact(&mut ack_data) {
-    //                         Ok(_) => {
-    //                             if &ack_data != ack {
-    //                                 println!("flushToNetwork!");
-    //                                 return;
-    //                             }
-    //                             stream.write_i32(-1 as i32).unwrap();
-    //                         }
-    //                         _ => {
-    //                             println!("flushToNetwork (pattern)!");
-    //                             return;
-    //                         }
-    //                     }
-    //                 }
-    //                 _ => {
-    //                     println!("flushToNetwork (pattern)!");
-    //                     return;
-    //                 }
-    //             }
-    //         }
-    //         _ => {
-    //             println!("flushToNetwork (pattern)!");
-    //             return;
-    //         }
-    //     }
-    // }
+    pub fn flushToNetwork(&mut self, stream:&mut TcpStream) {
+        let mut ack_data = [0 as u8; 1];
+        let mut endOfNetwork:i32 = -1;
+        let ack = b"1";
+        match stream.read_exact(&mut ack_data) {
+            Ok(_) => {
+                if &ack_data != ack {
+                    println!("flushToNetwork!");
+                    return;
+                }
+                stream.write(&self.pageBuffer.len().to_be_bytes());
+                stream.write(self.pageBuffer.bytes()).unwrap();
+
+                match stream.read_exact(&mut ack_data) {
+                    Ok(_) => {
+                        if &ack_data != ack {
+                            println!("flushToNetwork!");
+                            return;
+                        }
+
+                        stream.write(&endOfNetwork.to_be_bytes());
+
+                        match stream.read_exact(&mut ack_data) {
+                            Ok(_) => {
+                                if &ack_data != ack {
+                                    println!("flushToNetwork!");
+                                    return;
+                                }
+                                stream.write(&endOfNetwork.to_be_bytes());
+                            }
+                            _ => {
+                                println!("flushToNetwork (pattern)!");
+                                return;
+                            }
+                        }
+                    }
+                    _ => {
+                        println!("flushToNetwork (pattern)!");
+                        return;
+                    }
+                }
+            }
+            _ => {
+                println!("flushToNetwork (pattern)!");
+                return;
+            }
+        }
+    }
 
     fn writeIndex32ToFile(&mut self, index_vector: Vec<u32>) {
         let buffer_size = (self.rlen + 1) * 4;

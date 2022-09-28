@@ -75,4 +75,8 @@ impl MachineInfo {
     pub fn set_leaves(&mut self, leaves: Vec<String>) {
         self.leaves = leaves;
     }
+
+    pub fn getTotalNRow(&mut self) -> u32{
+        return self.nrow + self.nrowLeaf;
+    }
 }

@@ -198,25 +198,8 @@ impl ObjectReader {
     pub fn getObjectInEachPage(&self) -> HashMap<u32, u32> {
         return self.objectInEachPage.to_owned();
     }
-}
 
-// impl Clone for ObjectReader {
-//     fn clone(&self) -> Self {
-//         ObjectReader {
-//             inStreamRegularFile: self.inStreamRegularFile.try_clone().unwrap(),
-//             currentPageNumber: self.currentPageNumber.clone(),
-//             currentOffset: self.currentOffset.clone(),
-//             pageBuffer: self.pageBuffer.clone(),
-//             rlen: self.rlen.clone(),
-//             row: self.row.clone(),
-//             pageIndex: self.pageIndex.clone(),
-//             objectIndex: self.objectIndex.clone(),
-//             objectLength: self.objectLength.clone(),
-//             pagePosition: self.pagePosition.clone(),
-//             method: self.method.clone(),
-//             currentPagePosition: self.currentPagePosition.clone(),
-//             objectInEachPage: self.objectInEachPage.clone(),
-//             missed:self.missed.clone(),
-//         }
-//     }
-// }
+    pub fn method(&self) -> u16 {
+        self.method
+    }
+}
