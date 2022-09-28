@@ -86,6 +86,7 @@ fn main() -> io::Result<()> {
                     });
                 } else {
                     let stream = serverSocket.incoming().next().unwrap();
+                    println!("ACCEPT!!!!!!1");
                     match stream {
                         Ok(stream) => {
                             scope.spawn(|_| {
@@ -131,6 +132,7 @@ fn main() -> io::Result<()> {
                     });
                 } else {
                     let stream = serverSocket.incoming().next().unwrap();
+                    println!("ACCEPT!!!!!!1");
                     match stream {
                         Ok(stream) => {
                             scope.spawn(|_| {
