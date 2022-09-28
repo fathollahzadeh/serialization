@@ -50,7 +50,8 @@ fn main() -> io::Result<()> {
     let mut job = Arc::new(Mutex::new(0 as usize));
 
     if nodeType == NodeType::LEAF {
-        match TcpStream::connect(format!("{}:{}", machineInfo.ip(), machineInfo.port())) {
+
+        match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
             Ok(mut stream) => {
                 let mut list: Vec<TweetStatus> = vec![];
                 reader.readObjects(0, machineInfo.nrow(), &mut list);

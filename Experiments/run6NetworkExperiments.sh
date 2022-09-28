@@ -11,7 +11,7 @@ declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuf
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json") #("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
-nrow=1000000
+nrow=100000
 
 # Load data into memory
 # 1.a Java enviroments
@@ -91,11 +91,11 @@ echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_
 
 for method in "${rust_methods[@]}"; do
     #clean up
-   # rm -rf data/tmp
-   # mkdir -p data/tmp
+    #rm -rf data/tmp
+    #mkdir -p data/tmp
 
     # serialize data into disk
-    ./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
+    #./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
 
     # 1. Memory-to-Memory (m2m)
     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
