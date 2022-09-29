@@ -76,36 +76,62 @@ fn main() -> io::Result<()> {
             arc_queues.lock().unwrap().push(queue);
         }
         crossbeam::scope(|scope| {
-            for i in 0..machineInfo.leaves().len() + 1 {
+
+            for stream in serverSocket.incoming() {
                 println!("Loop!!");
-                //let mut j = job.lock().unwrap(); //&*job.lock().unwrap();
-                print!("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
-                if *job.lock().unwrap() == machineInfo.leaves().len() {
-                    println!("Local Load");
-                    scope.spawn(|_| {
-                        let index = *job.lock().unwrap();
-                        LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
-                        let status = &mut arc_statuses.lock().unwrap()[index];
-                        *status = false;
-                    });
-                } else {
-                    println!("Before Accept!!");
-                    let stream = serverSocket.incoming().next().unwrap();
-                    println!("ACCEPT!!!!!!1");
-                    match stream {
-                        Ok(stream) => {
-                            scope.spawn(|_| {
-                                let index = *job.lock().unwrap();
-                                NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
-                                let status = &mut arc_statuses.lock().unwrap()[index];
-                                *status = false;
-                            });
-                        }
-                        _ => {}
+                match stream {
+                    Ok(stream) => {
+                        println!("ACCEPT!!!!!!1");
+                        scope.spawn(|_| {
+                            let index = *job.lock().unwrap();
+                            NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
+                            let status = &mut arc_statuses.lock().unwrap()[index];
+                            *status = false;
+                        });
+                        *job.lock().unwrap() += 1;
                     }
+                    _ => {}
                 }
-                *job.lock().unwrap() += 1;
             }
+
+            scope.spawn(|_| {
+                let index = *job.lock().unwrap();
+                LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
+                let status = &mut arc_statuses.lock().unwrap()[index];
+                *status = false;
+            });
+
+
+
+            // for i in 0..machineInfo.leaves().len() + 1 {
+            //     println!("Loop!!");
+            //     print!("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+            //     if *job.lock().unwrap() == machineInfo.leaves().len() {
+            //         println!("Local Load");
+            //         scope.spawn(|_| {
+            //             let index = *job.lock().unwrap();
+            //             LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
+            //             let status = &mut arc_statuses.lock().unwrap()[index];
+            //             *status = false;
+            //         });
+            //     } else {
+            //         println!("Before Accept!!");
+            //         let stream = serverSocket.incoming().next().unwrap();
+            //         println!("ACCEPT!!!!!!1");
+            //         match stream {
+            //             Ok(stream) => {
+            //                 scope.spawn(|_| {
+            //                     let index = *job.lock().unwrap();
+            //                     NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
+            //                     let status = &mut arc_statuses.lock().unwrap()[index];
+            //                     *status = false;
+            //                 });
+            //             }
+            //             _ => {}
+            //         }
+            //     }
+            //     *job.lock().unwrap() += 1;
+            // }
             let mut writer = ObjectWriter::new2(method, machineInfo.getTotalNRow(), Const::NETWORK_PAGESIZE as usize);
             println!("CCCCCCCCCCCCCCCCCCCCCCCc");
 
