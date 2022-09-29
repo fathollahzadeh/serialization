@@ -44,15 +44,15 @@ fn main() -> io::Result<()> {
     let mut reader = ObjectReader::new1(inDataPath, method);
     let mut nodeType = machineInfo.getNodeType();
     let mut queues: Vec<ArrayQueue<Vec<TweetStatus>>> = vec![];
-    let mut arc_queues = Arc::new((Mutex::new(queues)));
+    let mut arc_queues = Arc::new(Mutex::new(queues));
     let mut statuses: Vec<bool> = vec![true; machineInfo.leaves().len() + 1];
-    let mut arc_statuses = Arc::new((Mutex::new(statuses)));
+    let mut arc_statuses = Arc::new(Mutex::new(statuses));
     let mut job = Arc::new(Mutex::new(0 as usize));
 
     println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
         println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
-        let stream = TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port()))?;
+        let stream = TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())).unwrap();
         println!("OOOOOOOOOk");
         let mut list: Vec<TweetStatus> = vec![];
         reader.readObjects(0, machineInfo.nrow(), &mut list);
@@ -61,6 +61,7 @@ fn main() -> io::Result<()> {
         for rd in list {
             writer.writeObjectToNetworkPage(rd, &mut stream.try_clone().unwrap());
         }
+        writer.flushToNetwork(&mut stream.try_clone().unwrap());
     } else if nodeType == NodeType::MIDDLE {
         println!("MIDDLE Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
@@ -104,45 +105,54 @@ fn main() -> io::Result<()> {
     } else if nodeType == NodeType::ROOT {
         println!("ROOT Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
-        for i in 0..machineInfo.leaves().len() + 1 {
+       // for i in 0..machineInfo.leaves().len() {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
             arc_queues.lock().unwrap().push(queue);
-        }
-        println!("+++++++++++++++++++++ IIIIIIIIIIIIIIIIIIII");
+       // }
+        println!("+++++++++++++++++++++ IIIIIIIIIIIIIIIIIIII  {}", arc_queues.lock().unwrap().len());
 
         crossbeam::scope(|scope| {
-            for stream in serverSocket.incoming() {
+            for i in 0..machineInfo.leaves().len() {
+                let stream = serverSocket.incoming().next().unwrap();
                 println!("ACCEPT!!!!!!1");
                 let stream = stream.unwrap();
+                //let index = *job.lock().unwrap();
                 scope.spawn(|_| {
-                    let index = *job.lock().unwrap();
+                    let index = 0;//*job.lock().unwrap();
+                    //*job.lock().unwrap() += 1;
+                    println!("==================================");
+                    println!("index={}   len={}", index.clone(), 100);
+                    //let aa = arc_queues.lock().unwrap().get(index).unwrap();
                     NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
                     let status = &mut arc_statuses.lock().unwrap()[index];
                     *status = false;
                 });
-                *job.lock().unwrap() += 1;
             }
-            scope.spawn(|_| {
-                let index = *job.lock().unwrap();
-                LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
-                let status = &mut arc_statuses.lock().unwrap()[index];
-                *status = false;
-            });
+            // scope.spawn(|_| {
+            //     println!("HHHHHHHHHHHHHHHHHHHHHH");
+            //     let index = *job.lock().unwrap();
+            //     println!("AAAAAAAAAAAAAAAAAAAAAA  {}", index.clone());
+            //     LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
+            //     let status = &mut arc_statuses.lock().unwrap()[index];
+            //     *status = false;
+            // });
             println!("CCCCCCCCCCCCCCCCCCCCCCCc");
 
-            let writer = ObjectWriter::new1(outDataPath, method, machineInfo.getTotalNRow());
-            if plan.to_lowercase().eq("m2d") {
-                ExternalSortTask(&arc_queues, &arc_statuses, true, writer, true, None);
-            } else {
-                ExternalSortTask(&arc_queues, &arc_statuses, false, writer, false, None);
-            }
+            // let writer = ObjectWriter::new1(outDataPath, method, machineInfo.getTotalNRow());
+            // if plan.to_lowercase().eq("d2d") || plan.to_lowercase().eq("m2d"){
+            //     ExternalSortTask(&arc_queues, &arc_statuses, true, writer, true, None);
+            // } else {
+            //     ExternalSortTask(&arc_queues, &arc_statuses, false, writer, false, None);
+            // }
         }).unwrap();
+        println!("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
     }
 
     Ok(())
 }
 
 fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<TweetStatus>>) {
+    println!("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
     let mut ack_data = [0 as u8; 1];
     let mut i32_data = [0 as u8; 4];
     let ack = b"1";
@@ -189,31 +199,38 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<Tw
 
             relativePosition = relativePosition + 4 + objectSize as usize;
         }
+        println!("wait");
         while queue.is_full() {}
         queue.push(list);
+        println!("-----release");
     }
 }
 
 fn LocalReadTask(inDataPath: &str, method: &str, queue: &ArrayQueue<Vec<TweetStatus>>) {
+    println!("fffffffffffffffffffffffffffffff");
     let mut reader = ObjectReader::new1(inDataPath, method);
     let mut list: Vec<TweetStatus> = vec![];
     let nrow = reader.getRlen();
+    println!("??????????? local {}", nrow.clone());
     reader.readObjects(0, nrow, &mut list);
     list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
 
+    println!("after local sort");
     let chunks = (nrow as f32 / Const::NETWORK_LOCAL_READ_LENGTH as f32).ceil() as usize;
     for ch in list.chunks_mut(chunks) {
         while queue.is_full() {}
         queue.push(ch.to_vec());
+        println!("aaaaaaaaaaaaaaaaaaaaaaaaaaa")
     }
 }
 
 fn ExternalSortTask(queues: &Arc<Mutex<Vec<ArrayQueue<Vec<TweetStatus>>>>>, statuses: &Arc<Mutex<Vec<bool>>>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
     let mut dataList: Vec<TweetStatus> = vec![];
-    let numberOfClients = queues.lock().unwrap().len(); //queues.len();
+    let numberOfClients = queues.lock().unwrap().len();
     let mut pageObjectCounter: Vec<u64> = vec![0; numberOfClients];
     let mut queue: PriorityQueue<ObjectNetworkIndex, Reverse<usize>> = PriorityQueue::new();
 
+    println!("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
     // reading objects from the first pages and adding them to a priority queue
     for i in 0..numberOfClients as u32 {
         let mut listReadFromFile = queues.lock().unwrap()[i as usize].pop().unwrap();
