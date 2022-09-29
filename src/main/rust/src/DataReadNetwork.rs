@@ -13,7 +13,7 @@ use crate::Const::{NETWORK_PAGESIZE, NodeType};
 use crate::util::Const;
 use crate::util::ObjectNetworkIndex::ObjectNetworkIndex;
 use crate::util::Network::Network;
-use std::thread;
+use std::{thread, time};
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::io::{Cursor, Read, Write};
 use std::ops::DerefMut;
@@ -26,6 +26,7 @@ use crossbeam_utils::thread::scope;
 use rand::{thread_rng, Rng};
 use rand::distributions::uniform::SampleBorrow;
 use std::sync::{Arc, Mutex};
+use std::thread::Thread;
 
 
 mod tweetStructs;
@@ -50,7 +51,7 @@ fn main() -> io::Result<()> {
     println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
         println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
-        let stream = TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())).unwrap();
+        let stream = initClient(machineInfo.root(), machineInfo.port()).ok().unwrap();
         println!("OOOOOOOOOk");
         let mut list: Vec<TweetStatus> = vec![];
         reader.readObjects(0, machineInfo.nrow(), &mut list);
@@ -89,15 +90,9 @@ fn main() -> io::Result<()> {
             });
 
             let mut writer = ObjectWriter::new2(method, machineInfo.getTotalNRow(), Const::NETWORK_PAGESIZE as usize);
+            let stream = initClient(machineInfo.root(), machineInfo.port()).ok().unwrap();
+            ExternalSortTask(&mut queues, &mut statuses, true, writer, false, Some(&mut stream.try_clone().unwrap()));
 
-            match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
-                Ok(mut stream) => {
-                    ExternalSortTask(&mut queues, &mut statuses, true, writer, false, Some(&mut stream.try_clone().unwrap()));
-                }
-                Err(e) => {
-                    println!("Failed to connect to root: {}", e);
-                }
-            }
 
             let ack = b"1";
             for stream in streams {
@@ -106,7 +101,7 @@ fn main() -> io::Result<()> {
         }
     } else if nodeType == NodeType::ROOT {
         println!("ROOT Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip() ,machineInfo.port())).unwrap();
+        let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
         unsafe {
             let mut streams = vec![];
 
@@ -146,6 +141,20 @@ fn main() -> io::Result<()> {
         }
     }
     Ok(())
+}
+
+fn initClient(ip: &str, port: u16) -> Result<TcpStream, Box<dyn std::error::Error>> {
+    let delay = time::Duration::from_secs(1);
+    for i in 0..1000 {
+        match TcpStream::connect(format!("{}:{}", ip, port)) {
+            Ok(mut stream) => {
+                return Ok(stream);
+            }
+            _ => { thread::sleep(delay) }
+        }
+    }
+
+    Err(Box::from(format!("Client can't start >> {}:{}", ip, port)))
 }
 
 fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<TweetStatus>>) {
