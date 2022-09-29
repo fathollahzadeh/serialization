@@ -54,6 +54,7 @@ fn main() -> io::Result<()> {
         println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
         match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
             Ok(mut stream) => {
+                println!("OOOOOOOOOk");
                 let mut list: Vec<TweetStatus> = vec![];
                 reader.readObjects(0, machineInfo.nrow(), &mut list);
                 list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
@@ -76,8 +77,10 @@ fn main() -> io::Result<()> {
         }
         crossbeam::scope(|scope| {
             for i in 0..machineInfo.leaves().len() + 1 {
+                println!("Loop!!");
                 let mut j = &*job.lock().unwrap();
                 if *(&*job.lock().unwrap()) == machineInfo.leaves().len() {
+                    println!("Local Load");
                     scope.spawn(|_| {
                         let index = *(&*job.lock().unwrap());
                         LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
@@ -85,6 +88,7 @@ fn main() -> io::Result<()> {
                         *status = false;
                     });
                 } else {
+                    println!("Before Accept!!");
                     let stream = serverSocket.incoming().next().unwrap();
                     println!("ACCEPT!!!!!!1");
                     match stream {
@@ -102,6 +106,7 @@ fn main() -> io::Result<()> {
                 *job.lock().unwrap() += 1;
             }
             let mut writer = ObjectWriter::new2(method, machineInfo.getTotalNRow(), Const::NETWORK_PAGESIZE as usize);
+            println!("CCCCCCCCCCCCCCCCCCCCCCCc");
 
             match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
                 Ok(mut stream) => {
