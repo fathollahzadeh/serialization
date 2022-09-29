@@ -52,20 +52,14 @@ fn main() -> io::Result<()> {
     println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
         println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
-        match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
-            Ok(mut stream) => {
-                println!("OOOOOOOOOk");
-                let mut list: Vec<TweetStatus> = vec![];
-                reader.readObjects(0, machineInfo.nrow(), &mut list);
-                list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
-                let mut writer = ObjectWriter::new2(method, machineInfo.nrow(), Const::NETWORK_PAGESIZE as usize);
-                for rd in list {
-                    writer.writeObjectToNetworkPage(rd, &mut stream.try_clone().unwrap());
-                }
-            }
-            Err(e) => {
-                println!("Failed to connect: {}", e);
-            }
+        let stream = TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())).unwrap();
+        println!("OOOOOOOOOk");
+        let mut list: Vec<TweetStatus> = vec![];
+        reader.readObjects(0, machineInfo.nrow(), &mut list);
+        list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
+        let mut writer = ObjectWriter::new2(method, machineInfo.nrow(), Const::NETWORK_PAGESIZE as usize);
+        for rd in list {
+            writer.writeObjectToNetworkPage(rd, &mut stream.try_clone().unwrap());
         }
     } else if nodeType == NodeType::MIDDLE {
         println!("MIDDLE Start !!!!!!!!!!!!!11");
@@ -77,20 +71,15 @@ fn main() -> io::Result<()> {
         }
         crossbeam::scope(|scope| {
             for stream in serverSocket.incoming() {
-                println!("Loop!!");
-                match stream {
-                    Ok(stream) => {
-                        println!("ACCEPT!!!!!!1");
-                        scope.spawn(|_| {
-                            let index = *job.lock().unwrap();
-                            NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
-                            let status = &mut arc_statuses.lock().unwrap()[index];
-                            *status = false;
-                        });
-                        *job.lock().unwrap() += 1;
-                    }
-                    _ => {}
-                }
+                let stream = stream.unwrap();
+                println!("ACCEPT!!!!!!1");
+                scope.spawn(|_| {
+                    let index = *job.lock().unwrap();
+                    NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
+                    let status = &mut arc_statuses.lock().unwrap()[index];
+                    *status = false;
+                });
+                *job.lock().unwrap() += 1;
             }
 
             scope.spawn(|_| {
@@ -123,18 +112,14 @@ fn main() -> io::Result<()> {
         crossbeam::scope(|scope| {
             for stream in serverSocket.incoming() {
                 println!("ACCEPT!!!!!!1");
-                match stream {
-                    Ok(stream) => {
-                        scope.spawn(|_| {
-                            let index = *job.lock().unwrap();
-                            NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
-                            let status = &mut arc_statuses.lock().unwrap()[index];
-                            *status = false;
-                        });
-                        *job.lock().unwrap() += 1;
-                    }
-                    _ => {}
-                }
+                let stream = stream.unwrap();
+                scope.spawn(|_| {
+                    let index = *job.lock().unwrap();
+                    NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
+                    let status = &mut arc_statuses.lock().unwrap()[index];
+                    *status = false;
+                });
+                *job.lock().unwrap() += 1;
             }
             scope.spawn(|_| {
                 let index = *job.lock().unwrap();
