@@ -69,14 +69,13 @@ fn main() -> io::Result<()> {
         }
     } else if nodeType == NodeType::MIDDLE {
         println!("MIDDLE Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
+        let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
 
         for i in 0..machineInfo.leaves().len() + 1 {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
             arc_queues.lock().unwrap().push(queue);
         }
         crossbeam::scope(|scope| {
-
             for stream in serverSocket.incoming() {
                 println!("Loop!!");
                 match stream {
@@ -100,7 +99,6 @@ fn main() -> io::Result<()> {
                 let status = &mut arc_statuses.lock().unwrap()[index];
                 *status = false;
             });
-
 
 
             // for i in 0..machineInfo.leaves().len() + 1 {
@@ -137,7 +135,7 @@ fn main() -> io::Result<()> {
 
             match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
                 Ok(mut stream) => {
-                    ExternalSortTask(&arc_queues, &arc_statuses, true, writer,false, Some(&mut stream.try_clone().unwrap()));
+                    ExternalSortTask(&arc_queues, &arc_statuses, true, writer, false, Some(&mut stream.try_clone().unwrap()));
                 }
                 Err(e) => {
                     println!("Failed to connect to root: {}", e);
@@ -146,46 +144,42 @@ fn main() -> io::Result<()> {
         }).unwrap();
     } else if nodeType == NodeType::ROOT {
         println!("ROOT Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
+        let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
         for i in 0..machineInfo.leaves().len() + 1 {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
             arc_queues.lock().unwrap().push(queue);
         }
 
         crossbeam::scope(|scope| {
-            for i in 0..machineInfo.leaves().len() + 1 {
-                if *job.lock().unwrap() == machineInfo.leaves().len() {
-                    scope.spawn(|_| {
-                        let index = *job.lock().unwrap();
-                        LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
-                        let status = &mut arc_statuses.lock().unwrap()[index];
-                        *status = false;
-                    });
-                } else {
-                    let stream = serverSocket.incoming().next().unwrap();
-                    println!("ACCEPT!!!!!!1");
-                    match stream {
-                        Ok(stream) => {
-                            scope.spawn(|_| {
-                                let index = *job.lock().unwrap();
-                                NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
-                                let status = &mut arc_statuses.lock().unwrap()[index];
-                                *status = false;
-                            });
-                        }
-                        _ => {}
+            for stream in serverSocket.incoming() {
+                println!("ACCEPT!!!!!!1");
+                match stream {
+                    Ok(stream) => {
+                        scope.spawn(|_| {
+                            let index = *job.lock().unwrap();
+                            NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
+                            let status = &mut arc_statuses.lock().unwrap()[index];
+                            *status = false;
+                        });
+                        *job.lock().unwrap() += 1;
                     }
+                    _ => {}
                 }
-                *job.lock().unwrap() += 1;
             }
-            let writer = ObjectWriter::new1(outDataPath,method, machineInfo.getTotalNRow());
+            scope.spawn(|_| {
+                let index = *job.lock().unwrap();
+                LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
+                let status = &mut arc_statuses.lock().unwrap()[index];
+                *status = false;
+            });
+            println!("CCCCCCCCCCCCCCCCCCCCCCCc");
+
+            let writer = ObjectWriter::new1(outDataPath, method, machineInfo.getTotalNRow());
             if plan.to_lowercase().eq("m2d") {
-                ExternalSortTask(&arc_queues, &arc_statuses, true, writer,true, None);
-            }
-            else {
+                ExternalSortTask(&arc_queues, &arc_statuses, true, writer, true, None);
+            } else {
                 ExternalSortTask(&arc_queues, &arc_statuses, false, writer, false, None);
             }
-
         }).unwrap();
     }
 
@@ -304,9 +298,8 @@ fn ExternalSortTask(queues: &Arc<Mutex<Vec<ArrayQueue<Vec<TweetStatus>>>>>, stat
             }
         }
         if is_write {
-            if onDisk { writer.writeObjectToFile(tmpObjectNetworkIndex.getObject()); }
-            else {
-               writer.writeObjectToNetworkPage(tmpObjectNetworkIndex.getObject(), &mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
+            if onDisk { writer.writeObjectToFile(tmpObjectNetworkIndex.getObject()); } else {
+                writer.writeObjectToNetworkPage(tmpObjectNetworkIndex.getObject(), &mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
             }
         } else {
             dataList.push(tmpObjectNetworkIndex.getObject());
@@ -314,8 +307,7 @@ fn ExternalSortTask(queues: &Arc<Mutex<Vec<ArrayQueue<Vec<TweetStatus>>>>>, stat
     }
     println!("Network External Sort: Done!");
     if is_write {
-        if onDisk { writer.flush(); }
-        else {
+        if onDisk { writer.flush(); } else {
             writer.flushToNetwork(&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
         }
     }
