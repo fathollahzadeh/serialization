@@ -78,12 +78,12 @@ fn main() -> io::Result<()> {
         crossbeam::scope(|scope| {
             for i in 0..machineInfo.leaves().len() + 1 {
                 println!("Loop!!");
-                let mut j = &*job.lock().unwrap();
+                //let mut j = job.lock().unwrap(); //&*job.lock().unwrap();
                 print!("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
-                if *(&*job.lock().unwrap()) == machineInfo.leaves().len() {
+                if *job.lock().unwrap() == machineInfo.leaves().len() {
                     println!("Local Load");
                     scope.spawn(|_| {
-                        let index = *(&*job.lock().unwrap());
+                        let index = *job.lock().unwrap();
                         LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
                         let status = &mut arc_statuses.lock().unwrap()[index];
                         *status = false;
@@ -95,7 +95,7 @@ fn main() -> io::Result<()> {
                     match stream {
                         Ok(stream) => {
                             scope.spawn(|_| {
-                                let index = *(&*job.lock().unwrap());
+                                let index = *job.lock().unwrap();
                                 NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
                                 let status = &mut arc_statuses.lock().unwrap()[index];
                                 *status = false;
@@ -128,10 +128,9 @@ fn main() -> io::Result<()> {
 
         crossbeam::scope(|scope| {
             for i in 0..machineInfo.leaves().len() + 1 {
-                let mut j = &*job.lock().unwrap();
-                if *(&*job.lock().unwrap()) == machineInfo.leaves().len() {
+                if *job.lock().unwrap() == machineInfo.leaves().len() {
                     scope.spawn(|_| {
-                        let index = *(&*job.lock().unwrap());
+                        let index = *job.lock().unwrap();
                         LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
                         let status = &mut arc_statuses.lock().unwrap()[index];
                         *status = false;
@@ -142,7 +141,7 @@ fn main() -> io::Result<()> {
                     match stream {
                         Ok(stream) => {
                             scope.spawn(|_| {
-                                let index = *(&*job.lock().unwrap());
+                                let index = *job.lock().unwrap();
                                 NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
                                 let status = &mut arc_statuses.lock().unwrap()[index];
                                 *status = false;
