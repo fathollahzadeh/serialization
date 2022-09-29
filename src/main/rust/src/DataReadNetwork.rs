@@ -79,6 +79,7 @@ fn main() -> io::Result<()> {
             for i in 0..machineInfo.leaves().len() + 1 {
                 println!("Loop!!");
                 let mut j = &*job.lock().unwrap();
+                print!("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
                 if *(&*job.lock().unwrap()) == machineInfo.leaves().len() {
                     println!("Local Load");
                     scope.spawn(|_| {
