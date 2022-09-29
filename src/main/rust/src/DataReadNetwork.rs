@@ -52,7 +52,7 @@ fn main() -> io::Result<()> {
     println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
         println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
-        let stream = TcpStream::connect("10.10.10.180:9090").unwrap();//format!("{}:{}", machineInfo.root(), machineInfo.port())
+        let stream = TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())).unwrap();
         println!("OOOOOOOOOk");
         let mut list: Vec<TweetStatus> = vec![];
         reader.readObjects(0, machineInfo.nrow(), &mut list);
@@ -63,7 +63,7 @@ fn main() -> io::Result<()> {
         }
     } else if nodeType == NodeType::MIDDLE {
         println!("MIDDLE Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind("0.0.0.0:9090").unwrap(); //format!("0.0.0.0:{}", machineInfo.port())
+        let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
 
         for i in 0..machineInfo.leaves().len() + 1 {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
@@ -103,7 +103,7 @@ fn main() -> io::Result<()> {
         }).unwrap();
     } else if nodeType == NodeType::ROOT {
         println!("ROOT Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind("127.0.0.1:9090").unwrap(); //format!("0.0.0.0:{}", machineInfo.port())
+        let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
         for i in 0..machineInfo.leaves().len() + 1 {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
             arc_queues.lock().unwrap().push(queue);
