@@ -69,7 +69,7 @@ fn main() -> io::Result<()> {
         }
     } else if nodeType == NodeType::MIDDLE {
         println!("MIDDLE Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
+        let serverSocket = TcpListener::bind("0.0.0.0:9090").unwrap(); //format!("0.0.0.0:{}", machineInfo.port())
 
         for i in 0..machineInfo.leaves().len() + 1 {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
@@ -100,36 +100,6 @@ fn main() -> io::Result<()> {
                 *status = false;
             });
 
-
-            // for i in 0..machineInfo.leaves().len() + 1 {
-            //     println!("Loop!!");
-            //     print!("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
-            //     if *job.lock().unwrap() == machineInfo.leaves().len() {
-            //         println!("Local Load");
-            //         scope.spawn(|_| {
-            //             let index = *job.lock().unwrap();
-            //             LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
-            //             let status = &mut arc_statuses.lock().unwrap()[index];
-            //             *status = false;
-            //         });
-            //     } else {
-            //         println!("Before Accept!!");
-            //         let stream = serverSocket.incoming().next().unwrap();
-            //         println!("ACCEPT!!!!!!1");
-            //         match stream {
-            //             Ok(stream) => {
-            //                 scope.spawn(|_| {
-            //                     let index = *job.lock().unwrap();
-            //                     NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
-            //                     let status = &mut arc_statuses.lock().unwrap()[index];
-            //                     *status = false;
-            //                 });
-            //             }
-            //             _ => {}
-            //         }
-            //     }
-            //     *job.lock().unwrap() += 1;
-            // }
             let mut writer = ObjectWriter::new2(method, machineInfo.getTotalNRow(), Const::NETWORK_PAGESIZE as usize);
             println!("CCCCCCCCCCCCCCCCCCCCCCCc");
 
@@ -144,7 +114,7 @@ fn main() -> io::Result<()> {
         }).unwrap();
     } else if nodeType == NodeType::ROOT {
         println!("ROOT Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
+        let serverSocket = TcpListener::bind("0.0.0.0:9090").unwrap(); //format!("0.0.0.0:{}", machineInfo.port())
         for i in 0..machineInfo.leaves().len() + 1 {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
             arc_queues.lock().unwrap().push(queue);
