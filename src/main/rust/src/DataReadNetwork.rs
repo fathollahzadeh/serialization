@@ -48,11 +48,8 @@ fn main() -> io::Result<()> {
     static mut queues: Vec<ArrayQueue<Vec<TweetStatus>>> = vec![];
     static mut statuses: Vec<bool> = vec![];
 
-    println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
-        println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
         let stream = initClient(machineInfo.root(), machineInfo.port()).ok().unwrap();
-        println!("OOOOOOOOOk");
         let mut list: Vec<TweetStatus> = vec![];
         reader.readObjects(0, machineInfo.nrow(), &mut list);
         list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
@@ -62,7 +59,6 @@ fn main() -> io::Result<()> {
         }
         writer.flushToNetwork(&mut stream.try_clone().unwrap());
     } else if nodeType == NodeType::MIDDLE {
-        println!("MIDDLE Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
         unsafe {
             let mut streams = vec![];
@@ -74,7 +70,6 @@ fn main() -> io::Result<()> {
             }
             for i in 0..machineInfo.leaves().len() {
                 let stream = serverSocket.incoming().next().unwrap();
-                println!("ACCEPT!!!!!!1");
                 let stream = stream.unwrap();
                 streams.push(stream.try_clone().unwrap());
                 let method = reader.method().clone();
@@ -100,11 +95,9 @@ fn main() -> io::Result<()> {
             }
         }
     } else if nodeType == NodeType::ROOT {
-        println!("ROOT Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
         unsafe {
             let mut streams = vec![];
-
             for i in 0..machineInfo.leaves().len() + 1 {
                 let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
                 queues.push(queue);
@@ -112,7 +105,6 @@ fn main() -> io::Result<()> {
             }
             for i in 0..machineInfo.leaves().len() {
                 let stream = serverSocket.incoming().next().unwrap();
-                println!("ACCEPT!!!!!!1");
                 let stream = stream.unwrap();
                 streams.push(stream.try_clone().unwrap());
                 let method = reader.method().clone();
