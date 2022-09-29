@@ -61,8 +61,8 @@ fn main() -> io::Result<()> {
         }
         writer.flushToNetwork(&mut stream.try_clone().unwrap());
     } else if nodeType == NodeType::MIDDLE {
-        println!("ROOT Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
+        println!("MIDDLE Start !!!!!!!!!!!!!11");
+        let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
         unsafe {
             let mut streams = vec![];
 
@@ -106,7 +106,7 @@ fn main() -> io::Result<()> {
         }
     } else if nodeType == NodeType::ROOT {
         println!("ROOT Start !!!!!!!!!!!!!11");
-        let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
+        let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip() ,machineInfo.port())).unwrap();
         unsafe {
             let mut streams = vec![];
 
