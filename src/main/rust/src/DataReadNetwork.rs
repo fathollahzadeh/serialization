@@ -51,45 +51,16 @@ fn main() -> io::Result<()> {
 
     println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
-        match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
-            Ok(mut stream) => {
-                println!("Successfully connected to server in port 3333");
-
-                let msg = b"Hello!";
-
-                stream.write(msg).unwrap();
-                println!("Sent Hello, awaiting reply...");
-
-                let mut data = [0 as u8; 6]; // using 6 byte buffer
-                match stream.read_exact(&mut data) {
-                    Ok(_) => {
-                        if &data == msg {
-                            println!("Reply is ok!");
-                        } else {
-                            let text = from_utf8(&data).unwrap();
-                            println!("Unexpected reply: {}", text);
-                        }
-                    }
-                    Err(e) => {
-                        println!("Failed to receive data: {}", e);
-                    }
-                }
-            }
-            Err(e) => {
-                println!("Failed to connect: {}", e);
-            }
+        println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
+        let stream = TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port()))?;
+        println!("OOOOOOOOOk");
+        let mut list: Vec<TweetStatus> = vec![];
+        reader.readObjects(0, machineInfo.nrow(), &mut list);
+        list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
+        let mut writer = ObjectWriter::new2(method, machineInfo.nrow(), Const::NETWORK_PAGESIZE as usize);
+        for rd in list {
+            writer.writeObjectToNetworkPage(rd, &mut stream.try_clone().unwrap());
         }
-
-        // println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
-        // let stream = TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())).unwrap();
-        // println!("OOOOOOOOOk");
-        // let mut list: Vec<TweetStatus> = vec![];
-        // reader.readObjects(0, machineInfo.nrow(), &mut list);
-        // list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
-        // let mut writer = ObjectWriter::new2(method, machineInfo.nrow(), Const::NETWORK_PAGESIZE as usize);
-        // for rd in list {
-        //     writer.writeObjectToNetworkPage(rd, &mut stream.try_clone().unwrap());
-        // }
     } else if nodeType == NodeType::MIDDLE {
         println!("MIDDLE Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
