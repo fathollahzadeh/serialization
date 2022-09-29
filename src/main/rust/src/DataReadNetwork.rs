@@ -52,7 +52,7 @@ fn main() -> io::Result<()> {
     println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
         println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
-        let stream = TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())).unwrap();
+        let stream = TcpStream::connect("10.10.10.180:9090").unwrap();//format!("{}:{}", machineInfo.root(), machineInfo.port())
         println!("OOOOOOOOOk");
         let mut list: Vec<TweetStatus> = vec![];
         reader.readObjects(0, machineInfo.nrow(), &mut list);
