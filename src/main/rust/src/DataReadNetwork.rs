@@ -52,7 +52,7 @@ fn main() -> io::Result<()> {
     println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
         println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
-        let stream = TcpStream::connect("10.10.10.180:9090").unwrap();//format!("{}:{}", machineInfo.root(), machineInfo.port())
+        let stream = TcpStream::connect("127.0.0.1:8888").unwrap();//format!("{}:{}", machineInfo.root(), machineInfo.port())
         println!("OOOOOOOOOk");
         let mut list: Vec<TweetStatus> = vec![];
         reader.readObjects(0, machineInfo.nrow(), &mut list);
@@ -108,6 +108,7 @@ fn main() -> io::Result<()> {
             let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
             arc_queues.lock().unwrap().push(queue);
         }
+        println!("+++++++++++++++++++++ IIIIIIIIIIIIIIIIIIII");
 
         crossbeam::scope(|scope| {
             for stream in serverSocket.incoming() {
