@@ -51,7 +51,7 @@ fn main() -> io::Result<()> {
 
     println!("Current Machine IP={}", machineInfo.ip());
     if nodeType == NodeType::LEAF {
-        println!("LEAF Start !!!!!!!!!!!!!11");
+        println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
         match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
             Ok(mut stream) => {
                 let mut list: Vec<TweetStatus> = vec![];
