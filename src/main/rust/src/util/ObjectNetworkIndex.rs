@@ -25,7 +25,7 @@ impl ObjectNetworkIndex {
 
 impl Ord for ObjectNetworkIndex {
 	fn cmp(&self, other: &Self) -> Ordering {
-		self.id.cmp(&other.id)
+		 Ordering::Greater
 	}
 }
 
@@ -37,7 +37,7 @@ impl PartialOrd for ObjectNetworkIndex {
 
 impl PartialEq for ObjectNetworkIndex {
 	fn eq(&self, other: &Self) -> bool {
-		self.id == other.id
+		false
 	}
 }
 

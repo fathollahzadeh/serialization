@@ -27,6 +27,7 @@ use rand::{thread_rng, Rng};
 use rand::distributions::uniform::SampleBorrow;
 use std::sync::{Arc, Mutex};
 
+
 mod tweetStructs;
 mod runtime;
 mod util;
@@ -43,11 +44,8 @@ fn main() -> io::Result<()> {
     let mut machineInfo = network.getCurrentMachine();
     let mut reader = ObjectReader::new1(inDataPath, method);
     let mut nodeType = machineInfo.getNodeType();
-    let mut queues: Vec<ArrayQueue<Vec<TweetStatus>>> = vec![];
-    let mut arc_queues = Arc::new(Mutex::new(queues));
-    let mut statuses: Vec<bool> = vec![true; machineInfo.leaves().len() + 1];
-    let mut arc_statuses = Arc::new(Mutex::new(statuses));
-    let mut job = Arc::new(Mutex::new(0 as usize));
+    static mut queues: Vec<ArrayQueue<Vec<TweetStatus>>> = vec![];
+    static mut statuses: Vec<bool> = vec![];
 
     println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
@@ -63,96 +61,94 @@ fn main() -> io::Result<()> {
         }
         writer.flushToNetwork(&mut stream.try_clone().unwrap());
     } else if nodeType == NodeType::MIDDLE {
-        println!("MIDDLE Start !!!!!!!!!!!!!11");
+        println!("ROOT Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
+        unsafe {
+            let mut streams = vec![];
 
-        for i in 0..machineInfo.leaves().len() + 1 {
-            let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
-            arc_queues.lock().unwrap().push(queue);
-        }
-        crossbeam::scope(|scope| {
-            for stream in serverSocket.incoming() {
-                let stream = stream.unwrap();
-                println!("ACCEPT!!!!!!1");
-                scope.spawn(|_| {
-                    let index = *job.lock().unwrap();
-                    NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
-                    let status = &mut arc_statuses.lock().unwrap()[index];
-                    *status = false;
-                });
-                *job.lock().unwrap() += 1;
+            for i in 0..machineInfo.leaves().len() + 1 {
+                let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
+                queues.push(queue);
+                statuses.push(true);
             }
-
-            scope.spawn(|_| {
-                let index = *job.lock().unwrap();
-                LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
-                let status = &mut arc_statuses.lock().unwrap()[index];
-                *status = false;
+            for i in 0..machineInfo.leaves().len() {
+                let stream = serverSocket.incoming().next().unwrap();
+                println!("ACCEPT!!!!!!1");
+                let stream = stream.unwrap();
+                streams.push(stream.try_clone().unwrap());
+                let method = reader.method().clone();
+                thread::spawn(move || {
+                    NetworkReadTask(stream, method, queues.get(i).unwrap());
+                    statuses[i] = false;
+                });
+            }
+            thread::spawn(move || {
+                let index = queues.len() - 1;
+                LocalReadTask(&mut reader, queues.get(index).unwrap());
+                statuses[index] = false;
             });
 
             let mut writer = ObjectWriter::new2(method, machineInfo.getTotalNRow(), Const::NETWORK_PAGESIZE as usize);
-            println!("CCCCCCCCCCCCCCCCCCCCCCCc");
 
             match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
                 Ok(mut stream) => {
-                    ExternalSortTask(&arc_queues, &arc_statuses, true, writer, false, Some(&mut stream.try_clone().unwrap()));
+                    ExternalSortTask(&mut queues, &mut statuses, true, writer, false, Some(&mut stream.try_clone().unwrap()));
                 }
                 Err(e) => {
                     println!("Failed to connect to root: {}", e);
                 }
             }
-        }).unwrap();
+
+            let ack = b"1";
+            for stream in streams {
+                stream.try_clone().unwrap().write(ack);
+            }
+        }
     } else if nodeType == NodeType::ROOT {
         println!("ROOT Start !!!!!!!!!!!!!11");
         let serverSocket = TcpListener::bind(format!("0.0.0.0:{}", machineInfo.port())).unwrap();
-       // for i in 0..machineInfo.leaves().len() {
-            let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
-            arc_queues.lock().unwrap().push(queue);
-       // }
-        println!("+++++++++++++++++++++ IIIIIIIIIIIIIIIIIIII  {}", arc_queues.lock().unwrap().len());
+        unsafe {
+            let mut streams = vec![];
 
-        crossbeam::scope(|scope| {
+            for i in 0..machineInfo.leaves().len() + 1 {
+                let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
+                queues.push(queue);
+                statuses.push(true);
+            }
             for i in 0..machineInfo.leaves().len() {
                 let stream = serverSocket.incoming().next().unwrap();
                 println!("ACCEPT!!!!!!1");
                 let stream = stream.unwrap();
-                //let index = *job.lock().unwrap();
-                scope.spawn(|_| {
-                    let index = 0;//*job.lock().unwrap();
-                    //*job.lock().unwrap() += 1;
-                    println!("==================================");
-                    println!("index={}   len={}", index.clone(), 100);
-                    //let aa = arc_queues.lock().unwrap().get(index).unwrap();
-                    NetworkReadTask(stream, reader.method(), arc_queues.lock().unwrap().get(index).unwrap());
-                    let status = &mut arc_statuses.lock().unwrap()[index];
-                    *status = false;
+                streams.push(stream.try_clone().unwrap());
+                let method = reader.method().clone();
+                thread::spawn(move || {
+                    NetworkReadTask(stream, method, queues.get(i).unwrap());
+                    statuses[i] = false;
                 });
             }
-            // scope.spawn(|_| {
-            //     println!("HHHHHHHHHHHHHHHHHHHHHH");
-            //     let index = *job.lock().unwrap();
-            //     println!("AAAAAAAAAAAAAAAAAAAAAA  {}", index.clone());
-            //     LocalReadTask(inDataPath.clone(), method.clone(), arc_queues.lock().unwrap().get(index).unwrap());
-            //     let status = &mut arc_statuses.lock().unwrap()[index];
-            //     *status = false;
-            // });
-            println!("CCCCCCCCCCCCCCCCCCCCCCCc");
+            thread::spawn(move || {
+                let index = queues.len() - 1;
+                LocalReadTask(&mut reader, queues.get(index).unwrap());
+                statuses[index] = false;
+            });
 
-            // let writer = ObjectWriter::new1(outDataPath, method, machineInfo.getTotalNRow());
-            // if plan.to_lowercase().eq("d2d") || plan.to_lowercase().eq("m2d"){
-            //     ExternalSortTask(&arc_queues, &arc_statuses, true, writer, true, None);
-            // } else {
-            //     ExternalSortTask(&arc_queues, &arc_statuses, false, writer, false, None);
-            // }
-        }).unwrap();
-        println!("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+            let writer = ObjectWriter::new1(outDataPath, method, machineInfo.getTotalNRow());
+            if plan.to_lowercase().eq("d2d") || plan.to_lowercase().eq("m2d") {
+                ExternalSortTask(&mut queues, &statuses, true, writer, true, None);
+            } else {
+                ExternalSortTask(&mut queues, &statuses, false, writer, false, None);
+            }
+
+            let ack = b"1";
+            for stream in streams {
+                stream.try_clone().unwrap().write(ack);
+            }
+        }
     }
-
     Ok(())
 }
 
 fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<TweetStatus>>) {
-    println!("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
     let mut ack_data = [0 as u8; 1];
     let mut i32_data = [0 as u8; 4];
     let ack = b"1";
@@ -199,41 +195,33 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<Tw
 
             relativePosition = relativePosition + 4 + objectSize as usize;
         }
-        println!("wait");
         while queue.is_full() {}
         queue.push(list);
-        println!("-----release");
     }
 }
 
-fn LocalReadTask(inDataPath: &str, method: &str, queue: &ArrayQueue<Vec<TweetStatus>>) {
-    println!("fffffffffffffffffffffffffffffff");
-    let mut reader = ObjectReader::new1(inDataPath, method);
+fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<TweetStatus>>) {
     let mut list: Vec<TweetStatus> = vec![];
     let nrow = reader.getRlen();
-    println!("??????????? local {}", nrow.clone());
     reader.readObjects(0, nrow, &mut list);
     list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
-
-    println!("after local sort");
-    let chunks = (nrow as f32 / Const::NETWORK_LOCAL_READ_LENGTH as f32).ceil() as usize;
-    for ch in list.chunks_mut(chunks) {
+    for ch in list.chunks_mut(Const::NETWORK_LOCAL_READ_LENGTH as usize) {
         while queue.is_full() {}
-        queue.push(ch.to_vec());
-        println!("aaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        let tmp = ch.to_vec();
+        queue.push(tmp);
     }
 }
 
-fn ExternalSortTask(queues: &Arc<Mutex<Vec<ArrayQueue<Vec<TweetStatus>>>>>, statuses: &Arc<Mutex<Vec<bool>>>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
+fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &Vec<bool>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
     let mut dataList: Vec<TweetStatus> = vec![];
-    let numberOfClients = queues.lock().unwrap().len();
+    let numberOfClients = queues.len();
     let mut pageObjectCounter: Vec<u64> = vec![0; numberOfClients];
     let mut queue: PriorityQueue<ObjectNetworkIndex, Reverse<usize>> = PriorityQueue::new();
 
-    println!("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
     // reading objects from the first pages and adding them to a priority queue
     for i in 0..numberOfClients as u32 {
-        let mut listReadFromFile = queues.lock().unwrap()[i as usize].pop().unwrap();
+        while queues[i as usize].is_empty() {}
+        let mut listReadFromFile = queues[i as usize].pop().unwrap();
         pageObjectCounter[i as usize] = listReadFromFile.len() as u64;
         for rd in listReadFromFile {
             let order = rd.getOrder();
@@ -247,22 +235,22 @@ fn ExternalSortTask(queues: &Arc<Mutex<Vec<ArrayQueue<Vec<TweetStatus>>>>>, stat
         let clientNumber = tmpObjectNetworkIndex.getClientIndex() as usize;
 
         // reduce the number of objects read from that file.
-        pageObjectCounter[clientNumber] -= 1;
+        pageObjectCounter[clientNumber] = pageObjectCounter[clientNumber] - 1;
 
         // If needed load more objects from files.
         // if zero load the next page from file and add objects.
         if pageObjectCounter[clientNumber] == 0 {
             let mut listReadFromFile: Vec<TweetStatus> = vec![];
-            if !queues.lock().unwrap().get(clientNumber).unwrap().is_empty() {
-                listReadFromFile = queues.lock().unwrap()[clientNumber].pop().unwrap();
+            if !queues[clientNumber].is_empty() {
+                listReadFromFile = queues[clientNumber].pop().unwrap();
             } else {
-                while *statuses.lock().unwrap().get(clientNumber).unwrap() && !queues.lock().unwrap().get(clientNumber).unwrap().is_empty() {}
-                if !&queues.lock().unwrap().get(clientNumber).unwrap().is_empty() {
-                    listReadFromFile = queues.lock().unwrap()[clientNumber].pop().unwrap();
+                while statuses[clientNumber] && queues[clientNumber].is_empty() {}
+                if !queues[clientNumber].is_empty() {
+                    listReadFromFile = queues[clientNumber].pop().unwrap();
                 }
             }
             if listReadFromFile.len() > 0 {
-                pageObjectCounter[clientNumber as usize] = listReadFromFile.len() as u64;
+                pageObjectCounter[clientNumber] = listReadFromFile.len() as u64;
                 for rd in listReadFromFile {
                     let order = rd.getOrder();
                     let objectNetworkIndex = ObjectNetworkIndex::new(rd, clientNumber as u32);
@@ -278,6 +266,7 @@ fn ExternalSortTask(queues: &Arc<Mutex<Vec<ArrayQueue<Vec<TweetStatus>>>>>, stat
             dataList.push(tmpObjectNetworkIndex.getObject());
         }
     }
+
     println!("Network External Sort: Done!");
     if is_write {
         if onDisk { writer.flush(); } else {
