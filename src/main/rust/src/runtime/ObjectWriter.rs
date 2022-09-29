@@ -256,7 +256,7 @@ impl ObjectWriter {
                                     println!("flushToNetwork!");
                                     return;
                                 }
-                                stream.write(&endOfNetwork.to_be_bytes());
+                                stream.read_exact(&mut ack_data);
                             }
                             _ => {
                                 println!("flushToNetwork (pattern)!");
