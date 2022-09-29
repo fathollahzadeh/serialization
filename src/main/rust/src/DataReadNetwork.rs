@@ -49,7 +49,7 @@ fn main() -> io::Result<()> {
     let mut arc_statuses = Arc::new((Mutex::new(statuses)));
     let mut job = Arc::new(Mutex::new(0 as usize));
 
-    println!("Current Machine IP={}", machineInfo.ip());
+    println!("Current Machine IP={}  root={}  port={}", machineInfo.ip(), machineInfo.root(), machineInfo.port());
     if nodeType == NodeType::LEAF {
         println!("LEAF Start !!!!!!!!!!!!!   {}", machineInfo.root());
         match TcpStream::connect(format!("{}:{}", machineInfo.root(), machineInfo.port())) {
