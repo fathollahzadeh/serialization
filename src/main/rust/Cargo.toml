@@ -56,10 +56,10 @@ authors = ["Saeed Fathollahzadeh <s.fathollahzadeh@gmail.com>"]
 #[[bin]]
 #name="ExternalSortIO"
 #path = "src/ExternalSortIO.rs"
-#
-#[[bin]]
-#name="DataReadNetwork"
-#path = "src/DataReadNetwork.rs"
+
+[[bin]]
+name="DataReadNetwork"
+path = "src/DataReadNetwork.rs"
 
 [[bin]]
 name="DataReadNetworkIO"
