@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #cleanup
-# rm -rf SerializationJava.jar
-# rm -rf cppbin
+rm -rf SerializationJava.jar
+rm -rf cppbin
 rm -rf rustbin
 cd ..
 path=$(pwd)
@@ -28,7 +28,7 @@ mv  bin/ "$path/Experiments/cppbin"
 
 # compile Rust baselines
 cd "$path/src/main/rust"
-#$HOME/.cargo/bin/cargo clean
+$HOME/.cargo/bin/cargo clean
 
 $HOME/.cargo/bin/cargo build --release
 mkdir -p "$path/Experiments/rustbin"
