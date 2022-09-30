@@ -13,12 +13,12 @@ export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-ori
 
 #./run1SetupDependencies.sh
 #./run2SetupSerialization.sh
-#./run3DownloadData.sh
-#./run4PrepareData.sh
+./run3DownloadData.sh
+./run4PrepareData.sh
 #./run5LocalExperiments.sh
 #./run5LocalExperimentsExternalSort.sh
 #./run6NetworkExperiments.sh
 
 
 
-#cssh -l saeed 35.192.32.89 35.188.42.222 34.71.219.114 34.134.19.16 34.69.98.252 35.239.253.95 34.172.44.209
+#cssh -l saeed 35.184.204.129 34.170.33.92 35.188.121.177 35.202.155.192 34.68.33.71 35.239.44.13 35.225.167.22
