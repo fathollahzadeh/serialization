@@ -220,7 +220,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, queues_size: &mut Vec
     while flag {
         flag = false;
         for i in 0..numberOfClients as usize {
-            while statuses[i] && (queues[i].is_empty() || queues_size.is_empty()){}
+            while statuses[i] && (queues[i].is_empty() || queues_size[i].is_empty()){}
             if !queues[i].is_empty() && !queues_size[i].is_empty() {
                 if is_write {
                     if onDisk {
