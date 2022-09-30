@@ -68,11 +68,15 @@ fn main() -> io::Result<()> {
         let ack = b"1";
 
         stream.read_exact(&mut ack_data).unwrap();
+        println!("ACK read=  1");
         if &ack_data != ack {
             println!("flushToNetwork Err!");
         }
         else {
+            println!("SCK write -1");
             stream.write(&endOfNetwork.to_be_bytes()).unwrap();
+
+            println!("ACK read 1");
             stream.read_exact(&mut ack_data).unwrap();
             if &ack_data != ack {
                 println!("flushToNetwork Err!");
@@ -85,7 +89,9 @@ fn main() -> io::Result<()> {
 
             for i in 0..machineInfo.leaves().len() + 1 {
                 let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
+                let queue_size = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
                 queues.push(queue);
+                queues_size.push(queue_size);
                 statuses.push(true);
             }
             for i in 0..machineInfo.leaves().len() {
@@ -120,7 +126,9 @@ fn main() -> io::Result<()> {
             let mut streams = vec![];
             for i in 0..machineInfo.leaves().len() + 1 {
                 let queue = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
+                let queue_size = ArrayQueue::new(Const::NETWORK_CLIENT_QUEUE_SIZE);
                 queues.push(queue);
+                queues_size.push(queue_size);
                 statuses.push(true);
             }
             for i in 0..machineInfo.leaves().len() {
@@ -186,11 +194,11 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8
         stream.read_exact(&mut buffer).unwrap();
 
 
-        //println!("wait {}", pageSize);
+        println!("wait {}", pageSize);
         while queue.is_full() {}
         queue.push(buffer);
         queue_size.push(pageSize);
-        //println!("release");
+        println!("release");
     }
 }
 
@@ -200,12 +208,12 @@ fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<u8>>, queue_s
     reader.readAllPages(&mut list, &mut pagesSize);
     let mut index = 0;
     for bb in list {
-        //println!("local wait");
+        println!("local wait");
         while queue.is_full() {}
         queue.push(bb);
         queue_size.push(pagesSize[index]);
         index +=1;
-        //println!("local release");
+        println!("local release");
     }
 }
 
