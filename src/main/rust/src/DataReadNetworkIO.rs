@@ -235,7 +235,10 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, queues_size: &mut Vec
             while statuses[i] && queues[i].is_empty() {}
             if !queues[i].is_empty() {
                 if is_write {
-                    if onDisk { writer.writeNetworkPageToFile(queues[i].pop().unwrap()); }
+                    if onDisk {
+                        writer.writeNetworkPageToFile(queues[i].pop().unwrap());
+                        queues_size[i].pop().unwrap();
+                    }
                     else {
                         writer.writeToNetworkPage(queues[i].pop().unwrap(),queues_size[i].pop().unwrap() ,&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
                     }

@@ -5,61 +5,61 @@ edition = "2021"
 autobins = false
 authors = ["Saeed Fathollahzadeh <s.fathollahzadeh@gmail.com>"]
 
-[[bin]]
-name="DataLoadToMemorySingle"
-path = "src/DataLoadToMemorySingle.rs"
-
-[[bin]]
-name="DataLoadToMemoryParallel"
-path = "src/DataLoadToMemoryParallel.rs"
-
-[[bin]]
-name="DataPrepare"
-path = "src/DataPrepare.rs"
-
-[[bin]]
-name="DataReadSingle"
-path = "src/DataReadSingle.rs"
-
-[[bin]]
-name="DataReadParallel"
-path = "src/DataReadParallel.rs"
-
-[[bin]]
-name="DataReadIOSingle"
-path = "src/DataReadIOSingle.rs"
-
-[[bin]]
-name="DataReadIOParallel"
-path = "src/DataReadIOParallel.rs"
-
-[[bin]]
-name="DataSerializationSingle"
-path = "src/DataSerializationSingle.rs"
-
-[[bin]]
-name="DataSerializationParallel"
-path = "src/DataSerializationParallel.rs"
-
-[[bin]]
-name="DataWriteSingle"
-path = "src/DataWriteSingle.rs"
-
-[[bin]]
-name="DataWriteParallel"
-path = "src/DataWriteParallel.rs"
-
-[[bin]]
-name="ExternalSort"
-path = "src/ExternalSort.rs"
-
-[[bin]]
-name="ExternalSortIO"
-path = "src/ExternalSortIO.rs"
-
-[[bin]]
-name="DataReadNetwork"
-path = "src/DataReadNetwork.rs"
+#[[bin]]
+#name="DataLoadToMemorySingle"
+#path = "src/DataLoadToMemorySingle.rs"
+#
+#[[bin]]
+#name="DataLoadToMemoryParallel"
+#path = "src/DataLoadToMemoryParallel.rs"
+#
+#[[bin]]
+#name="DataPrepare"
+#path = "src/DataPrepare.rs"
+#
+#[[bin]]
+#name="DataReadSingle"
+#path = "src/DataReadSingle.rs"
+#
+#[[bin]]
+#name="DataReadParallel"
+#path = "src/DataReadParallel.rs"
+#
+#[[bin]]
+#name="DataReadIOSingle"
+#path = "src/DataReadIOSingle.rs"
+#
+#[[bin]]
+#name="DataReadIOParallel"
+#path = "src/DataReadIOParallel.rs"
+#
+#[[bin]]
+#name="DataSerializationSingle"
+#path = "src/DataSerializationSingle.rs"
+#
+#[[bin]]
+#name="DataSerializationParallel"
+#path = "src/DataSerializationParallel.rs"
+#
+#[[bin]]
+#name="DataWriteSingle"
+#path = "src/DataWriteSingle.rs"
+#
+#[[bin]]
+#name="DataWriteParallel"
+#path = "src/DataWriteParallel.rs"
+#
+#[[bin]]
+#name="ExternalSort"
+#path = "src/ExternalSort.rs"
+#
+#[[bin]]
+#name="ExternalSortIO"
+#path = "src/ExternalSortIO.rs"
+#
+#[[bin]]
+#name="DataReadNetwork"
+#path = "src/DataReadNetwork.rs"
 
 [[bin]]
 name="DataReadNetworkIO"
