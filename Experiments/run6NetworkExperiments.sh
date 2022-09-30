@@ -54,13 +54,13 @@ echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_
 # done    
 
 
-#for method in "${cpp_methods[@]}"; do
+for method in "${cpp_methods[@]}"; do
     #clean up
     #rm -rf data/tmp
     #mkdir -p data/tmp
 
     # serialize data into disk
-    #./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP ${outDataPath}.${method}CPP $nrow 
+    ./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP ${outDataPath}.${method}CPP $nrow 
 
     # 1. Memory-to-Memory (m2m)
     #./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2m Experiment4_ExternalSort_times
@@ -86,16 +86,16 @@ echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_
     # 8. IO (d2d)
     #rm -rf ${outDataPath}.${method}SortedCPP
     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
-#done   
+done   
 
 
-for method in "${rust_methods[@]}"; do
+#for method in "${rust_methods[@]}"; do
     #clean up
     #rm -rf data/tmp
     #mkdir -p data/tmp
 
     # serialize data into disk
-    ./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
+    #./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
 
     # 1. Memory-to-Memory (m2m)
     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
@@ -121,4 +121,4 @@ for method in "${rust_methods[@]}"; do
     # 8. IO (d2d)
     #rm -rf ${outDataPath}.${method}SortedRust
     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
-done   
+#done   
