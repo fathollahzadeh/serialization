@@ -185,7 +185,7 @@ impl ObjectWriter {
         }
     }
 
-    pub fn writeToNetworkPage(&mut self, page: Vec<u8>, stream: &mut TcpStream) {
+    pub fn writeToNetworkPage(&mut self, page: Vec<u8>, pageSize: i32, stream: &mut TcpStream) {
         let mut ack_data = [0 as u8; 1];
         let ack = b"1";
         match stream.read_exact(&mut ack_data) {
@@ -194,6 +194,7 @@ impl ObjectWriter {
                     println!("writeObjectToNetworkPage Bytes!");
                     return;
                 }
+                stream.write(&pageSize.to_be_bytes()).unwrap();
                 stream.write(&page).unwrap();
             }
             _ => {

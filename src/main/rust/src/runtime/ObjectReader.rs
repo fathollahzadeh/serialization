@@ -9,6 +9,7 @@ use std::collections::HashMap;
 use bson::Document;
 use crate::util::Const;
 use crate::util::Const::PAGESIZE;
+use std::mem;
 
 pub struct ObjectReader {
     currentPageNumber: u32,
@@ -60,8 +61,6 @@ impl ObjectReader {
         }
 
     }
-
-
 
     fn readIndexesFromFile(pageIndex: &mut Vec<u32>, objectIndex: &mut Vec<u32>, objectLength: &mut Vec<u32>, pagePosition: &mut Vec<u64>, fname: &str) -> io::Result<()> {
         let indexFileName: String = format!("{}.{}", fname, "index");
@@ -215,20 +214,18 @@ impl ObjectReader {
         self.method
     }
 
-    pub fn readAllPages(&mut self, pages:&mut Vec<Vec<u8>>){
+    pub fn readAllPages(&mut self, pages:&mut Vec<Vec<u8>>, pagesSize:&mut Vec<i32>){
         for i in 0..self.networkPageCount as u64{
             let mut pageSize:i32 = Const::NETWORK_PAGESIZE as i32;
             if self.fileSize - (i+1) * (Const::NETWORK_PAGESIZE as u64) < 0 {
                 pageSize = (self.fileSize - i * Const::NETWORK_PAGESIZE as u64) as i32;
             }
-            let mut page = vec![0u8; (pageSize + 4) as usize];
-            page.put_i32(pageSize);
+            pagesSize.push(pageSize);
             let newPosition = i * pageSize as u64;
             self.inStreamRegularFile.seek(SeekFrom::Start(newPosition));
             let mut reader = BufReader::with_capacity(pageSize as usize, &self.inStreamRegularFile);
             let buffer = reader.fill_buf().unwrap();
-            page.put_slice(buffer);
-            pages.push(page);
+            pages.push(buffer.to_vec());
         }
     }
 

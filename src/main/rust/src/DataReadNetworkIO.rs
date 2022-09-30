@@ -47,16 +47,20 @@ fn main() -> io::Result<()> {
     let mut reader = ObjectReader::new1(inDataPath, method);
     let mut nodeType = machineInfo.getNodeType();
     static mut queues: Vec<ArrayQueue<Vec<u8>>> = vec![];
+    static mut queues_size: Vec<ArrayQueue<i32>> = vec![];
     static mut statuses: Vec<bool> = vec![];
 
     if nodeType == NodeType::LEAF {
         let mut stream = initClient(machineInfo.root(), machineInfo.port()).ok().unwrap();
         let mut pages: Vec<Vec<u8>> = vec![];
-        reader.readAllPages( &mut pages);
+        let mut pagesSize: Vec<i32> = vec![];
+        reader.readAllPages( &mut pages, &mut pagesSize);
 
         let mut writer = ObjectWriter::new2(method, machineInfo.nrow(), Const::NETWORK_PAGESIZE as usize);
+        let mut index = 0;
         for bb in pages {
-            writer.writeToNetworkPage(bb, &mut stream.try_clone().unwrap());
+            writer.writeToNetworkPage(bb, pagesSize[index], &mut stream.try_clone().unwrap());
+            index += 1;
         }
 
         let mut ack_data = [0 as u8; 1];
@@ -90,19 +94,19 @@ fn main() -> io::Result<()> {
                 streams.push(stream.try_clone().unwrap());
                 let method = reader.method().clone();
                 thread::spawn(move || {
-                    NetworkReadTask(stream, method, queues.get(i).unwrap());
+                    NetworkReadTask(stream, method, queues.get(i).unwrap(), queues_size.get(i).unwrap());
                     statuses[i] = false;
                 });
             }
             thread::spawn(move || {
                 let index = queues.len() - 1;
-                LocalReadTask(&mut reader, queues.get(index).unwrap());
+                LocalReadTask(&mut reader, queues.get(index).unwrap(), queues_size.get(index).unwrap());
                 statuses[index] = false;
             });
 
             let mut writer = ObjectWriter::new2(method, machineInfo.getTotalNRow(), Const::NETWORK_PAGESIZE as usize);
             let stream = initClient(machineInfo.root(), machineInfo.port()).ok().unwrap();
-            ExternalSortTask(&mut queues, &mut statuses, true, writer, false, Some(&mut stream.try_clone().unwrap()));
+            ExternalSortTask(&mut queues, &mut queues_size, &mut statuses,  true, writer, false, Some(&mut stream.try_clone().unwrap()));
 
 
             let ack = b"1";
@@ -121,25 +125,26 @@ fn main() -> io::Result<()> {
             }
             for i in 0..machineInfo.leaves().len() {
                 let stream = serverSocket.incoming().next().unwrap();
+                println!("AAAAAAAAAAA");
                 let stream = stream.unwrap();
                 streams.push(stream.try_clone().unwrap());
                 let method = reader.method().clone();
                 thread::spawn(move || {
-                    NetworkReadTask(stream, method, queues.get(i).unwrap());
+                    NetworkReadTask(stream, method, queues.get(i).unwrap(), queues_size.get(i).unwrap());
                     statuses[i] = false;
                 });
             }
             thread::spawn(move || {
                 let index = queues.len() - 1;
-                LocalReadTask(&mut reader, queues.get(index).unwrap());
+                LocalReadTask(&mut reader, queues.get(index).unwrap(), queues_size.get(index).unwrap());
                 statuses[index] = false;
             });
 
             let writer = ObjectWriter::new1(outDataPath, method, machineInfo.getTotalNRow());
             if plan.to_lowercase().eq("d2d") || plan.to_lowercase().eq("m2d") {
-                ExternalSortTask(&mut queues, &statuses, true, writer, true, None);
+                ExternalSortTask(&mut queues, &mut queues_size, &statuses, true, writer, true, None);
             } else {
-                ExternalSortTask(&mut queues, &statuses, false, writer, false, None);
+                ExternalSortTask(&mut queues, &mut queues_size, &statuses, false, writer, false, None);
             }
 
             let ack = b"1";
@@ -165,7 +170,7 @@ fn initClient(ip: &str, port: u16) -> Result<TcpStream, Box<dyn std::error::Erro
     Err(Box::from(format!("Client can't start >> {}:{}", ip, port)))
 }
 
-fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8>>) {
+fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8>>, queue_size: &ArrayQueue<i32>) {
     let mut i32_data = [0 as u8; 4];
     let ack = b"1";
 
@@ -177,28 +182,36 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8
             break;
         }
 
-        let mut page = BytesMut::with_capacity(pageSize as usize);
         let mut buffer = vec![0u8; pageSize as usize];
         stream.read_exact(&mut buffer).unwrap();
 
+
+        //println!("wait {}", pageSize);
         while queue.is_full() {}
         queue.push(buffer);
+        queue_size.push(pageSize);
+        //println!("release");
     }
 }
 
-fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<u8>>) {
+fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<u8>>, queue_size: &ArrayQueue<i32>) {
     let mut list: Vec<Vec<u8>> = vec![];
-    reader.readAllPages(&mut list);
+    let mut pagesSize: Vec<i32> = vec![];
+    reader.readAllPages(&mut list, &mut pagesSize);
+    let mut index = 0;
     for bb in list {
+        //println!("local wait");
         while queue.is_full() {}
         queue.push(bb);
+        queue_size.push(pagesSize[index]);
+        index +=1;
+        //println!("local release");
     }
 }
 
-fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, statuses: &Vec<bool>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
+fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, queues_size: &mut Vec<ArrayQueue<i32>>, statuses: &Vec<bool>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
     let numberOfClients = queues.len();
     let mut flag:bool = true;
-    let mut stream = Option::from(stream.unwrap().try_clone()).unwrap().unwrap();
 
     while flag {
         flag = false;
@@ -208,7 +221,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, statuses: &Vec<bool>,
                 if is_write {
                     if onDisk { writer.writeNetworkPageToFile(queues[i].pop().unwrap()); }
                     else {
-                        writer.writeToNetworkPage(queues[i].pop().unwrap(), &mut stream.try_clone().unwrap());
+                        writer.writeToNetworkPage(queues[i].pop().unwrap(),queues_size[i].pop().unwrap() ,&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
                     }
                 }
                 flag = true;
@@ -219,7 +232,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, statuses: &Vec<bool>,
     if is_write {
         if onDisk { writer.flushNetworkPageWriter(); }
         else {
-
+            let mut stream = Option::from(stream.unwrap().try_clone()).unwrap().unwrap();
             let mut ack_data = [0 as u8; 1];
             let mut endOfNetwork: i32 = -1;
             let ack = b"1";
