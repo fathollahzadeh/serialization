@@ -107,7 +107,7 @@ for method in "${rust_methods[@]}"; do
     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
 
     # 4. Disk-to-Disk (d2d)
-    ./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
+    #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
 
     # 5. IO (m2m)
     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
@@ -119,6 +119,6 @@ for method in "${rust_methods[@]}"; do
     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
 
     # 8. IO (d2d)
-    #rm -rf ${outDataPath}.${method}SortedRust
-    #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
+    rm -rf ${outDataPath}.${method}SortedRust
+    ./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
 done   
