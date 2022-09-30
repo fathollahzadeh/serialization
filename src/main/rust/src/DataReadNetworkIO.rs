@@ -63,6 +63,7 @@ fn main() -> io::Result<()> {
             index += 1;
         }
 
+        println!("DDDDDDDDDDDDDDDDDDDDDDDDDDD");
         let mut ack_data = [0 as u8; 1];
         let mut endOfNetwork: i32 = -1;
         let ack = b"1";
