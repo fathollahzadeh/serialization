@@ -1,5 +1,5 @@
 use std::borrow::Borrow;
-use bytes::{BytesMut, Buf};
+use bytes::{BytesMut, Buf, BufMut};
 use std::io;
 use std::fs::{File, OpenOptions};
 use crate::tweetStructs::TweetStatus::TweetStatus;
@@ -23,7 +23,9 @@ pub struct ObjectReader {
     objectIndex: Vec<u32>,
     objectLength: Vec<u32>,
     pagePosition: Vec<u64>,
-    currentPagePosition: u64
+    currentPagePosition: u64,
+    fileSize: u64,
+    networkPageCount: u32,
 }
 
 impl ObjectReader {
@@ -32,6 +34,11 @@ impl ObjectReader {
         let mut tmpObjectIndex: Vec<u32> = vec![];
         let mut tmpObjectLength: Vec<u32> = vec![];
         let mut tmpPagePosition: Vec<u64> = vec![];
+
+        let mut tmpFile = File::open(fname).unwrap();
+        let tmpFileSize = tmpFile.metadata().unwrap().len();
+        let tmpNetworkPageCount = ((tmpFileSize as f64 / Const::NETWORK_PAGESIZE as f64) as f64).ceil() as u32;
+        tmpFile.flush().unwrap();
 
         ObjectReader::readIndexesFromFile(&mut tmpPageIndex, &mut tmpObjectIndex, &mut tmpObjectLength, &mut tmpPagePosition, fname.clone()).ok();
         Self {
@@ -47,9 +54,14 @@ impl ObjectReader {
             pagePosition: tmpPagePosition,
             method: Const::getMethodID(method),
             currentPagePosition: 0,
-            objectInEachPage: ObjectReader::getObjectsInEachPage(&mut tmpPageIndex)
+            objectInEachPage: ObjectReader::getObjectsInEachPage(&mut tmpPageIndex),
+            fileSize:tmpFileSize,
+            networkPageCount: tmpNetworkPageCount
         }
+
     }
+
+
 
     fn readIndexesFromFile(pageIndex: &mut Vec<u32>, objectIndex: &mut Vec<u32>, objectLength: &mut Vec<u32>, pagePosition: &mut Vec<u64>, fname: &str) -> io::Result<()> {
         let indexFileName: String = format!("{}.{}", fname, "index");
@@ -202,4 +214,22 @@ impl ObjectReader {
     pub fn method(&self) -> u16 {
         self.method
     }
+
+    pub fn readAllPages(&mut self, pages:&mut Vec<Vec<u8>>){
+        for i in 0..self.networkPageCount as u64{
+            let mut pageSize:i32 = Const::NETWORK_PAGESIZE as i32;
+            if self.fileSize - (i+1) * (Const::NETWORK_PAGESIZE as u64) < 0 {
+                pageSize = (self.fileSize - i * Const::NETWORK_PAGESIZE as u64) as i32;
+            }
+            let mut page = vec![0u8; (pageSize + 4) as usize];
+            page.put_i32(pageSize);
+            let newPosition = i * pageSize as u64;
+            self.inStreamRegularFile.seek(SeekFrom::Start(newPosition));
+            let mut reader = BufReader::with_capacity(pageSize as usize, &self.inStreamRegularFile);
+            let buffer = reader.fill_buf().unwrap();
+            page.put_slice(buffer);
+            pages.push(page);
+        }
+    }
+
 }

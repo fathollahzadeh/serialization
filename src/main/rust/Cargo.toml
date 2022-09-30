@@ -61,6 +61,10 @@ path = "src/ExternalSortIO.rs"
 name="DataReadNetwork"
 path = "src/DataReadNetwork.rs"
 
+[[bin]]
+name="DataReadNetworkIO"
+path = "src/DataReadNetworkIO.rs"
+
 [build]
 rustflags = ["-Awarnings"]
 

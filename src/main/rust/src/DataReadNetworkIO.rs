@@ -27,6 +27,7 @@ use rand::{thread_rng, Rng};
 use rand::distributions::uniform::SampleBorrow;
 use std::sync::{Arc, Mutex};
 use std::thread::Thread;
+use bytes::BytesMut;
 
 
 mod tweetStructs;
@@ -45,19 +46,34 @@ fn main() -> io::Result<()> {
     let mut machineInfo = network.getCurrentMachine();
     let mut reader = ObjectReader::new1(inDataPath, method);
     let mut nodeType = machineInfo.getNodeType();
-    static mut queues: Vec<ArrayQueue<Vec<TweetStatus>>> = vec![];
+    static mut queues: Vec<ArrayQueue<Vec<u8>>> = vec![];
     static mut statuses: Vec<bool> = vec![];
 
     if nodeType == NodeType::LEAF {
-        let stream = initClient(machineInfo.root(), machineInfo.port()).ok().unwrap();
-        let mut list: Vec<TweetStatus> = vec![];
-        reader.readObjects(0, machineInfo.nrow(), &mut list);
-        list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
+        let mut stream = initClient(machineInfo.root(), machineInfo.port()).ok().unwrap();
+        let mut pages: Vec<Vec<u8>> = vec![];
+        reader.readAllPages( &mut pages);
+
         let mut writer = ObjectWriter::new2(method, machineInfo.nrow(), Const::NETWORK_PAGESIZE as usize);
-        for rd in list {
-            writer.writeObjectToNetworkPage(rd, &mut stream.try_clone().unwrap());
+        for bb in pages {
+            writer.writeToNetworkPage(bb, &mut stream.try_clone().unwrap());
         }
-        writer.flushToNetwork(&mut stream.try_clone().unwrap());
+
+        let mut ack_data = [0 as u8; 1];
+        let mut endOfNetwork: i32 = -1;
+        let ack = b"1";
+
+        stream.read_exact(&mut ack_data).unwrap();
+        if &ack_data != ack {
+            println!("flushToNetwork Err!");
+        }
+        else {
+            stream.write(&endOfNetwork.to_be_bytes()).unwrap();
+            stream.read_exact(&mut ack_data).unwrap();
+            if &ack_data != ack {
+                println!("flushToNetwork Err!");
+            }
+        }
     } else if nodeType == NodeType::MIDDLE {
         let serverSocket = TcpListener::bind(format!("{}:{}", machineInfo.ip(), machineInfo.port())).unwrap();
         unsafe {
@@ -149,7 +165,7 @@ fn initClient(ip: &str, port: u16) -> Result<TcpStream, Box<dyn std::error::Erro
     Err(Box::from(format!("Client can't start >> {}:{}", ip, port)))
 }
 
-fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<TweetStatus>>) {
+fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8>>) {
     let mut i32_data = [0 as u8; 4];
     let ack = b"1";
 
@@ -160,117 +176,65 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<Tw
         if pageSize == -1 {
             break;
         }
-        let mut relativePosition: usize = 0;
-        let mut list: Vec<TweetStatus> = vec![];
-        while relativePosition < pageSize as usize {
-            stream.read_exact(&mut i32_data).unwrap();
-            let objectSize = i32::from_be_bytes(i32_data);
-            let mut buffer = vec![0u8; objectSize as usize];
-            stream.read_exact(&mut buffer);
-            let buff_data = buffer.as_slice();
 
-            match method {
-                Const::JSON => {
-                    list.push(serde_json::from_slice(buff_data).unwrap());
-                }
-                Const::BINCODE => {
-                    list.push(bincode::deserialize(&buff_data).unwrap())
-                }
-                Const::MESSAGEPACK => {
-                    list.push(rmp_serde::from_slice(&buff_data).unwrap())
-                }
-                Const::BSON => {
-                    let doc = Document::from_reader(&mut Cursor::new(&buff_data[..])).unwrap();
-                    let bson_data = bson::bson!(doc);
-                    list.push(bson::from_bson(bson_data).unwrap())
-                }
-                Const::FLEXBUF => {
-                    list.push(flexbuffers::from_slice(&buff_data).unwrap())
-                }
-                _ => {
-                    println!("The method is not support!!");
-                    return;
-                }
-            }
+        let mut page = BytesMut::with_capacity(pageSize as usize);
+        let mut buffer = vec![0u8; pageSize as usize];
+        stream.read_exact(&mut buffer).unwrap();
 
-            relativePosition = relativePosition + 4 + objectSize as usize;
-        }
         while queue.is_full() {}
-        queue.push(list);
+        queue.push(buffer);
     }
 }
 
-fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<TweetStatus>>) {
-    let mut list: Vec<TweetStatus> = vec![];
-    let nrow = reader.getRlen();
-    reader.readObjects(0, nrow, &mut list);
-    list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
-    for ch in list.chunks_mut(Const::NETWORK_LOCAL_READ_LENGTH as usize) {
+fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<u8>>) {
+    let mut list: Vec<Vec<u8>> = vec![];
+    reader.readAllPages(&mut list);
+    for bb in list {
         while queue.is_full() {}
-        let tmp = ch.to_vec();
-        queue.push(tmp);
+        queue.push(bb);
     }
 }
 
-fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &Vec<bool>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
-    let mut dataList: Vec<TweetStatus> = vec![];
+fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, statuses: &Vec<bool>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
     let numberOfClients = queues.len();
-    let mut pageObjectCounter: Vec<u64> = vec![0; numberOfClients];
-    let mut queue: PriorityQueue<ObjectNetworkIndex, Reverse<usize>> = PriorityQueue::new();
+    let mut flag:bool = true;
+    let mut stream = Option::from(stream.unwrap().try_clone()).unwrap().unwrap();
 
-    // reading objects from the first pages and adding them to a priority queue
-    for i in 0..numberOfClients as u32 {
-        while queues[i as usize].is_empty() {}
-        let mut listReadFromFile = queues[i as usize].pop().unwrap();
-        pageObjectCounter[i as usize] = listReadFromFile.len() as u64;
-        for rd in listReadFromFile {
-            let order = rd.getOrder();
-            let objectNetworkIndex = ObjectNetworkIndex::new(rd, i);
-            queue.push(objectNetworkIndex, Reverse(order));
+    while flag {
+        flag = false;
+        for i in 0..numberOfClients as usize {
+            while statuses[i] && queues[i].is_empty() {}
+            if !queues[i].is_empty() {
+                if is_write {
+                    if onDisk { writer.writeNetworkPageToFile(queues[i].pop().unwrap()); }
+                    else {
+                        writer.writeToNetworkPage(queues[i].pop().unwrap(), &mut stream.try_clone().unwrap());
+                    }
+                }
+                flag = true;
+            }
         }
     }
-    println!("Network External Sort: First page reading is done! ");
-    while !queue.is_empty() {
-        let tmpObjectNetworkIndex: ObjectNetworkIndex = queue.pop().unwrap().0;
-        let clientNumber = tmpObjectNetworkIndex.getClientIndex() as usize;
-
-        // reduce the number of objects read from that file.
-        pageObjectCounter[clientNumber] = pageObjectCounter[clientNumber] - 1;
-
-        // If needed load more objects from files.
-        // if zero load the next page from file and add objects.
-        if pageObjectCounter[clientNumber] == 0 {
-            let mut listReadFromFile: Vec<TweetStatus> = vec![];
-            if !queues[clientNumber].is_empty() {
-                listReadFromFile = queues[clientNumber].pop().unwrap();
-            } else {
-                while statuses[clientNumber] && queues[clientNumber].is_empty() {}
-                if !queues[clientNumber].is_empty() {
-                    listReadFromFile = queues[clientNumber].pop().unwrap();
-                }
-            }
-            if listReadFromFile.len() > 0 {
-                pageObjectCounter[clientNumber] = listReadFromFile.len() as u64;
-                for rd in listReadFromFile {
-                    let order = rd.getOrder();
-                    let objectNetworkIndex = ObjectNetworkIndex::new(rd, clientNumber as u32);
-                    queue.push(objectNetworkIndex, Reverse(order));
-                }
-            }
-        }
-        if is_write {
-            if onDisk { writer.writeObjectToFile(tmpObjectNetworkIndex.getObject()); } else {
-                writer.writeObjectToNetworkPage(tmpObjectNetworkIndex.getObject(), &mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
-            }
-        } else {
-            dataList.push(tmpObjectNetworkIndex.getObject());
-        }
-    }
-
-    println!("Network External Sort: Done!");
+    println!("Network External Sort Transfer: Done!");
     if is_write {
-        if onDisk { writer.flush(); } else {
-            writer.flushToNetwork(&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
+        if onDisk { writer.writeNetworkPageToFile(queues[i].pop().unwrap()); }
+        else {
+
+            let mut ack_data = [0 as u8; 1];
+            let mut endOfNetwork: i32 = -1;
+            let ack = b"1";
+
+            stream.read_exact(&mut ack_data).unwrap();
+            if &ack_data != ack {
+                println!("flushToNetwork Err!");
+            }
+            else {
+                stream.write(&endOfNetwork.to_be_bytes()).unwrap();
+                stream.read_exact(&mut ack_data).unwrap();
+                if &ack_data != ack {
+                    println!("flushToNetwork Err!");
+                }
+            }
         }
     }
 }

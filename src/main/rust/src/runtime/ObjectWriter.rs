@@ -128,7 +128,7 @@ impl ObjectWriter {
         self.row += 1;
     }
 
-    pub fn writeObjectToNetworkPage(&mut self, object: TweetStatus, stream:&mut TcpStream) {
+    pub fn writeObjectToNetworkPage(&mut self, object: TweetStatus, stream: &mut TcpStream) {
         let object_size: i32;
         let mut last_len: i32 = self.pageBuffer.len().try_into().unwrap();
 
@@ -185,6 +185,30 @@ impl ObjectWriter {
         }
     }
 
+    pub fn writeToNetworkPage(&mut self, page: Vec<u8>, stream: &mut TcpStream) {
+        let mut ack_data = [0 as u8; 1];
+        let ack = b"1";
+        match stream.read_exact(&mut ack_data) {
+            Ok(_) => {
+                if &ack_data != ack {
+                    println!("writeObjectToNetworkPage Bytes!");
+                    return;
+                }
+                stream.write(&page).unwrap();
+            }
+            _ => {
+                println!("writeObjectToNetworkPage Bytes (pattern)!");
+                return;
+            }
+        }
+    }
+
+    pub fn writeNetworkPageToFile(&mut self, page: Vec<u8>){
+        //Write in file:
+        self.outStreamRegularFile.write_all(&page).ok();
+    }
+
+
     pub fn writeObjectBufferToFile(&mut self, buffer: &[u8]) {
         let object_size: u32 = buffer.len() as u32;
         let mut last_len: u32 = self.pageBuffer.len().try_into().unwrap();
@@ -228,9 +252,9 @@ impl ObjectWriter {
         self.outStreamRegularFile.flush().ok();
     }
 
-    pub fn flushToNetwork(&mut self, stream:&mut TcpStream) {
+    pub fn flushToNetwork(&mut self, stream: &mut TcpStream) {
         let mut ack_data = [0 as u8; 1];
-        let mut endOfNetwork:i32 = -1;
+        let mut endOfNetwork: i32 = -1;
         let ack = b"1";
         match stream.read_exact(&mut ack_data) {
             Ok(_) => {
