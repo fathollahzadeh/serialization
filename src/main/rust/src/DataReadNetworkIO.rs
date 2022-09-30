@@ -60,7 +60,7 @@ fn main() -> io::Result<()> {
         let mut index = 0;
         for bb in pages {
             writer.writeToNetworkPage(bb, pagesSize[index], &mut stream.try_clone().unwrap());
-            println!("+++++++++++++++++++ {}", index);
+            println!("+++++++++++++++++++ {}  {}", index, pagesSize[index]);
             index += 1;
         }
 
@@ -203,7 +203,7 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8
         queue.push(buffer);
         queue_size.push(pageSize);
         //println!("release");
-        println!(">>>>>>>>>>>>>>>  {}", con);
+        println!(">>>>>>>>>>>>>>>  {}  {}", con, pageSize);
         con +=1;
 
     }
