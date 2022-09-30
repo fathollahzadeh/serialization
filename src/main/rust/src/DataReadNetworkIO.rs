@@ -68,15 +68,11 @@ fn main() -> io::Result<()> {
         let ack = b"1";
 
         stream.read_exact(&mut ack_data).unwrap();
-        println!("ACK read=  1");
         if &ack_data != ack {
             println!("flushToNetwork Err!");
         }
         else {
-            println!("SCK write -1");
             stream.write(&endOfNetwork.to_be_bytes()).unwrap();
-
-            println!("ACK read 1");
             stream.read_exact(&mut ack_data).unwrap();
             if &ack_data != ack {
                 println!("flushToNetwork Err!");
