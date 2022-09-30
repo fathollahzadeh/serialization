@@ -60,11 +60,9 @@ fn main() -> io::Result<()> {
         let mut index = 0;
         for bb in pages {
             writer.writeToNetworkPage(bb, pagesSize[index], &mut stream.try_clone().unwrap());
-            println!("+++++++++++++++++++ {}  {}", index, pagesSize[index]);
             index += 1;
         }
 
-        println!("DDDDDDDDDDDDDDDDDDDDDDDDDDD");
         let mut ack_data = [0 as u8; 1];
         let mut endOfNetwork: i32 = -1;
         let ack = b"1";
@@ -136,7 +134,6 @@ fn main() -> io::Result<()> {
             }
             for i in 0..machineInfo.leaves().len() {
                 let stream = serverSocket.incoming().next().unwrap();
-                println!("AAAAAAAAAAA");
                 let stream = stream.unwrap();
                 streams.push(stream.try_clone().unwrap());
                 let method = reader.method().clone();
