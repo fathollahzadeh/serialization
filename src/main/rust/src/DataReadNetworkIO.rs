@@ -60,6 +60,7 @@ fn main() -> io::Result<()> {
         let mut index = 0;
         for bb in pages {
             writer.writeToNetworkPage(bb, pagesSize[index], &mut stream.try_clone().unwrap());
+            println!("+++++++++++++++++++ {}", index);
             index += 1;
         }
 
@@ -183,6 +184,8 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8
     let mut i32_data = [0 as u8; 4];
     let ack = b"1";
 
+    let mut con = 0;
+
     while true {
         stream.write(&ack.clone());
         stream.read_exact(&mut i32_data).unwrap();
@@ -195,11 +198,14 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8
         stream.read_exact(&mut buffer).unwrap();
 
 
-        println!("wait {}", pageSize);
+        //println!("wait {}", pageSize);
         while queue.is_full() {}
         queue.push(buffer);
         queue_size.push(pageSize);
-        println!("release");
+        //println!("release");
+        println!(">>>>>>>>>>>>>>>  {}", con);
+        com +=1;
+
     }
 }
 
@@ -209,13 +215,14 @@ fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<u8>>, queue_s
     reader.readAllPages(&mut list, &mut pagesSize);
     let mut index = 0;
     for bb in list {
-        println!("local wait");
+       // println!("local wait");
         while queue.is_full() {}
         queue.push(bb);
         queue_size.push(pagesSize[index]);
         index +=1;
-        println!("local release");
+       // println!("local release");
     }
+    println!("++++++++++++++++++++++++++++++++++++++++++++++");
 }
 
 fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, queues_size: &mut Vec<ArrayQueue<i32>>, statuses: &Vec<bool>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
