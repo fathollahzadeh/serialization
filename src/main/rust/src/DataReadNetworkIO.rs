@@ -204,7 +204,7 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8
         queue_size.push(pageSize);
         //println!("release");
         println!(">>>>>>>>>>>>>>>  {}", con);
-        com +=1;
+        con +=1;
 
     }
 }
