@@ -11,7 +11,7 @@ declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuf
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
-nrow=100000
+nrow=1000000
 
 # Load data into memory
 # 1.a Java enviroments
@@ -91,8 +91,8 @@ echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_
 
 for method in "${rust_methods[@]}"; do
     #clean up
-    rm -rf data/tmp
-    mkdir -p data/tmp
+    #rm -rf data/tmp
+    #mkdir -p data/tmp
 
     # serialize data into disk
     ./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
@@ -107,7 +107,7 @@ for method in "${rust_methods[@]}"; do
     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
 
     # 4. Disk-to-Disk (d2d)
-    ./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
+    #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
 
     # 5. IO (m2m)
     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
@@ -119,6 +119,6 @@ for method in "${rust_methods[@]}"; do
     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
 
     # 8. IO (d2d)
-    rm -rf ${outDataPath}.${method}SortedRust
-    ./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
+    #rm -rf ${outDataPath}.${method}SortedRust
+    #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
 done   
