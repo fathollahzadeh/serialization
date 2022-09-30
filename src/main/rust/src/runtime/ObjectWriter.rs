@@ -301,6 +301,11 @@ impl ObjectWriter {
         }
     }
 
+    pub fn flushNetworkPageWriter(&mut self){
+        self.outIndexFile.flush().unwrap();
+        self.outStreamRegularFile.flush().unwrap();
+    }
+
     fn writeIndex32ToFile(&mut self, index_vector: Vec<u32>) {
         let buffer_size = (self.rlen + 1) * 4;
         let mut buffer: BytesMut = BytesMut::with_capacity(buffer_size as usize);

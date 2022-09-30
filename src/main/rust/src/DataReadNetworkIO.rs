@@ -217,7 +217,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<u8>>>, statuses: &Vec<bool>,
     }
     println!("Network External Sort Transfer: Done!");
     if is_write {
-        if onDisk { writer.writeNetworkPageToFile(queues[i].pop().unwrap()); }
+        if onDisk { writer.flushNetworkPageWriter(); }
         else {
 
             let mut ack_data = [0 as u8; 1];
