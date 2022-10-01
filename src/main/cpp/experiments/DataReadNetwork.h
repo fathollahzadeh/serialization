@@ -23,7 +23,9 @@ struct ObjectNetworkIndex {
     T *myObject;
     int clientIndex;
 
-    virtual ~ObjectNetworkIndex() {}
+    virtual ~ObjectNetworkIndex() {
+        delete myObject;
+    }
 };
 
 //Ascending Sorter:
