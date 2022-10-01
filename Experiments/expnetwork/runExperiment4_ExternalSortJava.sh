@@ -12,7 +12,7 @@ IP="${IP%%*( )}"
 for rp in {1..1}; do
     start=$(date +%s%N)
     SCRIPT="$jnCMD -DinDataPath=${inDataPath}\
-                   -DoutDataPath=${outDataPath}.${method}Java\
+                   -DoutDataPath=${outDataPath}\
                    -Dplan=${plan}\
                    -Dmethod=${method}\
                    -Dconfig=${NETWORKCONFIG}\
