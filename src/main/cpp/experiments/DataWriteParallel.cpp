@@ -8,7 +8,8 @@
 
 using namespace std;
 
-void WriteTask(ObjectReader *reader, string method, string fname, int beginPos, int endPos) {
+void WriteTask(string inDataPath, string method, string fname, int beginPos, int endPos) {
+    ObjectReader *reader = new ObjectReader(inDataPath,"HandCoded");
     ObjectWriter *writer = new ObjectWriter( fname, method, endPos - beginPos +1);
     int size = BATCHSIZE;
     for (int i = beginPos; i < endPos;) {
@@ -60,8 +61,7 @@ int main(int argc, char *argv[]) {
 
     int blklen = (int) ceil((double) nrow / NUM_THREADS);
     for (int i = 0; i < NUM_THREADS & i * blklen < nrow; i++) {
-        ObjectReader *reader = new ObjectReader(inDataPath,"HandCoded");
-        pool.push_back(std::thread(WriteTask, reader, method, outDataPath + "/" + to_string(i) ,i * blklen, min((i + 1) * blklen, nrow)));
+        pool.push_back(std::thread(WriteTask, inDataPath, method, outDataPath + "/" + to_string(i) ,i * blklen, min((i + 1) * blklen, nrow)));
     }
 
     for (auto &th: pool) {

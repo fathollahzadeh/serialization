@@ -6,12 +6,14 @@
 
 using namespace std;
 
-void ReadIOTask(ObjectReader *reader, int beginPos, int endPos) {
+void ReadIOTask(string inDataPath,string method, int beginPos, int endPos) {
+    ObjectReader *reader = new ObjectReader(inDataPath, method);
     reader->readIO(beginPos, endPos - beginPos + 1);
     delete reader;
 }
 
-void ReadIOTaskRandom(ObjectReader *reader, int *randomIDs, int beginPos, int endPos) {
+void ReadIOTaskRandom(string inDataPath,string method, int *randomIDs, int beginPos, int endPos) {
+    ObjectReader *reader = new ObjectReader(inDataPath, method);
     for (int i = beginPos; i < endPos; i++)
         reader->readIO(randomIDs[i]);
     delete reader;
@@ -29,8 +31,7 @@ int main(int argc, char *argv[]) {
 
     if (strcasecmp(seqRand.c_str(), "sequential") == 0) {
         for (int i = 0; i < NUM_THREADS & i * blklen < nrow; i++) {
-            ObjectReader *reader = new ObjectReader(inDataPath, method);
-            pool.push_back(std::thread(ReadIOTask, reader, i * blklen, min((i + 1) * blklen, nrow)));
+            pool.push_back(std::thread(ReadIOTask, inDataPath, method, i * blklen, min((i + 1) * blklen, nrow)));
         }
 
         for (auto &th: pool) {
@@ -52,8 +53,7 @@ int main(int argc, char *argv[]) {
         }
 
         for (int i = 0; i < NUM_THREADS & i * blklen < nrow; i++) {
-            ObjectReader *reader = new ObjectReader(inDataPath, method);
-            pool.push_back(std::thread(ReadIOTaskRandom, reader, randomIDs, i * blklen, min((i + 1) * blklen, nrow)));
+            pool.push_back(std::thread(ReadIOTaskRandom, inDataPath, method, randomIDs, i * blklen, min((i + 1) * blklen, nrow)));
         }
 
         for (auto &th: pool) {
