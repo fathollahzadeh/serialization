@@ -8,6 +8,7 @@ import at.tugraz.util.OptimizerUtils;
 import at.tugraz.util.RootData;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +44,9 @@ public class DataWriteParallel {
         }
 
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-            ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
             int rlen = Math.min((i + 1) * blklen, nrow) - i * blklen + 1;
-            ObjectWriter writer = new ObjectWriter(outDataPath + "/" + i, method, rlen);
-            tasks.add(new WriterTask(reader, writer, i * blklen, Math.min((i + 1) * blklen, nrow)));
+            String fname = outDataPath + "/" + i;
+            tasks.add(new WriterTask(inDataPath, fname, method, rlen, i * blklen, Math.min((i + 1) * blklen, nrow)));
         }
 
         //wait until all tasks have been executed
@@ -66,9 +66,9 @@ public class DataWriteParallel {
         private final int beginPos;
         private final int endPos;
 
-        public WriterTask(ObjectReader reader, ObjectWriter writer, int beginPos, int endPos) {
-            this.reader = reader;
-            this.writer = writer;
+        public WriterTask(String inDataPath, String outDataPath, String method, int rlen, int beginPos, int endPos) throws FileNotFoundException {
+            this.reader = new ObjectReader(inDataPath, "Kryo");;
+            this.writer = new ObjectWriter(outDataPath, method, rlen);;
             this.beginPos = beginPos;
             this.endPos = endPos;
         }

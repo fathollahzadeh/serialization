@@ -27,8 +27,7 @@ public class DataLoadToMemoryParallel {
         int blklen = (int) Math.ceil((double) nrow / numThreads);
 
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-            ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
-            tasks.add(new DeSerializeTask(reader, i * blklen, Math.min((i + 1) * blklen, nrow)));
+            tasks.add(new DeSerializeTask(inDataPath, i * blklen, Math.min((i + 1) * blklen, nrow)));
         }
 
         //wait until all tasks have been executed
@@ -47,9 +46,8 @@ public class DataLoadToMemoryParallel {
         protected final int beginPos;
         protected final int endPos;
 
-        public DeSerializeTask(ObjectReader reader, int beginPos, int endPos) {
-
-            this.reader = reader;
+        public DeSerializeTask(String inDataPath,int beginPos, int endPos) {
+            this.reader = new ObjectReader(inDataPath, "Kryo");
             this.beginPos = beginPos;
             this.endPos = endPos;
         }

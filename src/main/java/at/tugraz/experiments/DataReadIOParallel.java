@@ -31,7 +31,7 @@ public class DataReadIOParallel {
         if (seqRand.equalsIgnoreCase("sequential")) {
             for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
                 ObjectReader reader = new ObjectReader(inDataPath, method);
-                tasks.add(new ReadIOTask(reader, i * blklen, Math.min((i + 1) * blklen, nrow)));
+                tasks.add(new ReadIOTask(inDataPath, method, i * blklen, Math.min((i + 1) * blklen, nrow)));
             }
         }
         else {
@@ -48,7 +48,7 @@ public class DataReadIOParallel {
             }
             for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
                 ObjectReader reader = new ObjectReader(inDataPath, method);
-                tasks.add(new ReadIOTaskRandom(reader ,randomIDs,i * blklen, Math.min((i + 1) * blklen, nrow)));
+                tasks.add(new ReadIOTaskRandom(inDataPath, method ,randomIDs,i * blklen, Math.min((i + 1) * blklen, nrow)));
             }
         }
 
@@ -67,8 +67,8 @@ public class DataReadIOParallel {
         protected final ObjectReader reader;
         protected final int beginPos;
         protected final int endPos;
-        public Task(ObjectReader reader, int beginPos, int endPos) {
-            this.reader = reader;
+        public Task(String inDataPath, String method, int beginPos, int endPos) {
+            this.reader = new ObjectReader(inDataPath, method);
             this.beginPos = beginPos;
             this.endPos = endPos;
         }
@@ -76,8 +76,8 @@ public class DataReadIOParallel {
 
 
     private static class ReadIOTask extends Task {
-        public ReadIOTask(ObjectReader reader, int beginPos, int endPos) {
-            super(reader, beginPos, endPos);
+        public ReadIOTask(String inDataPath, String method, int beginPos, int endPos) {
+            super(inDataPath, method, beginPos, endPos);
         }
 
         @Override
@@ -90,8 +90,8 @@ public class DataReadIOParallel {
     private static class ReadIOTaskRandom extends Task {
         private final int[] randomList;
 
-        public ReadIOTaskRandom(ObjectReader reader, int[] randomList, int beginPos, int endPos) {
-            super(reader, beginPos, endPos);
+        public ReadIOTaskRandom(String inDataPath, String method, int[] randomList, int beginPos, int endPos) {
+            super(inDataPath, method, beginPos, endPos);
             this.randomList = randomList;
         }
 

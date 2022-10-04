@@ -28,10 +28,8 @@ public class DataSerializationParallel {
         ArrayList<SerializeTask> tasks = new ArrayList<>();
         int blklen = (int) Math.ceil((double) nrow / numThreads);
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-            ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
             int rlen = Math.min((i + 1) * blklen, nrow) - i * blklen + 1;
-            ObjectWriter writer = new ObjectWriter(method, rlen, Const.PAGESIZE);
-            tasks.add(new SerializeTask(reader, writer, i * blklen, Math.min((i + 1) * blklen, nrow)));
+            tasks.add(new SerializeTask(inDataPath, method, rlen, i * blklen, Math.min((i + 1) * blklen, nrow)));
         }
 
         //wait until all tasks have been executed
@@ -51,9 +49,9 @@ public class DataSerializationParallel {
         private final long beginPos;
         private final long endPos;
 
-        public SerializeTask(ObjectReader reader, ObjectWriter writer, long beginPos, long endPos) {
-            this.reader = reader;
-            this.writer = writer;
+        public SerializeTask(String inDataPath, String method, int rlen, long beginPos, long endPos) {
+            this.reader = new ObjectReader(inDataPath, "Kryo");;
+            this.writer = new ObjectWriter(method, rlen, Const.PAGESIZE);
             this.beginPos = beginPos;
             this.endPos = endPos;
         }

@@ -32,8 +32,7 @@ public class DataReadParallel {
 
         if (seqRand.equalsIgnoreCase("sequential")) {
             for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-                ObjectReader reader = new ObjectReader(inDataPath, method);
-                tasks.add(new ReadTask(reader, i * blklen, Math.min((i + 1) * blklen, nrow), rd));
+                tasks.add(new ReadTask(inDataPath, method, i * blklen, Math.min((i + 1) * blklen, nrow), rd));
             }
         } else {
             String randomDataPath = System.getProperty("randomDataPath");
@@ -49,7 +48,7 @@ public class DataReadParallel {
             }
             for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
                 ObjectReader reader = new ObjectReader(inDataPath, method);
-                tasks.add(new ReadTaskRandom(reader, randomIDs, i * blklen, Math.min((i + 1) * blklen, nrow), rd));
+                tasks.add(new ReadTaskRandom(inDataPath, method, randomIDs, i * blklen, Math.min((i + 1) * blklen, nrow), rd));
             }
         }
 
@@ -70,8 +69,8 @@ public class DataReadParallel {
         protected final long endPos;
         protected final RootData[] rd;
 
-        public Task(ObjectReader reader, long beginPos, long endPos, RootData[] rd) {
-            this.reader = reader;
+        public Task(String inDataPath, String method, long beginPos, long endPos, RootData[] rd) {
+            this.reader = new ObjectReader(inDataPath, method);
             this.beginPos = beginPos;
             this.endPos = endPos;
             this.rd = rd;
@@ -81,8 +80,8 @@ public class DataReadParallel {
 
     private static class ReadTask extends Task {
 
-        public ReadTask(ObjectReader reader, long beginPos, long endPos, RootData[] rd) {
-            super(reader, beginPos, endPos, rd);
+        public ReadTask(String inDataPath, String method, long beginPos, long endPos, RootData[] rd) {
+            super(inDataPath, method, beginPos, endPos, rd);
         }
 
         @Override
@@ -95,8 +94,8 @@ public class DataReadParallel {
     private static class ReadTaskRandom extends Task {
         private final int[] randomList;
 
-        public ReadTaskRandom(ObjectReader reader, int[] randomList, int beginPos, int endPos, RootData[] rd) {
-            super(reader, beginPos, endPos, rd);
+        public ReadTaskRandom(String inDataPath, String method, int[] randomList, int beginPos, int endPos, RootData[] rd) {
+            super(inDataPath, method, beginPos, endPos, rd);
             this.randomList = randomList;
         }
 
