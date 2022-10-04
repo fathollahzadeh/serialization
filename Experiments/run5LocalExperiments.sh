@@ -8,11 +8,11 @@ randomDataPath="data/random_list_"
 outDataPath="data/tmp/tweets"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
-declare -a cpp_methods=("Handcoded") #("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
+declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
 max_nrow=10000000
-declare -a nrows=(10000000) #(10000000 9000000 8000000 7000000 6000000 5000000 4000000 3000000 2000000 1000000)
+declare -a nrows=(10000000 9000000 8000000 7000000 6000000 5000000 4000000 3000000 2000000 1000000)
 
 # Load data into memory
 # 1.a Java enviroments
@@ -77,39 +77,39 @@ for rp in {1..3}; do
         # serialize/write data into disk
         ################################
         # Seralization (just CPU time)
-        #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single false Experiment1_Write_times
-        #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single true Experiment1_Write_times
-        #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Parallel false Experiment1_Write_times
+        ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single false Experiment1_Write_times
+        ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single true Experiment1_Write_times
+        ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Parallel false Experiment1_Write_times
 
         # Write (CPU+IO)
         ###############
         ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times
-        #./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single true Experiment1_Write_times
-        #./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Parallel false Experiment1_Write_times
+        ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single true Experiment1_Write_times
+        ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Parallel false Experiment1_Write_times
 
          for nrow in "${nrows[@]}"; do
-         #    ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true $nrow Experiment1_LoadToMemory_times
-         #    ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false $nrow Experiment1_LoadToMemory_times
+             ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true $nrow Experiment1_LoadToMemory_times
+             ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false $nrow Experiment1_LoadToMemory_times
              ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Parallel false $nrow Experiment1_LoadToMemory_times
 
-          #   # De-Seralization (just IO time)
-          #   ###############################
-          #   ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single false Sequential Experiment2_Read_times
-          #   ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single true Sequential Experiment2_Read_times
-          #   ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
+            # De-Seralization (just IO time)
+            ###############################
+            ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single false Sequential Experiment2_Read_times
+            ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single true Sequential Experiment2_Read_times
+            ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
 
-          #   ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
-          #   ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
-          #   ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
 
-          #   # Read (CPU+IO)
-          #   ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single false Sequential Experiment2_Read_times
-          #   ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single true Sequential Experiment2_Read_times
-          #   ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
+            # Read (CPU+IO)
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single false Sequential Experiment2_Read_times
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single true Sequential Experiment2_Read_times
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
 
-          #   ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
-          #   ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
-          #   ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
 
          done
     done
