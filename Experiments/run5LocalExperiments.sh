@@ -81,8 +81,6 @@ for rp in {1..5}; do
         ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single true Experiment1_Write_times
         ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Parallel false Experiment1_Write_times
 
-        sync && echo 3 >/proc/sys/vm/drop_caches
-
         # Write (CPU+IO)
         ###############
         ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times
