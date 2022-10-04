@@ -23,6 +23,7 @@ void WriteTask(string inDataPath, string method, string fname, int beginPos, int
         size = min(endPos - i, BATCHSIZE);
         delete[] tweets;
     }
+    writer->flush();
     delete reader;
     delete writer;
 }
