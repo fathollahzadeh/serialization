@@ -9,14 +9,15 @@ seq_rand=$6
 log_file_name=$7
 randomDataPath=$8
 
-for rp in {1..1}; do
-    start=$(date +%s%N) 
-    SCRIPT="./cppbin/DataReadIO${platform} ${inDataPath}.${method}CPP ${method} ${seq_rand} ${nrow} ${randomDataPath}"    
-    if [ "$task_set" = true ] ; then
-        SCRIPT="taskset -c 0 $SCRIPT"
-    fi
-    echo $SCRIPT
-    time $SCRIPT
-    end=$(date +%s%N)
-    echo ${method}"CPP,CPP,"${task_set}",IO,"${platform}","${seq_rand}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat
-done
+# clean OS cache
+sync && echo 3 >/proc/sys/vm/drop_caches
+
+start=$(date +%s%N) 
+SCRIPT="./cppbin/DataReadIO${platform} ${inDataPath}.${method}CPP ${method} ${seq_rand} ${nrow} ${randomDataPath}"    
+if [ "$task_set" = true ] ; then
+    SCRIPT="taskset -c 0 $SCRIPT"
+fi
+echo $SCRIPT
+time $SCRIPT
+end=$(date +%s%N)
+echo ${method}"CPP,CPP,"${task_set}",IO,"${platform}","${seq_rand}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat

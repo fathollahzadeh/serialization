@@ -8,6 +8,9 @@ platform=$5
 task_set=$6
 log_file_name=$7
 
+# clean OS cache
+sync && echo 3 >/proc/sys/vm/drop_caches
+
 for rp in {1..1}; do
     start=$(date +%s%N) #  
     SCRIPT="./rustbin/DataWrite${platform} ${inDataPath} ${outDataPath}.${method}Rust ${nrow} ${method}"
