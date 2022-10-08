@@ -1401,3 +1401,6 @@ Rust,Single,true,4000000,56518
 Rust,Single,false,4000000,56545
 Rust,Parallel,false,4000000,16918
 Rust,Single,true,3000000,42286
+Rust,Single,false,3000000,43258
+Rust,Parallel,false,3000000,13183
+Rust,Single,true,2000000,28586

@@ -2801,3 +2801,9 @@ BsonRust,Rust,false,IO,Parallel,Sequential,4000000,37448
 BsonRust,Rust,false,Total,Single,Sequential,4000000,358014
 BsonRust,Rust,true,Total,Single,Sequential,4000000,357154
 BsonRust,Rust,false,Total,Parallel,Sequential,4000000,64765
+BsonRust,Rust,false,IO,Single,Sequential,3000000,33015
+BsonRust,Rust,true,IO,Single,Sequential,3000000,33032
+BsonRust,Rust,false,IO,Parallel,Sequential,3000000,28880
+BsonRust,Rust,false,Total,Single,Sequential,3000000,273684
+BsonRust,Rust,true,Total,Single,Sequential,3000000,264530
+BsonRust,Rust,false,Total,Parallel,Sequential,3000000,49381
