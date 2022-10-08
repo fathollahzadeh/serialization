@@ -10,14 +10,16 @@ log_file_name=$7
 randomDataPath=$8
 
 # clean OS cache
-sync && echo 3 >/proc/sys/vm/drop_caches
+echo 3 > /proc/sys/vm/drop_caches && sync
+sleep 3
 
-start=$(date +%s%N)
 SCRIPT="./rustbin/DataRead${platform} ${inDataPath}.${method}Rust ${method} ${seq_rand} ${nrow} ${randomDataPath}"
 if [ "$task_set" = true ] ; then
     SCRIPT="taskset -c 0 $SCRIPT"
 fi
 echo $SCRIPT
-time $SCRIPT
+
+start=$(date +%s%N) 
+$SCRIPT
 end=$(date +%s%N)
 echo ${method}"Rust,Rust,"${task_set}",Total,"${platform}","${seq_rand}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat

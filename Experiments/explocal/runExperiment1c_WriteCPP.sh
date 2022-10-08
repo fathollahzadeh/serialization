@@ -9,14 +9,16 @@ task_set=$6
 log_file_name=$7
 
 # clean OS cache
-sync && echo 3 >/proc/sys/vm/drop_caches
+echo 3 > /proc/sys/vm/drop_caches && sync
+sleep 3
 
-start=$(date +%s%N) #  
 SCRIPT="./cppbin/DataWrite${platform} ${inDataPath} ${outDataPath}.${method}CPP ${nrow} ${method}"
 if [ "$task_set" = true ] ; then
     SCRIPT="taskset -c 0 $SCRIPT"
 fi
 echo $SCRIPT
-time $SCRIPT
+
+start=$(date +%s%N)
+$SCRIPT
 end=$(date +%s%N)
 echo ${method}"CPP,CPP,"${task_set}",Total,"${platform}",Sequential,"${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat     

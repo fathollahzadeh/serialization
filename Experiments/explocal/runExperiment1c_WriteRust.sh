@@ -9,16 +9,16 @@ task_set=$6
 log_file_name=$7
 
 # clean OS cache
-sync && echo 3 >/proc/sys/vm/drop_caches
+echo 3 > /proc/sys/vm/drop_caches && sync
+sleep 3
 
-for rp in {1..1}; do
-    start=$(date +%s%N) #  
-    SCRIPT="./rustbin/DataWrite${platform} ${inDataPath} ${outDataPath}.${method}Rust ${nrow} ${method}"
-    if [ "$task_set" = true ] ; then
-        SCRIPT="taskset -c 0 $SCRIPT"
-    fi
-    echo $SCRIPT
-    time $SCRIPT
-    end=$(date +%s%N)
-    echo ${method}"Rust,Rust,"${task_set}",Total,"${platform}",Sequential,"${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat     
-done
+SCRIPT="./rustbin/DataWrite${platform} ${inDataPath} ${outDataPath}.${method}Rust ${nrow} ${method}"
+if [ "$task_set" = true ] ; then
+    SCRIPT="taskset -c 0 $SCRIPT"
+fi
+echo $SCRIPT
+
+start=$(date +%s%N)
+$SCRIPT
+end=$(date +%s%N)
+echo ${method}"Rust,Rust,"${task_set}",Total,"${platform}",Sequential,"${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat     
