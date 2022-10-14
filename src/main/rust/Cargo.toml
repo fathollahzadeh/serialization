@@ -32,7 +32,7 @@ path = "src/DataReadIOSingle.rs"
 [[bin]]
 name="DataReadIOParallel"
 path = "src/DataReadIOParallel.rs"
-
+#
 [[bin]]
 name="DataSerializationSingle"
 path = "src/DataSerializationSingle.rs"
