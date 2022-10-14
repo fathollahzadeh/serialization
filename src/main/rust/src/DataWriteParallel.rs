@@ -40,7 +40,7 @@ fn main() -> io::Result<()> {
         fs::create_dir(outDataPath.clone());
     }
 
-    let NUM_THREADS: usize = num_cpus::get();
+    let NUM_THREADS: usize = 10; //num_cpus::get();
     let fv = nrow as f32 / NUM_THREADS as f32;
     let blklen = fv.ceil() as u32;
 
