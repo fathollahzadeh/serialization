@@ -31,14 +31,17 @@ fn main() -> io::Result<()> {
             let inDataPath = inDataPath.clone();
             scope.spawn(move |_| {
                 let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
+                let mut total = 0;
                 let mut size = BATCHSIZE;
                 let mut j: u32 = beginPos;
                 while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
+                    total += rdSize;
                     j += rdSize;
                     size = min(endPos - j, BATCHSIZE);
                 }
+                println!("Total={}  begin={} -- end={}", total, beginPos, endPos);
                 reader.flush();
             });
         }

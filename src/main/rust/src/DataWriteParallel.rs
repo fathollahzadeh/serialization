@@ -53,20 +53,22 @@ fn main() -> io::Result<()> {
             let outDataPath = outDataPath.clone();
             scope.spawn(move |_| {
                 let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
-                let mut writer = ObjectWriter::new1(format!("{}/{}", outDataPath, i.clone()).as_str(), method.as_str(), endPos - beginPos + 1);
-
+                //let mut writer = ObjectWriter::new1(format!("{}/{}", outDataPath, i.clone()).as_str(), method.as_str(), endPos - beginPos + 1);
+                let mut total = 0;
                 let mut size = BATCHSIZE;
                 let mut j: u32 = beginPos;
                 while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
-                    for tweet in tweets {
-                        writer.writeObjectToFile(tweet);
-                    }
+                  //  for tweet in tweets {
+                  //      writer.writeObjectToFile(tweet);
+                  //  }
                     j += rdSize;
+                    total +=rdSize;
                     size = min(endPos - j, BATCHSIZE);
                 }
-                writer.flush();
+                println!("Total={}  begin={} -- end={}", total, beginPos, endPos);
+               // writer.flush();
                 reader.flush();
             });
         }
