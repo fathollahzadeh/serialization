@@ -1,0 +1,3 @@
+baseline,language,taskset,execution,platform,seq_rand,nrow,time
+MessagePackRust,Rust,false,CPU,Single,Sequential,416667,4483
+MessagePackRust,Rust,false,Total,Single,Sequential,416667,5064
