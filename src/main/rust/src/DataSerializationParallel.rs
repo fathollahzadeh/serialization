@@ -19,7 +19,7 @@ fn main() -> io::Result<()> {
     let method: String = args[2].to_string();
     let nrow: u32 = args[3].parse().unwrap();
 
-    let NUM_THREADS: usize = 1;//num_cpus::get();
+    let NUM_THREADS: usize = num_cpus::get();
     let fv = nrow as f32 / NUM_THREADS as f32;
     let blklen = fv.ceil() as u32;
 
