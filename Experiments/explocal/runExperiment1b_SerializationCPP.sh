@@ -9,7 +9,7 @@ log_file_name=$6
 
 # clean OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
-sleep 3
+sleep 100
 
 
 SCRIPT="./cppbin/DataSerialization${platform} ${inDataPath} ${method} ${nrow}"    

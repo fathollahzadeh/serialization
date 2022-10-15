@@ -8,7 +8,7 @@ log_file_name=$5
 
 # clean OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
-sleep 3
+sleep 100
 
 SCRIPT="./rustbin/DataLoadToMemory${platform} ${inDataPath} ${nrow}"
 if [ "$task_set" = true ] ; then

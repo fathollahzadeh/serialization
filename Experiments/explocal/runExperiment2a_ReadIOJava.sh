@@ -11,7 +11,7 @@ randomDataPath=$8
 
 # clean OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
-sleep 3
+sleep 100
 
 SCRIPT="$jCMD  -DinDataPath=${inDataPath}.${method}Java\
                -Dnrow=${nrow}\
