@@ -1,0 +1,154 @@
+\begin{tikzpicture}
+\pgfplotsset{
+	scatter/position=absolute,
+	xticklabel style = {font=\tiny,yshift=-0.1ex,xshift=0pt},%xshift=-16pt
+	yticklabel style = {font=\tiny,xshift=0.5ex},
+	ybar stacked,
+	xtick=data,
+	%legend style={cells={anchor=west}, legend pos=north west},
+	width=\linewidth,
+	height=2in,
+	axis x line*=bottom,
+	axis y line*=left,
+	x=0.9cm,
+	legend pos=north west,
+	legend image post style={scale=0.6},
+	y label style={at={(0.04,0.4)}},
+}
+
+\begin{axis}[
+	ymode=log,
+	bar shift=-6pt,
+	enlarge x limits={abs=0.5cm},
+	ytick={11,18,27,37,63,115,175,242,613,1117,1550},
+	yticklabels={11,18,27,37,63,115,175,242,613,1117,1550},
+	ylabel=Seqential Read Time (Sec.) - Log,
+	table/col sep=comma,
+	xticklabels from table={diagram/seq_read_cpu_io_bar.csv}{shortmethod},
+	xticklabel style={rotate=0},
+	xtick align=outside,
+	extra x ticks={2.5,8,14},
+	extra x tick labels={C++, Rust,Java},
+	extra x tick style={%
+		grid=none,
+		tick style={draw=none}, 
+		tick label style={font=\huge,yshift=-3mm,rotate=0,color=black}
+	},
+	after end axis/.code={
+		\draw[semithick,dotted] (0, 1.30) -- (50,1.30);
+		\draw[semithick,dotted] (60, 1.30) -- (100,1.30);
+		\draw[semithick,dotted] (110, 1.30) -- (180,1.30);
+		\draw[blue,thick] (55, 7.5) -- (55,1.30);
+		\draw[blue,thick] (105, 7.5) -- (105,1.30);
+	},
+	legend style={xshift=-5mm,yshift = 1mm,nodes={scale=0.55, transform shape},legend columns=2, draw=none}, 
+	legend entries={
+		IO Time(taskset true),
+		CPU Time(taskset true),	
+	},
+	nodes near coords={
+		\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}
+	},
+	point meta=rawy,
+	every node near coord/.append style={
+		/pgf/number format/1000 sep={},
+		rotate=90,
+		anchor=west,			
+		yshift=2mm,		
+		xshift=0mm,
+		at={(axis cs:\coordindex,\xdelta)},	
+	}
+]
+\addplot+[fill=gray,draw opacity=0,
+	visualization depends on={value 11 \as \xdelta},
+	every node near coord/.append style={		
+ 		color=black,
+ 		xshift=-3mm,
+ 		font=\plotfont{\coordindex}{4}{-1}{-1}{-1}{-1}{-1}{-1}{-1}, 			
+ 	},  
+]
+table[y=iotstrue,col sep=comma,meta=method, x expr=\coordindex]{diagram/seq_read_cpu_io_bar.csv};
+
+\addplot[fill=gray!40!white,draw opacity=0,
+visualization depends on={value \thisrow{iotstrue} \as \xdelta},
+every node near coord/.append style={
+	%xshift=-0.2mm,
+	xshift=-2.2mm,
+	color=black,
+	font=\plotfont{\coordindex}{2}{3}{-1}{-1}{-1}{-1}{-1}{-1},	
+}	
+]
+table[y=cputstrue,col sep=comma,meta=method, x expr=\coordindex]{diagram/seq_read_cpu_io_bar.csv};
+
+%%%%%%%%%%% add sume
+\addplot[fill=white,draw opacity=0,
+visualization depends on={value \thisrow{tstruetotaltime}+10 \as \xdelta},
+every node near coord/.append style={
+	xshift=-1mm,
+	color=black,
+	font=\plotfont{\coordindex}{-1}{-1}{-1}{-1}{-1}{-1}{-1}{-1},	
+}
+]
+table[y=tstruetotaltime,col sep=comma,meta=method, x expr=\coordindex]{diagram/seq_read_cpu_io_bar.csv};
+
+\end{axis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{axis}[
+ymode=log,
+bar shift=6pt,
+enlarge x limits={abs=0.5cm},
+yticklabels={,,},
+ytick style={draw=none},
+xticklabels={,,},
+%legend style = {yshift = -7mm,nodes={scale=0.55, transform shape}},
+legend style={xshift=-5mm,yshift = -2mm,nodes={scale=0.55, transform shape},legend columns=2, draw=none}, 
+legend entries={
+	IO Time(taskset false),
+	CPU Time(taskset false),	
+},
+nodes near coords={
+	\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}
+},
+point meta=rawy,
+every node near coord/.append style={
+	/pgf/number format/1000 sep={},
+	rotate=90,			
+	anchor=west,		
+	yshift=-2mm,
+	xshift=0mm,
+	at={(axis cs:\coordindex,\xdelta)},	
+}
+]
+\addplot+[fill=darkgray,draw opacity=0,
+	visualization depends on={value 11 \as \xdelta},
+	every node near coord/.append style={
+		color=white,
+		xshift=-3mm,
+		font=\plotfont{\coordindex}{4}{16}{-16}{-1}{-1}{-1}{-1}{-1} 		
+	}
+]
+table[y=iotsfalse,col sep=comma,meta=method, x expr=\coordindex]{diagram/seq_read_cpu_io_bar.csv};
+
+\addplot[fill=darkgray!15!white,draw opacity=0,
+	visualization depends on={value \thisrow{iotsfalse} \as \xdelta},
+	every node near coord/.append style={
+		%color=white,
+		xshift=-2.2mm,
+		font=\plotfont{\coordindex}{2}{3}{-1}{-1}{-1}{-1}{-1}{-1} 		
+	}
+]
+table[y=cputsfalse,col sep=comma,meta=method, x expr=\coordindex]{diagram/seq_read_cpu_io_bar.csv};
+
+%%%%%%%%%%% add sume
+\addplot[fill=white,draw opacity=0,
+visualization depends on={value \thisrow{tsfalsetotaltime}+10 \as \xdelta},
+every node near coord/.append style={
+	xshift=-1mm,
+	%color=black,
+	font=\plotfont{\coordindex}{-1}{-1}{-1}{-1}{-1}{-1}{-1}{-1}
+}
+]
+table[y=tsfalsetotaltime,col sep=comma,meta=method, x expr=\coordindex]{diagram/seq_read_cpu_io_bar.csv};
+
+\end{axis}
+\end{tikzpicture}

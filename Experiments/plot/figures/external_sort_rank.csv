@@ -1,0 +1,18 @@
+1&Java Json+Gzip&C++ inPlace&C++ inPlace\\ \hline
+2&C++ HandCoded&C++ HandCoded&C++ HandCoded\\ \hline
+3&C++ ProtoBuf&C++ FlatBuffers&C++ FlatBuffers\\ \hline
+4&C++ Boost&C++ ProtoBuf&C++ ProtoBuf\\ \hline
+5&Java Kryo&Rust Bincode&Rust Bincode\\ \hline
+6&Java FlatBuffers&Rust MessagePack&Rust MessagePack\\ \hline
+7&C++ FlatBuffers&Rust Json&Rust Json\\ \hline
+8&Rust MessagePack&C++ Boost&C++ Boost\\ \hline
+9&Rust Bincode&Rust FlexBuffers&Rust FlexBuffers\\ \hline
+10&Java ProtoBuf&Java FlatBuffers&Java FlatBuffers\\ \hline
+11&Rust FlexBuffers&Java Byte Buffer&Java Byte Buffer\\ \hline
+12&Rust Json&Rust Bson&Rust Bson\\ \hline
+13&Java Byte Buffer&Java ProtoBuf&Java ProtoBuf\\ \hline
+14&C++ inPlace&Java Kryo&Java Kryo\\ \hline
+15&C++ Bson&Java Bson&Java Bson\\ \hline
+16&Rust Bson&Java Default&Java Default\\ \hline
+17&Java Default&C++ Bson&C++ Bson\\ \hline
+18&Java Bson&Java Json+Gzip&Java Json+Gzip\\ \hline

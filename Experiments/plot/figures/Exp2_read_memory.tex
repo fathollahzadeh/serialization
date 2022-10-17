@@ -1,0 +1,140 @@
+
+\begin{tikzpicture}
+	\newcommand{\myaddplot}[7]{
+	   \addplot[xshift=#2,draw=#5,line width=0.15pt, fill=#3, discard if single={#1}{#4}, postaction={pattern=#6,pattern color=#5}] 
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_serialize_cpu_io_bar.dat};
+	   \addlegendentry{#7};
+   };  
+   
+   
+   \newcommand{\addDiagramExpOne}[1]{		
+	% \addplot[draw=black,line width=0.15pt, fill=color2, discard if single={aaaa}] 
+	% table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_memory.dat};
+
+	\addplot [forget plot,draw=none] coordinates{({HandCodedCPP},-1) ({inPlaceCPP},-1) ({FlatBuffersCPP},-1) ({ProtoBufCPP},-1) ({BoostCPP},-1) ({BsonCPP},-1) ({MessagePackRust},-1) ({BincodeRust},-1) ({JsonRust},-1) ({FlexBuffersRust},-1) ({BsonRust},-1) ({Json+GzipJava},-1) ({JsonJava},-1) ({BsonJava},-1) ({DefaultJava},-1) ({ProtoBufJava},-1) ({Byte BufferJava},-1) ({FlatBuffersJava},-1) ({KryoJava},-1)};
+
+ 	  \addplot[draw=black,line width=0.15pt, fill=tug, discard if single={CPP}] 
+		table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_memory.dat};
+		\addlegendentry{C++};
+
+		\addplot[draw=black,line width=0.15pt, fill=orange, discard if single={Rust}] 
+		table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_memory.dat};	
+		\addlegendentry{Rust};
+
+		\addplot[draw=black,line width=0.15pt, fill=tugb, discard if single={Java}] 
+		table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_memory.dat};	
+		\addlegendentry{Java};
+   };    
+   
+   \pgfplotsset{
+	   discard if single/.style n args={1}{
+		   x filter/.code={
+			   \edef\tempa{\thisrow{language}}
+			   \edef\tempb{#1}
+			   \ifx\tempa\tempb
+			   \else
+			   \def\pgfmathresult{inf}
+			   \fi			
+		   }
+	   }
+   };
+  
+	   \begin{axis}[
+		   name=ax,
+		   every major tick/.append style={ thick,major tick length=2.5pt, gray},
+			axis line style={gray},
+		    ybar,        
+		   %ymode=log,
+		   ymin=0,
+		   y tick label style={/pgf/number format/1000 sep={}},
+		   x tick label style={/pgf/number format/1000 sep={}},
+		   ytick={0,4,8,12,16,20,24,28,32},
+		   yticklabels={0,4,8,12,16,20,24,28,32},
+		   enlarge y limits={0.5,upper},
+		   enlarge x limits=0.03,
+		   ylabel={Used Memory[GB]},		   
+		   ytick align=outside,
+		   xtick align=outside,
+		   xtick pos=left,
+		   ytick pos=left,
+		   yticklabel style = {font=\scriptsize},
+		   ylabel style = {font=\scriptsize, yshift=-7pt},
+		   xticklabel style = {font=\scriptsize, rotate=50, anchor=east, xshift=0pt},
+		   xtick=data,
+		   height=0.7\columnwidth,  
+		   bar width=7pt,
+		   width=1\columnwidth,   
+		   ymajorgrids=true,
+		   grid style=dotted,   
+		   minor grid style={gray!50}, 
+		   every axis plot/.append style={
+				%ybar,
+				%bar width=.2,
+				bar shift=0pt,
+				fill
+        }, 
+		   symbolic x coords={
+				HandCodedCPP,
+		   		inPlaceCPP,
+		    	FlatBuffersCPP,
+				ProtoBufCPP,
+				BoostCPP,
+				BsonCPP,
+				MessagePackRust,
+				BincodeRust,
+				JsonRust,
+				FlexBuffersRust,
+				BsonRust,
+				Json+GzipJava,
+				JsonJava,
+				BsonJava,
+				DefaultJava,
+				ProtoBufJava,
+				Byte BufferJava,
+				FlatBuffersJava,
+				KryoJava},   
+		   xticklabels={
+				HandCoded,
+				inPlace,
+				 FlatBuffers,
+				  ProtoBuf, 
+				  Boost, 
+				  Bson, 
+				  MessagePack, 
+				  Bincode, 
+				  Json, 
+				  FlexBuffers, 
+				  Bson, 
+				  Json+Gzip, 
+				  Json, 
+				  Bson, 
+				  Default, 
+				  ProtoBuf, 
+				  Byte Buffer, 
+				  FlatBuffers, 
+				  Kryo}, 
+			point meta=rawy,
+			nodes near coords,
+			nodes near coords align={vertical},
+			every node near coord/.append style={
+				font=\scriptsize,
+				rotate=90,
+				anchor=west,	
+				/pgf/number format/.cd,
+				/pgf/number format/precision=2,	
+				},
+				legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.22cm); },	
+				legend style = {
+					every column/.append style   = {column sep=0.5cm, text width=30pt, draw=black},
+					font=\scriptsize,
+					%anchor=black,
+					draw=none,
+					legend columns=-1,
+					anchor=north,
+					legend cell align=left
+				},
+				   legend pos = {north west},	
+		   ]  	  
+		   \addDiagramExpOne{TRUE};			
+	   \end{axis}		   
+\end{tikzpicture}

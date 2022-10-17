@@ -1,0 +1,20 @@
+methodindex,memory,method,methodname
+1,12.7799479166667,C++ InPlace,InPlace
+2,19.3271484375,C++ FlatBuffers,FlatBuffers
+3,20.1097005208333,C++ HandCoded,HandCoded
+4,20.177734375,C++ Boost,Boost
+5,23.2509765625,C++ ProtoBuf,ProtoBuf
+6,30.1461588541667,C++ Bson,Bson
+7,23.27587890625,Rust Bincode,Bincode
+8,23.27734375,Rust MessagePack,MessagePack
+9,23.2685546875,Rust FlexBuffers,FlexBuffers
+10,23.365234375,Rust Json,Json
+11,30.82421875,Rust Bson,Bson
+12,30.99560546875,Java Byte Buffer,Byte Buffer
+13,28.90283203125,Java Bson,Bson
+14,28.7939453125,Java Json,Json
+15,28.75146484375,Java Json+Gzip,Json+Gzip
+16,28.63916015625,Java Kryo,Kryo
+17,28.525390625,Java Default,Default
+18,27.7666015625,Java ProtoBuffer,ProtoBuffer
+19,13.94580078125,Java FaltBuffers,FaltBuffers

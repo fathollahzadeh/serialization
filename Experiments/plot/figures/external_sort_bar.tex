@@ -1,0 +1,100 @@
+\begin{tikzpicture}
+	\begin{axis}[	
+	log origin y=infty,
+	scatter/position=absolute,
+	xticklabel style = {font=\tiny},%xshift=-16pt
+	yticklabel style = {font=\tiny,xshift=0.5ex},
+	ybar stacked,
+	xtick=data,	
+	width=\columnwidth,
+	height=2in,
+	axis x line*=bottom,
+	axis y line*=left,
+	%x=0.3cm,
+	bar width=0.27cm,	
+	ymode=log,
+	enlarge x limits={abs=0.3cm},
+	ytick={3,7,19,27,50,80,125,200},
+	yticklabels={3,7,19,27,50,80,125,200},
+	ylabel=Sort Time (Min.) - Log,
+	y label style={at={(0.1,0.4)}},
+	table/col sep=comma,
+	xticklabels from table={diagram/external_sort_bar.csv}{shortmethod},
+	x tick label style={yshift=0.5mm, xshift=0.7mm,rotate=45,anchor=east},
+	xtick align=outside, 
+	extra x ticks={2,7,13},
+	extra x tick labels={C++, Rust,Java},
+	extra x tick style={%
+		grid=none,
+		tick style={draw=none}, 
+		tick label style={font=\huge,yshift=-9mm,rotate=-45,color=black}
+	},
+	after end axis/.code={
+		\draw[semithick,gray!40] (-20, -1.85) -- (30,-1.85);
+		\draw[semithick,gray!40] (38, -1.85) -- (81,-1.85);
+		\draw[semithick,gray!40] (88, -1.85) -- (159,-1.85);
+		\draw[blue,thick]  (55, 6) -- (55,-0.35);
+		\draw[blue,thick]  (105, 6) -- (105,-0.35);
+		%------------------------------------------------------
+		\draw[semithick,gray!40] (-20, -1.85) -- (-11.5,-1.2);	
+		\draw[semithick,gray!40] (30, -1.85) -- (41.5,-1);	
+	    \draw[semithick,gray!40] (38, -1.85) -- (40.5,-1.7);
+		\draw[semithick,gray!40] (81, -1.85) -- (92.5,-1);
+		\draw[semithick,gray!40] (88, -1.85) -- (94,-1.45);
+		\draw[semithick,gray!40] (159, -1.85) -- (163.5,-1.52);
+	}
+	%legend pos= north west,
+	legend image post style={scale=0.6},
+	legend style={xshift=-30.1mm,yshift=4mm,nodes={scale=0.50, transform shape},legend columns=2, draw=none}, 
+	legend entries={
+		IO Time(taskset true),
+		CPU Time(taskset true),	
+	},
+	nodes near coords={
+		\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}
+	},
+	point meta=rawy,
+	every node near coord/.append style={
+		/pgf/number format/1000 sep={},
+		rotate=90,
+		anchor=west,			
+		%yshift=2mm,		
+		xshift=-1mm,
+		at={(axis cs:\coordindex,\xdelta)},	
+	}
+]
+\addplot[fill=darkgray,draw opacity=0,
+visualization depends on={value 0.9 \as \xdelta},
+every node near coord/.append style={		
+	color=white,
+	xshift=-1.1mm,
+	font=\plotfont{\coordindex}{-1}{-1}{-1}{-1}{-1}{-1}{-1}{-1}, 			
+},  
+]
+table[y=iotstrue,col sep=comma,meta=method, x expr=\coordindex]{diagram/external_sort_bar.csv};
+
+\addplot[fill=darkgray!30!white,draw opacity=0,
+visualization depends on={value \thisrow{iotstrue} \as \xdelta},
+every node near coord/.append style={
+	xshift=-1.2mm,
+	%xshift=1mm,
+	color=black,
+	font=\plotfont{\coordindex}{-1}{-1}{-1}{-1}{-1}{-1}{-1}{-1},	
+}
+]
+table[y=cputstrue,col sep=comma,meta=method, x expr=\coordindex]{diagram/external_sort_bar.csv};
+
+
+%%%%%%%%%%% add sume
+\addplot[fill=white,draw opacity=0,
+visualization depends on={value \thisrow{tstruetotaltime} \as \xdelta},
+every node near coord/.append style={
+	xshift=-0.5mm,
+	color=black,
+	font=\plotfont{\coordindex}{-1}{-1}{-1}{-1}{-1}{-1}{-1}{-1},	
+}
+]
+table[y=tstruetotaltime,col sep=comma,meta=method, x expr=\coordindex]{diagram/external_sort_bar.csv};
+\end{axis}
+
+\end{tikzpicture}

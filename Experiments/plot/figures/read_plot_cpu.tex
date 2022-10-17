@@ -1,0 +1,388 @@
+\definecolor{c1}{RGB}{244,164,96}
+\definecolor{c2}{RGB}{220,20,60}
+\definecolor{c3}{RGB}{105,105,105}
+\definecolor{c4}{RGB}{184,134,11}
+\definecolor{c5}{RGB}{139,0,139}
+\definecolor{c6}{RGB}{143,188,143}
+\definecolor{c7}{RGB}{138,43,226}
+\definecolor{c8}{RGB}{0,255,0}
+\definecolor{c9}{RGB}{139,69,19}
+\definecolor{c10}{RGB}{255,99,71}
+\definecolor{c11}{RGB}{255,69,0}
+\definecolor{c12}{RGB}{128,128,0}
+\definecolor{c13}{RGB}{0,100,0}
+\definecolor{c14}{RGB}{0,0,255}
+\definecolor{c15}{RGB}{25,25,112}
+\definecolor{c16}{RGB}{100,149,237}
+\definecolor{c17}{RGB}{0,139,139}
+\definecolor{c18}{RGB}{47,79,79}
+\definecolor{c19}{RGB}{0,0,255}
+
+\begin{tikzpicture}
+\begin{axis}
+[
+ymode=log,
+xlabel=Number of Objects,
+xlabel style = {font=\small,at={(0.5,0.05)}}, 
+ylabel=CPU Time (Sec.) - Log,
+ylabel style = {font=\small}, 
+xtick={1,2,3,4,5},
+xticklabels={1M,2M,3M,4M,5M},
+ytick={0.1,0.31,0.51,5,10,17,28,58,87,120,304,646,956,1550},
+yticklabels={0.1,0.31,0.51,5,10,17,28,58,87,120,304,646,956,1550},
+xticklabel style = {font=\tiny,yshift=0.5ex},
+yticklabel style = {font=\tiny,xshift=0.5ex},
+grid=both,
+grid style=dotted,
+minor grid style={gray},
+major grid style={gray},
+width=0.23\linewidth,
+height=3in,
+every axis plot/.append style={line width=0.5pt,mark options={scale=0.5,solid}},
+y label style={at={(0.3,0.4)}},
+]
+
+%dashdotted,dotted,dashed
+\addplot[color=c1,mark=*] 
+table[y=javaDefaultV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c2,mark=+,dotted]
+table[y=javaJsonGzipV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c19,mark=*,dotted]
+table[y=javaJsonV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c3,mark=star]
+table[y=javaBsonV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c4,dashed,mark=square]
+table[y=javaProtoBufV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c5,dotted,mark=diamond]
+table[y=javaKryoV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c6,mark=+]
+table[y=javaByteBufferV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c7,mark=diamond]
+table[y=javaFlatBufferV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c8,mark=triangle]
+table[y=cppHANDCODEDV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c9,mark=square]
+table[y=cppPROTOBUFV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c10,mark=square]
+table[y=cppINPLACEV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c18,mark=triangle]
+table[y=cppBOOSTV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c12,mark=diamond]
+table[y=cppBSONV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c13,mark=o]
+table[y=cppFLATBUFV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c14,dashed,mark=square]
+table[y=rustJSONV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c15,mark=triangle]
+table[y=rustBINCODEV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c16,mark=+]
+table[y=rustMESSAGEPACKV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c17,mark=*]
+table[y=rustBSONV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c11,mark=triangle]
+table[y=rustFLEXBUFFERSV,col sep=comma]{diagram/seq_read_cpu_plot_ts_true.csv};
+
+\node[] at (axis cs: 3,1) {\small{task set=true}};
+\end{axis}
+\end{tikzpicture}
+\hskip 0.1pt
+\begin{tikzpicture}
+\begin{axis}
+[
+ymode=log,
+xlabel=Number of Objects,
+xlabel style = {font=\small,at={(0.5,0.05)}}, 
+ylabel style = {font=\small}, 
+xtick={1,2,3,4,5},
+xticklabels={1M,2M,3M,4M,5M},
+ytick={0.1,0.31,0.51,5,10,17,28,58,87,120,304,646,1120},
+yticklabels={0.1,0.31,0.51,5,10,17,28,58,87,120,304,646,1120},
+xticklabel style = {font=\tiny,yshift=0.5ex},
+yticklabel style = {font=\tiny,xshift=0.5ex},
+grid=both,
+grid style=dotted,
+minor grid style={gray},
+major grid style={gray},
+width=0.23\linewidth,
+height=3in,
+every axis plot/.append style={line width=0.5pt,mark options={scale=0.5,solid}
+}
+]
+
+%dashdotted,dotted,dashed
+\addplot[color=c1,mark=*] 
+table[y=javaDefaultV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c2,mark=+,dotted]
+table[y=javaJsonGzipV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c19,mark=*,dotted]
+table[y=javaJsonV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+
+\addplot[color=c3,mark=star]
+table[y=javaBsonV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c4,dashed,mark=square]
+table[y=javaProtoBufV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c5,dotted,mark=diamond]
+table[y=javaKryoV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c6,mark=+]
+table[y=javaByteBufferV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c7,mark=diamond]
+table[y=javaFlatBufferV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c8,mark=triangle]
+table[y=cppHANDCODEDV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c9,mark=square]
+table[y=cppPROTOBUFV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c10,mark=square]
+table[y=cppINPLACEV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c18,mark=triangle]
+table[y=cppBOOSTV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c12,mark=diamond]
+table[y=cppBSONV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c13,mark=o]
+table[y=cppFLATBUFV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c14,dashed,mark=square]
+table[y=rustJSONV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c15,mark=triangle]
+table[y=rustBINCODEV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c16,mark=+]
+table[y=rustMESSAGEPACKV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c17,mark=*]
+table[y=rustBSONV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c11,mark=triangle]
+table[y=rustFLEXBUFFERSV,col sep=comma]{diagram/seq_read_cpu_plot_ts_false.csv};
+
+\node[] at (axis cs: 3,1) {\small{task set=false}};
+\end{axis}
+\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Random Read Diagram %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hskip 20pt
+\begin{tikzpicture}
+\begin{axis}
+[
+ymode=log,
+xlabel=Number of Objects,
+xlabel style = {font=\small,at={(0.5,0.05)}}, 
+ylabel=CPU Time (Sec.) - Log,
+ylabel style = {font=\small}, 
+xtick={1,2,3,4,5},
+xticklabels={1M,2M,3M,4M,5M},
+ytick={1.33,2,3,4,5,10,19,26,50,67,100,120,165,250,333,643,1000},
+yticklabels={1.33,2,3,4,5,10,19,26,50,67,100,120,165,250,333,643,1000},
+xticklabel style = {font=\tiny,yshift=0.5ex},
+yticklabel style = {font=\tiny,xshift=0.5ex},
+grid=both,
+grid style=dotted,
+minor grid style={gray},
+major grid style={gray},
+width=0.23\linewidth,
+height=3in,
+every axis plot/.append style={line width=0.5pt,mark options={scale=0.5,solid}},
+y label style={at={(0.3,0.4)}},
+]
+
+%dashdotted,dotted,dashed
+\addplot[color=c1,mark=*] 
+table[y=javaDefaultV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c2,mark=+,dotted]
+table[y=javaJsonGzipV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c19,mark=*,dotted]
+table[y=javaJsonV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c3,mark=star]
+table[y=javaBsonV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c4,dashed,mark=square]
+table[y=javaProtoBufV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c5,dotted,mark=diamond]
+table[y=javaKryoV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c6,mark=+]
+table[y=javaByteBufferV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c7,mark=diamond]
+table[y=javaFlatBufferV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c8,mark=triangle]
+table[y=cppHANDCODEDV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c9,mark=square]
+table[y=cppPROTOBUFV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c10,mark=square]
+table[y=cppINPLACEV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c18,mark=triangle]
+table[y=cppBOOSTV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c12,mark=diamond]
+table[y=cppBSONV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c13,mark=o]
+table[y=cppFLATBUFV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c14,dashed,mark=square]
+table[y=rustJSONV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c15,mark=triangle]
+table[y=rustBINCODEV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot[color=c16,mark=+]
+table[y=rustMESSAGEPACKV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c17,mark=*]
+table[y=rustBSONV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\addplot [color=c11,mark=triangle]
+table[y=rustFLEXBUFFERSV,col sep=comma]{diagram/rand_read_cpu_plot_ts_true.csv};
+
+\node[] at (axis cs: 3,10) {\small{task set=true}};
+\end{axis}
+\end{tikzpicture}
+\hskip 0.1pt
+\begin{tikzpicture}
+\begin{axis}
+[
+ymode=log,
+xlabel=Number of Objects,
+xlabel style = {font=\small,at={(0.5,0.05)}}, 
+ylabel style = {font=\small}, 
+xtick={1,2,3,4,5},
+xticklabels={1M,2M,3M,4M,5M},
+ytick={1.33,2,3,4,5,10,19,26,50,67,100,120,165,250,333,643,1250},
+yticklabels={1.33,2,3,4,5,10,19,26,50,67,100,120,165,250,333,643,1250},
+xticklabel style = {font=\tiny,yshift=0.5ex},
+yticklabel style = {font=\tiny,xshift=0.5ex},
+grid=both,
+grid style=dotted,
+minor grid style={gray},
+major grid style={gray},
+width=0.23\linewidth,
+height=3in,
+every axis plot/.append style={line width=0.5pt,mark options={scale=0.5,solid}},
+legend entries={
+	Java Default,
+	Java Json+Gzip,
+	Java Json,
+	Java Bson,
+	Java ProtoBuf,
+	Java Kryo,
+	Java Byte Buffer,	
+	Java FlatBuffers,
+	C++ HandCoded,
+	C++ ProtoBuf,
+	C++ inPlace,
+	C++ Boost,	
+	C++ Bson,
+	C++ FlatBuffers,
+	Rust Json,
+	Rust Bincode,
+	Rust MessagePack,
+	Rust Bson,
+	Rust FlexBuffers},
+legend pos=outer north east,
+legend style={nodes={scale=0.7, transform shape}}, 
+legend image post style={scale=0.7},
+legend cell align={left},
+]
+
+%dashdotted,dotted,dashed
+\addplot[color=c1,mark=*] 
+table[y=javaDefaultV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c2,mark=+,dotted]
+table[y=javaJsonGzipV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c19,mark=*,dotted]
+table[y=javaJsonV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c3,mark=star]
+table[y=javaBsonV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c4,dashed,mark=square]
+table[y=javaProtoBufV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c5,dotted,mark=diamond]
+table[y=javaKryoV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c6,mark=+]
+table[y=javaByteBufferV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c7,mark=diamond]
+table[y=javaFlatBufferV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c8,mark=triangle]
+table[y=cppHANDCODEDV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c9,mark=square]
+table[y=cppPROTOBUFV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c10,mark=square]
+table[y=cppINPLACEV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c18,mark=triangle]
+table[y=cppBOOSTV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c12,mark=diamond]
+table[y=cppBSONV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c13,mark=o]
+table[y=cppFLATBUFV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c14,dashed,mark=square]
+table[y=rustJSONV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c15,mark=triangle]
+table[y=rustBINCODEV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot[color=c16,mark=+]
+table[y=rustMESSAGEPACKV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c17,mark=*]
+table[y=rustBSONV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\addplot [color=c11,mark=triangle]
+table[y=rustFLEXBUFFERSV,col sep=comma]{diagram/rand_read_cpu_plot_ts_false.csv};
+
+\node[] at (axis cs: 3,10) {\small{task set=false}};
+\end{axis}
+\end{tikzpicture}

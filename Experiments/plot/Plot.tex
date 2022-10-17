@@ -1,0 +1,205 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{balance}  
+\usepackage[utf8x]{inputenc}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{adjustbox}
+%\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{pgfplots} 
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{algorithm}
+\usepackage{url}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usetikzlibrary{shapes,arrows,fit,chains}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+\usetikzlibrary{patterns}
+\usetikzlibrary{backgrounds}
+\usepackage{booktabs}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{verbatimbox,lipsum}
+\usepackage{listings}
+\usepgfplotslibrary{groupplots}
+
+%\pgfplotsset{compat=1.9}
+
+% \usepackage{mathptmx}
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \usepackage{amsthm}
+
+
+\newcommand{\definevariableobject}[1] {\textcolor{black}{ 
+		\ttfamily\bfseries\textcolor{red}{\ #1}}
+} 
+\newcommand{\definevariable}[1] {\textcolor{black}{ 
+		\ttfamily\bfseries\ #1}
+} 
+\definecolor{copper}{cmyk}{0,0.9,0.9,0.2}
+\colorlet{lightgray}{black!25}
+\colorlet{darkgray}{black!75}
+
+\usepackage{xcolor}
+\definecolor{tug}{RGB}{247,1,70}
+\definecolor{tugb}{RGB}{120,137,251}
+
+% \definecolor{color1}{RGB}{100,149,237} % corn flower blue
+% \definecolor{color2}{RGB}{153,153,153} % light gray
+% \definecolor{color3}{RGB}{0,0,0} % black
+% \definecolor{color4}{RGB}{255,165,0} % orange
+% \definecolor{color5}{RGB}{255,69,0} % orange red
+% \definecolor{color6}{RGB}{77,77,77} % dark gray
+% \definecolor{color7}{RGB}{31,119,180}
+% \definecolor{color8}{RGB}{7,77,125}
+
+\definecolor{color1}{RGB}{100,149,237} % corn flower blue
+\definecolor{color2}{RGB}{153,153,153} % light gray
+\definecolor{color3}{RGB}{0,0,0} % black
+\definecolor{color4}{RGB}{255,165,0} % orange
+\definecolor{color5}{RGB}{255,69,0} % orange red
+\definecolor{color6}{RGB}{77,77,77} % dark gray
+\definecolor{color7}{RGB}{31,119,180}
+\definecolor{color8}{RGB}{7,77,125}
+
+% Enable this two commands when you want to extract diagrams in extra files, then run "make"
+\usetikzlibrary{external}
+\tikzexternalize[prefix=plots/] %  activate
+
+\newcommand{\showvaluewrite}[8]{
+  \ifthenelse{
+    \equal{#1}{#2} \OR
+    \equal{#1}{#3} \OR
+    \equal{#1}{#4} \OR
+    \equal{#1}{#5} \OR
+    \equal{#1}{#6} \OR
+    \equal{#1}{#7} \OR
+    \equal{#1}{#8} 
+  }{\pgfkeys{/tikz/coordinate}}{}
+}
+
+\newcommand{\showvalue}[9]{
+  \ifthenelse{
+    \equal{#1}{#2} \OR
+    \equal{#1}{#3} \OR
+    \equal{#1}{#4} \OR
+    \equal{#1}{#5} \OR
+    \equal{#1}{#6} \OR
+    \equal{#1}{#7} \OR
+    \equal{#1}{#8} \OR
+    \equal{#1}{#9} 
+  }{\pgfkeys{/tikz/coordinate}}{}
+}
+
+
+% *** CITATION PACKAGES ***
+%
+\ifCLASSOPTIONcompsoc
+  % IEEE Computer Society needs nocompress option
+  % requires cite.sty v4.0 or later (November 2003)
+  \usepackage[nocompress]{cite}
+\else
+  % normal IEEE
+  \usepackage{cite}
+\fi
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+
+\makeatletter
+\def\endthebibliography{%
+	\def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+	\endlist
+}
+\makeatother
+
+%\theoremstyle{definition}
+%\newtheorem{findings}{Findings}
+
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+
+\title{Understanding and Benchmarking the Impact of Complex Object Implementations for Big Data Systems}
+
+\author{Saeed Fathollahzadeh, Kia Teymourian, Chris Jermaine 
+	\IEEEcompsocitemizethanks{
+		\IEEEcompsocthanksitem 
+		Saeed Fathollahzadeh is with the Department of Computer Science, Graz University of Technology, Graz, Austria.\protect\\ E-mail: s.fathollahzadeh@student.tugraz.at
+		\IEEEcompsocthanksitem Kia Teymourian is with the Department of Computer Science, The University of Texas at Austin, TX, USA. \protect\\ E-mail: kiat@bu.edu
+		\IEEEcompsocthanksitem Chris Jermaine is the Chair of Department of Computer Science, Rice University, Houston, TX, USA. \protect\\ E-mail: cmj4@rice.edu}	
+\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
+
+
+% The paper headers
+\markboth{Fathollahzadeh, et al: Understanding and Benchmarking the Impact of Complex Object Implementations for Big Data Systems}%
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Computer Society Journals}
+
+\IEEEtitleabstractindextext{%
+\begin{abstract}
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+Computer Society, IEEE, IEEEtran, journal, \LaTeX, paper, template.
+\end{IEEEkeywords}}
+
+ \tikzsetnextfilename{Exp1_write}
+    \begin{figure*}[h]
+        \centering
+        \input{figures/Exp1_write}
+        \caption{Experiment1: Serialization times for 5M Tweet Objects}
+\end{figure*}
+
+
+% \tikzsetnextfilename{Exp2_read_memory}
+%     \begin{figure}[h]
+%         \centering
+%         \input{figures/Exp2_read_memory.tex}showvalu
+%         \caption{Experiment2: Memory Usage in Reading of 4M Tweet Objects}
+% \end{figure}
+
+%  \tikzsetnextfilename{Exp3_seq_read_cpu_io}
+%     \begin{figure*}[h]
+%         \centering
+%         \input{figures/Exp3_seq_read_cpu_io.tex}
+%         \caption{Experiment3: Total and IO Time of Sequential Read of 4 Million Tweet objects}
+% \end{figure*}
+
+
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\IEEEpeerreviewmaketitle
+\bibliographystyle{IEEEtran}
+\bibliography{References}
+
+\end{document}
