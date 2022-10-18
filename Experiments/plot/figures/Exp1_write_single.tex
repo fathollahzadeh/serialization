@@ -166,7 +166,7 @@
 		xticklabel style = {font=\scriptsize},
 		x label style={yshift=-20pt},
 		xtick=data,
-		height=0.65\columnwidth,  
+		height=0.6\columnwidth,  
 		%bar width=10pt,
 		%width=0.33\textwidth, 				
 		% ymajorgrids=true,
@@ -187,18 +187,18 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tugb}{color7}{0.34\textwidth}{{10,100,1000,10000,100000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
+\addDiagramExpOne{CPP}{tugb}{color7}{0.40\textwidth}{{10,100,1000,10000,100000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
 
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.85) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time(taskset True) \\ \\
 		\ref{IOTrue} I/O Time(taskset True) 			
 }};
-\addDiagramExpOne{Rust}{tugb}{color7}{0.34\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
+\addDiagramExpOne{Rust}{tugb}{color7}{0.40\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.85) {\shortstack[l]{
 		\ref{CPUFalse} CPU Time(taskset False) \\ \\
 		\ref{IOFalse} I/O Time(taskset False) 			
 }};
-\addDiagramExpOne{Java}{tugb}{color7}{0.42\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
+\addDiagramExpOne{Java}{tugb}{color7}{0.48\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
 		
 \end{groupplot}
 
