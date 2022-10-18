@@ -22,7 +22,8 @@
 	   every node near coord/.append style={		  
 		   check for zeronan/.code={
 			   \pgfkeys{/pgf/fpu=true}
-			   \showvalue{\xbaseline}{HandcodedCPP}{inPlaceCPP}{FlatBufCPP}{ProtoBufCPP}{BoostCPP}{MessagePackRust}{JsonRust}{FlexBufRust}{BsonRust}
+			   \showvalue{\xbaseline}{HandcodedCPP}{inPlaceCPP}{FlatBufCPP}{ProtoBufCPP}{BoostCPP}{MessagePackRust}{JsonRust}{FlexBufRust}{BsonRust};
+			   \showvalue{\xbaseline}{BincodeRust}{BsonRust}{BsonJava}{DefaultJava}{}{}{}{}{}
 			   \pgfkeys{/pgf/fpu=false}
 		   },
 		   check for zeronan,
@@ -135,7 +136,7 @@
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
-		ymin=0.1,
+		ymin=0.3,
 		x tick label style={/pgf/number format/1000 sep=},
 		ymax=400,		
 		scaled y ticks=false,		  
