@@ -173,12 +173,20 @@
 Computer Society, IEEE, IEEEtran, journal, \LaTeX, paper, template.
 \end{IEEEkeywords}}
 
- \tikzsetnextfilename{Exp1_write}
+% \tikzsetnextfilename{Exp1_write_single}
+%     \begin{figure*}[h]
+%         \centering
+%         \input{figures/Exp1_write_single}
+%         \caption{Experiment1: Write times for 5M Tweet Objects (Single)}
+% \end{figure*}
+
+\tikzsetnextfilename{Exp1_write_parallel}
     \begin{figure*}[h]
         \centering
-        \input{figures/Exp1_write}
-        \caption{Experiment1: Serialization times for 5M Tweet Objects}
+        \input{figures/Exp1_write_parallel}
+        \caption{Experiment1: Write times for 5M Tweet Objects (parallel)}
 \end{figure*}
+
 
 
 % \tikzsetnextfilename{Exp2_read_memory}

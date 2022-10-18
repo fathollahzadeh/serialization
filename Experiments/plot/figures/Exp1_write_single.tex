@@ -151,7 +151,7 @@
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
-		ymin=4.5,
+		ymin=3,
 		ymax=10000,
 		scaled y ticks=false,		  
 		enlarge y limits={0.2,upper},		
@@ -208,61 +208,4 @@
 	\draw[decorate] ($(T4.south east)+(15pt,0)$) -- ($(T3.south west)+(-25pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
 	\draw[decorate] ($(T8.south east)+(15pt,0)$) -- ($(T5.south west)+(-0pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Java}};	
   \end{scope}
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   
-	%    \begin{axis}[
-	% 		name=ax,
-	% 	   %xtick style={draw=none},		
-	% 		every major tick/.append style={thick,major tick length=3.5pt, gray},
-	% 		axis line style={gray},
-	% 	   ybar stacked,        
-	% 	   ymode=log,
-	% 	   ymin=4,
-	% 	   %y tick label style={/pgf/number format/1000 sep={}},
-	% 	   %x tick label style={/pgf/number format/1000 sep={}},
-	% 	   scaled y ticks=false,		  
-	% 	   enlarge y limits={0.42,upper},
-	% 	   enlarge x limits=0.03,
-	% 	   ylabel={Execution Time[s]},		   
-	% 	   ytick align=inside,
-	% 	   xtick align=outside,			
-	% 	   xtick pos=left,
-	% 	   ytick pos=left,
-	% 	   yticklabel style = {font=\scriptsize},
-	% 	   ylabel style = {font=\scriptsize, yshift=-12pt},
-	% 	   xticklabel style = {font=\scriptsize},
-	% 	   xtick=data,
-	% 	   height=0.65\columnwidth,  
-	% 	   bar width=10pt,
-	% 	   width=1.1\textwidth,   
-	% 	   ymajorgrids=true,
-	% 	   grid style=dotted,   
-	% 	   minor grid style={gray!50},  
-	% 	   symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostCPP, BsonCPP, MessagePackRust, BincodeRust, JsonRust, FlexBufRust, BsonRust, Json+GzipJava, JsonJava, BsonJava, DefaultJava, ProtoBufJava, ByteBufferJava, FlatBufJava, KryoJava},		   
-	% 	   xticklabels={ HandCoded,, FlatBuf,, Boost,, MessagePack,, Json,, Bson,, Json,, Default,, Byte Buffer,, Kryo},  
-	% 	   %-----------------		   
-	% 	   extra x ticks={inPlaceCPP,ProtoBufCPP,BsonCPP,BincodeRust,FlexBufRust,Json+GzipJava,BsonJava, ProtoBufJava,FlatBufJava},
-	% 	   extra x tick labels={inPlace,ProtoBuf,Bson,Bincode,FlexBuf,Json+Gzip,Bson,ProtoBuf,FlatBuf},
-	% 	   every extra x tick/.style={major tick length=15pt, xtick align=outside},
-	% 	   %----------------		   
-	% 	   point meta=rawy,            
-    %        nodes near coords={\pgfmathprintnumber[precision=0]{\pgfplotspointmeta}},
-    %        nodes near coords custom={1}, 
-	% 	   legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.15cm,0.20cm); },					   
-	% 	   ]  	  
-	% 	   \addDiagramExpOne{CPP}{tug}{orange};		
-	% 	   \addDiagramExpOne{Rust}{tugb}{color7};	
-	% 	   \addDiagramExpOne{Java}{color5}{color2};	
-	% 	   \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.01,0.92) {\shortstack[l]{
-    %         \ref{IOTrueCPP} , \ref{IOTrueRust} , \ref{IOTrueJava} I/O Time(taskset True) \quad
-    %         \ref{IOFalseCPP} , \ref{IOFalseRust} , \ref{IOFalseJava} I/O Time(taskset False) \quad
-	% 		\ref{CPUTrueCPP} , \ref{CPUTrueRust} , \ref{CPUTrueJava} CPU Time(taskset True) \quad			
-    %         \ref{CPUFalseCPP} , \ref{CPUFalseRust} , \ref{CPUFalseJava} CPU Time(taskset False)
-    %     }};		
-	% 	% \node [draw=gray!50,inner sep=0.5mm, font=\scriptsize, anchor=west] at (rel axis cs: 0.01,0.70) {\shortstack[l]{
-    %     %     \ref{IOTrueCPP} , \ref{IOFalseCPP} , \ref{CPUTrueCPP} , \ref{CPUFalseCPP}  C++ \\
-    %     %     \ref{IOTrueRust} , \ref{IOFalseRust} , \ref{CPUTrueRust} , \ref{CPUFalseRust}  Rust \quad \\
-	% 	% 	\ref{IOTrueJava} , \ref{IOFalseJava} , \ref{CPUTrueJava} , \ref{CPUFalseJava}  Java
-    %     % }};		
-	%    \end{axis}		   
-	 \end{tikzpicture}
+\end{tikzpicture}
