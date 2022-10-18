@@ -12,7 +12,7 @@
 \begin{tikzpicture}
 	\newcommand{\myaddplot}[7]{
 	   \addplot[xshift=#1,draw=#4,line width=0.15pt, fill=#2, discard if single={#3}{#7}, postaction={pattern=#5,pattern color=#4}] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_write.dat};
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read.dat};
 	   \label{#3#7}
    };  
 
@@ -22,14 +22,14 @@
 	   every node near coord/.append style={		  
 		   check for zeronan/.code={
 			   \pgfkeys{/pgf/fpu=true}
-			   \showvalue{\xbaseline}{HandcodedCPP}{inPlaceCPP}{FlatBufCPP}{ProtoBufCPP}{BoostCPP}{MessagePackRust}{JsonRust}{FlexBufRust}{BsonRust};
-			   \showvalue{\xbaseline}{BincodeRust}{BsonRust}{BsonJava}{DefaultJava}{}{}{}{}{}
+			   \showvalue{\xbaseline}{BsonRust}{inPlaceCPP}{FlatBufCPP}{JsonJava}{BsonJava}{DefaultJava}{ProtoBufJava}{ByteBufferJava}{FlatBufJava};
+			   \showvalue{\xbaseline}{KryoJava}{JsonRust}{FlexBufRust}{}{}{}{}{}{}
 			   \pgfkeys{/pgf/fpu=false}
 		   },
 		   check for zeronan,
 	   }  
 	   ] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_write.dat};	  
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read.dat};	  
 	   \label{#3#7}
    };  
    
@@ -40,11 +40,11 @@
 		nodes near coords={\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}},
 		every node near coord/.append style={
 			black,			
-			xshift=-7pt,
+			xshift=-19pt,
 			anchor=west
 		}
 	] 
-	table[ y=time, col sep=comma, x=baseline] {results/Exp1_write.dat};	
+	table[ y=time, col sep=comma, x=baseline] {results/Exp2_read.dat};	
    };   
    
    \newcommand{\addDiagramExpOne}[7]{	
@@ -71,7 +71,23 @@
 			   \ifx\tempg\temph	
 				    \edef\tempi{\thisrow{platform}}
 				    \edef\tempj{Parallel}
-				    \ifx\tempi\tempj												   
+				    \ifx\tempi\tempj					
+						%
+						\edef\tempk{\thisrow{nrow}}
+						\edef\templ{5000000}
+						\ifx\tempk\templ
+							%
+							\edef\tempm{\thisrow{seq_rand}}
+							\edef\tempn{Sequential}
+							\ifx\tempm\tempn
+							\else
+							\def\pgfmathresult{inf}
+							\fi 
+							%	
+						\else
+						\def\pgfmathresult{inf}
+						\fi  	
+						%																					   
 				    \else
 				    \def\pgfmathresult{inf}
 				    \fi      
@@ -98,7 +114,7 @@
 		  /pgf/number format/1000 sep={},
 		  check for zero/.code={%
 			\pgfkeys{/pgf/fpu=true}
-			\pgfmathparse{\pgfplotspointmeta-0.1}
+			\pgfmathparse{\pgfplotspointmeta-0.01}
 			\pgfmathfloatifflags{\pgfmathresult}{0}{
 				\pgfkeys{/tikz/coordinate}
 			}{
@@ -107,7 +123,7 @@
 					\pgfmathparse{\pgfplotspointmeta<#1}%
 					\global\let\result=\pgfmathresult
 				\endgroup
-				\pgfmathfloatcreate{1}{0.1}{0}%
+				\pgfmathfloatcreate{1}{0.01}{0}%
 				\let\ONE=\pgfmathresult
 				\ifx\result\ONE
 					% AH : our condition 'y < #1' is met.
@@ -136,11 +152,11 @@
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
-		ymin=0.3,
+		ymin=13.5,
 		x tick label style={/pgf/number format/1000 sep=},
-		ymax=400,		
+		ymax=300,		
 		scaled y ticks=false,		  
-		enlarge y limits={0.3,upper},		
+		enlarge y limits={0.05,upper},		
 		ylabel={Execution Time[s]},		   
 		ytick align=inside,
 		xtick align=outside,			
@@ -163,10 +179,10 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tug}{color7}{0.21\textwidth}{{10,100,1000,10000}}{{10,100,1000}}{{enlarge x limits=0.15,}};	
+\addDiagramExpOne{CPP}{tug}{color7}{0.21\textwidth}{{10,100}}{{10,100}}{{enlarge x limits=0.15,}};	
 \node [draw=none,inner sep=2, fill=lightgray, text width=0.12\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.965) {C++};
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.86) {\shortstack[l]{
-		\ref{CPUCPP} CPU  
+		\ref{CPUCPP} CPU 
 		\ref{IOCPP} IO 
 }};
 
@@ -179,7 +195,7 @@
 
 \addDiagramExpOne{Java}{color4}{color7}{0.26\textwidth}{}{}{{enlarge x limits=0.14,}};
 \node [draw=none,inner sep=2, fill=lightgray, text width=0.17\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.965) {Java};
-\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.5,0.86) {\shortstack[l]{
+\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.86) {\shortstack[l]{
 		\ref{CPUJava} CPU  
 		\ref{IOJava} IO 
 }};

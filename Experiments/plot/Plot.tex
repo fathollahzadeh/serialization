@@ -189,19 +189,19 @@ Computer Society, IEEE, IEEEtran, journal, \LaTeX, paper, template.
 
 
 
-% \tikzsetnextfilename{Exp2_read_memory}
-%     \begin{figure}[h]
-%         \centering
-%         \input{figures/Exp2_read_memory.tex}showvalu
-%         \caption{Experiment2: Memory Usage in Reading of 4M Tweet Objects}
-% \end{figure}
+\tikzsetnextfilename{Exp2_seq_read_single}
+    \begin{figure*}[h]
+        \centering
+        \input{figures/Exp2_seq_read_single}
+        \caption{Experiment1: Sequential Read times for 5M Tweet Objects (Single)}
+\end{figure*}
 
-%  \tikzsetnextfilename{Exp3_seq_read_cpu_io}
-%     \begin{figure*}[h]
-%         \centering
-%         \input{figures/Exp3_seq_read_cpu_io.tex}
-%         \caption{Experiment3: Total and IO Time of Sequential Read of 4 Million Tweet objects}
-% \end{figure*}
+\tikzsetnextfilename{Exp2_seq_read_parallel}
+    \begin{figure*}[h]
+        \centering
+        \input{figures/Exp2_seq_read_parallel}
+        \caption{Experiment1: Sequential Read times for 5M Tweet Objects (Parallel)}
+\end{figure*}
 
 
 \maketitle
