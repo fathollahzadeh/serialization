@@ -156,7 +156,7 @@
 		point meta=rawy,            
 		nodes near coords={%
     		\pgfmathprintnumberto[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}{\myval}%
-    		\pgfmathparse{\myval<0.01?:\myval}\pgfmathresult%
+    		\pgfmathparse{\myval<=0.1?:\myval}\pgfmathresult%
 		},
 		nodes near coords custom={1}, 
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },

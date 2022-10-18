@@ -115,3 +115,13 @@ FlatBuffersJava,Java,true,Total,Single,Sequential,5000000,175713
 FlatBuffersJava,Java,false,Total,Parallel,Sequential,5000000,37266
 JsonRust,Rust,false,CPU,Single,Sequential,5000000,103352
 JsonRust,Rust,true,CPU,Single,Sequential,5000000,101717
+JsonRust,Rust,false,CPU,Parallel,Sequential,5000000,20626
+JsonRust,Rust,false,Total,Single,Sequential,5000000,152299
+JsonRust,Rust,true,Total,Single,Sequential,5000000,175804
+JsonRust,Rust,false,Total,Parallel,Sequential,5000000,26277
+BincodeRust,Rust,false,CPU,Single,Sequential,5000000,79304
+BincodeRust,Rust,true,CPU,Single,Sequential,5000000,72916
+BincodeRust,Rust,false,CPU,Parallel,Sequential,5000000,20614
+BincodeRust,Rust,false,Total,Single,Sequential,5000000,108532
+BincodeRust,Rust,true,Total,Single,Sequential,5000000,113205
+BincodeRust,Rust,false,Total,Parallel,Sequential,5000000,23279
