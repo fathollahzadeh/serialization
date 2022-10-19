@@ -16,12 +16,11 @@
    };  
 
    \newcommand{\myaddplotnan}[9]{
-	   \addplot[xshift=#2,draw=#9,line width=0.15pt, fill=#3, discard if single={#1}{#4}{#8}, %postaction={pattern=#6,pattern color=#5},
-	   visualization depends on={value \thisrow{baseline} \as \xbaseline},
+	   \addplot[xshift=#2,draw=#9,line width=0.15pt, fill=#3, discard if single={#1}{#4}{#8}, visualization depends on={value \thisrow{baseline} \as \xbaseline},
 	   every node near coord/.append style={		  
 		   check for zeronan/.code={
 			   \pgfkeys{/pgf/fpu=true}
-			   \showvalue{\xbaseline}{}{inPlaceCPP}{}{}{}{}{}{FlatBufJava}{}
+			   \showvalue{\xbaseline}{inPlaceCPP}{FlatBufJava}{}{}{}{}{}{}{}
 			   \pgfkeys{/pgf/fpu=false}
 		   },
 		   check for zeronan,

@@ -1,0 +1,108 @@
+\begin{tikzpicture}[scale=1, node distance=6.0mm]
+    \newcommand{\myaddplot}[4]{
+        \addplot[color=#4,mark=#3,discard if single={#1}{#2}]
+        table[ y=time, col sep=comma, x=nrow] {results/Exp2_read.dat};
+        \label{#1}
+    };
+
+    \newcommand{\addDiagramExpThree}[2]{
+        \myaddplot{HandcodedCPP}{True}{triangle}{tug};
+        \myaddplot{inPlaceCPP}{True}{*}{tug};
+        \myaddplot{FlatBufCPP}{True}{o}{tug};
+        \myaddplot{ProtoBufCPP}{True}{triangle*}{tug};
+        \myaddplot{BoostCPP}{True}{square*}{tug};
+        \myaddplot{BsonCPP}{True}{square}{tug};
+
+        \myaddplot{MessagePackRust}{True}{triangle}{tugb};
+        \myaddplot{BincodeRust}{True}{*}{tugb};
+        \myaddplot{JsonRust}{True}{o}{tugb};
+        \myaddplot{FlexBufRust}{True}{triangle*}{tugb};
+        \myaddplot{BsonRust}{True}{square}{tugb};
+        
+        \myaddplot{Json+GzipJava}{True}{o}{color6};
+        \myaddplot{JsonJava}{True}{diamond*}{color6};
+        \myaddplot{BsonJava}{True}{diamond}{color6};
+        \myaddplot{DefaultJava}{True}{square}{color6};
+        \myaddplot{ProtoBufJava}{True}{square*}{color6};
+        \myaddplot{ByteBufferJava}{True}{triangle*}{color6};
+        \myaddplot{FlatBufJava}{True}{*}{color6};
+        \myaddplot{KryoJava}{True}{triangle}{color6};
+   };
+
+   
+   \pgfplotsset{
+	discard if single/.style n args={2}{
+		x filter/.code={
+			\edef\tempa{\thisrow{baseline}}
+			\edef\tempb{#1}
+			\ifx\tempa\tempb
+                \edef\tempc{\thisrow{taskset}}
+                \edef\tempd{True}
+                \ifx\tempc\tempd
+                    %
+                    \edef\tempe{\thisrow{execution}}
+                    \edef\tempf{Total}
+                    \ifx\tempe\tempf
+                        %
+                        \edef\tempg{\thisrow{platform}}
+                        \edef\temph{Single}
+                        \ifx\tempg\temph
+                            %
+                            \edef\tempi{\thisrow{seq_rand}}
+                            \edef\tempj{Sequential}
+                            \ifx\tempi\tempj                                
+                            \else
+                            \def\pgfmathresult{inf}
+                            \fi
+                            %				
+                        \else
+                        \def\pgfmathresult{inf}
+                        \fi
+                        %				
+                    \else
+                    \def\pgfmathresult{inf}
+                    \fi
+                    %				
+                \else
+                \def\pgfmathresult{inf}
+			\fi
+			\else
+			\def\pgfmathresult{inf}
+			\fi
+		}
+	}
+};
+
+    \begin{axis}
+        [
+        ymode=log,    
+        %ymin=0.1,
+        y tick label style={/pgf/number format/1000 sep={}},   
+        scaled y ticks=false,
+        scaled x ticks=false,
+        tick label style={/pgf/number format/fixed},
+        enlarge x limits=0.03,
+        ylabel={Execution Time[s]},
+        xlabel={$\#$ Read Objects},
+        xtick pos=left,
+        ytick pos=left,
+        ytick align=outside,
+        xtick align=outside,
+        yticklabel style = {font=\Large},
+        ylabel style = {font=\Large},
+        xticklabel style = {font=\Large},
+        xtick=data,
+        xtick={1000000,2000000,3000000,4000000,5000000},
+        xticklabels={1M,2M,3M,4M,5M},
+        xlabel style = {font=\Large, yshift=-7pt},
+        height=1.3\columnwidth,
+        width=0.45\textwidth,
+        grid=both,
+        grid style=dotted,
+        minor grid style={gray!50},
+        every axis plot/.append style={line width=1pt,mark options={scale=1.7,solid}},
+        ]
+        \addDiagramExpThree{}{};
+    \end{axis}
+
+\end{tikzpicture}
