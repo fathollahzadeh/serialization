@@ -54,13 +54,13 @@
 		%xlabel=#9,				
 		]
 		\resetstackedplots	
-		\myaddplot{True}{-4}{#2}{IO}{#2}{none}{I/O Time(taskset True)}{#1};
-  		\myaddplotnan{True}{-4}{#2!40}{CPU}{#2!40}{north east lines}{CPU Time(taskset True)}{#1}{#2};
-		\myaddplots{True}{-4}{white}{Total}{none}{#1};
+		\myaddplot{True}{-5}{#2}{IO}{#2}{none}{I/O Time(taskset True)}{#1};
+  		\myaddplotnan{True}{-5}{#2!40}{CPU}{#2!40}{north east lines}{CPU Time(taskset True)}{#1}{#2};
+		\myaddplots{True}{-5}{white}{Total}{none}{#1};
 	    \resetstackedplots	 
-		\myaddplot{False}{4}{#3}{IO}{#3}{none}{I/O Time(taskset False)}{#1};  
-	    \myaddplotnan{False}{4}{#3!40}{CPU}{#3!40}{north west lines}{CPU Time(taskset False)}{#1}{#3};
-		\myaddplots{False}{4}{white}{Total}{none}{#1};    
+		\myaddplot{False}{5}{#3}{IO}{#3}{none}{I/O Time(taskset False)}{#1};  
+	    \myaddplotnan{False}{5}{#3!40}{CPU}{#3!40}{north west lines}{CPU Time(taskset False)}{#1}{#3};
+		\myaddplots{False}{5}{white}{Total}{none}{#1};    
    };     
 
   \pgfplotsset{
@@ -160,9 +160,8 @@
 			ylabels at=edge left,
 			horizontal sep=0pt,
 			vertical sep=0pt,
-			/pgf/bar width=8pt
+			/pgf/bar width=10pt
 		},			
-		%every major tick/.append style={thick,major tick length=3.5pt, gray},
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
@@ -170,7 +169,6 @@
 		ymax=10000,
 		scaled y ticks=false,		  
 		enlarge y limits={0.2,upper},		
-		%enlarge x limits = {abs=1},
 		ylabel={Execution Time[s]},		   
 		ytick align=inside,
 		xtick align=outside,			
@@ -182,20 +180,11 @@
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.6\columnwidth,  
-		%bar width=10pt,
-		%width=0.33\textwidth, 				
-		% ymajorgrids=true,
-		% grid style=dotted,   
-		% %x axis line style={opacity=0},	
-		% %y axis line style={opacity=0},	
-		% minor grid style={gray!50},  
 		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostCPP, BsonCPP, MessagePackRust, BincodeRust, JsonRust, FlexBufRust, BsonRust, Json+GzipJava, JsonJava, BsonJava, DefaultJava, ProtoBufJava, ByteBufferJava, FlatBufJava, KryoJava},		   
 		xticklabels={ HandCoded,, FlatBuf,, Boost,, MessagePack,, Json,, Bson,, Json,, Default,, Byte Buffer,, Kryo},  
-		%-----------------		   
 		extra x ticks={inPlaceCPP,ProtoBufCPP,BsonCPP,BincodeRust,FlexBufRust,Json+GzipJava,BsonJava, ProtoBufJava,FlatBufJava},
 		extra x tick labels={inPlace,ProtoBuf,Bson,Bincode,FlexBuf,Json+Gzip,Bson,ProtoBuf,FlatBuf},
 		every extra x tick/.style={major tick length=15pt, xtick align=outside},
-		%----------------		   
 		point meta=rawy,            
 		nodes near coords={\pgfmathprintnumber[precision=0]{\pgfplotspointmeta}},
 		nodes near coords custom={1}, 
@@ -208,12 +197,12 @@
 		\ref{CPUTrue} CPU Time(taskset True) \\ \\
 		\ref{IOTrue} I/O Time(taskset True) 			
 }};
-\addDiagramExpOne{Rust}{tugb}{color7}{0.4\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
+\addDiagramExpOne{Rust}{tugb}{color7}{0.38\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.85) {\shortstack[l]{
 		\ref{CPUFalse} CPU Time(taskset False) \\ \\
 		\ref{IOFalse} I/O Time(taskset False) 			
 }};
-\addDiagramExpOne{Java}{tugb}{color7}{0.48\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
+\addDiagramExpOne{Java}{tugb}{color7}{0.50\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
 		
 \end{groupplot}
 
