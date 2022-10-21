@@ -24,8 +24,8 @@ struct ObjectNetworkIndex {
     int clientIndex;
 
     virtual ~ObjectNetworkIndex() {
-        if (myObject != nullptr)
-            delete myObject;
+//        if (myObject != nullptr)
+//            delete myObject;
     }
 };
 
