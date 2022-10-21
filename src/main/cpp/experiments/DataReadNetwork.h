@@ -24,8 +24,8 @@ struct ObjectNetworkIndex {
     int clientIndex;
 
     virtual ~ObjectNetworkIndex() {
-//        if (myObject != nullptr)
-//            delete myObject;
+        if (myObject != nullptr)
+            delete myObject;
     }
 };
 
@@ -276,17 +276,17 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
                     queue.push(objectNetworkIndex);
                 }
                 q->pop();
-                delete listReadFromFile;
+                //delete listReadFromFile;
             }
         }
 
         if (writer != nullptr) {
             if (onDisk) writer->writeObjectToFile(tmpObjectNetworkIndex->myObject);
             else writer->writeObjectToNetworkPage(tmpObjectNetworkIndex->myObject, client);
-            delete tmpObjectNetworkIndex;
+
         } else
             dataList.push_back(tmpObjectNetworkIndex->myObject);
-
+        delete tmpObjectNetworkIndex;
     }
     cout << "Network External Sort: Done!" << endl;
     if (writer != nullptr) {
