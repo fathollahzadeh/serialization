@@ -9,6 +9,9 @@ log_file_name=$5
 IP=$(hostname -I)
 IP="${IP%%*( )}"
 
+echo 3 > /proc/sys/vm/drop_caches && sync
+sleep 100
+
 for rp in {1..1}; do
     start=$(date +%s%N)
     SCRIPT="./cppbin/DataReadNetworkIO ${inDataPath} ${outDataPath} ${method} ${NETWORKCONFIG} ${plan}"
