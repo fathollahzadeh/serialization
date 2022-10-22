@@ -25,7 +25,7 @@ struct ObjectNetworkIndex {
 
     virtual ~ObjectNetworkIndex() {
         //if (myObject != nullptr)
-        //    delete myObject;
+        delete myObject;
     }
 };
 
@@ -263,7 +263,6 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         // if zero load the next page from file and add objects.
         if (pageObjectCounter[clientNumber] == 0) {
             vector<T *> *listReadFromFile = nullptr;
-            //BlockingReaderWriterQueue<vector<T *>> *q = queues[clientNumber];
             while (statuses[clientNumber] && (listReadFromFile=queues[clientNumber]->peek()) == nullptr);
             if (listReadFromFile == nullptr)
                 listReadFromFile = queues[clientNumber]->peek();
@@ -276,12 +275,11 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
                     queue.push(objectNetworkIndex);
                 }
                 queues[clientNumber]->pop();
-                //delete listReadFromFile;
             }
         }
 
         if (writer != nullptr) {
-            if (onDisk){ writer->writeObjectToFile(tmpObjectNetworkIndex->myObject); delete tmpObjectNetworkIndex->myObject;}
+            if (onDisk) writer->writeObjectToFile(tmpObjectNetworkIndex->myObject);
             else writer->writeObjectToNetworkPage(tmpObjectNetworkIndex->myObject, client);
 
         } else
