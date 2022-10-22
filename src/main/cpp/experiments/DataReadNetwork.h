@@ -272,7 +272,7 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
                 for (int i=0; i< pageObjectCounter[clientNumber]; i++) {
                     ObjectNetworkIndex<T> *objectNetworkIndex = new ObjectNetworkIndex<T>();
                     objectNetworkIndex->clientIndex = clientNumber;
-                    objectNetworkIndex->myObject = listReadFromFile->at(0);
+                    objectNetworkIndex->myObject = listReadFromFile->at(i);
                     queue.push(objectNetworkIndex);
                 }
                 queues[clientNumber]->pop();
