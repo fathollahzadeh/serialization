@@ -25,7 +25,7 @@ struct ObjectNetworkIndex {
 
     virtual ~ObjectNetworkIndex() {
         //if (myObject != nullptr)
-        delete myObject;
+        //delete myObject;
     }
 };
 
@@ -276,7 +276,7 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
                     queue.push(objectNetworkIndex);
                 }
                 queues[clientNumber]->pop();
-                //delete listReadFromFile;
+                delete listReadFromFile;
             }
         }
 
