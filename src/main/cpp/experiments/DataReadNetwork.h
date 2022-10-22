@@ -263,10 +263,10 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         // if zero load the next page from file and add objects.
         if (pageObjectCounter[clientNumber] == 0) {
             vector<T *> *listReadFromFile = nullptr;
-            BlockingReaderWriterQueue<vector<T *>> *q = queues[clientNumber];
-            while (statuses[clientNumber] && (listReadFromFile=q->peek()) == nullptr);
+            //BlockingReaderWriterQueue<vector<T *>> *q = queues[clientNumber];
+            while (statuses[clientNumber] && (listReadFromFile=queues[clientNumber]) == nullptr);
             if (listReadFromFile == nullptr)
-                listReadFromFile = q->peek();
+                listReadFromFile = queues[clientNumber];
             if (listReadFromFile != nullptr) {
                 pageObjectCounter[clientNumber] = listReadFromFile->size();
                 for (int i=0; i< pageObjectCounter[clientNumber]; i++) {
@@ -275,13 +275,13 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
                     objectNetworkIndex->myObject = listReadFromFile->at(0);
                     queue.push(objectNetworkIndex);
                 }
-                q->pop();
+                queues[clientNumber]->pop();
                 //delete listReadFromFile;
             }
         }
 
         if (writer != nullptr) {
-            if (onDisk) writer->writeObjectToFile(tmpObjectNetworkIndex->myObject);
+            if (onDisk){ writer->writeObjectToFile(tmpObjectNetworkIndex->myObject); delete tmpObjectNetworkIndex->myObject;}
             else writer->writeObjectToNetworkPage(tmpObjectNetworkIndex->myObject, client);
 
         } else
