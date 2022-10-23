@@ -11,7 +11,7 @@ declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuf
 declare -a cpp_methods=("Handcoded") #("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
-nrow=1000000
+nrow=10000
 
 # Load data into memory
 # 1.a Java enviroments
@@ -28,9 +28,9 @@ echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_
 # #     ./expnetwork/runExperiment4_WriteJava.sh $method $inDataPathMemoryJava ${outDataPath}.${method}Java $nrow 
 # # done
 
-# for method in "${cpp_methods[@]}"; do    
-#     ./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP ${outDataPath}.${method}CPP $nrow 
-# done
+for method in "${cpp_methods[@]}"; do    
+    ./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP ${outDataPath}.${method}CPP $nrow 
+done
 
 # for method in "${rust_methods[@]}"; do
 #     ./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
