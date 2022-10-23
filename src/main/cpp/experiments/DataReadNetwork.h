@@ -262,19 +262,18 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         // If needed load more objects from files.
         // if zero load the next page from file and add objects.
         if (pageObjectCounter[clientNumber] == 0) {
-            vector<T *> *listReadFromFile = nullptr;
-            while (statuses[clientNumber] && (listReadFromFile=queues[clientNumber]->peek()) == nullptr);
-            if (listReadFromFile == nullptr)
-                listReadFromFile = queues[clientNumber]->peek();
-            if (listReadFromFile != nullptr) {
+            vector<T *> listReadFromFile;
+            while (statuses[clientNumber] && listReadFromFile.empty()){
+                queues[clientNumber]->try_dequeue(listReadFromFile);
+            }
+            if (!listReadFromFile.empty()) {
                 pageObjectCounter[clientNumber] = listReadFromFile->size();
-                for (int i=0; i< pageObjectCounter[clientNumber]; i++) {
+                for (T *rd: listReadFromFile) {
                     ObjectNetworkIndex<T> *objectNetworkIndex = new ObjectNetworkIndex<T>();
                     objectNetworkIndex->clientIndex = clientNumber;
-                    objectNetworkIndex->myObject = listReadFromFile->at(i);
+                    objectNetworkIndex->myObject = rd;
                     queue.push(objectNetworkIndex);
                 }
-                queues[clientNumber]->pop();
             }
         }
 
