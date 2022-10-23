@@ -251,6 +251,7 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         }
     }
     cout << "Network External Sort: First page reading is done! " << endl;
+    int c = 0;
 
     while (!queue.empty()) {
         ObjectNetworkIndex<T> *tmpObjectNetworkIndex = queue.top();
@@ -279,14 +280,14 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         }
 
         if (writer != nullptr) {
-            if (onDisk) writer->writeObjectToFile(tmpObjectNetworkIndex->myObject);
+            if (onDisk) {writer->writeObjectToFile(tmpObjectNetworkIndex->myObject); c++;}
             else writer->writeObjectToNetworkPage(tmpObjectNetworkIndex->myObject, client);
 
         } else
             dataList.push_back(tmpObjectNetworkIndex->myObject);
         delete tmpObjectNetworkIndex;
     }
-    cout << "Network External Sort: Done!" << endl;
+    cout << "Network External Sort: Done! c="<< c << endl;
     if (writer != nullptr) {
         if (onDisk) writer->flush();
         else writer->flushToNetwork(client);
