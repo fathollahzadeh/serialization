@@ -40,3 +40,5 @@ nrow=$(sed -n '$=' $inDataPath)
 SCRIPT="./rustbin/DataPrepare ${inDataPath} ${outDataPathRust} ${nrow}"
 echo $SCRIPT
 time $SCRIPT
+
+rm -rf ${inDataPath}

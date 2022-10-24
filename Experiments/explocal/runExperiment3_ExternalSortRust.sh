@@ -10,7 +10,7 @@ log_file_name=$7
 
 # clean OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
-sleep 100
+sleep 30
 
 SCRIPT="./rustbin/ExternalSort  ${inDataPath} ${outDataPath} ${method} ${chunk_size}"
 if [ "$task_set" = true ] ; then

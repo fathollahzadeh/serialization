@@ -11,7 +11,7 @@ randomDataPath=$8
 
 # clean OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
-sleep 100
+sleep 30
 
 SCRIPT="./cppbin/DataReadIO${platform} ${inDataPath}.${method}CPP ${method} ${seq_rand} ${nrow} ${randomDataPath}"    
 if [ "$task_set" = true ] ; then

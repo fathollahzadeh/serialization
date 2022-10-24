@@ -8,7 +8,7 @@ log_file_name=$5
 
 # clean OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
-sleep 100
+sleep 30
 
 SCRIPT="./cppbin/DataLoadToMemory${platform} ${inDataPath} ${nrow}"
 if [ "$task_set" = true ] ; then

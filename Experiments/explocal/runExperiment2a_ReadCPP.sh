@@ -11,7 +11,7 @@ randomDataPath=$8
 
 # clean OS cache
 echo 3 > /proc/sys/vm/drop_caches && sync
-sleep 100
+sleep 30
 
 SCRIPT="./cppbin/DataRead${platform} ${inDataPath}.${method}CPP ${method} ${seq_rand} ${nrow} ${randomDataPath}"
 if [ "$task_set" = true ] ; then
@@ -20,6 +20,6 @@ fi
 echo $SCRIPT
 
 start=$(date +%s%N)
-time $SCRIPT
+$SCRIPT
 end=$(date +%s%N)
 echo ${method}"CPP,CPP,"${task_set}",Total,"${platform}","${seq_rand}","${nrow}","$((($end - $start) / 1000000)) >>results/$log_file_name.dat

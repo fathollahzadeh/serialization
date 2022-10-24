@@ -19,7 +19,7 @@ mkdir -p data/tmp
 
 SCRIPT="$jnCMD -DinDataPath=data/tweets_1m.txt\
                -DoutDataPath=data/tweets.txt\
-               -Dcount=5\
+               -Dcount=15\
                -cp ./SerializationJava.jar at.tugraz.experiments.DataDuplicate
                 "          
 echo $SCRIPT
