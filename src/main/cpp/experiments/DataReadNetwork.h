@@ -203,6 +203,7 @@ Client *DataReadNetwork<T>::initClient(string ip, int port) {
 template<class T>
 void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
     statuses[id] = true;
+    int c=0;
     while (true) {
         client->writeACK();
         int pageSize = client->readInt();
@@ -215,8 +216,10 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
         reader->deSerializeNetworkBuffer(buffer, pageSize, list);
         delete[] buffer;
         while (!queues[id]->try_enqueue(list));
+        c += list.size();
     }
     statuses[id] = false;
+    cout<<" ID=" << id<< "  c="<<c<<endl;
 }
 
 template<class T>
@@ -227,14 +230,17 @@ void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     sort(list, list + nrow, UniversalPointerComparatorAscending<T>());
     int chunks = (int) ceil((double) nrow / NETWORK_LOCAL_READ_LENGTH);
 
+    int c=0;
     for (int i = 0; i < chunks & i * NETWORK_LOCAL_READ_LENGTH < nrow; i++) {
         vector<T *> tmpList;
         for (int j = i * NETWORK_LOCAL_READ_LENGTH; j < min((i + 1) * NETWORK_LOCAL_READ_LENGTH, nrow); j++) {
             tmpList.push_back(list[j]);
         }
         while (!queues[id]->try_enqueue(tmpList));
+        c+= tmpList.size();
     }
     statuses[id] = false;
+    cout<<"Local ID=" << id<< "  c="<<c<<endl;
 }
 
 template<class T>
