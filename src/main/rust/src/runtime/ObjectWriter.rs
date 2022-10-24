@@ -1,3 +1,4 @@
+use std::borrow::Borrow;
 use bytes::{BytesMut, BufMut, Buf};
 use std::fs::{File, OpenOptions};
 use std::hash::Hasher;
@@ -81,6 +82,31 @@ impl ObjectWriter {
                 flexbuffers::to_vec(object).unwrap().as_slice();
             }
             _ => {}
+        }
+    }
+
+    pub fn serializeObject2(&mut self, objects: Vec<TweetStatus>) {
+        for k in 0..objects.len() as usize {
+            match self.method {
+                Const::JSON => {
+                    serde_json::to_string(&objects[k]).unwrap().as_bytes();
+                }
+                Const::BINCODE => {
+                    bincode::serialize(&objects[k]).unwrap().as_slice();
+                }
+                Const::MESSAGEPACK => {
+                    rmp_serde::to_vec(&objects[k]).unwrap().as_slice();
+                }
+                Const::BSON => {
+                    let mut buf = Vec::new();
+                    bson::to_bson(&objects[k]).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
+                    buf.as_slice();
+                }
+                Const::FLEXBUF => {
+                    flexbuffers::to_vec(&objects[k]).unwrap().as_slice();
+                }
+                _ => {}
+            }
         }
     }
 

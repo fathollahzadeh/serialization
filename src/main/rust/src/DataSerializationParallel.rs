@@ -39,9 +39,10 @@ fn main() -> io::Result<()> {
                 while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
-                    for k in 0..rdSize as usize {
-                        writer.serializeObject(tweets[k].borrow());
-                    }
+                    writer.serializeObject2(tweets);
+                    // for k in 0..rdSize as usize {
+                    //     writer.serializeObject(tweets[k].borrow());
+                    // }
                     j += rdSize;
                     size = min(endPos - j, BATCHSIZE);
                 }
