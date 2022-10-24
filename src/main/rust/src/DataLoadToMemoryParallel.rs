@@ -2,14 +2,11 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 
-extern crate num_cpus;
-extern crate crossbeam;
-
 use std::{io, env};
 use std::cmp::min;
 use crate::runtime::ObjectReader::ObjectReader;
 use crate::tweetStructs::TweetStatus::TweetStatus;
-use crate::util::Const::BATCHSIZE;
+use crate::util::Const::{BATCHSIZE, PAGESIZE};
 
 mod tweetStructs;
 mod runtime;
@@ -31,19 +28,19 @@ fn main() -> io::Result<()> {
             let inDataPath = inDataPath.clone();
             scope.spawn(move |_| {
                 let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
-                let mut total = 0;
                 let mut size = BATCHSIZE;
                 let mut j: u32 = beginPos;
+                let mut sum = 0;
                 while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
-                    total += rdSize;
                     j += rdSize;
                     size = min(endPos - j, BATCHSIZE);
                 }
                 reader.flush();
             });
         }
-    });
+    }).expect("Finished!");
+
     Ok(())
 }

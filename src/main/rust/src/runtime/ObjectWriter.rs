@@ -45,8 +45,8 @@ impl ObjectWriter {
 
     pub fn new2(method: &str, rlen: u32, pageSize: usize) -> Self {
         Self {
-            outStreamRegularFile: OpenOptions::new().write(true).create(true).open("/tmp/tmp.txt").unwrap(),
-            outIndexFile: OpenOptions::new().write(true).create(true).open("/tmp/tmp.txt.index").unwrap(),
+            outStreamRegularFile: OpenOptions::new().write(true).create(true).open("data/tmp.txt").unwrap(),
+            outIndexFile: OpenOptions::new().write(true).create(true).open("data/tmp.txt.index").unwrap(),
             currentPageNumber: 1,
             currentOffset: 0,
             pageBuffer: BytesMut::with_capacity(2 * pageSize),
@@ -61,49 +61,49 @@ impl ObjectWriter {
         }
     }
 
-    pub fn serializeObject(&mut self, object: TweetStatus) {
+    pub fn serializeObject(&mut self, object: &TweetStatus) {
         match self.method {
             Const::JSON => {
-                serde_json::to_string(&object).unwrap().as_bytes();
+                serde_json::to_string(object).unwrap().as_bytes();
             }
             Const::BINCODE => {
-                bincode::serialize(&object).unwrap().as_slice();
+                bincode::serialize(object).unwrap().as_slice();
             }
             Const::MESSAGEPACK => {
-                rmp_serde::to_vec(&object).unwrap().as_slice();
+                rmp_serde::to_vec(object).unwrap().as_slice();
             }
             Const::BSON => {
                 let mut buf = Vec::new();
-                bson::to_bson(&object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
+                bson::to_bson(object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
                 buf.as_slice();
             }
             Const::FLEXBUF => {
-                flexbuffers::to_vec(&object).unwrap().as_slice();
+                flexbuffers::to_vec(object).unwrap().as_slice();
             }
             _ => {}
         }
     }
 
-    pub fn writeObjectToFile(&mut self, object: TweetStatus) {
+    pub fn writeObjectToFile(&mut self, object: &TweetStatus) {
         let object_size: u32;
         let mut last_len: u32 = self.pageBuffer.len().try_into().unwrap();
         match self.method {
             Const::JSON => {
-                self.pageBuffer.put_slice(serde_json::to_string(&object).unwrap().as_bytes());
+                self.pageBuffer.put_slice(serde_json::to_string(object).unwrap().as_bytes());
             }
             Const::BINCODE => {
-                self.pageBuffer.put_slice(bincode::serialize(&object).unwrap().as_slice());
+                self.pageBuffer.put_slice(bincode::serialize(object).unwrap().as_slice());
             }
             Const::MESSAGEPACK => {
-                self.pageBuffer.put_slice(rmp_serde::to_vec(&object).unwrap().as_slice());
+                self.pageBuffer.put_slice(rmp_serde::to_vec(object).unwrap().as_slice());
             }
             Const::BSON => {
                 let mut buf = Vec::new();
-                bson::to_bson(&object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
+                bson::to_bson(object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
                 self.pageBuffer.put_slice(buf.as_slice());
             }
             Const::FLEXBUF => {
-                self.pageBuffer.put_slice(flexbuffers::to_vec(&object).unwrap().as_slice());
+                self.pageBuffer.put_slice(flexbuffers::to_vec(object).unwrap().as_slice());
             }
             _ => {}
         }
@@ -204,7 +204,7 @@ impl ObjectWriter {
         }
     }
 
-    pub fn writeNetworkPageToFile(&mut self, page: Vec<u8>){
+    pub fn writeNetworkPageToFile(&mut self, page: Vec<u8>) {
         //Write in file:
         self.outStreamRegularFile.write_all(&page).ok();
     }
@@ -302,7 +302,7 @@ impl ObjectWriter {
         }
     }
 
-    pub fn flushNetworkPageWriter(&mut self){
+    pub fn flushNetworkPageWriter(&mut self) {
         self.outIndexFile.flush().unwrap();
         self.outStreamRegularFile.flush().unwrap();
     }

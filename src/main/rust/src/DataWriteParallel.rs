@@ -3,6 +3,7 @@
 #![allow(unused_variables)]
 
 use std::{io, env};
+use std::borrow::{Borrow, BorrowMut};
 use std::cmp::min;
 use std::io::{BufRead, BufReader};
 use std::fs::metadata;
@@ -60,17 +61,17 @@ fn main() -> io::Result<()> {
                 while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
-                    for tweet in tweets {
-                        writer.writeObjectToFile(tweet);
+                    for k in 0..rdSize as usize {
+                        writer.writeObjectToFile(tweets[k].borrow());
                     }
                     j += rdSize;
-                    total +=rdSize;
+                    total += rdSize;
                     size = min(endPos - j, BATCHSIZE);
                 }
                 writer.flush();
                 reader.flush();
             });
         }
-    });
+    }).expect("TODO: panic message");
     Ok(())
 }

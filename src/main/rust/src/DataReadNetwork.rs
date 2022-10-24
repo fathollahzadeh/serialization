@@ -259,7 +259,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
             }
         }
         if is_write {
-            if onDisk { writer.writeObjectToFile(tmpObjectNetworkIndex.getObject()); } else {
+            if onDisk { writer.writeObjectToFile(&tmpObjectNetworkIndex.getObject()); } else {
                 writer.writeObjectToNetworkPage(tmpObjectNetworkIndex.getObject(), &mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
             }
         } else {

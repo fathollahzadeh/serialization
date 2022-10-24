@@ -3,6 +3,7 @@
 #![allow(unused_variables)]
 
 use std::{io, env};
+use std::borrow::Borrow;
 use crate::runtime::ObjectReader::ObjectReader;
 use crate::runtime::ObjectWriter::ObjectWriter;
 use crate::tweetStructs::TweetStatus::TweetStatus;
@@ -31,12 +32,12 @@ fn main() -> io::Result<()> {
     let mut i = 0;
     while i < fileCount && i * chunkSize < reader.getRlen() {
         let mut list: Vec<TweetStatus> = vec![];
-        reader.readObjects(i * chunkSize, chunkSize, &mut list);
+        let rdSize = reader.readObjects(i * chunkSize, chunkSize, &mut list);
         list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
 
         let mut writer = ObjectWriter::new1(format!("{}/{}Rust-sorted-{}.bin", outDataPath, method, i).as_str(), method, list.len() as u32);
-        for tweet in list {
-            writer.writeObjectToFile(tweet);
+        for k in 0..rdSize as usize {
+            writer.writeObjectToFile(list[k].borrow());
         }
         writer.flush();
         i += 1;
@@ -88,7 +89,7 @@ fn main() -> io::Result<()> {
                 queue.push(objectFileIndex, Reverse(order));
             }
         }
-        writer.writeObjectToFile(tmpObjectFileIndex.getObject());
+        writer.writeObjectToFile(&tmpObjectFileIndex.getObject());
     }
     writer.flush();
     reader.flush();

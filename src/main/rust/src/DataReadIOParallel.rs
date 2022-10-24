@@ -65,7 +65,7 @@ fn main() -> io::Result<()> {
                 });
                 i += 1;
             }
-        });
+        }).expect("Finished!");
     }
     Ok(())
 }

@@ -3,6 +3,7 @@
 #![allow(unused_variables)]
 
 use std::{io, env};
+use std::borrow::Borrow;
 use std::cmp::min;
 use crate::runtime::ObjectReader::ObjectReader;
 use crate::runtime::ObjectWriter::ObjectWriter;
@@ -26,8 +27,8 @@ fn main() -> io::Result<()> {
     while i < nrow {
         let mut tweets: Vec<TweetStatus> = vec![];
         let rdSize: u32 = reader.readObjects(i, size, &mut tweets);
-        for tweet in tweets {
-            writer.serializeObject(tweet);
+        for k in 0..rdSize as usize {
+            writer.serializeObject(tweets[k].borrow());
         }
         i += rdSize;
         size = min(nrow - i, BATCHSIZE);
