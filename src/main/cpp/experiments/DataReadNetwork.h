@@ -85,8 +85,11 @@ void DataReadNetwork<T>::runDataReader() {
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
 
-        for (int i = 0; i < listSize; ++i)
+        int c=0;
+        for (int i = 0; i < listSize; ++i) {
             writer.writeObjectToNetworkPage(list[i], client);
+            c++;
+        }
         if (reader->getMethod() != INPLACE) {
             for (int i = 0; i < listSize; ++i) {
                 delete list[i];
@@ -100,6 +103,8 @@ void DataReadNetwork<T>::runDataReader() {
         writer.flushToNetwork(client);
         delete[] list;
         delete client;
+
+        cout<<"C="<<c<< endl;
     } else if (machineInfo->getNodeType() == MIDDLE) {
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         numberOfClients = machineInfo->getLeaves().size() + 1;
@@ -237,7 +242,7 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
     priority_queue<ObjectNetworkIndex<T> *, vector<ObjectNetworkIndex<T> *>, UniversalPointerComparatorDescending<T> > queue;
     long *pageObjectCounter = new long[numberOfClients];
     vector<T *> dataList;
-
+    int c = 0;
     // reading objects from the first pages and adding them to a priority queue
     for (int i = 0; i < numberOfClients; i++) {
         vector<T *> listReadFromFile;
@@ -248,10 +253,11 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
             objectNetworkIndex->clientIndex = i;
             objectNetworkIndex->myObject = rd;
             queue.push(objectNetworkIndex);
+            c++;
         }
     }
     cout << "Network External Sort: First page reading is done! " << endl;
-    int c = 0;
+
 
     while (!queue.empty()) {
         ObjectNetworkIndex<T> *tmpObjectNetworkIndex = queue.top();
@@ -280,11 +286,12 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
         }
 
         if (writer != nullptr) {
-            if (onDisk) {writer->writeObjectToFile(tmpObjectNetworkIndex->myObject); c++;}
+            if (onDisk) {writer->writeObjectToFile(tmpObjectNetworkIndex->myObject); }
             else writer->writeObjectToNetworkPage(tmpObjectNetworkIndex->myObject, client);
 
         } else
             dataList.push_back(tmpObjectNetworkIndex->myObject);
+        c++;
         delete tmpObjectNetworkIndex;
     }
     cout << "Network External Sort: Done! c="<< c << endl;

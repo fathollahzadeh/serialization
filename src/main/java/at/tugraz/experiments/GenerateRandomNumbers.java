@@ -8,9 +8,9 @@ public class GenerateRandomNumbers {
 
     public static void main(String[] args) {
         int low= 0;
-        int high= 1000000;
+        int high= 15000000;
         String fname = "Experiments/data";
-        for (int i=1000000; i<=1000000;i+=1000000){
+        for (int i=1000000; i<=15000000;i+=2000000){
             int[] randomList = new int[i];
             for (int j=0; j<i; j++)
                 randomList[j] = getRandomNumber(low, high);
