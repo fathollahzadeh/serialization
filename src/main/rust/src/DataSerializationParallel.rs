@@ -36,7 +36,6 @@ fn main() -> io::Result<()> {
 
                 let mut size = BATCHSIZE;
                 let mut j: u32 = beginPos;
-                let mut sum = 0;
                 while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
