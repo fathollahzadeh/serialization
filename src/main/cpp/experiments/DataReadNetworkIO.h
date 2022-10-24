@@ -199,15 +199,14 @@ void DataReadNetworkIO<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, C
     do {
         flag = false;
         for (int i = 0; i < numberOfClients; i++) {
-            BlockingReaderWriterQueue<char *> *q = queues[i];
-            while (statuses[i] && q->peek() == nullptr);
-            if (q->peek() != nullptr) {
-                char *page = *q->peek();
+            while (statuses[i] && queues[i]->peek() == nullptr);
+            if (queues[i]->peek() != nullptr) {
+                char *page = *queues[i]->peek();
                 if (writer != nullptr) {
                     if (onDisk) writer->writeNetworkPageToFile(page);
                     else writer->writeToNetworkPage(page, client);
                 }
-                q->pop();
+                queues[i]->pop();
                 flag = true;
             }
         }

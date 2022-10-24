@@ -84,11 +84,8 @@ void DataReadNetwork<T>::runDataReader() {
         int listSize = reader->readObjects(0, machineInfo->getNrow(), list);
         sort(list, list + listSize, UniversalPointerComparatorAscending<T>());
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
-
-        int c=0;
         for (int i = 0; i < listSize; ++i) {
             writer.writeObjectToNetworkPage(list[i], client);
-            c++;
         }
         if (reader->getMethod() != INPLACE) {
             for (int i = 0; i < listSize; ++i) {
@@ -104,7 +101,6 @@ void DataReadNetwork<T>::runDataReader() {
         delete[] list;
         delete client;
 
-        cout<<"C="<<c<< endl;
     } else if (machineInfo->getNodeType() == MIDDLE) {
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         numberOfClients = machineInfo->getLeaves().size() + 1;
@@ -230,17 +226,14 @@ void DataReadNetwork<T>::LocalReadTask(ObjectReader *reader, int nrow, int id) {
     sort(list, list + nrow, UniversalPointerComparatorAscending<T>());
     int chunks = (int) ceil((double) nrow / NETWORK_LOCAL_READ_LENGTH);
 
-    int c=0;
     for (int i = 0; i < chunks & i * NETWORK_LOCAL_READ_LENGTH < nrow; i++) {
         vector<T *> tmpList;
         for (int j = i * NETWORK_LOCAL_READ_LENGTH; j < min((i + 1) * NETWORK_LOCAL_READ_LENGTH, nrow); j++) {
             tmpList.push_back(list[j]);
         }
         while (!queues[id]->try_enqueue(tmpList));
-        c+= tmpList.size();
     }
     statuses[id] = false;
-    cout<<"Local ID=" << id<< "  c="<<c<<endl;
 }
 
 template<class T>
@@ -248,7 +241,6 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
     priority_queue<ObjectNetworkIndex<T> *, vector<ObjectNetworkIndex<T> *>, UniversalPointerComparatorDescending<T> > queue;
     long *pageObjectCounter = new long[numberOfClients];
     vector<T *> dataList;
-    int c = 0;
     // reading objects from the first pages and adding them to a priority queue
     for (int i = 0; i < numberOfClients; i++) {
         vector<T *> listReadFromFile;
@@ -259,7 +251,6 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
             objectNetworkIndex->clientIndex = i;
             objectNetworkIndex->myObject = rd;
             queue.push(objectNetworkIndex);
-            c++;
         }
     }
     cout << "Network External Sort: First page reading is done! " << endl;
@@ -299,10 +290,9 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
 
         } else
             dataList.push_back(tmpObjectNetworkIndex->myObject);
-        c++;
         delete tmpObjectNetworkIndex;
     }
-    cout << "Network External Sort: Done! c="<< c << endl;
+    cout << "Network External Sort: Done!"<< endl;
     if (writer != nullptr) {
         if (onDisk) writer->flush();
         else writer->flushToNetwork(client);
