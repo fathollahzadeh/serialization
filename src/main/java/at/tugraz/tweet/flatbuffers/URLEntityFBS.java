@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class URLEntityFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static URLEntityFBS getRootAsURLEntityFBS(ByteBuffer _bb) { return getRootAsURLEntityFBS(_bb, new URLEntityFBS()); }
   public static URLEntityFBS getRootAsURLEntityFBS(ByteBuffer _bb, URLEntityFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -34,13 +34,13 @@ public final class URLEntityFBS extends Table {
 
   public static int createURLEntityFBS(FlatBufferBuilder builder,
       int indicesOffset,
-      int display_urlOffset,
-      int expanded_urlOffset,
+      int displayUrlOffset,
+      int expandedUrlOffset,
       int urlOffset) {
     builder.startTable(4);
     URLEntityFBS.addUrl(builder, urlOffset);
-    URLEntityFBS.addExpandedUrl(builder, expanded_urlOffset);
-    URLEntityFBS.addDisplayUrl(builder, display_urlOffset);
+    URLEntityFBS.addExpandedUrl(builder, expandedUrlOffset);
+    URLEntityFBS.addDisplayUrl(builder, displayUrlOffset);
     URLEntityFBS.addIndices(builder, indicesOffset);
     return URLEntityFBS.endURLEntityFBS(builder);
   }

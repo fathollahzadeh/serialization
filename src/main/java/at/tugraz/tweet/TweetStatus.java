@@ -20,6 +20,7 @@ import javax.json.JsonValue;
 import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 
+import at.tugraz.tweet.flatbuffers.URLEntityFBS;
 import com.google.flatbuffers.FlatBufferBuilder;
 import com.google.gson.Gson;
 import com.google.protobuf.CodedInputStream;
@@ -2014,24 +2015,22 @@ public class TweetStatus extends Base implements RootData {
 
     public int flatBuffersWriter(FlatBufferBuilder builder) {
 
+        int id_strBuilder = builder.createString(this.id_str);
         int created_atBuilder = builder.createString(this.created_at);
         int textBuilder = this.text != null ? builder.createString(this.text) : 0;
         int sourceBuilder = this.source != null ? builder.createString(this.source) : 0;
-        int in_reply_to_screen_nameBuilder = this.in_reply_to_screen_name != null ? builder
-                .createString(this.in_reply_to_screen_name) : 0;
+        int in_reply_to_screen_nameBuilder = this.in_reply_to_screen_name != null ? builder.createString(this.in_reply_to_screen_name) : 0;
         int filter_levelBuilder = this.filter_level != null ? builder.createString(this.filter_level) : 0;
         int langBuilder = this.lang != null ? builder.createString(this.lang) : 0;
         int withheld_scopeBuilder = this.withheld_scope != null ? builder.createString(this.withheld_scope) : 0;
         int quoted_statusBuilder = this.quoted_status != null ? this.quoted_status.flatBuffersWriter(builder) : 0;
-        int retweeted_statusBuilder = this.retweeted_status != null ? this.retweeted_status
-                .flatBuffersWriter(builder) : 0;
+        int retweeted_statusBuilder = this.retweeted_status != null ? this.retweeted_status.flatBuffersWriter(builder) : 0;
 
         int[] scopesList = new int[this.scopes.size()];
         int i = 0;
         for (String key : this.scopes.keySet()) {
             int keyBuilder = builder.createString(key);
             boolean valueBuilder = this.scopes.get(key);
-
             int mapitem = MapStringBool.createMapStringBool(builder, keyBuilder, valueBuilder);
             scopesList[i] = mapitem;
             i++;
@@ -2046,14 +2045,12 @@ public class TweetStatus extends Base implements RootData {
             i++;
         }
 
-        int withheld_in_countriesBuilder = TweetStatusFBS
-                .createWithheldInCountriesVector(builder, withheld_in_countriesList);
+        int withheld_in_countriesBuilder = TweetStatusFBS.createWithheldInCountriesVector(builder, withheld_in_countriesList);
         int userBuilder = this.user.flatBuffersWriter(builder);
         int coordinatesBuilder = this.coordinates != null ? this.coordinates.flatBuffersWriter(builder) : 0;
         int placeBuilder = this.place != null ? this.place.flatBuffersWriter(builder) : 0;
         int entitiesBuilder = this.entities != null ? this.entities.flatBuffersWriter(builder) : 0;
-        int extended_entitiesBuilder = this.extended_entities != null ? this.extended_entities
-                .flatBuffersWriter(builder) : 0;
+        int extended_tweetBuilder = this.extended_tweet != null ? this.extended_tweet.flatBuffersWriter(builder) : 0;
 
         int[] matching_rulesList = new int[this.matching_rules.size()];
         i = 0;
@@ -2063,9 +2060,16 @@ public class TweetStatus extends Base implements RootData {
         }
         int matching_rulesBuilder = TweetStatusFBS.createMatchingRulesVector(builder, matching_rulesList);
 
+        int[] displayTextRangeList = new int[this.display_text_range.size()];
+        for(int j = 0; j < this.display_text_range.size(); j++) {
+            displayTextRangeList[j] = this.display_text_range.get(j);
+        }
+        int displayTextBuilderBuilder = TweetStatusFBS.createDisplayTextRangeVector(builder, displayTextRangeList);
+
         TweetStatusFBS.startTweetStatusFBS(builder);
         TweetStatusFBS.addCreatedAt(builder, created_atBuilder);
         TweetStatusFBS.addId(builder, this.id);
+        TweetStatusFBS.addIdStr(builder, id_strBuilder);
         TweetStatusFBS.addText(builder, textBuilder);
         TweetStatusFBS.addSource(builder, sourceBuilder);
         TweetStatusFBS.addTruncated(builder, this.isTruncated());
@@ -2083,7 +2087,7 @@ public class TweetStatus extends Base implements RootData {
         TweetStatusFBS.addRetweetCount(builder, this.retweet_count);
         TweetStatusFBS.addFavoriteCount(builder, this.favorite_count);
         TweetStatusFBS.addEntities(builder, entitiesBuilder);
-        TweetStatusFBS.addExtendedEntities(builder, extended_entitiesBuilder);
+        TweetStatusFBS.addExtendedTweet(builder, extended_tweetBuilder);
         TweetStatusFBS.addFavorited(builder, this.favorited);
         TweetStatusFBS.addRetweeted(builder, this.retweeted);
         TweetStatusFBS.addPossiblySensitive(builder, this.isPossibly_sensitive());
@@ -2095,6 +2099,7 @@ public class TweetStatus extends Base implements RootData {
         TweetStatusFBS.addWithheldCopyright(builder, this.withheld_copyright);
         TweetStatusFBS.addWithheldInCountries(builder, withheld_in_countriesBuilder);
         TweetStatusFBS.addWithheldScope(builder, withheld_scopeBuilder);
+        TweetStatusFBS.addDisplayTextRange(builder, displayTextBuilderBuilder);
 
         int orc = TweetStatusFBS.endTweetStatusFBS(builder);
         return orc;

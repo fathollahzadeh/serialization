@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class VariantEntityFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static VariantEntityFBS getRootAsVariantEntityFBS(ByteBuffer _bb) { return getRootAsVariantEntityFBS(_bb, new VariantEntityFBS()); }
   public static VariantEntityFBS getRootAsVariantEntityFBS(ByteBuffer _bb, VariantEntityFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -26,12 +26,12 @@ public final class VariantEntityFBS extends Table {
 
   public static int createVariantEntityFBS(FlatBufferBuilder builder,
       long bitrate,
-      int content_typeOffset,
+      int contentTypeOffset,
       int urlOffset) {
     builder.startTable(3);
     VariantEntityFBS.addBitrate(builder, bitrate);
     VariantEntityFBS.addUrl(builder, urlOffset);
-    VariantEntityFBS.addContentType(builder, content_typeOffset);
+    VariantEntityFBS.addContentType(builder, contentTypeOffset);
     return VariantEntityFBS.endVariantEntityFBS(builder);
   }
 

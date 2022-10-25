@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class TweetStatusFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static TweetStatusFBS getRootAsTweetStatusFBS(ByteBuffer _bb) { return getRootAsTweetStatusFBS(_bb, new TweetStatusFBS()); }
   public static TweetStatusFBS getRootAsTweetStatusFBS(ByteBuffer _bb, TweetStatusFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -20,189 +20,207 @@ public final class TweetStatusFBS extends Table {
   public ByteBuffer createdAtInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 4, 1); }
   public long id() { int o = __offset(6); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
   public boolean mutateId(long id) { int o = __offset(6); if (o != 0) { bb.putLong(o + bb_pos, id); return true; } else { return false; } }
-  public String text() { int o = __offset(8); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer textAsByteBuffer() { return __vector_as_bytebuffer(8, 1); }
-  public ByteBuffer textInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 8, 1); }
-  public String source() { int o = __offset(10); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer sourceAsByteBuffer() { return __vector_as_bytebuffer(10, 1); }
-  public ByteBuffer sourceInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 10, 1); }
-  public boolean truncated() { int o = __offset(12); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
-  public boolean mutateTruncated(boolean truncated) { int o = __offset(12); if (o != 0) { bb.put(o + bb_pos, (byte)(truncated ? 1 : 0)); return true; } else { return false; } }
-  public long inReplyToStatusId() { int o = __offset(14); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
-  public boolean mutateInReplyToStatusId(long in_reply_to_status_id) { int o = __offset(14); if (o != 0) { bb.putLong(o + bb_pos, in_reply_to_status_id); return true; } else { return false; } }
-  public long inReplyToUserId() { int o = __offset(16); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
-  public boolean mutateInReplyToUserId(long in_reply_to_user_id) { int o = __offset(16); if (o != 0) { bb.putLong(o + bb_pos, in_reply_to_user_id); return true; } else { return false; } }
-  public String inReplyToScreenName() { int o = __offset(18); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer inReplyToScreenNameAsByteBuffer() { return __vector_as_bytebuffer(18, 1); }
-  public ByteBuffer inReplyToScreenNameInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 18, 1); }
-  public UserFBS user() { return user(new UserFBS()); }
-  public UserFBS user(UserFBS obj) { int o = __offset(20); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public CoordinatesFBS coordinates() { return coordinates(new CoordinatesFBS()); }
-  public CoordinatesFBS coordinates(CoordinatesFBS obj) { int o = __offset(22); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public PlaceFBS place() { return place(new PlaceFBS()); }
-  public PlaceFBS place(PlaceFBS obj) { int o = __offset(24); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public long quotedStatusId() { int o = __offset(26); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
-  public boolean mutateQuotedStatusId(long quoted_status_id) { int o = __offset(26); if (o != 0) { bb.putLong(o + bb_pos, quoted_status_id); return true; } else { return false; } }
-  public boolean isQuoteStatus() { int o = __offset(28); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
-  public boolean mutateIsQuoteStatus(boolean is_quote_status) { int o = __offset(28); if (o != 0) { bb.put(o + bb_pos, (byte)(is_quote_status ? 1 : 0)); return true; } else { return false; } }
-  public TweetStatusFBS quotedStatus() { return quotedStatus(new TweetStatusFBS()); }
-  public TweetStatusFBS quotedStatus(TweetStatusFBS obj) { int o = __offset(30); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public TweetStatusFBS retweetedStatus() { return retweetedStatus(new TweetStatusFBS()); }
-  public TweetStatusFBS retweetedStatus(TweetStatusFBS obj) { int o = __offset(32); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public int quoteCount() { int o = __offset(34); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
-  public boolean mutateQuoteCount(int quote_count) { int o = __offset(34); if (o != 0) { bb.putInt(o + bb_pos, quote_count); return true; } else { return false; } }
-  public int replyCount() { int o = __offset(36); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
-  public boolean mutateReplyCount(int reply_count) { int o = __offset(36); if (o != 0) { bb.putInt(o + bb_pos, reply_count); return true; } else { return false; } }
-  public int retweetCount() { int o = __offset(38); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
-  public boolean mutateRetweetCount(int retweet_count) { int o = __offset(38); if (o != 0) { bb.putInt(o + bb_pos, retweet_count); return true; } else { return false; } }
-  public int favoriteCount() { int o = __offset(40); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
-  public boolean mutateFavoriteCount(int favorite_count) { int o = __offset(40); if (o != 0) { bb.putInt(o + bb_pos, favorite_count); return true; } else { return false; } }
-  public EntitiesFBS entities() { return entities(new EntitiesFBS()); }
-  public EntitiesFBS entities(EntitiesFBS obj) { int o = __offset(42); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public ExtendedEntitiesFBS extendedEntities() { return extendedEntities(new ExtendedEntitiesFBS()); }
-  public ExtendedEntitiesFBS extendedEntities(ExtendedEntitiesFBS obj) { int o = __offset(44); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public boolean favorited() { int o = __offset(46); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
-  public boolean mutateFavorited(boolean favorited) { int o = __offset(46); if (o != 0) { bb.put(o + bb_pos, (byte)(favorited ? 1 : 0)); return true; } else { return false; } }
-  public boolean retweeted() { int o = __offset(48); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
-  public boolean mutateRetweeted(boolean retweeted) { int o = __offset(48); if (o != 0) { bb.put(o + bb_pos, (byte)(retweeted ? 1 : 0)); return true; } else { return false; } }
-  public boolean possiblySensitive() { int o = __offset(50); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
-  public boolean mutatePossiblySensitive(boolean possibly_sensitive) { int o = __offset(50); if (o != 0) { bb.put(o + bb_pos, (byte)(possibly_sensitive ? 1 : 0)); return true; } else { return false; } }
-  public String filterLevel() { int o = __offset(52); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer filterLevelAsByteBuffer() { return __vector_as_bytebuffer(52, 1); }
-  public ByteBuffer filterLevelInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 52, 1); }
-  public String lang() { int o = __offset(54); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer langAsByteBuffer() { return __vector_as_bytebuffer(54, 1); }
-  public ByteBuffer langInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 54, 1); }
-  public MatchingRulesEntityFBS matchingRules(int j) { return matchingRules(new MatchingRulesEntityFBS(), j); }
-  public MatchingRulesEntityFBS matchingRules(MatchingRulesEntityFBS obj, int j) { int o = __offset(56); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
-  public int matchingRulesLength() { int o = __offset(56); return o != 0 ? __vector_len(o) : 0; }
-  public MatchingRulesEntityFBS.Vector matchingRulesVector() { return matchingRulesVector(new MatchingRulesEntityFBS.Vector()); }
-  public MatchingRulesEntityFBS.Vector matchingRulesVector(MatchingRulesEntityFBS.Vector obj) { int o = __offset(56); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public long currentUserRetweet() { int o = __offset(58); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
-  public boolean mutateCurrentUserRetweet(long current_user_retweet) { int o = __offset(58); if (o != 0) { bb.putLong(o + bb_pos, current_user_retweet); return true; } else { return false; } }
-  public MapStringBool scopes(int j) { return scopes(new MapStringBool(), j); }
-  public MapStringBool scopes(MapStringBool obj, int j) { int o = __offset(60); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
-  public int scopesLength() { int o = __offset(60); return o != 0 ? __vector_len(o) : 0; }
-  public MapStringBool.Vector scopesVector() { return scopesVector(new MapStringBool.Vector()); }
-  public MapStringBool.Vector scopesVector(MapStringBool.Vector obj) { int o = __offset(60); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public boolean withheldCopyright() { int o = __offset(62); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
-  public boolean mutateWithheldCopyright(boolean withheld_copyright) { int o = __offset(62); if (o != 0) { bb.put(o + bb_pos, (byte)(withheld_copyright ? 1 : 0)); return true; } else { return false; } }
-  public String withheldInCountries(int j) { int o = __offset(64); return o != 0 ? __string(__vector(o) + j * 4) : null; }
-  public int withheldInCountriesLength() { int o = __offset(64); return o != 0 ? __vector_len(o) : 0; }
+  public String idStr() { int o = __offset(8); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer idStrAsByteBuffer() { return __vector_as_bytebuffer(8, 1); }
+  public ByteBuffer idStrInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 8, 1); }
+  public String text() { int o = __offset(10); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer textAsByteBuffer() { return __vector_as_bytebuffer(10, 1); }
+  public ByteBuffer textInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 10, 1); }
+  public String source() { int o = __offset(12); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer sourceAsByteBuffer() { return __vector_as_bytebuffer(12, 1); }
+  public ByteBuffer sourceInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 12, 1); }
+  public boolean truncated() { int o = __offset(14); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
+  public boolean mutateTruncated(boolean truncated) { int o = __offset(14); if (o != 0) { bb.put(o + bb_pos, (byte)(truncated ? 1 : 0)); return true; } else { return false; } }
+  public long inReplyToStatusId() { int o = __offset(16); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
+  public boolean mutateInReplyToStatusId(long in_reply_to_status_id) { int o = __offset(16); if (o != 0) { bb.putLong(o + bb_pos, in_reply_to_status_id); return true; } else { return false; } }
+  public long inReplyToUserId() { int o = __offset(18); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
+  public boolean mutateInReplyToUserId(long in_reply_to_user_id) { int o = __offset(18); if (o != 0) { bb.putLong(o + bb_pos, in_reply_to_user_id); return true; } else { return false; } }
+  public String inReplyToScreenName() { int o = __offset(20); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer inReplyToScreenNameAsByteBuffer() { return __vector_as_bytebuffer(20, 1); }
+  public ByteBuffer inReplyToScreenNameInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 20, 1); }
+  public at.tugraz.tweet.flatbuffers.UserFBS user() { return user(new at.tugraz.tweet.flatbuffers.UserFBS()); }
+  public at.tugraz.tweet.flatbuffers.UserFBS user(at.tugraz.tweet.flatbuffers.UserFBS obj) { int o = __offset(22); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.CoordinatesFBS coordinates() { return coordinates(new at.tugraz.tweet.flatbuffers.CoordinatesFBS()); }
+  public at.tugraz.tweet.flatbuffers.CoordinatesFBS coordinates(at.tugraz.tweet.flatbuffers.CoordinatesFBS obj) { int o = __offset(24); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.PlaceFBS place() { return place(new at.tugraz.tweet.flatbuffers.PlaceFBS()); }
+  public at.tugraz.tweet.flatbuffers.PlaceFBS place(at.tugraz.tweet.flatbuffers.PlaceFBS obj) { int o = __offset(26); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public long quotedStatusId() { int o = __offset(28); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
+  public boolean mutateQuotedStatusId(long quoted_status_id) { int o = __offset(28); if (o != 0) { bb.putLong(o + bb_pos, quoted_status_id); return true; } else { return false; } }
+  public boolean isQuoteStatus() { int o = __offset(30); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
+  public boolean mutateIsQuoteStatus(boolean is_quote_status) { int o = __offset(30); if (o != 0) { bb.put(o + bb_pos, (byte)(is_quote_status ? 1 : 0)); return true; } else { return false; } }
+  public at.tugraz.tweet.flatbuffers.TweetStatusFBS quotedStatus() { return quotedStatus(new at.tugraz.tweet.flatbuffers.TweetStatusFBS()); }
+  public at.tugraz.tweet.flatbuffers.TweetStatusFBS quotedStatus(at.tugraz.tweet.flatbuffers.TweetStatusFBS obj) { int o = __offset(32); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.TweetStatusFBS retweetedStatus() { return retweetedStatus(new at.tugraz.tweet.flatbuffers.TweetStatusFBS()); }
+  public at.tugraz.tweet.flatbuffers.TweetStatusFBS retweetedStatus(at.tugraz.tweet.flatbuffers.TweetStatusFBS obj) { int o = __offset(34); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public int quoteCount() { int o = __offset(36); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public boolean mutateQuoteCount(int quote_count) { int o = __offset(36); if (o != 0) { bb.putInt(o + bb_pos, quote_count); return true; } else { return false; } }
+  public int replyCount() { int o = __offset(38); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public boolean mutateReplyCount(int reply_count) { int o = __offset(38); if (o != 0) { bb.putInt(o + bb_pos, reply_count); return true; } else { return false; } }
+  public int retweetCount() { int o = __offset(40); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public boolean mutateRetweetCount(int retweet_count) { int o = __offset(40); if (o != 0) { bb.putInt(o + bb_pos, retweet_count); return true; } else { return false; } }
+  public int favoriteCount() { int o = __offset(42); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public boolean mutateFavoriteCount(int favorite_count) { int o = __offset(42); if (o != 0) { bb.putInt(o + bb_pos, favorite_count); return true; } else { return false; } }
+  public at.tugraz.tweet.flatbuffers.EntitiesFBS entities() { return entities(new at.tugraz.tweet.flatbuffers.EntitiesFBS()); }
+  public at.tugraz.tweet.flatbuffers.EntitiesFBS entities(at.tugraz.tweet.flatbuffers.EntitiesFBS obj) { int o = __offset(44); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.ExtendedTweetFBS extendedTweet() { return extendedTweet(new at.tugraz.tweet.flatbuffers.ExtendedTweetFBS()); }
+  public at.tugraz.tweet.flatbuffers.ExtendedTweetFBS extendedTweet(at.tugraz.tweet.flatbuffers.ExtendedTweetFBS obj) { int o = __offset(46); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public boolean favorited() { int o = __offset(48); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
+  public boolean mutateFavorited(boolean favorited) { int o = __offset(48); if (o != 0) { bb.put(o + bb_pos, (byte)(favorited ? 1 : 0)); return true; } else { return false; } }
+  public boolean retweeted() { int o = __offset(50); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
+  public boolean mutateRetweeted(boolean retweeted) { int o = __offset(50); if (o != 0) { bb.put(o + bb_pos, (byte)(retweeted ? 1 : 0)); return true; } else { return false; } }
+  public boolean possiblySensitive() { int o = __offset(52); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
+  public boolean mutatePossiblySensitive(boolean possibly_sensitive) { int o = __offset(52); if (o != 0) { bb.put(o + bb_pos, (byte)(possibly_sensitive ? 1 : 0)); return true; } else { return false; } }
+  public String filterLevel() { int o = __offset(54); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer filterLevelAsByteBuffer() { return __vector_as_bytebuffer(54, 1); }
+  public ByteBuffer filterLevelInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 54, 1); }
+  public String lang() { int o = __offset(56); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer langAsByteBuffer() { return __vector_as_bytebuffer(56, 1); }
+  public ByteBuffer langInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 56, 1); }
+  public at.tugraz.tweet.flatbuffers.MatchingRulesEntityFBS matchingRules(int j) { return matchingRules(new at.tugraz.tweet.flatbuffers.MatchingRulesEntityFBS(), j); }
+  public at.tugraz.tweet.flatbuffers.MatchingRulesEntityFBS matchingRules(at.tugraz.tweet.flatbuffers.MatchingRulesEntityFBS obj, int j) { int o = __offset(58); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public int matchingRulesLength() { int o = __offset(58); return o != 0 ? __vector_len(o) : 0; }
+  public at.tugraz.tweet.flatbuffers.MatchingRulesEntityFBS.Vector matchingRulesVector() { return matchingRulesVector(new at.tugraz.tweet.flatbuffers.MatchingRulesEntityFBS.Vector()); }
+  public at.tugraz.tweet.flatbuffers.MatchingRulesEntityFBS.Vector matchingRulesVector(at.tugraz.tweet.flatbuffers.MatchingRulesEntityFBS.Vector obj) { int o = __offset(58); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public long currentUserRetweet() { int o = __offset(60); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
+  public boolean mutateCurrentUserRetweet(long current_user_retweet) { int o = __offset(60); if (o != 0) { bb.putLong(o + bb_pos, current_user_retweet); return true; } else { return false; } }
+  public at.tugraz.tweet.flatbuffers.MapStringBool scopes(int j) { return scopes(new at.tugraz.tweet.flatbuffers.MapStringBool(), j); }
+  public at.tugraz.tweet.flatbuffers.MapStringBool scopes(at.tugraz.tweet.flatbuffers.MapStringBool obj, int j) { int o = __offset(62); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public int scopesLength() { int o = __offset(62); return o != 0 ? __vector_len(o) : 0; }
+  public at.tugraz.tweet.flatbuffers.MapStringBool.Vector scopesVector() { return scopesVector(new at.tugraz.tweet.flatbuffers.MapStringBool.Vector()); }
+  public at.tugraz.tweet.flatbuffers.MapStringBool.Vector scopesVector(at.tugraz.tweet.flatbuffers.MapStringBool.Vector obj) { int o = __offset(62); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public boolean withheldCopyright() { int o = __offset(64); return o != 0 ? 0!=bb.get(o + bb_pos) : false; }
+  public boolean mutateWithheldCopyright(boolean withheld_copyright) { int o = __offset(64); if (o != 0) { bb.put(o + bb_pos, (byte)(withheld_copyright ? 1 : 0)); return true; } else { return false; } }
+  public String withheldInCountries(int j) { int o = __offset(66); return o != 0 ? __string(__vector(o) + j * 4) : null; }
+  public int withheldInCountriesLength() { int o = __offset(66); return o != 0 ? __vector_len(o) : 0; }
   public StringVector withheldInCountriesVector() { return withheldInCountriesVector(new StringVector()); }
-  public StringVector withheldInCountriesVector(StringVector obj) { int o = __offset(64); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public String withheldScope() { int o = __offset(66); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer withheldScopeAsByteBuffer() { return __vector_as_bytebuffer(66, 1); }
-  public ByteBuffer withheldScopeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 66, 1); }
+  public StringVector withheldInCountriesVector(StringVector obj) { int o = __offset(66); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public String withheldScope() { int o = __offset(68); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer withheldScopeAsByteBuffer() { return __vector_as_bytebuffer(68, 1); }
+  public ByteBuffer withheldScopeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 68, 1); }
+  public int displayTextRange(int j) { int o = __offset(70); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
+  public int displayTextRangeLength() { int o = __offset(70); return o != 0 ? __vector_len(o) : 0; }
+  public IntVector displayTextRangeVector() { return displayTextRangeVector(new IntVector()); }
+  public IntVector displayTextRangeVector(IntVector obj) { int o = __offset(70); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
+  public ByteBuffer displayTextRangeAsByteBuffer() { return __vector_as_bytebuffer(70, 4); }
+  public ByteBuffer displayTextRangeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 70, 4); }
+  public boolean mutateDisplayTextRange(int j, int display_text_range) { int o = __offset(70); if (o != 0) { bb.putInt(__vector(o) + j * 4, display_text_range); return true; } else { return false; } }
 
   public static int createTweetStatusFBS(FlatBufferBuilder builder,
-      int created_atOffset,
+      int createdAtOffset,
       long id,
+      int idStrOffset,
       int textOffset,
       int sourceOffset,
       boolean truncated,
-      long in_reply_to_status_id,
-      long in_reply_to_user_id,
-      int in_reply_to_screen_nameOffset,
+      long inReplyToStatusId,
+      long inReplyToUserId,
+      int inReplyToScreenNameOffset,
       int userOffset,
       int coordinatesOffset,
       int placeOffset,
-      long quoted_status_id,
-      boolean is_quote_status,
-      int quoted_statusOffset,
-      int retweeted_statusOffset,
-      int quote_count,
-      int reply_count,
-      int retweet_count,
-      int favorite_count,
+      long quotedStatusId,
+      boolean isQuoteStatus,
+      int quotedStatusOffset,
+      int retweetedStatusOffset,
+      int quoteCount,
+      int replyCount,
+      int retweetCount,
+      int favoriteCount,
       int entitiesOffset,
-      int extended_entitiesOffset,
+      int extendedTweetOffset,
       boolean favorited,
       boolean retweeted,
-      boolean possibly_sensitive,
-      int filter_levelOffset,
+      boolean possiblySensitive,
+      int filterLevelOffset,
       int langOffset,
-      int matching_rulesOffset,
-      long current_user_retweet,
+      int matchingRulesOffset,
+      long currentUserRetweet,
       int scopesOffset,
-      boolean withheld_copyright,
-      int withheld_in_countriesOffset,
-      int withheld_scopeOffset) {
-    builder.startTable(32);
-    TweetStatusFBS.addCurrentUserRetweet(builder, current_user_retweet);
-    TweetStatusFBS.addQuotedStatusId(builder, quoted_status_id);
-    TweetStatusFBS.addInReplyToUserId(builder, in_reply_to_user_id);
-    TweetStatusFBS.addInReplyToStatusId(builder, in_reply_to_status_id);
+      boolean withheldCopyright,
+      int withheldInCountriesOffset,
+      int withheldScopeOffset,
+      int displayTextRangeOffset) {
+    builder.startTable(34);
+    TweetStatusFBS.addCurrentUserRetweet(builder, currentUserRetweet);
+    TweetStatusFBS.addQuotedStatusId(builder, quotedStatusId);
+    TweetStatusFBS.addInReplyToUserId(builder, inReplyToUserId);
+    TweetStatusFBS.addInReplyToStatusId(builder, inReplyToStatusId);
     TweetStatusFBS.addId(builder, id);
-    TweetStatusFBS.addWithheldScope(builder, withheld_scopeOffset);
-    TweetStatusFBS.addWithheldInCountries(builder, withheld_in_countriesOffset);
+    TweetStatusFBS.addDisplayTextRange(builder, displayTextRangeOffset);
+    TweetStatusFBS.addWithheldScope(builder, withheldScopeOffset);
+    TweetStatusFBS.addWithheldInCountries(builder, withheldInCountriesOffset);
     TweetStatusFBS.addScopes(builder, scopesOffset);
-    TweetStatusFBS.addMatchingRules(builder, matching_rulesOffset);
+    TweetStatusFBS.addMatchingRules(builder, matchingRulesOffset);
     TweetStatusFBS.addLang(builder, langOffset);
-    TweetStatusFBS.addFilterLevel(builder, filter_levelOffset);
-    TweetStatusFBS.addExtendedEntities(builder, extended_entitiesOffset);
+    TweetStatusFBS.addFilterLevel(builder, filterLevelOffset);
+    TweetStatusFBS.addExtendedTweet(builder, extendedTweetOffset);
     TweetStatusFBS.addEntities(builder, entitiesOffset);
-    TweetStatusFBS.addFavoriteCount(builder, favorite_count);
-    TweetStatusFBS.addRetweetCount(builder, retweet_count);
-    TweetStatusFBS.addReplyCount(builder, reply_count);
-    TweetStatusFBS.addQuoteCount(builder, quote_count);
-    TweetStatusFBS.addRetweetedStatus(builder, retweeted_statusOffset);
-    TweetStatusFBS.addQuotedStatus(builder, quoted_statusOffset);
+    TweetStatusFBS.addFavoriteCount(builder, favoriteCount);
+    TweetStatusFBS.addRetweetCount(builder, retweetCount);
+    TweetStatusFBS.addReplyCount(builder, replyCount);
+    TweetStatusFBS.addQuoteCount(builder, quoteCount);
+    TweetStatusFBS.addRetweetedStatus(builder, retweetedStatusOffset);
+    TweetStatusFBS.addQuotedStatus(builder, quotedStatusOffset);
     TweetStatusFBS.addPlace(builder, placeOffset);
     TweetStatusFBS.addCoordinates(builder, coordinatesOffset);
     TweetStatusFBS.addUser(builder, userOffset);
-    TweetStatusFBS.addInReplyToScreenName(builder, in_reply_to_screen_nameOffset);
+    TweetStatusFBS.addInReplyToScreenName(builder, inReplyToScreenNameOffset);
     TweetStatusFBS.addSource(builder, sourceOffset);
     TweetStatusFBS.addText(builder, textOffset);
-    TweetStatusFBS.addCreatedAt(builder, created_atOffset);
-    TweetStatusFBS.addWithheldCopyright(builder, withheld_copyright);
-    TweetStatusFBS.addPossiblySensitive(builder, possibly_sensitive);
+    TweetStatusFBS.addIdStr(builder, idStrOffset);
+    TweetStatusFBS.addCreatedAt(builder, createdAtOffset);
+    TweetStatusFBS.addWithheldCopyright(builder, withheldCopyright);
+    TweetStatusFBS.addPossiblySensitive(builder, possiblySensitive);
     TweetStatusFBS.addRetweeted(builder, retweeted);
     TweetStatusFBS.addFavorited(builder, favorited);
-    TweetStatusFBS.addIsQuoteStatus(builder, is_quote_status);
+    TweetStatusFBS.addIsQuoteStatus(builder, isQuoteStatus);
     TweetStatusFBS.addTruncated(builder, truncated);
     return TweetStatusFBS.endTweetStatusFBS(builder);
   }
 
-  public static void startTweetStatusFBS(FlatBufferBuilder builder) { builder.startTable(32); }
+  public static void startTweetStatusFBS(FlatBufferBuilder builder) { builder.startTable(34); }
   public static void addCreatedAt(FlatBufferBuilder builder, int createdAtOffset) { builder.addOffset(0, createdAtOffset, 0); }
   public static void addId(FlatBufferBuilder builder, long id) { builder.addLong(1, id, 0L); }
-  public static void addText(FlatBufferBuilder builder, int textOffset) { builder.addOffset(2, textOffset, 0); }
-  public static void addSource(FlatBufferBuilder builder, int sourceOffset) { builder.addOffset(3, sourceOffset, 0); }
-  public static void addTruncated(FlatBufferBuilder builder, boolean truncated) { builder.addBoolean(4, truncated, false); }
-  public static void addInReplyToStatusId(FlatBufferBuilder builder, long inReplyToStatusId) { builder.addLong(5, inReplyToStatusId, 0L); }
-  public static void addInReplyToUserId(FlatBufferBuilder builder, long inReplyToUserId) { builder.addLong(6, inReplyToUserId, 0L); }
-  public static void addInReplyToScreenName(FlatBufferBuilder builder, int inReplyToScreenNameOffset) { builder.addOffset(7, inReplyToScreenNameOffset, 0); }
-  public static void addUser(FlatBufferBuilder builder, int userOffset) { builder.addOffset(8, userOffset, 0); }
-  public static void addCoordinates(FlatBufferBuilder builder, int coordinatesOffset) { builder.addOffset(9, coordinatesOffset, 0); }
-  public static void addPlace(FlatBufferBuilder builder, int placeOffset) { builder.addOffset(10, placeOffset, 0); }
-  public static void addQuotedStatusId(FlatBufferBuilder builder, long quotedStatusId) { builder.addLong(11, quotedStatusId, 0L); }
-  public static void addIsQuoteStatus(FlatBufferBuilder builder, boolean isQuoteStatus) { builder.addBoolean(12, isQuoteStatus, false); }
-  public static void addQuotedStatus(FlatBufferBuilder builder, int quotedStatusOffset) { builder.addOffset(13, quotedStatusOffset, 0); }
-  public static void addRetweetedStatus(FlatBufferBuilder builder, int retweetedStatusOffset) { builder.addOffset(14, retweetedStatusOffset, 0); }
-  public static void addQuoteCount(FlatBufferBuilder builder, int quoteCount) { builder.addInt(15, quoteCount, 0); }
-  public static void addReplyCount(FlatBufferBuilder builder, int replyCount) { builder.addInt(16, replyCount, 0); }
-  public static void addRetweetCount(FlatBufferBuilder builder, int retweetCount) { builder.addInt(17, retweetCount, 0); }
-  public static void addFavoriteCount(FlatBufferBuilder builder, int favoriteCount) { builder.addInt(18, favoriteCount, 0); }
-  public static void addEntities(FlatBufferBuilder builder, int entitiesOffset) { builder.addOffset(19, entitiesOffset, 0); }
-  public static void addExtendedEntities(FlatBufferBuilder builder, int extendedEntitiesOffset) { builder.addOffset(20, extendedEntitiesOffset, 0); }
-  public static void addFavorited(FlatBufferBuilder builder, boolean favorited) { builder.addBoolean(21, favorited, false); }
-  public static void addRetweeted(FlatBufferBuilder builder, boolean retweeted) { builder.addBoolean(22, retweeted, false); }
-  public static void addPossiblySensitive(FlatBufferBuilder builder, boolean possiblySensitive) { builder.addBoolean(23, possiblySensitive, false); }
-  public static void addFilterLevel(FlatBufferBuilder builder, int filterLevelOffset) { builder.addOffset(24, filterLevelOffset, 0); }
-  public static void addLang(FlatBufferBuilder builder, int langOffset) { builder.addOffset(25, langOffset, 0); }
-  public static void addMatchingRules(FlatBufferBuilder builder, int matchingRulesOffset) { builder.addOffset(26, matchingRulesOffset, 0); }
+  public static void addIdStr(FlatBufferBuilder builder, int idStrOffset) { builder.addOffset(2, idStrOffset, 0); }
+  public static void addText(FlatBufferBuilder builder, int textOffset) { builder.addOffset(3, textOffset, 0); }
+  public static void addSource(FlatBufferBuilder builder, int sourceOffset) { builder.addOffset(4, sourceOffset, 0); }
+  public static void addTruncated(FlatBufferBuilder builder, boolean truncated) { builder.addBoolean(5, truncated, false); }
+  public static void addInReplyToStatusId(FlatBufferBuilder builder, long inReplyToStatusId) { builder.addLong(6, inReplyToStatusId, 0L); }
+  public static void addInReplyToUserId(FlatBufferBuilder builder, long inReplyToUserId) { builder.addLong(7, inReplyToUserId, 0L); }
+  public static void addInReplyToScreenName(FlatBufferBuilder builder, int inReplyToScreenNameOffset) { builder.addOffset(8, inReplyToScreenNameOffset, 0); }
+  public static void addUser(FlatBufferBuilder builder, int userOffset) { builder.addOffset(9, userOffset, 0); }
+  public static void addCoordinates(FlatBufferBuilder builder, int coordinatesOffset) { builder.addOffset(10, coordinatesOffset, 0); }
+  public static void addPlace(FlatBufferBuilder builder, int placeOffset) { builder.addOffset(11, placeOffset, 0); }
+  public static void addQuotedStatusId(FlatBufferBuilder builder, long quotedStatusId) { builder.addLong(12, quotedStatusId, 0L); }
+  public static void addIsQuoteStatus(FlatBufferBuilder builder, boolean isQuoteStatus) { builder.addBoolean(13, isQuoteStatus, false); }
+  public static void addQuotedStatus(FlatBufferBuilder builder, int quotedStatusOffset) { builder.addOffset(14, quotedStatusOffset, 0); }
+  public static void addRetweetedStatus(FlatBufferBuilder builder, int retweetedStatusOffset) { builder.addOffset(15, retweetedStatusOffset, 0); }
+  public static void addQuoteCount(FlatBufferBuilder builder, int quoteCount) { builder.addInt(16, quoteCount, 0); }
+  public static void addReplyCount(FlatBufferBuilder builder, int replyCount) { builder.addInt(17, replyCount, 0); }
+  public static void addRetweetCount(FlatBufferBuilder builder, int retweetCount) { builder.addInt(18, retweetCount, 0); }
+  public static void addFavoriteCount(FlatBufferBuilder builder, int favoriteCount) { builder.addInt(19, favoriteCount, 0); }
+  public static void addEntities(FlatBufferBuilder builder, int entitiesOffset) { builder.addOffset(20, entitiesOffset, 0); }
+  public static void addExtendedTweet(FlatBufferBuilder builder, int extendedTweetOffset) { builder.addOffset(21, extendedTweetOffset, 0); }
+  public static void addFavorited(FlatBufferBuilder builder, boolean favorited) { builder.addBoolean(22, favorited, false); }
+  public static void addRetweeted(FlatBufferBuilder builder, boolean retweeted) { builder.addBoolean(23, retweeted, false); }
+  public static void addPossiblySensitive(FlatBufferBuilder builder, boolean possiblySensitive) { builder.addBoolean(24, possiblySensitive, false); }
+  public static void addFilterLevel(FlatBufferBuilder builder, int filterLevelOffset) { builder.addOffset(25, filterLevelOffset, 0); }
+  public static void addLang(FlatBufferBuilder builder, int langOffset) { builder.addOffset(26, langOffset, 0); }
+  public static void addMatchingRules(FlatBufferBuilder builder, int matchingRulesOffset) { builder.addOffset(27, matchingRulesOffset, 0); }
   public static int createMatchingRulesVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
   public static void startMatchingRulesVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
-  public static void addCurrentUserRetweet(FlatBufferBuilder builder, long currentUserRetweet) { builder.addLong(27, currentUserRetweet, 0L); }
-  public static void addScopes(FlatBufferBuilder builder, int scopesOffset) { builder.addOffset(28, scopesOffset, 0); }
+  public static void addCurrentUserRetweet(FlatBufferBuilder builder, long currentUserRetweet) { builder.addLong(28, currentUserRetweet, 0L); }
+  public static void addScopes(FlatBufferBuilder builder, int scopesOffset) { builder.addOffset(29, scopesOffset, 0); }
   public static int createScopesVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
   public static void startScopesVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
-  public static void addWithheldCopyright(FlatBufferBuilder builder, boolean withheldCopyright) { builder.addBoolean(29, withheldCopyright, false); }
-  public static void addWithheldInCountries(FlatBufferBuilder builder, int withheldInCountriesOffset) { builder.addOffset(30, withheldInCountriesOffset, 0); }
+  public static void addWithheldCopyright(FlatBufferBuilder builder, boolean withheldCopyright) { builder.addBoolean(30, withheldCopyright, false); }
+  public static void addWithheldInCountries(FlatBufferBuilder builder, int withheldInCountriesOffset) { builder.addOffset(31, withheldInCountriesOffset, 0); }
   public static int createWithheldInCountriesVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addOffset(data[i]); return builder.endVector(); }
   public static void startWithheldInCountriesVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
-  public static void addWithheldScope(FlatBufferBuilder builder, int withheldScopeOffset) { builder.addOffset(31, withheldScopeOffset, 0); }
+  public static void addWithheldScope(FlatBufferBuilder builder, int withheldScopeOffset) { builder.addOffset(32, withheldScopeOffset, 0); }
+  public static void addDisplayTextRange(FlatBufferBuilder builder, int displayTextRangeOffset) { builder.addOffset(33, displayTextRangeOffset, 0); }
+  public static int createDisplayTextRangeVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
+  public static void startDisplayTextRangeVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
   public static int endTweetStatusFBS(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

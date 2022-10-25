@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class UserMentionEntityFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static UserMentionEntityFBS getRootAsUserMentionEntityFBS(ByteBuffer _bb) { return getRootAsUserMentionEntityFBS(_bb, new UserMentionEntityFBS()); }
   public static UserMentionEntityFBS getRootAsUserMentionEntityFBS(ByteBuffer _bb, UserMentionEntityFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -36,16 +36,16 @@ public final class UserMentionEntityFBS extends Table {
 
   public static int createUserMentionEntityFBS(FlatBufferBuilder builder,
       long id,
-      int id_strOffset,
+      int idStrOffset,
       int indicesOffset,
       int nameOffset,
-      int screen_nameOffset) {
+      int screenNameOffset) {
     builder.startTable(5);
     UserMentionEntityFBS.addId(builder, id);
-    UserMentionEntityFBS.addScreenName(builder, screen_nameOffset);
+    UserMentionEntityFBS.addScreenName(builder, screenNameOffset);
     UserMentionEntityFBS.addName(builder, nameOffset);
     UserMentionEntityFBS.addIndices(builder, indicesOffset);
-    UserMentionEntityFBS.addIdStr(builder, id_strOffset);
+    UserMentionEntityFBS.addIdStr(builder, idStrOffset);
     return UserMentionEntityFBS.endUserMentionEntityFBS(builder);
   }
 

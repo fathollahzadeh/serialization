@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class MediaEntityFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static MediaEntityFBS getRootAsMediaEntityFBS(ByteBuffer _bb) { return getRootAsMediaEntityFBS(_bb, new MediaEntityFBS()); }
   public static MediaEntityFBS getRootAsMediaEntityFBS(ByteBuffer _bb, MediaEntityFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -23,84 +23,90 @@ public final class MediaEntityFBS extends Table {
   public ByteBuffer expandedUrlInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 6, 1); }
   public long id() { int o = __offset(8); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
   public boolean mutateId(long id) { int o = __offset(8); if (o != 0) { bb.putLong(o + bb_pos, id); return true; } else { return false; } }
-  public int indices(int j) { int o = __offset(10); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
-  public int indicesLength() { int o = __offset(10); return o != 0 ? __vector_len(o) : 0; }
+  public String idStr() { int o = __offset(10); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer idStrAsByteBuffer() { return __vector_as_bytebuffer(10, 1); }
+  public ByteBuffer idStrInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 10, 1); }
+  public int indices(int j) { int o = __offset(12); return o != 0 ? bb.getInt(__vector(o) + j * 4) : 0; }
+  public int indicesLength() { int o = __offset(12); return o != 0 ? __vector_len(o) : 0; }
   public IntVector indicesVector() { return indicesVector(new IntVector()); }
-  public IntVector indicesVector(IntVector obj) { int o = __offset(10); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
-  public ByteBuffer indicesAsByteBuffer() { return __vector_as_bytebuffer(10, 4); }
-  public ByteBuffer indicesInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 10, 4); }
-  public boolean mutateIndices(int j, int indices) { int o = __offset(10); if (o != 0) { bb.putInt(__vector(o) + j * 4, indices); return true; } else { return false; } }
-  public String mediaUrl() { int o = __offset(12); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer mediaUrlAsByteBuffer() { return __vector_as_bytebuffer(12, 1); }
-  public ByteBuffer mediaUrlInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 12, 1); }
-  public String mediaUrlHttps() { int o = __offset(14); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer mediaUrlHttpsAsByteBuffer() { return __vector_as_bytebuffer(14, 1); }
-  public ByteBuffer mediaUrlHttpsInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 14, 1); }
-  public MediaSizesEntityFBS sizes() { return sizes(new MediaSizesEntityFBS()); }
-  public MediaSizesEntityFBS sizes(MediaSizesEntityFBS obj) { int o = __offset(16); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public String type() { int o = __offset(18); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer typeAsByteBuffer() { return __vector_as_bytebuffer(18, 1); }
-  public ByteBuffer typeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 18, 1); }
-  public long sourceStatusId() { int o = __offset(20); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
-  public boolean mutateSourceStatusId(long source_status_id) { int o = __offset(20); if (o != 0) { bb.putLong(o + bb_pos, source_status_id); return true; } else { return false; } }
-  public String sourceStatusIdStr() { int o = __offset(22); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer sourceStatusIdStrAsByteBuffer() { return __vector_as_bytebuffer(22, 1); }
-  public ByteBuffer sourceStatusIdStrInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 22, 1); }
-  public String url() { int o = __offset(24); return o != 0 ? __string(o + bb_pos) : null; }
-  public ByteBuffer urlAsByteBuffer() { return __vector_as_bytebuffer(24, 1); }
-  public ByteBuffer urlInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 24, 1); }
-  public VideoEntityFBS videoInfo() { return videoInfo(new VideoEntityFBS()); }
-  public VideoEntityFBS videoInfo(VideoEntityFBS obj) { int o = __offset(26); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public AdditionalMediaInfoEntityFBS additionalMediaInfo() { return additionalMediaInfo(new AdditionalMediaInfoEntityFBS()); }
-  public AdditionalMediaInfoEntityFBS additionalMediaInfo(AdditionalMediaInfoEntityFBS obj) { int o = __offset(28); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public IntVector indicesVector(IntVector obj) { int o = __offset(12); return o != 0 ? obj.__assign(__vector(o), bb) : null; }
+  public ByteBuffer indicesAsByteBuffer() { return __vector_as_bytebuffer(12, 4); }
+  public ByteBuffer indicesInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 12, 4); }
+  public boolean mutateIndices(int j, int indices) { int o = __offset(12); if (o != 0) { bb.putInt(__vector(o) + j * 4, indices); return true; } else { return false; } }
+  public String mediaUrl() { int o = __offset(14); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer mediaUrlAsByteBuffer() { return __vector_as_bytebuffer(14, 1); }
+  public ByteBuffer mediaUrlInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 14, 1); }
+  public String mediaUrlHttps() { int o = __offset(16); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer mediaUrlHttpsAsByteBuffer() { return __vector_as_bytebuffer(16, 1); }
+  public ByteBuffer mediaUrlHttpsInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 16, 1); }
+  public at.tugraz.tweet.flatbuffers.MediaSizesEntityFBS sizes() { return sizes(new at.tugraz.tweet.flatbuffers.MediaSizesEntityFBS()); }
+  public at.tugraz.tweet.flatbuffers.MediaSizesEntityFBS sizes(at.tugraz.tweet.flatbuffers.MediaSizesEntityFBS obj) { int o = __offset(18); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public String type() { int o = __offset(20); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer typeAsByteBuffer() { return __vector_as_bytebuffer(20, 1); }
+  public ByteBuffer typeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 20, 1); }
+  public long sourceStatusId() { int o = __offset(22); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
+  public boolean mutateSourceStatusId(long source_status_id) { int o = __offset(22); if (o != 0) { bb.putLong(o + bb_pos, source_status_id); return true; } else { return false; } }
+  public String sourceStatusIdStr() { int o = __offset(24); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer sourceStatusIdStrAsByteBuffer() { return __vector_as_bytebuffer(24, 1); }
+  public ByteBuffer sourceStatusIdStrInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 24, 1); }
+  public String url() { int o = __offset(26); return o != 0 ? __string(o + bb_pos) : null; }
+  public ByteBuffer urlAsByteBuffer() { return __vector_as_bytebuffer(26, 1); }
+  public ByteBuffer urlInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 26, 1); }
+  public at.tugraz.tweet.flatbuffers.VideoEntityFBS videoInfo() { return videoInfo(new at.tugraz.tweet.flatbuffers.VideoEntityFBS()); }
+  public at.tugraz.tweet.flatbuffers.VideoEntityFBS videoInfo(at.tugraz.tweet.flatbuffers.VideoEntityFBS obj) { int o = __offset(28); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.AdditionalMediaInfoEntityFBS additionalMediaInfo() { return additionalMediaInfo(new at.tugraz.tweet.flatbuffers.AdditionalMediaInfoEntityFBS()); }
+  public at.tugraz.tweet.flatbuffers.AdditionalMediaInfoEntityFBS additionalMediaInfo(at.tugraz.tweet.flatbuffers.AdditionalMediaInfoEntityFBS obj) { int o = __offset(30); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
 
   public static int createMediaEntityFBS(FlatBufferBuilder builder,
-      int display_urlOffset,
-      int expanded_urlOffset,
+      int displayUrlOffset,
+      int expandedUrlOffset,
       long id,
+      int idStrOffset,
       int indicesOffset,
-      int media_urlOffset,
-      int media_url_httpsOffset,
+      int mediaUrlOffset,
+      int mediaUrlHttpsOffset,
       int sizesOffset,
       int typeOffset,
-      long source_status_id,
-      int source_status_id_strOffset,
+      long sourceStatusId,
+      int sourceStatusIdStrOffset,
       int urlOffset,
-      int video_infoOffset,
-      int additional_media_infoOffset) {
-    builder.startTable(13);
-    MediaEntityFBS.addSourceStatusId(builder, source_status_id);
+      int videoInfoOffset,
+      int additionalMediaInfoOffset) {
+    builder.startTable(14);
+    MediaEntityFBS.addSourceStatusId(builder, sourceStatusId);
     MediaEntityFBS.addId(builder, id);
-    MediaEntityFBS.addAdditionalMediaInfo(builder, additional_media_infoOffset);
-    MediaEntityFBS.addVideoInfo(builder, video_infoOffset);
+    MediaEntityFBS.addAdditionalMediaInfo(builder, additionalMediaInfoOffset);
+    MediaEntityFBS.addVideoInfo(builder, videoInfoOffset);
     MediaEntityFBS.addUrl(builder, urlOffset);
-    MediaEntityFBS.addSourceStatusIdStr(builder, source_status_id_strOffset);
+    MediaEntityFBS.addSourceStatusIdStr(builder, sourceStatusIdStrOffset);
     MediaEntityFBS.addType(builder, typeOffset);
     MediaEntityFBS.addSizes(builder, sizesOffset);
-    MediaEntityFBS.addMediaUrlHttps(builder, media_url_httpsOffset);
-    MediaEntityFBS.addMediaUrl(builder, media_urlOffset);
+    MediaEntityFBS.addMediaUrlHttps(builder, mediaUrlHttpsOffset);
+    MediaEntityFBS.addMediaUrl(builder, mediaUrlOffset);
     MediaEntityFBS.addIndices(builder, indicesOffset);
-    MediaEntityFBS.addExpandedUrl(builder, expanded_urlOffset);
-    MediaEntityFBS.addDisplayUrl(builder, display_urlOffset);
+    MediaEntityFBS.addIdStr(builder, idStrOffset);
+    MediaEntityFBS.addExpandedUrl(builder, expandedUrlOffset);
+    MediaEntityFBS.addDisplayUrl(builder, displayUrlOffset);
     return MediaEntityFBS.endMediaEntityFBS(builder);
   }
 
-  public static void startMediaEntityFBS(FlatBufferBuilder builder) { builder.startTable(13); }
+  public static void startMediaEntityFBS(FlatBufferBuilder builder) { builder.startTable(14); }
   public static void addDisplayUrl(FlatBufferBuilder builder, int displayUrlOffset) { builder.addOffset(0, displayUrlOffset, 0); }
   public static void addExpandedUrl(FlatBufferBuilder builder, int expandedUrlOffset) { builder.addOffset(1, expandedUrlOffset, 0); }
   public static void addId(FlatBufferBuilder builder, long id) { builder.addLong(2, id, 0L); }
-  public static void addIndices(FlatBufferBuilder builder, int indicesOffset) { builder.addOffset(3, indicesOffset, 0); }
+  public static void addIdStr(FlatBufferBuilder builder, int idStrOffset) { builder.addOffset(3, idStrOffset, 0); }
+  public static void addIndices(FlatBufferBuilder builder, int indicesOffset) { builder.addOffset(4, indicesOffset, 0); }
   public static int createIndicesVector(FlatBufferBuilder builder, int[] data) { builder.startVector(4, data.length, 4); for (int i = data.length - 1; i >= 0; i--) builder.addInt(data[i]); return builder.endVector(); }
   public static void startIndicesVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
-  public static void addMediaUrl(FlatBufferBuilder builder, int mediaUrlOffset) { builder.addOffset(4, mediaUrlOffset, 0); }
-  public static void addMediaUrlHttps(FlatBufferBuilder builder, int mediaUrlHttpsOffset) { builder.addOffset(5, mediaUrlHttpsOffset, 0); }
-  public static void addSizes(FlatBufferBuilder builder, int sizesOffset) { builder.addOffset(6, sizesOffset, 0); }
-  public static void addType(FlatBufferBuilder builder, int typeOffset) { builder.addOffset(7, typeOffset, 0); }
-  public static void addSourceStatusId(FlatBufferBuilder builder, long sourceStatusId) { builder.addLong(8, sourceStatusId, 0L); }
-  public static void addSourceStatusIdStr(FlatBufferBuilder builder, int sourceStatusIdStrOffset) { builder.addOffset(9, sourceStatusIdStrOffset, 0); }
-  public static void addUrl(FlatBufferBuilder builder, int urlOffset) { builder.addOffset(10, urlOffset, 0); }
-  public static void addVideoInfo(FlatBufferBuilder builder, int videoInfoOffset) { builder.addOffset(11, videoInfoOffset, 0); }
-  public static void addAdditionalMediaInfo(FlatBufferBuilder builder, int additionalMediaInfoOffset) { builder.addOffset(12, additionalMediaInfoOffset, 0); }
+  public static void addMediaUrl(FlatBufferBuilder builder, int mediaUrlOffset) { builder.addOffset(5, mediaUrlOffset, 0); }
+  public static void addMediaUrlHttps(FlatBufferBuilder builder, int mediaUrlHttpsOffset) { builder.addOffset(6, mediaUrlHttpsOffset, 0); }
+  public static void addSizes(FlatBufferBuilder builder, int sizesOffset) { builder.addOffset(7, sizesOffset, 0); }
+  public static void addType(FlatBufferBuilder builder, int typeOffset) { builder.addOffset(8, typeOffset, 0); }
+  public static void addSourceStatusId(FlatBufferBuilder builder, long sourceStatusId) { builder.addLong(9, sourceStatusId, 0L); }
+  public static void addSourceStatusIdStr(FlatBufferBuilder builder, int sourceStatusIdStrOffset) { builder.addOffset(10, sourceStatusIdStrOffset, 0); }
+  public static void addUrl(FlatBufferBuilder builder, int urlOffset) { builder.addOffset(11, urlOffset, 0); }
+  public static void addVideoInfo(FlatBufferBuilder builder, int videoInfoOffset) { builder.addOffset(12, videoInfoOffset, 0); }
+  public static void addAdditionalMediaInfo(FlatBufferBuilder builder, int additionalMediaInfoOffset) { builder.addOffset(13, additionalMediaInfoOffset, 0); }
   public static int endMediaEntityFBS(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

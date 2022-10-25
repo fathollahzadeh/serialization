@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class BoundingBoxCoordinateFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static BoundingBoxCoordinateFBS getRootAsBoundingBoxCoordinateFBS(ByteBuffer _bb) { return getRootAsBoundingBoxCoordinateFBS(_bb, new BoundingBoxCoordinateFBS()); }
   public static BoundingBoxCoordinateFBS getRootAsBoundingBoxCoordinateFBS(ByteBuffer _bb, BoundingBoxCoordinateFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -18,11 +18,11 @@ public final class BoundingBoxCoordinateFBS extends Table {
   public String type() { int o = __offset(4); return o != 0 ? __string(o + bb_pos) : null; }
   public ByteBuffer typeAsByteBuffer() { return __vector_as_bytebuffer(4, 1); }
   public ByteBuffer typeInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 4, 1); }
-  public DoubleList1 coordinates(int j) { return coordinates(new DoubleList1(), j); }
-  public DoubleList1 coordinates(DoubleList1 obj, int j) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.DoubleList1 coordinates(int j) { return coordinates(new at.tugraz.tweet.flatbuffers.DoubleList1(), j); }
+  public at.tugraz.tweet.flatbuffers.DoubleList1 coordinates(at.tugraz.tweet.flatbuffers.DoubleList1 obj, int j) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int coordinatesLength() { int o = __offset(6); return o != 0 ? __vector_len(o) : 0; }
-  public DoubleList1.Vector coordinatesVector() { return coordinatesVector(new DoubleList1.Vector()); }
-  public DoubleList1.Vector coordinatesVector(DoubleList1.Vector obj) { int o = __offset(6); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public at.tugraz.tweet.flatbuffers.DoubleList1.Vector coordinatesVector() { return coordinatesVector(new at.tugraz.tweet.flatbuffers.DoubleList1.Vector()); }
+  public at.tugraz.tweet.flatbuffers.DoubleList1.Vector coordinatesVector(at.tugraz.tweet.flatbuffers.DoubleList1.Vector obj) { int o = __offset(6); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
 
   public static int createBoundingBoxCoordinateFBS(FlatBufferBuilder builder,
       int typeOffset,

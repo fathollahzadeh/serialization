@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class PlaceFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static PlaceFBS getRootAsPlaceFBS(ByteBuffer _bb) { return getRootAsPlaceFBS(_bb, new PlaceFBS()); }
   public static PlaceFBS getRootAsPlaceFBS(ByteBuffer _bb, PlaceFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -36,26 +36,26 @@ public final class PlaceFBS extends Table {
   public String fullName() { int o = __offset(16); return o != 0 ? __string(o + bb_pos) : null; }
   public ByteBuffer fullNameAsByteBuffer() { return __vector_as_bytebuffer(16, 1); }
   public ByteBuffer fullNameInByteBuffer(ByteBuffer _bb) { return __vector_in_bytebuffer(_bb, 16, 1); }
-  public BoundingBoxCoordinateFBS boundingBox() { return boundingBox(new BoundingBoxCoordinateFBS()); }
-  public BoundingBoxCoordinateFBS boundingBox(BoundingBoxCoordinateFBS obj) { int o = __offset(18); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.BoundingBoxCoordinateFBS boundingBox() { return boundingBox(new at.tugraz.tweet.flatbuffers.BoundingBoxCoordinateFBS()); }
+  public at.tugraz.tweet.flatbuffers.BoundingBoxCoordinateFBS boundingBox(at.tugraz.tweet.flatbuffers.BoundingBoxCoordinateFBS obj) { int o = __offset(18); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
 
   public static int createPlaceFBS(FlatBufferBuilder builder,
       int nameOffset,
-      int country_codeOffset,
+      int countryCodeOffset,
       int idOffset,
       int countryOffset,
-      int place_typeOffset,
+      int placeTypeOffset,
       int urlOffset,
-      int full_nameOffset,
-      int bounding_boxOffset) {
+      int fullNameOffset,
+      int boundingBoxOffset) {
     builder.startTable(8);
-    PlaceFBS.addBoundingBox(builder, bounding_boxOffset);
-    PlaceFBS.addFullName(builder, full_nameOffset);
+    PlaceFBS.addBoundingBox(builder, boundingBoxOffset);
+    PlaceFBS.addFullName(builder, fullNameOffset);
     PlaceFBS.addUrl(builder, urlOffset);
-    PlaceFBS.addPlaceType(builder, place_typeOffset);
+    PlaceFBS.addPlaceType(builder, placeTypeOffset);
     PlaceFBS.addCountry(builder, countryOffset);
     PlaceFBS.addId(builder, idOffset);
-    PlaceFBS.addCountryCode(builder, country_codeOffset);
+    PlaceFBS.addCountryCode(builder, countryCodeOffset);
     PlaceFBS.addName(builder, nameOffset);
     return PlaceFBS.endPlaceFBS(builder);
   }

@@ -4,25 +4,25 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class MediaSizesEntityFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static MediaSizesEntityFBS getRootAsMediaSizesEntityFBS(ByteBuffer _bb) { return getRootAsMediaSizesEntityFBS(_bb, new MediaSizesEntityFBS()); }
   public static MediaSizesEntityFBS getRootAsMediaSizesEntityFBS(ByteBuffer _bb, MediaSizesEntityFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
   public MediaSizesEntityFBS __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public SizeEntityFBS thumb() { return thumb(new SizeEntityFBS()); }
-  public SizeEntityFBS thumb(SizeEntityFBS obj) { int o = __offset(4); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public SizeEntityFBS large() { return large(new SizeEntityFBS()); }
-  public SizeEntityFBS large(SizeEntityFBS obj) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public SizeEntityFBS medium() { return medium(new SizeEntityFBS()); }
-  public SizeEntityFBS medium(SizeEntityFBS obj) { int o = __offset(8); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
-  public SizeEntityFBS small() { return small(new SizeEntityFBS()); }
-  public SizeEntityFBS small(SizeEntityFBS obj) { int o = __offset(10); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.SizeEntityFBS thumb() { return thumb(new at.tugraz.tweet.flatbuffers.SizeEntityFBS()); }
+  public at.tugraz.tweet.flatbuffers.SizeEntityFBS thumb(at.tugraz.tweet.flatbuffers.SizeEntityFBS obj) { int o = __offset(4); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.SizeEntityFBS large() { return large(new at.tugraz.tweet.flatbuffers.SizeEntityFBS()); }
+  public at.tugraz.tweet.flatbuffers.SizeEntityFBS large(at.tugraz.tweet.flatbuffers.SizeEntityFBS obj) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.SizeEntityFBS medium() { return medium(new at.tugraz.tweet.flatbuffers.SizeEntityFBS()); }
+  public at.tugraz.tweet.flatbuffers.SizeEntityFBS medium(at.tugraz.tweet.flatbuffers.SizeEntityFBS obj) { int o = __offset(8); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.SizeEntityFBS small() { return small(new at.tugraz.tweet.flatbuffers.SizeEntityFBS()); }
+  public at.tugraz.tweet.flatbuffers.SizeEntityFBS small(at.tugraz.tweet.flatbuffers.SizeEntityFBS obj) { int o = __offset(10); return o != 0 ? obj.__assign(__indirect(o + bb_pos), bb) : null; }
 
   public static int createMediaSizesEntityFBS(FlatBufferBuilder builder,
       int thumbOffset,

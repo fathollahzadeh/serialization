@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class VideoEntityFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static VideoEntityFBS getRootAsVideoEntityFBS(ByteBuffer _bb) { return getRootAsVideoEntityFBS(_bb, new VideoEntityFBS()); }
   public static VideoEntityFBS getRootAsVideoEntityFBS(ByteBuffer _bb, VideoEntityFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -24,20 +24,20 @@ public final class VideoEntityFBS extends Table {
   public boolean mutateAspectRatio(int j, int aspect_ratio) { int o = __offset(4); if (o != 0) { bb.putInt(__vector(o) + j * 4, aspect_ratio); return true; } else { return false; } }
   public int durationMillis() { int o = __offset(6); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
   public boolean mutateDurationMillis(int duration_millis) { int o = __offset(6); if (o != 0) { bb.putInt(o + bb_pos, duration_millis); return true; } else { return false; } }
-  public VariantEntityFBS variants(int j) { return variants(new VariantEntityFBS(), j); }
-  public VariantEntityFBS variants(VariantEntityFBS obj, int j) { int o = __offset(8); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.VariantEntityFBS variants(int j) { return variants(new at.tugraz.tweet.flatbuffers.VariantEntityFBS(), j); }
+  public at.tugraz.tweet.flatbuffers.VariantEntityFBS variants(at.tugraz.tweet.flatbuffers.VariantEntityFBS obj, int j) { int o = __offset(8); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int variantsLength() { int o = __offset(8); return o != 0 ? __vector_len(o) : 0; }
-  public VariantEntityFBS.Vector variantsVector() { return variantsVector(new VariantEntityFBS.Vector()); }
-  public VariantEntityFBS.Vector variantsVector(VariantEntityFBS.Vector obj) { int o = __offset(8); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public at.tugraz.tweet.flatbuffers.VariantEntityFBS.Vector variantsVector() { return variantsVector(new at.tugraz.tweet.flatbuffers.VariantEntityFBS.Vector()); }
+  public at.tugraz.tweet.flatbuffers.VariantEntityFBS.Vector variantsVector(at.tugraz.tweet.flatbuffers.VariantEntityFBS.Vector obj) { int o = __offset(8); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
 
   public static int createVideoEntityFBS(FlatBufferBuilder builder,
-      int aspect_ratioOffset,
-      int duration_millis,
+      int aspectRatioOffset,
+      int durationMillis,
       int variantsOffset) {
     builder.startTable(3);
     VideoEntityFBS.addVariants(builder, variantsOffset);
-    VideoEntityFBS.addDurationMillis(builder, duration_millis);
-    VideoEntityFBS.addAspectRatio(builder, aspect_ratioOffset);
+    VideoEntityFBS.addDurationMillis(builder, durationMillis);
+    VideoEntityFBS.addAspectRatio(builder, aspectRatioOffset);
     return VideoEntityFBS.endVideoEntityFBS(builder);
   }
 

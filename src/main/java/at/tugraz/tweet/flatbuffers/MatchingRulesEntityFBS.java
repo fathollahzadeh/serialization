@@ -4,12 +4,12 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class MatchingRulesEntityFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static MatchingRulesEntityFBS getRootAsMatchingRulesEntityFBS(ByteBuffer _bb) { return getRootAsMatchingRulesEntityFBS(_bb, new MatchingRulesEntityFBS()); }
   public static MatchingRulesEntityFBS getRootAsMatchingRulesEntityFBS(ByteBuffer _bb, MatchingRulesEntityFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
@@ -27,10 +27,10 @@ public final class MatchingRulesEntityFBS extends Table {
   public static int createMatchingRulesEntityFBS(FlatBufferBuilder builder,
       int tagOffset,
       long id,
-      int id_strOffset) {
+      int idStrOffset) {
     builder.startTable(3);
     MatchingRulesEntityFBS.addId(builder, id);
-    MatchingRulesEntityFBS.addIdStr(builder, id_strOffset);
+    MatchingRulesEntityFBS.addIdStr(builder, idStrOffset);
     MatchingRulesEntityFBS.addTag(builder, tagOffset);
     return MatchingRulesEntityFBS.endMatchingRulesEntityFBS(builder);
   }

@@ -1,7 +1,6 @@
 package at.tugraz.tweet;
 
-import at.tugraz.tweet.flatbuffers.EntitiesFBS;
-import at.tugraz.tweet.flatbuffers.ExtendedEntitiesFBS;
+import at.tugraz.tweet.flatbuffers.*;
 import at.tugraz.util.Base;
 import at.tugraz.util.RootData;
 import com.esotericsoftware.kryo.util.Null;
@@ -266,27 +265,37 @@ public class ExtendedTweet extends Base implements RootData {
 	}
 
 	public int flatBuffersWriter(FlatBufferBuilder builder) {
-		int[] mediaList = new int[this.media.size()];
-		int i = 0;
-		for(MediaEntity mediaEntity : this.media) {
-			mediaList[i] = mediaEntity.flatBuffersWriter(builder);
-			i++;
-		}
-		int mediaBuilder = EntitiesFBS.createMediaVector(builder, mediaList);
 
-		ExtendedEntitiesFBS.startExtendedEntitiesFBS(builder);
-		EntitiesFBS.addMedia(builder, mediaBuilder);
-		int orc = ExtendedEntitiesFBS.endExtendedEntitiesFBS(builder);
+		int fullTextBuilder = this.full_text != null ? builder.createString(this.full_text) : 0;
+		int[] displayTextRangeList = new int[this.display_text_range.size()];
+		for(int i = 0; i < this.display_text_range.size(); i++) {
+			displayTextRangeList[i] = this.display_text_range.get(i);
+		}
+		int displayTextRangeBuilder = ExtendedTweetFBS.createDisplayTextRangeVector(builder, displayTextRangeList);
+
+		int entitiesBuilder = this.entities != null ? this.entities.flatBuffersWriter(builder) : 0;
+		int extendedEntitiesBuilder = this.extendedEntities != null ? this.extendedEntities.flatBuffersWriter(builder) : 0;
+
+		ExtendedTweetFBS.startExtendedTweetFBS(builder);
+		ExtendedTweetFBS.addFullText(builder, fullTextBuilder);
+		ExtendedTweetFBS.addDisplayTextRange(builder, displayTextRangeBuilder);
+		ExtendedTweetFBS.addEntities(builder, entitiesBuilder);
+		ExtendedTweetFBS.addExtendedEntities(builder, extendedEntitiesBuilder);
+		int orc = ExtendedTweetFBS.endExtendedTweetFBS(builder);
 		return orc;
 	}
 
-	public ExtendedTweet flatBuffersDeserialization(ExtendedEntitiesFBS extendedEntitiesFBS) {
-
-		for(int i = 0; i < extendedEntitiesFBS.mediaLength(); i++) {
-			MediaEntity mediaEntity = new MediaEntity();
-			mediaEntity.flatBuffersDeserialization(extendedEntitiesFBS.media(i));
-			this.media.add(mediaEntity);
+	public ExtendedTweet flatBuffersDeserialization(ExtendedTweetFBS extendedTweetFBS) {
+		for(int i = 0; i < extendedTweetFBS.displayTextRangeLength(); i++) {
+			this.display_text_range.add(extendedTweetFBS.displayTextRange(i));
 		}
+		this.full_text = extendedTweetFBS.fullText();
+		this.entities = new Entities();
+		this.entities.flatBuffersDeserialization(extendedTweetFBS.entities());
+
+		this.extendedEntities = new ExtendedEntities();
+		this.extendedEntities.flatBuffersDeserialization(extendedTweetFBS.extendedEntities());
 		return this;
+
 	}
 }

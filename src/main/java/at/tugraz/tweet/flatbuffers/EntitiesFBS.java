@@ -4,59 +4,59 @@ package at.tugraz.tweet.flatbuffers;
 
 import java.nio.*;
 import java.lang.*;
-
+import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class EntitiesFBS extends Table {
-  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_0(); }
+  public static void ValidateVersion() { Constants.FLATBUFFERS_2_0_8(); }
   public static EntitiesFBS getRootAsEntitiesFBS(ByteBuffer _bb) { return getRootAsEntitiesFBS(_bb, new EntitiesFBS()); }
   public static EntitiesFBS getRootAsEntitiesFBS(ByteBuffer _bb, EntitiesFBS obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
   public EntitiesFBS __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public HashtagEntityFBS hashtags(int j) { return hashtags(new HashtagEntityFBS(), j); }
-  public HashtagEntityFBS hashtags(HashtagEntityFBS obj, int j) { int o = __offset(4); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.HashtagEntityFBS hashtags(int j) { return hashtags(new at.tugraz.tweet.flatbuffers.HashtagEntityFBS(), j); }
+  public at.tugraz.tweet.flatbuffers.HashtagEntityFBS hashtags(at.tugraz.tweet.flatbuffers.HashtagEntityFBS obj, int j) { int o = __offset(4); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int hashtagsLength() { int o = __offset(4); return o != 0 ? __vector_len(o) : 0; }
-  public HashtagEntityFBS.Vector hashtagsVector() { return hashtagsVector(new HashtagEntityFBS.Vector()); }
-  public HashtagEntityFBS.Vector hashtagsVector(HashtagEntityFBS.Vector obj) { int o = __offset(4); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public MediaEntityFBS media(int j) { return media(new MediaEntityFBS(), j); }
-  public MediaEntityFBS media(MediaEntityFBS obj, int j) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.HashtagEntityFBS.Vector hashtagsVector() { return hashtagsVector(new at.tugraz.tweet.flatbuffers.HashtagEntityFBS.Vector()); }
+  public at.tugraz.tweet.flatbuffers.HashtagEntityFBS.Vector hashtagsVector(at.tugraz.tweet.flatbuffers.HashtagEntityFBS.Vector obj) { int o = __offset(4); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public at.tugraz.tweet.flatbuffers.MediaEntityFBS media(int j) { return media(new at.tugraz.tweet.flatbuffers.MediaEntityFBS(), j); }
+  public at.tugraz.tweet.flatbuffers.MediaEntityFBS media(at.tugraz.tweet.flatbuffers.MediaEntityFBS obj, int j) { int o = __offset(6); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int mediaLength() { int o = __offset(6); return o != 0 ? __vector_len(o) : 0; }
-  public MediaEntityFBS.Vector mediaVector() { return mediaVector(new MediaEntityFBS.Vector()); }
-  public MediaEntityFBS.Vector mediaVector(MediaEntityFBS.Vector obj) { int o = __offset(6); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public URLEntityFBS urls(int j) { return urls(new URLEntityFBS(), j); }
-  public URLEntityFBS urls(URLEntityFBS obj, int j) { int o = __offset(8); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.MediaEntityFBS.Vector mediaVector() { return mediaVector(new at.tugraz.tweet.flatbuffers.MediaEntityFBS.Vector()); }
+  public at.tugraz.tweet.flatbuffers.MediaEntityFBS.Vector mediaVector(at.tugraz.tweet.flatbuffers.MediaEntityFBS.Vector obj) { int o = __offset(6); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public at.tugraz.tweet.flatbuffers.URLEntityFBS urls(int j) { return urls(new at.tugraz.tweet.flatbuffers.URLEntityFBS(), j); }
+  public at.tugraz.tweet.flatbuffers.URLEntityFBS urls(at.tugraz.tweet.flatbuffers.URLEntityFBS obj, int j) { int o = __offset(8); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int urlsLength() { int o = __offset(8); return o != 0 ? __vector_len(o) : 0; }
-  public URLEntityFBS.Vector urlsVector() { return urlsVector(new URLEntityFBS.Vector()); }
-  public URLEntityFBS.Vector urlsVector(URLEntityFBS.Vector obj) { int o = __offset(8); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public UserMentionEntityFBS userMentions(int j) { return userMentions(new UserMentionEntityFBS(), j); }
-  public UserMentionEntityFBS userMentions(UserMentionEntityFBS obj, int j) { int o = __offset(10); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.URLEntityFBS.Vector urlsVector() { return urlsVector(new at.tugraz.tweet.flatbuffers.URLEntityFBS.Vector()); }
+  public at.tugraz.tweet.flatbuffers.URLEntityFBS.Vector urlsVector(at.tugraz.tweet.flatbuffers.URLEntityFBS.Vector obj) { int o = __offset(8); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public at.tugraz.tweet.flatbuffers.UserMentionEntityFBS userMentions(int j) { return userMentions(new at.tugraz.tweet.flatbuffers.UserMentionEntityFBS(), j); }
+  public at.tugraz.tweet.flatbuffers.UserMentionEntityFBS userMentions(at.tugraz.tweet.flatbuffers.UserMentionEntityFBS obj, int j) { int o = __offset(10); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int userMentionsLength() { int o = __offset(10); return o != 0 ? __vector_len(o) : 0; }
-  public UserMentionEntityFBS.Vector userMentionsVector() { return userMentionsVector(new UserMentionEntityFBS.Vector()); }
-  public UserMentionEntityFBS.Vector userMentionsVector(UserMentionEntityFBS.Vector obj) { int o = __offset(10); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public SymbolEntityFBS symbols(int j) { return symbols(new SymbolEntityFBS(), j); }
-  public SymbolEntityFBS symbols(SymbolEntityFBS obj, int j) { int o = __offset(12); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.UserMentionEntityFBS.Vector userMentionsVector() { return userMentionsVector(new at.tugraz.tweet.flatbuffers.UserMentionEntityFBS.Vector()); }
+  public at.tugraz.tweet.flatbuffers.UserMentionEntityFBS.Vector userMentionsVector(at.tugraz.tweet.flatbuffers.UserMentionEntityFBS.Vector obj) { int o = __offset(10); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public at.tugraz.tweet.flatbuffers.SymbolEntityFBS symbols(int j) { return symbols(new at.tugraz.tweet.flatbuffers.SymbolEntityFBS(), j); }
+  public at.tugraz.tweet.flatbuffers.SymbolEntityFBS symbols(at.tugraz.tweet.flatbuffers.SymbolEntityFBS obj, int j) { int o = __offset(12); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int symbolsLength() { int o = __offset(12); return o != 0 ? __vector_len(o) : 0; }
-  public SymbolEntityFBS.Vector symbolsVector() { return symbolsVector(new SymbolEntityFBS.Vector()); }
-  public SymbolEntityFBS.Vector symbolsVector(SymbolEntityFBS.Vector obj) { int o = __offset(12); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
-  public PollEntityFBS polls(int j) { return polls(new PollEntityFBS(), j); }
-  public PollEntityFBS polls(PollEntityFBS obj, int j) { int o = __offset(14); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
+  public at.tugraz.tweet.flatbuffers.SymbolEntityFBS.Vector symbolsVector() { return symbolsVector(new at.tugraz.tweet.flatbuffers.SymbolEntityFBS.Vector()); }
+  public at.tugraz.tweet.flatbuffers.SymbolEntityFBS.Vector symbolsVector(at.tugraz.tweet.flatbuffers.SymbolEntityFBS.Vector obj) { int o = __offset(12); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public at.tugraz.tweet.flatbuffers.PollEntityFBS polls(int j) { return polls(new at.tugraz.tweet.flatbuffers.PollEntityFBS(), j); }
+  public at.tugraz.tweet.flatbuffers.PollEntityFBS polls(at.tugraz.tweet.flatbuffers.PollEntityFBS obj, int j) { int o = __offset(14); return o != 0 ? obj.__assign(__indirect(__vector(o) + j * 4), bb) : null; }
   public int pollsLength() { int o = __offset(14); return o != 0 ? __vector_len(o) : 0; }
-  public PollEntityFBS.Vector pollsVector() { return pollsVector(new PollEntityFBS.Vector()); }
-  public PollEntityFBS.Vector pollsVector(PollEntityFBS.Vector obj) { int o = __offset(14); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
+  public at.tugraz.tweet.flatbuffers.PollEntityFBS.Vector pollsVector() { return pollsVector(new at.tugraz.tweet.flatbuffers.PollEntityFBS.Vector()); }
+  public at.tugraz.tweet.flatbuffers.PollEntityFBS.Vector pollsVector(at.tugraz.tweet.flatbuffers.PollEntityFBS.Vector obj) { int o = __offset(14); return o != 0 ? obj.__assign(__vector(o), 4, bb) : null; }
 
   public static int createEntitiesFBS(FlatBufferBuilder builder,
       int hashtagsOffset,
       int mediaOffset,
       int urlsOffset,
-      int user_mentionsOffset,
+      int userMentionsOffset,
       int symbolsOffset,
       int pollsOffset) {
     builder.startTable(6);
     EntitiesFBS.addPolls(builder, pollsOffset);
     EntitiesFBS.addSymbols(builder, symbolsOffset);
-    EntitiesFBS.addUserMentions(builder, user_mentionsOffset);
+    EntitiesFBS.addUserMentions(builder, userMentionsOffset);
     EntitiesFBS.addUrls(builder, urlsOffset);
     EntitiesFBS.addMedia(builder, mediaOffset);
     EntitiesFBS.addHashtags(builder, hashtagsOffset);
