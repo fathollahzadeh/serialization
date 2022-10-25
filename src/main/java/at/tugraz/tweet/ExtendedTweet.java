@@ -3,7 +3,6 @@ package at.tugraz.tweet;
 import at.tugraz.tweet.flatbuffers.*;
 import at.tugraz.util.Base;
 import at.tugraz.util.RootData;
-import com.esotericsoftware.kryo.util.Null;
 import com.google.flatbuffers.FlatBufferBuilder;
 import org.bson.BsonBinary;
 import org.bson.BsonBinaryReader;
@@ -12,7 +11,6 @@ import org.bson.io.BasicOutputBuffer;
 
 import javax.json.*;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 

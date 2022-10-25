@@ -86,6 +86,7 @@ public class TweetStatus extends Base implements RootData {
         withheld_copyright = false;
         withheld_in_countries = new ArrayList<String>();
         matching_rules = new ArrayList<>();
+        display_text_range = new ArrayList<>();
         scopes = new HashMap<>();
         this.tweetStatusFBS = null;
         this.tweetStatusP = null;
@@ -397,6 +398,7 @@ public class TweetStatus extends Base implements RootData {
             jsonWriter.writeObject(this.jsonObjectBuilder());
             jsonWriter.close();
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error(e);
         }
 
@@ -481,8 +483,10 @@ public class TweetStatus extends Base implements RootData {
         }
 
         JsonArrayBuilder jsonDisplayTextRangeArray = Json.createArrayBuilder();
-        for (Integer integer : display_text_range) {
-            jsonDisplayTextRangeArray.add(integer);
+        if (this.display_text_range!=null) {
+            for (Integer integer : this.display_text_range) {
+                jsonDisplayTextRangeArray.add(integer);
+            }
         }
         tweetStatusObjectBuilder.add("display_text_range", jsonDisplayTextRangeArray);
 
