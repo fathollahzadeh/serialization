@@ -24,6 +24,38 @@ public class ExtendedTweet extends Base implements RootData {
 	private  Entities entities;
 	private ExtendedEntities extendedEntities;
 
+	public String getFull_text() {
+		return full_text;
+	}
+
+	public void setFull_text(String full_text) {
+		this.full_text = full_text;
+	}
+
+	public List<Integer> getDisplay_text_range() {
+		return display_text_range;
+	}
+
+	public void setDisplay_text_range(List<Integer> display_text_range) {
+		this.display_text_range = display_text_range;
+	}
+
+	public Entities getEntities() {
+		return entities;
+	}
+
+	public void setEntities(Entities entities) {
+		this.entities = entities;
+	}
+
+	public ExtendedEntities getExtendedEntities() {
+		return extendedEntities;
+	}
+
+	public void setExtendedEntities(ExtendedEntities extendedEntities) {
+		this.extendedEntities = extendedEntities;
+	}
+
 	public ExtendedTweet() {
 		this.display_text_range = new ArrayList<>();
 	}
