@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "SizeEntityFBS.h"
 
 namespace tweetstatusflatbuffers {
@@ -20,6 +27,10 @@ struct MediaSizesEntityFBST : public flatbuffers::NativeTable {
   std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST> large{};
   std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST> medium{};
   std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST> small{};
+  MediaSizesEntityFBST() = default;
+  MediaSizesEntityFBST(const MediaSizesEntityFBST &o);
+  MediaSizesEntityFBST(MediaSizesEntityFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  MediaSizesEntityFBST &operator=(MediaSizesEntityFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct MediaSizesEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -115,6 +126,21 @@ inline flatbuffers::Offset<MediaSizesEntityFBS> CreateMediaSizesEntityFBS(
 
 flatbuffers::Offset<MediaSizesEntityFBS> CreateMediaSizesEntityFBS(flatbuffers::FlatBufferBuilder &_fbb, const MediaSizesEntityFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+inline MediaSizesEntityFBST::MediaSizesEntityFBST(const MediaSizesEntityFBST &o)
+      : thumb((o.thumb) ? new tweetstatusflatbuffers::SizeEntityFBST(*o.thumb) : nullptr),
+        large((o.large) ? new tweetstatusflatbuffers::SizeEntityFBST(*o.large) : nullptr),
+        medium((o.medium) ? new tweetstatusflatbuffers::SizeEntityFBST(*o.medium) : nullptr),
+        small((o.small) ? new tweetstatusflatbuffers::SizeEntityFBST(*o.small) : nullptr) {
+}
+
+inline MediaSizesEntityFBST &MediaSizesEntityFBST::operator=(MediaSizesEntityFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(thumb, o.thumb);
+  std::swap(large, o.large);
+  std::swap(medium, o.medium);
+  std::swap(small, o.small);
+  return *this;
+}
+
 inline MediaSizesEntityFBST *MediaSizesEntityFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<MediaSizesEntityFBST>(new MediaSizesEntityFBST());
   UnPackTo(_o.get(), _resolver);
@@ -124,10 +150,10 @@ inline MediaSizesEntityFBST *MediaSizesEntityFBS::UnPack(const flatbuffers::reso
 inline void MediaSizesEntityFBS::UnPackTo(MediaSizesEntityFBST *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = thumb(); if (_e) _o->thumb = std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST>(_e->UnPack(_resolver)); }
-  { auto _e = large(); if (_e) _o->large = std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST>(_e->UnPack(_resolver)); }
-  { auto _e = medium(); if (_e) _o->medium = std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST>(_e->UnPack(_resolver)); }
-  { auto _e = small(); if (_e) _o->small = std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST>(_e->UnPack(_resolver)); }
+  { auto _e = thumb(); if (_e) { if(_o->thumb) { _e->UnPackTo(_o->thumb.get(), _resolver); } else { _o->thumb = std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST>(_e->UnPack(_resolver)); } } else if (_o->thumb) { _o->thumb.reset(); } }
+  { auto _e = large(); if (_e) { if(_o->large) { _e->UnPackTo(_o->large.get(), _resolver); } else { _o->large = std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST>(_e->UnPack(_resolver)); } } else if (_o->large) { _o->large.reset(); } }
+  { auto _e = medium(); if (_e) { if(_o->medium) { _e->UnPackTo(_o->medium.get(), _resolver); } else { _o->medium = std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST>(_e->UnPack(_resolver)); } } else if (_o->medium) { _o->medium.reset(); } }
+  { auto _e = small(); if (_e) { if(_o->small) { _e->UnPackTo(_o->small.get(), _resolver); } else { _o->small = std::unique_ptr<tweetstatusflatbuffers::SizeEntityFBST>(_e->UnPack(_resolver)); } } else if (_o->small) { _o->small.reset(); } }
 }
 
 inline flatbuffers::Offset<MediaSizesEntityFBS> MediaSizesEntityFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const MediaSizesEntityFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -160,6 +186,10 @@ inline const tweetstatusflatbuffers::MediaSizesEntityFBS *GetSizePrefixedMediaSi
 
 inline MediaSizesEntityFBS *GetMutableMediaSizesEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<MediaSizesEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::MediaSizesEntityFBS *GetMutableSizePrefixedMediaSizesEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::MediaSizesEntityFBS>(buf);
 }
 
 inline bool VerifyMediaSizesEntityFBSBuffer(

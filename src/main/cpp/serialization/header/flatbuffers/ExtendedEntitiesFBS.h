@@ -6,11 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
-#include "AdditionalMediaInfoEntityFBS.h"
-#include "VideoEntityFBS.h"
-#include "SizeEntityFBS.h"
-#include "MediaSizesEntityFBS.h"
-#include "VariantEntityFBS.h"
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "MediaEntityFBS.h"
 
 namespace tweetstatusflatbuffers {
@@ -22,6 +24,10 @@ struct ExtendedEntitiesFBST;
 struct ExtendedEntitiesFBST : public flatbuffers::NativeTable {
   typedef ExtendedEntitiesFBS TableType;
   std::vector<std::unique_ptr<tweetstatusflatbuffers::MediaEntityFBST>> media{};
+  ExtendedEntitiesFBST() = default;
+  ExtendedEntitiesFBST(const ExtendedEntitiesFBST &o);
+  ExtendedEntitiesFBST(ExtendedEntitiesFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  ExtendedEntitiesFBST &operator=(ExtendedEntitiesFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct ExtendedEntitiesFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -85,6 +91,16 @@ inline flatbuffers::Offset<ExtendedEntitiesFBS> CreateExtendedEntitiesFBSDirect(
 
 flatbuffers::Offset<ExtendedEntitiesFBS> CreateExtendedEntitiesFBS(flatbuffers::FlatBufferBuilder &_fbb, const ExtendedEntitiesFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+inline ExtendedEntitiesFBST::ExtendedEntitiesFBST(const ExtendedEntitiesFBST &o) {
+  media.reserve(o.media.size());
+  for (const auto &media_ : o.media) { media.emplace_back((media_) ? new tweetstatusflatbuffers::MediaEntityFBST(*media_) : nullptr); }
+}
+
+inline ExtendedEntitiesFBST &ExtendedEntitiesFBST::operator=(ExtendedEntitiesFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(media, o.media);
+  return *this;
+}
+
 inline ExtendedEntitiesFBST *ExtendedEntitiesFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<ExtendedEntitiesFBST>(new ExtendedEntitiesFBST());
   UnPackTo(_o.get(), _resolver);
@@ -94,7 +110,7 @@ inline ExtendedEntitiesFBST *ExtendedEntitiesFBS::UnPack(const flatbuffers::reso
 inline void ExtendedEntitiesFBS::UnPackTo(ExtendedEntitiesFBST *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = media(); if (_e) { _o->media.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->media[_i] = std::unique_ptr<tweetstatusflatbuffers::MediaEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = media(); if (_e) { _o->media.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->media[_i]) { _e->Get(_i)->UnPackTo(_o->media[_i].get(), _resolver); } else { _o->media[_i] = std::unique_ptr<tweetstatusflatbuffers::MediaEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->media.resize(0); } }
 }
 
 inline flatbuffers::Offset<ExtendedEntitiesFBS> ExtendedEntitiesFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const ExtendedEntitiesFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -121,6 +137,10 @@ inline const tweetstatusflatbuffers::ExtendedEntitiesFBS *GetSizePrefixedExtende
 
 inline ExtendedEntitiesFBS *GetMutableExtendedEntitiesFBS(void *buf) {
   return flatbuffers::GetMutableRoot<ExtendedEntitiesFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::ExtendedEntitiesFBS *GetMutableSizePrefixedExtendedEntitiesFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::ExtendedEntitiesFBS>(buf);
 }
 
 inline bool VerifyExtendedEntitiesFBSBuffer(

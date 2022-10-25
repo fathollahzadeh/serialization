@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "BoundingBoxCoordinateFBS.h"
 
 namespace tweetstatusflatbuffers {
@@ -24,6 +31,10 @@ struct PlaceFBST : public flatbuffers::NativeTable {
   std::string url{};
   std::string full_name{};
   std::unique_ptr<tweetstatusflatbuffers::BoundingBoxCoordinateFBST> bounding_box{};
+  PlaceFBST() = default;
+  PlaceFBST(const PlaceFBST &o);
+  PlaceFBST(PlaceFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  PlaceFBST &operator=(PlaceFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct PlaceFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -204,6 +215,29 @@ inline flatbuffers::Offset<PlaceFBS> CreatePlaceFBSDirect(
 
 flatbuffers::Offset<PlaceFBS> CreatePlaceFBS(flatbuffers::FlatBufferBuilder &_fbb, const PlaceFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+inline PlaceFBST::PlaceFBST(const PlaceFBST &o)
+      : name(o.name),
+        country_code(o.country_code),
+        id(o.id),
+        country(o.country),
+        place_type(o.place_type),
+        url(o.url),
+        full_name(o.full_name),
+        bounding_box((o.bounding_box) ? new tweetstatusflatbuffers::BoundingBoxCoordinateFBST(*o.bounding_box) : nullptr) {
+}
+
+inline PlaceFBST &PlaceFBST::operator=(PlaceFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(name, o.name);
+  std::swap(country_code, o.country_code);
+  std::swap(id, o.id);
+  std::swap(country, o.country);
+  std::swap(place_type, o.place_type);
+  std::swap(url, o.url);
+  std::swap(full_name, o.full_name);
+  std::swap(bounding_box, o.bounding_box);
+  return *this;
+}
+
 inline PlaceFBST *PlaceFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<PlaceFBST>(new PlaceFBST());
   UnPackTo(_o.get(), _resolver);
@@ -220,7 +254,7 @@ inline void PlaceFBS::UnPackTo(PlaceFBST *_o, const flatbuffers::resolver_functi
   { auto _e = place_type(); if (_e) _o->place_type = _e->str(); }
   { auto _e = url(); if (_e) _o->url = _e->str(); }
   { auto _e = full_name(); if (_e) _o->full_name = _e->str(); }
-  { auto _e = bounding_box(); if (_e) _o->bounding_box = std::unique_ptr<tweetstatusflatbuffers::BoundingBoxCoordinateFBST>(_e->UnPack(_resolver)); }
+  { auto _e = bounding_box(); if (_e) { if(_o->bounding_box) { _e->UnPackTo(_o->bounding_box.get(), _resolver); } else { _o->bounding_box = std::unique_ptr<tweetstatusflatbuffers::BoundingBoxCoordinateFBST>(_e->UnPack(_resolver)); } } else if (_o->bounding_box) { _o->bounding_box.reset(); } }
 }
 
 inline flatbuffers::Offset<PlaceFBS> PlaceFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const PlaceFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -261,6 +295,10 @@ inline const tweetstatusflatbuffers::PlaceFBS *GetSizePrefixedPlaceFBS(const voi
 
 inline PlaceFBS *GetMutablePlaceFBS(void *buf) {
   return flatbuffers::GetMutableRoot<PlaceFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::PlaceFBS *GetMutableSizePrefixedPlaceFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::PlaceFBS>(buf);
 }
 
 inline bool VerifyPlaceFBSBuffer(

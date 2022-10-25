@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct SizeEntityFBS;
@@ -30,13 +37,13 @@ struct SizeEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int32_t width() const {
     return GetField<int32_t>(VT_WIDTH, 0);
   }
-  bool mutate_width(int32_t _width) {
+  bool mutate_width(int32_t _width = 0) {
     return SetField<int32_t>(VT_WIDTH, _width, 0);
   }
   int32_t height() const {
     return GetField<int32_t>(VT_HEIGHT, 0);
   }
-  bool mutate_height(int32_t _height) {
+  bool mutate_height(int32_t _height = 0) {
     return SetField<int32_t>(VT_HEIGHT, _height, 0);
   }
   const flatbuffers::String *resize() const {
@@ -47,8 +54,8 @@ struct SizeEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<int32_t>(verifier, VT_WIDTH) &&
-           VerifyField<int32_t>(verifier, VT_HEIGHT) &&
+           VerifyField<int32_t>(verifier, VT_WIDTH, 4) &&
+           VerifyField<int32_t>(verifier, VT_HEIGHT, 4) &&
            VerifyOffset(verifier, VT_RESIZE) &&
            verifier.VerifyString(resize()) &&
            verifier.EndTable();
@@ -151,6 +158,10 @@ inline const tweetstatusflatbuffers::SizeEntityFBS *GetSizePrefixedSizeEntityFBS
 
 inline SizeEntityFBS *GetMutableSizeEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<SizeEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::SizeEntityFBS *GetMutableSizePrefixedSizeEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::SizeEntityFBS>(buf);
 }
 
 inline bool VerifySizeEntityFBSBuffer(

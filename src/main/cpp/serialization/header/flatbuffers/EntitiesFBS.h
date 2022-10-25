@@ -6,18 +6,19 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "HashtagEntityFBS.h"
-#include "PollEntityFBS.h"
-#include "OptionEntityFBS.h"
-#include "SymbolEntityFBS.h"
-#include "AdditionalMediaInfoEntityFBS.h"
-#include "VideoEntityFBS.h"
-#include "SizeEntityFBS.h"
-#include "URLEntityFBS.h"
-#include "MediaSizesEntityFBS.h"
-#include "UserMentionEntityFBS.h"
-#include "VariantEntityFBS.h"
 #include "MediaEntityFBS.h"
+#include "PollEntityFBS.h"
+#include "SymbolEntityFBS.h"
+#include "URLEntityFBS.h"
+#include "UserMentionEntityFBS.h"
 
 namespace tweetstatusflatbuffers {
 
@@ -33,6 +34,10 @@ struct EntitiesFBST : public flatbuffers::NativeTable {
   std::vector<std::unique_ptr<tweetstatusflatbuffers::UserMentionEntityFBST>> user_mentions{};
   std::vector<std::unique_ptr<tweetstatusflatbuffers::SymbolEntityFBST>> symbols{};
   std::vector<std::unique_ptr<tweetstatusflatbuffers::PollEntityFBST>> polls{};
+  EntitiesFBST() = default;
+  EntitiesFBST(const EntitiesFBST &o);
+  EntitiesFBST(EntitiesFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  EntitiesFBST &operator=(EntitiesFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct EntitiesFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -186,6 +191,31 @@ inline flatbuffers::Offset<EntitiesFBS> CreateEntitiesFBSDirect(
 
 flatbuffers::Offset<EntitiesFBS> CreateEntitiesFBS(flatbuffers::FlatBufferBuilder &_fbb, const EntitiesFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+inline EntitiesFBST::EntitiesFBST(const EntitiesFBST &o) {
+  hashtags.reserve(o.hashtags.size());
+  for (const auto &hashtags_ : o.hashtags) { hashtags.emplace_back((hashtags_) ? new tweetstatusflatbuffers::HashtagEntityFBST(*hashtags_) : nullptr); }
+  media.reserve(o.media.size());
+  for (const auto &media_ : o.media) { media.emplace_back((media_) ? new tweetstatusflatbuffers::MediaEntityFBST(*media_) : nullptr); }
+  urls.reserve(o.urls.size());
+  for (const auto &urls_ : o.urls) { urls.emplace_back((urls_) ? new tweetstatusflatbuffers::URLEntityFBST(*urls_) : nullptr); }
+  user_mentions.reserve(o.user_mentions.size());
+  for (const auto &user_mentions_ : o.user_mentions) { user_mentions.emplace_back((user_mentions_) ? new tweetstatusflatbuffers::UserMentionEntityFBST(*user_mentions_) : nullptr); }
+  symbols.reserve(o.symbols.size());
+  for (const auto &symbols_ : o.symbols) { symbols.emplace_back((symbols_) ? new tweetstatusflatbuffers::SymbolEntityFBST(*symbols_) : nullptr); }
+  polls.reserve(o.polls.size());
+  for (const auto &polls_ : o.polls) { polls.emplace_back((polls_) ? new tweetstatusflatbuffers::PollEntityFBST(*polls_) : nullptr); }
+}
+
+inline EntitiesFBST &EntitiesFBST::operator=(EntitiesFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(hashtags, o.hashtags);
+  std::swap(media, o.media);
+  std::swap(urls, o.urls);
+  std::swap(user_mentions, o.user_mentions);
+  std::swap(symbols, o.symbols);
+  std::swap(polls, o.polls);
+  return *this;
+}
+
 inline EntitiesFBST *EntitiesFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<EntitiesFBST>(new EntitiesFBST());
   UnPackTo(_o.get(), _resolver);
@@ -195,12 +225,12 @@ inline EntitiesFBST *EntitiesFBS::UnPack(const flatbuffers::resolver_function_t 
 inline void EntitiesFBS::UnPackTo(EntitiesFBST *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = hashtags(); if (_e) { _o->hashtags.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->hashtags[_i] = std::unique_ptr<tweetstatusflatbuffers::HashtagEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
-  { auto _e = media(); if (_e) { _o->media.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->media[_i] = std::unique_ptr<tweetstatusflatbuffers::MediaEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
-  { auto _e = urls(); if (_e) { _o->urls.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->urls[_i] = std::unique_ptr<tweetstatusflatbuffers::URLEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
-  { auto _e = user_mentions(); if (_e) { _o->user_mentions.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->user_mentions[_i] = std::unique_ptr<tweetstatusflatbuffers::UserMentionEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
-  { auto _e = symbols(); if (_e) { _o->symbols.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->symbols[_i] = std::unique_ptr<tweetstatusflatbuffers::SymbolEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
-  { auto _e = polls(); if (_e) { _o->polls.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->polls[_i] = std::unique_ptr<tweetstatusflatbuffers::PollEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = hashtags(); if (_e) { _o->hashtags.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->hashtags[_i]) { _e->Get(_i)->UnPackTo(_o->hashtags[_i].get(), _resolver); } else { _o->hashtags[_i] = std::unique_ptr<tweetstatusflatbuffers::HashtagEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->hashtags.resize(0); } }
+  { auto _e = media(); if (_e) { _o->media.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->media[_i]) { _e->Get(_i)->UnPackTo(_o->media[_i].get(), _resolver); } else { _o->media[_i] = std::unique_ptr<tweetstatusflatbuffers::MediaEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->media.resize(0); } }
+  { auto _e = urls(); if (_e) { _o->urls.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->urls[_i]) { _e->Get(_i)->UnPackTo(_o->urls[_i].get(), _resolver); } else { _o->urls[_i] = std::unique_ptr<tweetstatusflatbuffers::URLEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->urls.resize(0); } }
+  { auto _e = user_mentions(); if (_e) { _o->user_mentions.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->user_mentions[_i]) { _e->Get(_i)->UnPackTo(_o->user_mentions[_i].get(), _resolver); } else { _o->user_mentions[_i] = std::unique_ptr<tweetstatusflatbuffers::UserMentionEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->user_mentions.resize(0); } }
+  { auto _e = symbols(); if (_e) { _o->symbols.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->symbols[_i]) { _e->Get(_i)->UnPackTo(_o->symbols[_i].get(), _resolver); } else { _o->symbols[_i] = std::unique_ptr<tweetstatusflatbuffers::SymbolEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->symbols.resize(0); } }
+  { auto _e = polls(); if (_e) { _o->polls.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->polls[_i]) { _e->Get(_i)->UnPackTo(_o->polls[_i].get(), _resolver); } else { _o->polls[_i] = std::unique_ptr<tweetstatusflatbuffers::PollEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->polls.resize(0); } }
 }
 
 inline flatbuffers::Offset<EntitiesFBS> EntitiesFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const EntitiesFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -237,6 +267,10 @@ inline const tweetstatusflatbuffers::EntitiesFBS *GetSizePrefixedEntitiesFBS(con
 
 inline EntitiesFBS *GetMutableEntitiesFBS(void *buf) {
   return flatbuffers::GetMutableRoot<EntitiesFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::EntitiesFBS *GetMutableSizePrefixedEntitiesFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::EntitiesFBS>(buf);
 }
 
 inline bool VerifyEntitiesFBSBuffer(

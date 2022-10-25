@@ -61,7 +61,7 @@ void TweetStatusFlatBuffers::serializeFlatBuffersIO(char *buffer, int &objectSiz
 
 flatbuffers::Offset <TweetStatusFBS>
 TweetStatusFlatBuffers::addTOFlatBuffers(TweetStatus *tweetStatus, flatbuffers::FlatBufferBuilder &builder) {
-
+    auto id_strBuilder = builder.CreateString(tweetStatus->idStr);
 	auto created_atBuilder = builder.CreateString(tweetStatus->createdAt);
 	auto textBuilder = builder.CreateString(tweetStatus->text);
 	auto sourceBuilder = builder.CreateString(tweetStatus->source);
@@ -101,13 +101,15 @@ TweetStatusFlatBuffers::addTOFlatBuffers(TweetStatus *tweetStatus, flatbuffers::
 	auto placeBuilder = tweetStatus->place != nullptr ? this->getPlaceBuilder(tweetStatus->place, builder) : 0;
 	auto entitiesBuilder =
 			tweetStatus->entities != nullptr ? this->getEntitiesBuilder(tweetStatus->entities, builder) : 0;
-	auto extended_entitiesBuilder =
-			tweetStatus->extendedEntities != nullptr ? this->getExtendedEntitiesBuilder(tweetStatus->extendedEntities,
-																						builder) : 0;
+	auto extended_tweetBuilder =
+			tweetStatus->extendedTweet != nullptr ? this->getExtendedTweetBuilder(tweetStatus->extendedTweet, builder) : 0;
 
-	TweetStatusFBSBuilder tweetStatusFbsBuilder(builder);
+    auto displayTextRangeBuilder = builder.CreateVector(tweetStatus->displayTextRange);
+
+    TweetStatusFBSBuilder tweetStatusFbsBuilder(builder);
 	tweetStatusFbsBuilder.add_created_at(created_atBuilder);
 	tweetStatusFbsBuilder.add_id(tweetStatus->id);
+    tweetStatusFbsBuilder.add_id_str(id_strBuilder);
 	tweetStatusFbsBuilder.add_text(textBuilder);
 	tweetStatusFbsBuilder.add_source(sourceBuilder);
 	tweetStatusFbsBuilder.add_truncated(tweetStatus->isTruncated);
@@ -125,7 +127,7 @@ TweetStatusFlatBuffers::addTOFlatBuffers(TweetStatus *tweetStatus, flatbuffers::
 	tweetStatusFbsBuilder.add_retweet_count(tweetStatus->retweetCount);
 	tweetStatusFbsBuilder.add_favorite_count(tweetStatus->favoriteCount);
 	tweetStatusFbsBuilder.add_entities(entitiesBuilder);
-	tweetStatusFbsBuilder.add_extended_entities(extended_entitiesBuilder);
+	tweetStatusFbsBuilder.add_extended_tweet(extended_tweetBuilder);
 	tweetStatusFbsBuilder.add_favorited(tweetStatus->isFavorited);
 	tweetStatusFbsBuilder.add_retweeted(tweetStatus->isRetweeted);
 	tweetStatusFbsBuilder.add_possibly_sensitive(tweetStatus->isPossiblySensitive);
@@ -137,6 +139,7 @@ TweetStatusFlatBuffers::addTOFlatBuffers(TweetStatus *tweetStatus, flatbuffers::
 	tweetStatusFbsBuilder.add_withheld_copyright(tweetStatus->withheldCopyright);
 	tweetStatusFbsBuilder.add_withheld_in_countries(withheld_in_countriesBuilder);
 	tweetStatusFbsBuilder.add_withheld_scope(withheld_scopeBuilder);
+    tweetStatusFbsBuilder.add_display_text_range(displayTextRangeBuilder);
 
 	auto orc = tweetStatusFbsBuilder.Finish();
 	return orc;
@@ -145,6 +148,7 @@ TweetStatusFlatBuffers::addTOFlatBuffers(TweetStatus *tweetStatus, flatbuffers::
 flatbuffers::Offset <UserFBS>
 TweetStatusFlatBuffers::getUserBuilder(User *user, flatbuffers::FlatBufferBuilder &builder) {
 
+    auto id_strBuilder = builder.CreateString(user->idStr);
 	auto nameBuilder = builder.CreateString(user->name);
 	auto screen_nameBuilder = builder.CreateString(user->screenName);
 	auto locationBuilder = builder.CreateString(user->location);
@@ -176,12 +180,13 @@ TweetStatusFlatBuffers::getUserBuilder(User *user, flatbuffers::FlatBufferBuilde
 
 	UserFBSBuilder userFbsBuilder(builder);
 	userFbsBuilder.add_id(user->id);
+    userFbsBuilder.add_id_str(id_strBuilder);
 	userFbsBuilder.add_name(nameBuilder);
 	userFbsBuilder.add_screen_name(screen_nameBuilder);
 	userFbsBuilder.add_location(locationBuilder);
 	userFbsBuilder.add_url(urlBuilder);
 	userFbsBuilder.add_description(descriptionBuilder);
-	userFbsBuilder.add_isProtected(user->isProtected);
+	userFbsBuilder.add_is_protected(user->isProtected);
 	userFbsBuilder.add_verified(user->isVerified);
 	userFbsBuilder.add_followers_count(user->followersCount);
 	userFbsBuilder.add_friends_count(user->friendsCount);
@@ -194,7 +199,7 @@ TweetStatusFlatBuffers::getUserBuilder(User *user, flatbuffers::FlatBufferBuilde
 	userFbsBuilder.add_default_profile(user->isDefaultProfile);
 	userFbsBuilder.add_withheld_in_countries(withheld_in_countriesBuilder);
 	userFbsBuilder.add_withheld_scope(withheld_scopeBuilder);
-	userFbsBuilder.add_descriptionURLEntities(descriptionURLEntitiesBuilder);
+	userFbsBuilder.add_description_url_entities(descriptionURLEntitiesBuilder);
 	userFbsBuilder.add_geo_enabled(user->isGeoEnabled);
 	userFbsBuilder.add_lang(langBuilder);
 	userFbsBuilder.add_contributors_enabled(user->isContributorsEnabled);
@@ -212,7 +217,7 @@ TweetStatusFlatBuffers::getUserBuilder(User *user, flatbuffers::FlatBufferBuilde
 	userFbsBuilder.add_time_zone(time_zoneBuilder);
 	userFbsBuilder.add_is_translator(user->translator);
 	userFbsBuilder.add_follow_request_sent(user->isFollowRequestSent);
-	userFbsBuilder.add_showAllInlineMedia(user->showAllInlineMedia);
+	userFbsBuilder.add_show_all_inline_media(user->showAllInlineMedia);
 	auto orc = userFbsBuilder.Finish();
 	return orc;
 }
@@ -334,6 +339,23 @@ TweetStatusFlatBuffers::getEntitiesBuilder(Entities *entities, flatbuffers::Flat
 	return orc;
 }
 
+flatbuffers::Offset <ExtendedTweetFBS>
+TweetStatusFlatBuffers::getExtendedTweetBuilder(ExtendedTweet *extendedTweet, flatbuffers::FlatBufferBuilder &builder) {
+    auto fullTextBuilder = builder.CreateString(extendedTweet->fullText);
+    auto displayTextRangeBuilder = builder.CreateVector(extendedTweet->displayTextRange);
+
+    auto entitiesBuilder = extendedTweet->entities != nullptr ? this->getEntitiesBuilder(extendedTweet->entities, builder) : 0;
+    auto extendedEntitiesBuilder = extendedTweet->extendedEntities != nullptr ? this->getExtendedEntitiesBuilder(extendedTweet->extendedEntities, builder) : 0;
+
+    ExtendedTweetFBSBuilder extendedTweetFbsBuilder(builder);
+    extendedTweetFbsBuilder.add_full_text(fullTextBuilder);
+    extendedTweetFbsBuilder.add_display_text_range(displayTextRangeBuilder);
+    extendedTweetFbsBuilder.add_entities(entitiesBuilder);
+    extendedTweetFbsBuilder.add_extended_entities(extendedEntitiesBuilder);
+    auto orc = extendedTweetFbsBuilder.Finish();
+    return orc;
+}
+
 flatbuffers::Offset <ExtendedEntitiesFBS>
 TweetStatusFlatBuffers::getExtendedEntitiesBuilder(ExtendedEntities *extendedEntities,
 												   flatbuffers::FlatBufferBuilder &builder) {
@@ -366,6 +388,7 @@ TweetStatusFlatBuffers::getHashtagEntityBuilder(HashtagEntity *hashtagEntity, fl
 flatbuffers::Offset <MediaEntityFBS>
 TweetStatusFlatBuffers::getMediaEntityBuilder(MediaEntity *mediaEntity, flatbuffers::FlatBufferBuilder &builder) {
 
+    auto id_strBuilder = builder.CreateString(mediaEntity->idStr);
 	auto display_urlBuilder = builder.CreateString(mediaEntity->displayURL);
 	auto expanded_urlBuilder = builder.CreateString(mediaEntity->expandedURL);
 	auto media_urlBuilder = builder.CreateString(mediaEntity->mediaURL);
@@ -386,6 +409,7 @@ TweetStatusFlatBuffers::getMediaEntityBuilder(MediaEntity *mediaEntity, flatbuff
 	mediaEntityFbsBuilder.add_display_url(display_urlBuilder);
 	mediaEntityFbsBuilder.add_expanded_url(expanded_urlBuilder);
 	mediaEntityFbsBuilder.add_id(mediaEntity->id);
+    mediaEntityFbsBuilder.add_id_str(id_strBuilder);
 	mediaEntityFbsBuilder.add_indices(indicesBuilder);
 	mediaEntityFbsBuilder.add_media_url(media_urlBuilder);
 	mediaEntityFbsBuilder.add_media_url_https(media_url_httpsBuilder);
@@ -579,7 +603,6 @@ TweetStatusFlatBuffers::getVideoEntityBuilder(VideoEntity *videoEntity, flatbuff
 
 
 TweetStatusFlatBuffers *TweetStatusFlatBuffers::deserializeFlatBuffers(char *buffer, int &bytesRead) {
-
 	this->tweetStatusFbs = new TweetStatusFBST();
 	GetTweetStatusFBS(buffer)->UnPackTo(this->tweetStatusFbs);
 	return this;

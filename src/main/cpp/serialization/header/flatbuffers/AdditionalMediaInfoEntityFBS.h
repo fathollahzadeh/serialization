@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct AdditionalMediaInfoEntityFBS;
@@ -44,13 +51,13 @@ struct AdditionalMediaInfoEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffer
   bool embeddable() const {
     return GetField<uint8_t>(VT_EMBEDDABLE, 0) != 0;
   }
-  bool mutate_embeddable(bool _embeddable) {
+  bool mutate_embeddable(bool _embeddable = 0) {
     return SetField<uint8_t>(VT_EMBEDDABLE, static_cast<uint8_t>(_embeddable), 0);
   }
   bool monetizable() const {
     return GetField<uint8_t>(VT_MONETIZABLE, 0) != 0;
   }
-  bool mutate_monetizable(bool _monetizable) {
+  bool mutate_monetizable(bool _monetizable = 0) {
     return SetField<uint8_t>(VT_MONETIZABLE, static_cast<uint8_t>(_monetizable), 0);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
@@ -59,8 +66,8 @@ struct AdditionalMediaInfoEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffer
            verifier.VerifyString(title()) &&
            VerifyOffset(verifier, VT_DESCRIPTION) &&
            verifier.VerifyString(description()) &&
-           VerifyField<uint8_t>(verifier, VT_EMBEDDABLE) &&
-           VerifyField<uint8_t>(verifier, VT_MONETIZABLE) &&
+           VerifyField<uint8_t>(verifier, VT_EMBEDDABLE, 1) &&
+           VerifyField<uint8_t>(verifier, VT_MONETIZABLE, 1) &&
            verifier.EndTable();
   }
   AdditionalMediaInfoEntityFBST *UnPack(const flatbuffers::resolver_function_t *_resolver = nullptr) const;
@@ -172,6 +179,10 @@ inline const tweetstatusflatbuffers::AdditionalMediaInfoEntityFBS *GetSizePrefix
 
 inline AdditionalMediaInfoEntityFBS *GetMutableAdditionalMediaInfoEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<AdditionalMediaInfoEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::AdditionalMediaInfoEntityFBS *GetMutableSizePrefixedAdditionalMediaInfoEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::AdditionalMediaInfoEntityFBS>(buf);
 }
 
 inline bool VerifyAdditionalMediaInfoEntityFBSBuffer(

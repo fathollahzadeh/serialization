@@ -149,39 +149,6 @@ stringstream *RootData::getStream() {
 	return NULL;
 }
 
-string RootData::getStringKeyValue(string key, string value) {
-	ostringstream ss;
-	string vs = value;
-	vs = regex_replace(vs, regex("\""), "'");
-	ss << "\"" << key << "\":\"" << vs << "\"";
-	return ss.str();
-
-}
-
-string RootData::getIntKeyValue(string key, int value) {
-	ostringstream ss;
-	ss << "\"" << key << "\":" << value;
-	return ss.str();
-}
-
-string RootData::getDoubleKeyValue(string key, double value) {
-	ostringstream ss;
-	ss << "\"" << key << "\":" << value;
-	return ss.str();
-}
-
-string RootData::getLongKeyValue(string key, long value) {
-	ostringstream ss;
-	ss << "\"" << key << "\":" << value;
-	return ss.str();
-}
-
-string RootData::getBoolKeyValue(string key, bool value) {
-	ostringstream ss;
-	ss << "\"" << key << "\":" << value;
-	return ss.str();
-}
-
 bool RootData::isDeleted() const {
 	return deleted;
 }

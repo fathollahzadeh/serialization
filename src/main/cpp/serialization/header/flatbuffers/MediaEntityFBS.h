@@ -6,11 +6,16 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "AdditionalMediaInfoEntityFBS.h"
-#include "VideoEntityFBS.h"
-#include "SizeEntityFBS.h"
 #include "MediaSizesEntityFBS.h"
-#include "VariantEntityFBS.h"
+#include "VideoEntityFBS.h"
 
 namespace tweetstatusflatbuffers {
 
@@ -23,6 +28,7 @@ struct MediaEntityFBST : public flatbuffers::NativeTable {
   std::string display_url{};
   std::string expanded_url{};
   int64_t id = 0;
+  std::string id_str{};
   std::vector<int32_t> indices{};
   std::string media_url{};
   std::string media_url_https{};
@@ -33,6 +39,10 @@ struct MediaEntityFBST : public flatbuffers::NativeTable {
   std::string url{};
   std::unique_ptr<tweetstatusflatbuffers::VideoEntityFBST> video_info{};
   std::unique_ptr<tweetstatusflatbuffers::AdditionalMediaInfoEntityFBST> additional_media_info{};
+  MediaEntityFBST() = default;
+  MediaEntityFBST(const MediaEntityFBST &o);
+  MediaEntityFBST(MediaEntityFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  MediaEntityFBST &operator=(MediaEntityFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct MediaEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -42,16 +52,17 @@ struct MediaEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_DISPLAY_URL = 4,
     VT_EXPANDED_URL = 6,
     VT_ID = 8,
-    VT_INDICES = 10,
-    VT_MEDIA_URL = 12,
-    VT_MEDIA_URL_HTTPS = 14,
-    VT_SIZES = 16,
-    VT_TYPE = 18,
-    VT_SOURCE_STATUS_ID = 20,
-    VT_SOURCE_STATUS_ID_STR = 22,
-    VT_URL = 24,
-    VT_VIDEO_INFO = 26,
-    VT_ADDITIONAL_MEDIA_INFO = 28
+    VT_ID_STR = 10,
+    VT_INDICES = 12,
+    VT_MEDIA_URL = 14,
+    VT_MEDIA_URL_HTTPS = 16,
+    VT_SIZES = 18,
+    VT_TYPE = 20,
+    VT_SOURCE_STATUS_ID = 22,
+    VT_SOURCE_STATUS_ID_STR = 24,
+    VT_URL = 26,
+    VT_VIDEO_INFO = 28,
+    VT_ADDITIONAL_MEDIA_INFO = 30
   };
   const flatbuffers::String *display_url() const {
     return GetPointer<const flatbuffers::String *>(VT_DISPLAY_URL);
@@ -68,8 +79,14 @@ struct MediaEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int64_t id() const {
     return GetField<int64_t>(VT_ID, 0);
   }
-  bool mutate_id(int64_t _id) {
+  bool mutate_id(int64_t _id = 0) {
     return SetField<int64_t>(VT_ID, _id, 0);
+  }
+  const flatbuffers::String *id_str() const {
+    return GetPointer<const flatbuffers::String *>(VT_ID_STR);
+  }
+  flatbuffers::String *mutable_id_str() {
+    return GetPointer<flatbuffers::String *>(VT_ID_STR);
   }
   const flatbuffers::Vector<int32_t> *indices() const {
     return GetPointer<const flatbuffers::Vector<int32_t> *>(VT_INDICES);
@@ -104,7 +121,7 @@ struct MediaEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int64_t source_status_id() const {
     return GetField<int64_t>(VT_SOURCE_STATUS_ID, 0);
   }
-  bool mutate_source_status_id(int64_t _source_status_id) {
+  bool mutate_source_status_id(int64_t _source_status_id = 0) {
     return SetField<int64_t>(VT_SOURCE_STATUS_ID, _source_status_id, 0);
   }
   const flatbuffers::String *source_status_id_str() const {
@@ -137,7 +154,9 @@ struct MediaEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            verifier.VerifyString(display_url()) &&
            VerifyOffset(verifier, VT_EXPANDED_URL) &&
            verifier.VerifyString(expanded_url()) &&
-           VerifyField<int64_t>(verifier, VT_ID) &&
+           VerifyField<int64_t>(verifier, VT_ID, 8) &&
+           VerifyOffset(verifier, VT_ID_STR) &&
+           verifier.VerifyString(id_str()) &&
            VerifyOffset(verifier, VT_INDICES) &&
            verifier.VerifyVector(indices()) &&
            VerifyOffset(verifier, VT_MEDIA_URL) &&
@@ -148,7 +167,7 @@ struct MediaEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            verifier.VerifyTable(sizes()) &&
            VerifyOffset(verifier, VT_TYPE) &&
            verifier.VerifyString(type()) &&
-           VerifyField<int64_t>(verifier, VT_SOURCE_STATUS_ID) &&
+           VerifyField<int64_t>(verifier, VT_SOURCE_STATUS_ID, 8) &&
            VerifyOffset(verifier, VT_SOURCE_STATUS_ID_STR) &&
            verifier.VerifyString(source_status_id_str()) &&
            VerifyOffset(verifier, VT_URL) &&
@@ -176,6 +195,9 @@ struct MediaEntityFBSBuilder {
   }
   void add_id(int64_t id) {
     fbb_.AddElement<int64_t>(MediaEntityFBS::VT_ID, id, 0);
+  }
+  void add_id_str(flatbuffers::Offset<flatbuffers::String> id_str) {
+    fbb_.AddOffset(MediaEntityFBS::VT_ID_STR, id_str);
   }
   void add_indices(flatbuffers::Offset<flatbuffers::Vector<int32_t>> indices) {
     fbb_.AddOffset(MediaEntityFBS::VT_INDICES, indices);
@@ -223,6 +245,7 @@ inline flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBS(
     flatbuffers::Offset<flatbuffers::String> display_url = 0,
     flatbuffers::Offset<flatbuffers::String> expanded_url = 0,
     int64_t id = 0,
+    flatbuffers::Offset<flatbuffers::String> id_str = 0,
     flatbuffers::Offset<flatbuffers::Vector<int32_t>> indices = 0,
     flatbuffers::Offset<flatbuffers::String> media_url = 0,
     flatbuffers::Offset<flatbuffers::String> media_url_https = 0,
@@ -245,6 +268,7 @@ inline flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBS(
   builder_.add_media_url_https(media_url_https);
   builder_.add_media_url(media_url);
   builder_.add_indices(indices);
+  builder_.add_id_str(id_str);
   builder_.add_expanded_url(expanded_url);
   builder_.add_display_url(display_url);
   return builder_.Finish();
@@ -255,6 +279,7 @@ inline flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBSDirect(
     const char *display_url = nullptr,
     const char *expanded_url = nullptr,
     int64_t id = 0,
+    const char *id_str = nullptr,
     const std::vector<int32_t> *indices = nullptr,
     const char *media_url = nullptr,
     const char *media_url_https = nullptr,
@@ -267,6 +292,7 @@ inline flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBSDirect(
     flatbuffers::Offset<tweetstatusflatbuffers::AdditionalMediaInfoEntityFBS> additional_media_info = 0) {
   auto display_url__ = display_url ? _fbb.CreateString(display_url) : 0;
   auto expanded_url__ = expanded_url ? _fbb.CreateString(expanded_url) : 0;
+  auto id_str__ = id_str ? _fbb.CreateString(id_str) : 0;
   auto indices__ = indices ? _fbb.CreateVector<int32_t>(*indices) : 0;
   auto media_url__ = media_url ? _fbb.CreateString(media_url) : 0;
   auto media_url_https__ = media_url_https ? _fbb.CreateString(media_url_https) : 0;
@@ -278,6 +304,7 @@ inline flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBSDirect(
       display_url__,
       expanded_url__,
       id,
+      id_str__,
       indices__,
       media_url__,
       media_url_https__,
@@ -292,6 +319,41 @@ inline flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBSDirect(
 
 flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBS(flatbuffers::FlatBufferBuilder &_fbb, const MediaEntityFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+inline MediaEntityFBST::MediaEntityFBST(const MediaEntityFBST &o)
+      : display_url(o.display_url),
+        expanded_url(o.expanded_url),
+        id(o.id),
+        id_str(o.id_str),
+        indices(o.indices),
+        media_url(o.media_url),
+        media_url_https(o.media_url_https),
+        sizes((o.sizes) ? new tweetstatusflatbuffers::MediaSizesEntityFBST(*o.sizes) : nullptr),
+        type(o.type),
+        source_status_id(o.source_status_id),
+        source_status_id_str(o.source_status_id_str),
+        url(o.url),
+        video_info((o.video_info) ? new tweetstatusflatbuffers::VideoEntityFBST(*o.video_info) : nullptr),
+        additional_media_info((o.additional_media_info) ? new tweetstatusflatbuffers::AdditionalMediaInfoEntityFBST(*o.additional_media_info) : nullptr) {
+}
+
+inline MediaEntityFBST &MediaEntityFBST::operator=(MediaEntityFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(display_url, o.display_url);
+  std::swap(expanded_url, o.expanded_url);
+  std::swap(id, o.id);
+  std::swap(id_str, o.id_str);
+  std::swap(indices, o.indices);
+  std::swap(media_url, o.media_url);
+  std::swap(media_url_https, o.media_url_https);
+  std::swap(sizes, o.sizes);
+  std::swap(type, o.type);
+  std::swap(source_status_id, o.source_status_id);
+  std::swap(source_status_id_str, o.source_status_id_str);
+  std::swap(url, o.url);
+  std::swap(video_info, o.video_info);
+  std::swap(additional_media_info, o.additional_media_info);
+  return *this;
+}
+
 inline MediaEntityFBST *MediaEntityFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<MediaEntityFBST>(new MediaEntityFBST());
   UnPackTo(_o.get(), _resolver);
@@ -304,16 +366,17 @@ inline void MediaEntityFBS::UnPackTo(MediaEntityFBST *_o, const flatbuffers::res
   { auto _e = display_url(); if (_e) _o->display_url = _e->str(); }
   { auto _e = expanded_url(); if (_e) _o->expanded_url = _e->str(); }
   { auto _e = id(); _o->id = _e; }
-  { auto _e = indices(); if (_e) { _o->indices.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->indices[_i] = _e->Get(_i); } } }
+  { auto _e = id_str(); if (_e) _o->id_str = _e->str(); }
+  { auto _e = indices(); if (_e) { _o->indices.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->indices[_i] = _e->Get(_i); } } else { _o->indices.resize(0); } }
   { auto _e = media_url(); if (_e) _o->media_url = _e->str(); }
   { auto _e = media_url_https(); if (_e) _o->media_url_https = _e->str(); }
-  { auto _e = sizes(); if (_e) _o->sizes = std::unique_ptr<tweetstatusflatbuffers::MediaSizesEntityFBST>(_e->UnPack(_resolver)); }
+  { auto _e = sizes(); if (_e) { if(_o->sizes) { _e->UnPackTo(_o->sizes.get(), _resolver); } else { _o->sizes = std::unique_ptr<tweetstatusflatbuffers::MediaSizesEntityFBST>(_e->UnPack(_resolver)); } } else if (_o->sizes) { _o->sizes.reset(); } }
   { auto _e = type(); if (_e) _o->type = _e->str(); }
   { auto _e = source_status_id(); _o->source_status_id = _e; }
   { auto _e = source_status_id_str(); if (_e) _o->source_status_id_str = _e->str(); }
   { auto _e = url(); if (_e) _o->url = _e->str(); }
-  { auto _e = video_info(); if (_e) _o->video_info = std::unique_ptr<tweetstatusflatbuffers::VideoEntityFBST>(_e->UnPack(_resolver)); }
-  { auto _e = additional_media_info(); if (_e) _o->additional_media_info = std::unique_ptr<tweetstatusflatbuffers::AdditionalMediaInfoEntityFBST>(_e->UnPack(_resolver)); }
+  { auto _e = video_info(); if (_e) { if(_o->video_info) { _e->UnPackTo(_o->video_info.get(), _resolver); } else { _o->video_info = std::unique_ptr<tweetstatusflatbuffers::VideoEntityFBST>(_e->UnPack(_resolver)); } } else if (_o->video_info) { _o->video_info.reset(); } }
+  { auto _e = additional_media_info(); if (_e) { if(_o->additional_media_info) { _e->UnPackTo(_o->additional_media_info.get(), _resolver); } else { _o->additional_media_info = std::unique_ptr<tweetstatusflatbuffers::AdditionalMediaInfoEntityFBST>(_e->UnPack(_resolver)); } } else if (_o->additional_media_info) { _o->additional_media_info.reset(); } }
 }
 
 inline flatbuffers::Offset<MediaEntityFBS> MediaEntityFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const MediaEntityFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -327,6 +390,7 @@ inline flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBS(flatbuffers::Fla
   auto _display_url = _o->display_url.empty() ? 0 : _fbb.CreateString(_o->display_url);
   auto _expanded_url = _o->expanded_url.empty() ? 0 : _fbb.CreateString(_o->expanded_url);
   auto _id = _o->id;
+  auto _id_str = _o->id_str.empty() ? 0 : _fbb.CreateString(_o->id_str);
   auto _indices = _o->indices.size() ? _fbb.CreateVector(_o->indices) : 0;
   auto _media_url = _o->media_url.empty() ? 0 : _fbb.CreateString(_o->media_url);
   auto _media_url_https = _o->media_url_https.empty() ? 0 : _fbb.CreateString(_o->media_url_https);
@@ -342,6 +406,7 @@ inline flatbuffers::Offset<MediaEntityFBS> CreateMediaEntityFBS(flatbuffers::Fla
       _display_url,
       _expanded_url,
       _id,
+      _id_str,
       _indices,
       _media_url,
       _media_url_https,
@@ -364,6 +429,10 @@ inline const tweetstatusflatbuffers::MediaEntityFBS *GetSizePrefixedMediaEntityF
 
 inline MediaEntityFBS *GetMutableMediaEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<MediaEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::MediaEntityFBS *GetMutableSizePrefixedMediaEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::MediaEntityFBS>(buf);
 }
 
 inline bool VerifyMediaEntityFBSBuffer(

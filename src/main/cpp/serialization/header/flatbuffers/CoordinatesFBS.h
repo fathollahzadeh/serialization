@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct CoordinatesFBS;
@@ -105,7 +112,7 @@ inline void CoordinatesFBS::UnPackTo(CoordinatesFBST *_o, const flatbuffers::res
   (void)_o;
   (void)_resolver;
   { auto _e = type(); if (_e) _o->type = _e->str(); }
-  { auto _e = coordinates(); if (_e) { _o->coordinates.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->coordinates[_i] = _e->Get(_i); } } }
+  { auto _e = coordinates(); if (_e) { _o->coordinates.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->coordinates[_i] = _e->Get(_i); } } else { _o->coordinates.resize(0); } }
 }
 
 inline flatbuffers::Offset<CoordinatesFBS> CoordinatesFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const CoordinatesFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -134,6 +141,10 @@ inline const tweetstatusflatbuffers::CoordinatesFBS *GetSizePrefixedCoordinatesF
 
 inline CoordinatesFBS *GetMutableCoordinatesFBS(void *buf) {
   return flatbuffers::GetMutableRoot<CoordinatesFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::CoordinatesFBS *GetMutableSizePrefixedCoordinatesFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::CoordinatesFBS>(buf);
 }
 
 inline bool VerifyCoordinatesFBSBuffer(

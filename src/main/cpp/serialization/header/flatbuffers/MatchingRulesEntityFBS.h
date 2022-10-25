@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct MatchingRulesEntityFBS;
@@ -36,7 +43,7 @@ struct MatchingRulesEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Tab
   int64_t id() const {
     return GetField<int64_t>(VT_ID, 0);
   }
-  bool mutate_id(int64_t _id) {
+  bool mutate_id(int64_t _id = 0) {
     return SetField<int64_t>(VT_ID, _id, 0);
   }
   const flatbuffers::String *id_str() const {
@@ -49,7 +56,7 @@ struct MatchingRulesEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Tab
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_TAG) &&
            verifier.VerifyString(tag()) &&
-           VerifyField<int64_t>(verifier, VT_ID) &&
+           VerifyField<int64_t>(verifier, VT_ID, 8) &&
            VerifyOffset(verifier, VT_ID_STR) &&
            verifier.VerifyString(id_str()) &&
            verifier.EndTable();
@@ -153,6 +160,10 @@ inline const tweetstatusflatbuffers::MatchingRulesEntityFBS *GetSizePrefixedMatc
 
 inline MatchingRulesEntityFBS *GetMutableMatchingRulesEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<MatchingRulesEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::MatchingRulesEntityFBS *GetMutableSizePrefixedMatchingRulesEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::MatchingRulesEntityFBS>(buf);
 }
 
 inline bool VerifyMatchingRulesEntityFBSBuffer(

@@ -69,17 +69,6 @@ public:
 
 	stringstream *getStream();
 
-	//Get JSON Key-Value:
-	string getStringKeyValue(string key, string value);
-
-	string getIntKeyValue(string key, int value);
-
-	string getDoubleKeyValue(string key, double value);
-
-	string getLongKeyValue(string key, long value);
-
-	string getBoolKeyValue(string key, bool value);
-
 	bool isDeleted() const;
 
 	void setDeleted(bool deleted);

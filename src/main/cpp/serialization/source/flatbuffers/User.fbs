@@ -9,7 +9,7 @@ table UserFBS {
         location:string;
         url:string;
         description:string;
-        isProtected:bool;
+        is_protected:bool;
         verified:bool;
         followers_count:int;
         friends_count:int;
@@ -22,7 +22,7 @@ table UserFBS {
         default_profile:bool;
         withheld_in_countries:[string];
         withheld_scope:string;
-        descriptionURLEntities:[URLEntityFBS];
+        description_url_entities:[URLEntityFBS];
         geo_enabled:bool;
         lang:string;
         contributors_enabled:bool;
@@ -40,7 +40,7 @@ table UserFBS {
         time_zone:string;
         is_translator:bool;
         follow_request_sent:bool;
-        showAllInlineMedia:bool;
+        show_all_inline_media:bool;
 
 }
 root_type UserFBS;

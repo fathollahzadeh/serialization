@@ -19,6 +19,7 @@ private:
     flatbuffers::Offset<BoundingBoxCoordinateFBS> getBoundingBoxCoordinateBuilder(BoundingBoxCoordinate *boundingBoxCoordinate,flatbuffers::FlatBufferBuilder &builder);
     flatbuffers::Offset<CoordinatesFBS> getCoordinatesBuilder(Coordinates *coordinates,flatbuffers::FlatBufferBuilder &builder);
     flatbuffers::Offset<EntitiesFBS> getEntitiesBuilder(Entities *entities,flatbuffers::FlatBufferBuilder &builder);
+    flatbuffers::Offset<ExtendedTweetFBS> getExtendedTweetBuilder(ExtendedTweet *extendedTweet,flatbuffers::FlatBufferBuilder &builder);
     flatbuffers::Offset<ExtendedEntitiesFBS> getExtendedEntitiesBuilder(ExtendedEntities *extendedEntities,flatbuffers::FlatBufferBuilder &builder);
     flatbuffers::Offset<HashtagEntityFBS> getHashtagEntityBuilder(HashtagEntity *hashtagEntity,flatbuffers::FlatBufferBuilder &builder);
     flatbuffers::Offset<MediaEntityFBS> getMediaEntityBuilder(MediaEntity *mediaEntity,flatbuffers::FlatBufferBuilder &builder);

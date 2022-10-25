@@ -6,25 +6,19 @@
 
 #include "flatbuffers/flatbuffers.h"
 
-#include "HashtagEntityFBS.h"
-#include "PollEntityFBS.h"
-#include "OptionEntityFBS.h"
-#include "SymbolEntityFBS.h"
-#include "AdditionalMediaInfoEntityFBS.h"
-#include "VideoEntityFBS.h"
-#include "SizeEntityFBS.h"
-#include "URLEntityFBS.h"
-#include "PlaceFBS.h"
-#include "MediaSizesEntityFBS.h"
-#include "UserMentionEntityFBS.h"
-#include "EntitiesFBS.h"
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "CoordinatesFBS.h"
-#include "UserFBS.h"
-#include "BoundingBoxCoordinateFBS.h"
-#include "VariantEntityFBS.h"
-#include "ExtendedEntitiesFBS.h"
+#include "EntitiesFBS.h"
+#include "ExtendedTweetFBS.h"
 #include "MatchingRulesEntityFBS.h"
-#include "MediaEntityFBS.h"
+#include "PlaceFBS.h"
+#include "UserFBS.h"
 
 namespace tweetstatusflatbuffers {
 
@@ -58,14 +52,14 @@ struct MapStringBool FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool value() const {
     return GetField<uint8_t>(VT_VALUE, 0) != 0;
   }
-  bool mutate_value(bool _value) {
+  bool mutate_value(bool _value = 0) {
     return SetField<uint8_t>(VT_VALUE, static_cast<uint8_t>(_value), 0);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_KEY) &&
            verifier.VerifyString(key()) &&
-           VerifyField<uint8_t>(verifier, VT_VALUE) &&
+           VerifyField<uint8_t>(verifier, VT_VALUE, 1) &&
            verifier.EndTable();
   }
   MapStringBoolT *UnPack(const flatbuffers::resolver_function_t *_resolver = nullptr) const;
@@ -121,6 +115,7 @@ struct TweetStatusFBST : public flatbuffers::NativeTable {
   typedef TweetStatusFBS TableType;
   std::string created_at{};
   int64_t id = 0;
+  std::string id_str{};
   std::string text{};
   std::string source{};
   bool truncated = false;
@@ -139,7 +134,7 @@ struct TweetStatusFBST : public flatbuffers::NativeTable {
   int32_t retweet_count = 0;
   int32_t favorite_count = 0;
   std::unique_ptr<tweetstatusflatbuffers::EntitiesFBST> entities{};
-  std::unique_ptr<tweetstatusflatbuffers::ExtendedEntitiesFBST> extended_entities{};
+  std::unique_ptr<tweetstatusflatbuffers::ExtendedTweetFBST> extended_tweet{};
   bool favorited = false;
   bool retweeted = false;
   bool possibly_sensitive = false;
@@ -151,6 +146,11 @@ struct TweetStatusFBST : public flatbuffers::NativeTable {
   bool withheld_copyright = false;
   std::vector<std::string> withheld_in_countries{};
   std::string withheld_scope{};
+  std::vector<int32_t> display_text_range{};
+  TweetStatusFBST() = default;
+  TweetStatusFBST(const TweetStatusFBST &o);
+  TweetStatusFBST(TweetStatusFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  TweetStatusFBST &operator=(TweetStatusFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -159,36 +159,38 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_CREATED_AT = 4,
     VT_ID = 6,
-    VT_TEXT = 8,
-    VT_SOURCE = 10,
-    VT_TRUNCATED = 12,
-    VT_IN_REPLY_TO_STATUS_ID = 14,
-    VT_IN_REPLY_TO_USER_ID = 16,
-    VT_IN_REPLY_TO_SCREEN_NAME = 18,
-    VT_USER = 20,
-    VT_COORDINATES = 22,
-    VT_PLACE = 24,
-    VT_QUOTED_STATUS_ID = 26,
-    VT_IS_QUOTE_STATUS = 28,
-    VT_QUOTED_STATUS = 30,
-    VT_RETWEETED_STATUS = 32,
-    VT_QUOTE_COUNT = 34,
-    VT_REPLY_COUNT = 36,
-    VT_RETWEET_COUNT = 38,
-    VT_FAVORITE_COUNT = 40,
-    VT_ENTITIES = 42,
-    VT_EXTENDED_ENTITIES = 44,
-    VT_FAVORITED = 46,
-    VT_RETWEETED = 48,
-    VT_POSSIBLY_SENSITIVE = 50,
-    VT_FILTER_LEVEL = 52,
-    VT_LANG = 54,
-    VT_MATCHING_RULES = 56,
-    VT_CURRENT_USER_RETWEET = 58,
-    VT_SCOPES = 60,
-    VT_WITHHELD_COPYRIGHT = 62,
-    VT_WITHHELD_IN_COUNTRIES = 64,
-    VT_WITHHELD_SCOPE = 66
+    VT_ID_STR = 8,
+    VT_TEXT = 10,
+    VT_SOURCE = 12,
+    VT_TRUNCATED = 14,
+    VT_IN_REPLY_TO_STATUS_ID = 16,
+    VT_IN_REPLY_TO_USER_ID = 18,
+    VT_IN_REPLY_TO_SCREEN_NAME = 20,
+    VT_USER = 22,
+    VT_COORDINATES = 24,
+    VT_PLACE = 26,
+    VT_QUOTED_STATUS_ID = 28,
+    VT_IS_QUOTE_STATUS = 30,
+    VT_QUOTED_STATUS = 32,
+    VT_RETWEETED_STATUS = 34,
+    VT_QUOTE_COUNT = 36,
+    VT_REPLY_COUNT = 38,
+    VT_RETWEET_COUNT = 40,
+    VT_FAVORITE_COUNT = 42,
+    VT_ENTITIES = 44,
+    VT_EXTENDED_TWEET = 46,
+    VT_FAVORITED = 48,
+    VT_RETWEETED = 50,
+    VT_POSSIBLY_SENSITIVE = 52,
+    VT_FILTER_LEVEL = 54,
+    VT_LANG = 56,
+    VT_MATCHING_RULES = 58,
+    VT_CURRENT_USER_RETWEET = 60,
+    VT_SCOPES = 62,
+    VT_WITHHELD_COPYRIGHT = 64,
+    VT_WITHHELD_IN_COUNTRIES = 66,
+    VT_WITHHELD_SCOPE = 68,
+    VT_DISPLAY_TEXT_RANGE = 70
   };
   const flatbuffers::String *created_at() const {
     return GetPointer<const flatbuffers::String *>(VT_CREATED_AT);
@@ -199,8 +201,14 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int64_t id() const {
     return GetField<int64_t>(VT_ID, 0);
   }
-  bool mutate_id(int64_t _id) {
+  bool mutate_id(int64_t _id = 0) {
     return SetField<int64_t>(VT_ID, _id, 0);
+  }
+  const flatbuffers::String *id_str() const {
+    return GetPointer<const flatbuffers::String *>(VT_ID_STR);
+  }
+  flatbuffers::String *mutable_id_str() {
+    return GetPointer<flatbuffers::String *>(VT_ID_STR);
   }
   const flatbuffers::String *text() const {
     return GetPointer<const flatbuffers::String *>(VT_TEXT);
@@ -217,19 +225,19 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool truncated() const {
     return GetField<uint8_t>(VT_TRUNCATED, 0) != 0;
   }
-  bool mutate_truncated(bool _truncated) {
+  bool mutate_truncated(bool _truncated = 0) {
     return SetField<uint8_t>(VT_TRUNCATED, static_cast<uint8_t>(_truncated), 0);
   }
   int64_t in_reply_to_status_id() const {
     return GetField<int64_t>(VT_IN_REPLY_TO_STATUS_ID, 0);
   }
-  bool mutate_in_reply_to_status_id(int64_t _in_reply_to_status_id) {
+  bool mutate_in_reply_to_status_id(int64_t _in_reply_to_status_id = 0) {
     return SetField<int64_t>(VT_IN_REPLY_TO_STATUS_ID, _in_reply_to_status_id, 0);
   }
   int64_t in_reply_to_user_id() const {
     return GetField<int64_t>(VT_IN_REPLY_TO_USER_ID, 0);
   }
-  bool mutate_in_reply_to_user_id(int64_t _in_reply_to_user_id) {
+  bool mutate_in_reply_to_user_id(int64_t _in_reply_to_user_id = 0) {
     return SetField<int64_t>(VT_IN_REPLY_TO_USER_ID, _in_reply_to_user_id, 0);
   }
   const flatbuffers::String *in_reply_to_screen_name() const {
@@ -259,13 +267,13 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int64_t quoted_status_id() const {
     return GetField<int64_t>(VT_QUOTED_STATUS_ID, 0);
   }
-  bool mutate_quoted_status_id(int64_t _quoted_status_id) {
+  bool mutate_quoted_status_id(int64_t _quoted_status_id = 0) {
     return SetField<int64_t>(VT_QUOTED_STATUS_ID, _quoted_status_id, 0);
   }
   bool is_quote_status() const {
     return GetField<uint8_t>(VT_IS_QUOTE_STATUS, 0) != 0;
   }
-  bool mutate_is_quote_status(bool _is_quote_status) {
+  bool mutate_is_quote_status(bool _is_quote_status = 0) {
     return SetField<uint8_t>(VT_IS_QUOTE_STATUS, static_cast<uint8_t>(_is_quote_status), 0);
   }
   const tweetstatusflatbuffers::TweetStatusFBS *quoted_status() const {
@@ -283,25 +291,25 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int32_t quote_count() const {
     return GetField<int32_t>(VT_QUOTE_COUNT, 0);
   }
-  bool mutate_quote_count(int32_t _quote_count) {
+  bool mutate_quote_count(int32_t _quote_count = 0) {
     return SetField<int32_t>(VT_QUOTE_COUNT, _quote_count, 0);
   }
   int32_t reply_count() const {
     return GetField<int32_t>(VT_REPLY_COUNT, 0);
   }
-  bool mutate_reply_count(int32_t _reply_count) {
+  bool mutate_reply_count(int32_t _reply_count = 0) {
     return SetField<int32_t>(VT_REPLY_COUNT, _reply_count, 0);
   }
   int32_t retweet_count() const {
     return GetField<int32_t>(VT_RETWEET_COUNT, 0);
   }
-  bool mutate_retweet_count(int32_t _retweet_count) {
+  bool mutate_retweet_count(int32_t _retweet_count = 0) {
     return SetField<int32_t>(VT_RETWEET_COUNT, _retweet_count, 0);
   }
   int32_t favorite_count() const {
     return GetField<int32_t>(VT_FAVORITE_COUNT, 0);
   }
-  bool mutate_favorite_count(int32_t _favorite_count) {
+  bool mutate_favorite_count(int32_t _favorite_count = 0) {
     return SetField<int32_t>(VT_FAVORITE_COUNT, _favorite_count, 0);
   }
   const tweetstatusflatbuffers::EntitiesFBS *entities() const {
@@ -310,28 +318,28 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   tweetstatusflatbuffers::EntitiesFBS *mutable_entities() {
     return GetPointer<tweetstatusflatbuffers::EntitiesFBS *>(VT_ENTITIES);
   }
-  const tweetstatusflatbuffers::ExtendedEntitiesFBS *extended_entities() const {
-    return GetPointer<const tweetstatusflatbuffers::ExtendedEntitiesFBS *>(VT_EXTENDED_ENTITIES);
+  const tweetstatusflatbuffers::ExtendedTweetFBS *extended_tweet() const {
+    return GetPointer<const tweetstatusflatbuffers::ExtendedTweetFBS *>(VT_EXTENDED_TWEET);
   }
-  tweetstatusflatbuffers::ExtendedEntitiesFBS *mutable_extended_entities() {
-    return GetPointer<tweetstatusflatbuffers::ExtendedEntitiesFBS *>(VT_EXTENDED_ENTITIES);
+  tweetstatusflatbuffers::ExtendedTweetFBS *mutable_extended_tweet() {
+    return GetPointer<tweetstatusflatbuffers::ExtendedTweetFBS *>(VT_EXTENDED_TWEET);
   }
   bool favorited() const {
     return GetField<uint8_t>(VT_FAVORITED, 0) != 0;
   }
-  bool mutate_favorited(bool _favorited) {
+  bool mutate_favorited(bool _favorited = 0) {
     return SetField<uint8_t>(VT_FAVORITED, static_cast<uint8_t>(_favorited), 0);
   }
   bool retweeted() const {
     return GetField<uint8_t>(VT_RETWEETED, 0) != 0;
   }
-  bool mutate_retweeted(bool _retweeted) {
+  bool mutate_retweeted(bool _retweeted = 0) {
     return SetField<uint8_t>(VT_RETWEETED, static_cast<uint8_t>(_retweeted), 0);
   }
   bool possibly_sensitive() const {
     return GetField<uint8_t>(VT_POSSIBLY_SENSITIVE, 0) != 0;
   }
-  bool mutate_possibly_sensitive(bool _possibly_sensitive) {
+  bool mutate_possibly_sensitive(bool _possibly_sensitive = 0) {
     return SetField<uint8_t>(VT_POSSIBLY_SENSITIVE, static_cast<uint8_t>(_possibly_sensitive), 0);
   }
   const flatbuffers::String *filter_level() const {
@@ -355,7 +363,7 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int64_t current_user_retweet() const {
     return GetField<int64_t>(VT_CURRENT_USER_RETWEET, 0);
   }
-  bool mutate_current_user_retweet(int64_t _current_user_retweet) {
+  bool mutate_current_user_retweet(int64_t _current_user_retweet = 0) {
     return SetField<int64_t>(VT_CURRENT_USER_RETWEET, _current_user_retweet, 0);
   }
   const flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::MapStringBool>> *scopes() const {
@@ -367,7 +375,7 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool withheld_copyright() const {
     return GetField<uint8_t>(VT_WITHHELD_COPYRIGHT, 0) != 0;
   }
-  bool mutate_withheld_copyright(bool _withheld_copyright) {
+  bool mutate_withheld_copyright(bool _withheld_copyright = 0) {
     return SetField<uint8_t>(VT_WITHHELD_COPYRIGHT, static_cast<uint8_t>(_withheld_copyright), 0);
   }
   const flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>> *withheld_in_countries() const {
@@ -382,18 +390,26 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   flatbuffers::String *mutable_withheld_scope() {
     return GetPointer<flatbuffers::String *>(VT_WITHHELD_SCOPE);
   }
+  const flatbuffers::Vector<int32_t> *display_text_range() const {
+    return GetPointer<const flatbuffers::Vector<int32_t> *>(VT_DISPLAY_TEXT_RANGE);
+  }
+  flatbuffers::Vector<int32_t> *mutable_display_text_range() {
+    return GetPointer<flatbuffers::Vector<int32_t> *>(VT_DISPLAY_TEXT_RANGE);
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_CREATED_AT) &&
            verifier.VerifyString(created_at()) &&
-           VerifyField<int64_t>(verifier, VT_ID) &&
+           VerifyField<int64_t>(verifier, VT_ID, 8) &&
+           VerifyOffset(verifier, VT_ID_STR) &&
+           verifier.VerifyString(id_str()) &&
            VerifyOffset(verifier, VT_TEXT) &&
            verifier.VerifyString(text()) &&
            VerifyOffset(verifier, VT_SOURCE) &&
            verifier.VerifyString(source()) &&
-           VerifyField<uint8_t>(verifier, VT_TRUNCATED) &&
-           VerifyField<int64_t>(verifier, VT_IN_REPLY_TO_STATUS_ID) &&
-           VerifyField<int64_t>(verifier, VT_IN_REPLY_TO_USER_ID) &&
+           VerifyField<uint8_t>(verifier, VT_TRUNCATED, 1) &&
+           VerifyField<int64_t>(verifier, VT_IN_REPLY_TO_STATUS_ID, 8) &&
+           VerifyField<int64_t>(verifier, VT_IN_REPLY_TO_USER_ID, 8) &&
            VerifyOffset(verifier, VT_IN_REPLY_TO_SCREEN_NAME) &&
            verifier.VerifyString(in_reply_to_screen_name()) &&
            VerifyOffset(verifier, VT_USER) &&
@@ -402,23 +418,23 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            verifier.VerifyTable(coordinates()) &&
            VerifyOffset(verifier, VT_PLACE) &&
            verifier.VerifyTable(place()) &&
-           VerifyField<int64_t>(verifier, VT_QUOTED_STATUS_ID) &&
-           VerifyField<uint8_t>(verifier, VT_IS_QUOTE_STATUS) &&
+           VerifyField<int64_t>(verifier, VT_QUOTED_STATUS_ID, 8) &&
+           VerifyField<uint8_t>(verifier, VT_IS_QUOTE_STATUS, 1) &&
            VerifyOffset(verifier, VT_QUOTED_STATUS) &&
            verifier.VerifyTable(quoted_status()) &&
            VerifyOffset(verifier, VT_RETWEETED_STATUS) &&
            verifier.VerifyTable(retweeted_status()) &&
-           VerifyField<int32_t>(verifier, VT_QUOTE_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_REPLY_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_RETWEET_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_FAVORITE_COUNT) &&
+           VerifyField<int32_t>(verifier, VT_QUOTE_COUNT, 4) &&
+           VerifyField<int32_t>(verifier, VT_REPLY_COUNT, 4) &&
+           VerifyField<int32_t>(verifier, VT_RETWEET_COUNT, 4) &&
+           VerifyField<int32_t>(verifier, VT_FAVORITE_COUNT, 4) &&
            VerifyOffset(verifier, VT_ENTITIES) &&
            verifier.VerifyTable(entities()) &&
-           VerifyOffset(verifier, VT_EXTENDED_ENTITIES) &&
-           verifier.VerifyTable(extended_entities()) &&
-           VerifyField<uint8_t>(verifier, VT_FAVORITED) &&
-           VerifyField<uint8_t>(verifier, VT_RETWEETED) &&
-           VerifyField<uint8_t>(verifier, VT_POSSIBLY_SENSITIVE) &&
+           VerifyOffset(verifier, VT_EXTENDED_TWEET) &&
+           verifier.VerifyTable(extended_tweet()) &&
+           VerifyField<uint8_t>(verifier, VT_FAVORITED, 1) &&
+           VerifyField<uint8_t>(verifier, VT_RETWEETED, 1) &&
+           VerifyField<uint8_t>(verifier, VT_POSSIBLY_SENSITIVE, 1) &&
            VerifyOffset(verifier, VT_FILTER_LEVEL) &&
            verifier.VerifyString(filter_level()) &&
            VerifyOffset(verifier, VT_LANG) &&
@@ -426,16 +442,18 @@ struct TweetStatusFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            VerifyOffset(verifier, VT_MATCHING_RULES) &&
            verifier.VerifyVector(matching_rules()) &&
            verifier.VerifyVectorOfTables(matching_rules()) &&
-           VerifyField<int64_t>(verifier, VT_CURRENT_USER_RETWEET) &&
+           VerifyField<int64_t>(verifier, VT_CURRENT_USER_RETWEET, 8) &&
            VerifyOffset(verifier, VT_SCOPES) &&
            verifier.VerifyVector(scopes()) &&
            verifier.VerifyVectorOfTables(scopes()) &&
-           VerifyField<uint8_t>(verifier, VT_WITHHELD_COPYRIGHT) &&
+           VerifyField<uint8_t>(verifier, VT_WITHHELD_COPYRIGHT, 1) &&
            VerifyOffset(verifier, VT_WITHHELD_IN_COUNTRIES) &&
            verifier.VerifyVector(withheld_in_countries()) &&
            verifier.VerifyVectorOfStrings(withheld_in_countries()) &&
            VerifyOffset(verifier, VT_WITHHELD_SCOPE) &&
            verifier.VerifyString(withheld_scope()) &&
+           VerifyOffset(verifier, VT_DISPLAY_TEXT_RANGE) &&
+           verifier.VerifyVector(display_text_range()) &&
            verifier.EndTable();
   }
   TweetStatusFBST *UnPack(const flatbuffers::resolver_function_t *_resolver = nullptr) const;
@@ -452,6 +470,9 @@ struct TweetStatusFBSBuilder {
   }
   void add_id(int64_t id) {
     fbb_.AddElement<int64_t>(TweetStatusFBS::VT_ID, id, 0);
+  }
+  void add_id_str(flatbuffers::Offset<flatbuffers::String> id_str) {
+    fbb_.AddOffset(TweetStatusFBS::VT_ID_STR, id_str);
   }
   void add_text(flatbuffers::Offset<flatbuffers::String> text) {
     fbb_.AddOffset(TweetStatusFBS::VT_TEXT, text);
@@ -507,8 +528,8 @@ struct TweetStatusFBSBuilder {
   void add_entities(flatbuffers::Offset<tweetstatusflatbuffers::EntitiesFBS> entities) {
     fbb_.AddOffset(TweetStatusFBS::VT_ENTITIES, entities);
   }
-  void add_extended_entities(flatbuffers::Offset<tweetstatusflatbuffers::ExtendedEntitiesFBS> extended_entities) {
-    fbb_.AddOffset(TweetStatusFBS::VT_EXTENDED_ENTITIES, extended_entities);
+  void add_extended_tweet(flatbuffers::Offset<tweetstatusflatbuffers::ExtendedTweetFBS> extended_tweet) {
+    fbb_.AddOffset(TweetStatusFBS::VT_EXTENDED_TWEET, extended_tweet);
   }
   void add_favorited(bool favorited) {
     fbb_.AddElement<uint8_t>(TweetStatusFBS::VT_FAVORITED, static_cast<uint8_t>(favorited), 0);
@@ -543,6 +564,9 @@ struct TweetStatusFBSBuilder {
   void add_withheld_scope(flatbuffers::Offset<flatbuffers::String> withheld_scope) {
     fbb_.AddOffset(TweetStatusFBS::VT_WITHHELD_SCOPE, withheld_scope);
   }
+  void add_display_text_range(flatbuffers::Offset<flatbuffers::Vector<int32_t>> display_text_range) {
+    fbb_.AddOffset(TweetStatusFBS::VT_DISPLAY_TEXT_RANGE, display_text_range);
+  }
   explicit TweetStatusFBSBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
@@ -558,6 +582,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(
     flatbuffers::FlatBufferBuilder &_fbb,
     flatbuffers::Offset<flatbuffers::String> created_at = 0,
     int64_t id = 0,
+    flatbuffers::Offset<flatbuffers::String> id_str = 0,
     flatbuffers::Offset<flatbuffers::String> text = 0,
     flatbuffers::Offset<flatbuffers::String> source = 0,
     bool truncated = false,
@@ -576,7 +601,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(
     int32_t retweet_count = 0,
     int32_t favorite_count = 0,
     flatbuffers::Offset<tweetstatusflatbuffers::EntitiesFBS> entities = 0,
-    flatbuffers::Offset<tweetstatusflatbuffers::ExtendedEntitiesFBS> extended_entities = 0,
+    flatbuffers::Offset<tweetstatusflatbuffers::ExtendedTweetFBS> extended_tweet = 0,
     bool favorited = false,
     bool retweeted = false,
     bool possibly_sensitive = false,
@@ -587,20 +612,22 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::MapStringBool>>> scopes = 0,
     bool withheld_copyright = false,
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>>> withheld_in_countries = 0,
-    flatbuffers::Offset<flatbuffers::String> withheld_scope = 0) {
+    flatbuffers::Offset<flatbuffers::String> withheld_scope = 0,
+    flatbuffers::Offset<flatbuffers::Vector<int32_t>> display_text_range = 0) {
   TweetStatusFBSBuilder builder_(_fbb);
   builder_.add_current_user_retweet(current_user_retweet);
   builder_.add_quoted_status_id(quoted_status_id);
   builder_.add_in_reply_to_user_id(in_reply_to_user_id);
   builder_.add_in_reply_to_status_id(in_reply_to_status_id);
   builder_.add_id(id);
+  builder_.add_display_text_range(display_text_range);
   builder_.add_withheld_scope(withheld_scope);
   builder_.add_withheld_in_countries(withheld_in_countries);
   builder_.add_scopes(scopes);
   builder_.add_matching_rules(matching_rules);
   builder_.add_lang(lang);
   builder_.add_filter_level(filter_level);
-  builder_.add_extended_entities(extended_entities);
+  builder_.add_extended_tweet(extended_tweet);
   builder_.add_entities(entities);
   builder_.add_favorite_count(favorite_count);
   builder_.add_retweet_count(retweet_count);
@@ -614,6 +641,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(
   builder_.add_in_reply_to_screen_name(in_reply_to_screen_name);
   builder_.add_source(source);
   builder_.add_text(text);
+  builder_.add_id_str(id_str);
   builder_.add_created_at(created_at);
   builder_.add_withheld_copyright(withheld_copyright);
   builder_.add_possibly_sensitive(possibly_sensitive);
@@ -628,6 +656,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBSDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
     const char *created_at = nullptr,
     int64_t id = 0,
+    const char *id_str = nullptr,
     const char *text = nullptr,
     const char *source = nullptr,
     bool truncated = false,
@@ -646,7 +675,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBSDirect(
     int32_t retweet_count = 0,
     int32_t favorite_count = 0,
     flatbuffers::Offset<tweetstatusflatbuffers::EntitiesFBS> entities = 0,
-    flatbuffers::Offset<tweetstatusflatbuffers::ExtendedEntitiesFBS> extended_entities = 0,
+    flatbuffers::Offset<tweetstatusflatbuffers::ExtendedTweetFBS> extended_tweet = 0,
     bool favorited = false,
     bool retweeted = false,
     bool possibly_sensitive = false,
@@ -657,8 +686,10 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBSDirect(
     const std::vector<flatbuffers::Offset<tweetstatusflatbuffers::MapStringBool>> *scopes = nullptr,
     bool withheld_copyright = false,
     const std::vector<flatbuffers::Offset<flatbuffers::String>> *withheld_in_countries = nullptr,
-    const char *withheld_scope = nullptr) {
+    const char *withheld_scope = nullptr,
+    const std::vector<int32_t> *display_text_range = nullptr) {
   auto created_at__ = created_at ? _fbb.CreateString(created_at) : 0;
+  auto id_str__ = id_str ? _fbb.CreateString(id_str) : 0;
   auto text__ = text ? _fbb.CreateString(text) : 0;
   auto source__ = source ? _fbb.CreateString(source) : 0;
   auto in_reply_to_screen_name__ = in_reply_to_screen_name ? _fbb.CreateString(in_reply_to_screen_name) : 0;
@@ -668,10 +699,12 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBSDirect(
   auto scopes__ = scopes ? _fbb.CreateVector<flatbuffers::Offset<tweetstatusflatbuffers::MapStringBool>>(*scopes) : 0;
   auto withheld_in_countries__ = withheld_in_countries ? _fbb.CreateVector<flatbuffers::Offset<flatbuffers::String>>(*withheld_in_countries) : 0;
   auto withheld_scope__ = withheld_scope ? _fbb.CreateString(withheld_scope) : 0;
+  auto display_text_range__ = display_text_range ? _fbb.CreateVector<int32_t>(*display_text_range) : 0;
   return tweetstatusflatbuffers::CreateTweetStatusFBS(
       _fbb,
       created_at__,
       id,
+      id_str__,
       text__,
       source__,
       truncated,
@@ -690,7 +723,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBSDirect(
       retweet_count,
       favorite_count,
       entities,
-      extended_entities,
+      extended_tweet,
       favorited,
       retweeted,
       possibly_sensitive,
@@ -701,7 +734,8 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBSDirect(
       scopes__,
       withheld_copyright,
       withheld_in_countries__,
-      withheld_scope__);
+      withheld_scope__,
+      display_text_range__);
 }
 
 flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(flatbuffers::FlatBufferBuilder &_fbb, const TweetStatusFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
@@ -735,6 +769,83 @@ inline flatbuffers::Offset<MapStringBool> CreateMapStringBool(flatbuffers::FlatB
       _value);
 }
 
+inline TweetStatusFBST::TweetStatusFBST(const TweetStatusFBST &o)
+      : created_at(o.created_at),
+        id(o.id),
+        id_str(o.id_str),
+        text(o.text),
+        source(o.source),
+        truncated(o.truncated),
+        in_reply_to_status_id(o.in_reply_to_status_id),
+        in_reply_to_user_id(o.in_reply_to_user_id),
+        in_reply_to_screen_name(o.in_reply_to_screen_name),
+        user((o.user) ? new tweetstatusflatbuffers::UserFBST(*o.user) : nullptr),
+        coordinates((o.coordinates) ? new tweetstatusflatbuffers::CoordinatesFBST(*o.coordinates) : nullptr),
+        place((o.place) ? new tweetstatusflatbuffers::PlaceFBST(*o.place) : nullptr),
+        quoted_status_id(o.quoted_status_id),
+        is_quote_status(o.is_quote_status),
+        quoted_status((o.quoted_status) ? new tweetstatusflatbuffers::TweetStatusFBST(*o.quoted_status) : nullptr),
+        retweeted_status((o.retweeted_status) ? new tweetstatusflatbuffers::TweetStatusFBST(*o.retweeted_status) : nullptr),
+        quote_count(o.quote_count),
+        reply_count(o.reply_count),
+        retweet_count(o.retweet_count),
+        favorite_count(o.favorite_count),
+        entities((o.entities) ? new tweetstatusflatbuffers::EntitiesFBST(*o.entities) : nullptr),
+        extended_tweet((o.extended_tweet) ? new tweetstatusflatbuffers::ExtendedTweetFBST(*o.extended_tweet) : nullptr),
+        favorited(o.favorited),
+        retweeted(o.retweeted),
+        possibly_sensitive(o.possibly_sensitive),
+        filter_level(o.filter_level),
+        lang(o.lang),
+        current_user_retweet(o.current_user_retweet),
+        withheld_copyright(o.withheld_copyright),
+        withheld_in_countries(o.withheld_in_countries),
+        withheld_scope(o.withheld_scope),
+        display_text_range(o.display_text_range) {
+  matching_rules.reserve(o.matching_rules.size());
+  for (const auto &matching_rules_ : o.matching_rules) { matching_rules.emplace_back((matching_rules_) ? new tweetstatusflatbuffers::MatchingRulesEntityFBST(*matching_rules_) : nullptr); }
+  scopes.reserve(o.scopes.size());
+  for (const auto &scopes_ : o.scopes) { scopes.emplace_back((scopes_) ? new tweetstatusflatbuffers::MapStringBoolT(*scopes_) : nullptr); }
+}
+
+inline TweetStatusFBST &TweetStatusFBST::operator=(TweetStatusFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(created_at, o.created_at);
+  std::swap(id, o.id);
+  std::swap(id_str, o.id_str);
+  std::swap(text, o.text);
+  std::swap(source, o.source);
+  std::swap(truncated, o.truncated);
+  std::swap(in_reply_to_status_id, o.in_reply_to_status_id);
+  std::swap(in_reply_to_user_id, o.in_reply_to_user_id);
+  std::swap(in_reply_to_screen_name, o.in_reply_to_screen_name);
+  std::swap(user, o.user);
+  std::swap(coordinates, o.coordinates);
+  std::swap(place, o.place);
+  std::swap(quoted_status_id, o.quoted_status_id);
+  std::swap(is_quote_status, o.is_quote_status);
+  std::swap(quoted_status, o.quoted_status);
+  std::swap(retweeted_status, o.retweeted_status);
+  std::swap(quote_count, o.quote_count);
+  std::swap(reply_count, o.reply_count);
+  std::swap(retweet_count, o.retweet_count);
+  std::swap(favorite_count, o.favorite_count);
+  std::swap(entities, o.entities);
+  std::swap(extended_tweet, o.extended_tweet);
+  std::swap(favorited, o.favorited);
+  std::swap(retweeted, o.retweeted);
+  std::swap(possibly_sensitive, o.possibly_sensitive);
+  std::swap(filter_level, o.filter_level);
+  std::swap(lang, o.lang);
+  std::swap(matching_rules, o.matching_rules);
+  std::swap(current_user_retweet, o.current_user_retweet);
+  std::swap(scopes, o.scopes);
+  std::swap(withheld_copyright, o.withheld_copyright);
+  std::swap(withheld_in_countries, o.withheld_in_countries);
+  std::swap(withheld_scope, o.withheld_scope);
+  std::swap(display_text_range, o.display_text_range);
+  return *this;
+}
+
 inline TweetStatusFBST *TweetStatusFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<TweetStatusFBST>(new TweetStatusFBST());
   UnPackTo(_o.get(), _resolver);
@@ -746,36 +857,38 @@ inline void TweetStatusFBS::UnPackTo(TweetStatusFBST *_o, const flatbuffers::res
   (void)_resolver;
   { auto _e = created_at(); if (_e) _o->created_at = _e->str(); }
   { auto _e = id(); _o->id = _e; }
+  { auto _e = id_str(); if (_e) _o->id_str = _e->str(); }
   { auto _e = text(); if (_e) _o->text = _e->str(); }
   { auto _e = source(); if (_e) _o->source = _e->str(); }
   { auto _e = truncated(); _o->truncated = _e; }
   { auto _e = in_reply_to_status_id(); _o->in_reply_to_status_id = _e; }
   { auto _e = in_reply_to_user_id(); _o->in_reply_to_user_id = _e; }
   { auto _e = in_reply_to_screen_name(); if (_e) _o->in_reply_to_screen_name = _e->str(); }
-  { auto _e = user(); if (_e) _o->user = std::unique_ptr<tweetstatusflatbuffers::UserFBST>(_e->UnPack(_resolver)); }
-  { auto _e = coordinates(); if (_e) _o->coordinates = std::unique_ptr<tweetstatusflatbuffers::CoordinatesFBST>(_e->UnPack(_resolver)); }
-  { auto _e = place(); if (_e) _o->place = std::unique_ptr<tweetstatusflatbuffers::PlaceFBST>(_e->UnPack(_resolver)); }
+  { auto _e = user(); if (_e) { if(_o->user) { _e->UnPackTo(_o->user.get(), _resolver); } else { _o->user = std::unique_ptr<tweetstatusflatbuffers::UserFBST>(_e->UnPack(_resolver)); } } else if (_o->user) { _o->user.reset(); } }
+  { auto _e = coordinates(); if (_e) { if(_o->coordinates) { _e->UnPackTo(_o->coordinates.get(), _resolver); } else { _o->coordinates = std::unique_ptr<tweetstatusflatbuffers::CoordinatesFBST>(_e->UnPack(_resolver)); } } else if (_o->coordinates) { _o->coordinates.reset(); } }
+  { auto _e = place(); if (_e) { if(_o->place) { _e->UnPackTo(_o->place.get(), _resolver); } else { _o->place = std::unique_ptr<tweetstatusflatbuffers::PlaceFBST>(_e->UnPack(_resolver)); } } else if (_o->place) { _o->place.reset(); } }
   { auto _e = quoted_status_id(); _o->quoted_status_id = _e; }
   { auto _e = is_quote_status(); _o->is_quote_status = _e; }
-  { auto _e = quoted_status(); if (_e) _o->quoted_status = std::unique_ptr<tweetstatusflatbuffers::TweetStatusFBST>(_e->UnPack(_resolver)); }
-  { auto _e = retweeted_status(); if (_e) _o->retweeted_status = std::unique_ptr<tweetstatusflatbuffers::TweetStatusFBST>(_e->UnPack(_resolver)); }
+  { auto _e = quoted_status(); if (_e) { if(_o->quoted_status) { _e->UnPackTo(_o->quoted_status.get(), _resolver); } else { _o->quoted_status = std::unique_ptr<tweetstatusflatbuffers::TweetStatusFBST>(_e->UnPack(_resolver)); } } else if (_o->quoted_status) { _o->quoted_status.reset(); } }
+  { auto _e = retweeted_status(); if (_e) { if(_o->retweeted_status) { _e->UnPackTo(_o->retweeted_status.get(), _resolver); } else { _o->retweeted_status = std::unique_ptr<tweetstatusflatbuffers::TweetStatusFBST>(_e->UnPack(_resolver)); } } else if (_o->retweeted_status) { _o->retweeted_status.reset(); } }
   { auto _e = quote_count(); _o->quote_count = _e; }
   { auto _e = reply_count(); _o->reply_count = _e; }
   { auto _e = retweet_count(); _o->retweet_count = _e; }
   { auto _e = favorite_count(); _o->favorite_count = _e; }
-  { auto _e = entities(); if (_e) _o->entities = std::unique_ptr<tweetstatusflatbuffers::EntitiesFBST>(_e->UnPack(_resolver)); }
-  { auto _e = extended_entities(); if (_e) _o->extended_entities = std::unique_ptr<tweetstatusflatbuffers::ExtendedEntitiesFBST>(_e->UnPack(_resolver)); }
+  { auto _e = entities(); if (_e) { if(_o->entities) { _e->UnPackTo(_o->entities.get(), _resolver); } else { _o->entities = std::unique_ptr<tweetstatusflatbuffers::EntitiesFBST>(_e->UnPack(_resolver)); } } else if (_o->entities) { _o->entities.reset(); } }
+  { auto _e = extended_tweet(); if (_e) { if(_o->extended_tweet) { _e->UnPackTo(_o->extended_tweet.get(), _resolver); } else { _o->extended_tweet = std::unique_ptr<tweetstatusflatbuffers::ExtendedTweetFBST>(_e->UnPack(_resolver)); } } else if (_o->extended_tweet) { _o->extended_tweet.reset(); } }
   { auto _e = favorited(); _o->favorited = _e; }
   { auto _e = retweeted(); _o->retweeted = _e; }
   { auto _e = possibly_sensitive(); _o->possibly_sensitive = _e; }
   { auto _e = filter_level(); if (_e) _o->filter_level = _e->str(); }
   { auto _e = lang(); if (_e) _o->lang = _e->str(); }
-  { auto _e = matching_rules(); if (_e) { _o->matching_rules.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->matching_rules[_i] = std::unique_ptr<tweetstatusflatbuffers::MatchingRulesEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = matching_rules(); if (_e) { _o->matching_rules.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->matching_rules[_i]) { _e->Get(_i)->UnPackTo(_o->matching_rules[_i].get(), _resolver); } else { _o->matching_rules[_i] = std::unique_ptr<tweetstatusflatbuffers::MatchingRulesEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->matching_rules.resize(0); } }
   { auto _e = current_user_retweet(); _o->current_user_retweet = _e; }
-  { auto _e = scopes(); if (_e) { _o->scopes.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->scopes[_i] = std::unique_ptr<tweetstatusflatbuffers::MapStringBoolT>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = scopes(); if (_e) { _o->scopes.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->scopes[_i]) { _e->Get(_i)->UnPackTo(_o->scopes[_i].get(), _resolver); } else { _o->scopes[_i] = std::unique_ptr<tweetstatusflatbuffers::MapStringBoolT>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->scopes.resize(0); } }
   { auto _e = withheld_copyright(); _o->withheld_copyright = _e; }
-  { auto _e = withheld_in_countries(); if (_e) { _o->withheld_in_countries.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->withheld_in_countries[_i] = _e->Get(_i)->str(); } } }
+  { auto _e = withheld_in_countries(); if (_e) { _o->withheld_in_countries.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->withheld_in_countries[_i] = _e->Get(_i)->str(); } } else { _o->withheld_in_countries.resize(0); } }
   { auto _e = withheld_scope(); if (_e) _o->withheld_scope = _e->str(); }
+  { auto _e = display_text_range(); if (_e) { _o->display_text_range.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->display_text_range[_i] = _e->Get(_i); } } else { _o->display_text_range.resize(0); } }
 }
 
 inline flatbuffers::Offset<TweetStatusFBS> TweetStatusFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const TweetStatusFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -788,6 +901,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(flatbuffers::Fla
   struct _VectorArgs { flatbuffers::FlatBufferBuilder *__fbb; const TweetStatusFBST* __o; const flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
   auto _created_at = _o->created_at.empty() ? 0 : _fbb.CreateString(_o->created_at);
   auto _id = _o->id;
+  auto _id_str = _o->id_str.empty() ? 0 : _fbb.CreateString(_o->id_str);
   auto _text = _o->text.empty() ? 0 : _fbb.CreateString(_o->text);
   auto _source = _o->source.empty() ? 0 : _fbb.CreateString(_o->source);
   auto _truncated = _o->truncated;
@@ -806,7 +920,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(flatbuffers::Fla
   auto _retweet_count = _o->retweet_count;
   auto _favorite_count = _o->favorite_count;
   auto _entities = _o->entities ? CreateEntitiesFBS(_fbb, _o->entities.get(), _rehasher) : 0;
-  auto _extended_entities = _o->extended_entities ? CreateExtendedEntitiesFBS(_fbb, _o->extended_entities.get(), _rehasher) : 0;
+  auto _extended_tweet = _o->extended_tweet ? CreateExtendedTweetFBS(_fbb, _o->extended_tweet.get(), _rehasher) : 0;
   auto _favorited = _o->favorited;
   auto _retweeted = _o->retweeted;
   auto _possibly_sensitive = _o->possibly_sensitive;
@@ -818,10 +932,12 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(flatbuffers::Fla
   auto _withheld_copyright = _o->withheld_copyright;
   auto _withheld_in_countries = _o->withheld_in_countries.size() ? _fbb.CreateVectorOfStrings(_o->withheld_in_countries) : 0;
   auto _withheld_scope = _o->withheld_scope.empty() ? 0 : _fbb.CreateString(_o->withheld_scope);
+  auto _display_text_range = _o->display_text_range.size() ? _fbb.CreateVector(_o->display_text_range) : 0;
   return tweetstatusflatbuffers::CreateTweetStatusFBS(
       _fbb,
       _created_at,
       _id,
+      _id_str,
       _text,
       _source,
       _truncated,
@@ -840,7 +956,7 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(flatbuffers::Fla
       _retweet_count,
       _favorite_count,
       _entities,
-      _extended_entities,
+      _extended_tweet,
       _favorited,
       _retweeted,
       _possibly_sensitive,
@@ -851,7 +967,8 @@ inline flatbuffers::Offset<TweetStatusFBS> CreateTweetStatusFBS(flatbuffers::Fla
       _scopes,
       _withheld_copyright,
       _withheld_in_countries,
-      _withheld_scope);
+      _withheld_scope,
+      _display_text_range);
 }
 
 inline const tweetstatusflatbuffers::TweetStatusFBS *GetTweetStatusFBS(const void *buf) {
@@ -864,6 +981,10 @@ inline const tweetstatusflatbuffers::TweetStatusFBS *GetSizePrefixedTweetStatusF
 
 inline TweetStatusFBS *GetMutableTweetStatusFBS(void *buf) {
   return flatbuffers::GetMutableRoot<TweetStatusFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::TweetStatusFBS *GetMutableSizePrefixedTweetStatusFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::TweetStatusFBS>(buf);
 }
 
 inline bool VerifyTweetStatusFBSBuffer(

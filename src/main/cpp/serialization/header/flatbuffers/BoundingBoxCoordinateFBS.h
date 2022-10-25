@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct BoundingBoxCoordinateFBS;
@@ -24,6 +31,10 @@ struct BoundingBoxCoordinateFBST : public flatbuffers::NativeTable {
   typedef BoundingBoxCoordinateFBS TableType;
   std::string type{};
   std::vector<std::unique_ptr<tweetstatusflatbuffers::DoubleList1T>> coordinates{};
+  BoundingBoxCoordinateFBST() = default;
+  BoundingBoxCoordinateFBST(const BoundingBoxCoordinateFBST &o);
+  BoundingBoxCoordinateFBST(BoundingBoxCoordinateFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  BoundingBoxCoordinateFBST &operator=(BoundingBoxCoordinateFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct BoundingBoxCoordinateFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -107,6 +118,10 @@ flatbuffers::Offset<BoundingBoxCoordinateFBS> CreateBoundingBoxCoordinateFBS(fla
 struct DoubleList1T : public flatbuffers::NativeTable {
   typedef DoubleList1 TableType;
   std::vector<std::unique_ptr<tweetstatusflatbuffers::DoubleList2T>> values{};
+  DoubleList1T() = default;
+  DoubleList1T(const DoubleList1T &o);
+  DoubleList1T(DoubleList1T&&) FLATBUFFERS_NOEXCEPT = default;
+  DoubleList1T &operator=(DoubleList1T o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct DoubleList1 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -235,6 +250,18 @@ inline flatbuffers::Offset<DoubleList2> CreateDoubleList2Direct(
 
 flatbuffers::Offset<DoubleList2> CreateDoubleList2(flatbuffers::FlatBufferBuilder &_fbb, const DoubleList2T *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+inline BoundingBoxCoordinateFBST::BoundingBoxCoordinateFBST(const BoundingBoxCoordinateFBST &o)
+      : type(o.type) {
+  coordinates.reserve(o.coordinates.size());
+  for (const auto &coordinates_ : o.coordinates) { coordinates.emplace_back((coordinates_) ? new tweetstatusflatbuffers::DoubleList1T(*coordinates_) : nullptr); }
+}
+
+inline BoundingBoxCoordinateFBST &BoundingBoxCoordinateFBST::operator=(BoundingBoxCoordinateFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(type, o.type);
+  std::swap(coordinates, o.coordinates);
+  return *this;
+}
+
 inline BoundingBoxCoordinateFBST *BoundingBoxCoordinateFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<BoundingBoxCoordinateFBST>(new BoundingBoxCoordinateFBST());
   UnPackTo(_o.get(), _resolver);
@@ -245,7 +272,7 @@ inline void BoundingBoxCoordinateFBS::UnPackTo(BoundingBoxCoordinateFBST *_o, co
   (void)_o;
   (void)_resolver;
   { auto _e = type(); if (_e) _o->type = _e->str(); }
-  { auto _e = coordinates(); if (_e) { _o->coordinates.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->coordinates[_i] = std::unique_ptr<tweetstatusflatbuffers::DoubleList1T>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = coordinates(); if (_e) { _o->coordinates.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->coordinates[_i]) { _e->Get(_i)->UnPackTo(_o->coordinates[_i].get(), _resolver); } else { _o->coordinates[_i] = std::unique_ptr<tweetstatusflatbuffers::DoubleList1T>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->coordinates.resize(0); } }
 }
 
 inline flatbuffers::Offset<BoundingBoxCoordinateFBS> BoundingBoxCoordinateFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const BoundingBoxCoordinateFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -264,6 +291,16 @@ inline flatbuffers::Offset<BoundingBoxCoordinateFBS> CreateBoundingBoxCoordinate
       _coordinates);
 }
 
+inline DoubleList1T::DoubleList1T(const DoubleList1T &o) {
+  values.reserve(o.values.size());
+  for (const auto &values_ : o.values) { values.emplace_back((values_) ? new tweetstatusflatbuffers::DoubleList2T(*values_) : nullptr); }
+}
+
+inline DoubleList1T &DoubleList1T::operator=(DoubleList1T o) FLATBUFFERS_NOEXCEPT {
+  std::swap(values, o.values);
+  return *this;
+}
+
 inline DoubleList1T *DoubleList1::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<DoubleList1T>(new DoubleList1T());
   UnPackTo(_o.get(), _resolver);
@@ -273,7 +310,7 @@ inline DoubleList1T *DoubleList1::UnPack(const flatbuffers::resolver_function_t 
 inline void DoubleList1::UnPackTo(DoubleList1T *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = values(); if (_e) { _o->values.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->values[_i] = std::unique_ptr<tweetstatusflatbuffers::DoubleList2T>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = values(); if (_e) { _o->values.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->values[_i]) { _e->Get(_i)->UnPackTo(_o->values[_i].get(), _resolver); } else { _o->values[_i] = std::unique_ptr<tweetstatusflatbuffers::DoubleList2T>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->values.resize(0); } }
 }
 
 inline flatbuffers::Offset<DoubleList1> DoubleList1::Pack(flatbuffers::FlatBufferBuilder &_fbb, const DoubleList1T* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -299,7 +336,7 @@ inline DoubleList2T *DoubleList2::UnPack(const flatbuffers::resolver_function_t 
 inline void DoubleList2::UnPackTo(DoubleList2T *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = values(); if (_e) { _o->values.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->values[_i] = _e->Get(_i); } } }
+  { auto _e = values(); if (_e) { _o->values.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->values[_i] = _e->Get(_i); } } else { _o->values.resize(0); } }
 }
 
 inline flatbuffers::Offset<DoubleList2> DoubleList2::Pack(flatbuffers::FlatBufferBuilder &_fbb, const DoubleList2T* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -326,6 +363,10 @@ inline const tweetstatusflatbuffers::BoundingBoxCoordinateFBS *GetSizePrefixedBo
 
 inline BoundingBoxCoordinateFBS *GetMutableBoundingBoxCoordinateFBS(void *buf) {
   return flatbuffers::GetMutableRoot<BoundingBoxCoordinateFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::BoundingBoxCoordinateFBS *GetMutableSizePrefixedBoundingBoxCoordinateFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::BoundingBoxCoordinateFBS>(buf);
 }
 
 inline bool VerifyBoundingBoxCoordinateFBSBuffer(

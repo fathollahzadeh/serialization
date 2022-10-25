@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct OptionEntityFBS;
@@ -28,7 +35,7 @@ struct OptionEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int32_t position() const {
     return GetField<int32_t>(VT_POSITION, 0);
   }
-  bool mutate_position(int32_t _position) {
+  bool mutate_position(int32_t _position = 0) {
     return SetField<int32_t>(VT_POSITION, _position, 0);
   }
   const flatbuffers::String *text() const {
@@ -39,7 +46,7 @@ struct OptionEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<int32_t>(verifier, VT_POSITION) &&
+           VerifyField<int32_t>(verifier, VT_POSITION, 4) &&
            VerifyOffset(verifier, VT_TEXT) &&
            verifier.VerifyString(text()) &&
            verifier.EndTable();
@@ -132,6 +139,10 @@ inline const tweetstatusflatbuffers::OptionEntityFBS *GetSizePrefixedOptionEntit
 
 inline OptionEntityFBS *GetMutableOptionEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<OptionEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::OptionEntityFBS *GetMutableSizePrefixedOptionEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::OptionEntityFBS>(buf);
 }
 
 inline bool VerifyOptionEntityFBSBuffer(

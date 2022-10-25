@@ -4,8 +4,8 @@ include "Entities.fbs";
 namespace tweetstatusflatbuffers;
 
 table ExtendedTweetFBS {
-    fullText:string;
-    displayTextRange:[int];
+    full_text:string;
+    display_text_range:[int];
     entities:EntitiesFBS;
     extended_entities:ExtendedEntitiesFBS;
 }

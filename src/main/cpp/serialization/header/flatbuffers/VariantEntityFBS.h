@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct VariantEntityFBS;
@@ -30,7 +37,7 @@ struct VariantEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int64_t bitrate() const {
     return GetField<int64_t>(VT_BITRATE, 0);
   }
-  bool mutate_bitrate(int64_t _bitrate) {
+  bool mutate_bitrate(int64_t _bitrate = 0) {
     return SetField<int64_t>(VT_BITRATE, _bitrate, 0);
   }
   const flatbuffers::String *content_type() const {
@@ -47,7 +54,7 @@ struct VariantEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<int64_t>(verifier, VT_BITRATE) &&
+           VerifyField<int64_t>(verifier, VT_BITRATE, 8) &&
            VerifyOffset(verifier, VT_CONTENT_TYPE) &&
            verifier.VerifyString(content_type()) &&
            VerifyOffset(verifier, VT_URL) &&
@@ -153,6 +160,10 @@ inline const tweetstatusflatbuffers::VariantEntityFBS *GetSizePrefixedVariantEnt
 
 inline VariantEntityFBS *GetMutableVariantEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<VariantEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::VariantEntityFBS *GetMutableSizePrefixedVariantEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::VariantEntityFBS>(buf);
 }
 
 inline bool VerifyVariantEntityFBSBuffer(

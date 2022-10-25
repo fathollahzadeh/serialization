@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct UserMentionEntityFBS;
@@ -34,7 +41,7 @@ struct UserMentionEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table
   int64_t id() const {
     return GetField<int64_t>(VT_ID, 0);
   }
-  bool mutate_id(int64_t _id) {
+  bool mutate_id(int64_t _id = 0) {
     return SetField<int64_t>(VT_ID, _id, 0);
   }
   const flatbuffers::String *id_str() const {
@@ -63,7 +70,7 @@ struct UserMentionEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<int64_t>(verifier, VT_ID) &&
+           VerifyField<int64_t>(verifier, VT_ID, 8) &&
            VerifyOffset(verifier, VT_ID_STR) &&
            verifier.VerifyString(id_str()) &&
            VerifyOffset(verifier, VT_INDICES) &&
@@ -158,7 +165,7 @@ inline void UserMentionEntityFBS::UnPackTo(UserMentionEntityFBST *_o, const flat
   (void)_resolver;
   { auto _e = id(); _o->id = _e; }
   { auto _e = id_str(); if (_e) _o->id_str = _e->str(); }
-  { auto _e = indices(); if (_e) { _o->indices.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->indices[_i] = _e->Get(_i); } } }
+  { auto _e = indices(); if (_e) { _o->indices.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->indices[_i] = _e->Get(_i); } } else { _o->indices.resize(0); } }
   { auto _e = name(); if (_e) _o->name = _e->str(); }
   { auto _e = screen_name(); if (_e) _o->screen_name = _e->str(); }
 }
@@ -195,6 +202,10 @@ inline const tweetstatusflatbuffers::UserMentionEntityFBS *GetSizePrefixedUserMe
 
 inline UserMentionEntityFBS *GetMutableUserMentionEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<UserMentionEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::UserMentionEntityFBS *GetMutableSizePrefixedUserMentionEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::UserMentionEntityFBS>(buf);
 }
 
 inline bool VerifyUserMentionEntityFBSBuffer(

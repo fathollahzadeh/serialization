@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
-flatc_path="/home/saeed/Apps/serialization_packages/Linux.flatc.binary.clang++-9/flatc"
-$flatc_path --cpp --gen-mutable --gen-object-api --filename-suffix FBS -o serialization/header/flatbuffers serialization/source/flatbuffers/*.fbs
+
+flatc_path="/home/saeed/Apps/flatc"
+SRC_DIR="src/main/cpp/serialization/source/flatbuffers"
+DST_DIR="src/main/cpp/serialization/source/flatbuffers"
+
+/home/saeed/Apps/flatc --cpp --gen-mutable --gen-object-api --filename-suffix FBS  src/main/cpp/serialization/source/flatbuffers/*.fbs
+
 #mv *generated.h src/serialization/source/flatbuffers
 #rm -rf edu
+
+
+

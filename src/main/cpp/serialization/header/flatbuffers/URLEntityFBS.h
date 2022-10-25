@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct URLEntityFBS;
@@ -140,7 +147,7 @@ inline URLEntityFBST *URLEntityFBS::UnPack(const flatbuffers::resolver_function_
 inline void URLEntityFBS::UnPackTo(URLEntityFBST *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = indices(); if (_e) { _o->indices.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->indices[_i] = _e->Get(_i); } } }
+  { auto _e = indices(); if (_e) { _o->indices.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->indices[_i] = _e->Get(_i); } } else { _o->indices.resize(0); } }
   { auto _e = display_url(); if (_e) _o->display_url = _e->str(); }
   { auto _e = expanded_url(); if (_e) _o->expanded_url = _e->str(); }
   { auto _e = url(); if (_e) _o->url = _e->str(); }
@@ -176,6 +183,10 @@ inline const tweetstatusflatbuffers::URLEntityFBS *GetSizePrefixedURLEntityFBS(c
 
 inline URLEntityFBS *GetMutableURLEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<URLEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::URLEntityFBS *GetMutableSizePrefixedURLEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::URLEntityFBS>(buf);
 }
 
 inline bool VerifyURLEntityFBSBuffer(

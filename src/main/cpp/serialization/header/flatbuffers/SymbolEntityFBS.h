@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 namespace tweetstatusflatbuffers {
 
 struct SymbolEntityFBS;
@@ -104,7 +111,7 @@ inline SymbolEntityFBST *SymbolEntityFBS::UnPack(const flatbuffers::resolver_fun
 inline void SymbolEntityFBS::UnPackTo(SymbolEntityFBST *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = indices(); if (_e) { _o->indices.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->indices[_i] = _e->Get(_i); } } }
+  { auto _e = indices(); if (_e) { _o->indices.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->indices[_i] = _e->Get(_i); } } else { _o->indices.resize(0); } }
   { auto _e = text(); if (_e) _o->text = _e->str(); }
 }
 
@@ -134,6 +141,10 @@ inline const tweetstatusflatbuffers::SymbolEntityFBS *GetSizePrefixedSymbolEntit
 
 inline SymbolEntityFBS *GetMutableSymbolEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<SymbolEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::SymbolEntityFBS *GetMutableSizePrefixedSymbolEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::SymbolEntityFBS>(buf);
 }
 
 inline bool VerifySymbolEntityFBSBuffer(

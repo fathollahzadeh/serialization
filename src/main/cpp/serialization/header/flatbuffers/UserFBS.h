@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "URLEntityFBS.h"
 
 namespace tweetstatusflatbuffers {
@@ -17,12 +24,13 @@ struct UserFBST;
 struct UserFBST : public flatbuffers::NativeTable {
   typedef UserFBS TableType;
   int64_t id = 0;
+  std::string id_str{};
   std::string name{};
   std::string screen_name{};
   std::string location{};
   std::string url{};
   std::string description{};
-  bool isProtected = false;
+  bool is_protected = false;
   bool verified = false;
   int32_t followers_count = 0;
   int32_t friends_count = 0;
@@ -35,7 +43,7 @@ struct UserFBST : public flatbuffers::NativeTable {
   bool default_profile = false;
   std::vector<std::string> withheld_in_countries{};
   std::string withheld_scope{};
-  std::vector<std::unique_ptr<tweetstatusflatbuffers::URLEntityFBST>> descriptionURLEntities{};
+  std::vector<std::unique_ptr<tweetstatusflatbuffers::URLEntityFBST>> description_url_entities{};
   bool geo_enabled = false;
   std::string lang{};
   bool contributors_enabled = false;
@@ -53,7 +61,11 @@ struct UserFBST : public flatbuffers::NativeTable {
   std::string time_zone{};
   bool is_translator = false;
   bool follow_request_sent = false;
-  bool showAllInlineMedia = false;
+  bool show_all_inline_media = false;
+  UserFBST() = default;
+  UserFBST(const UserFBST &o);
+  UserFBST(UserFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  UserFBST &operator=(UserFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -61,49 +73,56 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef UserFBSBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_ID = 4,
-    VT_NAME = 6,
-    VT_SCREEN_NAME = 8,
-    VT_LOCATION = 10,
-    VT_URL = 12,
-    VT_DESCRIPTION = 14,
-    VT_ISPROTECTED = 16,
-    VT_VERIFIED = 18,
-    VT_FOLLOWERS_COUNT = 20,
-    VT_FRIENDS_COUNT = 22,
-    VT_LISTED_COUNT = 24,
-    VT_FAVOURITES_COUNT = 26,
-    VT_STATUSES_COUNT = 28,
-    VT_CREATED_AT = 30,
-    VT_PROFILE_BANNER_URL = 32,
-    VT_PROFILE_IMAGE_URL_HTTPS = 34,
-    VT_DEFAULT_PROFILE = 36,
-    VT_WITHHELD_IN_COUNTRIES = 38,
-    VT_WITHHELD_SCOPE = 40,
-    VT_DESCRIPTIONURLENTITIES = 42,
-    VT_GEO_ENABLED = 44,
-    VT_LANG = 46,
-    VT_CONTRIBUTORS_ENABLED = 48,
-    VT_PROFILE_BACKGROUND_COLOR = 50,
-    VT_PROFILE_BACKGROUND_IMAGE_URL = 52,
-    VT_PROFILE_BACKGROUND_IMAGE_URL_HTTPS = 54,
-    VT_PROFILE_BACKGROUND_TILE = 56,
-    VT_PROFILE_IMAGE_URL = 58,
-    VT_PROFILE_LINK_COLOR = 60,
-    VT_PROFILE_SIDEBAR_BORDER_COLOR = 62,
-    VT_PROFILE_SIDEBAR_FILL_COLOR = 64,
-    VT_PROFILE_TEXT_COLOR = 66,
-    VT_PROFILE_USE_BACKGROUND_IMAGE = 68,
-    VT_UTC_OFFSET = 70,
-    VT_TIME_ZONE = 72,
-    VT_IS_TRANSLATOR = 74,
-    VT_FOLLOW_REQUEST_SENT = 76,
-    VT_SHOWALLINLINEMEDIA = 78
+    VT_ID_STR = 6,
+    VT_NAME = 8,
+    VT_SCREEN_NAME = 10,
+    VT_LOCATION = 12,
+    VT_URL = 14,
+    VT_DESCRIPTION = 16,
+    VT_IS_PROTECTED = 18,
+    VT_VERIFIED = 20,
+    VT_FOLLOWERS_COUNT = 22,
+    VT_FRIENDS_COUNT = 24,
+    VT_LISTED_COUNT = 26,
+    VT_FAVOURITES_COUNT = 28,
+    VT_STATUSES_COUNT = 30,
+    VT_CREATED_AT = 32,
+    VT_PROFILE_BANNER_URL = 34,
+    VT_PROFILE_IMAGE_URL_HTTPS = 36,
+    VT_DEFAULT_PROFILE = 38,
+    VT_WITHHELD_IN_COUNTRIES = 40,
+    VT_WITHHELD_SCOPE = 42,
+    VT_DESCRIPTION_URL_ENTITIES = 44,
+    VT_GEO_ENABLED = 46,
+    VT_LANG = 48,
+    VT_CONTRIBUTORS_ENABLED = 50,
+    VT_PROFILE_BACKGROUND_COLOR = 52,
+    VT_PROFILE_BACKGROUND_IMAGE_URL = 54,
+    VT_PROFILE_BACKGROUND_IMAGE_URL_HTTPS = 56,
+    VT_PROFILE_BACKGROUND_TILE = 58,
+    VT_PROFILE_IMAGE_URL = 60,
+    VT_PROFILE_LINK_COLOR = 62,
+    VT_PROFILE_SIDEBAR_BORDER_COLOR = 64,
+    VT_PROFILE_SIDEBAR_FILL_COLOR = 66,
+    VT_PROFILE_TEXT_COLOR = 68,
+    VT_PROFILE_USE_BACKGROUND_IMAGE = 70,
+    VT_UTC_OFFSET = 72,
+    VT_TIME_ZONE = 74,
+    VT_IS_TRANSLATOR = 76,
+    VT_FOLLOW_REQUEST_SENT = 78,
+    VT_SHOW_ALL_INLINE_MEDIA = 80
   };
   int64_t id() const {
     return GetField<int64_t>(VT_ID, 0);
   }
-  bool mutate_id(int64_t _id) {
+  bool mutate_id(int64_t _id = 0) {
     return SetField<int64_t>(VT_ID, _id, 0);
+  }
+  const flatbuffers::String *id_str() const {
+    return GetPointer<const flatbuffers::String *>(VT_ID_STR);
+  }
+  flatbuffers::String *mutable_id_str() {
+    return GetPointer<flatbuffers::String *>(VT_ID_STR);
   }
   const flatbuffers::String *name() const {
     return GetPointer<const flatbuffers::String *>(VT_NAME);
@@ -135,46 +154,46 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   flatbuffers::String *mutable_description() {
     return GetPointer<flatbuffers::String *>(VT_DESCRIPTION);
   }
-  bool isProtected() const {
-    return GetField<uint8_t>(VT_ISPROTECTED, 0) != 0;
+  bool is_protected() const {
+    return GetField<uint8_t>(VT_IS_PROTECTED, 0) != 0;
   }
-  bool mutate_isProtected(bool _isProtected) {
-    return SetField<uint8_t>(VT_ISPROTECTED, static_cast<uint8_t>(_isProtected), 0);
+  bool mutate_is_protected(bool _is_protected = 0) {
+    return SetField<uint8_t>(VT_IS_PROTECTED, static_cast<uint8_t>(_is_protected), 0);
   }
   bool verified() const {
     return GetField<uint8_t>(VT_VERIFIED, 0) != 0;
   }
-  bool mutate_verified(bool _verified) {
+  bool mutate_verified(bool _verified = 0) {
     return SetField<uint8_t>(VT_VERIFIED, static_cast<uint8_t>(_verified), 0);
   }
   int32_t followers_count() const {
     return GetField<int32_t>(VT_FOLLOWERS_COUNT, 0);
   }
-  bool mutate_followers_count(int32_t _followers_count) {
+  bool mutate_followers_count(int32_t _followers_count = 0) {
     return SetField<int32_t>(VT_FOLLOWERS_COUNT, _followers_count, 0);
   }
   int32_t friends_count() const {
     return GetField<int32_t>(VT_FRIENDS_COUNT, 0);
   }
-  bool mutate_friends_count(int32_t _friends_count) {
+  bool mutate_friends_count(int32_t _friends_count = 0) {
     return SetField<int32_t>(VT_FRIENDS_COUNT, _friends_count, 0);
   }
   int32_t listed_count() const {
     return GetField<int32_t>(VT_LISTED_COUNT, 0);
   }
-  bool mutate_listed_count(int32_t _listed_count) {
+  bool mutate_listed_count(int32_t _listed_count = 0) {
     return SetField<int32_t>(VT_LISTED_COUNT, _listed_count, 0);
   }
   int32_t favourites_count() const {
     return GetField<int32_t>(VT_FAVOURITES_COUNT, 0);
   }
-  bool mutate_favourites_count(int32_t _favourites_count) {
+  bool mutate_favourites_count(int32_t _favourites_count = 0) {
     return SetField<int32_t>(VT_FAVOURITES_COUNT, _favourites_count, 0);
   }
   int32_t statuses_count() const {
     return GetField<int32_t>(VT_STATUSES_COUNT, 0);
   }
-  bool mutate_statuses_count(int32_t _statuses_count) {
+  bool mutate_statuses_count(int32_t _statuses_count = 0) {
     return SetField<int32_t>(VT_STATUSES_COUNT, _statuses_count, 0);
   }
   const flatbuffers::String *created_at() const {
@@ -198,7 +217,7 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool default_profile() const {
     return GetField<uint8_t>(VT_DEFAULT_PROFILE, 0) != 0;
   }
-  bool mutate_default_profile(bool _default_profile) {
+  bool mutate_default_profile(bool _default_profile = 0) {
     return SetField<uint8_t>(VT_DEFAULT_PROFILE, static_cast<uint8_t>(_default_profile), 0);
   }
   const flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>> *withheld_in_countries() const {
@@ -213,16 +232,16 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   flatbuffers::String *mutable_withheld_scope() {
     return GetPointer<flatbuffers::String *>(VT_WITHHELD_SCOPE);
   }
-  const flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *descriptionURLEntities() const {
-    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *>(VT_DESCRIPTIONURLENTITIES);
+  const flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *description_url_entities() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *>(VT_DESCRIPTION_URL_ENTITIES);
   }
-  flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *mutable_descriptionURLEntities() {
-    return GetPointer<flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *>(VT_DESCRIPTIONURLENTITIES);
+  flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *mutable_description_url_entities() {
+    return GetPointer<flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *>(VT_DESCRIPTION_URL_ENTITIES);
   }
   bool geo_enabled() const {
     return GetField<uint8_t>(VT_GEO_ENABLED, 0) != 0;
   }
-  bool mutate_geo_enabled(bool _geo_enabled) {
+  bool mutate_geo_enabled(bool _geo_enabled = 0) {
     return SetField<uint8_t>(VT_GEO_ENABLED, static_cast<uint8_t>(_geo_enabled), 0);
   }
   const flatbuffers::String *lang() const {
@@ -234,7 +253,7 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool contributors_enabled() const {
     return GetField<uint8_t>(VT_CONTRIBUTORS_ENABLED, 0) != 0;
   }
-  bool mutate_contributors_enabled(bool _contributors_enabled) {
+  bool mutate_contributors_enabled(bool _contributors_enabled = 0) {
     return SetField<uint8_t>(VT_CONTRIBUTORS_ENABLED, static_cast<uint8_t>(_contributors_enabled), 0);
   }
   const flatbuffers::String *profile_background_color() const {
@@ -258,7 +277,7 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool profile_background_tile() const {
     return GetField<uint8_t>(VT_PROFILE_BACKGROUND_TILE, 0) != 0;
   }
-  bool mutate_profile_background_tile(bool _profile_background_tile) {
+  bool mutate_profile_background_tile(bool _profile_background_tile = 0) {
     return SetField<uint8_t>(VT_PROFILE_BACKGROUND_TILE, static_cast<uint8_t>(_profile_background_tile), 0);
   }
   const flatbuffers::String *profile_image_url() const {
@@ -294,13 +313,13 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool profile_use_background_image() const {
     return GetField<uint8_t>(VT_PROFILE_USE_BACKGROUND_IMAGE, 0) != 0;
   }
-  bool mutate_profile_use_background_image(bool _profile_use_background_image) {
+  bool mutate_profile_use_background_image(bool _profile_use_background_image = 0) {
     return SetField<uint8_t>(VT_PROFILE_USE_BACKGROUND_IMAGE, static_cast<uint8_t>(_profile_use_background_image), 0);
   }
   int32_t utc_offset() const {
     return GetField<int32_t>(VT_UTC_OFFSET, 0);
   }
-  bool mutate_utc_offset(int32_t _utc_offset) {
+  bool mutate_utc_offset(int32_t _utc_offset = 0) {
     return SetField<int32_t>(VT_UTC_OFFSET, _utc_offset, 0);
   }
   const flatbuffers::String *time_zone() const {
@@ -312,24 +331,26 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool is_translator() const {
     return GetField<uint8_t>(VT_IS_TRANSLATOR, 0) != 0;
   }
-  bool mutate_is_translator(bool _is_translator) {
+  bool mutate_is_translator(bool _is_translator = 0) {
     return SetField<uint8_t>(VT_IS_TRANSLATOR, static_cast<uint8_t>(_is_translator), 0);
   }
   bool follow_request_sent() const {
     return GetField<uint8_t>(VT_FOLLOW_REQUEST_SENT, 0) != 0;
   }
-  bool mutate_follow_request_sent(bool _follow_request_sent) {
+  bool mutate_follow_request_sent(bool _follow_request_sent = 0) {
     return SetField<uint8_t>(VT_FOLLOW_REQUEST_SENT, static_cast<uint8_t>(_follow_request_sent), 0);
   }
-  bool showAllInlineMedia() const {
-    return GetField<uint8_t>(VT_SHOWALLINLINEMEDIA, 0) != 0;
+  bool show_all_inline_media() const {
+    return GetField<uint8_t>(VT_SHOW_ALL_INLINE_MEDIA, 0) != 0;
   }
-  bool mutate_showAllInlineMedia(bool _showAllInlineMedia) {
-    return SetField<uint8_t>(VT_SHOWALLINLINEMEDIA, static_cast<uint8_t>(_showAllInlineMedia), 0);
+  bool mutate_show_all_inline_media(bool _show_all_inline_media = 0) {
+    return SetField<uint8_t>(VT_SHOW_ALL_INLINE_MEDIA, static_cast<uint8_t>(_show_all_inline_media), 0);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<int64_t>(verifier, VT_ID) &&
+           VerifyField<int64_t>(verifier, VT_ID, 8) &&
+           VerifyOffset(verifier, VT_ID_STR) &&
+           verifier.VerifyString(id_str()) &&
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
            VerifyOffset(verifier, VT_SCREEN_NAME) &&
@@ -340,39 +361,39 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            verifier.VerifyString(url()) &&
            VerifyOffset(verifier, VT_DESCRIPTION) &&
            verifier.VerifyString(description()) &&
-           VerifyField<uint8_t>(verifier, VT_ISPROTECTED) &&
-           VerifyField<uint8_t>(verifier, VT_VERIFIED) &&
-           VerifyField<int32_t>(verifier, VT_FOLLOWERS_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_FRIENDS_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_LISTED_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_FAVOURITES_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_STATUSES_COUNT) &&
+           VerifyField<uint8_t>(verifier, VT_IS_PROTECTED, 1) &&
+           VerifyField<uint8_t>(verifier, VT_VERIFIED, 1) &&
+           VerifyField<int32_t>(verifier, VT_FOLLOWERS_COUNT, 4) &&
+           VerifyField<int32_t>(verifier, VT_FRIENDS_COUNT, 4) &&
+           VerifyField<int32_t>(verifier, VT_LISTED_COUNT, 4) &&
+           VerifyField<int32_t>(verifier, VT_FAVOURITES_COUNT, 4) &&
+           VerifyField<int32_t>(verifier, VT_STATUSES_COUNT, 4) &&
            VerifyOffset(verifier, VT_CREATED_AT) &&
            verifier.VerifyString(created_at()) &&
            VerifyOffset(verifier, VT_PROFILE_BANNER_URL) &&
            verifier.VerifyString(profile_banner_url()) &&
            VerifyOffset(verifier, VT_PROFILE_IMAGE_URL_HTTPS) &&
            verifier.VerifyString(profile_image_url_https()) &&
-           VerifyField<uint8_t>(verifier, VT_DEFAULT_PROFILE) &&
+           VerifyField<uint8_t>(verifier, VT_DEFAULT_PROFILE, 1) &&
            VerifyOffset(verifier, VT_WITHHELD_IN_COUNTRIES) &&
            verifier.VerifyVector(withheld_in_countries()) &&
            verifier.VerifyVectorOfStrings(withheld_in_countries()) &&
            VerifyOffset(verifier, VT_WITHHELD_SCOPE) &&
            verifier.VerifyString(withheld_scope()) &&
-           VerifyOffset(verifier, VT_DESCRIPTIONURLENTITIES) &&
-           verifier.VerifyVector(descriptionURLEntities()) &&
-           verifier.VerifyVectorOfTables(descriptionURLEntities()) &&
-           VerifyField<uint8_t>(verifier, VT_GEO_ENABLED) &&
+           VerifyOffset(verifier, VT_DESCRIPTION_URL_ENTITIES) &&
+           verifier.VerifyVector(description_url_entities()) &&
+           verifier.VerifyVectorOfTables(description_url_entities()) &&
+           VerifyField<uint8_t>(verifier, VT_GEO_ENABLED, 1) &&
            VerifyOffset(verifier, VT_LANG) &&
            verifier.VerifyString(lang()) &&
-           VerifyField<uint8_t>(verifier, VT_CONTRIBUTORS_ENABLED) &&
+           VerifyField<uint8_t>(verifier, VT_CONTRIBUTORS_ENABLED, 1) &&
            VerifyOffset(verifier, VT_PROFILE_BACKGROUND_COLOR) &&
            verifier.VerifyString(profile_background_color()) &&
            VerifyOffset(verifier, VT_PROFILE_BACKGROUND_IMAGE_URL) &&
            verifier.VerifyString(profile_background_image_url()) &&
            VerifyOffset(verifier, VT_PROFILE_BACKGROUND_IMAGE_URL_HTTPS) &&
            verifier.VerifyString(profile_background_image_url_https()) &&
-           VerifyField<uint8_t>(verifier, VT_PROFILE_BACKGROUND_TILE) &&
+           VerifyField<uint8_t>(verifier, VT_PROFILE_BACKGROUND_TILE, 1) &&
            VerifyOffset(verifier, VT_PROFILE_IMAGE_URL) &&
            verifier.VerifyString(profile_image_url()) &&
            VerifyOffset(verifier, VT_PROFILE_LINK_COLOR) &&
@@ -383,13 +404,13 @@ struct UserFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            verifier.VerifyString(profile_sidebar_fill_color()) &&
            VerifyOffset(verifier, VT_PROFILE_TEXT_COLOR) &&
            verifier.VerifyString(profile_text_color()) &&
-           VerifyField<uint8_t>(verifier, VT_PROFILE_USE_BACKGROUND_IMAGE) &&
-           VerifyField<int32_t>(verifier, VT_UTC_OFFSET) &&
+           VerifyField<uint8_t>(verifier, VT_PROFILE_USE_BACKGROUND_IMAGE, 1) &&
+           VerifyField<int32_t>(verifier, VT_UTC_OFFSET, 4) &&
            VerifyOffset(verifier, VT_TIME_ZONE) &&
            verifier.VerifyString(time_zone()) &&
-           VerifyField<uint8_t>(verifier, VT_IS_TRANSLATOR) &&
-           VerifyField<uint8_t>(verifier, VT_FOLLOW_REQUEST_SENT) &&
-           VerifyField<uint8_t>(verifier, VT_SHOWALLINLINEMEDIA) &&
+           VerifyField<uint8_t>(verifier, VT_IS_TRANSLATOR, 1) &&
+           VerifyField<uint8_t>(verifier, VT_FOLLOW_REQUEST_SENT, 1) &&
+           VerifyField<uint8_t>(verifier, VT_SHOW_ALL_INLINE_MEDIA, 1) &&
            verifier.EndTable();
   }
   UserFBST *UnPack(const flatbuffers::resolver_function_t *_resolver = nullptr) const;
@@ -403,6 +424,9 @@ struct UserFBSBuilder {
   flatbuffers::uoffset_t start_;
   void add_id(int64_t id) {
     fbb_.AddElement<int64_t>(UserFBS::VT_ID, id, 0);
+  }
+  void add_id_str(flatbuffers::Offset<flatbuffers::String> id_str) {
+    fbb_.AddOffset(UserFBS::VT_ID_STR, id_str);
   }
   void add_name(flatbuffers::Offset<flatbuffers::String> name) {
     fbb_.AddOffset(UserFBS::VT_NAME, name);
@@ -419,8 +443,8 @@ struct UserFBSBuilder {
   void add_description(flatbuffers::Offset<flatbuffers::String> description) {
     fbb_.AddOffset(UserFBS::VT_DESCRIPTION, description);
   }
-  void add_isProtected(bool isProtected) {
-    fbb_.AddElement<uint8_t>(UserFBS::VT_ISPROTECTED, static_cast<uint8_t>(isProtected), 0);
+  void add_is_protected(bool is_protected) {
+    fbb_.AddElement<uint8_t>(UserFBS::VT_IS_PROTECTED, static_cast<uint8_t>(is_protected), 0);
   }
   void add_verified(bool verified) {
     fbb_.AddElement<uint8_t>(UserFBS::VT_VERIFIED, static_cast<uint8_t>(verified), 0);
@@ -458,8 +482,8 @@ struct UserFBSBuilder {
   void add_withheld_scope(flatbuffers::Offset<flatbuffers::String> withheld_scope) {
     fbb_.AddOffset(UserFBS::VT_WITHHELD_SCOPE, withheld_scope);
   }
-  void add_descriptionURLEntities(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>>> descriptionURLEntities) {
-    fbb_.AddOffset(UserFBS::VT_DESCRIPTIONURLENTITIES, descriptionURLEntities);
+  void add_description_url_entities(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>>> description_url_entities) {
+    fbb_.AddOffset(UserFBS::VT_DESCRIPTION_URL_ENTITIES, description_url_entities);
   }
   void add_geo_enabled(bool geo_enabled) {
     fbb_.AddElement<uint8_t>(UserFBS::VT_GEO_ENABLED, static_cast<uint8_t>(geo_enabled), 0);
@@ -512,8 +536,8 @@ struct UserFBSBuilder {
   void add_follow_request_sent(bool follow_request_sent) {
     fbb_.AddElement<uint8_t>(UserFBS::VT_FOLLOW_REQUEST_SENT, static_cast<uint8_t>(follow_request_sent), 0);
   }
-  void add_showAllInlineMedia(bool showAllInlineMedia) {
-    fbb_.AddElement<uint8_t>(UserFBS::VT_SHOWALLINLINEMEDIA, static_cast<uint8_t>(showAllInlineMedia), 0);
+  void add_show_all_inline_media(bool show_all_inline_media) {
+    fbb_.AddElement<uint8_t>(UserFBS::VT_SHOW_ALL_INLINE_MEDIA, static_cast<uint8_t>(show_all_inline_media), 0);
   }
   explicit UserFBSBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -529,12 +553,13 @@ struct UserFBSBuilder {
 inline flatbuffers::Offset<UserFBS> CreateUserFBS(
     flatbuffers::FlatBufferBuilder &_fbb,
     int64_t id = 0,
+    flatbuffers::Offset<flatbuffers::String> id_str = 0,
     flatbuffers::Offset<flatbuffers::String> name = 0,
     flatbuffers::Offset<flatbuffers::String> screen_name = 0,
     flatbuffers::Offset<flatbuffers::String> location = 0,
     flatbuffers::Offset<flatbuffers::String> url = 0,
     flatbuffers::Offset<flatbuffers::String> description = 0,
-    bool isProtected = false,
+    bool is_protected = false,
     bool verified = false,
     int32_t followers_count = 0,
     int32_t friends_count = 0,
@@ -547,7 +572,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(
     bool default_profile = false,
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>>> withheld_in_countries = 0,
     flatbuffers::Offset<flatbuffers::String> withheld_scope = 0,
-    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>>> descriptionURLEntities = 0,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>>> description_url_entities = 0,
     bool geo_enabled = false,
     flatbuffers::Offset<flatbuffers::String> lang = 0,
     bool contributors_enabled = false,
@@ -565,7 +590,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(
     flatbuffers::Offset<flatbuffers::String> time_zone = 0,
     bool is_translator = false,
     bool follow_request_sent = false,
-    bool showAllInlineMedia = false) {
+    bool show_all_inline_media = false) {
   UserFBSBuilder builder_(_fbb);
   builder_.add_id(id);
   builder_.add_time_zone(time_zone);
@@ -579,7 +604,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(
   builder_.add_profile_background_image_url(profile_background_image_url);
   builder_.add_profile_background_color(profile_background_color);
   builder_.add_lang(lang);
-  builder_.add_descriptionURLEntities(descriptionURLEntities);
+  builder_.add_description_url_entities(description_url_entities);
   builder_.add_withheld_scope(withheld_scope);
   builder_.add_withheld_in_countries(withheld_in_countries);
   builder_.add_profile_image_url_https(profile_image_url_https);
@@ -595,7 +620,8 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(
   builder_.add_location(location);
   builder_.add_screen_name(screen_name);
   builder_.add_name(name);
-  builder_.add_showAllInlineMedia(showAllInlineMedia);
+  builder_.add_id_str(id_str);
+  builder_.add_show_all_inline_media(show_all_inline_media);
   builder_.add_follow_request_sent(follow_request_sent);
   builder_.add_is_translator(is_translator);
   builder_.add_profile_use_background_image(profile_use_background_image);
@@ -604,19 +630,20 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(
   builder_.add_geo_enabled(geo_enabled);
   builder_.add_default_profile(default_profile);
   builder_.add_verified(verified);
-  builder_.add_isProtected(isProtected);
+  builder_.add_is_protected(is_protected);
   return builder_.Finish();
 }
 
 inline flatbuffers::Offset<UserFBS> CreateUserFBSDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
     int64_t id = 0,
+    const char *id_str = nullptr,
     const char *name = nullptr,
     const char *screen_name = nullptr,
     const char *location = nullptr,
     const char *url = nullptr,
     const char *description = nullptr,
-    bool isProtected = false,
+    bool is_protected = false,
     bool verified = false,
     int32_t followers_count = 0,
     int32_t friends_count = 0,
@@ -629,7 +656,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBSDirect(
     bool default_profile = false,
     const std::vector<flatbuffers::Offset<flatbuffers::String>> *withheld_in_countries = nullptr,
     const char *withheld_scope = nullptr,
-    const std::vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *descriptionURLEntities = nullptr,
+    const std::vector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> *description_url_entities = nullptr,
     bool geo_enabled = false,
     const char *lang = nullptr,
     bool contributors_enabled = false,
@@ -647,7 +674,8 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBSDirect(
     const char *time_zone = nullptr,
     bool is_translator = false,
     bool follow_request_sent = false,
-    bool showAllInlineMedia = false) {
+    bool show_all_inline_media = false) {
+  auto id_str__ = id_str ? _fbb.CreateString(id_str) : 0;
   auto name__ = name ? _fbb.CreateString(name) : 0;
   auto screen_name__ = screen_name ? _fbb.CreateString(screen_name) : 0;
   auto location__ = location ? _fbb.CreateString(location) : 0;
@@ -658,7 +686,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBSDirect(
   auto profile_image_url_https__ = profile_image_url_https ? _fbb.CreateString(profile_image_url_https) : 0;
   auto withheld_in_countries__ = withheld_in_countries ? _fbb.CreateVector<flatbuffers::Offset<flatbuffers::String>>(*withheld_in_countries) : 0;
   auto withheld_scope__ = withheld_scope ? _fbb.CreateString(withheld_scope) : 0;
-  auto descriptionURLEntities__ = descriptionURLEntities ? _fbb.CreateVector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>>(*descriptionURLEntities) : 0;
+  auto description_url_entities__ = description_url_entities ? _fbb.CreateVector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>>(*description_url_entities) : 0;
   auto lang__ = lang ? _fbb.CreateString(lang) : 0;
   auto profile_background_color__ = profile_background_color ? _fbb.CreateString(profile_background_color) : 0;
   auto profile_background_image_url__ = profile_background_image_url ? _fbb.CreateString(profile_background_image_url) : 0;
@@ -672,12 +700,13 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBSDirect(
   return tweetstatusflatbuffers::CreateUserFBS(
       _fbb,
       id,
+      id_str__,
       name__,
       screen_name__,
       location__,
       url__,
       description__,
-      isProtected,
+      is_protected,
       verified,
       followers_count,
       friends_count,
@@ -690,7 +719,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBSDirect(
       default_profile,
       withheld_in_countries__,
       withheld_scope__,
-      descriptionURLEntities__,
+      description_url_entities__,
       geo_enabled,
       lang__,
       contributors_enabled,
@@ -708,10 +737,96 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBSDirect(
       time_zone__,
       is_translator,
       follow_request_sent,
-      showAllInlineMedia);
+      show_all_inline_media);
 }
 
 flatbuffers::Offset<UserFBS> CreateUserFBS(flatbuffers::FlatBufferBuilder &_fbb, const UserFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
+inline UserFBST::UserFBST(const UserFBST &o)
+      : id(o.id),
+        id_str(o.id_str),
+        name(o.name),
+        screen_name(o.screen_name),
+        location(o.location),
+        url(o.url),
+        description(o.description),
+        is_protected(o.is_protected),
+        verified(o.verified),
+        followers_count(o.followers_count),
+        friends_count(o.friends_count),
+        listed_count(o.listed_count),
+        favourites_count(o.favourites_count),
+        statuses_count(o.statuses_count),
+        created_at(o.created_at),
+        profile_banner_url(o.profile_banner_url),
+        profile_image_url_https(o.profile_image_url_https),
+        default_profile(o.default_profile),
+        withheld_in_countries(o.withheld_in_countries),
+        withheld_scope(o.withheld_scope),
+        geo_enabled(o.geo_enabled),
+        lang(o.lang),
+        contributors_enabled(o.contributors_enabled),
+        profile_background_color(o.profile_background_color),
+        profile_background_image_url(o.profile_background_image_url),
+        profile_background_image_url_https(o.profile_background_image_url_https),
+        profile_background_tile(o.profile_background_tile),
+        profile_image_url(o.profile_image_url),
+        profile_link_color(o.profile_link_color),
+        profile_sidebar_border_color(o.profile_sidebar_border_color),
+        profile_sidebar_fill_color(o.profile_sidebar_fill_color),
+        profile_text_color(o.profile_text_color),
+        profile_use_background_image(o.profile_use_background_image),
+        utc_offset(o.utc_offset),
+        time_zone(o.time_zone),
+        is_translator(o.is_translator),
+        follow_request_sent(o.follow_request_sent),
+        show_all_inline_media(o.show_all_inline_media) {
+  description_url_entities.reserve(o.description_url_entities.size());
+  for (const auto &description_url_entities_ : o.description_url_entities) { description_url_entities.emplace_back((description_url_entities_) ? new tweetstatusflatbuffers::URLEntityFBST(*description_url_entities_) : nullptr); }
+}
+
+inline UserFBST &UserFBST::operator=(UserFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(id, o.id);
+  std::swap(id_str, o.id_str);
+  std::swap(name, o.name);
+  std::swap(screen_name, o.screen_name);
+  std::swap(location, o.location);
+  std::swap(url, o.url);
+  std::swap(description, o.description);
+  std::swap(is_protected, o.is_protected);
+  std::swap(verified, o.verified);
+  std::swap(followers_count, o.followers_count);
+  std::swap(friends_count, o.friends_count);
+  std::swap(listed_count, o.listed_count);
+  std::swap(favourites_count, o.favourites_count);
+  std::swap(statuses_count, o.statuses_count);
+  std::swap(created_at, o.created_at);
+  std::swap(profile_banner_url, o.profile_banner_url);
+  std::swap(profile_image_url_https, o.profile_image_url_https);
+  std::swap(default_profile, o.default_profile);
+  std::swap(withheld_in_countries, o.withheld_in_countries);
+  std::swap(withheld_scope, o.withheld_scope);
+  std::swap(description_url_entities, o.description_url_entities);
+  std::swap(geo_enabled, o.geo_enabled);
+  std::swap(lang, o.lang);
+  std::swap(contributors_enabled, o.contributors_enabled);
+  std::swap(profile_background_color, o.profile_background_color);
+  std::swap(profile_background_image_url, o.profile_background_image_url);
+  std::swap(profile_background_image_url_https, o.profile_background_image_url_https);
+  std::swap(profile_background_tile, o.profile_background_tile);
+  std::swap(profile_image_url, o.profile_image_url);
+  std::swap(profile_link_color, o.profile_link_color);
+  std::swap(profile_sidebar_border_color, o.profile_sidebar_border_color);
+  std::swap(profile_sidebar_fill_color, o.profile_sidebar_fill_color);
+  std::swap(profile_text_color, o.profile_text_color);
+  std::swap(profile_use_background_image, o.profile_use_background_image);
+  std::swap(utc_offset, o.utc_offset);
+  std::swap(time_zone, o.time_zone);
+  std::swap(is_translator, o.is_translator);
+  std::swap(follow_request_sent, o.follow_request_sent);
+  std::swap(show_all_inline_media, o.show_all_inline_media);
+  return *this;
+}
 
 inline UserFBST *UserFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<UserFBST>(new UserFBST());
@@ -723,12 +838,13 @@ inline void UserFBS::UnPackTo(UserFBST *_o, const flatbuffers::resolver_function
   (void)_o;
   (void)_resolver;
   { auto _e = id(); _o->id = _e; }
+  { auto _e = id_str(); if (_e) _o->id_str = _e->str(); }
   { auto _e = name(); if (_e) _o->name = _e->str(); }
   { auto _e = screen_name(); if (_e) _o->screen_name = _e->str(); }
   { auto _e = location(); if (_e) _o->location = _e->str(); }
   { auto _e = url(); if (_e) _o->url = _e->str(); }
   { auto _e = description(); if (_e) _o->description = _e->str(); }
-  { auto _e = isProtected(); _o->isProtected = _e; }
+  { auto _e = is_protected(); _o->is_protected = _e; }
   { auto _e = verified(); _o->verified = _e; }
   { auto _e = followers_count(); _o->followers_count = _e; }
   { auto _e = friends_count(); _o->friends_count = _e; }
@@ -739,9 +855,9 @@ inline void UserFBS::UnPackTo(UserFBST *_o, const flatbuffers::resolver_function
   { auto _e = profile_banner_url(); if (_e) _o->profile_banner_url = _e->str(); }
   { auto _e = profile_image_url_https(); if (_e) _o->profile_image_url_https = _e->str(); }
   { auto _e = default_profile(); _o->default_profile = _e; }
-  { auto _e = withheld_in_countries(); if (_e) { _o->withheld_in_countries.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->withheld_in_countries[_i] = _e->Get(_i)->str(); } } }
+  { auto _e = withheld_in_countries(); if (_e) { _o->withheld_in_countries.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->withheld_in_countries[_i] = _e->Get(_i)->str(); } } else { _o->withheld_in_countries.resize(0); } }
   { auto _e = withheld_scope(); if (_e) _o->withheld_scope = _e->str(); }
-  { auto _e = descriptionURLEntities(); if (_e) { _o->descriptionURLEntities.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->descriptionURLEntities[_i] = std::unique_ptr<tweetstatusflatbuffers::URLEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = description_url_entities(); if (_e) { _o->description_url_entities.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->description_url_entities[_i]) { _e->Get(_i)->UnPackTo(_o->description_url_entities[_i].get(), _resolver); } else { _o->description_url_entities[_i] = std::unique_ptr<tweetstatusflatbuffers::URLEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->description_url_entities.resize(0); } }
   { auto _e = geo_enabled(); _o->geo_enabled = _e; }
   { auto _e = lang(); if (_e) _o->lang = _e->str(); }
   { auto _e = contributors_enabled(); _o->contributors_enabled = _e; }
@@ -759,7 +875,7 @@ inline void UserFBS::UnPackTo(UserFBST *_o, const flatbuffers::resolver_function
   { auto _e = time_zone(); if (_e) _o->time_zone = _e->str(); }
   { auto _e = is_translator(); _o->is_translator = _e; }
   { auto _e = follow_request_sent(); _o->follow_request_sent = _e; }
-  { auto _e = showAllInlineMedia(); _o->showAllInlineMedia = _e; }
+  { auto _e = show_all_inline_media(); _o->show_all_inline_media = _e; }
 }
 
 inline flatbuffers::Offset<UserFBS> UserFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const UserFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -771,12 +887,13 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(flatbuffers::FlatBufferBuilder
   (void)_o;
   struct _VectorArgs { flatbuffers::FlatBufferBuilder *__fbb; const UserFBST* __o; const flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
   auto _id = _o->id;
+  auto _id_str = _o->id_str.empty() ? 0 : _fbb.CreateString(_o->id_str);
   auto _name = _o->name.empty() ? 0 : _fbb.CreateString(_o->name);
   auto _screen_name = _o->screen_name.empty() ? 0 : _fbb.CreateString(_o->screen_name);
   auto _location = _o->location.empty() ? 0 : _fbb.CreateString(_o->location);
   auto _url = _o->url.empty() ? 0 : _fbb.CreateString(_o->url);
   auto _description = _o->description.empty() ? 0 : _fbb.CreateString(_o->description);
-  auto _isProtected = _o->isProtected;
+  auto _is_protected = _o->is_protected;
   auto _verified = _o->verified;
   auto _followers_count = _o->followers_count;
   auto _friends_count = _o->friends_count;
@@ -789,7 +906,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(flatbuffers::FlatBufferBuilder
   auto _default_profile = _o->default_profile;
   auto _withheld_in_countries = _o->withheld_in_countries.size() ? _fbb.CreateVectorOfStrings(_o->withheld_in_countries) : 0;
   auto _withheld_scope = _o->withheld_scope.empty() ? 0 : _fbb.CreateString(_o->withheld_scope);
-  auto _descriptionURLEntities = _o->descriptionURLEntities.size() ? _fbb.CreateVector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> (_o->descriptionURLEntities.size(), [](size_t i, _VectorArgs *__va) { return CreateURLEntityFBS(*__va->__fbb, __va->__o->descriptionURLEntities[i].get(), __va->__rehasher); }, &_va ) : 0;
+  auto _description_url_entities = _o->description_url_entities.size() ? _fbb.CreateVector<flatbuffers::Offset<tweetstatusflatbuffers::URLEntityFBS>> (_o->description_url_entities.size(), [](size_t i, _VectorArgs *__va) { return CreateURLEntityFBS(*__va->__fbb, __va->__o->description_url_entities[i].get(), __va->__rehasher); }, &_va ) : 0;
   auto _geo_enabled = _o->geo_enabled;
   auto _lang = _o->lang.empty() ? 0 : _fbb.CreateString(_o->lang);
   auto _contributors_enabled = _o->contributors_enabled;
@@ -807,16 +924,17 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(flatbuffers::FlatBufferBuilder
   auto _time_zone = _o->time_zone.empty() ? 0 : _fbb.CreateString(_o->time_zone);
   auto _is_translator = _o->is_translator;
   auto _follow_request_sent = _o->follow_request_sent;
-  auto _showAllInlineMedia = _o->showAllInlineMedia;
+  auto _show_all_inline_media = _o->show_all_inline_media;
   return tweetstatusflatbuffers::CreateUserFBS(
       _fbb,
       _id,
+      _id_str,
       _name,
       _screen_name,
       _location,
       _url,
       _description,
-      _isProtected,
+      _is_protected,
       _verified,
       _followers_count,
       _friends_count,
@@ -829,7 +947,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(flatbuffers::FlatBufferBuilder
       _default_profile,
       _withheld_in_countries,
       _withheld_scope,
-      _descriptionURLEntities,
+      _description_url_entities,
       _geo_enabled,
       _lang,
       _contributors_enabled,
@@ -847,7 +965,7 @@ inline flatbuffers::Offset<UserFBS> CreateUserFBS(flatbuffers::FlatBufferBuilder
       _time_zone,
       _is_translator,
       _follow_request_sent,
-      _showAllInlineMedia);
+      _show_all_inline_media);
 }
 
 inline const tweetstatusflatbuffers::UserFBS *GetUserFBS(const void *buf) {
@@ -860,6 +978,10 @@ inline const tweetstatusflatbuffers::UserFBS *GetSizePrefixedUserFBS(const void 
 
 inline UserFBS *GetMutableUserFBS(void *buf) {
   return flatbuffers::GetMutableRoot<UserFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::UserFBS *GetMutableSizePrefixedUserFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::UserFBS>(buf);
 }
 
 inline bool VerifyUserFBSBuffer(

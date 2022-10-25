@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "VariantEntityFBS.h"
 
 namespace tweetstatusflatbuffers {
@@ -19,6 +26,10 @@ struct VideoEntityFBST : public flatbuffers::NativeTable {
   std::vector<int32_t> aspect_ratio{};
   int32_t duration_millis = 0;
   std::vector<std::unique_ptr<tweetstatusflatbuffers::VariantEntityFBST>> variants{};
+  VideoEntityFBST() = default;
+  VideoEntityFBST(const VideoEntityFBST &o);
+  VideoEntityFBST(VideoEntityFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  VideoEntityFBST &operator=(VideoEntityFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct VideoEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -38,7 +49,7 @@ struct VideoEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   int32_t duration_millis() const {
     return GetField<int32_t>(VT_DURATION_MILLIS, 0);
   }
-  bool mutate_duration_millis(int32_t _duration_millis) {
+  bool mutate_duration_millis(int32_t _duration_millis = 0) {
     return SetField<int32_t>(VT_DURATION_MILLIS, _duration_millis, 0);
   }
   const flatbuffers::Vector<flatbuffers::Offset<tweetstatusflatbuffers::VariantEntityFBS>> *variants() const {
@@ -51,7 +62,7 @@ struct VideoEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_ASPECT_RATIO) &&
            verifier.VerifyVector(aspect_ratio()) &&
-           VerifyField<int32_t>(verifier, VT_DURATION_MILLIS) &&
+           VerifyField<int32_t>(verifier, VT_DURATION_MILLIS, 4) &&
            VerifyOffset(verifier, VT_VARIANTS) &&
            verifier.VerifyVector(variants()) &&
            verifier.VerifyVectorOfTables(variants()) &&
@@ -114,6 +125,20 @@ inline flatbuffers::Offset<VideoEntityFBS> CreateVideoEntityFBSDirect(
 
 flatbuffers::Offset<VideoEntityFBS> CreateVideoEntityFBS(flatbuffers::FlatBufferBuilder &_fbb, const VideoEntityFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+inline VideoEntityFBST::VideoEntityFBST(const VideoEntityFBST &o)
+      : aspect_ratio(o.aspect_ratio),
+        duration_millis(o.duration_millis) {
+  variants.reserve(o.variants.size());
+  for (const auto &variants_ : o.variants) { variants.emplace_back((variants_) ? new tweetstatusflatbuffers::VariantEntityFBST(*variants_) : nullptr); }
+}
+
+inline VideoEntityFBST &VideoEntityFBST::operator=(VideoEntityFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(aspect_ratio, o.aspect_ratio);
+  std::swap(duration_millis, o.duration_millis);
+  std::swap(variants, o.variants);
+  return *this;
+}
+
 inline VideoEntityFBST *VideoEntityFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<VideoEntityFBST>(new VideoEntityFBST());
   UnPackTo(_o.get(), _resolver);
@@ -123,9 +148,9 @@ inline VideoEntityFBST *VideoEntityFBS::UnPack(const flatbuffers::resolver_funct
 inline void VideoEntityFBS::UnPackTo(VideoEntityFBST *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = aspect_ratio(); if (_e) { _o->aspect_ratio.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->aspect_ratio[_i] = _e->Get(_i); } } }
+  { auto _e = aspect_ratio(); if (_e) { _o->aspect_ratio.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->aspect_ratio[_i] = _e->Get(_i); } } else { _o->aspect_ratio.resize(0); } }
   { auto _e = duration_millis(); _o->duration_millis = _e; }
-  { auto _e = variants(); if (_e) { _o->variants.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->variants[_i] = std::unique_ptr<tweetstatusflatbuffers::VariantEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = variants(); if (_e) { _o->variants.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->variants[_i]) { _e->Get(_i)->UnPackTo(_o->variants[_i].get(), _resolver); } else { _o->variants[_i] = std::unique_ptr<tweetstatusflatbuffers::VariantEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->variants.resize(0); } }
 }
 
 inline flatbuffers::Offset<VideoEntityFBS> VideoEntityFBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const VideoEntityFBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -156,6 +181,10 @@ inline const tweetstatusflatbuffers::VideoEntityFBS *GetSizePrefixedVideoEntityF
 
 inline VideoEntityFBS *GetMutableVideoEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<VideoEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::VideoEntityFBS *GetMutableSizePrefixedVideoEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::VideoEntityFBS>(buf);
 }
 
 inline bool VerifyVideoEntityFBSBuffer(

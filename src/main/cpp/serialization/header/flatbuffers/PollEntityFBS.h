@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 22 &&
+              FLATBUFFERS_VERSION_MINOR == 9 &&
+              FLATBUFFERS_VERSION_REVISION == 29,
+             "Non-compatible flatbuffers version included");
+
 #include "OptionEntityFBS.h"
 
 namespace tweetstatusflatbuffers {
@@ -19,6 +26,10 @@ struct PollEntityFBST : public flatbuffers::NativeTable {
   std::vector<std::unique_ptr<tweetstatusflatbuffers::OptionEntityFBST>> options{};
   std::string end_datetime{};
   std::string duration_minutes{};
+  PollEntityFBST() = default;
+  PollEntityFBST(const PollEntityFBST &o);
+  PollEntityFBST(PollEntityFBST&&) FLATBUFFERS_NOEXCEPT = default;
+  PollEntityFBST &operator=(PollEntityFBST o) FLATBUFFERS_NOEXCEPT;
 };
 
 struct PollEntityFBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -116,6 +127,20 @@ inline flatbuffers::Offset<PollEntityFBS> CreatePollEntityFBSDirect(
 
 flatbuffers::Offset<PollEntityFBS> CreatePollEntityFBS(flatbuffers::FlatBufferBuilder &_fbb, const PollEntityFBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
+inline PollEntityFBST::PollEntityFBST(const PollEntityFBST &o)
+      : end_datetime(o.end_datetime),
+        duration_minutes(o.duration_minutes) {
+  options.reserve(o.options.size());
+  for (const auto &options_ : o.options) { options.emplace_back((options_) ? new tweetstatusflatbuffers::OptionEntityFBST(*options_) : nullptr); }
+}
+
+inline PollEntityFBST &PollEntityFBST::operator=(PollEntityFBST o) FLATBUFFERS_NOEXCEPT {
+  std::swap(options, o.options);
+  std::swap(end_datetime, o.end_datetime);
+  std::swap(duration_minutes, o.duration_minutes);
+  return *this;
+}
+
 inline PollEntityFBST *PollEntityFBS::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = std::unique_ptr<PollEntityFBST>(new PollEntityFBST());
   UnPackTo(_o.get(), _resolver);
@@ -125,7 +150,7 @@ inline PollEntityFBST *PollEntityFBS::UnPack(const flatbuffers::resolver_functio
 inline void PollEntityFBS::UnPackTo(PollEntityFBST *_o, const flatbuffers::resolver_function_t *_resolver) const {
   (void)_o;
   (void)_resolver;
-  { auto _e = options(); if (_e) { _o->options.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->options[_i] = std::unique_ptr<tweetstatusflatbuffers::OptionEntityFBST>(_e->Get(_i)->UnPack(_resolver)); } } }
+  { auto _e = options(); if (_e) { _o->options.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { if(_o->options[_i]) { _e->Get(_i)->UnPackTo(_o->options[_i].get(), _resolver); } else { _o->options[_i] = std::unique_ptr<tweetstatusflatbuffers::OptionEntityFBST>(_e->Get(_i)->UnPack(_resolver)); }; } } else { _o->options.resize(0); } }
   { auto _e = end_datetime(); if (_e) _o->end_datetime = _e->str(); }
   { auto _e = duration_minutes(); if (_e) _o->duration_minutes = _e->str(); }
 }
@@ -158,6 +183,10 @@ inline const tweetstatusflatbuffers::PollEntityFBS *GetSizePrefixedPollEntityFBS
 
 inline PollEntityFBS *GetMutablePollEntityFBS(void *buf) {
   return flatbuffers::GetMutableRoot<PollEntityFBS>(buf);
+}
+
+inline tweetstatusflatbuffers::PollEntityFBS *GetMutableSizePrefixedPollEntityFBS(void *buf) {
+  return flatbuffers::GetMutableSizePrefixedRoot<tweetstatusflatbuffers::PollEntityFBS>(buf);
 }
 
 inline bool VerifyPollEntityFBSBuffer(

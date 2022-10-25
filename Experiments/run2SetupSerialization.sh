@@ -20,11 +20,11 @@ rm -rf CMakeCache.txt
 rm -rf Makefile
 rm -rf cpp.cbp
 rm -rf bin
-# cmake .
-# make clean
-# make -j12
+cmake .
+make clean
+make -j12
 
-# mv  bin/ "$path/Experiments/cppbin"
+mv  bin/ "$path/Experiments/cppbin"
 
 # compile Rust baselines
 cd "$path/src/main/rust"
