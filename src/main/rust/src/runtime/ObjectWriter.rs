@@ -116,8 +116,6 @@ impl ObjectWriter {
         let mut last_len: u32 = self.pageBuffer.len().try_into().unwrap();
         match self.method {
             Const::JSON => {
-                println!("New:");
-                println!("{}",serde_json::to_string(object).unwrap());
                 self.pageBuffer.put_slice(serde_json::to_string(object).unwrap().as_bytes());
             }
             Const::BINCODE => {
