@@ -1,4 +1,4 @@
-namespace at.tugraz.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 
 table BoundingBoxCoordinateFBS {
         type:string;

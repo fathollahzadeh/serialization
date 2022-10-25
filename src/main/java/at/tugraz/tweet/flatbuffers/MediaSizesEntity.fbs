@@ -2,9 +2,7 @@ include "SizeEntity.fbs";
 
 namespace at.tugraz.tweet.flatbuffers;
 
-
 table MediaSizesEntityFBS {
-
   thumb:SizeEntityFBS;
   large:SizeEntityFBS;
   medium:SizeEntityFBS;

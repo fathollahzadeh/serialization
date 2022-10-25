@@ -1,6 +1,6 @@
 include "VariantEntity.fbs";
 
-namespace eat.tugraz.tweet.flatbuffers;
+namespace at.tugraz.tweet.flatbuffers;
 
 table VideoEntityFBS {
 
