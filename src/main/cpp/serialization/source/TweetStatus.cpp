@@ -18,8 +18,8 @@ TweetStatus::~TweetStatus() {
 			delete retweetedStatus;
 		if (entities != nullptr)
 			delete entities;
-		if (extendedEntities != nullptr)
-			delete extendedEntities;
+		if (extendedTweet != nullptr)
+			delete extendedTweet;
 		for (int i = 0; i < matchingRules.size(); ++i) {
 			delete matchingRules.at(i);
 		}
@@ -32,18 +32,19 @@ TweetStatus::TweetStatus() {
 	this->isPointer = true;
 }
 
-TweetStatus::TweetStatus(string createdAt, long id, string text, string source,
-						 bool isTruncated, long inReplyToStatusId, long inReplyToUserId,
-						 string inReplyToScreenName, User *user, Coordinates *coordinates,
-						 Place *place, long quotedStatusId, bool isQuoteStatus, TweetStatus *quotedStatus,
-						 TweetStatus *retweetedStatus, int quoteCount, int replyCount, int retweetCount,
-						 int favoriteCount, Entities *entities, ExtendedEntities *extendedEntities,
-						 bool isFavorited, bool isRetweeted, bool isPossiblySensitive, string filterLevel,
-						 string lang, vector<MatchingRulesEntity *> matchingRules,
-						 long currentUserRetweetedId, map<string, bool> scopes, bool withheldCopyright,
-						 vector <string> withheldInCountries, string withheldScope) {
+TweetStatus::TweetStatus(string createdAt, long id, string idStr, string text, string source,
+                         bool isTruncated, long inReplyToStatusId, long inReplyToUserId,
+                         string inReplyToScreenName, User *user, Coordinates *coordinates,
+                         Place *place, long quotedStatusId, bool isQuoteStatus, TweetStatus *quotedStatus,
+                         TweetStatus *retweetedStatus, int quoteCount, int replyCount, int retweetCount,
+                         int favoriteCount, Entities *entities, ExtendedTweet *extendedTweet,
+                         bool isFavorited, bool isRetweeted, bool isPossiblySensitive, string filterLevel,
+                         string lang, vector<MatchingRulesEntity *> matchingRules,
+                         long currentUserRetweetedId, map<string, bool> scopes, bool withheldCopyright,
+                         vector <string> withheldInCountries, string withheldScope, vector<int> displayTextRange) {
 	this->createdAt = createdAt;
 	this->id = id;
+    this->idStr = idStr;
 	this->text = text;
 	this->source = source;
 	this->isTruncated = isTruncated;
@@ -62,7 +63,7 @@ TweetStatus::TweetStatus(string createdAt, long id, string text, string source,
 	this->retweetCount = retweetCount;
 	this->favoriteCount = favoriteCount;
 	this->entities = entities;
-	this->extendedEntities = extendedEntities;
+	this->extendedTweet = extendedTweet;
 	this->isFavorited = isFavorited;
 	this->isRetweeted = isRetweeted;
 	this->isPossiblySensitive = isPossiblySensitive;
@@ -76,6 +77,7 @@ TweetStatus::TweetStatus(string createdAt, long id, string text, string source,
 	this->withheldScope = withheldScope;
 	this->isPointer = true;
 	this->hasBsonDoc = false;
+    this->displayTextRange = displayTextRange;
 
 }
 
@@ -103,6 +105,7 @@ char *TweetStatus::serializeHandcoded(char *buffer, int &objectSize) {
 	buffer = copyBool(buffer, this->withheldCopyright, objectSize);
 
 	//Copy Strings:
+    buffer = copyString(buffer, this->idStr, objectSize);
 	buffer = copyString(buffer, this->createdAt, objectSize);
 	buffer = copyString(buffer, this->text, objectSize);
 	buffer = copyString(buffer, this->source, objectSize);
@@ -139,9 +142,9 @@ char *TweetStatus::serializeHandcoded(char *buffer, int &objectSize) {
 
 	buffer = this->user->serializeHandcoded(buffer, objectSize);
 
-	if (this->extendedEntities != nullptr) {
+	if (this->extendedTweet != nullptr) {
 		buffer = copyBool(buffer, false, objectSize);
-		buffer = this->extendedEntities->serializeHandcoded(buffer, objectSize);
+		buffer = this->extendedTweet->serializeHandcoded(buffer, objectSize);
 	} else
 		buffer = copyBool(buffer, true, objectSize);
 
@@ -169,6 +172,11 @@ char *TweetStatus::serializeHandcoded(char *buffer, int &objectSize) {
 	for (int i = 0; i < numOfMatchingRules; i++) {
 		buffer = this->matchingRules.at(i)->serializeHandcoded(buffer, objectSize);
 	}
+
+    buffer = copyInt(buffer, this->displayTextRange.size(), objectSize);
+    for (int i = 0; i < this->displayTextRange.size(); ++i) {
+        buffer = copyInt(buffer, this->displayTextRange[i], objectSize);
+    }
 
 	return buffer;
 }
@@ -213,6 +221,8 @@ TweetStatus *TweetStatus::deserializeHandcoded(char *buffer, int &bytesRead) {
 	bytesRead += sizeof(this->withheldCopyright);
 
 	//Parse Strings:
+    parseString(buffer + bytesRead, this->idStr);
+    bytesRead += (sizeof(int) + this->idStr.length());
 	parseString(buffer + bytesRead, this->createdAt);
 	bytesRead += (sizeof(int) + this->createdAt.length());
 	parseString(buffer + bytesRead, this->text);
@@ -274,14 +284,14 @@ TweetStatus *TweetStatus::deserializeHandcoded(char *buffer, int &bytesRead) {
 	this->user = new User();
 	this->user->deserializeHandcoded(buffer, bytesRead);
 
-	//ExntendedEntitiesHC:
+	//ExntendedTweetHC:
 	checknullptr = parseBool(buffer + bytesRead);
 	bytesRead += sizeof(checknullptr);
 	if (!checknullptr) {
-		this->extendedEntities = new ExtendedEntities();
-		this->extendedEntities->deserializeHandcoded(buffer, bytesRead);
+		this->extendedTweet = new ExtendedTweet();
+		this->extendedTweet->deserializeHandcoded(buffer, bytesRead);
 	} else
-		this->extendedEntities = nullptr;
+		this->extendedTweet = nullptr;
 
 	//Quoted Status:
 	checknullptr = parseBool(buffer + bytesRead);
@@ -317,6 +327,15 @@ TweetStatus *TweetStatus::deserializeHandcoded(char *buffer, int &bytesRead) {
 		this->matchingRules.push_back(new MatchingRulesEntity());
 		this->matchingRules.at(i)->deserializeHandcoded(buffer, bytesRead);
 	}
+
+    int numOfDisplayTextRange = parseInt(buffer + bytesRead);
+    bytesRead += sizeof(numOfDisplayTextRange);
+
+    for (int i = 0; i < numOfDisplayTextRange; ++i) {
+        this->displayTextRange.push_back(parseInt(buffer + bytesRead));
+        bytesRead += sizeof(int);
+    }
+
 	return this;
 }
 
@@ -387,6 +406,7 @@ bsoncxx::document::value TweetStatus::serializeBSON() {
 	document doc = document{};
 	doc << "created_at" << this->createdAt <<
 		"id" << this->id <<
+        "id_str"<< this->idStr<<
 		"text" << this->text <<
 		"source" << this->source <<
 		"truncated" << this->isTruncated <<
@@ -412,8 +432,8 @@ bsoncxx::document::value TweetStatus::serializeBSON() {
 		"retweet_count" << this->retweetCount <<
 		"favorite_count" << this->favoriteCount <<//nullable
 		"entities" << bsoncxx::types::b_document{this->entities->serializeBSON().view()};
-	if (this->extendedEntities != nullptr) {
-		doc << "extended_entities" << bsoncxx::types::b_document{this->extendedEntities->serializeBSON().view()};
+	if (this->extendedTweet != nullptr) {
+		doc << "extended_tweet" << bsoncxx::types::b_document{this->extendedTweet->serializeBSON().view()};
 	}
 	doc << "favorited" << this->isFavorited <<//nullable
 		"retweeted" << this->isRetweeted <<
@@ -441,8 +461,14 @@ bsoncxx::document::value TweetStatus::serializeBSON() {
 	for (int i = 0; i < this->withheldInCountries.size(); ++i) {
 		arrwithheldInCountries << this->withheldInCountries[i];
 	}
-	doc << " withheld_in_countries" << arrwithheldInCountries <<//nullable
+	doc << "withheld_in_countries" << arrwithheldInCountries <<//nullable
 		"withheld_scope" << this->withheldScope;
+
+    auto displayTextRanges = array{};
+    for (int i = 0; i < this->displayTextRange.size(); ++i) {
+        displayTextRanges << this->displayTextRange[i];
+    }
+    doc << "display_text_range" << displayTextRanges;
 	return doc << finalize;
 }
 
@@ -453,6 +479,9 @@ TweetStatus *TweetStatus::deserializeBSON(bsoncxx::document::view doc) {
 
 	element = doc["id"];
 	this->id = element.type() == bsoncxx::type::k_int64 ? element.get_int64() : element.get_int32();
+
+    element = doc["id_str"];
+    this->idStr = bsoncxx::string::to_string(element.get_utf8().value);
 
 	element = doc["text"];
 	this->text = bsoncxx::string::to_string(element.get_utf8().value);
@@ -570,12 +599,19 @@ TweetStatus *TweetStatus::deserializeBSON(bsoncxx::document::view doc) {
 	this->entities = new Entities();
 	this->entities->deserializeBSON(element.get_document().view());
 
-	element = doc["extended_entities"];
+	element = doc["extended_tweet"];
 	if (element) {
-		this->extendedEntities = new ExtendedEntities();
-		this->extendedEntities->deserializeBSON(element.get_document().view());
+		this->extendedTweet = new ExtendedTweet();
+		this->extendedTweet->deserializeBSON(element.get_document().view());
 	} else
-		this->extendedEntities = nullptr;
+		this->extendedTweet = nullptr;
+
+    element = doc["display_text_range"];
+    if (element && element.type() == bsoncxx::type::k_array) {
+        for (auto ele : element.get_array().value) {
+            this->displayTextRange.push_back(ele.get_int32());
+        }
+    }
 	return this;
 }
 

@@ -22,6 +22,8 @@ class DataReader {
 private:
 	Entities *getEntities(Value &d);
 
+    ExtendedTweet *getExtendedTweet(Value &d);
+
 	User *getUser(Value &d);
 
 	Coordinates *getCoordinates(Value &d);

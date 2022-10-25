@@ -10,7 +10,7 @@
 #include "User.h"
 #include "RootData.h"
 #include "Entities.h"
-#include "ExtendedEntities.h"
+#include "ExtendedTweet.h"
 #include "MatchingRulesEntity.h"
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/map.hpp>
@@ -25,6 +25,7 @@ public:
 	int objectsize;
 	string createdAt;
 	long id;
+    string idStr;
 	string text;
 	string source;
 	bool isTruncated;
@@ -43,7 +44,7 @@ public:
 	int retweetCount;
 	int favoriteCount;//nullable
 	Entities *entities;
-	ExtendedEntities *extendedEntities;
+    ExtendedTweet *extendedTweet; // nullable
 	bool isFavorited;//nullable
 	bool isRetweeted;
 	bool isPossiblySensitive;//nullable
@@ -55,6 +56,7 @@ public:
 	bool withheldCopyright;//nullable
 	vector <string> withheldInCountries;//nullable
 	string withheldScope;//nullable
+    vector<int> displayTextRange; //nullable
 
 	bsoncxx::document::value bsonDoc = bsoncxx::document::value(nullptr, 0, nullptr);
 	bool hasBsonDoc = false;
@@ -73,6 +75,7 @@ private:
 		// Simply list all the fields to be serialized/deserialized.
 		ar & createdAt;
 		ar & id;
+        ar & idStr;
 		ar & text;
 		ar & source;
 		ar & isTruncated;
@@ -91,7 +94,7 @@ private:
 		ar & retweetCount;
 		ar & favoriteCount;
 		ar & BOOST_SERIALIZATION_NVP(entities);
-		ar & BOOST_SERIALIZATION_NVP(extendedEntities);
+		ar & BOOST_SERIALIZATION_NVP(extendedTweet);
 		ar & isFavorited;
 		ar & isRetweeted;
 		ar & isPossiblySensitive;
@@ -105,6 +108,7 @@ private:
 		ar & withheldCopyright;
 		ar & withheldInCountries;
 		ar & withheldScope;
+        ar & displayTextRange;
 	}
 
 public:
@@ -117,16 +121,16 @@ public:
 
 	TweetStatus(bool isPointer);
 
-	TweetStatus(string createdAt, long id, string text, string source,
+	TweetStatus(string createdAt, long id, string idStr, string text, string source,
 				bool isTruncated, long inReplyToStatusId, long inReplyToUserId,
 				string inReplyToScreenName, User *user, Coordinates *coordinates,
 				Place *place, long quotedStatusId, bool isQuoteStatus, TweetStatus *quotedStatus,
 				TweetStatus *retweetedStatus, int quoteCount, int replyCount, int retweetCount,
-				int favoriteCount, Entities *entities, ExtendedEntities *extendedEntities,
+				int favoriteCount, Entities *entities, ExtendedTweet *extendedTweet,
 				bool isFavorited, bool isRetweeted, bool isPossiblySensitive, string filterLevel,
 				string lang, vector<MatchingRulesEntity *> matchingRules,
 				long currentUserRetweetedId, map<string, bool> scopes, bool withheldCopyright,
-				vector <string> withheldInCountries, string withheldScope);
+				vector <string> withheldInCountries, string withheldScope, vector<int> displayTextRange);
 
 
 	//Hand Coded C++ serialization:

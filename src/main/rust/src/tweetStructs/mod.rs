@@ -18,3 +18,5 @@ pub mod VariantEntity;
 pub mod AdditionalMediaInfoEntity;
 pub mod BoundingBoxCoordinate;
 pub mod OptionEntity;
+pub mod ExtendedTweet;
+

@@ -12,8 +12,6 @@ using namespace std;
 
 class ExtendedEntities : public RootData {
 
-public:
-	vector<MediaEntity *> media;
 private:
 	//Boost Serialization:
 	friend class boost::serialization::access;
@@ -23,10 +21,11 @@ private:
 	void serialize(Archive &ar, const unsigned int version) {
 		// Simply list all the fields to be serialized/deserialized.
 		ar & media;
-
 	}
 
 public:
+    vector<MediaEntity *> media;
+
 	//Default destructor:
 	virtual ~ExtendedEntities();
 
@@ -48,9 +47,7 @@ public:
 
 	//BSON de-serialization:
 	ExtendedEntities *deserializeBSON(bsoncxx::document::view doc);
-
 };
 
-BOOST_CLASS_TRACKING(ExtendedEntities, boost::serialization::track_never
-)
+BOOST_CLASS_TRACKING(ExtendedEntities, boost::serialization::track_never)
 #endif

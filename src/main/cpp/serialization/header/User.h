@@ -16,6 +16,7 @@ class User : public RootData {
 
 public:
 	long id;
+    string idStr;
 	string name;
 	string screenName;
 	string location;//nullable
@@ -65,6 +66,7 @@ private:
 	void serialize(Archive &ar, const unsigned int version) {
 		// Simply list all the fields to be serialized/deserialized.
 		ar & id;
+        ar & idStr;
 		ar & name;
 		ar & screenName;
 		ar & location;
@@ -116,7 +118,7 @@ public:
 	User();
 
 	//Constructor with arguments:
-	User(long id, string name, string screenName, string location, string url,
+	User(long id, string idStr, string name, string screenName, string location, string url,
 		 string description, bool isProtected, bool isVerified, int followersCount, int friendsCount,
 		 int listedCount, int favouritesCount, int statusesCount, string createdAt,
 		 string profileBannerImageUrl, string profileImageUrlHttps, bool isDefaultProfile,

@@ -20,6 +20,7 @@ private:
 	offset_ptr<char> displayURL;
 	offset_ptr<char> expandedURL;
 	long id;
+    offset_ptr<char> idStr;
 	vector<int> indices;
 	offset_ptr<char> mediaURL;
 	offset_ptr<char> mediaURLHttps;

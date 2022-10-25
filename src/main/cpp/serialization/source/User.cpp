@@ -39,6 +39,7 @@ char *User::serializeHandcoded(char *buffer, int &objectSize) {
 	buffer = copyBool(buffer, this->isFollowRequestSent, objectSize);
 	buffer = copyBool(buffer, this->showAllInlineMedia, objectSize);
 	//Copy Strings:
+    buffer = copyString(buffer, this->idStr, objectSize);
 	buffer = copyString(buffer, this->name, objectSize);
 	buffer = copyString(buffer, this->screenName, objectSize);
 	buffer = copyString(buffer, this->createdAt, objectSize);
@@ -122,6 +123,8 @@ User *User::deserializeHandcoded(char *buffer, int &bytesRead) {
 	bytesRead += sizeof(this->showAllInlineMedia);
 
 	//Parse Strings:
+    parseString(buffer + bytesRead, this->idStr);
+    bytesRead += (sizeof(int) + this->idStr.length());
 	parseString(buffer + bytesRead, this->name);
 	bytesRead += (sizeof(int) + this->name.length());
 	parseString(buffer + bytesRead, this->screenName);
@@ -184,7 +187,7 @@ User *User::deserializeHandcoded(char *buffer, int &bytesRead) {
 }
 
 
-User::User(long id, string name, string screenName, string location, string url,
+User::User(long id, string idStr, string name, string screenName, string location, string url,
 		   string description, bool isProtected, bool isVerified, int followersCount, int friendsCount,
 		   int listedCount, int favouritesCount, int statusesCount, string createdAt,
 		   string profileBannerImageUrl, string profileImageUrlHttps, bool isDefaultProfile,
@@ -198,6 +201,7 @@ User::User(long id, string name, string screenName, string location, string url,
 		   bool showAllInlineMedia) {
 
 	this->id = id;
+    this->idStr;
 	this->name = name;
 	this->screenName = screenName;
 	this->location = location;
@@ -257,6 +261,7 @@ bsoncxx::document::value User::serializeBSON() {
 
 	document doc = document{};
 	doc << "id" << this->id <<
+        "id_str" << this->idStr <<
 		"name" << this->name <<
 		"screen_name" << this->screenName <<
 		"location" << this->location <<
@@ -299,6 +304,9 @@ bsoncxx::document::value User::serializeBSON() {
 User *User::deserializeBSON(bsoncxx::document::view doc) {
 	bsoncxx::document::element element = doc["id"];
 	this->id = element.type() == bsoncxx::type::k_int64 ? element.get_int64() : element.get_int32();
+
+    element = doc["id_str"];
+    this->idStr = bsoncxx::string::to_string(element.get_utf8().value);
 
 	element = doc["name"];
 	this->name = bsoncxx::string::to_string(element.get_utf8().value);

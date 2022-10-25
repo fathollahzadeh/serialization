@@ -14,6 +14,7 @@ class UserIP : public Object {
 
 public:
 	long id;
+    offset_ptr<char> idStr;
 	offset_ptr<char> name;
 	offset_ptr<char> screenName;
 	offset_ptr<char> location;//nullable

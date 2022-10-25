@@ -13,6 +13,7 @@ TweetStatusProto::TweetStatusProto(TweetStatus *tweetStatus) {
 	this->proto = new proto::TweetStatusP();
 	this->proto->set_createdat(tweetStatus->createdAt);
 	this->proto->set_id(tweetStatus->id);
+
 	this->proto->set_text(tweetStatus->text);
 	this->proto->set_source(tweetStatus->source);
 	this->proto->set_istruncated(tweetStatus->isTruncated);

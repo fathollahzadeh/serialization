@@ -7,8 +7,8 @@
 #include "CoordinatesIP.h"
 #include "PlaceIP.h"
 #include "EntitiesIP.h"
-#include "ExtendedEntitiesIP.h"
 #include "MatchingRulesEntityIP.h"
+#include "ExtendedTweetIP.h"
 
 class TweetStatusIP : public Object {
 
@@ -16,6 +16,7 @@ public:
 	int objectsize;
 	offset_ptr<char> createdAt;
 	long id;
+    offset_ptr<char> id_str;
 	offset_ptr<char> text;
 	offset_ptr<char> source;
 	bool isTruncated;
@@ -39,8 +40,8 @@ public:
 	int favoriteCount;//nullable
 	offset_ptr<EntitiesIP> entities;
 	bool hasEntities;
-	offset_ptr<ExtendedEntitiesIP> extendedEntities;
-	bool hasExtendedEntities;
+	offset_ptr<ExtendedTweetIP> extendedTweet; //nullable
+	bool hasExtendedTweet; //nullable
 	bool isFavorited;//nullable
 	bool isRetweeted;
 	bool isPossiblySensitive;//nullable

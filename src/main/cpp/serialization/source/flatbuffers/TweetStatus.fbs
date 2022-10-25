@@ -2,7 +2,7 @@ include "User.fbs";
 include "Coordinates.fbs";
 include "Place.fbs";
 include "Entities.fbs";
-include "ExtendedEntities.fbs";
+include "ExtendedTweet.fbs";
 include "MatchingRulesEntity.fbs";
 namespace tweetstatusflatbuffers;
 
@@ -14,6 +14,7 @@ table MapStringBool {
 table TweetStatusFBS {
         created_at:string;
         id:long;
+        id_str:string;
         text:string;
         source:string;
         truncated:bool;
@@ -32,7 +33,7 @@ table TweetStatusFBS {
         retweet_count:int;
         favorite_count:int;
         entities:EntitiesFBS;
-        extended_entities:ExtendedEntitiesFBS;
+        extended_tweet:ExtendedTweetFBS;
         favorited:bool;
         retweeted:bool;
         possibly_sensitive:bool;
@@ -44,6 +45,7 @@ table TweetStatusFBS {
         withheld_copyright:bool;
         withheld_in_countries:[string];
         withheld_scope:string;
+        display_text_range:[int];
 }
 
 root_type TweetStatusFBS;

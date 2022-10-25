@@ -9,6 +9,7 @@ table MediaEntityFBS {
          display_url:string;
          expanded_url:string;
          id:long;
+         id_str:string;
          indices:[int];
          media_url:string;
          media_url_https:string;

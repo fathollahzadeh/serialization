@@ -8,6 +8,7 @@ pub struct MediaEntity {
 	display_url: Option<String>,
 	expanded_url: Option<String>,
 	id: Option<i64>,
+	id_str:String,
 	indices: Option<Vec<i64>>,
 	media_url: Option<String>,
 	media_url_https: Option<String>,

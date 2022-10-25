@@ -4,6 +4,7 @@ use crate::tweetStructs::URLEntity::URLEntity;
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct User {
 	id: i64,
+	id_str:String,
 	name: String,
 	screen_name: Option<String>,
 	location: Option<String>,

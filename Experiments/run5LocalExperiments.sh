@@ -9,7 +9,7 @@ outDataPath="data/tmp/tweets"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
-declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf")  
+declare -a rust_methods=("Bincode") #("Json" "Bincode" "MessagePack" "Bson" "FlexBuf")  
 
 max_nrow=1000000
 declare -a nrows=(1000000) #(15000000 13000000 11000000 9000000 7000000 5000000 3000000 1000000)
@@ -40,7 +40,7 @@ for rp in {1..1}; do
         ###############
         #./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single false Experiment1_Write_times
         #./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single true Experiment1_Write_times
-        ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Parallel false Experiment1_Write_times
+        #./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Parallel false Experiment1_Write_times
 
         for nrow in "${nrows[@]}"; do
          #   ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single true $nrow Experiment1_LoadToMemory_times

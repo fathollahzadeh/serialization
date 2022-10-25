@@ -15,6 +15,9 @@ void TweetStatusIP::serialize(TweetStatus *tweetStatus) {
 
 	this->id = tweetStatus->id;
 
+    this->id_str = malloc<char>(strlen(tweetStatus->idStr.c_str()) + 1);
+    strcpy(this->id_str, tweetStatus->idStr.c_str());
+
 	this->text = malloc<char>(strlen(tweetStatus->text.c_str()) + 1);
 	strcpy(this->text, tweetStatus->text.c_str());
 
@@ -76,12 +79,12 @@ void TweetStatusIP::serialize(TweetStatus *tweetStatus) {
 	} else
 		this->hasEntities = false;
 
-	if (tweetStatus->extendedEntities != nullptr) {
-		this->hasExtendedEntities = false;
-		this->extendedEntities = new ExtendedEntitiesIP[1];
-		this->extendedEntities[0].serialize(tweetStatus->extendedEntities);
+	if (tweetStatus->extendedTweet != nullptr) {
+		this->hasExtendedTweet = false;
+		this->extendedTweet = new ExtendedTweetIP[1];
+		this->extendedTweet[0].serialize(tweetStatus->extendedTweet);
 	} else
-		this->hasExtendedEntities = false;
+		this->hasExtendedTweet = false;
 
 	this->isFavorited = tweetStatus->isFavorited;
 	this->isRetweeted = tweetStatus->isRetweeted;
@@ -120,9 +123,6 @@ void TweetStatusIP::serialize(TweetStatus *tweetStatus) {
 //       // this->withheldInCountries[j]=malloc < char > (strlen(aa.c_str()) + 1);
 //       // strcpy(this->withheldInCountries[j], aa.c_str());
 //    }
-
-
-	// cout<<">>>>>>>>> "<<this->withheldInCountries[0]<<endl;
 
 	this->withheldScope = malloc<char>(strlen(tweetStatus->withheldScope.c_str()) + 1);
 	strcpy(this->withheldScope, tweetStatus->withheldScope.c_str());

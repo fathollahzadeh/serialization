@@ -1,0 +1,12 @@
+include "ExtendedEntities.fbs";
+include "Entities.fbs";
+
+namespace tweetstatusflatbuffers;
+
+table ExtendedTweetFBS {
+    fullText:string;
+    displayTextRange:[int];
+    entities:EntitiesFBS;
+    extended_entities:ExtendedEntitiesFBS;
+}
+root_type ExtendedTweetFBS;

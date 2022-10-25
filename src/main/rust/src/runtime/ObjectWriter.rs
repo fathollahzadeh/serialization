@@ -1,4 +1,3 @@
-use std::borrow::Borrow;
 use bytes::{BytesMut, BufMut, Buf};
 use std::fs::{File, OpenOptions};
 use std::hash::Hasher;
@@ -62,7 +61,7 @@ impl ObjectWriter {
         }
     }
 
-    pub fn serializeObject(&mut self, object: &TweetStatus) {
+    pub fn serializeObject(&mut self, object: &TweetStatus){
         match self.method {
             Const::JSON => {
                 serde_json::to_string(object).unwrap().as_bytes();
@@ -85,29 +84,31 @@ impl ObjectWriter {
         }
     }
 
-    pub fn serializeObject2(&mut self, objects: Vec<TweetStatus>) {
-        for k in 0..objects.len() as usize {
-            match self.method {
-                Const::JSON => {
-                    serde_json::to_string(&objects[k]).unwrap().as_bytes();
-                }
-                Const::BINCODE => {
-                    bincode::serialize(&objects[k]).unwrap().as_slice();
-                }
-                Const::MESSAGEPACK => {
-                    rmp_serde::to_vec(&objects[k]).unwrap().as_slice();
-                }
-                Const::BSON => {
-                    let mut buf = Vec::new();
-                    bson::to_bson(&objects[k]).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
-                    buf.as_slice();
-                }
-                Const::FLEXBUF => {
-                    flexbuffers::to_vec(&objects[k]).unwrap().as_slice();
-                }
-                _ => {}
-            }
-        }
+
+    pub fn serializeObject2(&mut self, object: &TweetStatus) {
+
+        serde_json::to_string(object).unwrap().as_bytes();
+        // match self.method {
+        //     Const::JSON => {
+        //         Ok(serde_json::to_string(object).unwrap().as_bytes());
+        //     }
+        //     Const::BINCODE => {
+        //         Ok(bincode::serialize(object).unwrap().as_slice());
+        //     }
+        //     Const::MESSAGEPACK => {
+        //         Ok(rmp_serde::to_vec(object).unwrap().as_slice().len());
+        //     }
+        //     Const::BSON => {
+        //         let mut buf = Vec::new();
+        //         bson::to_bson(object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
+        //         Ok(buf.as_slice());
+        //     }
+        //     Const::FLEXBUF => {
+        //         flexbuffers::to_vec(object).unwrap().as_slice();
+        //     }
+        //     _ => {}
+        // }
+       // Err(Box::from("The method is not support!!"))
     }
 
     pub fn writeObjectToFile(&mut self, object: &TweetStatus) {
@@ -115,6 +116,8 @@ impl ObjectWriter {
         let mut last_len: u32 = self.pageBuffer.len().try_into().unwrap();
         match self.method {
             Const::JSON => {
+                println!("New:");
+                println!("{}",serde_json::to_string(object).unwrap());
                 self.pageBuffer.put_slice(serde_json::to_string(object).unwrap().as_bytes());
             }
             Const::BINCODE => {

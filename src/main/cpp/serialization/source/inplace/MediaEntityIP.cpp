@@ -14,6 +14,9 @@ void MediaEntityIP::serialize(MediaEntity *mediaEntity) {
 	this->displayURL = malloc<char>(strlen(mediaEntity->displayURL.c_str()) + 1);
 	strcpy(this->displayURL, mediaEntity->displayURL.c_str());
 
+    this->idStr = malloc<char>(strlen(mediaEntity->idStr.c_str()) + 1);
+    strcpy(this->idStr, mediaEntity->idStr.c_str());
+
 	this->expandedURL = malloc<char>(strlen(mediaEntity->expandedURL.c_str()) + 1);
 	strcpy(this->expandedURL, mediaEntity->expandedURL.c_str());
 

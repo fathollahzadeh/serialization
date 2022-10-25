@@ -16,20 +16,6 @@ using namespace std;
 
 class MediaEntity : public RootData {
 
-public:
-	string displayURL;
-	string expandedURL;
-	long id;
-	vector<int> indices;
-	string mediaURL;
-	string mediaURLHttps;
-	MediaSizesEntity *sizes;
-	string type;
-	long sourceStatusId;
-	string sourceStatusIdStr;
-	string url;
-	VideoEntity *videoInfo;
-	AdditionalMediaInfoEntity *additionalMediaInfo;
 private:
 	//Boost Serialization:
 	friend class boost::serialization::access;
@@ -42,6 +28,7 @@ private:
 		ar & displayURL;
 		ar & expandedURL;
 		ar & id;
+        ar & idStr;
 		ar & indices;
 		ar & mediaURL;
 		ar & mediaURLHttps;
@@ -56,6 +43,21 @@ private:
 	}
 
 public:
+    string displayURL;
+    string expandedURL;
+    long id;
+    string idStr;
+    vector<int> indices;
+    string mediaURL;
+    string mediaURLHttps;
+    MediaSizesEntity *sizes;
+    string type;
+    long sourceStatusId;
+    string sourceStatusIdStr;
+    string url;
+    VideoEntity *videoInfo;
+    AdditionalMediaInfoEntity *additionalMediaInfo;
+
 	//Default destructor:
 	virtual ~MediaEntity();
 
@@ -63,10 +65,9 @@ public:
 	MediaEntity();
 
 	//Constructor with arguments:
-	MediaEntity(string displayURL, string expandedURL, long id, vector<int> indices, string mediaURL,
-				string mediaURLHttps,
-				MediaSizesEntity *sizes, long sourceStatusId, string sourceStatusIdStr, string type, string url,
-				VideoEntity *videoInfo, AdditionalMediaInfoEntity *additionalMediaInfo);
+	MediaEntity(string displayURL, string expandedURL, long id, string idStr, vector<int> indices, string mediaURL,
+				string mediaURLHttps, MediaSizesEntity *sizes, long sourceStatusId, string sourceStatusIdStr,
+                string type, string url, VideoEntity *videoInfo, AdditionalMediaInfoEntity *additionalMediaInfo);
 
 	//Hand Coded C++ serialization:
 	//New API: Writes directly to File Page:
@@ -83,7 +84,6 @@ public:
 
 };
 
-BOOST_CLASS_TRACKING(MediaEntity, boost::serialization::track_never
-)
+BOOST_CLASS_TRACKING(MediaEntity, boost::serialization::track_never)
 
 #endif

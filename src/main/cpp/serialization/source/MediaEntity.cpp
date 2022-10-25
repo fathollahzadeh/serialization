@@ -7,13 +7,13 @@ MediaEntity::MediaEntity() {
 }
 
 //Constructor with arguments:
-MediaEntity::MediaEntity(string displayURL, string expandedURL, long id, vector<int> indices, string mediaURL,
-						 string mediaURLHttps, MediaSizesEntity *sizes, long sourceStatusId,
-						 string sourceStatusIdStr, string type,
+MediaEntity::MediaEntity(string displayURL, string expandedURL, long id, string idStr, vector<int> indices, string mediaURL,
+						 string mediaURLHttps, MediaSizesEntity *sizes, long sourceStatusId, string sourceStatusIdStr, string type,
 						 string url, VideoEntity *videoInfo, AdditionalMediaInfoEntity *additionalMediaInfo) {
 	this->displayURL = displayURL;
 	this->expandedURL = expandedURL;
 	this->id = id;
+    this->idStr = idStr;
 	this->indices = indices;
 	this->mediaURL = mediaURL;
 	this->mediaURLHttps = mediaURLHttps;
@@ -40,6 +40,7 @@ char *MediaEntity::serializeHandcoded(char *buffer, int &objectSize) {
 	buffer = copyLong(buffer, this->sourceStatusId, objectSize);
 
 	//Copy Strings:
+    buffer = copyString(buffer, this->idStr, objectSize);
 	buffer = copyString(buffer, this->displayURL, objectSize);
 	buffer = copyString(buffer, this->expandedURL, objectSize);
 	buffer = copyString(buffer, this->mediaURL, objectSize);
@@ -86,6 +87,8 @@ MediaEntity *MediaEntity::deserializeHandcoded(char *buffer, int &bytesRead) {
 	bytesRead += sizeof(this->sourceStatusId);
 
 	//Parse Strings:
+    parseString(buffer + bytesRead, this->idStr);
+    bytesRead += (sizeof(int) + this->idStr.length());
 	parseString(buffer + bytesRead, this->displayURL);
 	bytesRead += (sizeof(int) + this->displayURL.length());
 	parseString(buffer + bytesRead, this->expandedURL);
@@ -152,7 +155,8 @@ bsoncxx::document::value MediaEntity::serializeBSON() {
 	document doc = document{};
 	doc << "display_url" << this->displayURL <<
 		"expanded_url" << this->expandedURL <<
-		"id" << this->id;
+		"id" << this->id <<
+        "id_str" << this->idStr;
 
 	auto arrindices = array{};
 	for (int i = 0; i < this->indices.size(); ++i) {
@@ -184,6 +188,9 @@ MediaEntity *MediaEntity::deserializeBSON(bsoncxx::document::view doc) {
 
 	element = doc["id"];
 	this->id = element.type() == bsoncxx::type::k_int64 ? element.get_int64().value : element.get_int32().value;
+
+    element = doc["id_str"];
+    this->idStr = bsoncxx::string::to_string(element.get_utf8().value);
 
 	element = doc["expanded_url"];
 	this->expandedURL = bsoncxx::string::to_string(element.get_utf8().value);

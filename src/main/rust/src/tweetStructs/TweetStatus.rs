@@ -3,7 +3,7 @@ use crate::tweetStructs::User::User;
 use crate::tweetStructs::Coordinates::Coordinates;
 use crate::tweetStructs::Place::Place;
 use crate::tweetStructs::Entities::Entities;
-use crate::tweetStructs::ExtendedEntities::ExtendedEntities;
+use crate::tweetStructs::ExtendedTweet::ExtendedTweet;
 use std::collections::HashMap;
 use crate::tweetStructs::MatchingRulesEntity::MatchingRulesEntity;
 use std::cmp::Ordering;
@@ -12,6 +12,7 @@ use std::cmp::Ordering;
 pub struct TweetStatus {
 	created_at: String,
 	id: i64,
+	id_str:String,
 	text: Option<String>,
 	source: Option<String>,
 	truncated: bool,
@@ -30,7 +31,7 @@ pub struct TweetStatus {
 	retweet_count: i32,
 	favorite_count: Option<i32>,
 	entities: Entities,
-	extended_entities: Option<ExtendedEntities>,
+	extended_tweet:Option<ExtendedTweet>,
 	favorited: Option<bool>,
 	retweeted: bool,
 	possibly_sensitive: Option<bool>,
@@ -42,6 +43,7 @@ pub struct TweetStatus {
 	withheld_copyright: Option<bool>,
 	withheld_in_countries: Option<Vec<String>>,
 	withheld_scope: Option<String>,
+	display_text_range:Option<Vec<u32>>
 }
 
 impl TweetStatus {
