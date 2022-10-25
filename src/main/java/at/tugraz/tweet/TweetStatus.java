@@ -21,6 +21,7 @@ import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+import com.google.gson.Gson;
 import com.google.protobuf.CodedInputStream;
 import at.tugraz.tweet.flatbuffers.MapStringBool;
 import at.tugraz.tweet.flatbuffers.TweetStatusFBS;
@@ -90,7 +91,6 @@ public class TweetStatus extends Base implements RootData {
         scopes = new HashMap<>();
         this.tweetStatusFBS = null;
         this.tweetStatusP = null;
-
     }
 
     public String getCreated_at() {
@@ -483,7 +483,7 @@ public class TweetStatus extends Base implements RootData {
         }
 
         JsonArrayBuilder jsonDisplayTextRangeArray = Json.createArrayBuilder();
-        if (this.display_text_range!=null) {
+        if (this.display_text_range != null) {
             for (Integer integer : this.display_text_range) {
                 jsonDisplayTextRangeArray.add(integer);
             }
@@ -1273,18 +1273,18 @@ public class TweetStatus extends Base implements RootData {
 
         //Entities
         if (protoTweet.getEntitiesP() != null) {
-            this.entities = getEntities( protoTweet.getEntitiesP());
+            this.entities = getEntities(protoTweet.getEntitiesP());
         }
 
         if (protoTweet.getExtendedTweet() != null) {
             this.extended_tweet = new ExtendedTweet();
             extended_tweet.setFull_text(protoTweet.getExtendedTweet().getFullText());
-            for (Integer integer: protoTweet.getExtendedTweet().getDisplayTextRangeList())
+            for (Integer integer : protoTweet.getExtendedTweet().getDisplayTextRangeList())
                 extended_tweet.getDisplay_text_range().add(integer);
-            if (protoTweet.getExtendedTweet().getEntities()!=null)
+            if (protoTweet.getExtendedTweet().getEntities() != null)
                 extended_tweet.setEntities(getEntities(protoTweet.getExtendedTweet().getEntities()));
 
-            if (protoTweet.getExtendedTweet().getExtendedEntities()!=null) {
+            if (protoTweet.getExtendedTweet().getExtendedEntities() != null) {
                 ExtendedEntities extendedEntities = new ExtendedEntities();
                 TweetStatusProtos.ExtendedEntitiesP extendedEntitiesP = protoTweet.getExtendedTweet().getExtendedEntities();
 
@@ -1327,14 +1327,14 @@ public class TweetStatus extends Base implements RootData {
         if (protoTweet.getWithheldScope() != null)
             this.withheld_scope = protoTweet.getWithheldScope();
 
-        for (Integer integer: protoTweet.getDisplayTextRangeList())
+        for (Integer integer : protoTweet.getDisplayTextRangeList())
             display_text_range.add(integer);
 
         return this;
     }
 
-    private Entities getEntities(TweetStatusProtos.EntitiesP entitiesP){
-       Entities entities = new Entities();
+    private Entities getEntities(TweetStatusProtos.EntitiesP entitiesP) {
+        Entities entities = new Entities();
 
         //HashtagEntity
         for (TweetStatusProtos.HashtagEntityP hashtagEntityP : entitiesP.getHashtagEntityPList()) {
@@ -1988,18 +1988,18 @@ public class TweetStatus extends Base implements RootData {
         for (String s : this.withheld_in_countries) {
             writer.writeString(s);
         }
-
-        writer.writeInt32("display_text_range_size", this.display_text_range.size());
-        writer.writeName("display_text_range");
-        writer.writeStartArray();
-        for (Integer i : this.display_text_range) {
-            writer.writeInt32(i);
-        }
-
         writer.writeEndArray();
 
+        if (this.display_text_range !=null) {
+            writer.writeInt32("display_text_range_size", this.display_text_range.size());
+            writer.writeName("display_text_range");
+            writer.writeStartArray();
+            for (Integer i : this.display_text_range) {
+                writer.writeInt32(i);
+            }
+            writer.writeEndArray();
+        }
         writer.writeEndDocument();
-
         return outputBuffer.toByteArray();
     }
 
@@ -2063,7 +2063,7 @@ public class TweetStatus extends Base implements RootData {
         int matching_rulesBuilder = TweetStatusFBS.createMatchingRulesVector(builder, matching_rulesList);
 
         int[] displayTextRangeList = new int[this.display_text_range.size()];
-        for(int j = 0; j < this.display_text_range.size(); j++) {
+        for (int j = 0; j < this.display_text_range.size(); j++) {
             displayTextRangeList[j] = this.display_text_range.get(j);
         }
         int displayTextBuilderBuilder = TweetStatusFBS.createDisplayTextRangeVector(builder, displayTextRangeList);
@@ -2282,17 +2282,18 @@ public class TweetStatus extends Base implements RootData {
         for (int i = 0; i < withheld_in_countries_size; i++) {
             this.withheld_in_countries.add(reader.readString());
         }
-
-        int display_text_range_size = reader.readInt32("display_text_range_size");
-        reader.readName("display_text_range");
-        reader.readStartArray();
-        for (int i = 0; i < display_text_range_size; i++) {
-            this.display_text_range.add(reader.readInt32());
-        }
-
         reader.readEndArray();
-        reader.readEndDocument();
 
+        if (currentName.equals("display_text_range_size")){
+            int display_text_range_size = reader.readInt32("display_text_range_size");
+            reader.readName("display_text_range");
+            reader.readStartArray();
+            for (int i = 0; i < display_text_range_size; i++) {
+                this.display_text_range.add(reader.readInt32());
+            }
+            reader.readEndArray();
+        }
+        reader.readEndDocument();
         return this;
     }
 }

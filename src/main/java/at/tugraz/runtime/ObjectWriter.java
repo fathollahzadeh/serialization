@@ -98,7 +98,7 @@ public class ObjectWriter {
 
             }
         } catch (Exception ex) {
-            logger.error("ObjectWriter(serializeObject):" + ex.getMessage());
+            logger.error("ObjectWriter(serializeObject):", ex);
         }
         return buffer;
     }
