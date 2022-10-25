@@ -341,7 +341,7 @@ bool TweetStatusProto::operator<(TweetStatusProto &other) {
 
 TweetStatusProto::TweetStatusProto(bool isPointer) : isPointer(isPointer) {}
 
-proto::EntitiesP *TweetStatusProto::setEntities(Entities *entities, proto::EntitiesP *entitiesP ) {
+void TweetStatusProto::TweetStatusProto::setEntities(Entities *entities, proto::EntitiesP *entitiesP ) {
     //HashtagEntity
     for (int i = 0; i < entities->hashtags.size(); ++i) {
         proto::HashtagEntityP *hashtagEntityP = entitiesP->add_hashtagentityp();

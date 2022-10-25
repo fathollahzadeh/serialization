@@ -17,7 +17,7 @@ private:
 
 	void setSizeEntityP(proto::SizeEntityP *sizeEntityP, SizeEntity *sizeEntity);
 
-    proto::EntitiesP *setEntities(Entities *entities, proto::EntitiesP *entitiesP);
+    void setEntities(Entities *entities, proto::EntitiesP *entitiesP);
 
 	bool isPointer = false;
 

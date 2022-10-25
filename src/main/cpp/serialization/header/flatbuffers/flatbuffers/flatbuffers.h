@@ -26,7 +26,7 @@
 #include "flatbuffers/detached_buffer.h"
 #include "flatbuffers/flatbuffer_builder.h"
 #include "flatbuffers/stl_emulation.h"
-#include "flatbuffers/string.h"
+#include "flatbuffers/string_flat.h"
 #include "flatbuffers/struct.h"
 #include "flatbuffers/table.h"
 #include "flatbuffers/vector.h"

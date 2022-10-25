@@ -201,7 +201,7 @@ User::User(long id, string idStr, string name, string screenName, string locatio
 		   bool showAllInlineMedia) {
 
 	this->id = id;
-    this->idStr;
+    this->idStr=idStr;
 	this->name = name;
 	this->screenName = screenName;
 	this->location = location;
