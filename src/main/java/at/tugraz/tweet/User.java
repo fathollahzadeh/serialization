@@ -1195,8 +1195,7 @@ public class User extends Base implements RootData {
 			descriptionURLEntitiesList[i] = urlEntity.flatBuffersWriter(builder);
 			i++;
 		}
-		int descriptionURLEntitiesBuilder = UserFBS
-			.createDescriptionURLEntitiesVector(builder, descriptionURLEntitiesList);
+		int descriptionURLEntitiesBuilder = UserFBS.createDescriptionUrlEntitiesVector(builder, descriptionURLEntitiesList);
 
 		UserFBS.startUserFBS(builder);
 		UserFBS.addId(builder, this.id);
@@ -1218,7 +1217,7 @@ public class User extends Base implements RootData {
 		UserFBS.addProfileImageUrlHttps(builder, profile_image_url_httpsBuilder);
 		UserFBS.addWithheldInCountries(builder, withheld_in_countriesBuilder);
 		UserFBS.addWithheldScope(builder, withheld_scopeBuilder);
-		UserFBS.addDescriptionURLEntities(builder, descriptionURLEntitiesBuilder);
+		UserFBS.addDescriptionUrlEntities(builder, descriptionURLEntitiesBuilder);
 		UserFBS.addGeoEnabled(builder, this.geo_enabled);
 		UserFBS.addLang(builder, langBuilder);
 		UserFBS.addContributorsEnabled(builder, contributors_enabled);
@@ -1245,6 +1244,7 @@ public class User extends Base implements RootData {
 
 	public User flatBuffersDeserialization(UserFBS userFBS) {
 		this.id = userFBS.id();
+		this.id_str = userFBS.idStr();
 		this.name = userFBS.name();
 		this.screen_name = userFBS.screenName();
 		this.location = userFBS.location();
@@ -1266,9 +1266,9 @@ public class User extends Base implements RootData {
 		}
 		this.withheld_scope = userFBS.withheldScope();
 
-		for(int i = 0; i < userFBS.descriptionURLEntitiesLength(); i++) {
+		for(int i = 0; i < userFBS.descriptionUrlEntitiesLength(); i++) {
 			URLEntity urlEntity = new URLEntity();
-			urlEntity.flatBuffersDeserialization(userFBS.descriptionURLEntities(i));
+			urlEntity.flatBuffersDeserialization(userFBS.descriptionUrlEntities(i));
 			this.descriptionURLEntities.add(urlEntity);
 		}
 

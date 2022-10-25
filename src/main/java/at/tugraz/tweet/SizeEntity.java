@@ -14,24 +14,24 @@ import org.bson.io.BasicOutputBuffer;
 
 public class SizeEntity extends Base implements RootData {
 
-	private int width;
-	private int height;
+	private int w;
+	private int h;
 	private String resize;
 
-	public int getWidth() {
-		return width;
+	public int getW() {
+		return w;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
+	public void setW(int w) {
+		this.w = w;
 	}
 
-	public int getHeight() {
-		return height;
+	public int getH() {
+		return h;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setH(int h) {
+		this.h = h;
 	}
 
 	public String getResize() {
@@ -87,8 +87,8 @@ public class SizeEntity extends Base implements RootData {
 		ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
 		byteBuffer.putInt(resizeBytes.length);
 		byteBuffer.put(resizeBytes);
-		byteBuffer.putInt(width);
-		byteBuffer.putInt(height);
+		byteBuffer.putInt(w);
+		byteBuffer.putInt(h);
 
 		return byteBuffer.array();
 	}
@@ -100,8 +100,8 @@ public class SizeEntity extends Base implements RootData {
 		stringSize = byteBuffer.getInt();
 		this.resize = extractString(byteBuffer, stringSize);
 
-		this.width = byteBuffer.getInt();
-		this.height = byteBuffer.getInt();
+		this.w = byteBuffer.getInt();
+		this.h = byteBuffer.getInt();
 
 		return this;
 	}
@@ -109,8 +109,8 @@ public class SizeEntity extends Base implements RootData {
 	public JsonObject jsonObjectBuilder() {
 
 		JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-		objectBuilder.add("width", this.width);
-		objectBuilder.add("height", this.height);
+		objectBuilder.add("width", this.w);
+		objectBuilder.add("height", this.h);
 
 		if(this.resize != null && !this.resize.isEmpty()) {
 			objectBuilder.add("resize", this.resize);
@@ -120,8 +120,8 @@ public class SizeEntity extends Base implements RootData {
 	}
 
 	public SizeEntity readJSONSizeEntity(JsonObject jsonObject) {
-		this.width = jsonObject.getInt("width");
-		this.height = jsonObject.getInt("height");
+		this.w = jsonObject.getInt("width");
+		this.h = jsonObject.getInt("height");
 
 		if(jsonObject.get("resize") != null && jsonObject.get("resize") != JsonValue.NULL) {
 			this.resize = jsonObject.getString("resize");
@@ -137,8 +137,8 @@ public class SizeEntity extends Base implements RootData {
 		if(this.resize != null)
 			writer.writeString("resize", this.resize);
 
-		writer.writeInt32("width", this.width);
-		writer.writeInt32("height", this.height);
+		writer.writeInt32("width", this.w);
+		writer.writeInt32("height", this.h);
 
 		writer.writeEndDocument();
 
@@ -157,8 +157,8 @@ public class SizeEntity extends Base implements RootData {
 			reader.readName();
 		}
 
-		this.width = reader.readInt32();
-		this.height = reader.readInt32("height");
+		this.w = reader.readInt32();
+		this.h = reader.readInt32("height");
 		reader.readEndDocument();
 
 		return this;
@@ -173,8 +173,8 @@ public class SizeEntity extends Base implements RootData {
 		int resizeBuilder = this.resize != null ? builder.createString(this.resize) : 0;
 
 		SizeEntityFBS.startSizeEntityFBS(builder);
-		SizeEntityFBS.addWidth(builder, this.width);
-		SizeEntityFBS.addHeight(builder, this.height);
+		SizeEntityFBS.addWidth(builder, this.w);
+		SizeEntityFBS.addHeight(builder, this.h);
 		SizeEntityFBS.addResize(builder, resizeBuilder);
 		int orc = SizeEntityFBS.endSizeEntityFBS(builder);
 		return orc;
@@ -182,8 +182,8 @@ public class SizeEntity extends Base implements RootData {
 
 	public SizeEntity flatBuffersDeserialization(SizeEntityFBS sizeEntityFBS) {
 
-		this.width = sizeEntityFBS.width();
-		this.height = sizeEntityFBS.height();
+		this.w = sizeEntityFBS.width();
+		this.h = sizeEntityFBS.height();
 		this.resize = sizeEntityFBS.resize();
 		return this;
 	}

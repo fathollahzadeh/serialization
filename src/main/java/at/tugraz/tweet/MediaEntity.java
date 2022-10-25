@@ -26,7 +26,6 @@ public class MediaEntity extends Base implements RootData {
 	private String display_url;
 	private String expanded_url;
 	private long id;
-
 	private String id_str;
 	private List<Integer> indices;
 	private String media_url;
@@ -565,13 +564,13 @@ public class MediaEntity extends Base implements RootData {
 	}
 
 	public int flatBuffersWriter(FlatBufferBuilder builder) {
+		int id_strBuilder = this.id_str != null ? builder.createString(this.id_str) : 0;
 		int display_urlBuilder = this.display_url != null ? builder.createString(this.display_url) : 0;
 		int expanded_urlBuilder = this.expanded_url != null ? builder.createString(this.expanded_url) : 0;
 		int media_urlBuilder = this.media_url != null ? builder.createString(this.media_url) : 0;
 		int media_url_httpsBuilder = this.media_url_https != null ? builder.createString(this.media_url_https) : 0;
 		int typeBuilder = this.type != null ? builder.createString(this.type) : 0;
-		int source_status_id_strBuilder = this.source_status_id_str != null ? builder
-			.createString(this.source_status_id_str) : 0;
+		int source_status_id_strBuilder = this.source_status_id_str != null ? builder.createString(this.source_status_id_str) : 0;
 		int urlBuilder = this.url != null ? builder.createString(this.url) : 0;
 
 		int[] indicesList = new int[this.indices.size()];
@@ -585,6 +584,7 @@ public class MediaEntity extends Base implements RootData {
 			.flatBuffersWriter(builder) : 0;
 
 		MediaEntityFBS.startMediaEntityFBS(builder);
+		MediaEntityFBS.addIdStr(builder, id_strBuilder);
 		MediaEntityFBS.addDisplayUrl(builder, display_urlBuilder);
 		MediaEntityFBS.addExpandedUrl(builder, expanded_urlBuilder);
 		MediaEntityFBS.addId(builder, this.id);
@@ -608,6 +608,7 @@ public class MediaEntity extends Base implements RootData {
 		this.display_url = mediaEntityFBS.displayUrl();
 		this.expanded_url = mediaEntityFBS.expandedUrl();
 		this.id = mediaEntityFBS.id();
+		this.id_str = mediaEntityFBS.idStr();
 		for(int i = 0; i < mediaEntityFBS.indicesLength(); i++) {
 			this.indices.add(mediaEntityFBS.indices(i));
 		}

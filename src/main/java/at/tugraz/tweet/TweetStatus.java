@@ -20,9 +20,7 @@ import javax.json.JsonValue;
 import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 
-import at.tugraz.tweet.flatbuffers.URLEntityFBS;
 import com.google.flatbuffers.FlatBufferBuilder;
-import com.google.gson.Gson;
 import com.google.protobuf.CodedInputStream;
 import at.tugraz.tweet.flatbuffers.MapStringBool;
 import at.tugraz.tweet.flatbuffers.TweetStatusFBS;
@@ -1075,8 +1073,8 @@ public class TweetStatus extends Base implements RootData {
     }
 
     void setSizeEntityP(TweetStatusProtos.SizeEntityP.Builder sizeEntityP, SizeEntity sizeEntity) {
-        sizeEntityP.setWidth(sizeEntity.getWidth());
-        sizeEntityP.setHeight(sizeEntity.getHeight());
+        sizeEntityP.setWidth(sizeEntity.getW());
+        sizeEntityP.setHeight(sizeEntity.getH());
         if (sizeEntity.getResize() != null)
             sizeEntityP.setResize(sizeEntity.getResize());
     }
@@ -1506,8 +1504,8 @@ public class TweetStatus extends Base implements RootData {
 
     private SizeEntity getSizeEntity(TweetStatusProtos.SizeEntityP sizeEntityP) {
         SizeEntity sizeEntity = new SizeEntity();
-        sizeEntity.setWidth(sizeEntityP.getWidth());
-        sizeEntity.setHeight(sizeEntityP.getHeight());
+        sizeEntity.setW(sizeEntityP.getWidth());
+        sizeEntity.setH(sizeEntityP.getHeight());
         if (sizeEntityP.getResize() != null)
             sizeEntity.setResize(sizeEntityP.getResize());
         return sizeEntity;
