@@ -228,7 +228,7 @@ ExtendedTweet *DataReader::getExtendedTweet(Value &d) {
     }
     ExtendedEntities *extendedEntities = nullptr;
     if (d.HasMember("extended_entities") && !d["extended_entities"].IsNull()) {
-        if (d["extended_entities"].HasMember("media") && !d["media"]["extended_entities"].IsNull()) {
+        if (d["extended_entities"].HasMember("media") && !d["extended_entities"]["media"].IsNull()) {
             extendedEntities = new ExtendedEntities(getMedia(d["extended_entities"]["media"]));
         }
     }
