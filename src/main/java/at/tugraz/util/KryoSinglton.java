@@ -11,15 +11,6 @@ import com.esotericsoftware.kryo.Kryo;
 
 public class KryoSinglton {
 
-//	static class SingletonHolder {
-//		static final KryoSinglton instance = new KryoSinglton();
-//	}
-//
-//	public static KryoSinglton getInstance() {
-//		return SingletonHolder.instance;
-//
-//	}
-//
 	public Kryo getKryo() {
 		return kryo;
 	}
@@ -40,6 +31,7 @@ public class KryoSinglton {
 		kryo.register(BoundingBoxCoordinate.class);
 		kryo.register(Coordinates.class);
 		kryo.register(Entities.class);
+		kryo.register(ExtendedTweet.class);
 		kryo.register(ExtendedEntities.class);
 		kryo.register(HashtagEntity.class);
 		kryo.register(MatchingRulesEntity.class);

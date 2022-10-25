@@ -9,134 +9,132 @@ message TweetStatusP {
 
     string createdAt = 1;
     int64 id = 2;
-    string text = 3;
-    string source = 4;
-    bool isTruncated = 5;
-    int64 inReplyToStatusId = 6;
-    int64 inReplyToUserId = 7;
-    string inReplyToScreenName = 8;
+    string idStr=3;
+    string text = 4;
+    string source = 5;
+    bool isTruncated = 6;
+    int64 inReplyToStatusId = 7;
+    int64 inReplyToUserId = 8;
+    string inReplyToScreenName = 9;
+    UserP userP = 10;
+    CoordinatesP coordinates = 11;
+    PlaceP place = 12;
+    int64 quotedStatusId = 13;
+    bool isQuoteStatus = 14;
+    TweetStatusP quotedStatus = 15;
+    TweetStatusP retweetedStatus = 16;
+    int32 quoteCount=17;
+    int32 replyCount=18;
+    int32 retweetCount=19;
+    int32 favoriteCount=20;
+    EntitiesP entitiesP=21;
+    ExtendedTweetEntityP extendedTweet=22;
+    bool isFavorited=23;
+    bool isRetweeted=24;
+    bool isPossiblySensitive=25;
+    string filterLevel=26;
+    string lang=27;
+    repeated MatchingRulesEntityP matchingRules=28;
+    int64 currentUserRetweetedId=29;
+    repeated MapFieldEntry scopes=30;
+    bool withheldCopyright=31;
+    repeated string withheldInCountries=32;
+    string  withheldScope=33;
+    repeated int32 displayTextRange=34;
+}
 
-    //User:
-    message UserP {
+//User:
+message UserP {
+    int64 id = 1;
+    string idStr=2;
+    string name = 3;
+    string screenName = 4;
+    string location = 5;
+    string url = 6;
+    string description = 7;
+    bool isProtected = 8;
+    bool isVerified = 9;
+    int32 followersCount = 10;
+    int32 friendsCount = 11;
+    int32 listedCount = 12;
+    int32 favouritesCount = 13;
+    int32 statusesCount = 14;
+    string createdAt = 15;
+    string profileBannerImageUrl = 16;
+    string profileImageUrlHttps = 17;
+    bool isDefaultProfile = 18;
+    repeated string withheldInCountries = 19;
+    string withheldScope = 20;
+    URLEntityP descriptionURLEntities = 21;
+    bool isGeoEnabled = 22;
+    string lang = 23;
+    bool isContributorsEnabled = 24;
+    string profileBackgroundColor = 25;
+    string profileBackgroundImageUrl = 26;
+    string profileBackgroundImageUrlHttps = 27;
+    bool profileBackgroundTiled = 28;
+    string profileImageUrl = 29;
+    string profileLinkColor = 30;
+    string profileSidebarBorderColor = 31;
+    string profileSidebarFillColor = 32;
+    string profileTextColor = 33;
+    bool profileUseBackgroundImage = 34;
+    bool isDefaultProfileImage = 35;
+    int32 utcOffset = 36;
+    string timeZone = 37;
+    bool translator = 38;
+    bool isFollowRequestSent = 39;
+    bool showAllInlineMedia = 40;
+}
 
-        int64 id = 1;
-        string name = 2;
-        string screenName = 3;
-        string location = 4;
-        string url = 5;
-        string description = 6;
-        bool isProtected = 7;
-        bool isVerified = 8;
-        int32 followersCount = 9;
-        int32 friendsCount = 10;
-        int32 listedCount = 11;
-        int32 favouritesCount = 12;
-        int32 statusesCount = 13;
-        string createdAt = 14;
-        string profileBannerImageUrl = 15;
-        string profileImageUrlHttps = 16;
-        bool isDefaultProfile = 17;
-        repeated string withheldInCountries = 18;
-        string withheldScope = 19;
-        repeated URLEntityP descriptionURLEntities = 20;
-        bool isGeoEnabled = 21;
-        string lang = 22;
-        bool isContributorsEnabled = 23;
-        string profileBackgroundColor = 24;
-        string profileBackgroundImageUrl = 25;
-        string profileBackgroundImageUrlHttps = 26;
-        bool profileBackgroundTiled = 27;
-        string profileImageUrl = 28;
-        string profileLinkColor = 29;
-        string profileSidebarBorderColor = 30;
-        string profileSidebarFillColor = 31;
-        string profileTextColor = 32;
-        bool profileUseBackgroundImage = 33;
-        bool isDefaultProfileImage = 34;
-        int32 utcOffset = 35;
-        string timeZone = 36;
-        bool translator = 37;
-        bool isFollowRequestSent = 38;
-        bool showAllInlineMedia = 39;
-    }
+//Coordinates
+message CoordinatesP {
+    string type = 1;
+    repeated double coordinates = 2;
+}
 
-    UserP userP = 27;
+//Place
+message PlaceP {
+    string name = 1;
+    string countryCode = 2;
+    string id = 3;
+    string country = 4;
+    string placeType = 5;
+    string url = 6;
+    string fullName = 7;
 
-    //Coordinates
-    message CoordinatesP {
+    //BoundingBoxCoordinate
+    message BoundingBoxCoordinateP {
         string type = 1;
-        repeated double coordinates = 2;
-    }
-    CoordinatesP coordinates = 28;
 
-    //Place
-    message PlaceP {
-        string name = 1;
-        string countryCode = 2;
-        string id = 3;
-        string country = 4;
-        string placeType = 5;
-        string url = 6;
-        string fullName = 7;
-
-        //BoundingBoxCoordinate
-        message BoundingBoxCoordinateP {
-            string type = 1;
-
-            // Representation of a three dimensional array for coordinates
-            message RowsOneP {
-                message RowsTwoP {
-                    repeated double coordinate = 1;
-                }
-                repeated RowsTwoP rowsTwoP = 1;
+        // Representation of a three dimensional array for coordinates
+        message RowsOneP {
+            message RowsTwoP {
+                repeated double coordinate = 1;
             }
-            repeated RowsOneP threeDimArray = 2;
-
+            repeated RowsTwoP rowsTwoP = 1;
         }
-
-        BoundingBoxCoordinateP boundingBoxCoordinateP = 8;
-    }
-    PlaceP place = 29;
-    int64 quotedStatusId = 30;
-    bool isQuoteStatus = 31;
-    TweetStatusP quotedStatus = 32;
-    TweetStatusP retweetedStatus = 33;
-    int32 quoteCount=34;
-    int32 replyCount=35;
-    int32 retweetCount=36;
-    int32 favoriteCount=37;
-
-    //Entities
-    message EntitiesP{
-        repeated HashtagEntityP hashtagEntityP=1;
-        repeated MediaEntityP mediaEntityP=2;
-        repeated URLEntityP urlEntityP = 3;
-        repeated UserMentionEntityP userMentionEntityP = 4;
-        repeated SymbolEntityP symbolEntityP = 5;
-        repeated PollEntityP pollEntityP = 6;
+        repeated RowsOneP threeDimArray = 2;
 
     }
-    EntitiesP entitiesP=38;
 
-    message ExtendedEntitiesP{
-        repeated MediaEntityP media=1;
-    }
+    BoundingBoxCoordinateP boundingBoxCoordinateP = 8;
+}
 
-    ExtendedEntitiesP extendedEntities=39;
+//Entities
+message EntitiesP{
+    repeated HashtagEntityP hashtagEntityP=1;
+    repeated MediaEntityP mediaEntityP=2;
+    repeated URLEntityP urlEntityP = 3;
+    repeated UserMentionEntityP userMentionEntityP = 4;
+    repeated SymbolEntityP symbolEntityP = 5;
+    repeated PollEntityP pollEntityP = 6;
 
-    bool isFavorited=40;
-    bool isRetweeted=41;
-    bool isPossiblySensitive=42;
-    string filterLevel=43;
-    string lang=44;
-    repeated MatchingRulesEntityP matchingRules=45;
-    int64 currentUserRetweetedId=46;
-    repeated MapFieldEntry scopes=47;
-    bool withheldCopyright=48;
-    repeated string withheldInCountries=49;
-    string  withheldScope=50;
+}
 
-
+//ExtendedEntities
+message ExtendedEntitiesP{
+    repeated MediaEntityP media=1;
 }
 
 //URLEntityP
@@ -157,16 +155,17 @@ message MediaEntityP{
     string displayURL=1;
     string expandedURL=2;
     int64 id=3;
-    repeated int32 indices=4;
-    string mediaURL=5;
-    string mediaURLHttps=6;
-    MediaSizesEntityP sizes=7;
-    string type=8;
-    int64 sourceStatusId=9;
-    string sourceStatusIdStr=10;
-    string url=11;
-    VideoEntityP videoInfo=12;
-    AdditionalMediaInfoEntityP additionalMediaInfo=13;
+    string idStr=4;
+    repeated int32 indices=5;
+    string mediaURL=6;
+    string mediaURLHttps=7;
+    MediaSizesEntityP sizes=8;
+    string type=9;
+    int64 sourceStatusId=10;
+    string sourceStatusIdStr=11;
+    string url=12;
+    VideoEntityP videoInfo=13;
+    AdditionalMediaInfoEntityP additionalMediaInfo=14;
 }
 
 //UserMentionEntity
@@ -246,11 +245,10 @@ message MapFieldEntry {
     bool value = 2;
 }
 
-
-
-
-
-
-
-
-
+//ExtendedTweetEntity
+message ExtendedTweetEntityP{
+    string fullText=1;
+    repeated int32 displayTextRange=2;
+    EntitiesP entities=3;
+    ExtendedEntitiesP extendedEntities=4;
+}

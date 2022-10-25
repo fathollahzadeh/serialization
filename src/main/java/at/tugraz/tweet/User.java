@@ -25,6 +25,8 @@ import org.bson.io.BasicOutputBuffer;
 public class User extends Base implements RootData {
 
 	private long id;
+
+	private String id_str;
 	private String name;
 	private String screen_name;
 	private String location;//nullable
@@ -85,6 +87,14 @@ public class User extends Base implements RootData {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getId_str() {
+		return id_str;
+	}
+
+	public void setId_str(String id_str) {
+		this.id_str = id_str;
 	}
 
 	public String getName() {
@@ -419,6 +429,9 @@ public class User extends Base implements RootData {
 
 		int allocatedBufferSize = 0;
 
+		byte[] idStrBytes = id_str.getBytes(Charset.forName("UTF-8"));
+		allocatedBufferSize += idStrBytes.length + 4;
+
 		byte[] nameBytes = name.getBytes(Charset.forName("UTF-8"));
 		allocatedBufferSize += nameBytes.length + 4;
 
@@ -518,6 +531,8 @@ public class User extends Base implements RootData {
 		// array fields
 		ByteBuffer byteBuffer = ByteBuffer.allocate(allocatedBufferSize);
 		byteBuffer.putLong(id);
+		byteBuffer.putInt(idStrBytes.length);
+		byteBuffer.put(idStrBytes);
 		byteBuffer.putInt(nameBytes.length);
 		byteBuffer.put(nameBytes);
 		byteBuffer.putInt(screen_nameBytes.length);
@@ -593,6 +608,8 @@ public class User extends Base implements RootData {
 		int stringSize;
 
 		this.id = byteBuffer.getLong();
+		stringSize = byteBuffer.getInt();
+		this.id_str = extractString(byteBuffer, stringSize);
 		stringSize = byteBuffer.getInt();
 		this.name = extractString(byteBuffer, stringSize);
 		stringSize = byteBuffer.getInt();
@@ -677,6 +694,11 @@ public class User extends Base implements RootData {
 
 		JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
 		objectBuilder.add("id", this.id);
+
+		if(this.id_str != null && !this.id_str.isEmpty()) {
+			objectBuilder.add("id_str", this.id_str);
+		}
+
 		if(this.name != null && !this.name.isEmpty()) {
 			objectBuilder.add("name", this.name);
 		}
@@ -775,6 +797,10 @@ public class User extends Base implements RootData {
 	public User readJSONUser(JsonObject jsonObject) {
 
 		this.id = Long.parseLong(jsonObject.getJsonNumber("id").toString());
+		if(jsonObject.get("id_str") != null && jsonObject.get("id_str") != JsonValue.NULL) {
+			this.id_str = jsonObject.getString("id_str");
+		}
+
 		if(jsonObject.get("name") != null && jsonObject.get("name") != JsonValue.NULL) {
 			this.name = jsonObject.getString("name");
 		}

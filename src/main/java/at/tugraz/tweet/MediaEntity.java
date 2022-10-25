@@ -26,6 +26,8 @@ public class MediaEntity extends Base implements RootData {
 	private String display_url;
 	private String expanded_url;
 	private long id;
+
+	private String id_str;
 	private List<Integer> indices;
 	private String media_url;
 	private String media_url_https;
@@ -63,6 +65,14 @@ public class MediaEntity extends Base implements RootData {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getId_str() {
+		return id_str;
+	}
+
+	public void setId_str(String id_str) {
+		this.id_str = id_str;
 	}
 
 	public List<Integer> getIndices() {
@@ -428,6 +438,7 @@ public class MediaEntity extends Base implements RootData {
 			writer.writeString("expanded_url", this.expanded_url);
 		}
 		writer.writeInt64("id", this.id);
+		writer.writeString("id_str", this.id_str);
 
 		writer.writeInt32("indices_size", this.indices.size());
 		writer.writeName("indices");

@@ -39,6 +39,7 @@ public class TweetStatus extends Base implements RootData {
 	static Logger logger = Logger.getLogger(TweetStatus.class);
 	private String created_at;
 	private long id;
+	private String id_str;
 	private String text;
 	private String source;
 	private boolean truncated;
@@ -57,7 +58,7 @@ public class TweetStatus extends Base implements RootData {
 	private int retweet_count;
 	private int favorite_count;//nullable
 	private Entities entities;
-	private ExtendedEntities extended_entities;
+	private ExtendedTweet extended_tweet;
 	private boolean favorited;//nullable
 	private boolean retweeted;
 	private boolean possibly_sensitive;//nullable
@@ -69,6 +70,8 @@ public class TweetStatus extends Base implements RootData {
 	private boolean withheld_copyright;//nullable
 	private List<String> withheld_in_countries;//nullable
 	private String withheld_scope;//nullable
+
+	private List<Integer> display_text_range; //nullable
 
 	private TweetStatusFBS tweetStatusFBS;
 	private TweetStatusProtos.TweetStatusP tweetStatusP;
@@ -250,12 +253,12 @@ public class TweetStatus extends Base implements RootData {
 		this.entities = entities;
 	}
 
-	public ExtendedEntities getExtended_entities() {
-		return extended_entities;
+	public ExtendedTweet getExtended_tweet() {
+		return extended_tweet;
 	}
 
-	public void setExtended_entities(ExtendedEntities extended_entities) {
-		this.extended_entities = extended_entities;
+	public void setExtended_tweet(ExtendedTweet extended_tweet) {
+		this.extended_tweet = extended_tweet;
 	}
 
 	public boolean isFavorited() {
@@ -338,6 +341,23 @@ public class TweetStatus extends Base implements RootData {
 		this.withheld_in_countries = withheld_in_countries;
 	}
 
+
+	public String getId_str() {
+		return id_str;
+	}
+
+	public void setId_str(String id_str) {
+		this.id_str = id_str;
+	}
+
+	public List<Integer> getDisplay_text_range() {
+		return display_text_range;
+	}
+
+	public void setDisplay_text_range(List<Integer> display_text_range) {
+		this.display_text_range = display_text_range;
+	}
+
 	public String getWithheld_scope() {
 		return withheld_scope;
 	}
@@ -393,6 +413,7 @@ public class TweetStatus extends Base implements RootData {
 		JsonObjectBuilder tweetStatusObjectBuilder = Json.createObjectBuilder();
 		tweetStatusObjectBuilder.add("created_at", this.getCreated_at());
 		tweetStatusObjectBuilder.add("id", this.getId());
+		tweetStatusObjectBuilder.add("id_str", this.getId_str());
 		tweetStatusObjectBuilder.add("text", this.getText());
 		tweetStatusObjectBuilder.add("source", this.getSource());
 		tweetStatusObjectBuilder.add("truncated", this.isTruncated());
@@ -426,8 +447,8 @@ public class TweetStatus extends Base implements RootData {
 		if(this.getEntities() != null)
 			tweetStatusObjectBuilder.add("entities", this.getEntities().jsonObjectBuilder());
 
-		if(this.getExtended_entities() != null)
-			tweetStatusObjectBuilder.add("extended_entities", this.getExtended_entities().jsonObjectBuilder());
+		if(this.getExtended_tweet() != null)
+			tweetStatusObjectBuilder.add("extended_tweet", this.getExtended_tweet().jsonObjectBuilder());
 
 		tweetStatusObjectBuilder.add("favorited", this.isFavorited());
 		tweetStatusObjectBuilder.add("retweeted", this.isRetweeted());
@@ -461,8 +482,14 @@ public class TweetStatus extends Base implements RootData {
 		if(this.withheld_scope != null && !this.withheld_scope.isEmpty()) {
 			tweetStatusObjectBuilder.add("withheld_scope", this.getWithheld_scope());
 		}
-		JsonObject tweetStatusJsonObject = tweetStatusObjectBuilder.build();
 
+		JsonArrayBuilder jsonDisplayTextRangeArray = Json.createArrayBuilder();
+		for(Integer integer : display_text_range) {
+			jsonDisplayTextRangeArray.add(integer);
+		}
+		tweetStatusObjectBuilder.add("display_text_range", jsonDisplayTextRangeArray);
+
+		JsonObject tweetStatusJsonObject = tweetStatusObjectBuilder.build();
 		return tweetStatusJsonObject;
 	}
 
@@ -498,6 +525,7 @@ public class TweetStatus extends Base implements RootData {
 			this.created_at = jsonObject.getString("created_at");
 		}
 		this.id = Long.parseLong(jsonObject.getJsonNumber("id").toString());
+		this.id_str = jsonObject.getString("id_str");
 
 		if(jsonObject.get("text") != null && jsonObject.get("text") != JsonValue.NULL) {
 			this.text = jsonObject.getString("text");
@@ -562,10 +590,10 @@ public class TweetStatus extends Base implements RootData {
 			this.entities = new Entities().readJSONEntities(entitiesJsonObject);
 		}
 
-		if(jsonObject.getJsonObject("extended_entities") != null && jsonObject
-			.getJsonObject("extended_entities") != JsonValue.NULL) {
-			JsonObject extended_entitiesJsonObject = jsonObject.getJsonObject("extended_entities");
-			this.extended_entities = new ExtendedEntities().readJSONExtendedEntities(extended_entitiesJsonObject);
+		if(jsonObject.getJsonObject("extended_tweet") != null && jsonObject
+			.getJsonObject("extended_tweet") != JsonValue.NULL) {
+			JsonObject extended_tweetJsonObject = jsonObject.getJsonObject("extended_tweet");
+			this.extended_tweet = new ExtendedTweet().readJSONExtendedTweet(extended_tweetJsonObject);
 		}
 
 		this.favorited = jsonObject.getBoolean("favorited");
@@ -608,6 +636,13 @@ public class TweetStatus extends Base implements RootData {
 		}
 		if(jsonObject.get("withheld_scope") != null && jsonObject.get("withheld_scope") != JsonValue.NULL) {
 			this.withheld_scope = jsonObject.getString("withheld_scope");
+		}
+
+		if(jsonObject.getJsonArray("display_text_range") != null) {
+			JsonArray displayTextRangeArray = jsonObject.getJsonArray("display_text_range");
+			for(int i = 0; i < displayTextRangeArray.size(); i++) {
+				this.display_text_range.add(displayTextRangeArray.getInt(i));
+			}
 		}
 		return this;
 	}
@@ -1056,6 +1091,7 @@ public class TweetStatus extends Base implements RootData {
 
 		this.created_at = protoTweet.getCreatedAt();
 		this.id = protoTweet.getId();
+		//this.id_str = protoTweet.getId();
 		if(protoTweet.getText() != null)
 			this.text = protoTweet.getText();
 		if(protoTweet.getSource() != null)
@@ -1459,6 +1495,9 @@ public class TweetStatus extends Base implements RootData {
 
 		int allocatedBufferSize = 0;
 
+		byte[] id_strBytes = id_str.getBytes(Charset.forName("UTF-8"));
+		allocatedBufferSize += id_strBytes.length + 4;
+
 		byte[] created_atBytes = created_at.getBytes(Charset.forName("UTF-8"));
 		allocatedBufferSize += created_atBytes.length + 4;
 
@@ -1490,8 +1529,8 @@ public class TweetStatus extends Base implements RootData {
 		byte[] entityBytes = entities.writeByteBuffer();
 		allocatedBufferSize += entityBytes.length + 4;
 
-		byte[] extended_entityBytes = (extended_entities != null) ? extended_entities.writeByteBuffer() : new byte[0];
-		allocatedBufferSize += extended_entityBytes.length + 4;
+		byte[] extended_tweetBytes = (extended_tweet != null) ? extended_tweet.writeByteBuffer() : new byte[0];
+		allocatedBufferSize += extended_tweetBytes.length + 4;
 
 		byte[] filter_levelByte = (filter_level != null) ? filter_level.getBytes() : new byte[0];
 		allocatedBufferSize += filter_levelByte.length + 4;
@@ -1560,6 +1599,8 @@ public class TweetStatus extends Base implements RootData {
 		byteBuffer.putInt(created_atBytes.length);
 		byteBuffer.put(created_atBytes);
 		byteBuffer.putLong(id);
+		byteBuffer.putInt(id_strBytes.length);
+		byteBuffer.put(id_strBytes);
 		byteBuffer.putInt(textBytes.length);
 		byteBuffer.put(textBytes);
 		byteBuffer.putInt(sourceBytes.length);
@@ -1587,8 +1628,8 @@ public class TweetStatus extends Base implements RootData {
 		byteBuffer.putInt(favorite_count);
 		byteBuffer.putInt(entityBytes.length);
 		byteBuffer.put(entityBytes);
-		byteBuffer.putInt(extended_entityBytes.length);
-		byteBuffer.put(extended_entityBytes);
+		byteBuffer.putInt(extended_tweetBytes.length);
+		byteBuffer.put(extended_tweetBytes);
 		byteBuffer.put(convertToByte(favorited));
 		byteBuffer.put(convertToByte(retweeted));
 		byteBuffer.put(convertToByte(possibly_sensitive));
@@ -1625,6 +1666,10 @@ public class TweetStatus extends Base implements RootData {
 		byteBuffer.putInt(withheld_scopeBytes.length);
 		byteBuffer.put(withheld_scopeBytes);
 
+		byteBuffer.putInt(display_text_range.size());
+		for (int i:display_text_range)
+			byteBuffer.putInt(i);
+
 		return byteBuffer.array();
 	}
 
@@ -1632,6 +1677,9 @@ public class TweetStatus extends Base implements RootData {
 
 		ByteBuffer byteBuffer = ByteBuffer.wrap(buffData);
 		int stringSize;
+
+		stringSize = byteBuffer.getInt();
+		this.id_str = extractString(byteBuffer, stringSize);
 
 		stringSize = byteBuffer.getInt();
 		this.created_at = extractString(byteBuffer, stringSize);
@@ -1707,14 +1755,14 @@ public class TweetStatus extends Base implements RootData {
 		else
 			this.entities = null;
 
-		byte[] extended_entityBytes = new byte[byteBuffer.getInt()];
-		if(extended_entityBytes.length > 0) {
-			byteBuffer.get(extended_entityBytes, 0, extended_entityBytes.length);
-			this.extended_entities = new ExtendedEntities();
-			this.extended_entities.readByteBuffer(extended_entityBytes);
+		byte[] extended_tweetBytes = new byte[byteBuffer.getInt()];
+		if(extended_tweetBytes.length > 0) {
+			byteBuffer.get(extended_tweetBytes, 0, extended_tweetBytes.length);
+			this.extended_tweet = new ExtendedTweet();
+			this.extended_tweet.readByteBuffer(extended_tweetBytes);
 		}
 		else
-			this.extended_entities = null;
+			this.extended_tweet = null;
 
 		this.favorited = convertToBoolean(byteBuffer.get());
 		this.retweeted = convertToBoolean(byteBuffer.get());
@@ -1763,6 +1811,12 @@ public class TweetStatus extends Base implements RootData {
 
 		stringSize = byteBuffer.getInt();
 		this.withheld_scope = extractString(byteBuffer, stringSize);
+
+		int numberSize = byteBuffer.getInt();
+		this.display_text_range = new ArrayList<>();
+		for(int i = 0; i < numberSize; i++) {
+			this.display_text_range.add(byteBuffer.getInt());
+		}
 
 		return this;
 	}
@@ -1844,6 +1898,7 @@ public class TweetStatus extends Base implements RootData {
 		writer.writeStartDocument();
 		writer.writeString("created_at", this.created_at);
 		writer.writeInt64("id", this.id);
+		writer.writeString("id_str", this.id_str);
 		writer.writeString("text", this.text);
 		writer.writeString("source", this.source);
 		writer.writeBoolean("truncated", this.truncated);
@@ -1878,8 +1933,8 @@ public class TweetStatus extends Base implements RootData {
 		if(this.entities != null)
 			writer.writeBinaryData("entities", new BsonBinary(this.entities.bsonSerialization()));
 
-		if(this.extended_entities != null)
-			writer.writeBinaryData("extended_entities", new BsonBinary(this.extended_entities.bsonSerialization()));
+		if(this.extended_tweet!= null)
+			writer.writeBinaryData("extended_tweet", new BsonBinary(this.extended_tweet.bsonSerialization()));
 
 		writer.writeBoolean("favorited", this.favorited);
 		writer.writeBoolean("retweeted", this.retweeted);
@@ -1917,6 +1972,14 @@ public class TweetStatus extends Base implements RootData {
 		for(String s : this.withheld_in_countries) {
 			writer.writeString(s);
 		}
+
+		writer.writeInt32("display_text_range_size", this.display_text_range.size());
+		writer.writeName("display_text_range");
+		writer.writeStartArray();
+		for(Integer i : this.display_text_range) {
+			writer.writeInt32(i);
+		}
+
 		writer.writeEndArray();
 
 		writer.writeEndDocument();
@@ -2091,6 +2154,7 @@ public class TweetStatus extends Base implements RootData {
 		reader.readStartDocument();
 		this.created_at = reader.readString("created_at");
 		this.id = reader.readInt64("id");
+		this.id_str = reader.readString("id_str");
 		this.text = reader.readString("text");
 		this.source = reader.readString("source");
 		this.truncated = reader.readBoolean("truncated");
@@ -2147,9 +2211,9 @@ public class TweetStatus extends Base implements RootData {
 			currentName = reader.readName();
 		}
 
-		if(currentName.equals("extended_entities")) {
-			this.extended_entities = new ExtendedEntities();
-			this.extended_entities.bsonDeSerialization(reader.readBinaryData().getData());
+		if(currentName.equals("extended_tweet")) {
+			this.extended_tweet = new ExtendedTweet();
+			this.extended_tweet.bsonDeSerialization(reader.readBinaryData().getData());
 			reader.readName();
 		}
 
@@ -2199,6 +2263,14 @@ public class TweetStatus extends Base implements RootData {
 		for(int i = 0; i < withheld_in_countries_size; i++) {
 			this.withheld_in_countries.add(reader.readString());
 		}
+
+		int display_text_range_size = reader.readInt32("display_text_range_size");
+		reader.readName("display_text_range");
+		reader.readStartArray();
+		for(int i = 0; i < display_text_range_size; i++) {
+			this.display_text_range.add(reader.readInt32());
+		}
+
 		reader.readEndArray();
 		reader.readEndDocument();
 
