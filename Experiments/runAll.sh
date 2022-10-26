@@ -17,9 +17,9 @@ export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-ori
 #./run2SetupSerialization.sh
 #./run3DownloadData.sh
 #./run4PrepareData.sh
-./run5LocalExperiments.sh
+#./run5LocalExperiments.sh
 #./run5LocalExperimentsExternalSort.sh
-#./run6NetworkExperiments.sh
+./run6NetworkExperiments.sh
 
 
 
@@ -27,4 +27,6 @@ export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-ori
 
 
 # id +=1 >> root=6978212  m= 2992726
+
+#gdown https://drive.google.com/uc?id=1ZrsgJ_f2gXTBzAgA6vVq_S2mcopHtpv6
 
