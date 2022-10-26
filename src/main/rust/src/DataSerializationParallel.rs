@@ -35,19 +35,19 @@ fn main() -> io::Result<()> {
 
                 let mut size = BATCHSIZE;
                 let mut j: u32 = beginPos;
+                let mut sum = 0;
                 while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
-                    // for tweet in tweets {
-                    //     writer.serializeObject2(&tweet);
-                    // }
-                     for k in 0..rdSize as usize {
-                         writer.serializeObject(&tweets[k]);
-                     }
+                    for tweet in tweets {
+                        writer.serializeObject(&tweet);
+                        sum +=1;
+                    }
                     j += rdSize;
                     size = min(endPos - j, BATCHSIZE);
                 }
                 reader.flush();
+                println!("id ={}  sum={}", i, sum);
             });
         }
     }).expect("Finished!");

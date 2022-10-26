@@ -30,13 +30,17 @@ fn main() -> io::Result<()> {
                 let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
                 let mut size = BATCHSIZE;
                 let mut j: u32 = beginPos;
+                let mut sum = 0;
                 while j < endPos {
                     let mut tweets: Vec<TweetStatus> = vec![];
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
                     j += rdSize;
                     size = min(endPos - j, BATCHSIZE);
+                    sim += rdSize;
                 }
                 reader.flush();
+
+                println!("ID={}  sum={}", i, sum);
             });
         }
     }).expect("Finished!");
