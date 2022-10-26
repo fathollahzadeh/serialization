@@ -152,6 +152,7 @@ fn initClient(ip: &str, port: u16) -> Result<TcpStream, Box<dyn std::error::Erro
 fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<TweetStatus>>) {
     let mut i32_data = [0 as u8; 4];
     let ack = b"1";
+    let mut c = 0;
 
     while true {
         stream.write(&ack.clone());
@@ -197,7 +198,10 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<Tw
         }
         while queue.is_full() {}
         queue.push(list);
+        c +=list.len();
     }
+
+    println!(" c={}", c);
 }
 
 fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<TweetStatus>>) {
@@ -230,6 +234,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
         }
     }
     println!("Network External Sort: First page reading is done! ");
+    let mut c = 0;
     while !queue.is_empty() {
         let tmpObjectNetworkIndex: ObjectNetworkIndex = queue.pop().unwrap().0;
         let clientNumber = tmpObjectNetworkIndex.getClientIndex() as usize;
@@ -265,9 +270,10 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
         } else {
             dataList.push(tmpObjectNetworkIndex.getObject());
         }
+        c +=1;
     }
 
-    println!("Network External Sort: Done!");
+    println!("Network External Sort: Done! {}", c);
     if is_write {
         if onDisk { writer.flush(); } else {
             writer.flushToNetwork(&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
