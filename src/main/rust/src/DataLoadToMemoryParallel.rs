@@ -36,7 +36,7 @@ fn main() -> io::Result<()> {
                     let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
                     j += rdSize;
                     size = min(endPos - j, BATCHSIZE);
-                    sim += rdSize;
+                    sum += rdSize;
                 }
                 reader.flush();
 
