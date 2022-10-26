@@ -239,6 +239,9 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
     }
     println!("Network External Sort: First page reading is done! ");
     let mut c = 0;
+    let mut c1 = 0;
+    let mut c2 = 0;
+    let mut c3 = 0;
     while !queue.is_empty() {
         let tmpObjectNetworkIndex: ObjectNetworkIndex = queue.pop().unwrap().0;
         let clientNumber = tmpObjectNetworkIndex.getClientIndex() as usize;
@@ -264,6 +267,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
                     let order = rd.getOrder();
                     let objectNetworkIndex = ObjectNetworkIndex::new(rd, clientNumber as u32);
                     queue.push(objectNetworkIndex, Reverse(order));
+
                 }
             }
         }
@@ -275,9 +279,18 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
             dataList.push(tmpObjectNetworkIndex.getObject());
         }
         c +=1;
+        if clientNumber == 0 {
+            c1 +=1;
+        }
+        if clientNumber == 1 {
+            c2 +=1;
+        }
+        if clientNumber == 2 {
+            c3 +=1;
+        }
     }
 
-    println!("Network External Sort: Done! {}", c);
+    println!("Network External Sort: Done! c={}  c1={}  c2={}  c3={}", c, c1, c2, c3);
     if is_write {
         if onDisk { writer.flush(); } else {
             writer.flushToNetwork(&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());

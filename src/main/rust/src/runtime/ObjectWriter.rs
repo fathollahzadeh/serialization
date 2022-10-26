@@ -85,9 +85,11 @@ impl ObjectWriter {
     }
 
 
-    pub fn serializeObject2(&mut self, object: &TweetStatus) {
+    pub fn serializeObject2(&mut self, object: &TweetStatus)-> BytesMut{
 
-        serde_json::to_string(object).unwrap().as_bytes();
+        let mut buff: BytesMut = BytesMut::with_capacity(5000);
+         buff.put_slice(serde_json::to_string(object).unwrap().as_bytes());
+        return buff;
         // match self.method {
         //     Const::JSON => {
         //         Ok(serde_json::to_string(object).unwrap().as_bytes());
