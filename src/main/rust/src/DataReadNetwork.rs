@@ -210,11 +210,14 @@ fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<TweetStatus>>
     let nrow = reader.getRlen();
     reader.readObjects(0, nrow, &mut list);
     list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
+    let mut c = 0;
     for ch in list.chunks_mut(Const::NETWORK_LOCAL_READ_LENGTH as usize) {
         while queue.is_full() {}
         let tmp = ch.to_vec();
+        c += tmp.len();
         queue.push(tmp);
     }
+    println!("local c={}",c);
 }
 
 fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &Vec<bool>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
