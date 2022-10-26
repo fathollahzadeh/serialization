@@ -9,17 +9,17 @@ mkdir -p data/tmp
 rm -rf loging.log
 export LOG4JPROP='conf/log4j.properties'
 export NETWORKCONFIG='conf/machines.inf'
-export jCMD="java -Xms25g -Xmx25g -Xmn200m --illegal-access=deny -Dlog4j.configuration=file:$LOG4JPROP"
-export jnCMD="java -Xms12g -Xmx12g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:$LOG4JPROP"
+export jCMD="java -Xms110g -Xmx110g -Xmn11g --illegal-access=deny -Dlog4j.configuration=file:$LOG4JPROP"
+export jnCMD="java -Xms28g -Xmx28g -Xmn1g --illegal-access=deny -Dlog4j.configuration=file:$LOG4JPROP"
 export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt"
 
 #./run1SetupDependencies.sh
 #./run2SetupSerialization.sh
-#./run3DownloadData.sh
+./run3DownloadData.sh
 ./run4PrepareData.sh
-#./run5LocalExperiments.sh
+./run5LocalExperiments.sh
 #./run5LocalExperimentsExternalSort.sh
-./run6NetworkExperiments.sh
+#./run6NetworkExperiments.sh
 
 
 
