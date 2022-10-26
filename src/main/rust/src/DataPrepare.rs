@@ -26,7 +26,7 @@ fn main() -> io::Result<()> {
          let mut tweetStatus: TweetStatus = serde_json::from_str(&line.unwrap()).unwrap();
          tweetStatus.set_id(tweetStatus.getId() + id);
           writer.writeObjectToFile(&tweetStatus);
-        id +=1;
+         //id +=1;
     }
     writer.flush();
     Ok(())
