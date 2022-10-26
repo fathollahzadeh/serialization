@@ -16,10 +16,10 @@ export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-ori
 #./run1SetupDependencies.sh
 #./run2SetupSerialization.sh
 #./run3DownloadData.sh
-./run4PrepareData.sh
-#./run5LocalExperiments.sh
+#./run4PrepareData.sh
+./run5LocalExperiments.sh
 #./run5LocalExperimentsExternalSort.sh
-./run6NetworkExperiments.sh
+#./run6NetworkExperiments.sh
 
 
 

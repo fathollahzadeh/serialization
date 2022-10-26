@@ -9,10 +9,10 @@ outDataPath="data/tmp/tweets"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
-declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf")  
+declare -a rust_methods=("MessagePack") #("Json" "Bincode" "MessagePack" "Bson" "FlexBuf")  
 
-max_nrow=1000000
-declare -a nrows=(1000000) #(15000000 13000000 11000000 9000000 7000000 5000000 3000000 1000000)
+max_nrow=15000000
+declare -a nrows=(15000000) #(15000000 13000000 11000000 9000000 7000000 5000000 3000000 1000000)
 
 # Load data into memory
 # 1.a Java enviroments
