@@ -29,16 +29,16 @@ SCRIPT="$jnCMD  -DinDataPath=${inDataPath}\
 echo $SCRIPT
 time $SCRIPT
 
-# # prepare data for C++ experiments
-# ##################################
-# SCRIPT="./cppbin/DataPrepare ${inDataPath} ${outDataPathCPP} ${nrow}"
-# echo $SCRIPT
-# time $SCRIPT
+# prepare data for C++ experiments
+##################################
+SCRIPT="./cppbin/DataPrepare ${inDataPath} ${outDataPathCPP} ${nrow}"
+echo $SCRIPT
+time $SCRIPT
 
 # prepare data for Rust experiments
 ##################################
-# SCRIPT="./rustbin/DataPrepare ${inDataPath} ${outDataPathRust} ${nrow}"
-# echo $SCRIPT
-# time $SCRIPT
+SCRIPT="./rustbin/DataPrepare ${inDataPath} ${outDataPathRust} ${nrow}"
+echo $SCRIPT
+time $SCRIPT
 
 #rm -rf ${inDataPath}
