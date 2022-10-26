@@ -34,7 +34,7 @@ for rp in {1..1}; do
         #Seralization (just CPU time)
         # ./explocal/runExperiment1b_SerializationRust.sh $method $inDataPathRust $max_nrow Single false Experiment1_Write_times
         # ./explocal/runExperiment1b_SerializationRust.sh $method $inDataPathRust $max_nrow Single true Experiment1_Write_times
-        # ./explocal/runExperiment1b_SerializationRust.sh $method $inDataPathRust $max_nrow Parallel false Experiment1_Write_times
+         ./explocal/runExperiment1b_SerializationRust.sh $method $inDataPathRust $max_nrow Parallel false Experiment1_Write_times
 
         # Write (CPU+IO)
         ###############
