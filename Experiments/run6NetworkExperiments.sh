@@ -32,9 +32,9 @@ echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_
 #     ./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP ${outDataPath}.${method}CPP $nrow 
 # done
 
-for method in "${rust_methods[@]}"; do
-    ./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
-done
+# for method in "${rust_methods[@]}"; do
+#     ./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
+# done
 
 for rp in {1..1}; do
 
