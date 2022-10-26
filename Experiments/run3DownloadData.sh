@@ -1,6 +1,9 @@
 #!/bin/bash
 mkdir -p data
 mkdir -p data/tmp
+
+#pip install gdown
+
 # cd data
 # rm -rf *
 # wget https://storage.googleapis.com/tweets_1m/tweets.zip
