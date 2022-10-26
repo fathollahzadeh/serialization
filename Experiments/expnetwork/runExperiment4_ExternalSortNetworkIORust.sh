@@ -10,7 +10,7 @@ IP=$(hostname -I)
 IP="${IP%%*( )}"
 
 echo 3 > /proc/sys/vm/drop_caches && sync
-sleep 100
+sleep 30
 
 for rp in {1..1}; do
     start=$(date +%s%N)
