@@ -3,6 +3,8 @@
 # clean original results
 rm -rf results
 mkdir -p results
+mkdir -p data
+mkdir -p data/tmp
 
 rm -rf loging.log
 export LOG4JPROP='conf/log4j.properties'
@@ -14,7 +16,7 @@ export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-ori
 #./run1SetupDependencies.sh
 #./run2SetupSerialization.sh
 #./run3DownloadData.sh
-#./run4PrepareData.sh
+./run4PrepareData.sh
 #./run5LocalExperiments.sh
 #./run5LocalExperimentsExternalSort.sh
 ./run6NetworkExperiments.sh
