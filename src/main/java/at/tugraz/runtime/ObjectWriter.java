@@ -143,7 +143,8 @@ public class ObjectWriter {
             currentOffset += objectSize;
             this.row++;
         } catch (Exception ex) {
-            logger.error("writeObjectToFile:" + ex + "  " + row);
+            ex.printStackTrace();
+            logger.error("writeObjectToFile:", ex );
         }
     }
 

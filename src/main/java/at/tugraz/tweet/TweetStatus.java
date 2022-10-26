@@ -895,8 +895,10 @@ public class TweetStatus extends Base implements RootData {
         if (this.withheld_scope != null)
             tweetP.setWithheldScope(this.withheld_scope);
 
-        for (Integer integer : this.getDisplay_text_range()) {
-            tweetP.addDisplayTextRange(integer);
+        if (this.display_text_range!=null) {
+            for (Integer integer : this.getDisplay_text_range()) {
+                tweetP.addDisplayTextRange(integer);
+            }
         }
 
         return tweetP.build();
@@ -1575,6 +1577,11 @@ public class TweetStatus extends Base implements RootData {
         }
         allocatedBufferSize += 4;
 
+        if (display_text_range!=null)
+            allocatedBufferSize += 4 * display_text_range.size() + 4;
+        else
+            allocatedBufferSize += 4;
+
         ArrayList<byte[]> scopesBytes = new ArrayList<byte[]>();
 
         if (scopes != null) {
@@ -1690,10 +1697,13 @@ public class TweetStatus extends Base implements RootData {
         byteBuffer.putInt(withheld_scopeBytes.length);
         byteBuffer.put(withheld_scopeBytes);
 
-        byteBuffer.putInt(display_text_range.size());
-        for (int i : display_text_range)
-            byteBuffer.putInt(i);
-
+        if (display_text_range!=null) {
+            byteBuffer.putInt(display_text_range.size());
+            for (int i : display_text_range)
+                byteBuffer.putInt(i);
+        }
+        else
+            byteBuffer.putInt(0);
         return byteBuffer.array();
     }
 
@@ -1703,12 +1713,10 @@ public class TweetStatus extends Base implements RootData {
         int stringSize;
 
         stringSize = byteBuffer.getInt();
-        this.id_str = extractString(byteBuffer, stringSize);
-
-        stringSize = byteBuffer.getInt();
         this.created_at = extractString(byteBuffer, stringSize);
-
         this.id = byteBuffer.getLong();
+        stringSize = byteBuffer.getInt();
+        this.id_str = extractString(byteBuffer, stringSize);
         stringSize = byteBuffer.getInt();
         this.text = extractString(byteBuffer, stringSize);
         stringSize = byteBuffer.getInt();
@@ -1990,7 +1998,7 @@ public class TweetStatus extends Base implements RootData {
         }
         writer.writeEndArray();
 
-        if (this.display_text_range !=null) {
+        if (this.display_text_range !=null && this.display_text_range.size() > 0) {
             writer.writeInt32("display_text_range_size", this.display_text_range.size());
             writer.writeName("display_text_range");
             writer.writeStartArray();
@@ -1999,6 +2007,8 @@ public class TweetStatus extends Base implements RootData {
             }
             writer.writeEndArray();
         }
+        else
+            writer.writeInt32("display_text_range_size", 0);
         writer.writeEndDocument();
         return outputBuffer.toByteArray();
     }
@@ -2062,10 +2072,15 @@ public class TweetStatus extends Base implements RootData {
         }
         int matching_rulesBuilder = TweetStatusFBS.createMatchingRulesVector(builder, matching_rulesList);
 
-        int[] displayTextRangeList = new int[this.display_text_range.size()];
-        for (int j = 0; j < this.display_text_range.size(); j++) {
-            displayTextRangeList[j] = this.display_text_range.get(j);
+        int[] displayTextRangeList;
+        if (this.display_text_range!=null) {
+            displayTextRangeList = new int[this.display_text_range.size()];
+            for (int j = 0; j < this.display_text_range.size(); j++) {
+                displayTextRangeList[j] = this.display_text_range.get(j);
+            }
         }
+        else
+            displayTextRangeList = new int[0];
         int displayTextBuilderBuilder = TweetStatusFBS.createDisplayTextRangeVector(builder, displayTextRangeList);
 
         TweetStatusFBS.startTweetStatusFBS(builder);
@@ -2284,8 +2299,8 @@ public class TweetStatus extends Base implements RootData {
         }
         reader.readEndArray();
 
-        if (currentName.equals("display_text_range_size")){
-            int display_text_range_size = reader.readInt32("display_text_range_size");
+        int display_text_range_size = reader.readInt32("display_text_range_size");
+        if (display_text_range_size > 0){
             reader.readName("display_text_range");
             reader.readStartArray();
             for (int i = 0; i < display_text_range_size; i++) {

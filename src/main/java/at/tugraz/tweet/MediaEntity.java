@@ -500,6 +500,7 @@ public class MediaEntity extends Base implements RootData {
 			reader.readName();
 		}
 		this.id = reader.readInt64();
+		this.id_str = reader.readString("id_str");
 
 		int indices_size = reader.readInt32("indices_size");
 		reader.readName("indices");

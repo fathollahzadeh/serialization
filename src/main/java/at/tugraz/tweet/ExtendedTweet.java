@@ -97,10 +97,10 @@ public class ExtendedTweet extends Base implements RootData {
 
         allocatedBufferSize += 4 * display_text_range.size() + 4;
 
-        byte[] entitiesBytes = entities.writeByteBuffer();
+        byte[] entitiesBytes =entities !=null ?  entities.writeByteBuffer() : new byte[0];
         allocatedBufferSize += entitiesBytes.length + 4;
 
-        byte[] extendedEntitiesBytes = extendedEntities.writeByteBuffer();
+        byte[] extendedEntitiesBytes = extendedEntities!=null ? extendedEntities.writeByteBuffer(): new byte[0];
         allocatedBufferSize += extendedEntitiesBytes.length + 4;
 
         // array fields
@@ -133,14 +133,17 @@ public class ExtendedTweet extends Base implements RootData {
         }
 
         byte[] entitiesBytes = new byte[byteBuffer.getInt()];
-        byteBuffer.get(entitiesBytes, 0, entitiesBytes.length);
-        this.entities = new Entities();
-        this.entities.readByteBuffer(entitiesBytes);
-
+        if (entitiesBytes.length > 0) {
+            byteBuffer.get(entitiesBytes, 0, entitiesBytes.length);
+            this.entities = new Entities();
+            this.entities.readByteBuffer(entitiesBytes);
+        }
         byte[] extendedEntitiesBytes = new byte[byteBuffer.getInt()];
-        byteBuffer.get(extendedEntitiesBytes, 0, extendedEntitiesBytes.length);
-        this.extendedEntities = new ExtendedEntities();
-        this.extendedEntities.readByteBuffer(extendedEntitiesBytes);
+        if (extendedEntitiesBytes.length > 0) {
+            byteBuffer.get(extendedEntitiesBytes, 0, extendedEntitiesBytes.length);
+            this.extendedEntities = new ExtendedEntities();
+            this.extendedEntities.readByteBuffer(extendedEntitiesBytes);
+        }
         return this;
     }
 
@@ -200,12 +203,6 @@ public class ExtendedTweet extends Base implements RootData {
         BsonBinaryWriter writer = new BsonBinaryWriter(outputBuffer);
 
         writer.writeStartDocument();
-
-        if (this.full_text != null) {
-            writer.writeString("full_text", this.full_text);
-        }
-
-
         writer.writeInt32("display_text_range_size", this.display_text_range.size());
         writer.writeName("display_text_range");
         writer.writeStartArray();
@@ -223,6 +220,10 @@ public class ExtendedTweet extends Base implements RootData {
             writer.writeName("extended_entities");
             writer.writeBinaryData(new BsonBinary(this.extendedEntities.bsonSerialization()));
         }
+
+        if (this.full_text != null) {
+            writer.writeString("full_text", this.full_text);
+        }
         writer.writeEndDocument();
         return outputBuffer.toByteArray();
     }
@@ -233,31 +234,31 @@ public class ExtendedTweet extends Base implements RootData {
 
         reader.readStartDocument();
 
-        String currentName = reader.readName();
-        if (currentName.equals("full_text")) {
-            this.full_text = reader.readString();
-        }
-
+        String currentName;
         int display_text_range_size = reader.readInt32("display_text_range_size");
         reader.readName("display_text_range");
         reader.readStartArray();
         for (int i = 0; i < display_text_range_size; i++) {
             this.display_text_range.add(reader.readInt32());
         }
+        reader.readEndArray();
 
+        currentName = reader.readName();
         if (currentName.equals("entities")) {
             this.entities = new Entities();
             this.entities.bsonDeSerialization(reader.readBinaryData().getData());
-            reader.readName();
+            currentName = reader.readName();
         }
 
         if (currentName.equals("extended_entities")) {
             this.extendedEntities = new ExtendedEntities();
             this.extendedEntities.bsonDeSerialization(reader.readBinaryData().getData());
-            reader.readName();
+            currentName = reader.readName();
         }
 
-        reader.readEndArray();
+        if (currentName.equals("full_text")) {
+            this.full_text = reader.readString();
+        }
         reader.readEndDocument();
         return this;
     }
