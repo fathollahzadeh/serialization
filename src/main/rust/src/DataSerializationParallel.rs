@@ -8,6 +8,7 @@ use crate::runtime::ObjectReader::ObjectReader;
 use crate::runtime::ObjectWriter::ObjectWriter;
 use crate::tweetStructs::TweetStatus::TweetStatus;
 use crate::util::Const::{BATCHSIZE, PAGESIZE};
+use std::time::{Duration, Instant};
 
 mod tweetStructs;
 mod runtime;
@@ -23,6 +24,7 @@ fn main() -> io::Result<()> {
     let fv = nrow as f32 / NUM_THREADS as f32;
     let blklen = fv.ceil() as u32;
 
+    let start = Instant::now();
     crossbeam::scope(|scope| {
         for i in 0..NUM_THREADS as u32 {
             let beginPos = i * blklen;
@@ -30,20 +32,31 @@ fn main() -> io::Result<()> {
             let inDataPath = inDataPath.clone();
             let method = method.clone();
             scope.spawn(move |_| {
+                let start_t = Instant::now();
                 let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
                 let mut writer = ObjectWriter::new2(method.as_str(), endPos - beginPos + 1, PAGESIZE as usize);
 
-                let mut size= endPos - beginPos +1;
-                let mut tweets: Vec<TweetStatus> = vec![];
-                let rdSize: u32 = reader.readObjects(beginPos, size, &mut tweets);
-                for tweet in tweets {
-                    writer.serializeObject(&tweet);
+                let mut size = BATCHSIZE;
+                let mut j: u32 = beginPos;
+                let mut sum = 0;
+                while j < endPos {
+                    let mut tweets: Vec<TweetStatus> = vec![];
+                    let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
+                    for tweet in tweets {
+                        writer.serializeObject(&tweet);
+                        sum +=1;
+                    }
+                    j += rdSize;
+                    size = min(endPos - j, BATCHSIZE);
                 }
-                reader.flush();
-                println!("id ={}  sum={}", i, rdSize);
+                let duration_t = start_t.elapsed();
+                println!("{},{},{:?}", i, sum, duration_t);
             });
         }
     }).expect("Finished!");
+
+    let duration = start.elapsed();
+    println!("Time elapsed in expensive_function() is: {:?}", duration);
 
     Ok(())
 }
