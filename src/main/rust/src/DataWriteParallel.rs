@@ -3,16 +3,12 @@
 #![allow(unused_variables)]
 
 use std::{io, env};
-use std::borrow::{Borrow, BorrowMut};
 use std::cmp::min;
-use std::io::{BufRead, BufReader};
-use std::fs::metadata;
-use std::path::Path;
-use std::fs;
 use crate::runtime::ObjectReader::ObjectReader;
 use crate::runtime::ObjectWriter::ObjectWriter;
 use crate::tweetStructs::TweetStatus::TweetStatus;
-use crate::util::Const::BATCHSIZE;
+use crate::util::Const::{BATCHSIZE, PAGESIZE};
+use std::time::{Duration, Instant};
 
 mod tweetStructs;
 mod runtime;
@@ -25,53 +21,33 @@ fn main() -> io::Result<()> {
     let nrow: u32 = args[3].parse().unwrap();
     let method: String = args[4].to_string();
 
-    let start = 0;
-    let end = outDataPath.find(".").unwrap() as i32;
-    let outDataPath: String = outDataPath.chars().skip(start).take(end as usize).collect();
-
-    let exist = Path::new(outDataPath.clone().as_str()).exists();
-
-    if (exist && !metadata(outDataPath.clone()).unwrap().is_dir()) || !exist {
-        fs::create_dir(outDataPath.clone());
-    }
-
-    let outDataPath = format!("{}/{}", outDataPath.clone(), method.clone());
-    let exist = Path::new(outDataPath.clone().as_str()).exists();
-    if (exist && !metadata(outDataPath.clone()).unwrap().is_dir()) || !exist {
-        fs::create_dir(outDataPath.clone());
-    }
+    let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
+    let mut binaryObject =vec![];
+    reader.readIO2(0, reader.getRlen(), &mut binaryObject);
 
     let NUM_THREADS: usize = num_cpus::get();
     let fv = nrow as f32 / NUM_THREADS as f32;
     let blklen = fv.ceil() as u32;
 
     crossbeam::scope(|scope| {
-        for i in 0..NUM_THREADS as u32 {
-            let beginPos = i * blklen;
-            let endPos = min((i + 1) * blklen, nrow);
-            let inDataPath = inDataPath.clone();
+        let mut index = 0;
+        for tweetsChunk in binaryObject.chunks_mut(blklen as usize) {
             let method = method.clone();
+            let inDataPath = inDataPath.clone();
             let outDataPath = outDataPath.clone();
+            let i = index.clone();
             scope.spawn(move |_| {
-                let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
-                let mut writer = ObjectWriter::new1(format!("{}/{}", outDataPath, i.clone()).as_str(), method.as_str(), endPos - beginPos + 1);
-                let mut total = 0;
-                let mut size = BATCHSIZE;
-                let mut j: u32 = beginPos;
-                while j < endPos {
-                    let mut tweets: Vec<TweetStatus> = vec![];
-                    let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
-                    for k in 0..rdSize as usize {
-                        writer.writeObjectToFile(tweets[k].borrow());
-                    }
-                    j += rdSize;
-                    total += rdSize;
-                    size = min(endPos - j, BATCHSIZE);
+                let mut writer = ObjectWriter::new1(format!("{}/{}", outDataPath, i.clone()).as_str(), method.as_str(), tweetsChunk.len() as u32);
+                for (i, e) in tweetsChunk.iter_mut().enumerate() {
+                    let tweet:TweetStatus = rmp_serde::from_slice(&*e).unwrap();
+                    writer.writeObjectToFile(&tweet);
                 }
                 writer.flush();
-                reader.flush();
             });
+            index +=1;
         }
-    }).expect("TODO: panic message");
+
+    }).expect("Finished!");
+    reader.flush();
     Ok(())
 }

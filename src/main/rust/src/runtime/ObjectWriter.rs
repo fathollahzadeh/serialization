@@ -83,36 +83,6 @@ impl ObjectWriter {
             _ => {}
         }
     }
-
-
-    pub fn serializeObject2(&mut self, object: &TweetStatus)-> BytesMut{
-
-        let mut buff: BytesMut = BytesMut::with_capacity(5000);
-         buff.put_slice(serde_json::to_string(object).unwrap().as_bytes());
-        return buff;
-        // match self.method {
-        //     Const::JSON => {
-        //         Ok(serde_json::to_string(object).unwrap().as_bytes());
-        //     }
-        //     Const::BINCODE => {
-        //         Ok(bincode::serialize(object).unwrap().as_slice());
-        //     }
-        //     Const::MESSAGEPACK => {
-        //         Ok(rmp_serde::to_vec(object).unwrap().as_slice().len());
-        //     }
-        //     Const::BSON => {
-        //         let mut buf = Vec::new();
-        //         bson::to_bson(object).unwrap().as_document().unwrap().to_writer(&mut buf).ok();
-        //         Ok(buf.as_slice());
-        //     }
-        //     Const::FLEXBUF => {
-        //         flexbuffers::to_vec(object).unwrap().as_slice();
-        //     }
-        //     _ => {}
-        // }
-       // Err(Box::from("The method is not support!!"))
-    }
-
     pub fn writeObjectToFile(&mut self, object: &TweetStatus) {
         let object_size: u32;
         let mut last_len: u32 = self.pageBuffer.len().try_into().unwrap();

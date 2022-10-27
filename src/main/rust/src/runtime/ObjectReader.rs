@@ -26,7 +26,7 @@ pub struct ObjectReader {
     pagePosition: Vec<u64>,
     currentPagePosition: u64,
     fileSize: u64,
-    networkPageCount: u32,
+    networkPageCount: u32
 }
 
 impl ObjectReader {
@@ -112,7 +112,6 @@ impl ObjectReader {
         return objectInEachPage;
     }
 
-    //int readObjects(int i, int n, TweetStatus ** objectList);
     pub fn readObjects(&mut self, i: u32, n: u32, objectList: &mut Vec<TweetStatus>) -> u32 {
         let listSize = min(i + n, self.rlen);
         let mut index = 0;
@@ -185,6 +184,13 @@ impl ObjectReader {
         }
     }
 
+    pub fn readIO2(&mut self, i: u32, n: u32, ob: &mut Vec<Vec<u8>>){
+        let listSize = min(i + n, self.rlen);
+           for j in i..listSize {
+             ob.push(self.readObjectIO(j as usize).to_owned());
+         }
+    }
+
     pub fn readObjectIO(&mut self, i: usize) -> &[u8] {
         let pindex = self.pageIndex[i];
         self.readPageFromFile(pindex);
@@ -228,5 +234,4 @@ impl ObjectReader {
             pages.push(buffer.to_vec());
         }
     }
-
 }

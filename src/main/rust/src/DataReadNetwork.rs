@@ -247,7 +247,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
         let clientNumber = tmpObjectNetworkIndex.getClientIndex() as usize;
 
         // reduce the number of objects read from that file.
-        pageObjectCounter[clientNumber] = pageObjectCounter[clientNumber] - 1;
+        pageObjectCounter[clientNumber] -= 1;
 
         // If needed load more objects from files.
         // if zero load the next page from file and add objects.
@@ -267,7 +267,6 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
                     let order = rd.getOrder();
                     let objectNetworkIndex = ObjectNetworkIndex::new(rd, clientNumber as u32);
                     queue.push(objectNetworkIndex, Reverse(order));
-
                 }
             }
         }
