@@ -2,6 +2,10 @@
 mkdir -p data
 mkdir -p data/tmp
 
+
+#Kia's Storage:
+#https://utcs378.s3.amazonaws.com/tweets_15M_rows.txt.lzo
+
 #pip install gdown
 
 # cd data
