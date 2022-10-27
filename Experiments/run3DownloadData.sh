@@ -5,6 +5,7 @@ mkdir -p data/tmp
 
 #Kia's Storage:
 #https://utcs378.s3.amazonaws.com/tweets_15M_rows.txt.lzo
+#sudo apt-get install -y lzop
 
 #pip install gdown
 
