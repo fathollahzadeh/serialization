@@ -33,21 +33,14 @@ fn main() -> io::Result<()> {
                 let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
                 let mut writer = ObjectWriter::new2(method.as_str(), endPos - beginPos + 1, PAGESIZE as usize);
 
-                let mut size = BATCHSIZE;
-                let mut j: u32 = beginPos;
-                let mut sum = 0;
-                while j < endPos {
-                    let mut tweets: Vec<TweetStatus> = vec![];
-                    let rdSize: u32 = reader.readObjects(j, size, &mut tweets);
-                    for tweet in tweets {
-                        writer.serializeObject(&tweet);
-                        sum +=1;
-                    }
-                    j += rdSize;
-                    size = min(endPos - j, BATCHSIZE);
+                let mut size= endPos - beginPos +1;
+                let mut tweets: Vec<TweetStatus> = vec![];
+                let rdSize: u32 = reader.readObjects(beginPos, size, &mut tweets);
+                for tweet in tweets {
+                    writer.serializeObject(&tweet);
                 }
                 reader.flush();
-                println!("id ={}  sum={}", i, sum);
+                println!("id ={}  sum={}", i, rdSize);
             });
         }
     }).expect("Finished!");
