@@ -82,6 +82,7 @@ fn main() -> io::Result<()> {
                 let mut size= endPos - beginPos +1;
                 let mut tweets: Vec<TweetStatus> = vec![];
                 let rdSize: u32 = reader.readObjects(beginPos, size, &mut tweets);
+
                 reader.flush();
 
                 println!("ID={}  sum={}", i, rdSize);

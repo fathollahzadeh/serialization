@@ -290,7 +290,8 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
         }
     }
 
-    println!("Network External Sort: Done! c={}  c1={}  c2={}  c3={}", c, c1, c2, c3);
+    println!("Network External Sort: Done! c={}  c1={}  c2={}  c3={}  q1={} q1c={} q2={} q1c={} q3={} q1c={}", c, c1, c2, c3, queues[0].len(), queues[0].capacity(),
+             queues[1].len(), queues[1].capacity(),queues[2].len(), queues[2].capacity(),);
     if is_write {
         if onDisk { writer.flush(); } else {
             writer.flushToNetwork(&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
