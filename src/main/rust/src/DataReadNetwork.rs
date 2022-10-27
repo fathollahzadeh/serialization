@@ -152,7 +152,6 @@ fn initClient(ip: &str, port: u16) -> Result<TcpStream, Box<dyn std::error::Erro
 fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<TweetStatus>>) {
     let mut i32_data = [0 as u8; 4];
     let ack = b"1";
-    let mut c = 0;
 
     while true {
         stream.write(&ack.clone());
@@ -197,12 +196,8 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<Tw
             relativePosition = relativePosition + 4 + objectSize as usize;
         }
         while queue.is_full() {}
-        c +=list.len();
         queue.push(list);
-
     }
-
-    println!(" c={}", c);
 }
 
 fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<TweetStatus>>) {
@@ -210,14 +205,11 @@ fn LocalReadTask(reader: &mut ObjectReader, queue: &ArrayQueue<Vec<TweetStatus>>
     let nrow = reader.getRlen();
     reader.readObjects(0, nrow, &mut list);
     list.sort_by(|cu, ot| cu.getOrder().cmp(&ot.getOrder()));
-    let mut c = 0;
     for ch in list.chunks_mut(Const::NETWORK_LOCAL_READ_LENGTH as usize) {
         while queue.is_full() {}
         let tmp = ch.to_vec();
-        c += tmp.len();
         queue.push(tmp);
     }
-    println!("local c={}",c);
 }
 
 fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &Vec<bool>, is_write: bool, mut writer: ObjectWriter, onDisk: bool, stream: Option<&TcpStream>) {
@@ -239,9 +231,6 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
     }
     println!("Network External Sort: First page reading is done! ");
     let mut c = 0;
-    let mut c1 = 0;
-    let mut c2 = 0;
-    let mut c3 = 0;
     while !queue.is_empty() {
         let tmpObjectNetworkIndex: ObjectNetworkIndex = queue.pop().unwrap().0;
         let clientNumber = tmpObjectNetworkIndex.getClientIndex() as usize;
@@ -278,19 +267,9 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
             dataList.push(tmpObjectNetworkIndex.getObject());
         }
         c +=1;
-        if clientNumber == 0 {
-            c1 +=1;
-        }
-        if clientNumber == 1 {
-            c2 +=1;
-        }
-        if clientNumber == 2 {
-            c3 +=1;
-        }
     }
 
-    println!("Network External Sort: Done! c={}  c1={}  c2={}  c3={}  q1={} q1c={} q2={} q1c={} q3={} q1c={}", c, c1, c2, c3, queues[0].len(), queues[0].capacity(),
-             queues[1].len(), queues[1].capacity(),queues[2].len(), queues[2].capacity(),);
+    println!("Network External Sort: Done! c={}  c1={}  c2={}  c3={}  ", c, pageObjectCounter[0], pageObjectCounter[1], pageObjectCounter[2]);
     if is_write {
         if onDisk { writer.flush(); } else {
             writer.flushToNetwork(&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
