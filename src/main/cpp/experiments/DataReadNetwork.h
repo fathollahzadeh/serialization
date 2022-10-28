@@ -199,7 +199,6 @@ Client *DataReadNetwork<T>::initClient(string ip, int port) {
 template<class T>
 void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, int id) {
     statuses[id] = true;
-    int c=0;
     while (true) {
         client->writeACK();
         int pageSize = client->readInt();
@@ -212,10 +211,8 @@ void DataReadNetwork<T>::NetworkReadTask(ObjectReader *reader, Socket *client, i
         reader->deSerializeNetworkBuffer(buffer, pageSize, list);
         delete[] buffer;
         while (!queues[id]->try_enqueue(list));
-        c += list.size();
     }
     statuses[id] = false;
-    cout<<" ID=" << id<< "  c="<<c<<endl;
 }
 
 template<class T>
