@@ -9,6 +9,9 @@ use crate::runtime::ObjectWriter::ObjectWriter;
 use crate::tweetStructs::TweetStatus::TweetStatus;
 use crate::util::Const::{BATCHSIZE, PAGESIZE};
 use std::time::{Duration, Instant};
+use std::path::Path;
+use std::fs;
+use std::fs::metadata;
 
 mod tweetStructs;
 mod runtime;
@@ -20,6 +23,22 @@ fn main() -> io::Result<()> {
     let outDataPath: String = args[2].to_string();
     let nrow: u32 = args[3].parse().unwrap();
     let method: String = args[4].to_string();
+
+    let start = 0;
+    let end = outDataPath.find(".").unwrap() as i32;
+    let outDataPath: String = outDataPath.chars().skip(start).take(end as usize).collect();
+
+    let exist = Path::new(outDataPath.clone().as_str()).exists();
+
+    if (exist && !metadata(outDataPath.clone()).unwrap().is_dir()) || !exist {
+        fs::create_dir(outDataPath.clone());
+    }
+
+    let outDataPath = format!("{}/{}", outDataPath.clone(), method.clone());
+    let exist = Path::new(outDataPath.clone().as_str()).exists();
+    if (exist && !metadata(outDataPath.clone()).unwrap().is_dir()) || !exist {
+        fs::create_dir(outDataPath.clone());
+    }
 
     let mut reader = ObjectReader::new1(inDataPath.as_str(), "MessagePack");
     let mut binaryObject =vec![];

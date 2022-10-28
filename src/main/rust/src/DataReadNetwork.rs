@@ -268,7 +268,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
         }
     }
 
-    println!("Network External Sort: Done! c={}  c1={}  c2={}  c3={}  ", c, pageObjectCounter[0], pageObjectCounter[1], pageObjectCounter[2]);
+    println!("Network External Sort: Done!");
     if is_write {
         if onDisk { writer.flush(); } else {
             writer.flushToNetwork(&mut Option::from(stream.unwrap().try_clone()).unwrap().unwrap());
