@@ -1,7 +1,7 @@
 pub const PAGESIZE: u32 = 256*1024;
 pub const BATCHSIZE: u32 = 512;
 pub const NETWORK_PAGESIZE: u32 = 20*1024*1024;
-pub const NETWORK_LOCAL_READ_LENGTH: u32 = 1000;
+pub const NETWORK_LOCAL_READ_LENGTH: u32 = 5000;
 pub const NETWORK_CLIENT_QUEUE_SIZE: usize = 10;
 pub const NETWORK_TIMEOUT: u32 = 2000*1000;
 

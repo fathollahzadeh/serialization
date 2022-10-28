@@ -196,7 +196,9 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<Tw
             relativePosition = relativePosition + 4 + objectSize as usize;
         }
         while queue.is_full() {}
-        queue.push(list);
+        if list.len() >0 {
+            queue.push(list);
+        }
     }
 }
 

@@ -8,6 +8,7 @@ mkdir -p data/tmp
 #sudo apt-get install -y lzop
 
 #pip install gdown
+#gdown https://drive.google.com/uc?id=1ZrsgJ_f2gXTBzAgA6vVq_S2mcopHtpv6
 
 # cd data
 # rm -rf *

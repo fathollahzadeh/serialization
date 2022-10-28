@@ -316,6 +316,23 @@ void ObjectReader::readIO(long i) {
     delete[] tBuffer;
 }
 
+void ObjectReader::readBinaryObjects(char **binaryObjects) {
+    for (int i = 0; i < rlen; ++i) {
+        char *curBuffer = readPageFromFile(pageIndex[i]);
+
+        //Read the object using a object index.
+        //Deserialize object based on preference:
+        int tempObjectSize = 0;
+
+        //keep data in heap
+        memcpy(&tempObjectSize, curBuffer + objectIndex[i], sizeof(int));
+        char *tBuffer = new char[tempObjectSize];
+        memcpy(tBuffer, curBuffer + objectIndex[i] + sizeof(tempObjectSize), tempObjectSize);
+        binaryObjects[i] = tBuffer;
+    }
+}
+
+
 map<int, int> ObjectReader::getObjectInEachPage() {
     return this->objectInEachPage;
 }
