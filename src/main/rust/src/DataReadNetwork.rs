@@ -217,7 +217,7 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
     let numberOfClients = queues.len();
     let mut pageObjectCounter: Vec<u64> = vec![0; numberOfClients];
     let mut queue: PriorityQueue<ObjectNetworkIndex, Reverse<usize>> = PriorityQueue::new();
-    let mut c = 0;
+
     // reading objects from the first pages and adding them to a priority queue
     for i in 0..numberOfClients as u32 {
         while queues[i as usize].is_empty() {}
@@ -227,7 +227,6 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
             let order = rd.getOrder();
             let objectNetworkIndex = ObjectNetworkIndex::new(rd, i);
             queue.push(objectNetworkIndex, Reverse(order));
-            c +=1;
         }
     }
     println!("Network External Sort: First page reading is done! ");
@@ -257,7 +256,6 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
                     let order = rd.getOrder();
                     let objectNetworkIndex = ObjectNetworkIndex::new(rd, clientNumber as u32);
                     queue.push(objectNetworkIndex, Reverse(order));
-                    c +=1;
                 }
             }
         }
@@ -268,7 +266,6 @@ fn ExternalSortTask(queues: &mut Vec<ArrayQueue<Vec<TweetStatus>>>, statuses: &V
         } else {
             dataList.push(tmpObjectNetworkIndex.getObject());
         }
-
     }
 
     println!("Network External Sort: Done! c={}  c1={}  c2={}  c3={}  ", c, pageObjectCounter[0], pageObjectCounter[1], pageObjectCounter[2]);
