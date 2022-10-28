@@ -41,4 +41,4 @@ SCRIPT="./rustbin/DataPrepare ${inDataPath} ${outDataPathRust} ${nrow}"
 echo $SCRIPT
 time $SCRIPT
 
-rm -rf ${inDataPath}
+#rm -rf ${inDataPath}

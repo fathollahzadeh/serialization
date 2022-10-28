@@ -11,8 +11,8 @@ declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuf
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf")  
 
-max_nrow=15000000
-declare -a nrows=(15000000 13000000 11000000 9000000 7000000 5000000 3000000 1000000)
+max_nrow=10000000
+declare -a nrows=(10000000 8000000 6000000 4000000 2000000)
 
 # Load data into memory
 # 1.a Java enviroments

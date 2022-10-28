@@ -5,6 +5,7 @@ mkdir -p data/tmp
 
 #Kia's Storage:
 #https://utcs378.s3.amazonaws.com/tweets_15M_rows.txt.lzo
+#https://utcs378.s3.amazonaws.com/tweets_1M_rows.txt.bz2
 #sudo apt-get install -y lzop
 
 #pip install gdown
@@ -28,7 +29,7 @@ mkdir -p data/tmp
 
 SCRIPT="$jnCMD -DinDataPath=data/tweets_1m.txt\
                -DoutDataPath=data/tweets.txt\
-               -Dcount=15\
+               -Dcount=10\
                -cp ./SerializationJava.jar at.tugraz.experiments.DataDuplicate
                 "          
 echo $SCRIPT
