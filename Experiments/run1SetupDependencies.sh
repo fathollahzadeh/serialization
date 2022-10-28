@@ -1,7 +1,12 @@
 #!/bin/bash
+sudo apt update
+
+# install zip and bzip2 for unzip dataset
+sudo apt-get install zip -y
+sudo apt-get -y install bzip2
+pip install gdown -y
 
 # setup Java dependencies
-sudo apt update
 sudo apt-get install -y openjdk-11-jdk-headless
 sudo apt install -y maven
 sudo apt install -y git

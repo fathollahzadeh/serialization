@@ -11,7 +11,7 @@ declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuf
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
-externalsort_nrow=7000000
+externalsort_nrow=5000000
 externalsort_hunk_size=1000000
 
 
@@ -20,7 +20,7 @@ externalsort_hunk_size=1000000
 echo "baseline,language,taskset,execution,platform,seq_rand,nrow,time" >>results/Experiment3a_ExternalSort_Write_times.dat
 echo "baseline,language,taskset,execution,chunk_size,nrow,time" >>results/Experiment3b_ExternalSort_times.dat
 
-for rp in {1..3}; do
+for rp in {1..1}; do
     for method in "${java_methods[@]}"; do
         #clean up
         rm -rf data/tmp
