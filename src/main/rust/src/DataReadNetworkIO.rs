@@ -188,8 +188,10 @@ fn NetworkReadTask(mut stream: TcpStream, method: u16, queue: &ArrayQueue<Vec<u8
         let mut buffer = vec![0u8; pageSize as usize];
         stream.read_exact(&mut buffer).unwrap();
         while queue.is_full() || queue_size.is_full(){}
-        queue.push(buffer);
-        queue_size.push(pageSize);
+        if pageSize > 0 {
+            queue.push(buffer);
+            queue_size.push(pageSize);
+        }
     }
 }
 
