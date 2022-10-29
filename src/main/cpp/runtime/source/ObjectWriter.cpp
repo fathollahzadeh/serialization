@@ -456,6 +456,7 @@ void ObjectWriter::writeToNetworkPage(char *page, Client *client) {
     client->readACK();
     int pageSize = rootData.parseInt(page);
     client->write(page, pageSize + sizeof(int));
+    delete[] page;
 }
 
 void ObjectWriter::writeNetworkPageToFile(char *page) {
