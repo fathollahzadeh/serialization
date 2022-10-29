@@ -57,7 +57,7 @@ void DataReadNetworkIO<T>::runDataReader() {
         ObjectWriter writer(method, machineInfo->getTotalNRow(), NETWORK_PAGESIZE);
         for (int i = 0; i < reader->getNetworkPageCount(); ++i) {
             writer.writeToNetworkPage(pages[i], client);
-            delete[] pages[i];
+            //delete[] pages[i];
         }
 
         // flush client
