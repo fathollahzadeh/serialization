@@ -25,7 +25,7 @@ struct ObjectNetworkIndex {
 
     virtual ~ObjectNetworkIndex() {
         //if (myObject != nullptr)
-        delete myObject;
+        //delete myObject;
     }
 };
 
@@ -54,6 +54,7 @@ private:
     string inDataPath;
     string outDataPath;
     string method;
+    int methodID;
     string plan;
     bool *statuses;
     BlockingReaderWriterQueue<vector<T *>> **queues;
@@ -78,6 +79,7 @@ void DataReadNetwork<T>::runDataReader() {
     Network network(config);
     MachineInfo *machineInfo = network.getCurrentMachine();
     ObjectReader *reader = new ObjectReader(inDataPath, method);
+    methodID = reader->getMethod();
     if (machineInfo->getNodeType() == LEAF) {
         Client *client = initClient(machineInfo->getRoot()->getIp(), machineInfo->getPort());
         T **list = new T *[machineInfo->getNrow()];
@@ -287,6 +289,14 @@ void DataReadNetwork<T>::ExternalSortTask(ObjectWriter *writer, bool onDisk, Cli
 
         } else
             dataList.push_back(tmpObjectNetworkIndex->myObject);
+
+        if (methodID != INPLACE) {
+            delete tmpObjectNetworkIndex->myObject;
+        } else {
+            char *tbuffer = (char *) tmpObjectNetworkIndex->myObject;
+            delete[] tbuffer;
+        }
+
         delete tmpObjectNetworkIndex;
     }
     cout << "Network External Sort: Done!"<< endl;
