@@ -21,8 +21,8 @@ echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_
 
 # write all data into file
 #clean up
-rm -rf data/tmp
-mkdir -p data/tmp
+#rm -rf data/tmp
+#mkdir -p data/tmp
 
 # for method in "${java_methods[@]}"; do    
 #     ./expnetwork/runExperiment4_WriteJava.sh $method $inDataPathMemoryJava ${outDataPath}.${method}Java $nrow 
