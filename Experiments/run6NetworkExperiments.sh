@@ -94,11 +94,11 @@ for rp in {1..1}; do
         #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2m Experiment4_ExternalSort_times
 
         # 8. IO (d2d)
-        # rm -rf ${outDataPath}.${method}SortedCPP
-        # ./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
+        rm -rf ${outDataPath}.${method}SortedCPP
+        ./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
 
-        # #clean-up
-        # rm -rf ${outDataPath}.${method}SortedCPP
+        #clean-up
+        rm -rf ${outDataPath}.${method}SortedCPP
     done   
 
 
