@@ -158,7 +158,7 @@ public:
 	//print order number:
 	int getOrder();
 
-	void setBsonDoc(bsoncxx::document::value bsonDoc);
+	//void setBsonDoc(bsoncxx::document::value bsonDoc);
 
 };
 

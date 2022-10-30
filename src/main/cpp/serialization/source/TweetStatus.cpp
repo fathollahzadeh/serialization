@@ -390,10 +390,10 @@ TweetStatus *TweetStatus::deserializeBoost(char *buffer, int &bytesRead) {
 }
 
 bsoncxx::document::value TweetStatus::serializeBSON() {
-
-	if (this->hasBsonDoc) {
-		return this->bsonDoc;
-	}
+//
+//	if (this->hasBsonDoc) {
+//		return this->bsonDoc;
+//	}
 
 	using bsoncxx::builder::stream::document;
 	using bsoncxx::builder::stream::finalize;
@@ -663,10 +663,10 @@ int TweetStatus::getOrder() {
 TweetStatus::TweetStatus(bool isPointer) : isPointer(isPointer) {}
 
 
-void TweetStatus::setBsonDoc(bsoncxx::document::value bsonDoc) {
-	this->bsonDoc = bsonDoc;
-	this->hasBsonDoc = true;
-}
+//void TweetStatus::setBsonDoc(bsoncxx::document::value bsonDoc) {
+//	this->bsonDoc = bsonDoc;
+//	this->hasBsonDoc = true;
+//}
 
 
 

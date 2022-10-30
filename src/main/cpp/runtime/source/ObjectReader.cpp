@@ -152,7 +152,7 @@ TweetStatus *ObjectReader::readObject(int i) {
         bsoncxx::document::value bsonObj = bsoncxx::from_json(tBuffer);
         bsoncxx::document::view doc = bsonObj.view();
         object->deserializeBSON(doc);
-        object->setBsonDoc(bsonObj);
+        //object->setBsonDoc(bsonObj);
         delete[] tBuffer;
     }
     return object;
@@ -307,27 +307,27 @@ void ObjectReader::readIO(long i) {
 
     //Read the object using a object index.
     //Deserialize object based on preference:
-    int tempObjectSize = 0;
-
+    int tempObjectSize = objectLength[i];
+    int extra = 0;
+    if (method == INPLACE) {
+        memcpy(&tempObjectSize, curBuffer + objectIndex[i], sizeof(int));
+        extra = sizeof(int);
+    }
     //keep data in heap
-    memcpy(&tempObjectSize, curBuffer + objectIndex[i], sizeof(int));
     char *tBuffer = new char[tempObjectSize];
-    memcpy(tBuffer, curBuffer + objectIndex[i] + sizeof(tempObjectSize), tempObjectSize);
+    memcpy(tBuffer, curBuffer + objectIndex[i] + extra, tempObjectSize);
     delete[] tBuffer;
 }
 
 void ObjectReader::readBinaryObjects(char **binaryObjects) {
-    for (int i = 0; i < rlen; ++i) {
+    for (long i = 0; i < rlen; ++i) {
         char *curBuffer = readPageFromFile(pageIndex[i]);
 
         //Read the object using a object index.
         //Deserialize object based on preference:
-        int tempObjectSize = 0;
-
-        //keep data in heap
-        memcpy(&tempObjectSize, curBuffer + objectIndex[i], sizeof(int));
+        int tempObjectSize = objectLength[i];
         char *tBuffer = new char[tempObjectSize];
-        memcpy(tBuffer, curBuffer + objectIndex[i] + sizeof(tempObjectSize), tempObjectSize);
+        memcpy(tBuffer, curBuffer + objectIndex[i], tempObjectSize);
         binaryObjects[i] = tBuffer;
     }
 }
@@ -359,7 +359,7 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
             bsoncxx::document::value bsonObj = bsoncxx::from_json(tBuffer);
             bsoncxx::document::view doc = bsonObj.view();
             object->deserializeBSON(doc);
-            object->setBsonDoc(bsonObj);
+            //object->setBsonDoc(bsonObj);
             delete[] tBuffer;
             relativePosition += sizeof(objectSize);
         }

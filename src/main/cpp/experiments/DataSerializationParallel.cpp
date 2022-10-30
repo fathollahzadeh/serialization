@@ -1,4 +1,3 @@
-#include <iostream>
 #include "ObjectWriter.h"
 #include "ObjectReader.h"
 #include "Const.h"
@@ -7,22 +6,16 @@
 
 using namespace std;
 
-void SerializeTask(string inDataPath, string method, int beginPos, int endPos) {
-    ObjectReader *reader = new ObjectReader(inDataPath,"HandCoded");
+void SerializeTask(string method, char **buffer, int beginPos, int endPos) {
     ObjectWriter *writer = new ObjectWriter(method, endPos - beginPos + 1, PAGESIZE);
-    int size = BATCHSIZE;
-    for (int i = beginPos; i < endPos;) {
-        TweetStatus **tweets = new TweetStatus *[size];
-        int rdSize = reader->readObjects(i, size, tweets);
-        for (int j = 0; j < rdSize; j++) {
-            writer->serializeObject(tweets[j]);
-            delete tweets[j];
-        }
-        i += rdSize;
-        size = min(endPos - i, BATCHSIZE);
-        delete[] tweets;
+    for (int i = beginPos; i < endPos; i++) {
+        TweetStatus *object = new TweetStatus();
+        int objectSize = 0;
+        object->deserializeHandcoded(buffer[i], objectSize);
+        writer->serializeObject(object);
+        delete[] buffer[i];
+        delete object;
     }
-    delete reader;
     delete writer;
 }
 
@@ -32,17 +25,19 @@ int main(int argc, char *argv[]) {
     string method = argv[2];
     int nrow = atoi(argv[3]);
 
+    ObjectReader *reader = new ObjectReader(inDataPath, "HandCoded");
+    char **buffer = new char*[nrow];
+    reader->readBinaryObjects(buffer);
+
     vector<thread> pool;
     int blklen = (int) ceil((double) nrow / NUM_THREADS);
     for (int i = 0; i < NUM_THREADS & i * blklen < nrow; i++) {
-        pool.push_back(std::thread(SerializeTask, inDataPath, method, i * blklen, min((i + 1) * blklen, nrow)));
+        pool.push_back(std::thread(SerializeTask,method,  buffer, i * blklen, min((i + 1) * blklen, nrow)));
     }
-
     for (auto &th: pool) {
         th.join();
     }
+    delete[] buffer;
+    delete reader;
     return 0;
 }
-
-
-

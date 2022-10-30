@@ -34,5 +34,6 @@ int main(int argc, char *argv[]) {
         th.join();
     }
     delete[] buffer;
+    delete reader;
     return 0;
 }
