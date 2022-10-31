@@ -1,0 +1,179 @@
+\makeatletter
+\newcommand\resetstackedplots{
+	\makeatletter
+	\pgfplots@stacked@isfirstplottrue
+	\makeatother
+	\addplot [forget plot,draw=none] coordinates{({HandcodedCPP},0.01) ({inPlaceCPP},0.01) ({FlatBufCPP},0.01) ({ProtoBufCPP},0.01) 
+	({BoostCPP},0.01) ({BsonCPP},0.01) ({MessagePackRust},0.01) ({BincodeRust},0.01) ({JsonRust},0.01) ({FlexBufRust},0.01) ({BsonRust},0.01) ({Json+GzipJava},0.01) 
+	({JsonJava},0.01) ({BsonJava},0.01) ({DefaultJava},0.01) ({ProtoBufJava},0.01) ({ByteBufferJava},0.01) ({FlatBufJava},0.01) ({KryoJava},0.01)};
+}
+\makeatother
+
+\begin{tikzpicture}
+	\newcommand{\myaddplot}[7]{
+	   \addplot[white,xshift=#1,draw=#4,line width=0.15pt, fill=#2, discard if single={#3}{#7}, postaction={pattern=#5,pattern color=#4}] 
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp5_network.dat};
+	   \label{#3#7}
+   };  
+
+   \newcommand{\myaddplotnan}[8]{
+	   \addplot[xshift=#1,draw=#8,line width=0.15pt, fill=#2, discard if single={#3}{#7},
+	   visualization depends on={value \thisrow{baseline} \as \xbaseline},
+	   every node near coord/.append style={		  
+		   check for zeronan/.code={
+			   \pgfkeys{/pgf/fpu=true}
+			   %\showvalue{\xbaseline}{BsonRust}{inPlaceCPP}{FlatBufCPP}{JsonJava}{BsonJava}{DefaultJava}{ProtoBufJava}{ByteBufferJava}{FlatBufJava};
+			   %\showvalue{\xbaseline}{KryoJava}{JsonRust}{FlexBufRust}{}{}{}{}{}{}
+			   \showvalue{\xbaseline}{inPlaceCPP}{}{}{}{}{}{}{}{}
+			   \pgfkeys{/pgf/fpu=false}
+		   },
+		   check for zeronan,
+	   }  
+	   ] 
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp5_network.dat};	  
+	   \label{#3#7}
+   };  
+   
+   \newcommand{\myaddplots}[5]{	   
+	\addplot[xshift=#1,draw=#4,line width=0.15pt, fill=#2, discard if single={#3}{#5},
+		forget plot,
+		nodes near coords custom=1,
+		nodes near coords={\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}},
+		every node near coord/.append style={
+			black,			
+			xshift=-5pt,
+			anchor=west
+		}
+	] 
+	table[ y=time, col sep=comma, x=baseline] {results/Exp5_network.dat};	
+   };   
+   
+   \newcommand{\addDiagramExpOne}[7]{	
+	\nextgroupplot[
+		width=#4,				
+		ytick=#5,
+		yticklabels=#6,
+		#7
+		]
+		\resetstackedplots	
+		\myaddplot{0}{#2}{IO}{#2}{none}{I/O Time(taskset True)}{#1};
+  		\myaddplotnan{0}{#2!20}{CPU}{#2!20}{north east lines}{CPU Time(taskset True)}{#1}{#2};
+		\myaddplots{0}{white}{Total}{none}{#1};
+   };     
+
+  \pgfplotsset{
+	   discard if single/.style n args={2}{
+		   x filter/.code={
+		   \edef\tempe{\thisrow{execution}}
+		   \edef\tempf{#1}
+		   \ifx\tempe\tempf	
+			   \edef\tempg{\thisrow{language}}
+			   \edef\temph{#2}
+			   \ifx\tempg\temph					      
+			   \else
+			   \def\pgfmathresult{inf}
+			   \fi      
+		   \else
+		   \def\pgfmathresult{inf}
+		   \fi      
+	   }
+	   },
+	   nodes near coords custom/.style={
+		large value/.style={                    
+			rotate=90,
+			anchor=east,			
+		},
+		small value/.style={
+			rotate=90,
+			anchor=east,
+		},
+		every node near coord/.style={
+		  font=\scriptsize,
+		  inner sep=0.5mm,
+		  /pgf/number format/1000 sep={},
+		  check for zero/.code={%
+			\pgfkeys{/pgf/fpu=true}
+			\pgfmathparse{\pgfplotspointmeta-0.01}
+			\pgfmathfloatifflags{\pgfmathresult}{0}{
+				\pgfkeys{/tikz/coordinate}
+			}{
+				\begingroup                      
+					\pgfkeys{/pgf/fpu}%
+					\pgfmathparse{\pgfplotspointmeta<#1}%
+					\global\let\result=\pgfmathresult
+				\endgroup
+				\pgfmathfloatcreate{1}{0.01}{0}%
+				\let\ONE=\pgfmathresult
+				\ifx\result\ONE
+					% AH : our condition 'y < #1' is met.
+					\pgfkeysalso{/pgfplots/small value}%
+				\else
+					% ok, proceed as usual.
+					\pgfkeysalso{/pgfplots/large value}%
+				\fi
+			}
+			\pgfkeys{/pgf/fpu=false}
+		  },
+		  check for zero,
+		},
+	},   
+   };
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \begin{groupplot}[
+		group style={
+			group size=3 by 1,
+			xlabels at=edge bottom,
+			ylabels at=edge left,
+			horizontal sep=4pt,
+			vertical sep=0pt,
+			/pgf/bar width=10pt
+		},			
+		axis line style={gray},
+		ybar stacked,        
+		ymode=log,
+		ymin=0.1,
+		x tick label style={/pgf/number format/1000 sep=},
+		ymax=1000,		
+		scaled y ticks=false,		  
+		enlarge y limits={0.17,upper},		
+		ylabel={Execution Time[minute]},		   
+		ytick align=inside,
+		xtick align=outside,			
+		xtick pos=left,
+		ytick pos=left,
+		yticklabel style = {font=\scriptsize},
+		ylabel style = {font=\scriptsize, yshift=-12pt},
+		xticklabel style = {font=\scriptsize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
+		x label style={yshift=-20pt},
+		xtick=data,
+		height=0.55\columnwidth,  
+		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostCPP, BsonCPP, MessagePackRust, BincodeRust, JsonRust, FlexBufRust, BsonRust, Json+GzipJava, JsonJava, BsonJava, DefaultJava, ProtoBufJava, ByteBufferJava, FlatBufJava, KryoJava},		   
+		xticklabels={Handcoded, inPlace, FlatBuf, ProtoBuf, Boost, Bson, MessagePack, Bincode, Json, FlexBuf, Bson, Json+Gzip, Json, Bson, Default, ProtoBuf, ByteBuffer, FlatBuf, Kryo},  		   
+		point meta=rawy,            
+		nodes near coords={%
+    		\pgfmathprintnumberto[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}{\myval}%
+    		\pgfmathparse{\myval<=0.1?:\myval}\pgfmathresult%
+		},
+		nodes near coords custom={1}, 
+		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
+		xticklabel style={name=T\ticknum}			
+]
+\addDiagramExpOne{CPP}{black}{white}{0.23\textwidth}{{10,100,1000}}{{10,100,1000}}{{enlarge x limits=0.15,}};	
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
+
+\addDiagramExpOne{Rust}{black}{color7}{0.21\textwidth}{}{}{{enlarge x limits=0.18,}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
+
+\addDiagramExpOne{Java}{black}{color7}{0.29\textwidth}{}{}{{enlarge x limits=0.14,}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
+
+
+\end{groupplot}
+
+\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at ($(group c2r1.north west) + (-0.5cm,0.3cm)$) {\shortstack[l]{
+		\ref{CPUJava} CPU \ \ \  
+		\ref{IOJava} I/O (HDD + Network)
+}};
+
+
+\end{tikzpicture}
