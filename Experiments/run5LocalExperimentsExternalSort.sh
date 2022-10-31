@@ -11,8 +11,8 @@ declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuf
 declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
-externalsort_nrow=5000000
-externalsort_hunk_size=1000000
+externalsort_nrow=15000000
+externalsort_hunk_size=2142858
 
 
 # write header to log file
