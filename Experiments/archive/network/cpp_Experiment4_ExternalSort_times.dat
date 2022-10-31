@@ -1,4 +1,4 @@
-baseline,language,plan,machineip,time
+baseline,language,execution,plan,machineip,time
 HandcodedCPP,CPP,Total,d2d,10.128.0.3 ,440576
 HandcodedCPP,CPP,IO,d2d,10.128.0.3 ,60436
 inPlaceCPP,CPP,Total,d2d,10.128.0.3 ,205612
@@ -50,4 +50,3 @@ BsonCPP,CPP,Total,d2d,10.128.0.3 ,9075951
 BsonCPP,CPP,IO,d2d,10.128.0.3 ,134572
 FlatBufCPP,CPP,Total,d2d,10.128.0.3 ,441619
 FlatBufCPP,CPP,IO,d2d,10.128.0.3 ,83614
-
