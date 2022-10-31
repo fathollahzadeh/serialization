@@ -2,10 +2,9 @@ package at.tugraz.experiments;
 
 import at.tugraz.runtime.ObjectReader;
 import at.tugraz.runtime.ObjectWriter;
-import at.tugraz.util.CommonThreadPool;
-import at.tugraz.util.Const;
-import at.tugraz.util.OptimizerUtils;
-import at.tugraz.util.RootData;
+import at.tugraz.tweet.TweetStatus;
+import at.tugraz.util.*;
+import com.esotericsoftware.kryo.Kryo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,13 +22,18 @@ public class DataSerializationParallel {
         String method = System.getProperty("method");
         int nrow = Integer.parseInt(System.getProperty("nrow"));
 
+        ObjectReader reader =  new ObjectReader(inDataPath, "Kryo");
+        ArrayList<byte[]> buffer = reader.readIO(0, nrow);
+
         int numThreads = OptimizerUtils.getParallelWriteParallelism();
         ExecutorService pool = CommonThreadPool.get(numThreads);
         ArrayList<SerializeTask> tasks = new ArrayList<>();
         int blklen = (int) Math.ceil((double) nrow / numThreads);
+
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-            int rlen = Math.min((i + 1) * blklen, nrow) - i * blklen + 1;
-            tasks.add(new SerializeTask(inDataPath, method, rlen, i * blklen, Math.min((i + 1) * blklen, nrow)));
+            int beginPos = i * blklen;
+            int endPos = Math.min((i + 1) * blklen, nrow);
+            tasks.add(new SerializeTask(buffer.subList(beginPos, endPos), method));
         }
 
         //wait until all tasks have been executed
@@ -37,33 +41,28 @@ public class DataSerializationParallel {
         pool.shutdown();
 
         //check for exceptions
-        for (Future<Integer> f: rt){
+        for (Future<Integer> f : rt) {
             f.get();
         }
-
     }
 
-    private static class SerializeTask implements Callable<Integer> {
-        private final ObjectReader reader;
+    static class SerializeTask implements Callable<Integer> {
+        protected final  List<byte[]> buffer;
+        protected final Kryo kryo;
         private final ObjectWriter writer;
-        private final long beginPos;
-        private final long endPos;
 
-        public SerializeTask(String inDataPath, String method, int rlen, long beginPos, long endPos) {
-            this.reader = new ObjectReader(inDataPath, "Kryo");;
-            this.writer = new ObjectWriter(method, rlen, Const.PAGESIZE);
-            this.beginPos = beginPos;
-            this.endPos = endPos;
+        public SerializeTask(List<byte[]> buffer, String method) {
+            this.buffer = buffer;
+            this.kryo = new KryoSinglton().getKryo();
+            this.writer = new ObjectWriter(method, buffer.size(), Const.PAGESIZE);
         }
 
         @Override
         public Integer call() {
-            int size = Const.BATCHSIZE;
-            for (int i = (int)beginPos; i < endPos; ) {
-                RootData[] rd = reader.readObjects(i, size);
-                writer.serializeObjects(rd);
-                i += rd.length;
-                size = (int) Math.min(endPos - i, Const.BATCHSIZE);
+            TweetStatus myData = new TweetStatus();
+            for (byte[] b: buffer){
+                RootData object = myData.kryoDeserialization(b, myData.getClass(), this.kryo);
+                writer.serializeObject(object);
             }
             return null;
         }

@@ -2,10 +2,9 @@ package at.tugraz.experiments;
 
 import at.tugraz.runtime.ObjectReader;
 import at.tugraz.runtime.ObjectWriter;
-import at.tugraz.util.CommonThreadPool;
-import at.tugraz.util.Const;
-import at.tugraz.util.OptimizerUtils;
-import at.tugraz.util.RootData;
+import at.tugraz.tweet.TweetStatus;
+import at.tugraz.util.*;
+import com.esotericsoftware.kryo.Kryo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,6 +25,9 @@ public class DataWriteParallel {
         String method = System.getProperty("method");
         int nrow = Integer.parseInt(System.getProperty("nrow"));
 
+        ObjectReader reader = new ObjectReader(inDataPath, "Kryo");
+        ArrayList<byte[]> buffer = reader.readIO(0, nrow);
+
         int numThreads = OptimizerUtils.getParallelWriteParallelism();
         ExecutorService pool = CommonThreadPool.get(numThreads);
         ArrayList<WriterTask> tasks = new ArrayList<>();
@@ -44,9 +46,10 @@ public class DataWriteParallel {
         }
 
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-            int rlen = Math.min((i + 1) * blklen, nrow) - i * blklen + 1;
             String fname = outDataPath + "/" + i;
-            tasks.add(new WriterTask(inDataPath, fname, method, rlen, i * blklen, Math.min((i + 1) * blklen, nrow)));
+            int beginPos = i * blklen;
+            int endPos = Math.min((i + 1) * blklen, nrow);
+            tasks.add(new WriterTask(buffer.subList(beginPos, endPos), fname, method));
         }
 
         //wait until all tasks have been executed
@@ -57,30 +60,25 @@ public class DataWriteParallel {
         for (Future<Integer> fu : rt) {
             fu.get();
         }
-
     }
 
-    private static class WriterTask implements Callable<Integer> {
-        private final ObjectReader reader;
+    static class WriterTask implements Callable<Integer> {
+        protected final List<byte[]> buffer;
+        protected final Kryo kryo;
         private final ObjectWriter writer;
-        private final int beginPos;
-        private final int endPos;
 
-        public WriterTask(String inDataPath, String outDataPath, String method, int rlen, int beginPos, int endPos) throws FileNotFoundException {
-            this.reader = new ObjectReader(inDataPath, "Kryo");;
-            this.writer = new ObjectWriter(outDataPath, method, rlen);;
-            this.beginPos = beginPos;
-            this.endPos = endPos;
+        public WriterTask(List<byte[]> buffer, String outDataPath, String method) throws FileNotFoundException {
+            this.buffer = buffer;
+            this.kryo = new KryoSinglton().getKryo();
+            this.writer = new ObjectWriter(outDataPath, method, buffer.size());
         }
 
         @Override
         public Integer call() {
-            int size = Const.BATCHSIZE;
-            for (int i = beginPos; i < endPos; ) {
-                RootData[] rd = reader.readObjects(i, size);
-                writer.writeObjectToFile(rd);
-                i += rd.length;
-                size = Math.min(endPos - i , Const.BATCHSIZE);
+            TweetStatus myData = new TweetStatus();
+            for (byte[] b : buffer) {
+                RootData object = myData.kryoDeserialization(b, myData.getClass(), this.kryo);
+                writer.writeObjectToFile(object);
             }
             writer.flush();
             return null;

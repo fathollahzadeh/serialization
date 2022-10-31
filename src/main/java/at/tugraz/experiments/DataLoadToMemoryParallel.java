@@ -1,10 +1,12 @@
 package at.tugraz.experiments;
 
 import at.tugraz.runtime.ObjectReader;
+import at.tugraz.tweet.TweetStatus;
 import at.tugraz.util.CommonThreadPool;
-import at.tugraz.util.Const;
+import at.tugraz.util.KryoSinglton;
 import at.tugraz.util.OptimizerUtils;
 import at.tugraz.util.RootData;
+import com.esotericsoftware.kryo.Kryo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +23,18 @@ public class DataLoadToMemoryParallel {
         String inDataPath = System.getProperty("inDataPath");
         int nrow = Integer.parseInt(System.getProperty("nrow"));
 
+        ObjectReader reader =  new ObjectReader(inDataPath, "Kryo");
+        ArrayList<byte[]> buffer = reader.readIO(0, nrow);
+
         int numThreads = OptimizerUtils.getParallelWriteParallelism();
         ExecutorService pool = CommonThreadPool.get(numThreads);
         ArrayList<DeSerializeTask> tasks = new ArrayList<>();
         int blklen = (int) Math.ceil((double) nrow / numThreads);
 
         for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-            tasks.add(new DeSerializeTask(inDataPath, i * blklen, Math.min((i + 1) * blklen, nrow)));
+            int beginPos = i * blklen;
+            int endPos = Math.min((i + 1) * blklen, nrow);
+            tasks.add(new DeSerializeTask(buffer.subList(beginPos, endPos)));
         }
 
         //wait until all tasks have been executed
@@ -42,23 +49,19 @@ public class DataLoadToMemoryParallel {
 
 
     static class DeSerializeTask implements Callable<Integer> {
-        protected final ObjectReader reader;
-        protected final int beginPos;
-        protected final int endPos;
+        protected final  List<byte[]> buffer;
+        protected final Kryo kryo;
 
-        public DeSerializeTask(String inDataPath,int beginPos, int endPos) {
-            this.reader = new ObjectReader(inDataPath, "Kryo");
-            this.beginPos = beginPos;
-            this.endPos = endPos;
+        public DeSerializeTask(List<byte[]> buffer) {
+            this.buffer = buffer;
+            this.kryo = new KryoSinglton().getKryo();
         }
 
         @Override
         public Integer call() {
-            int size = Const.BATCHSIZE;
-            for (int i = beginPos; i < endPos; ) {
-                RootData[] rd = reader.readObjects(i, size);
-                i += rd.length;
-                size = Math.min(endPos - i + 1, Const.BATCHSIZE);
+            TweetStatus myData = new TweetStatus();
+            for (byte[] b: buffer){
+                RootData object = myData.kryoDeserialization(b, myData.getClass(), this.kryo);
             }
             return null;
         }
