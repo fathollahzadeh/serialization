@@ -19,7 +19,7 @@ export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-ori
 #./run4PrepareData.sh
 #./run5LocalExperiments.sh
 #./run5LocalExperimentsExternalSort.sh
-./run6NetworkExperiments.sh
+#./run6NetworkExperiments.sh
 
 
 #cssh -l saeed 34.171.107.137 35.224.45.21 34.121.118.248 35.232.102.201 35.202.158.180 34.171.204.131 34.136.129.1 

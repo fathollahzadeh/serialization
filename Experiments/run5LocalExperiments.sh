@@ -43,11 +43,11 @@ for rp in {1..1}; do
     #     ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single true Experiment1_Write_times
     #     ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Parallel false Experiment1_Write_times
 
-    #    for nrow in "${nrows[@]}"; do
-    #        ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single true $nrow Experiment1_LoadToMemory_times
-    #        ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single false $nrow Experiment1_LoadToMemory_times
-    #        ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Parallel false $nrow Experiment1_LoadToMemory_times
+    #      ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single true $max_nrow Experiment1_LoadToMemory_times
+    #      ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Single false $max_nrow Experiment1_LoadToMemory_times
+    #      ./explocal/runExperiment1a_LoadToMemoryRust.sh $inDataPathRust Parallel false $max_nrow Experiment1_LoadToMemory_times
 
+    #    for nrow in "${nrows[@]}"; do
     #         # De-Seralization (just IO time)
     #         ##############################
     #         ./explocal/runExperiment2a_ReadIORust.sh $method $outDataPath $nrow Single false Sequential Experiment2_Read_times
@@ -86,12 +86,13 @@ for rp in {1..1}; do
     #     ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times
     #     ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single true Experiment1_Write_times
     #     ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Parallel false Experiment1_Write_times
+    
+    #     ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true $max_nrow Experiment1_LoadToMemory_times
+    #     ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false $max_nrow Experiment1_LoadToMemory_times
+    #     ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Parallel false $max_nrow Experiment1_LoadToMemory_times
 
-    #      for nrow in "${nrows[@]}"; do
-    #         ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true $nrow Experiment1_LoadToMemory_times
-    #         ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false $nrow Experiment1_LoadToMemory_times
-    #         ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Parallel false $nrow Experiment1_LoadToMemory_times
 
+    #      for nrow in "${nrows[@]}"; do    
     #         #De-Seralization (just IO time)
     #         ##############################
     #         ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $nrow Single false Sequential Experiment2_Read_times
@@ -133,10 +134,11 @@ for rp in {1..1}; do
         ./explocal/runExperiment1c_WriteJava.sh $method $inDataPathJava $outDataPath $max_nrow Single true Experiment1_Write_times
         ./explocal/runExperiment1c_WriteJava.sh $method $inDataPathJava $outDataPath $max_nrow Parallel false Experiment1_Write_times
 
-         for nrow in "${nrows[@]}"; do
-            ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single true $nrow Experiment1_LoadToMemory_times
-            ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single false $nrow Experiment1_LoadToMemory_times
-            ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Parallel false $nrow Experiment1_LoadToMemory_times
+        ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single true $max_nrow Experiment1_LoadToMemory_times
+        ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Single false $max_nrow Experiment1_LoadToMemory_times
+        ./explocal/runExperiment1a_LoadToMemoryJava.sh $inDataPathJava Parallel false $max_nrow Experiment1_LoadToMemory_times
+
+         for nrow in "${nrows[@]}"; do            
 
             # De-Seralization (just IO time)
             ###############################
