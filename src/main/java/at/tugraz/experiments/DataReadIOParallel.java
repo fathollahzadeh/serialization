@@ -30,7 +30,6 @@ public class DataReadIOParallel {
 
         if (seqRand.equalsIgnoreCase("sequential")) {
             for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-                ObjectReader reader = new ObjectReader(inDataPath, method);
                 tasks.add(new ReadIOTask(inDataPath, method, i * blklen, Math.min((i + 1) * blklen, nrow)));
             }
         }
@@ -47,7 +46,6 @@ public class DataReadIOParallel {
                 e.printStackTrace();
             }
             for (int i = 0; i < numThreads & i * blklen < nrow; i++) {
-                ObjectReader reader = new ObjectReader(inDataPath, method);
                 tasks.add(new ReadIOTaskRandom(inDataPath, method ,randomIDs,i * blklen, Math.min((i + 1) * blklen, nrow)));
             }
         }
