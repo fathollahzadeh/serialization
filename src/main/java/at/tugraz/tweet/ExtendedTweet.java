@@ -19,7 +19,7 @@ public class ExtendedTweet extends Base implements RootData {
     private String full_text;
     private List<Integer> display_text_range;
     private Entities entities;
-    private ExtendedEntities extendedEntities;
+    private ExtendedEntities extended_entities;
 
     public String getFull_text() {
         return full_text;
@@ -45,12 +45,12 @@ public class ExtendedTweet extends Base implements RootData {
         this.entities = entities;
     }
 
-    public ExtendedEntities getExtendedEntities() {
-        return extendedEntities;
+    public ExtendedEntities getExtended_entities() {
+        return extended_entities;
     }
 
-    public void setExtendedEntities(ExtendedEntities extendedEntities) {
-        this.extendedEntities = extendedEntities;
+    public void setExtended_entities(ExtendedEntities extended_entities) {
+        this.extended_entities = extended_entities;
     }
 
     public ExtendedTweet() {
@@ -100,7 +100,7 @@ public class ExtendedTweet extends Base implements RootData {
         byte[] entitiesBytes =entities !=null ?  entities.writeByteBuffer() : new byte[0];
         allocatedBufferSize += entitiesBytes.length + 4;
 
-        byte[] extendedEntitiesBytes = extendedEntities!=null ? extendedEntities.writeByteBuffer(): new byte[0];
+        byte[] extendedEntitiesBytes = extended_entities!=null ? extended_entities.writeByteBuffer(): new byte[0];
         allocatedBufferSize += extendedEntitiesBytes.length + 4;
 
         // array fields
@@ -141,8 +141,8 @@ public class ExtendedTweet extends Base implements RootData {
         byte[] extendedEntitiesBytes = new byte[byteBuffer.getInt()];
         if (extendedEntitiesBytes.length > 0) {
             byteBuffer.get(extendedEntitiesBytes, 0, extendedEntitiesBytes.length);
-            this.extendedEntities = new ExtendedEntities();
-            this.extendedEntities.readByteBuffer(extendedEntitiesBytes);
+            this.extended_entities = new ExtendedEntities();
+            this.extended_entities.readByteBuffer(extendedEntitiesBytes);
         }
         return this;
     }
@@ -166,8 +166,8 @@ public class ExtendedTweet extends Base implements RootData {
         if (this.entities != null)
             objectBuilder.add("entities", this.entities.jsonObjectBuilder());
 
-        if (this.extendedEntities != null)
-            objectBuilder.add("extended_entities", this.extendedEntities.jsonObjectBuilder());
+        if (this.extended_entities != null)
+            objectBuilder.add("extended_entities", this.extended_entities.jsonObjectBuilder());
 
         JsonObject jsonObject = objectBuilder.build();
         return jsonObject;
@@ -193,7 +193,7 @@ public class ExtendedTweet extends Base implements RootData {
 
         if (jsonObject.getJsonObject("extended_entities") != null && jsonObject.getJsonObject("extended_entities") != JsonValue.NULL) {
             JsonObject extendedEntityJsonObject = jsonObject.getJsonObject("extended_entities");
-            this.extendedEntities = new ExtendedEntities().readJSONExtendedEntities(extendedEntityJsonObject);
+            this.extended_entities = new ExtendedEntities().readJSONExtendedEntities(extendedEntityJsonObject);
         }
         return this;
     }
@@ -216,9 +216,9 @@ public class ExtendedTweet extends Base implements RootData {
             writer.writeBinaryData(new BsonBinary(this.entities.bsonSerialization()));
         }
 
-        if (extendedEntities != null) {
+        if (extended_entities != null) {
             writer.writeName("extended_entities");
-            writer.writeBinaryData(new BsonBinary(this.extendedEntities.bsonSerialization()));
+            writer.writeBinaryData(new BsonBinary(this.extended_entities.bsonSerialization()));
         }
 
         if (this.full_text != null) {
@@ -251,8 +251,8 @@ public class ExtendedTweet extends Base implements RootData {
         }
 
         if (currentName.equals("extended_entities")) {
-            this.extendedEntities = new ExtendedEntities();
-            this.extendedEntities.bsonDeSerialization(reader.readBinaryData().getData());
+            this.extended_entities = new ExtendedEntities();
+            this.extended_entities.bsonDeSerialization(reader.readBinaryData().getData());
             currentName = reader.readName();
         }
 
@@ -273,7 +273,7 @@ public class ExtendedTweet extends Base implements RootData {
         int displayTextRangeBuilder = ExtendedTweetFBS.createDisplayTextRangeVector(builder, displayTextRangeList);
 
         int entitiesBuilder = this.entities != null ? this.entities.flatBuffersWriter(builder) : 0;
-        int extendedEntitiesBuilder = this.extendedEntities != null ? this.extendedEntities.flatBuffersWriter(builder) : 0;
+        int extendedEntitiesBuilder = this.extended_entities != null ? this.extended_entities.flatBuffersWriter(builder) : 0;
 
         ExtendedTweetFBS.startExtendedTweetFBS(builder);
         ExtendedTweetFBS.addFullText(builder, fullTextBuilder);
@@ -292,8 +292,8 @@ public class ExtendedTweet extends Base implements RootData {
         this.entities = new Entities();
         this.entities.flatBuffersDeserialization(extendedTweetFBS.entities());
 
-        this.extendedEntities = new ExtendedEntities();
-        this.extendedEntities.flatBuffersDeserialization(extendedTweetFBS.extendedEntities());
+        this.extended_entities = new ExtendedEntities();
+        this.extended_entities.flatBuffersDeserialization(extendedTweetFBS.extendedEntities());
         return this;
 
     }

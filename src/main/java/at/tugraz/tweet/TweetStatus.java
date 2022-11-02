@@ -847,9 +847,9 @@ public class TweetStatus extends Base implements RootData {
                 extendedTweetP.setEntities(getEntityP(this.extended_tweet.getEntities()));
             }
 
-            if (this.extended_tweet.getExtendedEntities() != null) {
+            if (this.extended_tweet.getExtended_entities() != null) {
                 TweetStatusProtos.ExtendedEntitiesP.Builder extendedEntitiesP = TweetStatusProtos.ExtendedEntitiesP.newBuilder();
-                for (MediaEntity mediaEntity : this.extended_tweet.getExtendedEntities().getMedia()) {
+                for (MediaEntity mediaEntity : this.extended_tweet.getExtended_entities().getMedia()) {
                     TweetStatusProtos.MediaEntityP.Builder mediaEntityP = TweetStatusProtos.MediaEntityP.newBuilder();
                     setMediaEntityP(mediaEntityP, mediaEntity);
                     extendedEntitiesP.addMedia(mediaEntityP);
@@ -1293,7 +1293,7 @@ public class TweetStatus extends Base implements RootData {
                 for (TweetStatusProtos.MediaEntityP mediaEntityP : extendedEntitiesP.getMediaList()) {
                     extendedEntities.getMedia().add(getMediaEntity(mediaEntityP));
                 }
-                extended_tweet.setExtendedEntities(extendedEntities);
+                extended_tweet.setExtended_entities(extendedEntities);
             }
         }
 
