@@ -1,0 +1,116 @@
+syntax = "proto3";
+package proto;
+
+message ComplexObjectL1 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+    int32 var_int323 = 3;
+    int32 var_int324 = 4;
+    int32 var_int325 = 5;
+    int32 var_int326 = 6;
+    int32 var_int327 = 7;
+    int32 var_int328 = 8;
+
+    int64 var_int641 = 9;
+    int64 var_int642 = 10;
+    int64 var_int643 = 11;
+    int64 var_int644 = 12;
+    int64 var_int645 = 13;
+    int64 var_int646 = 14;
+    int64 var_int647 = 15;
+    int64 var_int648 = 16;
+
+    float var_float1 = 17;
+    float var_float2 = 18;
+    float var_float3 = 19;
+    float var_float4 = 20;
+    float var_float5 = 21;
+    float var_float6 = 22;
+    float var_float7 = 23;
+    float var_float8 = 24;
+
+    double var_double1 = 25;
+    double var_double2 = 26;
+    double var_double3 = 27;
+    double var_double4 = 28;
+    double var_double5 = 29;
+    double var_double6 = 30;
+    double var_double7 = 31;
+    double var_double8 = 32;
+
+    bool var_bool1 = 33;
+    bool var_bool2 = 34;
+    bool var_bool3 = 35;
+    bool var_bool4 = 36;
+    bool var_bool5 = 37;
+    bool var_bool6 = 38;
+    bool var_bool7 = 39;
+    bool var_bool8 = 40;
+
+    string var_string1 = 41;
+    string var_string2 = 42;
+    string var_string3 = 43;
+    string var_string4 = 44;
+    string var_string5 = 45;
+    string var_string6 = 46;
+    string var_string7 = 47;
+    string var_string8 = 48;
+
+    ComplexObjectL11 complexObjectL11=49;
+}
+
+message ComplexObjectL11 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+    int32 var_int323 = 3;
+    int32 var_int324 = 4;
+    int32 var_int325 = 5;
+    int32 var_int326 = 6;
+    int32 var_int327 = 7;
+    int32 var_int328 = 8;
+
+    int64 var_int641 = 9;
+    int64 var_int642 = 10;
+    int64 var_int643 = 11;
+    int64 var_int644 = 12;
+    int64 var_int645 = 13;
+    int64 var_int646 = 14;
+    int64 var_int647 = 15;
+    int64 var_int648 = 16;
+
+    float var_float1 = 17;
+    float var_float2 = 18;
+    float var_float3 = 19;
+    float var_float4 = 20;
+    float var_float5 = 21;
+    float var_float6 = 22;
+    float var_float7 = 23;
+    float var_float8 = 24;
+
+    double var_double1 = 25;
+    double var_double2 = 26;
+    double var_double3 = 27;
+    double var_double4 = 28;
+    double var_double5 = 29;
+    double var_double6 = 30;
+    double var_double7 = 31;
+    double var_double8 = 32;
+
+    bool var_bool1 = 33;
+    bool var_bool2 = 34;
+    bool var_bool3 = 35;
+    bool var_bool4 = 36;
+    bool var_bool5 = 37;
+    bool var_bool6 = 38;
+    bool var_bool7 = 39;
+    bool var_bool8 = 40;
+
+    string var_string1 = 41;
+    string var_string2 = 42;
+    string var_string3 = 43;
+    string var_string4 = 44;
+    string var_string5 = 45;
+    string var_string6 = 46;
+    string var_string7 = 47;
+    string var_string8 = 48;
+}

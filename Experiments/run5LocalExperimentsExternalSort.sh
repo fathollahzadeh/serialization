@@ -12,7 +12,7 @@ declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "ProtoBuf" "Bson" "FlatBuf
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf") 
 
 externalsort_nrow=15000000
-externalsort_hunk_size=2142858
+externalsort_hunk_size=10000000
 
 
 # write header to log file

@@ -1,0 +1,176 @@
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.DefaultJava -Dnrow=15000000 -Dmethod=Default -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.DefaultJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Default -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.DefaultJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Default -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.DefaultJava -Dnrow=15000000 -Dmethod=Default -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.DefaultJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Default -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.DefaultJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Default -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.Json+GzipJava -Dnrow=15000000 -Dmethod=Json+Gzip -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.Json+GzipJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Json+Gzip -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.Json+GzipJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Json+Gzip -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.Json+GzipJava -Dnrow=15000000 -Dmethod=Json+Gzip -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.Json+GzipJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Json+Gzip -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.Json+GzipJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Json+Gzip -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.BsonJava -Dnrow=15000000 -Dmethod=Bson -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.BsonJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Bson -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.BsonJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Bson -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.BsonJava -Dnrow=15000000 -Dmethod=Bson -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.BsonJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Bson -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.BsonJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Bson -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.ProtoBufJava -Dnrow=15000000 -Dmethod=ProtoBuf -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.ProtoBufJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=ProtoBuf -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.ProtoBufJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=ProtoBuf -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.ProtoBufJava -Dnrow=15000000 -Dmethod=ProtoBuf -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.ProtoBufJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=ProtoBuf -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.ProtoBufJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=ProtoBuf -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.KryoJava -Dnrow=15000000 -Dmethod=Kryo -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.KryoJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Kryo -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.KryoJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Kryo -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.KryoJava -Dnrow=15000000 -Dmethod=Kryo -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.KryoJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Kryo -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.KryoJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Kryo -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.ByteBufferJava -Dnrow=15000000 -Dmethod=ByteBuffer -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.ByteBufferJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=ByteBuffer -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.ByteBufferJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=ByteBuffer -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.ByteBufferJava -Dnrow=15000000 -Dmethod=ByteBuffer -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.ByteBufferJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=ByteBuffer -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.ByteBufferJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=ByteBuffer -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.JsonJava -Dnrow=15000000 -Dmethod=Json -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.JsonJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Json -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.JsonJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Json -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.JsonJava -Dnrow=15000000 -Dmethod=Json -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.JsonJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Json -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.JsonJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=Json -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.FlatBuffersJava -Dnrow=15000000 -Dmethod=FlatBuffers -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.FlatBuffersJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=FlatBuffers -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.FlatBuffersJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=FlatBuffers -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tweets.jbin -DoutDataPath=data/tmp/tweets.FlatBuffersJava -Dnrow=15000000 -Dmethod=FlatBuffers -cp ./SerializationJava.jar at.tugraz.experiments.DataWriteSingle
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.FlatBuffersJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=FlatBuffers -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSort
+Single-Thread External Sort: First page reading is done! 
+taskset -c 0 java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:conf/log4j.properties -DinDataPath=data/tmp/tweets.FlatBuffersJava -DoutDataPath=data/tmp/externalsort -Dnrow=15000000 -DchunkSize=1000000 -Dmethod=FlatBuffers -cp ./SerializationJava.jar at.tugraz.experiments.ExternalSortIO
+Single-Thread External Sort: IO done! 
+./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.HandcodedCPP 15000000 Handcoded
+./cppbin/ExternalSortIO data/tmp/tweets.HandcodedCPP data/tmp/externalsort Handcoded 1000000
+./cppbin/ExternalSort data/tmp/tweets.HandcodedCPP data/tmp/externalsort Handcoded 1000000
+taskset -c 0 ./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.HandcodedCPP 15000000 Handcoded
+taskset -c 0 ./cppbin/ExternalSort data/tmp/tweets.HandcodedCPP data/tmp/externalsort Handcoded 1000000
+taskset -c 0 ./cppbin/ExternalSortIO data/tmp/tweets.HandcodedCPP data/tmp/externalsort Handcoded 1000000
+./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.inPlaceCPP 15000000 inPlace
+./cppbin/ExternalSortIO data/tmp/tweets.inPlaceCPP data/tmp/externalsort inPlace 1000000
+./cppbin/ExternalSort data/tmp/tweets.inPlaceCPP data/tmp/externalsort inPlace 1000000
+taskset -c 0 ./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.inPlaceCPP 15000000 inPlace
+taskset -c 0 ./cppbin/ExternalSort data/tmp/tweets.inPlaceCPP data/tmp/externalsort inPlace 1000000
+taskset -c 0 ./cppbin/ExternalSortIO data/tmp/tweets.inPlaceCPP data/tmp/externalsort inPlace 1000000
+./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.BoostCPP 15000000 Boost
+./cppbin/ExternalSortIO data/tmp/tweets.BoostCPP data/tmp/externalsort Boost 1000000
+./cppbin/ExternalSort data/tmp/tweets.BoostCPP data/tmp/externalsort Boost 1000000
+taskset -c 0 ./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.BoostCPP 15000000 Boost
+taskset -c 0 ./cppbin/ExternalSort data/tmp/tweets.BoostCPP data/tmp/externalsort Boost 1000000
+taskset -c 0 ./cppbin/ExternalSortIO data/tmp/tweets.BoostCPP data/tmp/externalsort Boost 1000000
+./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.ProtoBufCPP 15000000 ProtoBuf
+./cppbin/ExternalSortIO data/tmp/tweets.ProtoBufCPP data/tmp/externalsort ProtoBuf 1000000
+./cppbin/ExternalSort data/tmp/tweets.ProtoBufCPP data/tmp/externalsort ProtoBuf 1000000
+taskset -c 0 ./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.ProtoBufCPP 15000000 ProtoBuf
+taskset -c 0 ./cppbin/ExternalSort data/tmp/tweets.ProtoBufCPP data/tmp/externalsort ProtoBuf 1000000
+taskset -c 0 ./cppbin/ExternalSortIO data/tmp/tweets.ProtoBufCPP data/tmp/externalsort ProtoBuf 1000000
+./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.BsonCPP 15000000 Bson
+./cppbin/ExternalSortIO data/tmp/tweets.BsonCPP data/tmp/externalsort Bson 1000000
+./cppbin/ExternalSort data/tmp/tweets.BsonCPP data/tmp/externalsort Bson 1000000
+taskset -c 0 ./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.BsonCPP 15000000 Bson
+taskset -c 0 ./cppbin/ExternalSort data/tmp/tweets.BsonCPP data/tmp/externalsort Bson 1000000
+taskset -c 0 ./cppbin/ExternalSortIO data/tmp/tweets.BsonCPP data/tmp/externalsort Bson 1000000
+./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.FlatBufCPP 15000000 FlatBuf
+./cppbin/ExternalSortIO data/tmp/tweets.FlatBufCPP data/tmp/externalsort FlatBuf 1000000
+./cppbin/ExternalSort data/tmp/tweets.FlatBufCPP data/tmp/externalsort FlatBuf 1000000
+taskset -c 0 ./cppbin/DataWriteSingle data/tweets.cbin data/tmp/tweets.FlatBufCPP 15000000 FlatBuf
+taskset -c 0 ./cppbin/ExternalSort data/tmp/tweets.FlatBufCPP data/tmp/externalsort FlatBuf 1000000
+taskset -c 0 ./cppbin/ExternalSortIO data/tmp/tweets.FlatBufCPP data/tmp/externalsort FlatBuf 1000000
+./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.JsonRust 15000000 Json
+./rustbin/ExternalSortIO data/tmp/tweets.JsonRust data/tmp/externalsort Json 1000000
+Single-Thread External Sort is Done! 
+./rustbin/ExternalSort data/tmp/tweets.JsonRust data/tmp/externalsort Json 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.JsonRust 15000000 Json
+taskset -c 0 ./rustbin/ExternalSort data/tmp/tweets.JsonRust data/tmp/externalsort Json 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/ExternalSortIO data/tmp/tweets.JsonRust data/tmp/externalsort Json 1000000
+Single-Thread External Sort is Done! 
+./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.BincodeRust 15000000 Bincode
+./rustbin/ExternalSortIO data/tmp/tweets.BincodeRust data/tmp/externalsort Bincode 1000000
+Single-Thread External Sort is Done! 
+./rustbin/ExternalSort data/tmp/tweets.BincodeRust data/tmp/externalsort Bincode 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.BincodeRust 15000000 Bincode
+taskset -c 0 ./rustbin/ExternalSort data/tmp/tweets.BincodeRust data/tmp/externalsort Bincode 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/ExternalSortIO data/tmp/tweets.BincodeRust data/tmp/externalsort Bincode 1000000
+Single-Thread External Sort is Done! 
+./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.MessagePackRust 15000000 MessagePack
+./rustbin/ExternalSortIO data/tmp/tweets.MessagePackRust data/tmp/externalsort MessagePack 1000000
+Single-Thread External Sort is Done! 
+./rustbin/ExternalSort data/tmp/tweets.MessagePackRust data/tmp/externalsort MessagePack 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.MessagePackRust 15000000 MessagePack
+taskset -c 0 ./rustbin/ExternalSort data/tmp/tweets.MessagePackRust data/tmp/externalsort MessagePack 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/ExternalSortIO data/tmp/tweets.MessagePackRust data/tmp/externalsort MessagePack 1000000
+Single-Thread External Sort is Done! 
+./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.BsonRust 15000000 Bson
+./rustbin/ExternalSortIO data/tmp/tweets.BsonRust data/tmp/externalsort Bson 1000000
+Single-Thread External Sort is Done! 
+./rustbin/ExternalSort data/tmp/tweets.BsonRust data/tmp/externalsort Bson 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.BsonRust 15000000 Bson
+taskset -c 0 ./rustbin/ExternalSort data/tmp/tweets.BsonRust data/tmp/externalsort Bson 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/ExternalSortIO data/tmp/tweets.BsonRust data/tmp/externalsort Bson 1000000
+Single-Thread External Sort is Done! 
+./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.FlexBufRust 15000000 FlexBuf
+./rustbin/ExternalSortIO data/tmp/tweets.FlexBufRust data/tmp/externalsort FlexBuf 1000000
+Single-Thread External Sort is Done! 
+./rustbin/ExternalSort data/tmp/tweets.FlexBufRust data/tmp/externalsort FlexBuf 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/DataWriteSingle data/tweets.rbin data/tmp/tweets.FlexBufRust 15000000 FlexBuf
+taskset -c 0 ./rustbin/ExternalSort data/tmp/tweets.FlexBufRust data/tmp/externalsort FlexBuf 1000000
+Single-Thread External Sort: First page reading is done! 
+Single-Thread External Sort is Done! 
+taskset -c 0 ./rustbin/ExternalSortIO data/tmp/tweets.FlexBufRust data/tmp/externalsort FlexBuf 1000000
+Single-Thread External Sort is Done! 

@@ -318,7 +318,6 @@ void ObjectWriter::writeObjectToFile(TweetStatusProto *object) {
     if ((currentOffset + objectSize) > PAGESIZE) {
 
         //Write in file:
-        auto tmpTime = chrono::steady_clock::now();
         outStreamRegularFile.write(pageBuffer, PAGESIZE);
 
         //At this point, previous page is written in file.
