@@ -1,0 +1,169 @@
+syntax = "proto3";
+package proto;
+
+message ComplexObjectL3 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+
+    int64 var_int641 = 3;
+    int64 var_int642 = 4;
+
+    float var_float1 = 5;
+    float var_float2 = 6;
+
+    double var_double1 = 7;
+    double var_double2 = 8;
+
+    bool var_bool1 = 9;
+    bool var_bool2 = 10;
+
+    string var_string1 = 11;
+    string var_string2 = 12;
+    ComplexObjectL31 complexObjectL31=13;
+}
+
+message ComplexObjectL31 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+
+    int64 var_int641 = 3;
+    int64 var_int642 = 4;
+
+    float var_float1 = 5;
+    float var_float2 = 6;
+
+    double var_double1 = 7;
+    double var_double2 = 8;
+
+    bool var_bool1 = 9;
+    bool var_bool2 = 10;
+
+    string var_string1 = 11;
+    string var_string2 = 12;
+    ComplexObjectL32 complexObjectL32=13;
+}
+
+message ComplexObjectL32 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+
+    int64 var_int641 = 3;
+    int64 var_int642 = 4;
+
+    float var_float1 = 5;
+    float var_float2 = 6;
+
+    double var_double1 = 7;
+    double var_double2 = 8;
+
+    bool var_bool1 = 9;
+    bool var_bool2 = 10;
+
+    string var_string1 = 11;
+    string var_string2 = 12;
+    ComplexObjectL33 complexObjectL33=13;
+}
+
+message ComplexObjectL33 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+
+    int64 var_int641 = 3;
+    int64 var_int642 = 4;
+
+    float var_float1 = 5;
+    float var_float2 = 6;
+
+    double var_double1 = 7;
+    double var_double2 = 8;
+
+    bool var_bool1 = 9;
+    bool var_bool2 = 10;
+
+    string var_string1 = 11;
+    string var_string2 = 12;
+    ComplexObjectL34 complexObjectL34=13;
+}
+
+message ComplexObjectL34 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+
+    int64 var_int641 = 3;
+    int64 var_int642 = 4;
+
+    float var_float1 = 5;
+    float var_float2 = 6;
+
+    double var_double1 = 7;
+    double var_double2 = 8;
+
+    bool var_bool1 = 9;
+    bool var_bool2 = 10;
+
+    string var_string1 = 11;
+    string var_string2 = 12;
+    ComplexObjectL35 complexObjectL35=13;
+}
+
+message ComplexObjectL35 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+
+    int64 var_int641 = 3;
+    int64 var_int642 = 4;
+
+    float var_float1 = 5;
+    float var_float2 = 6;
+
+    double var_double1 = 7;
+    double var_double2 = 8;
+
+    bool var_bool1 = 9;
+    bool var_bool2 = 10;
+
+    string var_string1 = 11;
+    string var_string2 = 12;
+    ComplexObjectL36 complexObjectL36=13;
+}
+
+
+message ComplexObjectL36 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+
+    int64 var_int641 = 3;
+    int64 var_int642 = 4;
+
+    float var_float1 = 5;
+    float var_float2 = 6;
+
+    double var_double1 = 7;
+    double var_double2 = 8;
+
+    bool var_bool1 = 9;
+    bool var_bool2 = 10;
+
+    string var_string1 = 11;
+    string var_string2 = 12;
+    ComplexObjectL37 complexObjectL37=13;
+}
+message ComplexObjectL37 {
+    int32 var_int321 = 1;
+    int32 var_int322 = 2;
+
+    int64 var_int641 = 3;
+    int64 var_int642 = 4;
+
+    float var_float1 = 5;
+    float var_float2 = 6;
+
+    double var_double1 = 7;
+    double var_double2 = 8;
+
+    bool var_bool1 = 9;
+    bool var_bool2 = 10;
+
+    string var_string1 = 11;
+    string var_string2 = 12;
+}

@@ -35,36 +35,35 @@ static proto::ComplexObjectL23 *genComplexObjectL23() {
     srand((unsigned) time(NULL));
 
     proto::ComplexObjectL23 *cObject = new proto::ComplexObjectL23();
-    cObject->set_var_int321(rand());
-    cObject->set_var_int322(rand());
-    cObject->set_var_int323(rand());
-    cObject->set_var_int324(rand());
+    cObject->set_var_int321(50000);
+    cObject->set_var_int322(50000);
+    cObject->set_var_int323(50000);
+    cObject->set_var_int324(50000);
 
-    cObject->set_var_int641(rand());
-    cObject->set_var_int642(rand());
-    cObject->set_var_int643(rand());
-    cObject->set_var_int644(rand());
+    cObject->set_var_int641(99999999999900);
+    cObject->set_var_int642(99999999999900);
+    cObject->set_var_int643(99999999999900);
+    cObject->set_var_int644(99999999999900);
 
-    cObject->set_var_float1(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float2(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float3(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float4(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
+    cObject->set_var_float1(1.1);
+    cObject->set_var_float2(1.1);
+    cObject->set_var_float3(1.1);
+    cObject->set_var_float4(1.1);
 
-    cObject->set_var_double1(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double2(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double3(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double4(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
+    cObject->set_var_double1(2.2);
+    cObject->set_var_double2(2.2);
+    cObject->set_var_double3(2.2);
+    cObject->set_var_double4(2.2);
 
     cObject->set_var_bool1(true);
     cObject->set_var_bool2(true);
     cObject->set_var_bool3(true);
     cObject->set_var_bool4(true);
 
-    cObject->set_var_string1(genRandomString(39));
-    cObject->set_var_string2(genRandomString(39));
-    cObject->set_var_string3(genRandomString(39));
-    cObject->set_var_string4(genRandomString(39));
-
+    cObject->set_var_string1(genRandomString(32));
+    cObject->set_var_string2(genRandomString(32));
+    cObject->set_var_string3(genRandomString(32));
+    cObject->set_var_string4(genRandomString(31));
     return cObject;
 }
 
@@ -73,35 +72,35 @@ static proto::ComplexObjectL22 *genComplexObjectL22() {
     srand((unsigned) time(NULL));
 
     proto::ComplexObjectL22 *cObject = new proto::ComplexObjectL22();
-    cObject->set_var_int321(rand());
-    cObject->set_var_int322(rand());
-    cObject->set_var_int323(rand());
-    cObject->set_var_int324(rand());
+    cObject->set_var_int321(50000);
+    cObject->set_var_int322(50000);
+    cObject->set_var_int323(50000);
+    cObject->set_var_int324(50000);
 
-    cObject->set_var_int641(rand());
-    cObject->set_var_int642(rand());
-    cObject->set_var_int643(rand());
-    cObject->set_var_int644(rand());
+    cObject->set_var_int641(99999999999900);
+    cObject->set_var_int642(99999999999900);
+    cObject->set_var_int643(99999999999900);
+    cObject->set_var_int644(99999999999900);
 
-    cObject->set_var_float1(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float2(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float3(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float4(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
+    cObject->set_var_float1(1.1);
+    cObject->set_var_float2(1.1);
+    cObject->set_var_float3(1.1);
+    cObject->set_var_float4(1.1);
 
-    cObject->set_var_double1(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double2(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double3(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double4(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
+    cObject->set_var_double1(2.2);
+    cObject->set_var_double2(2.2);
+    cObject->set_var_double3(2.2);
+    cObject->set_var_double4(2.2);
 
     cObject->set_var_bool1(true);
     cObject->set_var_bool2(true);
     cObject->set_var_bool3(true);
     cObject->set_var_bool4(true);
 
-    cObject->set_var_string1(genRandomString(39));
-    cObject->set_var_string2(genRandomString(39));
-    cObject->set_var_string3(genRandomString(39));
-    cObject->set_var_string4(genRandomString(39));
+    cObject->set_var_string1(genRandomString(31));
+    cObject->set_var_string2(genRandomString(31));
+    cObject->set_var_string3(genRandomString(31));
+    cObject->set_var_string4(genRandomString(30));
     cObject->set_allocated_complexobjectl23(genComplexObjectL23());
 
     return cObject;
@@ -112,35 +111,35 @@ static proto::ComplexObjectL21 *genComplexObjectL21() {
     srand((unsigned) time(NULL));
 
     proto::ComplexObjectL21 *cObject = new proto::ComplexObjectL21();
-    cObject->set_var_int321(rand());
-    cObject->set_var_int322(rand());
-    cObject->set_var_int323(rand());
-    cObject->set_var_int324(rand());
+    cObject->set_var_int321(50000);
+    cObject->set_var_int322(50000);
+    cObject->set_var_int323(50000);
+    cObject->set_var_int324(50000);
 
-    cObject->set_var_int641(rand());
-    cObject->set_var_int642(rand());
-    cObject->set_var_int643(rand());
-    cObject->set_var_int644(rand());
+    cObject->set_var_int641(99999999999900);
+    cObject->set_var_int642(99999999999900);
+    cObject->set_var_int643(99999999999900);
+    cObject->set_var_int644(99999999999900);
 
-    cObject->set_var_float1(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float2(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float3(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float4(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
+    cObject->set_var_float1(1.1);
+    cObject->set_var_float2(1.1);
+    cObject->set_var_float3(1.1);
+    cObject->set_var_float4(1.1);
 
-    cObject->set_var_double1(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double2(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double3(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double4(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
+    cObject->set_var_double1(2.2);
+    cObject->set_var_double2(2.2);
+    cObject->set_var_double3(2.2);
+    cObject->set_var_double4(2.2);
 
     cObject->set_var_bool1(true);
     cObject->set_var_bool2(true);
     cObject->set_var_bool3(true);
     cObject->set_var_bool4(true);
 
-    cObject->set_var_string1(genRandomString(39));
-    cObject->set_var_string2(genRandomString(39));
-    cObject->set_var_string3(genRandomString(39));
-    cObject->set_var_string4(genRandomString(39));
+    cObject->set_var_string1(genRandomString(31));
+    cObject->set_var_string2(genRandomString(31));
+    cObject->set_var_string3(genRandomString(31));
+    cObject->set_var_string4(genRandomString(30));
     cObject->set_allocated_complexobjectl22(genComplexObjectL22());
 
     return cObject;
@@ -151,35 +150,35 @@ static proto::ComplexObjectL2 *genComplexObjectL2() {
     srand((unsigned) time(NULL));
 
     proto::ComplexObjectL2 *cObject = new proto::ComplexObjectL2();
-    cObject->set_var_int321(rand());
-    cObject->set_var_int322(rand());
-    cObject->set_var_int323(rand());
-    cObject->set_var_int324(rand());
+    cObject->set_var_int321(50000);
+    cObject->set_var_int322(50000);
+    cObject->set_var_int323(50000);
+    cObject->set_var_int324(50000);
 
-    cObject->set_var_int641(rand());
-    cObject->set_var_int642(rand());
-    cObject->set_var_int643(rand());
-    cObject->set_var_int644(rand());
+    cObject->set_var_int641(99999999999900);
+    cObject->set_var_int642(99999999999900);
+    cObject->set_var_int643(99999999999900);
+    cObject->set_var_int644(99999999999900);
 
-    cObject->set_var_float1(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float2(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float3(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-    cObject->set_var_float4(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
+    cObject->set_var_float1(1.1);
+    cObject->set_var_float2(1.1);
+    cObject->set_var_float3(1.1);
+    cObject->set_var_float4(1.1);
 
-    cObject->set_var_double1(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double2(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double3(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
-    cObject->set_var_double4(static_cast <double > (rand()) / static_cast <double > (RAND_MAX));
+    cObject->set_var_double1(2.2);
+    cObject->set_var_double2(2.2);
+    cObject->set_var_double3(2.2);
+    cObject->set_var_double4(2.2);
 
     cObject->set_var_bool1(true);
     cObject->set_var_bool2(true);
     cObject->set_var_bool3(true);
     cObject->set_var_bool4(true);
 
-    cObject->set_var_string1(genRandomString(39));
-    cObject->set_var_string2(genRandomString(39));
-    cObject->set_var_string3(genRandomString(39));
-    cObject->set_var_string4(genRandomString(39));
+    cObject->set_var_string1(genRandomString(31));
+    cObject->set_var_string2(genRandomString(31));
+    cObject->set_var_string3(genRandomString(31));
+    cObject->set_var_string4(genRandomString(30));
     cObject->set_allocated_complexobjectl21(genComplexObjectL21());
 
     return cObject;
@@ -193,17 +192,20 @@ int main(int argc, char *argv[]) {
     int count = 0;
     double sum_serialization;
     double sum_deserialization;
+    size_t bufferSize;
 
     for (int i = 0; i < totalObjects; ++i) {
-        char *buffer = new char[1024];
         proto::ComplexObjectL2 *cObject = genComplexObjectL2();
+        bufferSize = cObject->ByteSizeLong();
+        char *buffer = new char[bufferSize];
+
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-        cObject->SerializeToArray(buffer, 1024);
+        cObject->SerializeToArray(buffer, bufferSize);
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
         std::chrono::steady_clock::time_point begind = std::chrono::steady_clock::now();
         proto::ComplexObjectL2 *dcObject = new proto::ComplexObjectL2();
-        dcObject->ParseFromArray(buffer, 1024);;
+        dcObject->ParseFromArray(buffer, bufferSize);;
         std::chrono::steady_clock::time_point endd = std::chrono::steady_clock::now();
 
         sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
@@ -217,7 +219,7 @@ int main(int argc, char *argv[]) {
 
     double avg = sum_serialization / count;
     double avgd = sum_deserialization / count;
-    cout << "ComplexObjectL2 avg serialization=" << avg << "  avg deserialize=" << avgd << endl;
+    cout << "ComplexObjectL2 avg serialization=" << avg << "  avg deserialize=" << avgd<< "   buffer size="<<bufferSize << endl;
 
     return 0;
 }

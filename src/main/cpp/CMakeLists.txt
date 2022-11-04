@@ -293,3 +293,15 @@ add_executable(ComplexObjectL2
         ${srcBenchmark}
         ${srcBenchmarkCC}
         )
+
+add_executable(ComplexObjectL3
+        benchmark/ComplexObjectL3.cpp
+        ${srcBenchmark}
+        ${srcBenchmarkCC}
+        )
+
+add_executable(ComplexObjectL4
+        benchmark/ComplexObjectL4.cpp
+        ${srcBenchmark}
+        ${srcBenchmarkCC}
+        )

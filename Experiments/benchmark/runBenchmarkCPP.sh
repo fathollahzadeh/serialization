@@ -13,4 +13,8 @@
 ./cppbin/SimpleObject
 ./cppbin/ComplexObjectL1
 ./cppbin/ComplexObjectL2
+./cppbin/ComplexObjectL3
+./cppbin/ComplexObjectL4
+
+#ComplexObjectL1 avg serialization=1.0289  avg deserialize=2.9162   buffer size=1166
 
