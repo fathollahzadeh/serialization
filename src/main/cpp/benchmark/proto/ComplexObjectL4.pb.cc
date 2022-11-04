@@ -23,13 +23,8 @@ namespace _pbi = _pb::internal;
 namespace proto {
 PROTOBUF_CONSTEXPR ComplexObjectL4::ComplexObjectL4(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl41_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL4DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL4DefaultTypeInternal()
@@ -42,13 +37,8 @@ struct ComplexObjectL4DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL4DefaultTypeInternal _ComplexObjectL4_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL41::ComplexObjectL41(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl42_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL41DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL41DefaultTypeInternal()
@@ -61,13 +51,8 @@ struct ComplexObjectL41DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL41DefaultTypeInternal _ComplexObjectL41_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL42::ComplexObjectL42(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl43_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL42DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL42DefaultTypeInternal()
@@ -80,13 +65,8 @@ struct ComplexObjectL42DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL42DefaultTypeInternal _ComplexObjectL42_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL43::ComplexObjectL43(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl44_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL43DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL43DefaultTypeInternal()
@@ -99,13 +79,8 @@ struct ComplexObjectL43DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL43DefaultTypeInternal _ComplexObjectL43_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL44::ComplexObjectL44(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl45_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL44DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL44DefaultTypeInternal()
@@ -118,13 +93,8 @@ struct ComplexObjectL44DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL44DefaultTypeInternal _ComplexObjectL44_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL45::ComplexObjectL45(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl46_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL45DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL45DefaultTypeInternal()
@@ -137,13 +107,8 @@ struct ComplexObjectL45DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL45DefaultTypeInternal _ComplexObjectL45_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL46::ComplexObjectL46(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl47_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL46DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL46DefaultTypeInternal()
@@ -156,13 +121,8 @@ struct ComplexObjectL46DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL46DefaultTypeInternal _ComplexObjectL46_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL47::ComplexObjectL47(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl48_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL47DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL47DefaultTypeInternal()
@@ -175,13 +135,8 @@ struct ComplexObjectL47DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL47DefaultTypeInternal _ComplexObjectL47_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL48::ComplexObjectL48(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl49_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL48DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL48DefaultTypeInternal()
@@ -194,13 +149,8 @@ struct ComplexObjectL48DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL48DefaultTypeInternal _ComplexObjectL48_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL49::ComplexObjectL49(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl410_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL49DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL49DefaultTypeInternal()
@@ -213,13 +163,8 @@ struct ComplexObjectL49DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL49DefaultTypeInternal _ComplexObjectL49_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL410::ComplexObjectL410(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl411_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL410DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL410DefaultTypeInternal()
@@ -232,13 +177,8 @@ struct ComplexObjectL410DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL410DefaultTypeInternal _ComplexObjectL410_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL411::ComplexObjectL411(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl412_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL411DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL411DefaultTypeInternal()
@@ -251,13 +191,8 @@ struct ComplexObjectL411DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL411DefaultTypeInternal _ComplexObjectL411_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL412::ComplexObjectL412(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl413_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL412DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL412DefaultTypeInternal()
@@ -270,13 +205,8 @@ struct ComplexObjectL412DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL412DefaultTypeInternal _ComplexObjectL412_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL413::ComplexObjectL413(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl414_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL413DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL413DefaultTypeInternal()
@@ -289,13 +219,8 @@ struct ComplexObjectL413DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL413DefaultTypeInternal _ComplexObjectL413_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL414::ComplexObjectL414(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.complexobjectl415_)*/nullptr
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.complexobject_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL414DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL414DefaultTypeInternal()
@@ -308,12 +233,7 @@ struct ComplexObjectL414DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComplexObjectL414DefaultTypeInternal _ComplexObjectL414_default_instance_;
 PROTOBUF_CONSTEXPR ComplexObjectL415::ComplexObjectL415(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.var_string1_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.var_int641_)*/int64_t{0}
-  , /*decltype(_impl_.var_int321_)*/0
-  , /*decltype(_impl_.var_float1_)*/0
-  , /*decltype(_impl_.var_double1_)*/0
-  , /*decltype(_impl_.var_bool1_)*/false
+    /*decltype(_impl_.var_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ComplexObjectL415DefaultTypeInternal {
   PROTOBUF_CONSTEXPR ComplexObjectL415DefaultTypeInternal()
@@ -336,225 +256,145 @@ const uint32_t TableStruct_ComplexObjectL4_2eproto::offsets[] PROTOBUF_SECTION_V
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.complexobjectl41_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL4, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.complexobjectl42_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL41, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.complexobjectl43_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL42, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.complexobjectl44_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL43, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.complexobjectl45_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL44, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.complexobjectl46_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL45, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.complexobjectl47_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL46, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.complexobjectl48_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL47, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.complexobjectl49_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL48, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.complexobjectl410_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL49, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.complexobjectl411_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL410, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.complexobjectl412_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL411, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.complexobjectl413_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL412, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.complexobjectl414_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL413, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.var_string1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.complexobjectl415_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.var_string_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL414, _impl_.complexobject_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL415, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL415, _impl_.var_int321_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL415, _impl_.var_int641_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL415, _impl_.var_float1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL415, _impl_.var_double1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL415, _impl_.var_bool1_),
-  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL415, _impl_.var_string1_),
+  PROTOBUF_FIELD_OFFSET(::proto::ComplexObjectL415, _impl_.var_string_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::proto::ComplexObjectL4)},
-  { 13, -1, -1, sizeof(::proto::ComplexObjectL41)},
-  { 26, -1, -1, sizeof(::proto::ComplexObjectL42)},
-  { 39, -1, -1, sizeof(::proto::ComplexObjectL43)},
-  { 52, -1, -1, sizeof(::proto::ComplexObjectL44)},
-  { 65, -1, -1, sizeof(::proto::ComplexObjectL45)},
-  { 78, -1, -1, sizeof(::proto::ComplexObjectL46)},
-  { 91, -1, -1, sizeof(::proto::ComplexObjectL47)},
-  { 104, -1, -1, sizeof(::proto::ComplexObjectL48)},
-  { 117, -1, -1, sizeof(::proto::ComplexObjectL49)},
-  { 130, -1, -1, sizeof(::proto::ComplexObjectL410)},
-  { 143, -1, -1, sizeof(::proto::ComplexObjectL411)},
-  { 156, -1, -1, sizeof(::proto::ComplexObjectL412)},
-  { 169, -1, -1, sizeof(::proto::ComplexObjectL413)},
-  { 182, -1, -1, sizeof(::proto::ComplexObjectL414)},
-  { 195, -1, -1, sizeof(::proto::ComplexObjectL415)},
+  { 8, -1, -1, sizeof(::proto::ComplexObjectL41)},
+  { 16, -1, -1, sizeof(::proto::ComplexObjectL42)},
+  { 24, -1, -1, sizeof(::proto::ComplexObjectL43)},
+  { 32, -1, -1, sizeof(::proto::ComplexObjectL44)},
+  { 40, -1, -1, sizeof(::proto::ComplexObjectL45)},
+  { 48, -1, -1, sizeof(::proto::ComplexObjectL46)},
+  { 56, -1, -1, sizeof(::proto::ComplexObjectL47)},
+  { 64, -1, -1, sizeof(::proto::ComplexObjectL48)},
+  { 72, -1, -1, sizeof(::proto::ComplexObjectL49)},
+  { 80, -1, -1, sizeof(::proto::ComplexObjectL410)},
+  { 88, -1, -1, sizeof(::proto::ComplexObjectL411)},
+  { 96, -1, -1, sizeof(::proto::ComplexObjectL412)},
+  { 104, -1, -1, sizeof(::proto::ComplexObjectL413)},
+  { 112, -1, -1, sizeof(::proto::ComplexObjectL414)},
+  { 120, -1, -1, sizeof(::proto::ComplexObjectL415)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -577,88 +417,46 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_ComplexObjectL4_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\025ComplexObjectL4.proto\022\005proto\"\275\001\n\017Compl"
-  "exObjectL4\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nvar_in"
-  "t641\030\002 \001(\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013var_do"
-  "uble1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013var_st"
-  "ring1\030\006 \001(\t\0221\n\020complexObjectL41\030\007 \001(\0132\027."
-  "proto.ComplexObjectL41\"\276\001\n\020ComplexObject"
-  "L41\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nvar_int641\030\002 "
-  "\001(\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013var_double1\030\004"
-  " \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013var_string1\030\006"
-  " \001(\t\0221\n\020complexObjectL42\030\007 \001(\0132\027.proto.C"
-  "omplexObjectL42\"\276\001\n\020ComplexObjectL42\022\022\n\n"
-  "var_int321\030\001 \001(\005\022\022\n\nvar_int641\030\002 \001(\003\022\022\n\n"
-  "var_float1\030\003 \001(\002\022\023\n\013var_double1\030\004 \001(\001\022\021\n"
-  "\tvar_bool1\030\005 \001(\010\022\023\n\013var_string1\030\006 \001(\t\0221\n"
-  "\020complexObjectL43\030\007 \001(\0132\027.proto.ComplexO"
-  "bjectL43\"\276\001\n\020ComplexObjectL43\022\022\n\nvar_int"
-  "321\030\001 \001(\005\022\022\n\nvar_int641\030\002 \001(\003\022\022\n\nvar_flo"
-  "at1\030\003 \001(\002\022\023\n\013var_double1\030\004 \001(\001\022\021\n\tvar_bo"
-  "ol1\030\005 \001(\010\022\023\n\013var_string1\030\006 \001(\t\0221\n\020comple"
-  "xObjectL44\030\007 \001(\0132\027.proto.ComplexObjectL4"
-  "4\"\276\001\n\020ComplexObjectL44\022\022\n\nvar_int321\030\001 \001"
-  "(\005\022\022\n\nvar_int641\030\002 \001(\003\022\022\n\nvar_float1\030\003 \001"
-  "(\002\022\023\n\013var_double1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 \001"
-  "(\010\022\023\n\013var_string1\030\006 \001(\t\0221\n\020complexObject"
-  "L45\030\007 \001(\0132\027.proto.ComplexObjectL45\"\276\001\n\020C"
-  "omplexObjectL45\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nv"
-  "ar_int641\030\002 \001(\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013v"
-  "ar_double1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013v"
-  "ar_string1\030\006 \001(\t\0221\n\020complexObjectL46\030\007 \001"
-  "(\0132\027.proto.ComplexObjectL46\"\276\001\n\020ComplexO"
-  "bjectL46\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nvar_int6"
-  "41\030\002 \001(\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013var_doub"
-  "le1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013var_stri"
-  "ng1\030\006 \001(\t\0221\n\020complexObjectL47\030\007 \001(\0132\027.pr"
-  "oto.ComplexObjectL47\"\276\001\n\020ComplexObjectL4"
-  "7\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nvar_int641\030\002 \001("
-  "\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013var_double1\030\004 \001"
-  "(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013var_string1\030\006 \001"
-  "(\t\0221\n\020complexObjectL48\030\007 \001(\0132\027.proto.Com"
-  "plexObjectL48\"\276\001\n\020ComplexObjectL48\022\022\n\nva"
-  "r_int321\030\001 \001(\005\022\022\n\nvar_int641\030\002 \001(\003\022\022\n\nva"
-  "r_float1\030\003 \001(\002\022\023\n\013var_double1\030\004 \001(\001\022\021\n\tv"
-  "ar_bool1\030\005 \001(\010\022\023\n\013var_string1\030\006 \001(\t\0221\n\020c"
-  "omplexObjectL49\030\007 \001(\0132\027.proto.ComplexObj"
-  "ectL49\"\300\001\n\020ComplexObjectL49\022\022\n\nvar_int32"
-  "1\030\001 \001(\005\022\022\n\nvar_int641\030\002 \001(\003\022\022\n\nvar_float"
-  "1\030\003 \001(\002\022\023\n\013var_double1\030\004 \001(\001\022\021\n\tvar_bool"
-  "1\030\005 \001(\010\022\023\n\013var_string1\030\006 \001(\t\0223\n\021complexO"
-  "bjectL410\030\007 \001(\0132\030.proto.ComplexObjectL41"
-  "0\"\301\001\n\021ComplexObjectL410\022\022\n\nvar_int321\030\001 "
-  "\001(\005\022\022\n\nvar_int641\030\002 \001(\003\022\022\n\nvar_float1\030\003 "
-  "\001(\002\022\023\n\013var_double1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 "
-  "\001(\010\022\023\n\013var_string1\030\006 \001(\t\0223\n\021complexObjec"
-  "tL411\030\007 \001(\0132\030.proto.ComplexObjectL411\"\301\001"
-  "\n\021ComplexObjectL411\022\022\n\nvar_int321\030\001 \001(\005\022"
-  "\022\n\nvar_int641\030\002 \001(\003\022\022\n\nvar_float1\030\003 \001(\002\022"
-  "\023\n\013var_double1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022"
-  "\023\n\013var_string1\030\006 \001(\t\0223\n\021complexObjectL41"
-  "2\030\007 \001(\0132\030.proto.ComplexObjectL412\"\301\001\n\021Co"
-  "mplexObjectL412\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nv"
-  "ar_int641\030\002 \001(\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013v"
-  "ar_double1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013v"
-  "ar_string1\030\006 \001(\t\0223\n\021complexObjectL413\030\007 "
-  "\001(\0132\030.proto.ComplexObjectL413\"\301\001\n\021Comple"
-  "xObjectL413\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nvar_i"
-  "nt641\030\002 \001(\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013var_d"
-  "ouble1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013var_s"
-  "tring1\030\006 \001(\t\0223\n\021complexObjectL414\030\007 \001(\0132"
-  "\030.proto.ComplexObjectL414\"\301\001\n\021ComplexObj"
-  "ectL414\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nvar_int64"
-  "1\030\002 \001(\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013var_doubl"
-  "e1\030\004 \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013var_strin"
-  "g1\030\006 \001(\t\0223\n\021complexObjectL415\030\007 \001(\0132\030.pr"
-  "oto.ComplexObjectL415\"\214\001\n\021ComplexObjectL"
-  "415\022\022\n\nvar_int321\030\001 \001(\005\022\022\n\nvar_int641\030\002 "
-  "\001(\003\022\022\n\nvar_float1\030\003 \001(\002\022\023\n\013var_double1\030\004"
-  " \001(\001\022\021\n\tvar_bool1\030\005 \001(\010\022\023\n\013var_string1\030\006"
-  " \001(\tb\006proto3"
+  "\n\025ComplexObjectL4.proto\022\005proto\"U\n\017Comple"
+  "xObjectL4\022\022\n\nvar_string\030\001 \001(\t\022.\n\rcomplex"
+  "Object\030\002 \001(\0132\027.proto.ComplexObjectL41\"V\n"
+  "\020ComplexObjectL41\022\022\n\nvar_string\030\001 \001(\t\022.\n"
+  "\rcomplexObject\030\002 \001(\0132\027.proto.ComplexObje"
+  "ctL42\"V\n\020ComplexObjectL42\022\022\n\nvar_string\030"
+  "\001 \001(\t\022.\n\rcomplexObject\030\002 \001(\0132\027.proto.Com"
+  "plexObjectL43\"V\n\020ComplexObjectL43\022\022\n\nvar"
+  "_string\030\001 \001(\t\022.\n\rcomplexObject\030\002 \001(\0132\027.p"
+  "roto.ComplexObjectL44\"V\n\020ComplexObjectL4"
+  "4\022\022\n\nvar_string\030\001 \001(\t\022.\n\rcomplexObject\030\002"
+  " \001(\0132\027.proto.ComplexObjectL45\"V\n\020Complex"
+  "ObjectL45\022\022\n\nvar_string\030\001 \001(\t\022.\n\rcomplex"
+  "Object\030\002 \001(\0132\027.proto.ComplexObjectL46\"V\n"
+  "\020ComplexObjectL46\022\022\n\nvar_string\030\001 \001(\t\022.\n"
+  "\rcomplexObject\030\002 \001(\0132\027.proto.ComplexObje"
+  "ctL47\"V\n\020ComplexObjectL47\022\022\n\nvar_string\030"
+  "\001 \001(\t\022.\n\rcomplexObject\030\002 \001(\0132\027.proto.Com"
+  "plexObjectL48\"V\n\020ComplexObjectL48\022\022\n\nvar"
+  "_string\030\001 \001(\t\022.\n\rcomplexObject\030\002 \001(\0132\027.p"
+  "roto.ComplexObjectL49\"W\n\020ComplexObjectL4"
+  "9\022\022\n\nvar_string\030\001 \001(\t\022/\n\rcomplexObject\030\002"
+  " \001(\0132\030.proto.ComplexObjectL410\"X\n\021Comple"
+  "xObjectL410\022\022\n\nvar_string\030\001 \001(\t\022/\n\rcompl"
+  "exObject\030\002 \001(\0132\030.proto.ComplexObjectL411"
+  "\"X\n\021ComplexObjectL411\022\022\n\nvar_string\030\001 \001("
+  "\t\022/\n\rcomplexObject\030\002 \001(\0132\030.proto.Complex"
+  "ObjectL412\"X\n\021ComplexObjectL412\022\022\n\nvar_s"
+  "tring\030\001 \001(\t\022/\n\rcomplexObject\030\002 \001(\0132\030.pro"
+  "to.ComplexObjectL413\"X\n\021ComplexObjectL41"
+  "3\022\022\n\nvar_string\030\001 \001(\t\022/\n\rcomplexObject\030\002"
+  " \001(\0132\030.proto.ComplexObjectL414\"X\n\021Comple"
+  "xObjectL414\022\022\n\nvar_string\030\001 \001(\t\022/\n\rcompl"
+  "exObject\030\002 \001(\0132\030.proto.ComplexObjectL415"
+  "\"\'\n\021ComplexObjectL415\022\022\n\nvar_string\030\001 \001("
+  "\tb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ComplexObjectL4_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ComplexObjectL4_2eproto = {
-    false, false, 3092, descriptor_table_protodef_ComplexObjectL4_2eproto,
+    false, false, 1409, descriptor_table_protodef_ComplexObjectL4_2eproto,
     "ComplexObjectL4.proto",
     &descriptor_table_ComplexObjectL4_2eproto_once, nullptr, 0, 16,
     schemas, file_default_instances, TableStruct_ComplexObjectL4_2eproto::offsets,
@@ -677,12 +475,12 @@ namespace proto {
 
 class ComplexObjectL4::_Internal {
  public:
-  static const ::proto::ComplexObjectL41& complexobjectl41(const ComplexObjectL4* msg);
+  static const ::proto::ComplexObjectL41& complexobject(const ComplexObjectL4* msg);
 };
 
 const ::proto::ComplexObjectL41&
-ComplexObjectL4::_Internal::complexobjectl41(const ComplexObjectL4* msg) {
-  return *msg->_impl_.complexobjectl41_;
+ComplexObjectL4::_Internal::complexobject(const ComplexObjectL4* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL4::ComplexObjectL4(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -694,30 +492,22 @@ ComplexObjectL4::ComplexObjectL4(const ComplexObjectL4& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL4* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl41_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl41()) {
-    _this->_impl_.complexobjectl41_ = new ::proto::ComplexObjectL41(*from._impl_.complexobjectl41_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL41(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL4)
 }
 
@@ -726,18 +516,13 @@ inline void ComplexObjectL4::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl41_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -752,8 +537,8 @@ ComplexObjectL4::~ComplexObjectL4() {
 
 inline void ComplexObjectL4::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl41_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL4::SetCachedSize(int size) const {
@@ -766,14 +551,11 @@ void ComplexObjectL4::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl41_ != nullptr) {
-    delete _impl_.complexobjectl41_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl41_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -783,60 +565,20 @@ const char* ComplexObjectL4::_InternalParse(const char* ptr, ::_pbi::ParseContex
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL4.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL4.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL41 complexObjectL41 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl41(), ptr);
+      // .proto.ComplexObjectL41 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -870,59 +612,21 @@ uint8_t* ComplexObjectL4::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL4.var_string1");
+      "proto.ComplexObjectL4.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL41 complexObjectL41 = 7;
-  if (this->_internal_has_complexobjectl41()) {
+  // .proto.ComplexObjectL41 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl41(this),
-        _Internal::complexobjectl41(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -941,51 +645,18 @@ size_t ComplexObjectL4::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL41 complexObjectL41 = 7;
-  if (this->_internal_has_complexobjectl41()) {
+  // .proto.ComplexObjectL41 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl41_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1006,35 +677,12 @@ void ComplexObjectL4::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const 
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl41()) {
-    _this->_internal_mutable_complexobjectl41()->::proto::ComplexObjectL41::MergeFrom(
-        from._internal_complexobjectl41());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL41::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1056,15 +704,10 @@ void ComplexObjectL4::InternalSwap(ComplexObjectL4* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL4, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL4::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL4, _impl_.complexobjectl41_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl41_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl41_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL4::GetMetadata() const {
@@ -1077,12 +720,12 @@ void ComplexObjectL4::InternalSwap(ComplexObjectL4* other) {
 
 class ComplexObjectL41::_Internal {
  public:
-  static const ::proto::ComplexObjectL42& complexobjectl42(const ComplexObjectL41* msg);
+  static const ::proto::ComplexObjectL42& complexobject(const ComplexObjectL41* msg);
 };
 
 const ::proto::ComplexObjectL42&
-ComplexObjectL41::_Internal::complexobjectl42(const ComplexObjectL41* msg) {
-  return *msg->_impl_.complexobjectl42_;
+ComplexObjectL41::_Internal::complexobject(const ComplexObjectL41* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL41::ComplexObjectL41(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -1094,30 +737,22 @@ ComplexObjectL41::ComplexObjectL41(const ComplexObjectL41& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL41* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl42_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl42()) {
-    _this->_impl_.complexobjectl42_ = new ::proto::ComplexObjectL42(*from._impl_.complexobjectl42_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL42(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL41)
 }
 
@@ -1126,18 +761,13 @@ inline void ComplexObjectL41::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl42_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -1152,8 +782,8 @@ ComplexObjectL41::~ComplexObjectL41() {
 
 inline void ComplexObjectL41::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl42_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL41::SetCachedSize(int size) const {
@@ -1166,14 +796,11 @@ void ComplexObjectL41::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl42_ != nullptr) {
-    delete _impl_.complexobjectl42_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl42_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1183,60 +810,20 @@ const char* ComplexObjectL41::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL41.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL41.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL42 complexObjectL42 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl42(), ptr);
+      // .proto.ComplexObjectL42 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1270,59 +857,21 @@ uint8_t* ComplexObjectL41::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL41.var_string1");
+      "proto.ComplexObjectL41.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL42 complexObjectL42 = 7;
-  if (this->_internal_has_complexobjectl42()) {
+  // .proto.ComplexObjectL42 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl42(this),
-        _Internal::complexobjectl42(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1341,51 +890,18 @@ size_t ComplexObjectL41::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL42 complexObjectL42 = 7;
-  if (this->_internal_has_complexobjectl42()) {
+  // .proto.ComplexObjectL42 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl42_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1406,35 +922,12 @@ void ComplexObjectL41::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl42()) {
-    _this->_internal_mutable_complexobjectl42()->::proto::ComplexObjectL42::MergeFrom(
-        from._internal_complexobjectl42());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL42::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1456,15 +949,10 @@ void ComplexObjectL41::InternalSwap(ComplexObjectL41* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL41, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL41::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL41, _impl_.complexobjectl42_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl42_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl42_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL41::GetMetadata() const {
@@ -1477,12 +965,12 @@ void ComplexObjectL41::InternalSwap(ComplexObjectL41* other) {
 
 class ComplexObjectL42::_Internal {
  public:
-  static const ::proto::ComplexObjectL43& complexobjectl43(const ComplexObjectL42* msg);
+  static const ::proto::ComplexObjectL43& complexobject(const ComplexObjectL42* msg);
 };
 
 const ::proto::ComplexObjectL43&
-ComplexObjectL42::_Internal::complexobjectl43(const ComplexObjectL42* msg) {
-  return *msg->_impl_.complexobjectl43_;
+ComplexObjectL42::_Internal::complexobject(const ComplexObjectL42* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL42::ComplexObjectL42(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -1494,30 +982,22 @@ ComplexObjectL42::ComplexObjectL42(const ComplexObjectL42& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL42* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl43_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl43()) {
-    _this->_impl_.complexobjectl43_ = new ::proto::ComplexObjectL43(*from._impl_.complexobjectl43_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL43(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL42)
 }
 
@@ -1526,18 +1006,13 @@ inline void ComplexObjectL42::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl43_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -1552,8 +1027,8 @@ ComplexObjectL42::~ComplexObjectL42() {
 
 inline void ComplexObjectL42::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl43_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL42::SetCachedSize(int size) const {
@@ -1566,14 +1041,11 @@ void ComplexObjectL42::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl43_ != nullptr) {
-    delete _impl_.complexobjectl43_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl43_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1583,60 +1055,20 @@ const char* ComplexObjectL42::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL42.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL42.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL43 complexObjectL43 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl43(), ptr);
+      // .proto.ComplexObjectL43 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1670,59 +1102,21 @@ uint8_t* ComplexObjectL42::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL42.var_string1");
+      "proto.ComplexObjectL42.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL43 complexObjectL43 = 7;
-  if (this->_internal_has_complexobjectl43()) {
+  // .proto.ComplexObjectL43 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl43(this),
-        _Internal::complexobjectl43(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1741,51 +1135,18 @@ size_t ComplexObjectL42::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL43 complexObjectL43 = 7;
-  if (this->_internal_has_complexobjectl43()) {
+  // .proto.ComplexObjectL43 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl43_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1806,35 +1167,12 @@ void ComplexObjectL42::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl43()) {
-    _this->_internal_mutable_complexobjectl43()->::proto::ComplexObjectL43::MergeFrom(
-        from._internal_complexobjectl43());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL43::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1856,15 +1194,10 @@ void ComplexObjectL42::InternalSwap(ComplexObjectL42* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL42, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL42::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL42, _impl_.complexobjectl43_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl43_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl43_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL42::GetMetadata() const {
@@ -1877,12 +1210,12 @@ void ComplexObjectL42::InternalSwap(ComplexObjectL42* other) {
 
 class ComplexObjectL43::_Internal {
  public:
-  static const ::proto::ComplexObjectL44& complexobjectl44(const ComplexObjectL43* msg);
+  static const ::proto::ComplexObjectL44& complexobject(const ComplexObjectL43* msg);
 };
 
 const ::proto::ComplexObjectL44&
-ComplexObjectL43::_Internal::complexobjectl44(const ComplexObjectL43* msg) {
-  return *msg->_impl_.complexobjectl44_;
+ComplexObjectL43::_Internal::complexobject(const ComplexObjectL43* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL43::ComplexObjectL43(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -1894,30 +1227,22 @@ ComplexObjectL43::ComplexObjectL43(const ComplexObjectL43& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL43* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl44_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl44()) {
-    _this->_impl_.complexobjectl44_ = new ::proto::ComplexObjectL44(*from._impl_.complexobjectl44_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL44(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL43)
 }
 
@@ -1926,18 +1251,13 @@ inline void ComplexObjectL43::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl44_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -1952,8 +1272,8 @@ ComplexObjectL43::~ComplexObjectL43() {
 
 inline void ComplexObjectL43::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl44_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL43::SetCachedSize(int size) const {
@@ -1966,14 +1286,11 @@ void ComplexObjectL43::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl44_ != nullptr) {
-    delete _impl_.complexobjectl44_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl44_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1983,60 +1300,20 @@ const char* ComplexObjectL43::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL43.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL43.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL44 complexObjectL44 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl44(), ptr);
+      // .proto.ComplexObjectL44 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -2070,59 +1347,21 @@ uint8_t* ComplexObjectL43::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL43.var_string1");
+      "proto.ComplexObjectL43.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL44 complexObjectL44 = 7;
-  if (this->_internal_has_complexobjectl44()) {
+  // .proto.ComplexObjectL44 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl44(this),
-        _Internal::complexobjectl44(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2141,51 +1380,18 @@ size_t ComplexObjectL43::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL44 complexObjectL44 = 7;
-  if (this->_internal_has_complexobjectl44()) {
+  // .proto.ComplexObjectL44 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl44_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -2206,35 +1412,12 @@ void ComplexObjectL43::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl44()) {
-    _this->_internal_mutable_complexobjectl44()->::proto::ComplexObjectL44::MergeFrom(
-        from._internal_complexobjectl44());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL44::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -2256,15 +1439,10 @@ void ComplexObjectL43::InternalSwap(ComplexObjectL43* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL43, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL43::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL43, _impl_.complexobjectl44_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl44_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl44_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL43::GetMetadata() const {
@@ -2277,12 +1455,12 @@ void ComplexObjectL43::InternalSwap(ComplexObjectL43* other) {
 
 class ComplexObjectL44::_Internal {
  public:
-  static const ::proto::ComplexObjectL45& complexobjectl45(const ComplexObjectL44* msg);
+  static const ::proto::ComplexObjectL45& complexobject(const ComplexObjectL44* msg);
 };
 
 const ::proto::ComplexObjectL45&
-ComplexObjectL44::_Internal::complexobjectl45(const ComplexObjectL44* msg) {
-  return *msg->_impl_.complexobjectl45_;
+ComplexObjectL44::_Internal::complexobject(const ComplexObjectL44* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL44::ComplexObjectL44(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -2294,30 +1472,22 @@ ComplexObjectL44::ComplexObjectL44(const ComplexObjectL44& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL44* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl45_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl45()) {
-    _this->_impl_.complexobjectl45_ = new ::proto::ComplexObjectL45(*from._impl_.complexobjectl45_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL45(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL44)
 }
 
@@ -2326,18 +1496,13 @@ inline void ComplexObjectL44::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl45_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -2352,8 +1517,8 @@ ComplexObjectL44::~ComplexObjectL44() {
 
 inline void ComplexObjectL44::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl45_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL44::SetCachedSize(int size) const {
@@ -2366,14 +1531,11 @@ void ComplexObjectL44::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl45_ != nullptr) {
-    delete _impl_.complexobjectl45_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl45_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -2383,60 +1545,20 @@ const char* ComplexObjectL44::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL44.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL44.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL45 complexObjectL45 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl45(), ptr);
+      // .proto.ComplexObjectL45 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -2470,59 +1592,21 @@ uint8_t* ComplexObjectL44::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL44.var_string1");
+      "proto.ComplexObjectL44.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL45 complexObjectL45 = 7;
-  if (this->_internal_has_complexobjectl45()) {
+  // .proto.ComplexObjectL45 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl45(this),
-        _Internal::complexobjectl45(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2541,51 +1625,18 @@ size_t ComplexObjectL44::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL45 complexObjectL45 = 7;
-  if (this->_internal_has_complexobjectl45()) {
+  // .proto.ComplexObjectL45 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl45_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -2606,35 +1657,12 @@ void ComplexObjectL44::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl45()) {
-    _this->_internal_mutable_complexobjectl45()->::proto::ComplexObjectL45::MergeFrom(
-        from._internal_complexobjectl45());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL45::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -2656,15 +1684,10 @@ void ComplexObjectL44::InternalSwap(ComplexObjectL44* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL44, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL44::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL44, _impl_.complexobjectl45_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl45_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl45_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL44::GetMetadata() const {
@@ -2677,12 +1700,12 @@ void ComplexObjectL44::InternalSwap(ComplexObjectL44* other) {
 
 class ComplexObjectL45::_Internal {
  public:
-  static const ::proto::ComplexObjectL46& complexobjectl46(const ComplexObjectL45* msg);
+  static const ::proto::ComplexObjectL46& complexobject(const ComplexObjectL45* msg);
 };
 
 const ::proto::ComplexObjectL46&
-ComplexObjectL45::_Internal::complexobjectl46(const ComplexObjectL45* msg) {
-  return *msg->_impl_.complexobjectl46_;
+ComplexObjectL45::_Internal::complexobject(const ComplexObjectL45* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL45::ComplexObjectL45(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -2694,30 +1717,22 @@ ComplexObjectL45::ComplexObjectL45(const ComplexObjectL45& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL45* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl46_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl46()) {
-    _this->_impl_.complexobjectl46_ = new ::proto::ComplexObjectL46(*from._impl_.complexobjectl46_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL46(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL45)
 }
 
@@ -2726,18 +1741,13 @@ inline void ComplexObjectL45::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl46_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -2752,8 +1762,8 @@ ComplexObjectL45::~ComplexObjectL45() {
 
 inline void ComplexObjectL45::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl46_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL45::SetCachedSize(int size) const {
@@ -2766,14 +1776,11 @@ void ComplexObjectL45::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl46_ != nullptr) {
-    delete _impl_.complexobjectl46_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl46_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -2783,60 +1790,20 @@ const char* ComplexObjectL45::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL45.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL45.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL46 complexObjectL46 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl46(), ptr);
+      // .proto.ComplexObjectL46 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -2870,59 +1837,21 @@ uint8_t* ComplexObjectL45::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL45.var_string1");
+      "proto.ComplexObjectL45.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL46 complexObjectL46 = 7;
-  if (this->_internal_has_complexobjectl46()) {
+  // .proto.ComplexObjectL46 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl46(this),
-        _Internal::complexobjectl46(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2941,51 +1870,18 @@ size_t ComplexObjectL45::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL46 complexObjectL46 = 7;
-  if (this->_internal_has_complexobjectl46()) {
+  // .proto.ComplexObjectL46 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl46_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -3006,35 +1902,12 @@ void ComplexObjectL45::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl46()) {
-    _this->_internal_mutable_complexobjectl46()->::proto::ComplexObjectL46::MergeFrom(
-        from._internal_complexobjectl46());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL46::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -3056,15 +1929,10 @@ void ComplexObjectL45::InternalSwap(ComplexObjectL45* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL45, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL45::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL45, _impl_.complexobjectl46_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl46_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl46_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL45::GetMetadata() const {
@@ -3077,12 +1945,12 @@ void ComplexObjectL45::InternalSwap(ComplexObjectL45* other) {
 
 class ComplexObjectL46::_Internal {
  public:
-  static const ::proto::ComplexObjectL47& complexobjectl47(const ComplexObjectL46* msg);
+  static const ::proto::ComplexObjectL47& complexobject(const ComplexObjectL46* msg);
 };
 
 const ::proto::ComplexObjectL47&
-ComplexObjectL46::_Internal::complexobjectl47(const ComplexObjectL46* msg) {
-  return *msg->_impl_.complexobjectl47_;
+ComplexObjectL46::_Internal::complexobject(const ComplexObjectL46* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL46::ComplexObjectL46(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -3094,30 +1962,22 @@ ComplexObjectL46::ComplexObjectL46(const ComplexObjectL46& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL46* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl47_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl47()) {
-    _this->_impl_.complexobjectl47_ = new ::proto::ComplexObjectL47(*from._impl_.complexobjectl47_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL47(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL46)
 }
 
@@ -3126,18 +1986,13 @@ inline void ComplexObjectL46::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl47_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -3152,8 +2007,8 @@ ComplexObjectL46::~ComplexObjectL46() {
 
 inline void ComplexObjectL46::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl47_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL46::SetCachedSize(int size) const {
@@ -3166,14 +2021,11 @@ void ComplexObjectL46::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl47_ != nullptr) {
-    delete _impl_.complexobjectl47_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl47_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3183,60 +2035,20 @@ const char* ComplexObjectL46::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL46.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL46.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL47 complexObjectL47 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl47(), ptr);
+      // .proto.ComplexObjectL47 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -3270,59 +2082,21 @@ uint8_t* ComplexObjectL46::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL46.var_string1");
+      "proto.ComplexObjectL46.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL47 complexObjectL47 = 7;
-  if (this->_internal_has_complexobjectl47()) {
+  // .proto.ComplexObjectL47 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl47(this),
-        _Internal::complexobjectl47(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3341,51 +2115,18 @@ size_t ComplexObjectL46::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL47 complexObjectL47 = 7;
-  if (this->_internal_has_complexobjectl47()) {
+  // .proto.ComplexObjectL47 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl47_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -3406,35 +2147,12 @@ void ComplexObjectL46::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl47()) {
-    _this->_internal_mutable_complexobjectl47()->::proto::ComplexObjectL47::MergeFrom(
-        from._internal_complexobjectl47());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL47::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -3456,15 +2174,10 @@ void ComplexObjectL46::InternalSwap(ComplexObjectL46* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL46, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL46::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL46, _impl_.complexobjectl47_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl47_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl47_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL46::GetMetadata() const {
@@ -3477,12 +2190,12 @@ void ComplexObjectL46::InternalSwap(ComplexObjectL46* other) {
 
 class ComplexObjectL47::_Internal {
  public:
-  static const ::proto::ComplexObjectL48& complexobjectl48(const ComplexObjectL47* msg);
+  static const ::proto::ComplexObjectL48& complexobject(const ComplexObjectL47* msg);
 };
 
 const ::proto::ComplexObjectL48&
-ComplexObjectL47::_Internal::complexobjectl48(const ComplexObjectL47* msg) {
-  return *msg->_impl_.complexobjectl48_;
+ComplexObjectL47::_Internal::complexobject(const ComplexObjectL47* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL47::ComplexObjectL47(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -3494,30 +2207,22 @@ ComplexObjectL47::ComplexObjectL47(const ComplexObjectL47& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL47* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl48_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl48()) {
-    _this->_impl_.complexobjectl48_ = new ::proto::ComplexObjectL48(*from._impl_.complexobjectl48_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL48(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL47)
 }
 
@@ -3526,18 +2231,13 @@ inline void ComplexObjectL47::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl48_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -3552,8 +2252,8 @@ ComplexObjectL47::~ComplexObjectL47() {
 
 inline void ComplexObjectL47::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl48_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL47::SetCachedSize(int size) const {
@@ -3566,14 +2266,11 @@ void ComplexObjectL47::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl48_ != nullptr) {
-    delete _impl_.complexobjectl48_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl48_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3583,60 +2280,20 @@ const char* ComplexObjectL47::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL47.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL47.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL48 complexObjectL48 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl48(), ptr);
+      // .proto.ComplexObjectL48 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -3670,59 +2327,21 @@ uint8_t* ComplexObjectL47::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL47.var_string1");
+      "proto.ComplexObjectL47.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL48 complexObjectL48 = 7;
-  if (this->_internal_has_complexobjectl48()) {
+  // .proto.ComplexObjectL48 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl48(this),
-        _Internal::complexobjectl48(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3741,51 +2360,18 @@ size_t ComplexObjectL47::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL48 complexObjectL48 = 7;
-  if (this->_internal_has_complexobjectl48()) {
+  // .proto.ComplexObjectL48 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl48_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -3806,35 +2392,12 @@ void ComplexObjectL47::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl48()) {
-    _this->_internal_mutable_complexobjectl48()->::proto::ComplexObjectL48::MergeFrom(
-        from._internal_complexobjectl48());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL48::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -3856,15 +2419,10 @@ void ComplexObjectL47::InternalSwap(ComplexObjectL47* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL47, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL47::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL47, _impl_.complexobjectl48_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl48_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl48_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL47::GetMetadata() const {
@@ -3877,12 +2435,12 @@ void ComplexObjectL47::InternalSwap(ComplexObjectL47* other) {
 
 class ComplexObjectL48::_Internal {
  public:
-  static const ::proto::ComplexObjectL49& complexobjectl49(const ComplexObjectL48* msg);
+  static const ::proto::ComplexObjectL49& complexobject(const ComplexObjectL48* msg);
 };
 
 const ::proto::ComplexObjectL49&
-ComplexObjectL48::_Internal::complexobjectl49(const ComplexObjectL48* msg) {
-  return *msg->_impl_.complexobjectl49_;
+ComplexObjectL48::_Internal::complexobject(const ComplexObjectL48* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL48::ComplexObjectL48(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -3894,30 +2452,22 @@ ComplexObjectL48::ComplexObjectL48(const ComplexObjectL48& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL48* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl49_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl49()) {
-    _this->_impl_.complexobjectl49_ = new ::proto::ComplexObjectL49(*from._impl_.complexobjectl49_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL49(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL48)
 }
 
@@ -3926,18 +2476,13 @@ inline void ComplexObjectL48::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl49_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -3952,8 +2497,8 @@ ComplexObjectL48::~ComplexObjectL48() {
 
 inline void ComplexObjectL48::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl49_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL48::SetCachedSize(int size) const {
@@ -3966,14 +2511,11 @@ void ComplexObjectL48::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl49_ != nullptr) {
-    delete _impl_.complexobjectl49_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl49_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3983,60 +2525,20 @@ const char* ComplexObjectL48::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL48.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL48.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL49 complexObjectL49 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl49(), ptr);
+      // .proto.ComplexObjectL49 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -4070,59 +2572,21 @@ uint8_t* ComplexObjectL48::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL48.var_string1");
+      "proto.ComplexObjectL48.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL49 complexObjectL49 = 7;
-  if (this->_internal_has_complexobjectl49()) {
+  // .proto.ComplexObjectL49 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl49(this),
-        _Internal::complexobjectl49(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4141,51 +2605,18 @@ size_t ComplexObjectL48::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL49 complexObjectL49 = 7;
-  if (this->_internal_has_complexobjectl49()) {
+  // .proto.ComplexObjectL49 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl49_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -4206,35 +2637,12 @@ void ComplexObjectL48::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl49()) {
-    _this->_internal_mutable_complexobjectl49()->::proto::ComplexObjectL49::MergeFrom(
-        from._internal_complexobjectl49());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL49::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -4256,15 +2664,10 @@ void ComplexObjectL48::InternalSwap(ComplexObjectL48* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL48, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL48::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL48, _impl_.complexobjectl49_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl49_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl49_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL48::GetMetadata() const {
@@ -4277,12 +2680,12 @@ void ComplexObjectL48::InternalSwap(ComplexObjectL48* other) {
 
 class ComplexObjectL49::_Internal {
  public:
-  static const ::proto::ComplexObjectL410& complexobjectl410(const ComplexObjectL49* msg);
+  static const ::proto::ComplexObjectL410& complexobject(const ComplexObjectL49* msg);
 };
 
 const ::proto::ComplexObjectL410&
-ComplexObjectL49::_Internal::complexobjectl410(const ComplexObjectL49* msg) {
-  return *msg->_impl_.complexobjectl410_;
+ComplexObjectL49::_Internal::complexobject(const ComplexObjectL49* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL49::ComplexObjectL49(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -4294,30 +2697,22 @@ ComplexObjectL49::ComplexObjectL49(const ComplexObjectL49& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL49* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl410_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl410()) {
-    _this->_impl_.complexobjectl410_ = new ::proto::ComplexObjectL410(*from._impl_.complexobjectl410_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL410(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL49)
 }
 
@@ -4326,18 +2721,13 @@ inline void ComplexObjectL49::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl410_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -4352,8 +2742,8 @@ ComplexObjectL49::~ComplexObjectL49() {
 
 inline void ComplexObjectL49::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl410_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL49::SetCachedSize(int size) const {
@@ -4366,14 +2756,11 @@ void ComplexObjectL49::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl410_ != nullptr) {
-    delete _impl_.complexobjectl410_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl410_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4383,60 +2770,20 @@ const char* ComplexObjectL49::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL49.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL49.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL410 complexObjectL410 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl410(), ptr);
+      // .proto.ComplexObjectL410 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -4470,59 +2817,21 @@ uint8_t* ComplexObjectL49::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL49.var_string1");
+      "proto.ComplexObjectL49.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL410 complexObjectL410 = 7;
-  if (this->_internal_has_complexobjectl410()) {
+  // .proto.ComplexObjectL410 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl410(this),
-        _Internal::complexobjectl410(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4541,51 +2850,18 @@ size_t ComplexObjectL49::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL410 complexObjectL410 = 7;
-  if (this->_internal_has_complexobjectl410()) {
+  // .proto.ComplexObjectL410 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl410_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -4606,35 +2882,12 @@ void ComplexObjectL49::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl410()) {
-    _this->_internal_mutable_complexobjectl410()->::proto::ComplexObjectL410::MergeFrom(
-        from._internal_complexobjectl410());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL410::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -4656,15 +2909,10 @@ void ComplexObjectL49::InternalSwap(ComplexObjectL49* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL49, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL49::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL49, _impl_.complexobjectl410_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl410_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl410_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL49::GetMetadata() const {
@@ -4677,12 +2925,12 @@ void ComplexObjectL49::InternalSwap(ComplexObjectL49* other) {
 
 class ComplexObjectL410::_Internal {
  public:
-  static const ::proto::ComplexObjectL411& complexobjectl411(const ComplexObjectL410* msg);
+  static const ::proto::ComplexObjectL411& complexobject(const ComplexObjectL410* msg);
 };
 
 const ::proto::ComplexObjectL411&
-ComplexObjectL410::_Internal::complexobjectl411(const ComplexObjectL410* msg) {
-  return *msg->_impl_.complexobjectl411_;
+ComplexObjectL410::_Internal::complexobject(const ComplexObjectL410* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL410::ComplexObjectL410(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -4694,30 +2942,22 @@ ComplexObjectL410::ComplexObjectL410(const ComplexObjectL410& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL410* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl411_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl411()) {
-    _this->_impl_.complexobjectl411_ = new ::proto::ComplexObjectL411(*from._impl_.complexobjectl411_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL411(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL410)
 }
 
@@ -4726,18 +2966,13 @@ inline void ComplexObjectL410::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl411_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -4752,8 +2987,8 @@ ComplexObjectL410::~ComplexObjectL410() {
 
 inline void ComplexObjectL410::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl411_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL410::SetCachedSize(int size) const {
@@ -4766,14 +3001,11 @@ void ComplexObjectL410::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl411_ != nullptr) {
-    delete _impl_.complexobjectl411_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl411_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4783,60 +3015,20 @@ const char* ComplexObjectL410::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL410.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL410.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL411 complexObjectL411 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl411(), ptr);
+      // .proto.ComplexObjectL411 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -4870,59 +3062,21 @@ uint8_t* ComplexObjectL410::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL410.var_string1");
+      "proto.ComplexObjectL410.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL411 complexObjectL411 = 7;
-  if (this->_internal_has_complexobjectl411()) {
+  // .proto.ComplexObjectL411 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl411(this),
-        _Internal::complexobjectl411(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4941,51 +3095,18 @@ size_t ComplexObjectL410::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL411 complexObjectL411 = 7;
-  if (this->_internal_has_complexobjectl411()) {
+  // .proto.ComplexObjectL411 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl411_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -5006,35 +3127,12 @@ void ComplexObjectL410::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl411()) {
-    _this->_internal_mutable_complexobjectl411()->::proto::ComplexObjectL411::MergeFrom(
-        from._internal_complexobjectl411());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL411::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -5056,15 +3154,10 @@ void ComplexObjectL410::InternalSwap(ComplexObjectL410* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL410, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL410::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL410, _impl_.complexobjectl411_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl411_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl411_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL410::GetMetadata() const {
@@ -5077,12 +3170,12 @@ void ComplexObjectL410::InternalSwap(ComplexObjectL410* other) {
 
 class ComplexObjectL411::_Internal {
  public:
-  static const ::proto::ComplexObjectL412& complexobjectl412(const ComplexObjectL411* msg);
+  static const ::proto::ComplexObjectL412& complexobject(const ComplexObjectL411* msg);
 };
 
 const ::proto::ComplexObjectL412&
-ComplexObjectL411::_Internal::complexobjectl412(const ComplexObjectL411* msg) {
-  return *msg->_impl_.complexobjectl412_;
+ComplexObjectL411::_Internal::complexobject(const ComplexObjectL411* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL411::ComplexObjectL411(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -5094,30 +3187,22 @@ ComplexObjectL411::ComplexObjectL411(const ComplexObjectL411& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL411* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl412_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl412()) {
-    _this->_impl_.complexobjectl412_ = new ::proto::ComplexObjectL412(*from._impl_.complexobjectl412_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL412(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL411)
 }
 
@@ -5126,18 +3211,13 @@ inline void ComplexObjectL411::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl412_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -5152,8 +3232,8 @@ ComplexObjectL411::~ComplexObjectL411() {
 
 inline void ComplexObjectL411::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl412_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL411::SetCachedSize(int size) const {
@@ -5166,14 +3246,11 @@ void ComplexObjectL411::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl412_ != nullptr) {
-    delete _impl_.complexobjectl412_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl412_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -5183,60 +3260,20 @@ const char* ComplexObjectL411::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL411.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL411.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL412 complexObjectL412 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl412(), ptr);
+      // .proto.ComplexObjectL412 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -5270,59 +3307,21 @@ uint8_t* ComplexObjectL411::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL411.var_string1");
+      "proto.ComplexObjectL411.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL412 complexObjectL412 = 7;
-  if (this->_internal_has_complexobjectl412()) {
+  // .proto.ComplexObjectL412 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl412(this),
-        _Internal::complexobjectl412(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -5341,51 +3340,18 @@ size_t ComplexObjectL411::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL412 complexObjectL412 = 7;
-  if (this->_internal_has_complexobjectl412()) {
+  // .proto.ComplexObjectL412 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl412_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -5406,35 +3372,12 @@ void ComplexObjectL411::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl412()) {
-    _this->_internal_mutable_complexobjectl412()->::proto::ComplexObjectL412::MergeFrom(
-        from._internal_complexobjectl412());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL412::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -5456,15 +3399,10 @@ void ComplexObjectL411::InternalSwap(ComplexObjectL411* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL411, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL411::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL411, _impl_.complexobjectl412_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl412_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl412_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL411::GetMetadata() const {
@@ -5477,12 +3415,12 @@ void ComplexObjectL411::InternalSwap(ComplexObjectL411* other) {
 
 class ComplexObjectL412::_Internal {
  public:
-  static const ::proto::ComplexObjectL413& complexobjectl413(const ComplexObjectL412* msg);
+  static const ::proto::ComplexObjectL413& complexobject(const ComplexObjectL412* msg);
 };
 
 const ::proto::ComplexObjectL413&
-ComplexObjectL412::_Internal::complexobjectl413(const ComplexObjectL412* msg) {
-  return *msg->_impl_.complexobjectl413_;
+ComplexObjectL412::_Internal::complexobject(const ComplexObjectL412* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL412::ComplexObjectL412(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -5494,30 +3432,22 @@ ComplexObjectL412::ComplexObjectL412(const ComplexObjectL412& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL412* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl413_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl413()) {
-    _this->_impl_.complexobjectl413_ = new ::proto::ComplexObjectL413(*from._impl_.complexobjectl413_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL413(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL412)
 }
 
@@ -5526,18 +3456,13 @@ inline void ComplexObjectL412::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl413_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -5552,8 +3477,8 @@ ComplexObjectL412::~ComplexObjectL412() {
 
 inline void ComplexObjectL412::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl413_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL412::SetCachedSize(int size) const {
@@ -5566,14 +3491,11 @@ void ComplexObjectL412::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl413_ != nullptr) {
-    delete _impl_.complexobjectl413_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl413_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -5583,60 +3505,20 @@ const char* ComplexObjectL412::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL412.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL412.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL413 complexObjectL413 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl413(), ptr);
+      // .proto.ComplexObjectL413 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -5670,59 +3552,21 @@ uint8_t* ComplexObjectL412::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL412.var_string1");
+      "proto.ComplexObjectL412.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL413 complexObjectL413 = 7;
-  if (this->_internal_has_complexobjectl413()) {
+  // .proto.ComplexObjectL413 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl413(this),
-        _Internal::complexobjectl413(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -5741,51 +3585,18 @@ size_t ComplexObjectL412::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL413 complexObjectL413 = 7;
-  if (this->_internal_has_complexobjectl413()) {
+  // .proto.ComplexObjectL413 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl413_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -5806,35 +3617,12 @@ void ComplexObjectL412::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl413()) {
-    _this->_internal_mutable_complexobjectl413()->::proto::ComplexObjectL413::MergeFrom(
-        from._internal_complexobjectl413());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL413::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -5856,15 +3644,10 @@ void ComplexObjectL412::InternalSwap(ComplexObjectL412* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL412, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL412::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL412, _impl_.complexobjectl413_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl413_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl413_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL412::GetMetadata() const {
@@ -5877,12 +3660,12 @@ void ComplexObjectL412::InternalSwap(ComplexObjectL412* other) {
 
 class ComplexObjectL413::_Internal {
  public:
-  static const ::proto::ComplexObjectL414& complexobjectl414(const ComplexObjectL413* msg);
+  static const ::proto::ComplexObjectL414& complexobject(const ComplexObjectL413* msg);
 };
 
 const ::proto::ComplexObjectL414&
-ComplexObjectL413::_Internal::complexobjectl414(const ComplexObjectL413* msg) {
-  return *msg->_impl_.complexobjectl414_;
+ComplexObjectL413::_Internal::complexobject(const ComplexObjectL413* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL413::ComplexObjectL413(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -5894,30 +3677,22 @@ ComplexObjectL413::ComplexObjectL413(const ComplexObjectL413& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL413* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl414_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl414()) {
-    _this->_impl_.complexobjectl414_ = new ::proto::ComplexObjectL414(*from._impl_.complexobjectl414_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL414(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL413)
 }
 
@@ -5926,18 +3701,13 @@ inline void ComplexObjectL413::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl414_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -5952,8 +3722,8 @@ ComplexObjectL413::~ComplexObjectL413() {
 
 inline void ComplexObjectL413::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl414_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL413::SetCachedSize(int size) const {
@@ -5966,14 +3736,11 @@ void ComplexObjectL413::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl414_ != nullptr) {
-    delete _impl_.complexobjectl414_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl414_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -5983,60 +3750,20 @@ const char* ComplexObjectL413::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL413.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL413.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL414 complexObjectL414 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl414(), ptr);
+      // .proto.ComplexObjectL414 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -6070,59 +3797,21 @@ uint8_t* ComplexObjectL413::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL413.var_string1");
+      "proto.ComplexObjectL413.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL414 complexObjectL414 = 7;
-  if (this->_internal_has_complexobjectl414()) {
+  // .proto.ComplexObjectL414 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl414(this),
-        _Internal::complexobjectl414(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -6141,51 +3830,18 @@ size_t ComplexObjectL413::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL414 complexObjectL414 = 7;
-  if (this->_internal_has_complexobjectl414()) {
+  // .proto.ComplexObjectL414 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl414_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -6206,35 +3862,12 @@ void ComplexObjectL413::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl414()) {
-    _this->_internal_mutable_complexobjectl414()->::proto::ComplexObjectL414::MergeFrom(
-        from._internal_complexobjectl414());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL414::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -6256,15 +3889,10 @@ void ComplexObjectL413::InternalSwap(ComplexObjectL413* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL413, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL413::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL413, _impl_.complexobjectl414_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl414_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl414_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL413::GetMetadata() const {
@@ -6277,12 +3905,12 @@ void ComplexObjectL413::InternalSwap(ComplexObjectL413* other) {
 
 class ComplexObjectL414::_Internal {
  public:
-  static const ::proto::ComplexObjectL415& complexobjectl415(const ComplexObjectL414* msg);
+  static const ::proto::ComplexObjectL415& complexobject(const ComplexObjectL414* msg);
 };
 
 const ::proto::ComplexObjectL415&
-ComplexObjectL414::_Internal::complexobjectl415(const ComplexObjectL414* msg) {
-  return *msg->_impl_.complexobjectl415_;
+ComplexObjectL414::_Internal::complexobject(const ComplexObjectL414* msg) {
+  return *msg->_impl_.complexobject_;
 }
 ComplexObjectL414::ComplexObjectL414(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -6294,30 +3922,22 @@ ComplexObjectL414::ComplexObjectL414(const ComplexObjectL414& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL414* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl415_){nullptr}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_complexobjectl415()) {
-    _this->_impl_.complexobjectl415_ = new ::proto::ComplexObjectL415(*from._impl_.complexobjectl415_);
+  if (from._internal_has_complexobject()) {
+    _this->_impl_.complexobject_ = new ::proto::ComplexObjectL415(*from._impl_.complexobject_);
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL414)
 }
 
@@ -6326,18 +3946,13 @@ inline void ComplexObjectL414::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.complexobjectl415_){nullptr}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
+    , decltype(_impl_.complexobject_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -6352,8 +3967,8 @@ ComplexObjectL414::~ComplexObjectL414() {
 
 inline void ComplexObjectL414::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.complexobjectl415_;
+  _impl_.var_string_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.complexobject_;
 }
 
 void ComplexObjectL414::SetCachedSize(int size) const {
@@ -6366,14 +3981,11 @@ void ComplexObjectL414::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl415_ != nullptr) {
-    delete _impl_.complexobjectl415_;
+  _impl_.var_string_.ClearToEmpty();
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl415_ = nullptr;
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.complexobject_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -6383,60 +3995,20 @@ const char* ComplexObjectL414::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL414.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL414.var_string"));
         } else
           goto handle_unusual;
         continue;
-      // .proto.ComplexObjectL415 complexObjectL415 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ctx->ParseMessage(_internal_mutable_complexobjectl415(), ptr);
+      // .proto.ComplexObjectL415 complexObject = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_complexobject(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -6470,59 +4042,21 @@ uint8_t* ComplexObjectL414::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL414.var_string1");
+      "proto.ComplexObjectL414.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
-  // .proto.ComplexObjectL415 complexObjectL415 = 7;
-  if (this->_internal_has_complexobjectl415()) {
+  // .proto.ComplexObjectL415 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(7, _Internal::complexobjectl415(this),
-        _Internal::complexobjectl415(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::complexobject(this),
+        _Internal::complexobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -6541,51 +4075,18 @@ size_t ComplexObjectL414::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
+        this->_internal_var_string());
   }
 
-  // .proto.ComplexObjectL415 complexObjectL415 = 7;
-  if (this->_internal_has_complexobjectl415()) {
+  // .proto.ComplexObjectL415 complexObject = 2;
+  if (this->_internal_has_complexobject()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.complexobjectl415_);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        *_impl_.complexobject_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -6606,35 +4107,12 @@ void ComplexObjectL414::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
-  if (from._internal_has_complexobjectl415()) {
-    _this->_internal_mutable_complexobjectl415()->::proto::ComplexObjectL415::MergeFrom(
-        from._internal_complexobjectl415());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (from._internal_has_complexobject()) {
+    _this->_internal_mutable_complexobject()->::proto::ComplexObjectL415::MergeFrom(
+        from._internal_complexobject());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -6656,15 +4134,10 @@ void ComplexObjectL414::InternalSwap(ComplexObjectL414* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL414, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL414::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL414, _impl_.complexobjectl415_)>(
-          reinterpret_cast<char*>(&_impl_.complexobjectl415_),
-          reinterpret_cast<char*>(&other->_impl_.complexobjectl415_));
+  swap(_impl_.complexobject_, other->_impl_.complexobject_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL414::GetMetadata() const {
@@ -6689,26 +4162,18 @@ ComplexObjectL415::ComplexObjectL415(const ComplexObjectL415& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ComplexObjectL415* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.var_int641_){}
-    , decltype(_impl_.var_int321_){}
-    , decltype(_impl_.var_float1_){}
-    , decltype(_impl_.var_double1_){}
-    , decltype(_impl_.var_bool1_){}
+      decltype(_impl_.var_string_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_var_string1().empty()) {
-    _this->_impl_.var_string1_.Set(from._internal_var_string1(), 
+  if (!from._internal_var_string().empty()) {
+    _this->_impl_.var_string_.Set(from._internal_var_string(), 
       _this->GetArenaForAllocation());
   }
-  ::memcpy(&_impl_.var_int641_, &from._impl_.var_int641_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.var_bool1_) -
-    reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
   // @@protoc_insertion_point(copy_constructor:proto.ComplexObjectL415)
 }
 
@@ -6717,17 +4182,12 @@ inline void ComplexObjectL415::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.var_string1_){}
-    , decltype(_impl_.var_int641_){int64_t{0}}
-    , decltype(_impl_.var_int321_){0}
-    , decltype(_impl_.var_float1_){0}
-    , decltype(_impl_.var_double1_){0}
-    , decltype(_impl_.var_bool1_){false}
+      decltype(_impl_.var_string_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.var_string1_.InitDefault();
+  _impl_.var_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -6742,7 +4202,7 @@ ComplexObjectL415::~ComplexObjectL415() {
 
 inline void ComplexObjectL415::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.var_string1_.Destroy();
+  _impl_.var_string_.Destroy();
 }
 
 void ComplexObjectL415::SetCachedSize(int size) const {
@@ -6755,10 +4215,7 @@ void ComplexObjectL415::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.var_string1_.ClearToEmpty();
-  ::memset(&_impl_.var_int641_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.var_bool1_) -
-      reinterpret_cast<char*>(&_impl_.var_int641_)) + sizeof(_impl_.var_bool1_));
+  _impl_.var_string_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -6768,53 +4225,13 @@ const char* ComplexObjectL415::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 var_int321 = 1;
+      // string var_string = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.var_int321_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int64 var_int641 = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.var_int641_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // float var_float1 = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.var_float1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // double var_double1 = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 33)) {
-          _impl_.var_double1_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
-          ptr += sizeof(double);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool var_bool1 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.var_bool1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string var_string1 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_var_string1();
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_var_string();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL415.var_string1"));
+          CHK_(::_pbi::VerifyUTF8(str, "proto.ComplexObjectL415.var_string"));
         } else
           goto handle_unusual;
         continue;
@@ -6847,52 +4264,14 @@ uint8_t* ComplexObjectL415::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_var_int321(), target);
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(2, this->_internal_var_int641(), target);
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_var_float1(), target);
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(4, this->_internal_var_double1(), target);
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_var_bool1(), target);
-  }
-
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_var_string1().data(), static_cast<int>(this->_internal_var_string1().length()),
+      this->_internal_var_string().data(), static_cast<int>(this->_internal_var_string().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "proto.ComplexObjectL415.var_string1");
+      "proto.ComplexObjectL415.var_string");
     target = stream->WriteStringMaybeAliased(
-        6, this->_internal_var_string1(), target);
+        1, this->_internal_var_string(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -6911,44 +4290,11 @@ size_t ComplexObjectL415::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string var_string1 = 6;
-  if (!this->_internal_var_string1().empty()) {
+  // string var_string = 1;
+  if (!this->_internal_var_string().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_var_string1());
-  }
-
-  // int64 var_int641 = 2;
-  if (this->_internal_var_int641() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_var_int641());
-  }
-
-  // int32 var_int321 = 1;
-  if (this->_internal_var_int321() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_var_int321());
-  }
-
-  // float var_float1 = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = this->_internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    total_size += 1 + 4;
-  }
-
-  // double var_double1 = 4;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = this->_internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool var_bool1 = 5;
-  if (this->_internal_var_bool1() != 0) {
-    total_size += 1 + 1;
+        this->_internal_var_string());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -6969,31 +4315,8 @@ void ComplexObjectL415::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_var_string1().empty()) {
-    _this->_internal_set_var_string1(from._internal_var_string1());
-  }
-  if (from._internal_var_int641() != 0) {
-    _this->_internal_set_var_int641(from._internal_var_int641());
-  }
-  if (from._internal_var_int321() != 0) {
-    _this->_internal_set_var_int321(from._internal_var_int321());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_var_float1 = from._internal_var_float1();
-  uint32_t raw_var_float1;
-  memcpy(&raw_var_float1, &tmp_var_float1, sizeof(tmp_var_float1));
-  if (raw_var_float1 != 0) {
-    _this->_internal_set_var_float1(from._internal_var_float1());
-  }
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_var_double1 = from._internal_var_double1();
-  uint64_t raw_var_double1;
-  memcpy(&raw_var_double1, &tmp_var_double1, sizeof(tmp_var_double1));
-  if (raw_var_double1 != 0) {
-    _this->_internal_set_var_double1(from._internal_var_double1());
-  }
-  if (from._internal_var_bool1() != 0) {
-    _this->_internal_set_var_bool1(from._internal_var_bool1());
+  if (!from._internal_var_string().empty()) {
+    _this->_internal_set_var_string(from._internal_var_string());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -7015,15 +4338,9 @@ void ComplexObjectL415::InternalSwap(ComplexObjectL415* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.var_string1_, lhs_arena,
-      &other->_impl_.var_string1_, rhs_arena
+      &_impl_.var_string_, lhs_arena,
+      &other->_impl_.var_string_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ComplexObjectL415, _impl_.var_bool1_)
-      + sizeof(ComplexObjectL415::_impl_.var_bool1_)
-      - PROTOBUF_FIELD_OFFSET(ComplexObjectL415, _impl_.var_int641_)>(
-          reinterpret_cast<char*>(&_impl_.var_int641_),
-          reinterpret_cast<char*>(&other->_impl_.var_int641_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ComplexObjectL415::GetMetadata() const {

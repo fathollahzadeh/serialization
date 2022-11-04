@@ -237,90 +237,40 @@ class ComplexObjectL4 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL41FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL41 complexObjectL41 = 7;
-  bool has_complexobjectl41() const;
+  // .proto.ComplexObjectL41 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl41() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl41();
-  const ::proto::ComplexObjectL41& complexobjectl41() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL41* release_complexobjectl41();
-  ::proto::ComplexObjectL41* mutable_complexobjectl41();
-  void set_allocated_complexobjectl41(::proto::ComplexObjectL41* complexobjectl41);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL41& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL41* release_complexobject();
+  ::proto::ComplexObjectL41* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL41* complexobject);
   private:
-  const ::proto::ComplexObjectL41& _internal_complexobjectl41() const;
-  ::proto::ComplexObjectL41* _internal_mutable_complexobjectl41();
+  const ::proto::ComplexObjectL41& _internal_complexobject() const;
+  ::proto::ComplexObjectL41* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl41(
-      ::proto::ComplexObjectL41* complexobjectl41);
-  ::proto::ComplexObjectL41* unsafe_arena_release_complexobjectl41();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL41* complexobject);
+  ::proto::ComplexObjectL41* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL4)
  private:
@@ -330,13 +280,8 @@ class ComplexObjectL4 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL41* complexobjectl41_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL41* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -465,90 +410,40 @@ class ComplexObjectL41 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL42FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL42 complexObjectL42 = 7;
-  bool has_complexobjectl42() const;
+  // .proto.ComplexObjectL42 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl42() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl42();
-  const ::proto::ComplexObjectL42& complexobjectl42() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL42* release_complexobjectl42();
-  ::proto::ComplexObjectL42* mutable_complexobjectl42();
-  void set_allocated_complexobjectl42(::proto::ComplexObjectL42* complexobjectl42);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL42& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL42* release_complexobject();
+  ::proto::ComplexObjectL42* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL42* complexobject);
   private:
-  const ::proto::ComplexObjectL42& _internal_complexobjectl42() const;
-  ::proto::ComplexObjectL42* _internal_mutable_complexobjectl42();
+  const ::proto::ComplexObjectL42& _internal_complexobject() const;
+  ::proto::ComplexObjectL42* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl42(
-      ::proto::ComplexObjectL42* complexobjectl42);
-  ::proto::ComplexObjectL42* unsafe_arena_release_complexobjectl42();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL42* complexobject);
+  ::proto::ComplexObjectL42* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL41)
  private:
@@ -558,13 +453,8 @@ class ComplexObjectL41 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL42* complexobjectl42_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL42* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -693,90 +583,40 @@ class ComplexObjectL42 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL43FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL43 complexObjectL43 = 7;
-  bool has_complexobjectl43() const;
+  // .proto.ComplexObjectL43 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl43() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl43();
-  const ::proto::ComplexObjectL43& complexobjectl43() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL43* release_complexobjectl43();
-  ::proto::ComplexObjectL43* mutable_complexobjectl43();
-  void set_allocated_complexobjectl43(::proto::ComplexObjectL43* complexobjectl43);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL43& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL43* release_complexobject();
+  ::proto::ComplexObjectL43* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL43* complexobject);
   private:
-  const ::proto::ComplexObjectL43& _internal_complexobjectl43() const;
-  ::proto::ComplexObjectL43* _internal_mutable_complexobjectl43();
+  const ::proto::ComplexObjectL43& _internal_complexobject() const;
+  ::proto::ComplexObjectL43* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl43(
-      ::proto::ComplexObjectL43* complexobjectl43);
-  ::proto::ComplexObjectL43* unsafe_arena_release_complexobjectl43();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL43* complexobject);
+  ::proto::ComplexObjectL43* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL42)
  private:
@@ -786,13 +626,8 @@ class ComplexObjectL42 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL43* complexobjectl43_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL43* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -921,90 +756,40 @@ class ComplexObjectL43 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL44FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL44 complexObjectL44 = 7;
-  bool has_complexobjectl44() const;
+  // .proto.ComplexObjectL44 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl44() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl44();
-  const ::proto::ComplexObjectL44& complexobjectl44() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL44* release_complexobjectl44();
-  ::proto::ComplexObjectL44* mutable_complexobjectl44();
-  void set_allocated_complexobjectl44(::proto::ComplexObjectL44* complexobjectl44);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL44& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL44* release_complexobject();
+  ::proto::ComplexObjectL44* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL44* complexobject);
   private:
-  const ::proto::ComplexObjectL44& _internal_complexobjectl44() const;
-  ::proto::ComplexObjectL44* _internal_mutable_complexobjectl44();
+  const ::proto::ComplexObjectL44& _internal_complexobject() const;
+  ::proto::ComplexObjectL44* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl44(
-      ::proto::ComplexObjectL44* complexobjectl44);
-  ::proto::ComplexObjectL44* unsafe_arena_release_complexobjectl44();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL44* complexobject);
+  ::proto::ComplexObjectL44* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL43)
  private:
@@ -1014,13 +799,8 @@ class ComplexObjectL43 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL44* complexobjectl44_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL44* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1149,90 +929,40 @@ class ComplexObjectL44 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL45FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL45 complexObjectL45 = 7;
-  bool has_complexobjectl45() const;
+  // .proto.ComplexObjectL45 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl45() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl45();
-  const ::proto::ComplexObjectL45& complexobjectl45() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL45* release_complexobjectl45();
-  ::proto::ComplexObjectL45* mutable_complexobjectl45();
-  void set_allocated_complexobjectl45(::proto::ComplexObjectL45* complexobjectl45);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL45& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL45* release_complexobject();
+  ::proto::ComplexObjectL45* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL45* complexobject);
   private:
-  const ::proto::ComplexObjectL45& _internal_complexobjectl45() const;
-  ::proto::ComplexObjectL45* _internal_mutable_complexobjectl45();
+  const ::proto::ComplexObjectL45& _internal_complexobject() const;
+  ::proto::ComplexObjectL45* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl45(
-      ::proto::ComplexObjectL45* complexobjectl45);
-  ::proto::ComplexObjectL45* unsafe_arena_release_complexobjectl45();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL45* complexobject);
+  ::proto::ComplexObjectL45* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL44)
  private:
@@ -1242,13 +972,8 @@ class ComplexObjectL44 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL45* complexobjectl45_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL45* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1377,90 +1102,40 @@ class ComplexObjectL45 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL46FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL46 complexObjectL46 = 7;
-  bool has_complexobjectl46() const;
+  // .proto.ComplexObjectL46 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl46() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl46();
-  const ::proto::ComplexObjectL46& complexobjectl46() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL46* release_complexobjectl46();
-  ::proto::ComplexObjectL46* mutable_complexobjectl46();
-  void set_allocated_complexobjectl46(::proto::ComplexObjectL46* complexobjectl46);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL46& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL46* release_complexobject();
+  ::proto::ComplexObjectL46* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL46* complexobject);
   private:
-  const ::proto::ComplexObjectL46& _internal_complexobjectl46() const;
-  ::proto::ComplexObjectL46* _internal_mutable_complexobjectl46();
+  const ::proto::ComplexObjectL46& _internal_complexobject() const;
+  ::proto::ComplexObjectL46* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl46(
-      ::proto::ComplexObjectL46* complexobjectl46);
-  ::proto::ComplexObjectL46* unsafe_arena_release_complexobjectl46();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL46* complexobject);
+  ::proto::ComplexObjectL46* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL45)
  private:
@@ -1470,13 +1145,8 @@ class ComplexObjectL45 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL46* complexobjectl46_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL46* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1605,90 +1275,40 @@ class ComplexObjectL46 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL47FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL47 complexObjectL47 = 7;
-  bool has_complexobjectl47() const;
+  // .proto.ComplexObjectL47 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl47() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl47();
-  const ::proto::ComplexObjectL47& complexobjectl47() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL47* release_complexobjectl47();
-  ::proto::ComplexObjectL47* mutable_complexobjectl47();
-  void set_allocated_complexobjectl47(::proto::ComplexObjectL47* complexobjectl47);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL47& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL47* release_complexobject();
+  ::proto::ComplexObjectL47* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL47* complexobject);
   private:
-  const ::proto::ComplexObjectL47& _internal_complexobjectl47() const;
-  ::proto::ComplexObjectL47* _internal_mutable_complexobjectl47();
+  const ::proto::ComplexObjectL47& _internal_complexobject() const;
+  ::proto::ComplexObjectL47* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl47(
-      ::proto::ComplexObjectL47* complexobjectl47);
-  ::proto::ComplexObjectL47* unsafe_arena_release_complexobjectl47();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL47* complexobject);
+  ::proto::ComplexObjectL47* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL46)
  private:
@@ -1698,13 +1318,8 @@ class ComplexObjectL46 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL47* complexobjectl47_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL47* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1833,90 +1448,40 @@ class ComplexObjectL47 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL48FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL48 complexObjectL48 = 7;
-  bool has_complexobjectl48() const;
+  // .proto.ComplexObjectL48 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl48() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl48();
-  const ::proto::ComplexObjectL48& complexobjectl48() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL48* release_complexobjectl48();
-  ::proto::ComplexObjectL48* mutable_complexobjectl48();
-  void set_allocated_complexobjectl48(::proto::ComplexObjectL48* complexobjectl48);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL48& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL48* release_complexobject();
+  ::proto::ComplexObjectL48* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL48* complexobject);
   private:
-  const ::proto::ComplexObjectL48& _internal_complexobjectl48() const;
-  ::proto::ComplexObjectL48* _internal_mutable_complexobjectl48();
+  const ::proto::ComplexObjectL48& _internal_complexobject() const;
+  ::proto::ComplexObjectL48* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl48(
-      ::proto::ComplexObjectL48* complexobjectl48);
-  ::proto::ComplexObjectL48* unsafe_arena_release_complexobjectl48();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL48* complexobject);
+  ::proto::ComplexObjectL48* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL47)
  private:
@@ -1926,13 +1491,8 @@ class ComplexObjectL47 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL48* complexobjectl48_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL48* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2061,90 +1621,40 @@ class ComplexObjectL48 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL49FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL49 complexObjectL49 = 7;
-  bool has_complexobjectl49() const;
+  // .proto.ComplexObjectL49 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl49() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl49();
-  const ::proto::ComplexObjectL49& complexobjectl49() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL49* release_complexobjectl49();
-  ::proto::ComplexObjectL49* mutable_complexobjectl49();
-  void set_allocated_complexobjectl49(::proto::ComplexObjectL49* complexobjectl49);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL49& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL49* release_complexobject();
+  ::proto::ComplexObjectL49* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL49* complexobject);
   private:
-  const ::proto::ComplexObjectL49& _internal_complexobjectl49() const;
-  ::proto::ComplexObjectL49* _internal_mutable_complexobjectl49();
+  const ::proto::ComplexObjectL49& _internal_complexobject() const;
+  ::proto::ComplexObjectL49* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl49(
-      ::proto::ComplexObjectL49* complexobjectl49);
-  ::proto::ComplexObjectL49* unsafe_arena_release_complexobjectl49();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL49* complexobject);
+  ::proto::ComplexObjectL49* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL48)
  private:
@@ -2154,13 +1664,8 @@ class ComplexObjectL48 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL49* complexobjectl49_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL49* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2289,90 +1794,40 @@ class ComplexObjectL49 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL410FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL410 complexObjectL410 = 7;
-  bool has_complexobjectl410() const;
+  // .proto.ComplexObjectL410 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl410() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl410();
-  const ::proto::ComplexObjectL410& complexobjectl410() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL410* release_complexobjectl410();
-  ::proto::ComplexObjectL410* mutable_complexobjectl410();
-  void set_allocated_complexobjectl410(::proto::ComplexObjectL410* complexobjectl410);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL410& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL410* release_complexobject();
+  ::proto::ComplexObjectL410* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL410* complexobject);
   private:
-  const ::proto::ComplexObjectL410& _internal_complexobjectl410() const;
-  ::proto::ComplexObjectL410* _internal_mutable_complexobjectl410();
+  const ::proto::ComplexObjectL410& _internal_complexobject() const;
+  ::proto::ComplexObjectL410* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl410(
-      ::proto::ComplexObjectL410* complexobjectl410);
-  ::proto::ComplexObjectL410* unsafe_arena_release_complexobjectl410();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL410* complexobject);
+  ::proto::ComplexObjectL410* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL49)
  private:
@@ -2382,13 +1837,8 @@ class ComplexObjectL49 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL410* complexobjectl410_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL410* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2517,90 +1967,40 @@ class ComplexObjectL410 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL411FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL411 complexObjectL411 = 7;
-  bool has_complexobjectl411() const;
+  // .proto.ComplexObjectL411 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl411() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl411();
-  const ::proto::ComplexObjectL411& complexobjectl411() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL411* release_complexobjectl411();
-  ::proto::ComplexObjectL411* mutable_complexobjectl411();
-  void set_allocated_complexobjectl411(::proto::ComplexObjectL411* complexobjectl411);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL411& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL411* release_complexobject();
+  ::proto::ComplexObjectL411* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL411* complexobject);
   private:
-  const ::proto::ComplexObjectL411& _internal_complexobjectl411() const;
-  ::proto::ComplexObjectL411* _internal_mutable_complexobjectl411();
+  const ::proto::ComplexObjectL411& _internal_complexobject() const;
+  ::proto::ComplexObjectL411* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl411(
-      ::proto::ComplexObjectL411* complexobjectl411);
-  ::proto::ComplexObjectL411* unsafe_arena_release_complexobjectl411();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL411* complexobject);
+  ::proto::ComplexObjectL411* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL410)
  private:
@@ -2610,13 +2010,8 @@ class ComplexObjectL410 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL411* complexobjectl411_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL411* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2745,90 +2140,40 @@ class ComplexObjectL411 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL412FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL412 complexObjectL412 = 7;
-  bool has_complexobjectl412() const;
+  // .proto.ComplexObjectL412 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl412() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl412();
-  const ::proto::ComplexObjectL412& complexobjectl412() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL412* release_complexobjectl412();
-  ::proto::ComplexObjectL412* mutable_complexobjectl412();
-  void set_allocated_complexobjectl412(::proto::ComplexObjectL412* complexobjectl412);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL412& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL412* release_complexobject();
+  ::proto::ComplexObjectL412* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL412* complexobject);
   private:
-  const ::proto::ComplexObjectL412& _internal_complexobjectl412() const;
-  ::proto::ComplexObjectL412* _internal_mutable_complexobjectl412();
+  const ::proto::ComplexObjectL412& _internal_complexobject() const;
+  ::proto::ComplexObjectL412* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl412(
-      ::proto::ComplexObjectL412* complexobjectl412);
-  ::proto::ComplexObjectL412* unsafe_arena_release_complexobjectl412();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL412* complexobject);
+  ::proto::ComplexObjectL412* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL411)
  private:
@@ -2838,13 +2183,8 @@ class ComplexObjectL411 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL412* complexobjectl412_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL412* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2973,90 +2313,40 @@ class ComplexObjectL412 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL413FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL413 complexObjectL413 = 7;
-  bool has_complexobjectl413() const;
+  // .proto.ComplexObjectL413 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl413() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl413();
-  const ::proto::ComplexObjectL413& complexobjectl413() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL413* release_complexobjectl413();
-  ::proto::ComplexObjectL413* mutable_complexobjectl413();
-  void set_allocated_complexobjectl413(::proto::ComplexObjectL413* complexobjectl413);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL413& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL413* release_complexobject();
+  ::proto::ComplexObjectL413* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL413* complexobject);
   private:
-  const ::proto::ComplexObjectL413& _internal_complexobjectl413() const;
-  ::proto::ComplexObjectL413* _internal_mutable_complexobjectl413();
+  const ::proto::ComplexObjectL413& _internal_complexobject() const;
+  ::proto::ComplexObjectL413* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl413(
-      ::proto::ComplexObjectL413* complexobjectl413);
-  ::proto::ComplexObjectL413* unsafe_arena_release_complexobjectl413();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL413* complexobject);
+  ::proto::ComplexObjectL413* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL412)
  private:
@@ -3066,13 +2356,8 @@ class ComplexObjectL412 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL413* complexobjectl413_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL413* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3201,90 +2486,40 @@ class ComplexObjectL413 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL414FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL414 complexObjectL414 = 7;
-  bool has_complexobjectl414() const;
+  // .proto.ComplexObjectL414 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl414() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl414();
-  const ::proto::ComplexObjectL414& complexobjectl414() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL414* release_complexobjectl414();
-  ::proto::ComplexObjectL414* mutable_complexobjectl414();
-  void set_allocated_complexobjectl414(::proto::ComplexObjectL414* complexobjectl414);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL414& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL414* release_complexobject();
+  ::proto::ComplexObjectL414* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL414* complexobject);
   private:
-  const ::proto::ComplexObjectL414& _internal_complexobjectl414() const;
-  ::proto::ComplexObjectL414* _internal_mutable_complexobjectl414();
+  const ::proto::ComplexObjectL414& _internal_complexobject() const;
+  ::proto::ComplexObjectL414* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl414(
-      ::proto::ComplexObjectL414* complexobjectl414);
-  ::proto::ComplexObjectL414* unsafe_arena_release_complexobjectl414();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL414* complexobject);
+  ::proto::ComplexObjectL414* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL413)
  private:
@@ -3294,13 +2529,8 @@ class ComplexObjectL413 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL414* complexobjectl414_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL414* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3429,90 +2659,40 @@ class ComplexObjectL414 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kComplexObjectL415FieldNumber = 7,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
+    kComplexObjectFieldNumber = 2,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
-  // .proto.ComplexObjectL415 complexObjectL415 = 7;
-  bool has_complexobjectl415() const;
+  // .proto.ComplexObjectL415 complexObject = 2;
+  bool has_complexobject() const;
   private:
-  bool _internal_has_complexobjectl415() const;
+  bool _internal_has_complexobject() const;
   public:
-  void clear_complexobjectl415();
-  const ::proto::ComplexObjectL415& complexobjectl415() const;
-  PROTOBUF_NODISCARD ::proto::ComplexObjectL415* release_complexobjectl415();
-  ::proto::ComplexObjectL415* mutable_complexobjectl415();
-  void set_allocated_complexobjectl415(::proto::ComplexObjectL415* complexobjectl415);
+  void clear_complexobject();
+  const ::proto::ComplexObjectL415& complexobject() const;
+  PROTOBUF_NODISCARD ::proto::ComplexObjectL415* release_complexobject();
+  ::proto::ComplexObjectL415* mutable_complexobject();
+  void set_allocated_complexobject(::proto::ComplexObjectL415* complexobject);
   private:
-  const ::proto::ComplexObjectL415& _internal_complexobjectl415() const;
-  ::proto::ComplexObjectL415* _internal_mutable_complexobjectl415();
+  const ::proto::ComplexObjectL415& _internal_complexobject() const;
+  ::proto::ComplexObjectL415* _internal_mutable_complexobject();
   public:
-  void unsafe_arena_set_allocated_complexobjectl415(
-      ::proto::ComplexObjectL415* complexobjectl415);
-  ::proto::ComplexObjectL415* unsafe_arena_release_complexobjectl415();
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
-  public:
+  void unsafe_arena_set_allocated_complexobject(
+      ::proto::ComplexObjectL415* complexobject);
+  ::proto::ComplexObjectL415* unsafe_arena_release_complexobject();
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL414)
  private:
@@ -3522,13 +2702,8 @@ class ComplexObjectL414 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    ::proto::ComplexObjectL415* complexobjectl415_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
+    ::proto::ComplexObjectL415* complexobject_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3657,70 +2832,20 @@ class ComplexObjectL415 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kVarString1FieldNumber = 6,
-    kVarInt641FieldNumber = 2,
-    kVarInt321FieldNumber = 1,
-    kVarFloat1FieldNumber = 3,
-    kVarDouble1FieldNumber = 4,
-    kVarBool1FieldNumber = 5,
+    kVarStringFieldNumber = 1,
   };
-  // string var_string1 = 6;
-  void clear_var_string1();
-  const std::string& var_string1() const;
+  // string var_string = 1;
+  void clear_var_string();
+  const std::string& var_string() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_var_string1(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_var_string1();
-  PROTOBUF_NODISCARD std::string* release_var_string1();
-  void set_allocated_var_string1(std::string* var_string1);
+  void set_var_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_var_string();
+  PROTOBUF_NODISCARD std::string* release_var_string();
+  void set_allocated_var_string(std::string* var_string);
   private:
-  const std::string& _internal_var_string1() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string1(const std::string& value);
-  std::string* _internal_mutable_var_string1();
-  public:
-
-  // int64 var_int641 = 2;
-  void clear_var_int641();
-  int64_t var_int641() const;
-  void set_var_int641(int64_t value);
-  private:
-  int64_t _internal_var_int641() const;
-  void _internal_set_var_int641(int64_t value);
-  public:
-
-  // int32 var_int321 = 1;
-  void clear_var_int321();
-  int32_t var_int321() const;
-  void set_var_int321(int32_t value);
-  private:
-  int32_t _internal_var_int321() const;
-  void _internal_set_var_int321(int32_t value);
-  public:
-
-  // float var_float1 = 3;
-  void clear_var_float1();
-  float var_float1() const;
-  void set_var_float1(float value);
-  private:
-  float _internal_var_float1() const;
-  void _internal_set_var_float1(float value);
-  public:
-
-  // double var_double1 = 4;
-  void clear_var_double1();
-  double var_double1() const;
-  void set_var_double1(double value);
-  private:
-  double _internal_var_double1() const;
-  void _internal_set_var_double1(double value);
-  public:
-
-  // bool var_bool1 = 5;
-  void clear_var_bool1();
-  bool var_bool1() const;
-  void set_var_bool1(bool value);
-  private:
-  bool _internal_var_bool1() const;
-  void _internal_set_var_bool1(bool value);
+  const std::string& _internal_var_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_var_string(const std::string& value);
+  std::string* _internal_mutable_var_string();
   public:
 
   // @@protoc_insertion_point(class_scope:proto.ComplexObjectL415)
@@ -3731,12 +2856,7 @@ class ComplexObjectL415 final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string1_;
-    int64_t var_int641_;
-    int32_t var_int321_;
-    float var_float1_;
-    double var_double1_;
-    bool var_bool1_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr var_string_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -3753,195 +2873,95 @@ class ComplexObjectL415 final :
 #endif  // __GNUC__
 // ComplexObjectL4
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL4::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL4::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL4::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL4::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL4::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL4::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL4.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL4::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL4::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL4::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL4::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL4::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL4.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL4::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL4::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL4::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL4::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL4::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL4.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL4::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL4::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL4::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL4::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL4::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL4.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL4::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL4::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL4::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL4::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL4::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL4.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL4::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL4::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL4::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL4::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL4::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL4.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL4.var_string)
 }
-inline std::string* ComplexObjectL4::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL4.var_string1)
+inline std::string* ComplexObjectL4::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL4.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL4::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL4::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL4::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL4::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL4::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL4::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL4::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL4.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL4::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL4.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL4::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL4::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL4.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL4.var_string)
 }
 
-// .proto.ComplexObjectL41 complexObjectL41 = 7;
-inline bool ComplexObjectL4::_internal_has_complexobjectl41() const {
-  return this != internal_default_instance() && _impl_.complexobjectl41_ != nullptr;
+// .proto.ComplexObjectL41 complexObject = 2;
+inline bool ComplexObjectL4::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL4::has_complexobjectl41() const {
-  return _internal_has_complexobjectl41();
+inline bool ComplexObjectL4::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL4::clear_complexobjectl41() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl41_ != nullptr) {
-    delete _impl_.complexobjectl41_;
+inline void ComplexObjectL4::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl41_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL41& ComplexObjectL4::_internal_complexobjectl41() const {
-  const ::proto::ComplexObjectL41* p = _impl_.complexobjectl41_;
+inline const ::proto::ComplexObjectL41& ComplexObjectL4::_internal_complexobject() const {
+  const ::proto::ComplexObjectL41* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL41&>(
       ::proto::_ComplexObjectL41_default_instance_);
 }
-inline const ::proto::ComplexObjectL41& ComplexObjectL4::complexobjectl41() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.complexObjectL41)
-  return _internal_complexobjectl41();
+inline const ::proto::ComplexObjectL41& ComplexObjectL4::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL4.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL4::unsafe_arena_set_allocated_complexobjectl41(
-    ::proto::ComplexObjectL41* complexobjectl41) {
+inline void ComplexObjectL4::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL41* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl41_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl41_ = complexobjectl41;
-  if (complexobjectl41) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL4.complexObjectL41)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL4.complexObject)
 }
-inline ::proto::ComplexObjectL41* ComplexObjectL4::release_complexobjectl41() {
+inline ::proto::ComplexObjectL41* ComplexObjectL4::release_complexobject() {
   
-  ::proto::ComplexObjectL41* temp = _impl_.complexobjectl41_;
-  _impl_.complexobjectl41_ = nullptr;
+  ::proto::ComplexObjectL41* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -3953,239 +2973,139 @@ inline ::proto::ComplexObjectL41* ComplexObjectL4::release_complexobjectl41() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL41* ComplexObjectL4::unsafe_arena_release_complexobjectl41() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL4.complexObjectL41)
+inline ::proto::ComplexObjectL41* ComplexObjectL4::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL4.complexObject)
   
-  ::proto::ComplexObjectL41* temp = _impl_.complexobjectl41_;
-  _impl_.complexobjectl41_ = nullptr;
+  ::proto::ComplexObjectL41* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL41* ComplexObjectL4::_internal_mutable_complexobjectl41() {
+inline ::proto::ComplexObjectL41* ComplexObjectL4::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl41_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL41>(GetArenaForAllocation());
-    _impl_.complexobjectl41_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl41_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL41* ComplexObjectL4::mutable_complexobjectl41() {
-  ::proto::ComplexObjectL41* _msg = _internal_mutable_complexobjectl41();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL4.complexObjectL41)
+inline ::proto::ComplexObjectL41* ComplexObjectL4::mutable_complexobject() {
+  ::proto::ComplexObjectL41* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL4.complexObject)
   return _msg;
 }
-inline void ComplexObjectL4::set_allocated_complexobjectl41(::proto::ComplexObjectL41* complexobjectl41) {
+inline void ComplexObjectL4::set_allocated_complexobject(::proto::ComplexObjectL41* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl41_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl41) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl41);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl41 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl41, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl41_ = complexobjectl41;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL4.complexObjectL41)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL4.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL41
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL41::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL41::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL41::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL41::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL41::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL41::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL41.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL41::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL41::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL41::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL41::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL41::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL41.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL41::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL41::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL41::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL41::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL41::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL41.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL41::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL41::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL41::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL41::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL41::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL41.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL41::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL41::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL41::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL41::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL41::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL41.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL41::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL41::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL41::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL41::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL41::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL41.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL41.var_string)
 }
-inline std::string* ComplexObjectL41::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL41.var_string1)
+inline std::string* ComplexObjectL41::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL41.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL41::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL41::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL41::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL41::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL41::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL41::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL41::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL41.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL41::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL41.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL41::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL41::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL41.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL41.var_string)
 }
 
-// .proto.ComplexObjectL42 complexObjectL42 = 7;
-inline bool ComplexObjectL41::_internal_has_complexobjectl42() const {
-  return this != internal_default_instance() && _impl_.complexobjectl42_ != nullptr;
+// .proto.ComplexObjectL42 complexObject = 2;
+inline bool ComplexObjectL41::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL41::has_complexobjectl42() const {
-  return _internal_has_complexobjectl42();
+inline bool ComplexObjectL41::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL41::clear_complexobjectl42() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl42_ != nullptr) {
-    delete _impl_.complexobjectl42_;
+inline void ComplexObjectL41::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl42_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL42& ComplexObjectL41::_internal_complexobjectl42() const {
-  const ::proto::ComplexObjectL42* p = _impl_.complexobjectl42_;
+inline const ::proto::ComplexObjectL42& ComplexObjectL41::_internal_complexobject() const {
+  const ::proto::ComplexObjectL42* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL42&>(
       ::proto::_ComplexObjectL42_default_instance_);
 }
-inline const ::proto::ComplexObjectL42& ComplexObjectL41::complexobjectl42() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.complexObjectL42)
-  return _internal_complexobjectl42();
+inline const ::proto::ComplexObjectL42& ComplexObjectL41::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL41.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL41::unsafe_arena_set_allocated_complexobjectl42(
-    ::proto::ComplexObjectL42* complexobjectl42) {
+inline void ComplexObjectL41::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL42* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl42_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl42_ = complexobjectl42;
-  if (complexobjectl42) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL41.complexObjectL42)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL41.complexObject)
 }
-inline ::proto::ComplexObjectL42* ComplexObjectL41::release_complexobjectl42() {
+inline ::proto::ComplexObjectL42* ComplexObjectL41::release_complexobject() {
   
-  ::proto::ComplexObjectL42* temp = _impl_.complexobjectl42_;
-  _impl_.complexobjectl42_ = nullptr;
+  ::proto::ComplexObjectL42* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -4197,239 +3117,139 @@ inline ::proto::ComplexObjectL42* ComplexObjectL41::release_complexobjectl42() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL42* ComplexObjectL41::unsafe_arena_release_complexobjectl42() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL41.complexObjectL42)
+inline ::proto::ComplexObjectL42* ComplexObjectL41::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL41.complexObject)
   
-  ::proto::ComplexObjectL42* temp = _impl_.complexobjectl42_;
-  _impl_.complexobjectl42_ = nullptr;
+  ::proto::ComplexObjectL42* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL42* ComplexObjectL41::_internal_mutable_complexobjectl42() {
+inline ::proto::ComplexObjectL42* ComplexObjectL41::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl42_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL42>(GetArenaForAllocation());
-    _impl_.complexobjectl42_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl42_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL42* ComplexObjectL41::mutable_complexobjectl42() {
-  ::proto::ComplexObjectL42* _msg = _internal_mutable_complexobjectl42();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL41.complexObjectL42)
+inline ::proto::ComplexObjectL42* ComplexObjectL41::mutable_complexobject() {
+  ::proto::ComplexObjectL42* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL41.complexObject)
   return _msg;
 }
-inline void ComplexObjectL41::set_allocated_complexobjectl42(::proto::ComplexObjectL42* complexobjectl42) {
+inline void ComplexObjectL41::set_allocated_complexobject(::proto::ComplexObjectL42* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl42_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl42) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl42);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl42 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl42, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl42_ = complexobjectl42;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL41.complexObjectL42)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL41.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL42
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL42::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL42::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL42::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL42::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL42::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL42::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL42.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL42::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL42::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL42::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL42::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL42::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL42.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL42::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL42::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL42::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL42::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL42::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL42.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL42::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL42::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL42::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL42::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL42::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL42.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL42::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL42::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL42::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL42::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL42::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL42.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL42::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL42::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL42::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL42::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL42::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL42.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL42.var_string)
 }
-inline std::string* ComplexObjectL42::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL42.var_string1)
+inline std::string* ComplexObjectL42::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL42.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL42::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL42::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL42::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL42::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL42::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL42::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL42::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL42.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL42::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL42.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL42::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL42::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL42.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL42.var_string)
 }
 
-// .proto.ComplexObjectL43 complexObjectL43 = 7;
-inline bool ComplexObjectL42::_internal_has_complexobjectl43() const {
-  return this != internal_default_instance() && _impl_.complexobjectl43_ != nullptr;
+// .proto.ComplexObjectL43 complexObject = 2;
+inline bool ComplexObjectL42::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL42::has_complexobjectl43() const {
-  return _internal_has_complexobjectl43();
+inline bool ComplexObjectL42::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL42::clear_complexobjectl43() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl43_ != nullptr) {
-    delete _impl_.complexobjectl43_;
+inline void ComplexObjectL42::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl43_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL43& ComplexObjectL42::_internal_complexobjectl43() const {
-  const ::proto::ComplexObjectL43* p = _impl_.complexobjectl43_;
+inline const ::proto::ComplexObjectL43& ComplexObjectL42::_internal_complexobject() const {
+  const ::proto::ComplexObjectL43* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL43&>(
       ::proto::_ComplexObjectL43_default_instance_);
 }
-inline const ::proto::ComplexObjectL43& ComplexObjectL42::complexobjectl43() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.complexObjectL43)
-  return _internal_complexobjectl43();
+inline const ::proto::ComplexObjectL43& ComplexObjectL42::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL42.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL42::unsafe_arena_set_allocated_complexobjectl43(
-    ::proto::ComplexObjectL43* complexobjectl43) {
+inline void ComplexObjectL42::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL43* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl43_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl43_ = complexobjectl43;
-  if (complexobjectl43) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL42.complexObjectL43)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL42.complexObject)
 }
-inline ::proto::ComplexObjectL43* ComplexObjectL42::release_complexobjectl43() {
+inline ::proto::ComplexObjectL43* ComplexObjectL42::release_complexobject() {
   
-  ::proto::ComplexObjectL43* temp = _impl_.complexobjectl43_;
-  _impl_.complexobjectl43_ = nullptr;
+  ::proto::ComplexObjectL43* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -4441,239 +3261,139 @@ inline ::proto::ComplexObjectL43* ComplexObjectL42::release_complexobjectl43() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL43* ComplexObjectL42::unsafe_arena_release_complexobjectl43() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL42.complexObjectL43)
+inline ::proto::ComplexObjectL43* ComplexObjectL42::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL42.complexObject)
   
-  ::proto::ComplexObjectL43* temp = _impl_.complexobjectl43_;
-  _impl_.complexobjectl43_ = nullptr;
+  ::proto::ComplexObjectL43* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL43* ComplexObjectL42::_internal_mutable_complexobjectl43() {
+inline ::proto::ComplexObjectL43* ComplexObjectL42::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl43_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL43>(GetArenaForAllocation());
-    _impl_.complexobjectl43_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl43_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL43* ComplexObjectL42::mutable_complexobjectl43() {
-  ::proto::ComplexObjectL43* _msg = _internal_mutable_complexobjectl43();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL42.complexObjectL43)
+inline ::proto::ComplexObjectL43* ComplexObjectL42::mutable_complexobject() {
+  ::proto::ComplexObjectL43* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL42.complexObject)
   return _msg;
 }
-inline void ComplexObjectL42::set_allocated_complexobjectl43(::proto::ComplexObjectL43* complexobjectl43) {
+inline void ComplexObjectL42::set_allocated_complexobject(::proto::ComplexObjectL43* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl43_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl43) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl43);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl43 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl43, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl43_ = complexobjectl43;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL42.complexObjectL43)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL42.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL43
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL43::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL43::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL43::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL43::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL43::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL43::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL43.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL43::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL43::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL43::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL43::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL43::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL43.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL43::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL43::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL43::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL43::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL43::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL43.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL43::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL43::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL43::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL43::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL43::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL43.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL43::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL43::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL43::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL43::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL43::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL43.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL43::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL43::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL43::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL43::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL43::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL43.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL43.var_string)
 }
-inline std::string* ComplexObjectL43::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL43.var_string1)
+inline std::string* ComplexObjectL43::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL43.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL43::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL43::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL43::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL43::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL43::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL43::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL43::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL43.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL43::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL43.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL43::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL43::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL43.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL43.var_string)
 }
 
-// .proto.ComplexObjectL44 complexObjectL44 = 7;
-inline bool ComplexObjectL43::_internal_has_complexobjectl44() const {
-  return this != internal_default_instance() && _impl_.complexobjectl44_ != nullptr;
+// .proto.ComplexObjectL44 complexObject = 2;
+inline bool ComplexObjectL43::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL43::has_complexobjectl44() const {
-  return _internal_has_complexobjectl44();
+inline bool ComplexObjectL43::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL43::clear_complexobjectl44() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl44_ != nullptr) {
-    delete _impl_.complexobjectl44_;
+inline void ComplexObjectL43::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl44_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL44& ComplexObjectL43::_internal_complexobjectl44() const {
-  const ::proto::ComplexObjectL44* p = _impl_.complexobjectl44_;
+inline const ::proto::ComplexObjectL44& ComplexObjectL43::_internal_complexobject() const {
+  const ::proto::ComplexObjectL44* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL44&>(
       ::proto::_ComplexObjectL44_default_instance_);
 }
-inline const ::proto::ComplexObjectL44& ComplexObjectL43::complexobjectl44() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.complexObjectL44)
-  return _internal_complexobjectl44();
+inline const ::proto::ComplexObjectL44& ComplexObjectL43::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL43.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL43::unsafe_arena_set_allocated_complexobjectl44(
-    ::proto::ComplexObjectL44* complexobjectl44) {
+inline void ComplexObjectL43::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL44* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl44_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl44_ = complexobjectl44;
-  if (complexobjectl44) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL43.complexObjectL44)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL43.complexObject)
 }
-inline ::proto::ComplexObjectL44* ComplexObjectL43::release_complexobjectl44() {
+inline ::proto::ComplexObjectL44* ComplexObjectL43::release_complexobject() {
   
-  ::proto::ComplexObjectL44* temp = _impl_.complexobjectl44_;
-  _impl_.complexobjectl44_ = nullptr;
+  ::proto::ComplexObjectL44* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -4685,239 +3405,139 @@ inline ::proto::ComplexObjectL44* ComplexObjectL43::release_complexobjectl44() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL44* ComplexObjectL43::unsafe_arena_release_complexobjectl44() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL43.complexObjectL44)
+inline ::proto::ComplexObjectL44* ComplexObjectL43::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL43.complexObject)
   
-  ::proto::ComplexObjectL44* temp = _impl_.complexobjectl44_;
-  _impl_.complexobjectl44_ = nullptr;
+  ::proto::ComplexObjectL44* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL44* ComplexObjectL43::_internal_mutable_complexobjectl44() {
+inline ::proto::ComplexObjectL44* ComplexObjectL43::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl44_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL44>(GetArenaForAllocation());
-    _impl_.complexobjectl44_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl44_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL44* ComplexObjectL43::mutable_complexobjectl44() {
-  ::proto::ComplexObjectL44* _msg = _internal_mutable_complexobjectl44();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL43.complexObjectL44)
+inline ::proto::ComplexObjectL44* ComplexObjectL43::mutable_complexobject() {
+  ::proto::ComplexObjectL44* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL43.complexObject)
   return _msg;
 }
-inline void ComplexObjectL43::set_allocated_complexobjectl44(::proto::ComplexObjectL44* complexobjectl44) {
+inline void ComplexObjectL43::set_allocated_complexobject(::proto::ComplexObjectL44* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl44_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl44) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl44);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl44 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl44, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl44_ = complexobjectl44;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL43.complexObjectL44)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL43.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL44
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL44::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL44::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL44::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL44::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL44::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL44::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL44.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL44::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL44::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL44::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL44::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL44::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL44.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL44::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL44::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL44::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL44::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL44::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL44.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL44::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL44::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL44::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL44::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL44::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL44.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL44::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL44::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL44::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL44::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL44::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL44.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL44::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL44::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL44::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL44::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL44::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL44.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL44.var_string)
 }
-inline std::string* ComplexObjectL44::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL44.var_string1)
+inline std::string* ComplexObjectL44::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL44.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL44::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL44::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL44::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL44::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL44::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL44::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL44::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL44.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL44::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL44.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL44::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL44::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL44.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL44.var_string)
 }
 
-// .proto.ComplexObjectL45 complexObjectL45 = 7;
-inline bool ComplexObjectL44::_internal_has_complexobjectl45() const {
-  return this != internal_default_instance() && _impl_.complexobjectl45_ != nullptr;
+// .proto.ComplexObjectL45 complexObject = 2;
+inline bool ComplexObjectL44::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL44::has_complexobjectl45() const {
-  return _internal_has_complexobjectl45();
+inline bool ComplexObjectL44::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL44::clear_complexobjectl45() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl45_ != nullptr) {
-    delete _impl_.complexobjectl45_;
+inline void ComplexObjectL44::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl45_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL45& ComplexObjectL44::_internal_complexobjectl45() const {
-  const ::proto::ComplexObjectL45* p = _impl_.complexobjectl45_;
+inline const ::proto::ComplexObjectL45& ComplexObjectL44::_internal_complexobject() const {
+  const ::proto::ComplexObjectL45* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL45&>(
       ::proto::_ComplexObjectL45_default_instance_);
 }
-inline const ::proto::ComplexObjectL45& ComplexObjectL44::complexobjectl45() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.complexObjectL45)
-  return _internal_complexobjectl45();
+inline const ::proto::ComplexObjectL45& ComplexObjectL44::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL44.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL44::unsafe_arena_set_allocated_complexobjectl45(
-    ::proto::ComplexObjectL45* complexobjectl45) {
+inline void ComplexObjectL44::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL45* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl45_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl45_ = complexobjectl45;
-  if (complexobjectl45) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL44.complexObjectL45)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL44.complexObject)
 }
-inline ::proto::ComplexObjectL45* ComplexObjectL44::release_complexobjectl45() {
+inline ::proto::ComplexObjectL45* ComplexObjectL44::release_complexobject() {
   
-  ::proto::ComplexObjectL45* temp = _impl_.complexobjectl45_;
-  _impl_.complexobjectl45_ = nullptr;
+  ::proto::ComplexObjectL45* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -4929,239 +3549,139 @@ inline ::proto::ComplexObjectL45* ComplexObjectL44::release_complexobjectl45() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL45* ComplexObjectL44::unsafe_arena_release_complexobjectl45() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL44.complexObjectL45)
+inline ::proto::ComplexObjectL45* ComplexObjectL44::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL44.complexObject)
   
-  ::proto::ComplexObjectL45* temp = _impl_.complexobjectl45_;
-  _impl_.complexobjectl45_ = nullptr;
+  ::proto::ComplexObjectL45* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL45* ComplexObjectL44::_internal_mutable_complexobjectl45() {
+inline ::proto::ComplexObjectL45* ComplexObjectL44::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl45_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL45>(GetArenaForAllocation());
-    _impl_.complexobjectl45_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl45_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL45* ComplexObjectL44::mutable_complexobjectl45() {
-  ::proto::ComplexObjectL45* _msg = _internal_mutable_complexobjectl45();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL44.complexObjectL45)
+inline ::proto::ComplexObjectL45* ComplexObjectL44::mutable_complexobject() {
+  ::proto::ComplexObjectL45* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL44.complexObject)
   return _msg;
 }
-inline void ComplexObjectL44::set_allocated_complexobjectl45(::proto::ComplexObjectL45* complexobjectl45) {
+inline void ComplexObjectL44::set_allocated_complexobject(::proto::ComplexObjectL45* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl45_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl45) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl45);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl45 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl45, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl45_ = complexobjectl45;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL44.complexObjectL45)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL44.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL45
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL45::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL45::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL45::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL45::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL45::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL45::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL45.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL45::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL45::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL45::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL45::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL45::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL45.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL45::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL45::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL45::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL45::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL45::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL45.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL45::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL45::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL45::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL45::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL45::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL45.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL45::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL45::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL45::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL45::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL45::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL45.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL45::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL45::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL45::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL45::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL45::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL45.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL45.var_string)
 }
-inline std::string* ComplexObjectL45::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL45.var_string1)
+inline std::string* ComplexObjectL45::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL45.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL45::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL45::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL45::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL45::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL45::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL45::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL45::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL45.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL45::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL45.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL45::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL45::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL45.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL45.var_string)
 }
 
-// .proto.ComplexObjectL46 complexObjectL46 = 7;
-inline bool ComplexObjectL45::_internal_has_complexobjectl46() const {
-  return this != internal_default_instance() && _impl_.complexobjectl46_ != nullptr;
+// .proto.ComplexObjectL46 complexObject = 2;
+inline bool ComplexObjectL45::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL45::has_complexobjectl46() const {
-  return _internal_has_complexobjectl46();
+inline bool ComplexObjectL45::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL45::clear_complexobjectl46() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl46_ != nullptr) {
-    delete _impl_.complexobjectl46_;
+inline void ComplexObjectL45::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl46_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL46& ComplexObjectL45::_internal_complexobjectl46() const {
-  const ::proto::ComplexObjectL46* p = _impl_.complexobjectl46_;
+inline const ::proto::ComplexObjectL46& ComplexObjectL45::_internal_complexobject() const {
+  const ::proto::ComplexObjectL46* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL46&>(
       ::proto::_ComplexObjectL46_default_instance_);
 }
-inline const ::proto::ComplexObjectL46& ComplexObjectL45::complexobjectl46() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.complexObjectL46)
-  return _internal_complexobjectl46();
+inline const ::proto::ComplexObjectL46& ComplexObjectL45::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL45.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL45::unsafe_arena_set_allocated_complexobjectl46(
-    ::proto::ComplexObjectL46* complexobjectl46) {
+inline void ComplexObjectL45::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL46* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl46_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl46_ = complexobjectl46;
-  if (complexobjectl46) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL45.complexObjectL46)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL45.complexObject)
 }
-inline ::proto::ComplexObjectL46* ComplexObjectL45::release_complexobjectl46() {
+inline ::proto::ComplexObjectL46* ComplexObjectL45::release_complexobject() {
   
-  ::proto::ComplexObjectL46* temp = _impl_.complexobjectl46_;
-  _impl_.complexobjectl46_ = nullptr;
+  ::proto::ComplexObjectL46* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -5173,239 +3693,139 @@ inline ::proto::ComplexObjectL46* ComplexObjectL45::release_complexobjectl46() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL46* ComplexObjectL45::unsafe_arena_release_complexobjectl46() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL45.complexObjectL46)
+inline ::proto::ComplexObjectL46* ComplexObjectL45::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL45.complexObject)
   
-  ::proto::ComplexObjectL46* temp = _impl_.complexobjectl46_;
-  _impl_.complexobjectl46_ = nullptr;
+  ::proto::ComplexObjectL46* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL46* ComplexObjectL45::_internal_mutable_complexobjectl46() {
+inline ::proto::ComplexObjectL46* ComplexObjectL45::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl46_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL46>(GetArenaForAllocation());
-    _impl_.complexobjectl46_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl46_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL46* ComplexObjectL45::mutable_complexobjectl46() {
-  ::proto::ComplexObjectL46* _msg = _internal_mutable_complexobjectl46();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL45.complexObjectL46)
+inline ::proto::ComplexObjectL46* ComplexObjectL45::mutable_complexobject() {
+  ::proto::ComplexObjectL46* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL45.complexObject)
   return _msg;
 }
-inline void ComplexObjectL45::set_allocated_complexobjectl46(::proto::ComplexObjectL46* complexobjectl46) {
+inline void ComplexObjectL45::set_allocated_complexobject(::proto::ComplexObjectL46* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl46_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl46) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl46);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl46 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl46, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl46_ = complexobjectl46;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL45.complexObjectL46)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL45.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL46
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL46::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL46::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL46::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL46::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL46::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL46::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL46.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL46::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL46::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL46::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL46::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL46::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL46.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL46::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL46::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL46::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL46::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL46::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL46.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL46::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL46::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL46::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL46::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL46::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL46.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL46::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL46::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL46::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL46::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL46::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL46.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL46::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL46::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL46::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL46::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL46::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL46.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL46.var_string)
 }
-inline std::string* ComplexObjectL46::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL46.var_string1)
+inline std::string* ComplexObjectL46::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL46.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL46::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL46::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL46::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL46::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL46::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL46::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL46::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL46.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL46::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL46.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL46::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL46::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL46.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL46.var_string)
 }
 
-// .proto.ComplexObjectL47 complexObjectL47 = 7;
-inline bool ComplexObjectL46::_internal_has_complexobjectl47() const {
-  return this != internal_default_instance() && _impl_.complexobjectl47_ != nullptr;
+// .proto.ComplexObjectL47 complexObject = 2;
+inline bool ComplexObjectL46::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL46::has_complexobjectl47() const {
-  return _internal_has_complexobjectl47();
+inline bool ComplexObjectL46::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL46::clear_complexobjectl47() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl47_ != nullptr) {
-    delete _impl_.complexobjectl47_;
+inline void ComplexObjectL46::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl47_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL47& ComplexObjectL46::_internal_complexobjectl47() const {
-  const ::proto::ComplexObjectL47* p = _impl_.complexobjectl47_;
+inline const ::proto::ComplexObjectL47& ComplexObjectL46::_internal_complexobject() const {
+  const ::proto::ComplexObjectL47* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL47&>(
       ::proto::_ComplexObjectL47_default_instance_);
 }
-inline const ::proto::ComplexObjectL47& ComplexObjectL46::complexobjectl47() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.complexObjectL47)
-  return _internal_complexobjectl47();
+inline const ::proto::ComplexObjectL47& ComplexObjectL46::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL46.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL46::unsafe_arena_set_allocated_complexobjectl47(
-    ::proto::ComplexObjectL47* complexobjectl47) {
+inline void ComplexObjectL46::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL47* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl47_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl47_ = complexobjectl47;
-  if (complexobjectl47) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL46.complexObjectL47)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL46.complexObject)
 }
-inline ::proto::ComplexObjectL47* ComplexObjectL46::release_complexobjectl47() {
+inline ::proto::ComplexObjectL47* ComplexObjectL46::release_complexobject() {
   
-  ::proto::ComplexObjectL47* temp = _impl_.complexobjectl47_;
-  _impl_.complexobjectl47_ = nullptr;
+  ::proto::ComplexObjectL47* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -5417,239 +3837,139 @@ inline ::proto::ComplexObjectL47* ComplexObjectL46::release_complexobjectl47() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL47* ComplexObjectL46::unsafe_arena_release_complexobjectl47() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL46.complexObjectL47)
+inline ::proto::ComplexObjectL47* ComplexObjectL46::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL46.complexObject)
   
-  ::proto::ComplexObjectL47* temp = _impl_.complexobjectl47_;
-  _impl_.complexobjectl47_ = nullptr;
+  ::proto::ComplexObjectL47* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL47* ComplexObjectL46::_internal_mutable_complexobjectl47() {
+inline ::proto::ComplexObjectL47* ComplexObjectL46::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl47_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL47>(GetArenaForAllocation());
-    _impl_.complexobjectl47_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl47_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL47* ComplexObjectL46::mutable_complexobjectl47() {
-  ::proto::ComplexObjectL47* _msg = _internal_mutable_complexobjectl47();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL46.complexObjectL47)
+inline ::proto::ComplexObjectL47* ComplexObjectL46::mutable_complexobject() {
+  ::proto::ComplexObjectL47* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL46.complexObject)
   return _msg;
 }
-inline void ComplexObjectL46::set_allocated_complexobjectl47(::proto::ComplexObjectL47* complexobjectl47) {
+inline void ComplexObjectL46::set_allocated_complexobject(::proto::ComplexObjectL47* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl47_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl47) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl47);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl47 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl47, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl47_ = complexobjectl47;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL46.complexObjectL47)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL46.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL47
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL47::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL47::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL47::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL47::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL47::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL47::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL47.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL47::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL47::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL47::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL47::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL47::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL47.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL47::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL47::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL47::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL47::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL47::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL47.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL47::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL47::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL47::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL47::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL47::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL47.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL47::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL47::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL47::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL47::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL47::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL47.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL47::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL47::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL47::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL47::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL47::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL47.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL47.var_string)
 }
-inline std::string* ComplexObjectL47::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL47.var_string1)
+inline std::string* ComplexObjectL47::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL47.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL47::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL47::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL47::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL47::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL47::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL47::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL47::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL47.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL47::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL47.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL47::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL47::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL47.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL47.var_string)
 }
 
-// .proto.ComplexObjectL48 complexObjectL48 = 7;
-inline bool ComplexObjectL47::_internal_has_complexobjectl48() const {
-  return this != internal_default_instance() && _impl_.complexobjectl48_ != nullptr;
+// .proto.ComplexObjectL48 complexObject = 2;
+inline bool ComplexObjectL47::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL47::has_complexobjectl48() const {
-  return _internal_has_complexobjectl48();
+inline bool ComplexObjectL47::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL47::clear_complexobjectl48() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl48_ != nullptr) {
-    delete _impl_.complexobjectl48_;
+inline void ComplexObjectL47::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl48_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL48& ComplexObjectL47::_internal_complexobjectl48() const {
-  const ::proto::ComplexObjectL48* p = _impl_.complexobjectl48_;
+inline const ::proto::ComplexObjectL48& ComplexObjectL47::_internal_complexobject() const {
+  const ::proto::ComplexObjectL48* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL48&>(
       ::proto::_ComplexObjectL48_default_instance_);
 }
-inline const ::proto::ComplexObjectL48& ComplexObjectL47::complexobjectl48() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.complexObjectL48)
-  return _internal_complexobjectl48();
+inline const ::proto::ComplexObjectL48& ComplexObjectL47::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL47.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL47::unsafe_arena_set_allocated_complexobjectl48(
-    ::proto::ComplexObjectL48* complexobjectl48) {
+inline void ComplexObjectL47::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL48* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl48_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl48_ = complexobjectl48;
-  if (complexobjectl48) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL47.complexObjectL48)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL47.complexObject)
 }
-inline ::proto::ComplexObjectL48* ComplexObjectL47::release_complexobjectl48() {
+inline ::proto::ComplexObjectL48* ComplexObjectL47::release_complexobject() {
   
-  ::proto::ComplexObjectL48* temp = _impl_.complexobjectl48_;
-  _impl_.complexobjectl48_ = nullptr;
+  ::proto::ComplexObjectL48* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -5661,239 +3981,139 @@ inline ::proto::ComplexObjectL48* ComplexObjectL47::release_complexobjectl48() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL48* ComplexObjectL47::unsafe_arena_release_complexobjectl48() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL47.complexObjectL48)
+inline ::proto::ComplexObjectL48* ComplexObjectL47::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL47.complexObject)
   
-  ::proto::ComplexObjectL48* temp = _impl_.complexobjectl48_;
-  _impl_.complexobjectl48_ = nullptr;
+  ::proto::ComplexObjectL48* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL48* ComplexObjectL47::_internal_mutable_complexobjectl48() {
+inline ::proto::ComplexObjectL48* ComplexObjectL47::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl48_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL48>(GetArenaForAllocation());
-    _impl_.complexobjectl48_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl48_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL48* ComplexObjectL47::mutable_complexobjectl48() {
-  ::proto::ComplexObjectL48* _msg = _internal_mutable_complexobjectl48();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL47.complexObjectL48)
+inline ::proto::ComplexObjectL48* ComplexObjectL47::mutable_complexobject() {
+  ::proto::ComplexObjectL48* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL47.complexObject)
   return _msg;
 }
-inline void ComplexObjectL47::set_allocated_complexobjectl48(::proto::ComplexObjectL48* complexobjectl48) {
+inline void ComplexObjectL47::set_allocated_complexobject(::proto::ComplexObjectL48* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl48_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl48) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl48);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl48 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl48, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl48_ = complexobjectl48;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL47.complexObjectL48)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL47.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL48
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL48::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL48::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL48::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL48::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL48::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL48::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL48.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL48::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL48::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL48::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL48::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL48::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL48.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL48::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL48::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL48::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL48::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL48::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL48.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL48::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL48::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL48::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL48::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL48::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL48.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL48::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL48::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL48::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL48::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL48::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL48.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL48::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL48::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL48::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL48::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL48::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL48.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL48.var_string)
 }
-inline std::string* ComplexObjectL48::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL48.var_string1)
+inline std::string* ComplexObjectL48::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL48.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL48::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL48::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL48::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL48::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL48::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL48::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL48::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL48.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL48::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL48.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL48::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL48::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL48.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL48.var_string)
 }
 
-// .proto.ComplexObjectL49 complexObjectL49 = 7;
-inline bool ComplexObjectL48::_internal_has_complexobjectl49() const {
-  return this != internal_default_instance() && _impl_.complexobjectl49_ != nullptr;
+// .proto.ComplexObjectL49 complexObject = 2;
+inline bool ComplexObjectL48::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL48::has_complexobjectl49() const {
-  return _internal_has_complexobjectl49();
+inline bool ComplexObjectL48::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL48::clear_complexobjectl49() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl49_ != nullptr) {
-    delete _impl_.complexobjectl49_;
+inline void ComplexObjectL48::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl49_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL49& ComplexObjectL48::_internal_complexobjectl49() const {
-  const ::proto::ComplexObjectL49* p = _impl_.complexobjectl49_;
+inline const ::proto::ComplexObjectL49& ComplexObjectL48::_internal_complexobject() const {
+  const ::proto::ComplexObjectL49* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL49&>(
       ::proto::_ComplexObjectL49_default_instance_);
 }
-inline const ::proto::ComplexObjectL49& ComplexObjectL48::complexobjectl49() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.complexObjectL49)
-  return _internal_complexobjectl49();
+inline const ::proto::ComplexObjectL49& ComplexObjectL48::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL48.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL48::unsafe_arena_set_allocated_complexobjectl49(
-    ::proto::ComplexObjectL49* complexobjectl49) {
+inline void ComplexObjectL48::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL49* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl49_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl49_ = complexobjectl49;
-  if (complexobjectl49) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL48.complexObjectL49)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL48.complexObject)
 }
-inline ::proto::ComplexObjectL49* ComplexObjectL48::release_complexobjectl49() {
+inline ::proto::ComplexObjectL49* ComplexObjectL48::release_complexobject() {
   
-  ::proto::ComplexObjectL49* temp = _impl_.complexobjectl49_;
-  _impl_.complexobjectl49_ = nullptr;
+  ::proto::ComplexObjectL49* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -5905,239 +4125,139 @@ inline ::proto::ComplexObjectL49* ComplexObjectL48::release_complexobjectl49() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL49* ComplexObjectL48::unsafe_arena_release_complexobjectl49() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL48.complexObjectL49)
+inline ::proto::ComplexObjectL49* ComplexObjectL48::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL48.complexObject)
   
-  ::proto::ComplexObjectL49* temp = _impl_.complexobjectl49_;
-  _impl_.complexobjectl49_ = nullptr;
+  ::proto::ComplexObjectL49* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL49* ComplexObjectL48::_internal_mutable_complexobjectl49() {
+inline ::proto::ComplexObjectL49* ComplexObjectL48::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl49_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL49>(GetArenaForAllocation());
-    _impl_.complexobjectl49_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl49_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL49* ComplexObjectL48::mutable_complexobjectl49() {
-  ::proto::ComplexObjectL49* _msg = _internal_mutable_complexobjectl49();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL48.complexObjectL49)
+inline ::proto::ComplexObjectL49* ComplexObjectL48::mutable_complexobject() {
+  ::proto::ComplexObjectL49* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL48.complexObject)
   return _msg;
 }
-inline void ComplexObjectL48::set_allocated_complexobjectl49(::proto::ComplexObjectL49* complexobjectl49) {
+inline void ComplexObjectL48::set_allocated_complexobject(::proto::ComplexObjectL49* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl49_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl49) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl49);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl49 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl49, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl49_ = complexobjectl49;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL48.complexObjectL49)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL48.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL49
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL49::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL49::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL49::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL49::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL49::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL49::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL49.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL49::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL49::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL49::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL49::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL49::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL49.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL49::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL49::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL49::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL49::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL49::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL49.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL49::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL49::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL49::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL49::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL49::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL49.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL49::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL49::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL49::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL49::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL49::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL49.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL49::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL49::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL49::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL49::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL49::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL49.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL49.var_string)
 }
-inline std::string* ComplexObjectL49::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL49.var_string1)
+inline std::string* ComplexObjectL49::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL49.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL49::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL49::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL49::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL49::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL49::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL49::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL49::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL49.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL49::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL49.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL49::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL49::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL49.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL49.var_string)
 }
 
-// .proto.ComplexObjectL410 complexObjectL410 = 7;
-inline bool ComplexObjectL49::_internal_has_complexobjectl410() const {
-  return this != internal_default_instance() && _impl_.complexobjectl410_ != nullptr;
+// .proto.ComplexObjectL410 complexObject = 2;
+inline bool ComplexObjectL49::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL49::has_complexobjectl410() const {
-  return _internal_has_complexobjectl410();
+inline bool ComplexObjectL49::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL49::clear_complexobjectl410() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl410_ != nullptr) {
-    delete _impl_.complexobjectl410_;
+inline void ComplexObjectL49::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl410_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL410& ComplexObjectL49::_internal_complexobjectl410() const {
-  const ::proto::ComplexObjectL410* p = _impl_.complexobjectl410_;
+inline const ::proto::ComplexObjectL410& ComplexObjectL49::_internal_complexobject() const {
+  const ::proto::ComplexObjectL410* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL410&>(
       ::proto::_ComplexObjectL410_default_instance_);
 }
-inline const ::proto::ComplexObjectL410& ComplexObjectL49::complexobjectl410() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.complexObjectL410)
-  return _internal_complexobjectl410();
+inline const ::proto::ComplexObjectL410& ComplexObjectL49::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL49.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL49::unsafe_arena_set_allocated_complexobjectl410(
-    ::proto::ComplexObjectL410* complexobjectl410) {
+inline void ComplexObjectL49::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL410* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl410_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl410_ = complexobjectl410;
-  if (complexobjectl410) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL49.complexObjectL410)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL49.complexObject)
 }
-inline ::proto::ComplexObjectL410* ComplexObjectL49::release_complexobjectl410() {
+inline ::proto::ComplexObjectL410* ComplexObjectL49::release_complexobject() {
   
-  ::proto::ComplexObjectL410* temp = _impl_.complexobjectl410_;
-  _impl_.complexobjectl410_ = nullptr;
+  ::proto::ComplexObjectL410* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -6149,239 +4269,139 @@ inline ::proto::ComplexObjectL410* ComplexObjectL49::release_complexobjectl410()
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL410* ComplexObjectL49::unsafe_arena_release_complexobjectl410() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL49.complexObjectL410)
+inline ::proto::ComplexObjectL410* ComplexObjectL49::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL49.complexObject)
   
-  ::proto::ComplexObjectL410* temp = _impl_.complexobjectl410_;
-  _impl_.complexobjectl410_ = nullptr;
+  ::proto::ComplexObjectL410* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL410* ComplexObjectL49::_internal_mutable_complexobjectl410() {
+inline ::proto::ComplexObjectL410* ComplexObjectL49::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl410_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL410>(GetArenaForAllocation());
-    _impl_.complexobjectl410_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl410_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL410* ComplexObjectL49::mutable_complexobjectl410() {
-  ::proto::ComplexObjectL410* _msg = _internal_mutable_complexobjectl410();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL49.complexObjectL410)
+inline ::proto::ComplexObjectL410* ComplexObjectL49::mutable_complexobject() {
+  ::proto::ComplexObjectL410* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL49.complexObject)
   return _msg;
 }
-inline void ComplexObjectL49::set_allocated_complexobjectl410(::proto::ComplexObjectL410* complexobjectl410) {
+inline void ComplexObjectL49::set_allocated_complexobject(::proto::ComplexObjectL410* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl410_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl410) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl410);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl410 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl410, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl410_ = complexobjectl410;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL49.complexObjectL410)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL49.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL410
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL410::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL410::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL410::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL410::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL410::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL410::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL410.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL410::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL410::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL410::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL410::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL410::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL410.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL410::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL410::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL410::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL410::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL410::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL410.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL410::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL410::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL410::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL410::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL410::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL410.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL410::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL410::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL410::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL410::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL410::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL410.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL410::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL410::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL410::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL410::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL410::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL410.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL410.var_string)
 }
-inline std::string* ComplexObjectL410::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL410.var_string1)
+inline std::string* ComplexObjectL410::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL410.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL410::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL410::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL410::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL410::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL410::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL410::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL410::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL410.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL410::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL410.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL410::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL410::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL410.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL410.var_string)
 }
 
-// .proto.ComplexObjectL411 complexObjectL411 = 7;
-inline bool ComplexObjectL410::_internal_has_complexobjectl411() const {
-  return this != internal_default_instance() && _impl_.complexobjectl411_ != nullptr;
+// .proto.ComplexObjectL411 complexObject = 2;
+inline bool ComplexObjectL410::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL410::has_complexobjectl411() const {
-  return _internal_has_complexobjectl411();
+inline bool ComplexObjectL410::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL410::clear_complexobjectl411() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl411_ != nullptr) {
-    delete _impl_.complexobjectl411_;
+inline void ComplexObjectL410::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl411_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL411& ComplexObjectL410::_internal_complexobjectl411() const {
-  const ::proto::ComplexObjectL411* p = _impl_.complexobjectl411_;
+inline const ::proto::ComplexObjectL411& ComplexObjectL410::_internal_complexobject() const {
+  const ::proto::ComplexObjectL411* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL411&>(
       ::proto::_ComplexObjectL411_default_instance_);
 }
-inline const ::proto::ComplexObjectL411& ComplexObjectL410::complexobjectl411() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.complexObjectL411)
-  return _internal_complexobjectl411();
+inline const ::proto::ComplexObjectL411& ComplexObjectL410::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL410.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL410::unsafe_arena_set_allocated_complexobjectl411(
-    ::proto::ComplexObjectL411* complexobjectl411) {
+inline void ComplexObjectL410::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL411* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl411_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl411_ = complexobjectl411;
-  if (complexobjectl411) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL410.complexObjectL411)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL410.complexObject)
 }
-inline ::proto::ComplexObjectL411* ComplexObjectL410::release_complexobjectl411() {
+inline ::proto::ComplexObjectL411* ComplexObjectL410::release_complexobject() {
   
-  ::proto::ComplexObjectL411* temp = _impl_.complexobjectl411_;
-  _impl_.complexobjectl411_ = nullptr;
+  ::proto::ComplexObjectL411* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -6393,239 +4413,139 @@ inline ::proto::ComplexObjectL411* ComplexObjectL410::release_complexobjectl411(
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL411* ComplexObjectL410::unsafe_arena_release_complexobjectl411() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL410.complexObjectL411)
+inline ::proto::ComplexObjectL411* ComplexObjectL410::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL410.complexObject)
   
-  ::proto::ComplexObjectL411* temp = _impl_.complexobjectl411_;
-  _impl_.complexobjectl411_ = nullptr;
+  ::proto::ComplexObjectL411* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL411* ComplexObjectL410::_internal_mutable_complexobjectl411() {
+inline ::proto::ComplexObjectL411* ComplexObjectL410::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl411_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL411>(GetArenaForAllocation());
-    _impl_.complexobjectl411_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl411_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL411* ComplexObjectL410::mutable_complexobjectl411() {
-  ::proto::ComplexObjectL411* _msg = _internal_mutable_complexobjectl411();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL410.complexObjectL411)
+inline ::proto::ComplexObjectL411* ComplexObjectL410::mutable_complexobject() {
+  ::proto::ComplexObjectL411* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL410.complexObject)
   return _msg;
 }
-inline void ComplexObjectL410::set_allocated_complexobjectl411(::proto::ComplexObjectL411* complexobjectl411) {
+inline void ComplexObjectL410::set_allocated_complexobject(::proto::ComplexObjectL411* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl411_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl411) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl411);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl411 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl411, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl411_ = complexobjectl411;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL410.complexObjectL411)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL410.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL411
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL411::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL411::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL411::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL411::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL411::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL411::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL411.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL411::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL411::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL411::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL411::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL411::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL411.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL411::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL411::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL411::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL411::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL411::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL411.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL411::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL411::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL411::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL411::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL411::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL411.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL411::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL411::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL411::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL411::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL411::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL411.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL411::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL411::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL411::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL411::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL411::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL411.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL411.var_string)
 }
-inline std::string* ComplexObjectL411::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL411.var_string1)
+inline std::string* ComplexObjectL411::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL411.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL411::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL411::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL411::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL411::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL411::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL411::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL411::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL411.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL411::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL411.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL411::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL411::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL411.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL411.var_string)
 }
 
-// .proto.ComplexObjectL412 complexObjectL412 = 7;
-inline bool ComplexObjectL411::_internal_has_complexobjectl412() const {
-  return this != internal_default_instance() && _impl_.complexobjectl412_ != nullptr;
+// .proto.ComplexObjectL412 complexObject = 2;
+inline bool ComplexObjectL411::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL411::has_complexobjectl412() const {
-  return _internal_has_complexobjectl412();
+inline bool ComplexObjectL411::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL411::clear_complexobjectl412() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl412_ != nullptr) {
-    delete _impl_.complexobjectl412_;
+inline void ComplexObjectL411::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl412_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL412& ComplexObjectL411::_internal_complexobjectl412() const {
-  const ::proto::ComplexObjectL412* p = _impl_.complexobjectl412_;
+inline const ::proto::ComplexObjectL412& ComplexObjectL411::_internal_complexobject() const {
+  const ::proto::ComplexObjectL412* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL412&>(
       ::proto::_ComplexObjectL412_default_instance_);
 }
-inline const ::proto::ComplexObjectL412& ComplexObjectL411::complexobjectl412() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.complexObjectL412)
-  return _internal_complexobjectl412();
+inline const ::proto::ComplexObjectL412& ComplexObjectL411::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL411.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL411::unsafe_arena_set_allocated_complexobjectl412(
-    ::proto::ComplexObjectL412* complexobjectl412) {
+inline void ComplexObjectL411::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL412* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl412_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl412_ = complexobjectl412;
-  if (complexobjectl412) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL411.complexObjectL412)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL411.complexObject)
 }
-inline ::proto::ComplexObjectL412* ComplexObjectL411::release_complexobjectl412() {
+inline ::proto::ComplexObjectL412* ComplexObjectL411::release_complexobject() {
   
-  ::proto::ComplexObjectL412* temp = _impl_.complexobjectl412_;
-  _impl_.complexobjectl412_ = nullptr;
+  ::proto::ComplexObjectL412* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -6637,239 +4557,139 @@ inline ::proto::ComplexObjectL412* ComplexObjectL411::release_complexobjectl412(
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL412* ComplexObjectL411::unsafe_arena_release_complexobjectl412() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL411.complexObjectL412)
+inline ::proto::ComplexObjectL412* ComplexObjectL411::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL411.complexObject)
   
-  ::proto::ComplexObjectL412* temp = _impl_.complexobjectl412_;
-  _impl_.complexobjectl412_ = nullptr;
+  ::proto::ComplexObjectL412* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL412* ComplexObjectL411::_internal_mutable_complexobjectl412() {
+inline ::proto::ComplexObjectL412* ComplexObjectL411::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl412_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL412>(GetArenaForAllocation());
-    _impl_.complexobjectl412_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl412_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL412* ComplexObjectL411::mutable_complexobjectl412() {
-  ::proto::ComplexObjectL412* _msg = _internal_mutable_complexobjectl412();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL411.complexObjectL412)
+inline ::proto::ComplexObjectL412* ComplexObjectL411::mutable_complexobject() {
+  ::proto::ComplexObjectL412* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL411.complexObject)
   return _msg;
 }
-inline void ComplexObjectL411::set_allocated_complexobjectl412(::proto::ComplexObjectL412* complexobjectl412) {
+inline void ComplexObjectL411::set_allocated_complexobject(::proto::ComplexObjectL412* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl412_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl412) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl412);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl412 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl412, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl412_ = complexobjectl412;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL411.complexObjectL412)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL411.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL412
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL412::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL412::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL412::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL412::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL412::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL412::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL412.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL412::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL412::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL412::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL412::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL412::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL412.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL412::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL412::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL412::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL412::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL412::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL412.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL412::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL412::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL412::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL412::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL412::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL412.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL412::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL412::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL412::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL412::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL412::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL412.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL412::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL412::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL412::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL412::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL412::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL412.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL412.var_string)
 }
-inline std::string* ComplexObjectL412::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL412.var_string1)
+inline std::string* ComplexObjectL412::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL412.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL412::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL412::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL412::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL412::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL412::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL412::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL412::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL412.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL412::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL412.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL412::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL412::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL412.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL412.var_string)
 }
 
-// .proto.ComplexObjectL413 complexObjectL413 = 7;
-inline bool ComplexObjectL412::_internal_has_complexobjectl413() const {
-  return this != internal_default_instance() && _impl_.complexobjectl413_ != nullptr;
+// .proto.ComplexObjectL413 complexObject = 2;
+inline bool ComplexObjectL412::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL412::has_complexobjectl413() const {
-  return _internal_has_complexobjectl413();
+inline bool ComplexObjectL412::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL412::clear_complexobjectl413() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl413_ != nullptr) {
-    delete _impl_.complexobjectl413_;
+inline void ComplexObjectL412::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl413_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL413& ComplexObjectL412::_internal_complexobjectl413() const {
-  const ::proto::ComplexObjectL413* p = _impl_.complexobjectl413_;
+inline const ::proto::ComplexObjectL413& ComplexObjectL412::_internal_complexobject() const {
+  const ::proto::ComplexObjectL413* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL413&>(
       ::proto::_ComplexObjectL413_default_instance_);
 }
-inline const ::proto::ComplexObjectL413& ComplexObjectL412::complexobjectl413() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.complexObjectL413)
-  return _internal_complexobjectl413();
+inline const ::proto::ComplexObjectL413& ComplexObjectL412::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL412.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL412::unsafe_arena_set_allocated_complexobjectl413(
-    ::proto::ComplexObjectL413* complexobjectl413) {
+inline void ComplexObjectL412::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL413* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl413_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl413_ = complexobjectl413;
-  if (complexobjectl413) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL412.complexObjectL413)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL412.complexObject)
 }
-inline ::proto::ComplexObjectL413* ComplexObjectL412::release_complexobjectl413() {
+inline ::proto::ComplexObjectL413* ComplexObjectL412::release_complexobject() {
   
-  ::proto::ComplexObjectL413* temp = _impl_.complexobjectl413_;
-  _impl_.complexobjectl413_ = nullptr;
+  ::proto::ComplexObjectL413* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -6881,239 +4701,139 @@ inline ::proto::ComplexObjectL413* ComplexObjectL412::release_complexobjectl413(
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL413* ComplexObjectL412::unsafe_arena_release_complexobjectl413() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL412.complexObjectL413)
+inline ::proto::ComplexObjectL413* ComplexObjectL412::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL412.complexObject)
   
-  ::proto::ComplexObjectL413* temp = _impl_.complexobjectl413_;
-  _impl_.complexobjectl413_ = nullptr;
+  ::proto::ComplexObjectL413* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL413* ComplexObjectL412::_internal_mutable_complexobjectl413() {
+inline ::proto::ComplexObjectL413* ComplexObjectL412::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl413_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL413>(GetArenaForAllocation());
-    _impl_.complexobjectl413_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl413_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL413* ComplexObjectL412::mutable_complexobjectl413() {
-  ::proto::ComplexObjectL413* _msg = _internal_mutable_complexobjectl413();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL412.complexObjectL413)
+inline ::proto::ComplexObjectL413* ComplexObjectL412::mutable_complexobject() {
+  ::proto::ComplexObjectL413* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL412.complexObject)
   return _msg;
 }
-inline void ComplexObjectL412::set_allocated_complexobjectl413(::proto::ComplexObjectL413* complexobjectl413) {
+inline void ComplexObjectL412::set_allocated_complexobject(::proto::ComplexObjectL413* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl413_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl413) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl413);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl413 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl413, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl413_ = complexobjectl413;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL412.complexObjectL413)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL412.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL413
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL413::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL413::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL413::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL413::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL413::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL413::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL413.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL413::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL413::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL413::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL413::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL413::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL413.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL413::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL413::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL413::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL413::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL413::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL413.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL413::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL413::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL413::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL413::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL413::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL413.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL413::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL413::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL413::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL413::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL413::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL413.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL413::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL413::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL413::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL413::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL413::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL413.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL413.var_string)
 }
-inline std::string* ComplexObjectL413::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL413.var_string1)
+inline std::string* ComplexObjectL413::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL413.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL413::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL413::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL413::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL413::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL413::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL413::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL413::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL413.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL413::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL413.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL413::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL413::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL413.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL413.var_string)
 }
 
-// .proto.ComplexObjectL414 complexObjectL414 = 7;
-inline bool ComplexObjectL413::_internal_has_complexobjectl414() const {
-  return this != internal_default_instance() && _impl_.complexobjectl414_ != nullptr;
+// .proto.ComplexObjectL414 complexObject = 2;
+inline bool ComplexObjectL413::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL413::has_complexobjectl414() const {
-  return _internal_has_complexobjectl414();
+inline bool ComplexObjectL413::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL413::clear_complexobjectl414() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl414_ != nullptr) {
-    delete _impl_.complexobjectl414_;
+inline void ComplexObjectL413::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl414_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL414& ComplexObjectL413::_internal_complexobjectl414() const {
-  const ::proto::ComplexObjectL414* p = _impl_.complexobjectl414_;
+inline const ::proto::ComplexObjectL414& ComplexObjectL413::_internal_complexobject() const {
+  const ::proto::ComplexObjectL414* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL414&>(
       ::proto::_ComplexObjectL414_default_instance_);
 }
-inline const ::proto::ComplexObjectL414& ComplexObjectL413::complexobjectl414() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.complexObjectL414)
-  return _internal_complexobjectl414();
+inline const ::proto::ComplexObjectL414& ComplexObjectL413::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL413.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL413::unsafe_arena_set_allocated_complexobjectl414(
-    ::proto::ComplexObjectL414* complexobjectl414) {
+inline void ComplexObjectL413::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL414* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl414_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl414_ = complexobjectl414;
-  if (complexobjectl414) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL413.complexObjectL414)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL413.complexObject)
 }
-inline ::proto::ComplexObjectL414* ComplexObjectL413::release_complexobjectl414() {
+inline ::proto::ComplexObjectL414* ComplexObjectL413::release_complexobject() {
   
-  ::proto::ComplexObjectL414* temp = _impl_.complexobjectl414_;
-  _impl_.complexobjectl414_ = nullptr;
+  ::proto::ComplexObjectL414* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -7125,239 +4845,139 @@ inline ::proto::ComplexObjectL414* ComplexObjectL413::release_complexobjectl414(
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL414* ComplexObjectL413::unsafe_arena_release_complexobjectl414() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL413.complexObjectL414)
+inline ::proto::ComplexObjectL414* ComplexObjectL413::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL413.complexObject)
   
-  ::proto::ComplexObjectL414* temp = _impl_.complexobjectl414_;
-  _impl_.complexobjectl414_ = nullptr;
+  ::proto::ComplexObjectL414* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL414* ComplexObjectL413::_internal_mutable_complexobjectl414() {
+inline ::proto::ComplexObjectL414* ComplexObjectL413::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl414_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL414>(GetArenaForAllocation());
-    _impl_.complexobjectl414_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl414_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL414* ComplexObjectL413::mutable_complexobjectl414() {
-  ::proto::ComplexObjectL414* _msg = _internal_mutable_complexobjectl414();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL413.complexObjectL414)
+inline ::proto::ComplexObjectL414* ComplexObjectL413::mutable_complexobject() {
+  ::proto::ComplexObjectL414* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL413.complexObject)
   return _msg;
 }
-inline void ComplexObjectL413::set_allocated_complexobjectl414(::proto::ComplexObjectL414* complexobjectl414) {
+inline void ComplexObjectL413::set_allocated_complexobject(::proto::ComplexObjectL414* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl414_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl414) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl414);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl414 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl414, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl414_ = complexobjectl414;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL413.complexObjectL414)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL413.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL414
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL414::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL414::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL414::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL414::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL414::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL414::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL414.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL414::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL414::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL414::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL414::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL414::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL414.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL414::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL414::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL414::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL414::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL414::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL414.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL414::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL414::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL414::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL414::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL414::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL414.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL414::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL414::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL414::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL414::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL414::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL414.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL414::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL414::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL414::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL414::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL414::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL414.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL414.var_string)
 }
-inline std::string* ComplexObjectL414::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL414.var_string1)
+inline std::string* ComplexObjectL414::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL414.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL414::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL414::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL414::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL414::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL414::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL414::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL414::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL414.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL414::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL414.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL414::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL414::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL414.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL414.var_string)
 }
 
-// .proto.ComplexObjectL415 complexObjectL415 = 7;
-inline bool ComplexObjectL414::_internal_has_complexobjectl415() const {
-  return this != internal_default_instance() && _impl_.complexobjectl415_ != nullptr;
+// .proto.ComplexObjectL415 complexObject = 2;
+inline bool ComplexObjectL414::_internal_has_complexobject() const {
+  return this != internal_default_instance() && _impl_.complexobject_ != nullptr;
 }
-inline bool ComplexObjectL414::has_complexobjectl415() const {
-  return _internal_has_complexobjectl415();
+inline bool ComplexObjectL414::has_complexobject() const {
+  return _internal_has_complexobject();
 }
-inline void ComplexObjectL414::clear_complexobjectl415() {
-  if (GetArenaForAllocation() == nullptr && _impl_.complexobjectl415_ != nullptr) {
-    delete _impl_.complexobjectl415_;
+inline void ComplexObjectL414::clear_complexobject() {
+  if (GetArenaForAllocation() == nullptr && _impl_.complexobject_ != nullptr) {
+    delete _impl_.complexobject_;
   }
-  _impl_.complexobjectl415_ = nullptr;
+  _impl_.complexobject_ = nullptr;
 }
-inline const ::proto::ComplexObjectL415& ComplexObjectL414::_internal_complexobjectl415() const {
-  const ::proto::ComplexObjectL415* p = _impl_.complexobjectl415_;
+inline const ::proto::ComplexObjectL415& ComplexObjectL414::_internal_complexobject() const {
+  const ::proto::ComplexObjectL415* p = _impl_.complexobject_;
   return p != nullptr ? *p : reinterpret_cast<const ::proto::ComplexObjectL415&>(
       ::proto::_ComplexObjectL415_default_instance_);
 }
-inline const ::proto::ComplexObjectL415& ComplexObjectL414::complexobjectl415() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.complexObjectL415)
-  return _internal_complexobjectl415();
+inline const ::proto::ComplexObjectL415& ComplexObjectL414::complexobject() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL414.complexObject)
+  return _internal_complexobject();
 }
-inline void ComplexObjectL414::unsafe_arena_set_allocated_complexobjectl415(
-    ::proto::ComplexObjectL415* complexobjectl415) {
+inline void ComplexObjectL414::unsafe_arena_set_allocated_complexobject(
+    ::proto::ComplexObjectL415* complexobject) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobjectl415_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.complexobject_);
   }
-  _impl_.complexobjectl415_ = complexobjectl415;
-  if (complexobjectl415) {
+  _impl_.complexobject_ = complexobject;
+  if (complexobject) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL414.complexObjectL415)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:proto.ComplexObjectL414.complexObject)
 }
-inline ::proto::ComplexObjectL415* ComplexObjectL414::release_complexobjectl415() {
+inline ::proto::ComplexObjectL415* ComplexObjectL414::release_complexobject() {
   
-  ::proto::ComplexObjectL415* temp = _impl_.complexobjectl415_;
-  _impl_.complexobjectl415_ = nullptr;
+  ::proto::ComplexObjectL415* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -7369,198 +4989,98 @@ inline ::proto::ComplexObjectL415* ComplexObjectL414::release_complexobjectl415(
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::proto::ComplexObjectL415* ComplexObjectL414::unsafe_arena_release_complexobjectl415() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL414.complexObjectL415)
+inline ::proto::ComplexObjectL415* ComplexObjectL414::unsafe_arena_release_complexobject() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL414.complexObject)
   
-  ::proto::ComplexObjectL415* temp = _impl_.complexobjectl415_;
-  _impl_.complexobjectl415_ = nullptr;
+  ::proto::ComplexObjectL415* temp = _impl_.complexobject_;
+  _impl_.complexobject_ = nullptr;
   return temp;
 }
-inline ::proto::ComplexObjectL415* ComplexObjectL414::_internal_mutable_complexobjectl415() {
+inline ::proto::ComplexObjectL415* ComplexObjectL414::_internal_mutable_complexobject() {
   
-  if (_impl_.complexobjectl415_ == nullptr) {
+  if (_impl_.complexobject_ == nullptr) {
     auto* p = CreateMaybeMessage<::proto::ComplexObjectL415>(GetArenaForAllocation());
-    _impl_.complexobjectl415_ = p;
+    _impl_.complexobject_ = p;
   }
-  return _impl_.complexobjectl415_;
+  return _impl_.complexobject_;
 }
-inline ::proto::ComplexObjectL415* ComplexObjectL414::mutable_complexobjectl415() {
-  ::proto::ComplexObjectL415* _msg = _internal_mutable_complexobjectl415();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL414.complexObjectL415)
+inline ::proto::ComplexObjectL415* ComplexObjectL414::mutable_complexobject() {
+  ::proto::ComplexObjectL415* _msg = _internal_mutable_complexobject();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL414.complexObject)
   return _msg;
 }
-inline void ComplexObjectL414::set_allocated_complexobjectl415(::proto::ComplexObjectL415* complexobjectl415) {
+inline void ComplexObjectL414::set_allocated_complexobject(::proto::ComplexObjectL415* complexobject) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.complexobjectl415_;
+    delete _impl_.complexobject_;
   }
-  if (complexobjectl415) {
+  if (complexobject) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobjectl415);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(complexobject);
     if (message_arena != submessage_arena) {
-      complexobjectl415 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, complexobjectl415, submessage_arena);
+      complexobject = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, complexobject, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.complexobjectl415_ = complexobjectl415;
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL414.complexObjectL415)
+  _impl_.complexobject_ = complexobject;
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL414.complexObject)
 }
 
 // -------------------------------------------------------------------
 
 // ComplexObjectL415
 
-// int32 var_int321 = 1;
-inline void ComplexObjectL415::clear_var_int321() {
-  _impl_.var_int321_ = 0;
+// string var_string = 1;
+inline void ComplexObjectL415::clear_var_string() {
+  _impl_.var_string_.ClearToEmpty();
 }
-inline int32_t ComplexObjectL415::_internal_var_int321() const {
-  return _impl_.var_int321_;
-}
-inline int32_t ComplexObjectL415::var_int321() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL415.var_int321)
-  return _internal_var_int321();
-}
-inline void ComplexObjectL415::_internal_set_var_int321(int32_t value) {
-  
-  _impl_.var_int321_ = value;
-}
-inline void ComplexObjectL415::set_var_int321(int32_t value) {
-  _internal_set_var_int321(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL415.var_int321)
-}
-
-// int64 var_int641 = 2;
-inline void ComplexObjectL415::clear_var_int641() {
-  _impl_.var_int641_ = int64_t{0};
-}
-inline int64_t ComplexObjectL415::_internal_var_int641() const {
-  return _impl_.var_int641_;
-}
-inline int64_t ComplexObjectL415::var_int641() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL415.var_int641)
-  return _internal_var_int641();
-}
-inline void ComplexObjectL415::_internal_set_var_int641(int64_t value) {
-  
-  _impl_.var_int641_ = value;
-}
-inline void ComplexObjectL415::set_var_int641(int64_t value) {
-  _internal_set_var_int641(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL415.var_int641)
-}
-
-// float var_float1 = 3;
-inline void ComplexObjectL415::clear_var_float1() {
-  _impl_.var_float1_ = 0;
-}
-inline float ComplexObjectL415::_internal_var_float1() const {
-  return _impl_.var_float1_;
-}
-inline float ComplexObjectL415::var_float1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL415.var_float1)
-  return _internal_var_float1();
-}
-inline void ComplexObjectL415::_internal_set_var_float1(float value) {
-  
-  _impl_.var_float1_ = value;
-}
-inline void ComplexObjectL415::set_var_float1(float value) {
-  _internal_set_var_float1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL415.var_float1)
-}
-
-// double var_double1 = 4;
-inline void ComplexObjectL415::clear_var_double1() {
-  _impl_.var_double1_ = 0;
-}
-inline double ComplexObjectL415::_internal_var_double1() const {
-  return _impl_.var_double1_;
-}
-inline double ComplexObjectL415::var_double1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL415.var_double1)
-  return _internal_var_double1();
-}
-inline void ComplexObjectL415::_internal_set_var_double1(double value) {
-  
-  _impl_.var_double1_ = value;
-}
-inline void ComplexObjectL415::set_var_double1(double value) {
-  _internal_set_var_double1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL415.var_double1)
-}
-
-// bool var_bool1 = 5;
-inline void ComplexObjectL415::clear_var_bool1() {
-  _impl_.var_bool1_ = false;
-}
-inline bool ComplexObjectL415::_internal_var_bool1() const {
-  return _impl_.var_bool1_;
-}
-inline bool ComplexObjectL415::var_bool1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL415.var_bool1)
-  return _internal_var_bool1();
-}
-inline void ComplexObjectL415::_internal_set_var_bool1(bool value) {
-  
-  _impl_.var_bool1_ = value;
-}
-inline void ComplexObjectL415::set_var_bool1(bool value) {
-  _internal_set_var_bool1(value);
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL415.var_bool1)
-}
-
-// string var_string1 = 6;
-inline void ComplexObjectL415::clear_var_string1() {
-  _impl_.var_string1_.ClearToEmpty();
-}
-inline const std::string& ComplexObjectL415::var_string1() const {
-  // @@protoc_insertion_point(field_get:proto.ComplexObjectL415.var_string1)
-  return _internal_var_string1();
+inline const std::string& ComplexObjectL415::var_string() const {
+  // @@protoc_insertion_point(field_get:proto.ComplexObjectL415.var_string)
+  return _internal_var_string();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void ComplexObjectL415::set_var_string1(ArgT0&& arg0, ArgT... args) {
+void ComplexObjectL415::set_var_string(ArgT0&& arg0, ArgT... args) {
  
- _impl_.var_string1_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto.ComplexObjectL415.var_string1)
+ _impl_.var_string_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto.ComplexObjectL415.var_string)
 }
-inline std::string* ComplexObjectL415::mutable_var_string1() {
-  std::string* _s = _internal_mutable_var_string1();
-  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL415.var_string1)
+inline std::string* ComplexObjectL415::mutable_var_string() {
+  std::string* _s = _internal_mutable_var_string();
+  // @@protoc_insertion_point(field_mutable:proto.ComplexObjectL415.var_string)
   return _s;
 }
-inline const std::string& ComplexObjectL415::_internal_var_string1() const {
-  return _impl_.var_string1_.Get();
+inline const std::string& ComplexObjectL415::_internal_var_string() const {
+  return _impl_.var_string_.Get();
 }
-inline void ComplexObjectL415::_internal_set_var_string1(const std::string& value) {
+inline void ComplexObjectL415::_internal_set_var_string(const std::string& value) {
   
-  _impl_.var_string1_.Set(value, GetArenaForAllocation());
+  _impl_.var_string_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL415::_internal_mutable_var_string1() {
+inline std::string* ComplexObjectL415::_internal_mutable_var_string() {
   
-  return _impl_.var_string1_.Mutable(GetArenaForAllocation());
+  return _impl_.var_string_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ComplexObjectL415::release_var_string1() {
-  // @@protoc_insertion_point(field_release:proto.ComplexObjectL415.var_string1)
-  return _impl_.var_string1_.Release();
+inline std::string* ComplexObjectL415::release_var_string() {
+  // @@protoc_insertion_point(field_release:proto.ComplexObjectL415.var_string)
+  return _impl_.var_string_.Release();
 }
-inline void ComplexObjectL415::set_allocated_var_string1(std::string* var_string1) {
-  if (var_string1 != nullptr) {
+inline void ComplexObjectL415::set_allocated_var_string(std::string* var_string) {
+  if (var_string != nullptr) {
     
   } else {
     
   }
-  _impl_.var_string1_.SetAllocated(var_string1, GetArenaForAllocation());
+  _impl_.var_string_.SetAllocated(var_string, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.var_string1_.IsDefault()) {
-    _impl_.var_string1_.Set("", GetArenaForAllocation());
+  if (_impl_.var_string_.IsDefault()) {
+    _impl_.var_string_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL415.var_string1)
+  // @@protoc_insertion_point(field_set_allocated:proto.ComplexObjectL415.var_string)
 }
 
 #ifdef __GNUC__

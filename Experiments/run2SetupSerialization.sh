@@ -21,8 +21,8 @@ cd "$path/src/main/cpp"
 # rm -rf cpp.cbp
 # rm -rf bin
 cmake .
-#make clean
-make -j12
+make clean
+make -j16
 
 mv  bin/ "$path/Experiments/cppbin"
 

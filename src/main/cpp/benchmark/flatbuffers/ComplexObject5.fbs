@@ -1,0 +1,9 @@
+include "ComplexObject6.fbs";
+namespace complexobjectflatbuffers;
+
+table ComplexObject5FBS {
+        var_string:string;
+        complexobject:ComplexObject6FBS;
+
+}
+root_type ComplexObject5FBS;

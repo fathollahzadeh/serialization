@@ -36,6 +36,7 @@ include_directories("${PROJECT_SOURCE_DIR}/serialization/header")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/inplace")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/proto")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/proto/*.h")
+include_directories("${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.h")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/flatbuffers")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/flatbuffers/flatbuffers")
 
@@ -45,8 +46,8 @@ include_directories("${PROJECT_SOURCE_DIR}/util/source")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/inplace/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/proto/")
-include_directories("${PROJECT_SOURCE_DIR}/benchmark/*.cc")
-include_directories("${PROJECT_SOURCE_DIR}/benchmark/*.cpp")
+include_directories("${PROJECT_SOURCE_DIR}/benchmark/proto/*.cc")
+include_directories("${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.cc")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/")
 include_directories("${PROJECT_SOURCE_DIR}/experiments/")
 
@@ -58,7 +59,8 @@ file(GLOB srcInPlace "${PROJECT_SOURCE_DIR}/serialization/source/inplace/*.cpp")
 file(GLOB srcProtobuf "${PROJECT_SOURCE_DIR}/serialization/source/proto/*.cpp")
 file(GLOB srcProtobufcc "${PROJECT_SOURCE_DIR}/serialization/source/proto/*.cc")
 file(GLOB srcFlatbuf "${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/*.cpp")
-file(GLOB srcBenchmarkCC "${PROJECT_SOURCE_DIR}/benchmark/proto/*.cc")
+file(GLOB srcBenchmarkCCP "${PROJECT_SOURCE_DIR}/benchmark/proto/*.cc")
+file(GLOB srcBenchmarkCCF "${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.cc")
 
 
 ## prepare data
@@ -276,32 +278,39 @@ file(GLOB srcBenchmarkCC "${PROJECT_SOURCE_DIR}/benchmark/proto/*.cc")
 #target_link_libraries(DataReadNetworkIO PRIVATE mongo::mongocxx_shared)
 
 # Benchmark
-add_executable(SimpleObject
-        benchmark/SimpleObject.cpp
+add_executable(ProtoSimpleObject
+        benchmark/proto/SimpleObject.cpp
         ${srcBenchmark}
-        ${srcBenchmarkCC}
+        ${srcBenchmarkCCP}
         )
 
-add_executable(ComplexObjectL1
-        benchmark/ComplexObjectL1.cpp
+add_executable(ProtoComplexObjectL4
+        benchmark/proto/ComplexObjectL4.cpp
         ${srcBenchmark}
-        ${srcBenchmarkCC}
+        ${srcBenchmarkCCP}
         )
 
-add_executable(ComplexObjectL2
-        benchmark/ComplexObjectL2.cpp
+#add_executable(ProtoComplexObjectL3
+#        benchmark/proto/ComplexObjectL3.cpp
+#        ${srcBenchmark}
+#        ${srcBenchmarkCCP}
+#        )
+
+
+add_executable(FlatSimpleObject
+        benchmark/flatbuffers/SimpleObject.cpp
         ${srcBenchmark}
-        ${srcBenchmarkCC}
+        ${srcBenchmarkCCF}
         )
 
-add_executable(ComplexObjectL3
-        benchmark/ComplexObjectL3.cpp
+add_executable(FlatComplexObjectL4
+        benchmark/flatbuffers/ComplexObjectL4.cpp
         ${srcBenchmark}
-        ${srcBenchmarkCC}
+        ${srcBenchmarkCCF}
         )
-
-add_executable(ComplexObjectL4
-        benchmark/ComplexObjectL4.cpp
-        ${srcBenchmark}
-        ${srcBenchmarkCC}
-        )
+#
+#add_executable(FlatComplexObjectL3
+#        benchmark/flatbuffers/ComplexObjectL3.cpp
+#        ${srcBenchmark}
+#        ${srcBenchmarkCCF}
+#        )

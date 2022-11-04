@@ -10,11 +10,11 @@
 # echo 3 > /proc/sys/vm/drop_caches && sync
 # sleep 30
 
-./cppbin/SimpleObject
-./cppbin/ComplexObjectL1
-./cppbin/ComplexObjectL2
-./cppbin/ComplexObjectL3
-./cppbin/ComplexObjectL4
+#./cppbin/ProtoComplexObjectL3
+./cppbin/ProtoSimpleObject
+./cppbin/ProtoComplexObjectL4
 
-#ComplexObjectL1 avg serialization=1.0289  avg deserialize=2.9162   buffer size=1166
+./cppbin/FlatSimpleObject
+#./cppbin/FlatComplexObjectL3
+./cppbin/FlatComplexObjectL4
 

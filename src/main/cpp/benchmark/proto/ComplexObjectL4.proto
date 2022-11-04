@@ -2,161 +2,67 @@ syntax = "proto3";
 package proto;
 
 message ComplexObjectL4 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL41 complexObjectL41=7;
+    string var_string = 1;
+    ComplexObjectL41 complexObject=2;
 }
 
 message ComplexObjectL41 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL42 complexObjectL42=7;
+    string var_string = 1;
+    ComplexObjectL42 complexObject=2;
 }
-
 message ComplexObjectL42 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL43 complexObjectL43=7;
+    string var_string = 1;
+    ComplexObjectL43 complexObject=2;
 }
-
 message ComplexObjectL43 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL44 complexObjectL44=7;
+    string var_string = 1;
+    ComplexObjectL44 complexObject=2;
 }
-
 message ComplexObjectL44 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL45 complexObjectL45=7;
+    string var_string = 1;
+    ComplexObjectL45 complexObject=2;
 }
-
 message ComplexObjectL45 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL46 complexObjectL46=7;
+    string var_string = 1;
+    ComplexObjectL46 complexObject=2;
 }
-
 message ComplexObjectL46 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL47 complexObjectL47=7;
+    string var_string = 1;
+    ComplexObjectL47 complexObject=2;
 }
-
 message ComplexObjectL47 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL48 complexObjectL48=7;
+    string var_string = 1;
+    ComplexObjectL48 complexObject=2;
 }
-
 message ComplexObjectL48 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL49 complexObjectL49=7;
+    string var_string = 1;
+    ComplexObjectL49 complexObject=2;
 }
-
 message ComplexObjectL49 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL410 complexObjectL410=7;
+    string var_string = 1;
+    ComplexObjectL410 complexObject=2;
 }
-
 message ComplexObjectL410 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL411 complexObjectL411=7;
+    string var_string = 1;
+    ComplexObjectL411 complexObject=2;
 }
-
 message ComplexObjectL411 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL412 complexObjectL412=7;
+    string var_string = 1;
+    ComplexObjectL412 complexObject=2;
 }
-
 message ComplexObjectL412 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL413 complexObjectL413=7;
+    string var_string = 1;
+    ComplexObjectL413 complexObject=2;
 }
-
 message ComplexObjectL413 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL414 complexObjectL414=7;
+    string var_string = 1;
+    ComplexObjectL414 complexObject=2;
 }
-
 message ComplexObjectL414 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
-    ComplexObjectL415 complexObjectL415=7;
+    string var_string = 1;
+    ComplexObjectL415 complexObject=2;
 }
-
 message ComplexObjectL415 {
-    int32 var_int321 = 1;
-    int64 var_int641 = 2;
-    float var_float1 = 3;
-    double var_double1 = 4;
-    bool var_bool1 = 5;
-    string var_string1 = 6;
+    string var_string = 1;
 }
 
