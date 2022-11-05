@@ -36,7 +36,7 @@ include_directories("${PROJECT_SOURCE_DIR}/serialization/header")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/inplace")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/proto")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/proto/*.h")
-include_directories("${PROJECT_SOURCE_DIR}/benchmark/complexobject/*.h")
+include_directories("${PROJECT_SOURCE_DIR}/benchmark/complexobject/header")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.h")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/flatbuffers")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/flatbuffers/flatbuffers")
@@ -47,7 +47,7 @@ include_directories("${PROJECT_SOURCE_DIR}/util/source")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/inplace/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/proto/")
-include_directories("${PROJECT_SOURCE_DIR}/benchmark/complexobject/")
+include_directories("${PROJECT_SOURCE_DIR}/benchmark/complexobject/source/")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/proto/*.cc")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.cc")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/")
@@ -63,7 +63,7 @@ file(GLOB srcProtobufcc "${PROJECT_SOURCE_DIR}/serialization/source/proto/*.cc")
 file(GLOB srcFlatbuf "${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/*.cpp")
 file(GLOB srcBenchmarkCCP "${PROJECT_SOURCE_DIR}/benchmark/proto/*.cc")
 file(GLOB srcBenchmarkCCF "${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.cc")
-file(GLOB srcComplexObject "${PROJECT_SOURCE_DIR}/benchmark/complexobject/*.cpp")
+file(GLOB srcComplexObject "${PROJECT_SOURCE_DIR}/benchmark/complexobject/source/*.cpp")
 
 
 ## prepare data
@@ -295,6 +295,5 @@ add_executable(FlatBufBench
 
 add_executable(ComplexObjectBench
         benchmark/complexobject/ComplexObject.cpp
-        ${srcBenchmark}
-        ${srcBenchmarkCCF}
+        ${srcComplexObject}
         )

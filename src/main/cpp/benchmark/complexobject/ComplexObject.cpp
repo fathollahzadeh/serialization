@@ -1,3 +1,8 @@
-//
-// Created by saeed on 05.11.22.
-//
+
+
+#include "ComplexObject1.h"
+
+int main(int argc, char *argv[]) {
+
+    return 0;
+}
