@@ -22,7 +22,7 @@
 using namespace std;
 using namespace complexobjectflatbuffers;
 
-static std::string randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0";
+std::string randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0";
 
 static flatbuffers::Offset<SimpleObjectFBS> genSimpleObject(flatbuffers::FlatBufferBuilder &builder) {
 
@@ -182,9 +182,174 @@ static flatbuffers::Offset<ComplexObject1FBS> genComplexObject1(flatbuffers::Fla
     return orc;
 }
 
+static string genRandomString(const int len) {
+    static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    std::string tmp_s;
+    tmp_s.reserve(len);
+    for (int i = 0; i < len; ++i) {
+        tmp_s += alphanum[rand() % (sizeof(alphanum) - 1)];
+    }
+    return tmp_s;
+}
 
-int main(int argc, char *argv[]) {
+static void run1(){
+    randString = genRandomString(1024);
+    flatbuffers::FlatBufferBuilder builder(1024);
+    int totalObjects = 500000;
+    long sum_serialization = 0;
+    long sum_deserialization = 0;
+    size_t bufferSize;
+    auto arc = genSimpleObject(builder);
+    builder.Finish(arc);
+    bufferSize = builder.GetSize();
 
+    for (int i = 0; i < totalObjects; ++i) {
+        flatbuffers::FlatBufferBuilder tmpBuilder(bufferSize);
+        char *buffer = new char[bufferSize];
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+        auto orc = genSimpleObject(tmpBuilder);
+        uint8_t *bp;
+        tmpBuilder.Finish(orc);
+        bp = tmpBuilder.GetBufferPointer();
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+        memmove(buffer, (char *) bp, bufferSize);
+
+        std::chrono::steady_clock::time_point begind = std::chrono::steady_clock::now();
+        auto * complexObject = new SimpleObjectFBST();
+        GetSimpleObjectFBS(buffer)->UnPackTo(complexObject);
+        std::chrono::steady_clock::time_point endd = std::chrono::steady_clock::now();
+
+        sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+        sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
+        tmpBuilder.Clear();
+        delete[] buffer;
+    }
+
+    double avg = (double )sum_serialization / totalObjects;
+    double avgd = (double )sum_deserialization / totalObjects;
+    cout << "FlatBuf,1," << avg << "," << avgd << ","<<bufferSize<< endl;
+}
+
+static void run2(){
+    randString = genRandomString(512);
+    flatbuffers::FlatBufferBuilder builder(1024);
+    int totalObjects = 500000;
+    long sum_serialization = 0;
+    long sum_deserialization = 0;
+    size_t bufferSize;
+    auto arc = genComplexObject15(builder);
+    builder.Finish(arc);
+    bufferSize = builder.GetSize();
+
+    for (int i = 0; i < totalObjects; ++i) {
+        flatbuffers::FlatBufferBuilder tmpBuilder(bufferSize);
+        char *buffer = new char[bufferSize];
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+        auto orc = genComplexObject15(tmpBuilder);
+        uint8_t *bp;
+        tmpBuilder.Finish(orc);
+        bp = tmpBuilder.GetBufferPointer();
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+        memmove(buffer, (char *) bp, bufferSize);
+
+        std::chrono::steady_clock::time_point begind = std::chrono::steady_clock::now();
+        auto * complexObject = new ComplexObject15FBST();
+        GetComplexObject15FBS(buffer)->UnPackTo(complexObject);
+        std::chrono::steady_clock::time_point endd = std::chrono::steady_clock::now();
+
+        sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+        sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
+        tmpBuilder.Clear();
+        delete[] buffer;
+    }
+
+    double avg = (double )sum_serialization / totalObjects;
+    double avgd = (double )sum_deserialization / totalObjects;
+    cout << "FlatBuf,2," << avg << "," << avgd << ","<<bufferSize<< endl;
+}
+
+static void run4(){
+    randString = genRandomString(256);
+    flatbuffers::FlatBufferBuilder builder(1024);
+    int totalObjects = 500000;
+    long sum_serialization = 0;
+    long sum_deserialization = 0;
+    size_t bufferSize;
+    auto arc = genComplexObject13(builder);
+    builder.Finish(arc);
+    bufferSize = builder.GetSize();
+
+    for (int i = 0; i < totalObjects; ++i) {
+        flatbuffers::FlatBufferBuilder tmpBuilder(bufferSize);
+        char *buffer = new char[bufferSize];
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+        auto orc = genComplexObject13(tmpBuilder);
+        uint8_t *bp;
+        tmpBuilder.Finish(orc);
+        bp = tmpBuilder.GetBufferPointer();
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+        memmove(buffer, (char *) bp, bufferSize);
+
+        std::chrono::steady_clock::time_point begind = std::chrono::steady_clock::now();
+        auto * complexObject = new ComplexObject13FBST();
+        GetComplexObject13FBS(buffer)->UnPackTo(complexObject);
+        std::chrono::steady_clock::time_point endd = std::chrono::steady_clock::now();
+
+        sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+        sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
+        tmpBuilder.Clear();
+        delete[] buffer;
+    }
+
+    double avg = (double )sum_serialization / totalObjects;
+    double avgd = (double )sum_deserialization / totalObjects;
+    cout << "FlatBuf,4," << avg << "," << avgd << ","<<bufferSize<< endl;
+}
+
+static void run8(){
+    randString = genRandomString(128);
+    flatbuffers::FlatBufferBuilder builder(1024);
+    int totalObjects = 500000;
+    long sum_serialization = 0;
+    long sum_deserialization = 0;
+    size_t bufferSize;
+    auto arc = genComplexObject9(builder);
+    builder.Finish(arc);
+    bufferSize = builder.GetSize();
+
+    for (int i = 0; i < totalObjects; ++i) {
+        flatbuffers::FlatBufferBuilder tmpBuilder(bufferSize);
+        char *buffer = new char[bufferSize];
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+        auto orc = genComplexObject9(tmpBuilder);
+        uint8_t *bp;
+        tmpBuilder.Finish(orc);
+        bp = tmpBuilder.GetBufferPointer();
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+        memmove(buffer, (char *) bp, bufferSize);
+
+        std::chrono::steady_clock::time_point begind = std::chrono::steady_clock::now();
+        auto * complexObject = new ComplexObject9FBST();
+        GetComplexObject9FBS(buffer)->UnPackTo(complexObject);
+        std::chrono::steady_clock::time_point endd = std::chrono::steady_clock::now();
+
+        sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+        sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
+        tmpBuilder.Clear();
+        delete[] buffer;
+    }
+
+    double avg = (double )sum_serialization / totalObjects;
+    double avgd = (double )sum_deserialization / totalObjects;
+    cout << "FlatBuf,8," << avg << "," << avgd << ","<<bufferSize<< endl;
+}
+
+static void run16(){
+    randString = genRandomString(64);
     flatbuffers::FlatBufferBuilder builder(1024);
     int totalObjects = 500000;
     long sum_serialization = 0;
@@ -219,8 +384,15 @@ int main(int argc, char *argv[]) {
 
     double avg = (double )sum_serialization / totalObjects;
     double avgd = (double )sum_deserialization / totalObjects;
-    cout << "FlatBuffer ComplexObjectL4 avg serialization=" << avg << "  avg deserialize=" << avgd << "   buffer size="<<bufferSize<< endl;
+    cout << "FlatBuf,16," << avg << "," << avgd << ","<<bufferSize<< endl;
+}
 
+int main(int argc, char *argv[]) {
+    run1();
+    run2();
+    run4();
+    run8();
+    run16();
     return 0;
 }
 

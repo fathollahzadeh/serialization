@@ -278,39 +278,14 @@ file(GLOB srcBenchmarkCCF "${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.cc")
 #target_link_libraries(DataReadNetworkIO PRIVATE mongo::mongocxx_shared)
 
 # Benchmark
-#add_executable(ProtoSimpleObject
-#        benchmark/proto/SimpleObject.cpp
-#        ${srcBenchmark}
-#        ${srcBenchmarkCCP}
-#        )
-
-#add_executable(ProtoComplexObjectL4
-#        benchmark/proto/ComplexObjectL4.cpp
-#        ${srcBenchmark}
-#        ${srcBenchmarkCCP}
-#        )
-
-#add_executable(ProtoComplexObjectL3
-#        benchmark/proto/ComplexObjectL3.cpp
-#        ${srcBenchmark}
-#        ${srcBenchmarkCCP}
-#        )
-
-
-add_executable(FlatSimpleObject
-        benchmark/flatbuffers/SimpleObject.cpp
+add_executable(ProtoBufBench
+        benchmark/proto/ComplexObjectL4.cpp
         ${srcBenchmark}
-        ${srcBenchmarkCCF}
+        ${srcBenchmarkCCP}
         )
 
-add_executable(FlatComplexObjectL4
+add_executable(FlatBufBench
         benchmark/flatbuffers/ComplexObjectL4.cpp
         ${srcBenchmark}
         ${srcBenchmarkCCF}
         )
-#
-#add_executable(FlatComplexObjectL3
-#        benchmark/flatbuffers/ComplexObjectL3.cpp
-#        ${srcBenchmark}
-#        ${srcBenchmarkCCF}
-#        )
