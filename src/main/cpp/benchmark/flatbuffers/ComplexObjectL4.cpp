@@ -195,7 +195,7 @@ static string genRandomString(const int len) {
 static void run1(){
     randString = genRandomString(1024);
     flatbuffers::FlatBufferBuilder builder(1024);
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
@@ -224,6 +224,7 @@ static void run1(){
         sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
         tmpBuilder.Clear();
         delete[] buffer;
+        delete complexObject;
     }
 
     double avg = (double )sum_serialization / totalObjects;
@@ -234,7 +235,7 @@ static void run1(){
 static void run2(){
     randString = genRandomString(512);
     flatbuffers::FlatBufferBuilder builder(1024);
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
@@ -263,6 +264,7 @@ static void run2(){
         sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
         tmpBuilder.Clear();
         delete[] buffer;
+        delete complexObject;
     }
 
     double avg = (double )sum_serialization / totalObjects;
@@ -273,7 +275,7 @@ static void run2(){
 static void run4(){
     randString = genRandomString(256);
     flatbuffers::FlatBufferBuilder builder(1024);
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
@@ -301,18 +303,19 @@ static void run4(){
         sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
         sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
         tmpBuilder.Clear();
+        delete complexObject;
         delete[] buffer;
     }
 
     double avg = (double )sum_serialization / totalObjects;
     double avgd = (double )sum_deserialization / totalObjects;
-    cout << "FlatBuf,4," << avg << "," << avgd << ","<<bufferSize<< endl;
+    cout << "FlatBuf,3," << avg << "," << avgd << ","<<bufferSize<< endl;
 }
 
 static void run8(){
     randString = genRandomString(128);
     flatbuffers::FlatBufferBuilder builder(1024);
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
@@ -341,17 +344,18 @@ static void run8(){
         sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
         tmpBuilder.Clear();
         delete[] buffer;
+        delete complexObject;
     }
 
     double avg = (double )sum_serialization / totalObjects;
     double avgd = (double )sum_deserialization / totalObjects;
-    cout << "FlatBuf,8," << avg << "," << avgd << ","<<bufferSize<< endl;
+    cout << "FlatBuf,4," << avg << "," << avgd << ","<<bufferSize<< endl;
 }
 
 static void run16(){
     randString = genRandomString(64);
     flatbuffers::FlatBufferBuilder builder(1024);
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
@@ -380,11 +384,12 @@ static void run16(){
         sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
         tmpBuilder.Clear();
         delete[] buffer;
+        delete complexObject;
     }
 
     double avg = (double )sum_serialization / totalObjects;
     double avgd = (double )sum_deserialization / totalObjects;
-    cout << "FlatBuf,16," << avg << "," << avgd << ","<<bufferSize<< endl;
+    cout << "FlatBuf,5," << avg << "," << avgd << ","<<bufferSize<< endl;
 }
 
 int main(int argc, char *argv[]) {

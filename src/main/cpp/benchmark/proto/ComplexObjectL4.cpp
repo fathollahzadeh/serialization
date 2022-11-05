@@ -21,7 +21,7 @@
 
 using namespace std;
 
-int strLen = 64;
+std::string randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0";
 
 static string genRandomString(const int len) {
     static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -35,121 +35,121 @@ static string genRandomString(const int len) {
 
 static proto::ComplexObjectL415 *genComplexObjectL415() {
     proto::ComplexObjectL415 *cObject = new proto::ComplexObjectL415();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     return cObject;
 }
 
 static proto::ComplexObjectL414 *genComplexObjectL414() {
     proto::ComplexObjectL414 *cObject = new proto::ComplexObjectL414();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL415());
     return cObject;
 }
 
 static proto::ComplexObjectL413 *genComplexObjectL413() {
     proto::ComplexObjectL413 *cObject = new proto::ComplexObjectL413();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL414());
     return cObject;
 }
 
 static proto::ComplexObjectL412 *genComplexObjectL412() {
     proto::ComplexObjectL412 *cObject = new proto::ComplexObjectL412();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL413());
     return cObject;
 }
 
 static proto::ComplexObjectL411 *genComplexObjectL411() {
     proto::ComplexObjectL411 *cObject = new proto::ComplexObjectL411();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL412());
     return cObject;
 }
 
 static proto::ComplexObjectL410 *genComplexObjectL410() {
     proto::ComplexObjectL410 *cObject = new proto::ComplexObjectL410();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL411());
     return cObject;
 }
 
 static proto::ComplexObjectL49 *genComplexObjectL49() {
     proto::ComplexObjectL49 *cObject = new proto::ComplexObjectL49();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL410());
     return cObject;
 }
 
 static proto::ComplexObjectL48 *genComplexObjectL48() {
     proto::ComplexObjectL48 *cObject = new proto::ComplexObjectL48();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL49());
     return cObject;
 }
 
 static proto::ComplexObjectL47 *genComplexObjectL47() {
     proto::ComplexObjectL47 *cObject = new proto::ComplexObjectL47();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL48());
     return cObject;
 }
 
 static proto::ComplexObjectL46 *genComplexObjectL46() {
     proto::ComplexObjectL46 *cObject = new proto::ComplexObjectL46();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL47());
     return cObject;
 }
 
 static proto::ComplexObjectL45 *genComplexObjectL45() {
     proto::ComplexObjectL45 *cObject = new proto::ComplexObjectL45();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL46());
     return cObject;
 }
 
 static proto::ComplexObjectL44 *genComplexObjectL44() {
     proto::ComplexObjectL44 *cObject = new proto::ComplexObjectL44();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL45());
     return cObject;
 }
 
 static proto::ComplexObjectL43 *genComplexObjectL43() {
     proto::ComplexObjectL43 *cObject = new proto::ComplexObjectL43();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL44());
     return cObject;
 }
 
 static proto::ComplexObjectL42 *genComplexObjectL42() {
     proto::ComplexObjectL42 *cObject = new proto::ComplexObjectL42();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL43());
     return cObject;
 }
 
 static proto::ComplexObjectL41 *genComplexObjectL41() {
     proto::ComplexObjectL41 *cObject = new proto::ComplexObjectL41();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL42());
     return cObject;
 }
 
 static proto::ComplexObjectL4 *genComplexObjectL4() {
     proto::ComplexObjectL4 *cObject = new proto::ComplexObjectL4();
-    cObject->set_var_string(genRandomString(strLen));
+    cObject->set_var_string(randString);
     cObject->set_allocated_complexobject(genComplexObjectL41());
     return cObject;
 }
 
 static void run1(){
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
-    strLen = 1024;
+    randString = genRandomString(1024);
 
     for (int i = 0; i < totalObjects; ++i) {
         proto::ComplexObjectL415 *cObject = genComplexObjectL415();
@@ -179,11 +179,11 @@ static void run1(){
 }
 
 static void run2(){
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
-    strLen = 512;
+    randString = genRandomString(512);
 
     for (int i = 0; i < totalObjects; ++i) {
         proto::ComplexObjectL414 *cObject = genComplexObjectL414();
@@ -213,11 +213,11 @@ static void run2(){
 }
 
 static void run4(){
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
-    strLen = 256;
+    randString = genRandomString(256);
 
     for (int i = 0; i < totalObjects; ++i) {
         proto::ComplexObjectL412 *cObject = genComplexObjectL412();
@@ -242,16 +242,16 @@ static void run4(){
     }
     double avg = (double )sum_serialization / totalObjects;
     double avgd = (double )sum_deserialization / totalObjects;
-    cout << "ProtoBuf,4," << avg << "," << avgd<<","<<bufferSize<< endl;
+    cout << "ProtoBuf,3," << avg << "," << avgd<<","<<bufferSize<< endl;
 
 }
 
 static void run8(){
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
-    strLen = 128;
+    randString = genRandomString(128);
 
     for (int i = 0; i < totalObjects; ++i) {
         proto::ComplexObjectL48 *cObject = genComplexObjectL48();
@@ -276,16 +276,16 @@ static void run8(){
     }
     double avg = (double )sum_serialization / totalObjects;
     double avgd = (double )sum_deserialization / totalObjects;
-    cout << "ProtoBuf,8," << avg << "," << avgd<<","<<bufferSize<< endl;
+    cout << "ProtoBuf,4," << avg << "," << avgd<<","<<bufferSize<< endl;
 
 }
 
 static void run16(){
-    int totalObjects = 500000;
+    int totalObjects = 5000000;
     long sum_serialization = 0;
     long sum_deserialization = 0;
     size_t bufferSize;
-    strLen = 64;
+    randString = genRandomString(64);
 
     for (int i = 0; i < totalObjects; ++i) {
         proto::ComplexObjectL4 *cObject = genComplexObjectL4();
@@ -310,7 +310,7 @@ static void run16(){
     }
     double avg = (double )sum_serialization / totalObjects;
     double avgd = (double )sum_deserialization / totalObjects;
-    cout << "ProtoBuf,16," << avg << "," << avgd<<","<<bufferSize<< endl;
+    cout << "ProtoBuf,5," << avg << "," << avgd<<","<<bufferSize<< endl;
 }
 
 int main(int argc, char *argv[]) {
