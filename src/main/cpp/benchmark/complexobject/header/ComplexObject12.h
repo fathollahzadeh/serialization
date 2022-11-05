@@ -23,9 +23,12 @@ public:
     string var_string;
     ComplexObject13 complexObject;
 
-    ComplexObject12();
+    explicit ComplexObject12(const string &varString);
 
     virtual ~ComplexObject12();
+    char *serializeBoost(char *buffer, int &objectSize);
 };
+
+BOOST_CLASS_TRACKING(ComplexObject12, boost::serialization::track_never)
 
 #endif //CPP_COMPLEXOBJECT12_H

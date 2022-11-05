@@ -296,4 +296,7 @@ add_executable(FlatBufBench
 add_executable(ComplexObjectBench
         benchmark/complexobject/ComplexObject.cpp
         ${srcComplexObject}
+        ${srcUtil}
         )
+target_link_libraries(ComplexObjectBench PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(ComplexObjectBench PRIVATE mongo::mongocxx_shared)

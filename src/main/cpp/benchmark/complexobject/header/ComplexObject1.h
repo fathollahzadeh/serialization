@@ -9,6 +9,8 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
+using namespace std;
+
 class ComplexObject1 : public RootData {
 
 private:
@@ -23,10 +25,14 @@ public:
     string var_string;
     ComplexObject2 complexObject;
 
-    ComplexObject1();
+    explicit ComplexObject1(const string &varString);
 
     virtual ~ComplexObject1();
+
+    char *serializeBoost(char *buffer, int &objectSize);
 };
+
+BOOST_CLASS_TRACKING(ComplexObject1, boost::serialization::track_never)
 
 
 #endif //CPP_COMPLEXOBJECT1_H
