@@ -15,25 +15,11 @@
 */
 
 #include <iostream>
-//#include "ComplexObject1FBS.h"
-//#include "ComplexObject2FBS.h"
-//#include "ComplexObject3FBS.h"
-//#include "ComplexObject4FBS.h"
-//#include "ComplexObject5FBS.h"
-//#include "ComplexObject6FBS.h"
-//#include "ComplexObject7FBS.h"
-//#include "ComplexObject8FBS.h"
-//#include "ComplexObject9FBS.h"
-//#include "ComplexObject10FBS.h"
-//#include "ComplexObject11FBS.h"
-//#include "ComplexObject12FBS.h"
-#include "ComplexObject13FBS.h"
-//#include "ComplexObject14FBS.h"
-//#include "ComplexObject15FBS.h"
-//#include "SimpleObjectFBS.h"
-#include <random>
+#include "ComplexObject1FBS.h"
+#include "SimpleObjectFBS.h"
 #include <chrono>
 
+using namespace std;
 using namespace complexobjectflatbuffers;
 
 static std::string randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0";
@@ -72,7 +58,126 @@ static flatbuffers::Offset<ComplexObject13FBS> genComplexObject13(flatbuffers::F
     auto complexObject = genComplexObject14(builder);
     ComplexObject13FBSBuilder fbsBuilder(builder);
     fbsBuilder.add_var_string(var_stringBuilder);
-    fbsBuilder.add_complexobject44(complexObject);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject12FBS> genComplexObject12(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject13(builder);
+    ComplexObject12FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject11FBS> genComplexObject11(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject12(builder);
+    ComplexObject11FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject10FBS> genComplexObject10(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject11(builder);
+    ComplexObject10FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+static flatbuffers::Offset<ComplexObject9FBS> genComplexObject9(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject10(builder);
+    ComplexObject9FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject8FBS> genComplexObject8(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject9(builder);
+    ComplexObject8FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject7FBS> genComplexObject7(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject8(builder);
+    ComplexObject7FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject6FBS> genComplexObject6(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject7(builder);
+    ComplexObject6FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject5FBS> genComplexObject5(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject6(builder);
+    ComplexObject5FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject4FBS> genComplexObject4(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject5(builder);
+    ComplexObject4FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject3FBS> genComplexObject3(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject4(builder);
+    ComplexObject3FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject2FBS> genComplexObject2(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject3(builder);
+    ComplexObject2FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
+    auto orc = fbsBuilder.Finish();
+    return orc;
+}
+
+static flatbuffers::Offset<ComplexObject1FBS> genComplexObject1(flatbuffers::FlatBufferBuilder &builder) {
+    auto var_stringBuilder = builder.CreateString(randString);
+    auto complexObject = genComplexObject2(builder);
+    ComplexObject1FBSBuilder fbsBuilder(builder);
+    fbsBuilder.add_var_string(var_stringBuilder);
+    fbsBuilder.add_complexobject(complexObject);
     auto orc = fbsBuilder.Finish();
     return orc;
 }
@@ -81,12 +186,11 @@ static flatbuffers::Offset<ComplexObject13FBS> genComplexObject13(flatbuffers::F
 int main(int argc, char *argv[]) {
 
     flatbuffers::FlatBufferBuilder builder(1024);
-    int totalObjects = 10000;
-    int count = 0;
-    double sum_serialization;
-    double sum_deserialization;
+    int totalObjects = 500000;
+    long sum_serialization = 0;
+    long sum_deserialization = 0;
     size_t bufferSize;
-    auto arc = genComplexObject15(builder);
+    auto arc = genComplexObject1(builder);
     builder.Finish(arc);
     bufferSize = builder.GetSize();
 
@@ -94,7 +198,7 @@ int main(int argc, char *argv[]) {
         flatbuffers::FlatBufferBuilder tmpBuilder(bufferSize);
         char *buffer = new char[bufferSize];
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-        auto orc = genComplexObject13(tmpBuilder);
+        auto orc = genComplexObject1(tmpBuilder);
         uint8_t *bp;
         tmpBuilder.Finish(orc);
         bp = tmpBuilder.GetBufferPointer();
@@ -103,21 +207,18 @@ int main(int argc, char *argv[]) {
         memmove(buffer, (char *) bp, bufferSize);
 
         std::chrono::steady_clock::time_point begind = std::chrono::steady_clock::now();
-
-        ComplexObject13FBST * complexObject = new ComplexObject13FBST();
-        GetComplexObject13FBS(buffer)->UnPackTo(complexObject);
+        auto * complexObject = new ComplexObject1FBST();
+        GetComplexObject1FBS(buffer)->UnPackTo(complexObject);
         std::chrono::steady_clock::time_point endd = std::chrono::steady_clock::now();
 
         sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
         sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
-        count++;
         tmpBuilder.Clear();
-       // delete complexObject;
         delete[] buffer;
     }
 
-    double avg = sum_serialization / count;
-    double avgd = sum_deserialization / count;
+    double avg = (double )sum_serialization / totalObjects;
+    double avgd = (double )sum_deserialization / totalObjects;
     cout << "FlatBuffer ComplexObjectL4 avg serialization=" << avg << "  avg deserialize=" << avgd << "   buffer size="<<bufferSize<< endl;
 
     return 0;

@@ -3,6 +3,6 @@ namespace complexobjectflatbuffers;
 
 table ComplexObject13FBS {
         var_string:string;
-        complexobject44:ComplexObject14FBS;
+        complexobject:ComplexObject14FBS;
 }
 root_type ComplexObject13FBS;

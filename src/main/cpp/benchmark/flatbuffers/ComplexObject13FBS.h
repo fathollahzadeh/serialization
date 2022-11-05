@@ -24,7 +24,7 @@ struct ComplexObject13FBST;
 struct ComplexObject13FBST : public flatbuffers::NativeTable {
   typedef ComplexObject13FBS TableType;
   std::string var_string{};
-  std::unique_ptr<complexobjectflatbuffers::ComplexObject14FBST> complexobject44{};
+  std::unique_ptr<complexobjectflatbuffers::ComplexObject14FBST> complexobject{};
   ComplexObject13FBST() = default;
   ComplexObject13FBST(const ComplexObject13FBST &o);
   ComplexObject13FBST(ComplexObject13FBST&&) FLATBUFFERS_NOEXCEPT = default;
@@ -36,7 +36,7 @@ struct ComplexObject13FBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef ComplexObject13FBSBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_VAR_STRING = 4,
-    VT_COMPLEXOBJECT44 = 6
+    VT_COMPLEXOBJECT = 6
   };
   const flatbuffers::String *var_string() const {
     return GetPointer<const flatbuffers::String *>(VT_VAR_STRING);
@@ -44,18 +44,18 @@ struct ComplexObject13FBS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   flatbuffers::String *mutable_var_string() {
     return GetPointer<flatbuffers::String *>(VT_VAR_STRING);
   }
-  const complexobjectflatbuffers::ComplexObject14FBS *complexobject44() const {
-    return GetPointer<const complexobjectflatbuffers::ComplexObject14FBS *>(VT_COMPLEXOBJECT44);
+  const complexobjectflatbuffers::ComplexObject14FBS *complexobject() const {
+    return GetPointer<const complexobjectflatbuffers::ComplexObject14FBS *>(VT_COMPLEXOBJECT);
   }
-  complexobjectflatbuffers::ComplexObject14FBS *mutable_complexobject44() {
-    return GetPointer<complexobjectflatbuffers::ComplexObject14FBS *>(VT_COMPLEXOBJECT44);
+  complexobjectflatbuffers::ComplexObject14FBS *mutable_complexobject() {
+    return GetPointer<complexobjectflatbuffers::ComplexObject14FBS *>(VT_COMPLEXOBJECT);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_VAR_STRING) &&
            verifier.VerifyString(var_string()) &&
-           VerifyOffset(verifier, VT_COMPLEXOBJECT44) &&
-           verifier.VerifyTable(complexobject44()) &&
+           VerifyOffset(verifier, VT_COMPLEXOBJECT) &&
+           verifier.VerifyTable(complexobject()) &&
            verifier.EndTable();
   }
   ComplexObject13FBST *UnPack(const flatbuffers::resolver_function_t *_resolver = nullptr) const;
@@ -70,8 +70,8 @@ struct ComplexObject13FBSBuilder {
   void add_var_string(flatbuffers::Offset<flatbuffers::String> var_string) {
     fbb_.AddOffset(ComplexObject13FBS::VT_VAR_STRING, var_string);
   }
-  void add_complexobject44(flatbuffers::Offset<complexobjectflatbuffers::ComplexObject14FBS> complexobject44) {
-    fbb_.AddOffset(ComplexObject13FBS::VT_COMPLEXOBJECT44, complexobject44);
+  void add_complexobject(flatbuffers::Offset<complexobjectflatbuffers::ComplexObject14FBS> complexobject) {
+    fbb_.AddOffset(ComplexObject13FBS::VT_COMPLEXOBJECT, complexobject);
   }
   explicit ComplexObject13FBSBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -87,9 +87,9 @@ struct ComplexObject13FBSBuilder {
 inline flatbuffers::Offset<ComplexObject13FBS> CreateComplexObject13FBS(
     flatbuffers::FlatBufferBuilder &_fbb,
     flatbuffers::Offset<flatbuffers::String> var_string = 0,
-    flatbuffers::Offset<complexobjectflatbuffers::ComplexObject14FBS> complexobject44 = 0) {
+    flatbuffers::Offset<complexobjectflatbuffers::ComplexObject14FBS> complexobject = 0) {
   ComplexObject13FBSBuilder builder_(_fbb);
-  builder_.add_complexobject44(complexobject44);
+  builder_.add_complexobject(complexobject);
   builder_.add_var_string(var_string);
   return builder_.Finish();
 }
@@ -97,24 +97,24 @@ inline flatbuffers::Offset<ComplexObject13FBS> CreateComplexObject13FBS(
 inline flatbuffers::Offset<ComplexObject13FBS> CreateComplexObject13FBSDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
     const char *var_string = nullptr,
-    flatbuffers::Offset<complexobjectflatbuffers::ComplexObject14FBS> complexobject44 = 0) {
+    flatbuffers::Offset<complexobjectflatbuffers::ComplexObject14FBS> complexobject = 0) {
   auto var_string__ = var_string ? _fbb.CreateString(var_string) : 0;
   return complexobjectflatbuffers::CreateComplexObject13FBS(
       _fbb,
       var_string__,
-      complexobject44);
+      complexobject);
 }
 
 flatbuffers::Offset<ComplexObject13FBS> CreateComplexObject13FBS(flatbuffers::FlatBufferBuilder &_fbb, const ComplexObject13FBST *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
 inline ComplexObject13FBST::ComplexObject13FBST(const ComplexObject13FBST &o)
       : var_string(o.var_string),
-        complexobject44((o.complexobject44) ? new complexobjectflatbuffers::ComplexObject14FBST(*o.complexobject44) : nullptr) {
+        complexobject((o.complexobject) ? new complexobjectflatbuffers::ComplexObject14FBST(*o.complexobject) : nullptr) {
 }
 
 inline ComplexObject13FBST &ComplexObject13FBST::operator=(ComplexObject13FBST o) FLATBUFFERS_NOEXCEPT {
   std::swap(var_string, o.var_string);
-  std::swap(complexobject44, o.complexobject44);
+  std::swap(complexobject, o.complexobject);
   return *this;
 }
 
@@ -128,7 +128,7 @@ inline void ComplexObject13FBS::UnPackTo(ComplexObject13FBST *_o, const flatbuff
   (void)_o;
   (void)_resolver;
   { auto _e = var_string(); if (_e) _o->var_string = _e->str(); }
-  { auto _e = complexobject44(); if (_e) { if(_o->complexobject44) { _e->UnPackTo(_o->complexobject44.get(), _resolver); } else { _o->complexobject44 = std::unique_ptr<complexobjectflatbuffers::ComplexObject14FBST>(_e->UnPack(_resolver)); } } else if (_o->complexobject44) { _o->complexobject44.reset(); } }
+  { auto _e = complexobject(); if (_e) { if(_o->complexobject) { _e->UnPackTo(_o->complexobject.get(), _resolver); } else { _o->complexobject = std::unique_ptr<complexobjectflatbuffers::ComplexObject14FBST>(_e->UnPack(_resolver)); } } else if (_o->complexobject) { _o->complexobject.reset(); } }
 }
 
 inline flatbuffers::Offset<ComplexObject13FBS> ComplexObject13FBS::Pack(flatbuffers::FlatBufferBuilder &_fbb, const ComplexObject13FBST* _o, const flatbuffers::rehasher_function_t *_rehasher) {
@@ -140,11 +140,11 @@ inline flatbuffers::Offset<ComplexObject13FBS> CreateComplexObject13FBS(flatbuff
   (void)_o;
   struct _VectorArgs { flatbuffers::FlatBufferBuilder *__fbb; const ComplexObject13FBST* __o; const flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
   auto _var_string = _o->var_string.empty() ? 0 : _fbb.CreateString(_o->var_string);
-  auto _complexobject44 = _o->complexobject44 ? CreateComplexObject14FBS(_fbb, _o->complexobject44.get(), _rehasher) : 0;
+  auto _complexobject = _o->complexobject ? CreateComplexObject14FBS(_fbb, _o->complexobject.get(), _rehasher) : 0;
   return complexobjectflatbuffers::CreateComplexObject13FBS(
       _fbb,
       _var_string,
-      _complexobject44);
+      _complexobject);
 }
 
 inline const complexobjectflatbuffers::ComplexObject13FBS *GetComplexObject13FBS(const void *buf) {
