@@ -25,6 +25,10 @@ private:
 public:
     string var_string;
     ComplexObject6 complexObject;
+
+    ComplexObject5();
+
+    virtual ~ComplexObject5();
 };
 
 

@@ -21,6 +21,10 @@ private:
 public:
     string var_string;
     ComplexObject12 complexObject;
+
+    ComplexObject13();
+
+    virtual ~ComplexObject13();
 };
 
 

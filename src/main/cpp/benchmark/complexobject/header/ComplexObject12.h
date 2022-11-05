@@ -22,6 +22,10 @@ private:
 public:
     string var_string;
     ComplexObject13 complexObject;
+
+    ComplexObject12();
+
+    virtual ~ComplexObject12();
 };
 
 #endif //CPP_COMPLEXOBJECT12_H

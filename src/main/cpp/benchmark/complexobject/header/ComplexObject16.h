@@ -18,6 +18,10 @@ private:
 
 public:
     string var_string;
+
+    ComplexObject16();
+
+    virtual ~ComplexObject16();
 };
 
 #endif //CPP_COMPLEXOBJECT16_H

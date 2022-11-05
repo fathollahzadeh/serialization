@@ -1,5 +1,9 @@
-//
-// Created by saeed on 05.11.22.
-//
+#include "ComplexObject9.h"
 
-#include "../header/ComplexObject9.h"
+ComplexObject9::ComplexObject9() {
+
+}
+
+ComplexObject9::~ComplexObject9() {
+
+}

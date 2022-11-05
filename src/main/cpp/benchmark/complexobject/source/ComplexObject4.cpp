@@ -1,5 +1,9 @@
-//
-// Created by saeed on 05.11.22.
-//
+#include "ComplexObject4.h"
 
-#include "../header/ComplexObject4.h"
+ComplexObject4::ComplexObject4() {
+
+}
+
+ComplexObject4::~ComplexObject4() {
+
+}

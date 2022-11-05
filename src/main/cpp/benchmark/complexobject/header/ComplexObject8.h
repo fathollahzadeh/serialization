@@ -21,6 +21,10 @@ private:
 public:
     string var_string;
     ComplexObject9 complexObject;
+
+    ComplexObject8();
+
+    virtual ~ComplexObject8();
 };
 
 #endif //CPP_COMPLEXOBJECT8_H
