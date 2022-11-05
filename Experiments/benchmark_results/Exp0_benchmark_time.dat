@@ -1,0 +1,11 @@
+baseline,object_level,serialization_time,deserialization_time,buffer_size
+ProtoBuf,1,0.67843,0.83045,1027
+ProtoBuf,2,0.658284,0.93528,1033
+ProtoBuf,4,0.887106,1.08031,1045
+ProtoBuf,8,0.997664,1.80458,1069
+ProtoBuf,16,1.00816,3.00335,1100
+FlatBuf,1,0.589162,0.827422,1052
+FlatBuf,2,1.08066,0.695798,1080
+FlatBuf,4,1.22424,0.88487,1128
+FlatBuf,8,1.40325,1.04209,1208
+FlatBuf,16,1.81968,1.38791,1368
