@@ -11,8 +11,8 @@ char *ComplexObject9::serializeBoost(char *buffer, int &objectSize) {
     stringstream ss;
     boost::archive::text_oarchive oa(ss, boost::archive::no_header);
     oa << T;
-    char *tempBuffer = buffer;
-    copyString(tempBuffer, ss.str(), objectSize);
+    objectSize = ss.str().length();
+    memcpy(buffer, ss.str().c_str(), objectSize);
     return buffer;
 }
 

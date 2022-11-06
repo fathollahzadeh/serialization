@@ -37,12 +37,16 @@ static void run1(){
         cObject->serializeBoost(buffer, tmpSize);
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
+
         std::chrono::steady_clock::time_point begind = std::chrono::steady_clock::now();
+        ComplexObject16 *dcOject = new ComplexObject16();
+        dcOject->deserializeBoost(buffer, bufferSize);
         std::chrono::steady_clock::time_point endd = std::chrono::steady_clock::now();
 
         sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
         sum_deserialization += std::chrono::duration_cast<std::chrono::microseconds>(endd - begind).count();
         delete[] buffer;
+        delete dcOject;
     }
     delete cObject;
     double avg = (double )sum_serialization / totalObjects;
