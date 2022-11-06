@@ -16,4 +16,25 @@ char *ComplexObject9::serializeBoost(char *buffer, int &objectSize) {
     return buffer;
 }
 
+//Boost de-serialization:
+ComplexObject9 *ComplexObject9::deserializeBoost(char *buffer, int bytesRead) {
+
+    ComplexObject9 *boostObject = this;
+
+    //Create stream on heap: Keep stream alive:
+    stringstream *rs = new stringstream();
+    rs->write(buffer, bytesRead);
+
+    //Create archive on heap: Keep stream alive:
+    boost::archive::text_iarchive *ia = new boost::archive::text_iarchive(*rs, boost::archive::no_header);
+    (*ia) >> boostObject;
+
+    ia->delete_created_pointers();
+    delete ia;
+    delete rs;
+    return boostObject;
+}
+
 ComplexObject9::ComplexObject9(const string &varString) : var_string(varString) {}
+
+ComplexObject9::ComplexObject9() {}

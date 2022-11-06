@@ -19,11 +19,15 @@ private:
 
 public:
 
+    ComplexObject1();
+
     explicit ComplexObject1(const string &varString);
 
     virtual ~ComplexObject1();
 
     char *serializeBoost(char *buffer, int &objectSize);
+
+    ComplexObject1 *deserializeBoost(char *buffer, int bytesRead);
 };
 
 BOOST_CLASS_TRACKING(ComplexObject1, boost::serialization::track_never)

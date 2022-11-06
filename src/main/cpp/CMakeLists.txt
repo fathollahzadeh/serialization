@@ -297,6 +297,7 @@ add_executable(ComplexObjectBench
         benchmark/complexobject/ComplexObject.cpp
         ${srcUtil}
         ${srcComplexObject}
+        ${srcSerialization}
         )
 target_link_libraries(ComplexObjectBench PRIVATE mongo::bsoncxx_shared)
 target_link_libraries(ComplexObjectBench PRIVATE mongo::mongocxx_shared)

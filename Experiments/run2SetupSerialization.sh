@@ -26,12 +26,12 @@ make -j16
 
 mv  bin/ "$path/Experiments/cppbin"
 
-rm -rf CMakeFiles
-rm -rf cmake_install.cmake
-rm -rf CMakeCache.txt
-rm -rf Makefile
-rm -rf cpp.cbp
-rm -rf bin
+# rm -rf CMakeFiles
+# rm -rf cmake_install.cmake
+# rm -rf CMakeCache.txt
+# rm -rf Makefile
+# rm -rf cpp.cbp
+# rm -rf bin
 
 # compile Rust baselines
 cd "$path/src/main/rust"

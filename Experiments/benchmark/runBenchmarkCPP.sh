@@ -12,5 +12,7 @@
 
 #./cppbin/ProtoBufBench
 
-./cppbin/FlatBufBench
+#./cppbin/FlatBufBench
+
+./cppbin/ComplexObjectBench
 
