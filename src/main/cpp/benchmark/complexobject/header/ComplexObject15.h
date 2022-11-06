@@ -32,6 +32,10 @@ public:
     char *serializeBoost(char *buffer, int &objectSize);
 
     ComplexObject15 *deserializeBoost(char *buffer, int bytesRead);
+
+    char *serializeHandcoded(char *buffer, int &objectSize);
+
+    ComplexObject15 *deserializeHandcoded(char *buffer, int &bytesRead);
 };
 
 BOOST_CLASS_TRACKING(ComplexObject15, boost::serialization::track_never)

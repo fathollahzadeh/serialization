@@ -34,6 +34,20 @@ ComplexObject14 *ComplexObject14::deserializeBoost(char *buffer, int bytesRead) 
     return boostObject;
 }
 
+char *ComplexObject14::serializeHandcoded(char *buffer, int &objectSize) {
+    buffer = copyString(buffer, this->var_string, objectSize);
+    buffer = complexObject->serializeHandcoded(buffer, objectSize);
+    return buffer;
+}
+
+
+ComplexObject14 *ComplexObject14::deserializeHandcoded(char *buffer, int &bytesRead) {
+    parseString(buffer+ bytesRead, this->var_string);
+    this->complexObject = new ComplexObject15();
+    this->complexObject->deserializeHandcoded(buffer, bytesRead);
+    return this;
+}
+
 ComplexObject14::ComplexObject14(const string &varString) : var_string(varString) {}
 
 ComplexObject14::ComplexObject14() {}

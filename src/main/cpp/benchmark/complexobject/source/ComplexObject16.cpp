@@ -33,6 +33,19 @@ ComplexObject16 *ComplexObject16::deserializeBoost(char *buffer, int bytesRead) 
     return boostObject;
 }
 
+char *ComplexObject16::serializeHandcoded(char *buffer, int &objectSize) {
+    buffer = copyString(buffer, this->var_string, objectSize);
+    return buffer;
+}
+
+
+ComplexObject16 *ComplexObject16::deserializeHandcoded(char *buffer, int &bytesRead) {
+    parseString(buffer, this->var_string);
+    bytesRead += (sizeof(int) + this->var_string.length());
+    return this;
+}
+
+
 ComplexObject16::ComplexObject16(const string &varString) : var_string(varString) {}
 
 ComplexObject16::ComplexObject16() {}
