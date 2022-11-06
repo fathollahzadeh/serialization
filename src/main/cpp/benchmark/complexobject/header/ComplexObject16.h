@@ -10,6 +10,8 @@
 class ComplexObject16 : public RootData {
 
 private:
+    string var_string;
+
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive &ar, const unsigned int version) {
@@ -17,7 +19,6 @@ private:
     }
 
 public:
-    string var_string;
 
     explicit ComplexObject16(const string &varString);
 

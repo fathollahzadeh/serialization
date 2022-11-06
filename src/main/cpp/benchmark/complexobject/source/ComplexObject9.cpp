@@ -1,8 +1,6 @@
 #include "ComplexObject9.h"
 
-ComplexObject9::~ComplexObject9() {
-
-}
+ComplexObject9::~ComplexObject9() {}
 
 
 char *ComplexObject9::serializeBoost(char *buffer, int &objectSize) {
