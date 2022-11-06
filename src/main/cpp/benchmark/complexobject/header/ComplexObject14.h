@@ -19,6 +19,10 @@ private:
 public:
     ComplexObject14();
 
+    ComplexObject15 *getComplexObject() const;
+
+    void setComplexObject(ComplexObject15 *complexObject);
+
     explicit ComplexObject14(const string &varString);
 
     virtual ~ComplexObject14();

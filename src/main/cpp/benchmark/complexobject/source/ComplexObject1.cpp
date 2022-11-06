@@ -38,4 +38,12 @@ ComplexObject1::ComplexObject1(const string &varString) : var_string(varString) 
 
 ComplexObject1::ComplexObject1() {}
 
+ComplexObject2 *ComplexObject1::getComplexObject() const {
+    return complexObject;
+}
+
+void ComplexObject1::setComplexObject(ComplexObject2 *complexObject) {
+    ComplexObject1::complexObject = complexObject;
+}
+
 

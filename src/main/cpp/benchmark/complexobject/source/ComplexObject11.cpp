@@ -39,3 +39,11 @@ ComplexObject11 *ComplexObject11::deserializeBoost(char *buffer, int bytesRead) 
 ComplexObject11::ComplexObject11(const string &varString) : var_string(varString) {}
 
 ComplexObject11::ComplexObject11() {}
+
+ComplexObject12 *ComplexObject11::getComplexObject() const {
+    return complexObject;
+}
+
+void ComplexObject11::setComplexObject(ComplexObject12 *complexObject) {
+    ComplexObject11::complexObject = complexObject;
+}

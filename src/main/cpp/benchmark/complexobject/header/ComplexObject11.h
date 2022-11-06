@@ -20,6 +20,10 @@ public:
 
     ComplexObject11();
 
+    ComplexObject12 *getComplexObject() const;
+
+    void setComplexObject(ComplexObject12 *complexObject);
+
     explicit ComplexObject11(const string &varString);
 
     virtual ~ComplexObject11();
