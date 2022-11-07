@@ -120,22 +120,27 @@ int main(int argc, char *argv[]) {
     randString = genRandomString(1024);
     ComplexObject<ComplexObject16> co1(1, genComplexObject16());
     co1.run();
+    //co1.runHandCoded();
 
     randString = genRandomString(512);
     ComplexObject<ComplexObject15> co2(2, genComplexObject15());
     co2.run();
-
-    randString = genRandomString(256);
-    ComplexObject<ComplexObject13> co4(4, genComplexObject13());
-    co4.run();
-
-    randString = genRandomString(128);
-    ComplexObject<ComplexObject9> co8(8, genComplexObject9());
-    co8.run();
-
-    randString = genRandomString(64);
-    ComplexObject<ComplexObject1> co16(16, genComplexObject1());
-    co16.run();
+   // co2.runHandCoded();
+//
+//    randString = genRandomString(256);
+//    ComplexObject<ComplexObject13> co4(4, genComplexObject13());
+//    co4.run();
+//   // co4.runHandCoded();
+//
+//    randString = genRandomString(128);
+//    ComplexObject<ComplexObject9> co8(8, genComplexObject9());
+//    co8.run();
+//    //co8.runHandCoded();
+//
+//    randString = genRandomString(64);
+//    ComplexObject<ComplexObject1> co16(16, genComplexObject1());
+//    co16.run();
+    //co16.runHandCoded();
 
     return 0;
 }

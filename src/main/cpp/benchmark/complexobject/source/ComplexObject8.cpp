@@ -1,6 +1,8 @@
 #include "ComplexObject8.h"
 
-ComplexObject8::~ComplexObject8() {}
+ComplexObject8::~ComplexObject8() {
+    delete complexObject;
+}
 
 char *ComplexObject8::serializeBoost(char *buffer, int &objectSize) {
     //Serialize:

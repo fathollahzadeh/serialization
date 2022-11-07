@@ -1,7 +1,7 @@
 #include "ComplexObject10.h"
 
 ComplexObject10::~ComplexObject10() {
-
+    delete complexObject;
 }
 
 char *ComplexObject10::serializeBoost(char *buffer, int &objectSize) {

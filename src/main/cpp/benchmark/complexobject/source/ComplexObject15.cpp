@@ -1,6 +1,8 @@
 #include "ComplexObject15.h"
 
-ComplexObject15::~ComplexObject15() {}
+ComplexObject15::~ComplexObject15() {
+    delete complexObject;
+}
 
 char *ComplexObject15::serializeBoost(char *buffer, int &objectSize) {
     //Serialize:
@@ -44,7 +46,7 @@ char *ComplexObject15::serializeHandcoded(char *buffer, int &objectSize) {
 ComplexObject15 *ComplexObject15::deserializeHandcoded(char *buffer, int &bytesRead) {
     parseString(buffer+ bytesRead, this->var_string);
     this->complexObject = new ComplexObject16();
-    this->complexObject->deserializeHandcoded(buffer, bytesRead);
+    this->complexObject = this->complexObject->deserializeHandcoded(buffer, bytesRead);
     return this;
 }
 
