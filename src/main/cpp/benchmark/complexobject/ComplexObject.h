@@ -6,7 +6,7 @@
 template<class T>
 class ComplexObject {
 private:
-    int totalObjects = 5000;
+    int totalObjects = 1000000;
     string randString;
     int objectLevel;
     T *cObject;
@@ -38,7 +38,7 @@ void ComplexObject<T>::run() {
         char *tmpPointer = buffer;
         std::chrono::steady_clock::time_point begind = std::chrono::steady_clock::now();
         T *dcOject = new T();
-        dcOject->deserializeBoost(buffer, bufferSize);
+        dcOject = dcOject->deserializeBoost(buffer, bufferSize);
         std::chrono::steady_clock::time_point endd = std::chrono::steady_clock::now();
 
         sum_serialization += std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();

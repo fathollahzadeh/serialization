@@ -26,10 +26,10 @@ ComplexObject16 *ComplexObject16::deserializeBoost(char *buffer, int bytesRead) 
     //Create archive on heap: Keep stream alive:
     boost::archive::text_iarchive *ia = new boost::archive::text_iarchive(*rs, boost::archive::no_header);
     (*ia) >> boostObject;
-
     ia->delete_created_pointers();
     delete ia;
     delete rs;
+
     return boostObject;
 }
 
