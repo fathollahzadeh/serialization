@@ -37,6 +37,7 @@ include_directories("${PROJECT_SOURCE_DIR}/serialization/header/inplace")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/proto")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/proto/*.h")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/complexobject/header")
+include_directories("${PROJECT_SOURCE_DIR}/benchmark/complexobject/header/inplace")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.h")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/flatbuffers")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/header/flatbuffers/flatbuffers")
@@ -48,6 +49,7 @@ include_directories("${PROJECT_SOURCE_DIR}/serialization/source/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/inplace/")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/proto/")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/complexobject/source/")
+include_directories("${PROJECT_SOURCE_DIR}/benchmark/complexobject/source/inplace/")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/proto/*.cc")
 include_directories("${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.cc")
 include_directories("${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/")
@@ -64,6 +66,7 @@ file(GLOB srcFlatbuf "${PROJECT_SOURCE_DIR}/serialization/source/flatbuffers/*.c
 file(GLOB srcBenchmarkCCP "${PROJECT_SOURCE_DIR}/benchmark/proto/*.cc")
 file(GLOB srcBenchmarkCCF "${PROJECT_SOURCE_DIR}/benchmark/flatbuffers/*.cc")
 file(GLOB srcComplexObject "${PROJECT_SOURCE_DIR}/benchmark/complexobject/source/*.cpp")
+file(GLOB srcComplexObjectIP "${PROJECT_SOURCE_DIR}/benchmark/complexobject/source/inplace/*.cpp")
 
 
 ## prepare data
@@ -295,8 +298,11 @@ add_executable(FlatBufBench
 
 add_executable(ComplexObjectBench
         benchmark/complexobject/ComplexObject.cpp
+        util/header/
         ${srcUtil}
+        ${srcInPlace}
         ${srcComplexObject}
+        ${srcComplexObjectIP}
         ${srcSerialization}
         )
 target_link_libraries(ComplexObjectBench PRIVATE mongo::bsoncxx_shared)

@@ -14,13 +14,14 @@ private:
 public:
     ComplexObject(int objectLevel, T *cObject);
 
-    void run();
+    void runBoost();
 
     void runHandCoded();
+
 };
 
 template<class T>
-void ComplexObject<T>::run() {
+void ComplexObject<T>::runBoost() {
     long sum_serialization = 0;
     long sum_deserialization = 0;
     int bufferSize = 0;

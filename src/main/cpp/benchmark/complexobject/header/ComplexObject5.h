@@ -6,8 +6,6 @@
 class ComplexObject5 : public RootData {
 
 private:
-    string var_string;
-    ComplexObject6 *complexObject;
 
     friend class boost::serialization::access;
     template<class Archive>
@@ -17,6 +15,8 @@ private:
     }
 
 public:
+    string var_string;
+    ComplexObject6 *complexObject;
 
     ComplexObject5();
 

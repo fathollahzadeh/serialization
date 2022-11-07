@@ -1,5 +1,6 @@
 
 #include "ComplexObject.h"
+#include "ComplexObjectIP.h"
 
 static string genRandomString(const int len) {
     static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -107,25 +108,41 @@ int main(int argc, char *argv[]) {
     std::string randString8 = genRandomString(128);
     std::string randString16 = genRandomString(64);
 
-    ComplexObject<ComplexObject16> co1(1, genComplexObject16(randString1));
-    co1.run();
-    co1.runHandCoded();
+//    ComplexObject<ComplexObject16> co1(1, genComplexObject16(randString1));
+//    co1.runBoost();
+//    co1.runHandCoded();
+//
+//    ComplexObject<ComplexObject15> co2(2, genComplexObject15(randString2));
+//    co2.runBoost();
+//    co2.runHandCoded();
+//
+//    ComplexObject<ComplexObject13> co4(4, genComplexObject13(randString4));
+//    co4.runBoost();
+//    co4.runHandCoded();
+//
+//    ComplexObject<ComplexObject9> co8(8, genComplexObject9(randString8));
+//    co8.runBoost();
+//    co8.runHandCoded();
+//
+//    ComplexObject<ComplexObject1> co16(16, genComplexObject1(randString16));
+//    co16.runBoost();
+//    co16.runHandCoded();
 
-    ComplexObject<ComplexObject15> co2(2, genComplexObject15(randString2));
-    co2.run();
-    co2.runHandCoded();
+    //----------------------------------
+    ComplexObjectIP<ComplexObjectIP16, ComplexObject16> coIP1(1, genComplexObject16(randString1));
+    coIP1.runInPlace();
 
-    ComplexObject<ComplexObject13> co4(4, genComplexObject13(randString4));
-    co4.run();
-    co4.runHandCoded();
+    ComplexObjectIP<ComplexObjectIP15, ComplexObject15> coIP2(2, genComplexObject15(randString2));
+    coIP2.runInPlace();
 
-    ComplexObject<ComplexObject9> co8(8, genComplexObject9(randString8));
-    co8.run();
-    co8.runHandCoded();
+    ComplexObjectIP<ComplexObjectIP13, ComplexObject13> coIP4(4, genComplexObject13(randString4));
+    coIP4.runInPlace();
 
-    ComplexObject<ComplexObject1> co16(16, genComplexObject1(randString16));
-    co16.run();
-    co16.runHandCoded();
+    ComplexObjectIP<ComplexObjectIP9, ComplexObject9> coIP8(8, genComplexObject9(randString8));
+    coIP8.runInPlace();
+
+    ComplexObjectIP<ComplexObjectIP1, ComplexObject1> coIP16(16, genComplexObject1(randString16));
+    coIP16.runInPlace();
 
     return 0;
 }
