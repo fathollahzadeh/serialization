@@ -1,0 +1,72 @@
+\begin{tikzpicture}[scale=1, node distance=6.0mm]
+    \newcommand{\myaddplot}[4]{
+        \addplot[color=#4,mark=#3,discard if single={#1}]
+        table[ y=#2, col sep=comma, x=object_level] {results/Exp0_benchmark.dat};
+        \label{#1}
+    };
+
+    \newcommand{\addDiagramExpThree}[2]{
+        \myaddplot{ProtoBuf}{deserialization_time}{*}{color1};        
+        \myaddplot{FlatBuf}{deserialization_time}{square*}{color2};
+        \myaddplot{Boost}{deserialization_time}{square*}{color3};
+        \myaddplot{Hand-coded}{deserialization_time}{triangle}{color6};
+        \myaddplot{inPlace}{deserialization_time}{triangle*}{color5};
+
+        \node [draw=none,inner sep=1, font=\Large] at (rel axis cs: 0.3,0.65){\shortstack[l]{
+            \ref{ProtoBuf} ProtoBuf \\
+            \ref{FlatBuf} FlatBuf \\
+            \ref{Boost} Boost \\
+            \ref{Hand-coded} Hand-coded \\
+            \ref{inPlace} inPlace
+        }};
+   };
+
+   
+   \pgfplotsset{
+	discard if single/.style n args={1}{
+		x filter/.code={
+			\edef\tempa{\thisrow{baseline}}
+			\edef\tempb{#1}
+			\ifx\tempa\tempb
+			\else
+			\def\pgfmathresult{inf}
+			\fi
+		}
+	}
+};
+
+    \begin{axis}
+        [
+        ymode=log,    
+        ymin=0,
+        ymax=15,
+        y tick label style={/pgf/number format/1000 sep={}},   
+        scaled y ticks=false,
+        scaled x ticks=false,
+        tick label style={/pgf/number format/fixed},
+        enlarge x limits=0.03,
+        ylabel={Latency[$\mu s$]},
+        xlabel={$\#$ Objects Level},
+        xtick pos=left,
+        ytick pos=left,
+        ytick align=outside,
+        xtick align=outside,
+        yticklabel style = {font=\Large},
+        ylabel style = {font=\Large},
+        xticklabel style = {font=\Large},
+        xtick=data,
+        xtick={1,2,3,4,5},
+        xticklabels={1,2,4,8,16},
+        xlabel style = {font=\Large, yshift=-7pt},
+        height=0.6\columnwidth,
+        width=\columnwidth,
+        grid=both,
+        grid style=dotted,
+        minor grid style={gray!50},
+        every axis plot/.append style={line width=1pt,mark options={scale=1.7,solid}},
+        ]
+        \addDiagramExpThree{}{};
+
+    \end{axis}
+
+\end{tikzpicture}

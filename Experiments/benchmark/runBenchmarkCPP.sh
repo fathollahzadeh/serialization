@@ -10,9 +10,10 @@
 # echo 3 > /proc/sys/vm/drop_caches && sync
 # sleep 30
 
-#./cppbin/ProtoBufBench
 
-#./cppbin/FlatBufBench
+./cppbin/ProtoBufBench
+
+./cppbin/FlatBufBench
 
 ./cppbin/ComplexObjectBench
 

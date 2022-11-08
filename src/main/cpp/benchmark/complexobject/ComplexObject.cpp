@@ -108,27 +108,26 @@ int main(int argc, char *argv[]) {
     std::string randString8 = genRandomString(128);
     std::string randString16 = genRandomString(64);
 
-//    ComplexObject<ComplexObject16> co1(1, genComplexObject16(randString1));
-//    co1.runBoost();
-//    co1.runHandCoded();
-//
-//    ComplexObject<ComplexObject15> co2(2, genComplexObject15(randString2));
-//    co2.runBoost();
-//    co2.runHandCoded();
-//
-//    ComplexObject<ComplexObject13> co4(4, genComplexObject13(randString4));
-//    co4.runBoost();
-//    co4.runHandCoded();
-//
-//    ComplexObject<ComplexObject9> co8(8, genComplexObject9(randString8));
-//    co8.runBoost();
-//    co8.runHandCoded();
-//
-//    ComplexObject<ComplexObject1> co16(16, genComplexObject1(randString16));
-//    co16.runBoost();
-//    co16.runHandCoded();
+    ComplexObject<ComplexObject16> co1(1, genComplexObject16(randString1));
+    co1.runBoost();
+    co1.runHandCoded();
 
-    //----------------------------------
+    ComplexObject<ComplexObject15> co2(2, genComplexObject15(randString2));
+    co2.runBoost();
+    co2.runHandCoded();
+
+    ComplexObject<ComplexObject13> co4(4, genComplexObject13(randString4));
+    co4.runBoost();
+    co4.runHandCoded();
+
+    ComplexObject<ComplexObject9> co8(8, genComplexObject9(randString8));
+    co8.runBoost();
+    co8.runHandCoded();
+
+    ComplexObject<ComplexObject1> co16(16, genComplexObject1(randString16));
+    co16.runBoost();
+    co16.runHandCoded();
+
     ComplexObjectIP<ComplexObjectIP16, ComplexObject16> coIP1(1, genComplexObject16(randString1));
     coIP1.runInPlace();
 
