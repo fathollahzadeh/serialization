@@ -1,0 +1,57 @@
+\begin{tikzpicture} 
+    \begin{axis}[%
+    hide axis,
+    xmin=10,
+    xmax=50,
+    ymin=0,
+    ymax=0.4, 
+    legend columns=7,
+    legend style={draw=white!15!black,legend cell align=left},
+    legend style={draw=none, nodes={scale=1.2, transform shape,}, font=\large},    
+    legend image post style={line width=1.5pt,scale=1.7},
+    legend cell align={left},   
+    /tikz/every even column/.append style={column sep=3em},
+    ]
+    \addlegendimage{black,mark=triangle,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{C++ Handcoded};
+    \addlegendimage{black,mark=*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{C++ inPlace};
+    \addlegendimage{black,mark=o,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{C++ FlatBuf};
+    \addlegendimage{black,mark=triangle*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{C++ ProtoBuf};
+    \addlegendimage{black,mark=square,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{C++ Boost};
+    \addlegendimage{black,mark=square*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{C++ Bson};
+
+    \addlegendimage{blue,mark=o,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Rust Json};    
+    \addlegendimage{blue,mark=triangle,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Rust MessagePack};    
+    \addlegendimage{blue,mark=*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Rust Bincode};    
+    \addlegendimage{blue,mark=triangle*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Rust FlexBuf};
+    \addlegendimage{blue,mark=square,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Rust Bson};
+
+    \addlegendimage{purple,mark=square,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Java Default};
+    \addlegendimage{purple,mark=diamond*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Java Json};
+    \addlegendimage{purple,mark=diamond,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Java Bson};     
+    \addlegendimage{purple,mark=o,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Java Json+Gzip};
+    \addlegendimage{purple,mark=square*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Java ProtoBuf};
+    \addlegendimage{purple,mark=triangle*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Java ByteBuffer};
+    \addlegendimage{purple,mark=*,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Java FlatBuf};
+    \addlegendimage{purple,mark=triangle,dotted, line cap=round,mark options={scale=1.2,solid}}
+    \addlegendentry{Java Kryo};
+    
+    \end{axis}
+\end{tikzpicture}

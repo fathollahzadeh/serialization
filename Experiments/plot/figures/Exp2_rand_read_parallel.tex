@@ -11,8 +11,8 @@
 
 \begin{tikzpicture}
 	\newcommand{\myaddplot}[7]{
-	   \addplot[white, xshift=#1,draw=#4,line width=0.15pt, fill=#2, discard if single={#3}{#7}, postaction={pattern=#5,pattern color=#4}] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_write_parallel.dat};
+	   \addplot[white,xshift=#1,draw=#4,line width=0.15pt, fill=#2, discard if single={#3}{#7}, postaction={pattern=#5,pattern color=#4}] 
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_parallel_10m.dat};
 	   \label{#3#7}
    };  
 
@@ -22,14 +22,13 @@
 	   every node near coord/.append style={		  
 		   check for zeronan/.code={
 			   \pgfkeys{/pgf/fpu=true}
-			   \showvalue{\xbaseline}{HandcodedCPP}{inPlaceCPP}{FlatBufCPP}{ProtoBufCPP}{BoostCPP}{MessagePackRust}{JsonRust}{FlexBufRust}{BsonRust};
-			   \showvalue{\xbaseline}{BincodeRust}{BsonRust}{BsonJava}{DefaultJava}{ProtoBufJava}{FlatBufJava}{ByteBufferJava}{}{}
+			   \showvalue{\xbaseline}{HandcodedCPP}{inPlaceCPP}{FlatBufCPP}{ProtoBufCPP}{MessagePackRust}{BincodeRust}{FlatBufJava}{ProtoBufJava}{};
 			   \pgfkeys{/pgf/fpu=false}
 		   },
 		   check for zeronan,
 	   }  
 	   ] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_write_parallel.dat};	  
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_parallel_10m.dat};	  
 	   \label{#3#7}
    };  
    
@@ -40,11 +39,11 @@
 		nodes near coords={\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}},
 		every node near coord/.append style={
 			black,			
-			xshift=-5pt,
+			xshift=-10pt,
 			anchor=west
 		}
 	] 
-	table[ y=time, col sep=comma, x=baseline] {results/Exp1_write_parallel.dat};	
+	table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_parallel_10m.dat};	
    };   
    
    \newcommand{\addDiagramExpOne}[7]{	
@@ -56,8 +55,8 @@
 		]
 		\resetstackedplots	
 		\myaddplot{0}{#2}{IO}{#2}{none}{I/O Time(taskset True)}{#1};
-  		\myaddplotnan{0}{#2!25}{CPU}{#2!25}{north east lines}{CPU Time(taskset True)}{#1}{#2};
-		\myaddplots{0}{white}{Total}{none}{#1};
+		\myaddplotnan{0}{#2!25}{CPU}{#2!25}{north east lines}{CPU Time(taskset True)}{#1}{#2};
+	    \myaddplots{0}{white}{Total}{none}{#1};
    };     
 
   \pgfplotsset{
@@ -71,7 +70,23 @@
 			   \ifx\tempg\temph	
 				    \edef\tempi{\thisrow{platform}}
 				    \edef\tempj{Parallel}
-				    \ifx\tempi\tempj												   
+				    \ifx\tempi\tempj					
+						%
+						\edef\tempk{\thisrow{nrow}}
+						\edef\templ{10000000}
+						\ifx\tempk\templ
+							%
+							\edef\tempm{\thisrow{seq_rand}}
+							\edef\tempn{Random}
+							\ifx\tempm\tempn
+							\else
+							\def\pgfmathresult{inf}
+							\fi 
+							%	
+						\else
+						\def\pgfmathresult{inf}
+						\fi  	
+						%																					   
 				    \else
 				    \def\pgfmathresult{inf}
 				    \fi      
@@ -136,12 +151,12 @@
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
-		ymin=0.5,
+		ymin=0.7,
 		x tick label style={/pgf/number format/1000 sep=},
-		ymax=1000,		
+		ymax=100,		
 		scaled y ticks=false,		  
-		enlarge y limits={0.45,upper},		
-		ylabel={Execution Time[s]},		   
+		enlarge y limits={0.05,upper},		
+		ylabel={Execution Time[min.]},		   
 		ytick align=inside,
 		xtick align=outside,			
 		xtick pos=left,
@@ -157,7 +172,7 @@
 		point meta=rawy,            
 		nodes near coords={%
     		\pgfmathprintnumberto[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}{\myval}%
-    		\pgfmathparse{\myval<=0.1?:\myval}\pgfmathresult%
+    		\pgfmathparse{\myval<0.1?:\myval}\pgfmathresult%
 		},
 		nodes near coords custom={1}, 
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
@@ -179,6 +194,5 @@
 		\ref{CPUJava} CPU \ \ \  
 		\ref{IOJava} I/O
 }};
-
    
 \end{tikzpicture}

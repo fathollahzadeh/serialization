@@ -1,24 +1,37 @@
 \begin{tikzpicture}[scale=1, node distance=6.0mm]
     \newcommand{\myaddplot}[4]{
-        \addplot[color=#4,mark=#3,discard if single={#1}]
+        \addplot[color=#4!40,mark=#3,discard if single={#1},dotted, line cap=round, mark options={scale=1.5,,solid, #4,fill=#4}]
         table[ y=#2, col sep=comma, x=object_level] {results/Exp0_benchmark.dat};
         \label{#1}
     };
 
     \newcommand{\addDiagramExpThree}[2]{
-        \myaddplot{ProtoBuf}{deserialization_time}{*}{color1};        
-        \myaddplot{FlatBuf}{deserialization_time}{square*}{color2};
-        \myaddplot{Boost}{deserialization_time}{square*}{color3};
-        \myaddplot{Hand-coded}{deserialization_time}{triangle}{color6};
-        \myaddplot{inPlace}{deserialization_time}{triangle*}{color5};
+        \myaddplot{FlatBuf}{deserialization_time}{triangle}{black};
+        \myaddplot{FlatBuf}{serialization_time}{triangle*}{black};
 
-        \node [draw=none,inner sep=1, font=\Large] at (rel axis cs: 0.3,0.65){\shortstack[l]{
-            \ref{ProtoBuf} ProtoBuf \\
-            \ref{FlatBuf} FlatBuf \\
-            \ref{Boost} Boost \\
-            \ref{Hand-coded} Hand-coded \\
-            \ref{inPlace} inPlace
-        }};
+        \myaddplot{ProtoBuf}{deserialization_time}{o}{blue};        
+        \myaddplot{ProtoBuf}{serialization_time}{*}{blue};    
+        
+        \myaddplot{Boost}{deserialization_time}{diamond}{brown};
+        \myaddplot{Boost}{serialization_time}{diamond*}{brown};
+
+        \myaddplot{Hand-coded}{deserialization_time}{pentagon}{purple};
+        \myaddplot{Hand-coded}{serialization_time}{pentagon*}{purple};
+
+        \myaddplot{inPlace}{deserialization_time}{triangle}{darkgray};
+        \myaddplot{inPlace}{serialization_time}{triangle*}{darkgray};
+        
+        %\myaddplot{Boost}{deserialization_time}{square*}{color3};
+        %\myaddplot{Hand-coded}{deserialization_time}{triangle}{color6};
+        %\myaddplot{inPlace}{deserialization_time}{triangle*}{color5};
+
+        % \node [draw=none,inner sep=1, font=\Large] at (rel axis cs: 0.3,0.65){\shortstack[l]{
+        %     \ref{ProtoBuf} ProtoBuf \\
+        %     \ref{FlatBuf} FlatBuf \\
+        %     \ref{Boost} Boost \\
+        %     \ref{Hand-coded} Hand-coded \\
+        %     \ref{inPlace} inPlace
+        % }};
    };
 
    
@@ -58,12 +71,12 @@
         xtick={1,2,3,4,5},
         xticklabels={1,2,4,8,16},
         xlabel style = {font=\Large, yshift=-7pt},
-        height=0.6\columnwidth,
+        height=1\columnwidth,
         width=\columnwidth,
         grid=both,
         grid style=dotted,
         minor grid style={gray!50},
-        every axis plot/.append style={line width=1pt,mark options={scale=1.7,solid}},
+        every axis plot/.append style={line width=.75pt,mark options={scale=10,solid}},        
         ]
         \addDiagramExpThree{}{};
 

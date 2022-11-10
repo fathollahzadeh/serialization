@@ -5,9 +5,9 @@ DefaultJava,Java,True,IO,Single,Sequential,10000000,1.54
 DefaultJava,Java,False,Total,Single,Sequential,10000000,10.28
 DefaultJava,Java,False,CPU,Single,Sequential,10000000,8.02
 DefaultJava,Java,False,IO,Single,Sequential,10000000,2.26
-Json+GzipJava,Java,True,Total,Single,Sequential,10000000,39.77
-Json+GzipJava,Java,True,CPU,Single,Sequential,10000000,38.83
-Json+GzipJava,Java,True,IO,Single,Sequential,10000000,0.94
+Json+GzipJava,Java,True,Total,Single,Sequential,10000000,39.87
+Json+GzipJava,Java,True,CPU,Single,Sequential,10000000,38.89
+Json+GzipJava,Java,True,IO,Single,Sequential,10000000,0.97
 Json+GzipJava,Java,False,Total,Single,Sequential,10000000,40.35
 Json+GzipJava,Java,False,CPU,Single,Sequential,10000000,39.58
 Json+GzipJava,Java,False,IO,Single,Sequential,10000000,0.77

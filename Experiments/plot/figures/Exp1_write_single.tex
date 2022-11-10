@@ -11,7 +11,7 @@
 \begin{tikzpicture}
 	\newcommand{\myaddplot}[8]{
 	   \addplot[white,xshift=#2,draw=#5,line width=0.15pt, fill=#3, discard if single={#1}{#4}{#8}, postaction={pattern=#6,pattern color=#5}] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_write.dat};
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_write_single.dat};
 	   \label{#4#1}
    };  
 
@@ -27,7 +27,7 @@
 		   check for zeronan,
 	   }  
 	   ] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_write.dat};	  
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp1_write_single.dat};	  
 	   \label{#4#1}
    };  
    
@@ -42,7 +42,7 @@
 			anchor=west
 		}
 	] 
-	table[ y=time, col sep=comma, x=baseline] {results/Exp1_write.dat};	
+	table[ y=time, col sep=comma, x=baseline] {results/Exp1_write_single.dat};	
    };   
    
    \newcommand{\addDiagramExpOne}[9]{	
@@ -177,7 +177,6 @@
 		xticklabel style={name=T\ticknum}			
 ]
 \addDiagramExpOne{CPP}{tugb}{color7}{0.42\textwidth}{{10,100,1000,10000,100000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
-
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.75) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time (taskset True) \\ 
 		\ref{IOTrue} I/O Time (taskset True) \\
@@ -185,10 +184,6 @@
 		\ref{IOFalse} I/O Time (taskset False) 				
 }};
 \addDiagramExpOne{Rust}{tugb}{color7}{0.40\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
-% \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.85) {\shortstack[l]{
-% 		\ref{CPUFalse} CPU Time(taskset False) \\ \\
-% 		\ref{IOFalse} I/O Time(taskset False) 			
-% }};
 \addDiagramExpOne{Java}{tugb}{color7}{0.53\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
 		
 \end{groupplot}

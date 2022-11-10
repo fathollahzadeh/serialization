@@ -11,7 +11,7 @@
 \begin{tikzpicture}
 	\newcommand{\myaddplot}[8]{
 	   \addplot[white,xshift=#2,draw=#5,line width=0.15pt, fill=#3, discard if single={#1}{#4}{#8}, postaction={pattern=#6,pattern color=#5}] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_single.dat};
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_single_10m.dat};
 	   \label{#4#1}
    };  
 
@@ -20,13 +20,13 @@
 	   every node near coord/.append style={		  
 		   check for zeronan/.code={
 			   \pgfkeys{/pgf/fpu=true}
-			   \showvalue{\xbaseline}{inPlaceCPP}{FlatBufJava}{}{}{}{}{}{}{}
+			   \showvalue{\xbaseline}{inPlaceCPP}{FlatBufJava}{HandcodedCPP}{inPlaceCPP}{FlatBufCPP}{ProtoBufCPP}{MessagePackRust}{BincodeRust}{}
 			   \pgfkeys{/pgf/fpu=false}
 		   },
 		   check for zeronan,
 	   }  
 	   ] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_single.dat};	  
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_single_10m.dat};	  
 	   \label{#4#1}
    };  
    
@@ -37,11 +37,11 @@
 		nodes near coords={\pgfmathprintnumber[precision=2]{\pgfplotspointmeta}},
 		every node near coord/.append style={
 			black,			
-			xshift=-7pt,
+			xshift=-15pt,
 			anchor=west
 		}
 	] 
-	table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_single.dat};	
+	table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_single_10m.dat};	
    };   
    
    \newcommand{\addDiagramExpOne}[9]{	
@@ -86,7 +86,7 @@
 									\ifx\tempk\templ
 										%
 										\edef\tempm{\thisrow{seq_rand}}
-										\edef\tempn{Sequential}
+										\edef\tempn{Random}
 										\ifx\tempm\tempn
 										\else
 										\def\pgfmathresult{inf}
@@ -165,7 +165,7 @@
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
-		ymin=0.35,
+		ymin=4,
 		ymax=100,
 		scaled y ticks=false,		  
 		enlarge y limits={0.2,upper},		
@@ -191,7 +191,7 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tugb}{color7}{0.42\textwidth}{{10,100,1000,10000,100000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
+\addDiagramExpOne{CPP}{tugb}{color7}{0.42\textwidth}{{10,100}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.75) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time (taskset True) \\ 
 		\ref{IOTrue} I/O Time (taskset True) \\

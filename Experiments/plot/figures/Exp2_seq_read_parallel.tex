@@ -11,8 +11,8 @@
 
 \begin{tikzpicture}
 	\newcommand{\myaddplot}[7]{
-	   \addplot[xshift=#1,draw=#4,line width=0.15pt, fill=#2, discard if single={#3}{#7}, postaction={pattern=#5,pattern color=#4}] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read.dat};
+	   \addplot[white,xshift=#1,draw=#4,line width=0.15pt, fill=#2, discard if single={#3}{#7}, postaction={pattern=#5,pattern color=#4}] 
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_parallel.dat};
 	   \label{#3#7}
    };  
 
@@ -22,14 +22,13 @@
 	   every node near coord/.append style={		  
 		   check for zeronan/.code={
 			   \pgfkeys{/pgf/fpu=true}
-			   \showvalue{\xbaseline}{BsonRust}{inPlaceCPP}{FlatBufCPP}{JsonJava}{BsonJava}{DefaultJava}{ProtoBufJava}{ByteBufferJava}{FlatBufJava};
-			   \showvalue{\xbaseline}{KryoJava}{JsonRust}{FlexBufRust}{}{}{}{}{}{}
+			   \showvalue{\xbaseline}{BsonRust}{inPlaceCPP}{FlatBufCPP}{FlexBufRust}{KryoJava}{JsonRust}{ProtoBufJava}{}{FlatBufJava};
 			   \pgfkeys{/pgf/fpu=false}
 		   },
 		   check for zeronan,
 	   }  
 	   ] 
-	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read.dat};	  
+	   table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_parallel.dat};	  
 	   \label{#3#7}
    };  
    
@@ -44,7 +43,7 @@
 			anchor=west
 		}
 	] 
-	table[ y=time, col sep=comma, x=baseline] {results/Exp2_read.dat};	
+	table[ y=time, col sep=comma, x=baseline] {results/Exp2_read_parallel.dat};	
    };   
    
    \newcommand{\addDiagramExpOne}[7]{	
@@ -56,8 +55,8 @@
 		]
 		\resetstackedplots	
 		\myaddplot{0}{#2}{IO}{#2}{none}{I/O Time(taskset True)}{#1};
-  		\myaddplotnan{0}{#2!40}{CPU}{#2!40}{north east lines}{CPU Time(taskset True)}{#1}{#2};
-		\myaddplots{0}{white}{Total}{none}{#1};
+		\myaddplotnan{0}{#2!25}{CPU}{#2!25}{north east lines}{CPU Time(taskset True)}{#1}{#2};
+	    \myaddplots{0}{white}{Total}{none}{#1};
    };     
 
   \pgfplotsset{
@@ -74,7 +73,7 @@
 				    \ifx\tempi\tempj					
 						%
 						\edef\tempk{\thisrow{nrow}}
-						\edef\templ{5000000}
+						\edef\templ{10000000}
 						\ifx\tempk\templ
 							%
 							\edef\tempm{\thisrow{seq_rand}}
@@ -114,7 +113,7 @@
 		  /pgf/number format/1000 sep={},
 		  check for zero/.code={%
 			\pgfkeys{/pgf/fpu=true}
-			\pgfmathparse{\pgfplotspointmeta-0.01}
+			\pgfmathparse{\pgfplotspointmeta-0.1}
 			\pgfmathfloatifflags{\pgfmathresult}{0}{
 				\pgfkeys{/tikz/coordinate}
 			}{
@@ -123,7 +122,7 @@
 					\pgfmathparse{\pgfplotspointmeta<#1}%
 					\global\let\result=\pgfmathresult
 				\endgroup
-				\pgfmathfloatcreate{1}{0.01}{0}%
+				\pgfmathfloatcreate{1}{0.1}{0}%
 				\let\ONE=\pgfmathresult
 				\ifx\result\ONE
 					% AH : our condition 'y < #1' is met.
@@ -145,16 +144,16 @@
 			group size=3 by 1,
 			xlabels at=edge bottom,
 			ylabels at=edge left,
-			horizontal sep=4pt,
+			horizontal sep=2pt,
 			vertical sep=0pt,
-			/pgf/bar width=8pt
+			/pgf/bar width=10pt
 		},			
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
-		ymin=13.5,
+		ymin=0.575,
 		x tick label style={/pgf/number format/1000 sep=},
-		ymax=300,		
+		ymax=10,		
 		scaled y ticks=false,		  
 		enlarge y limits={0.05,upper},		
 		ylabel={Execution Time[s]},		   
@@ -167,38 +166,33 @@
 		xticklabel style = {font=\scriptsize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
 		x label style={yshift=-20pt},
 		xtick=data,
-		height=0.65\columnwidth,  
+		height=0.55\columnwidth,  
 		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostCPP, BsonCPP, MessagePackRust, BincodeRust, JsonRust, FlexBufRust, BsonRust, Json+GzipJava, JsonJava, BsonJava, DefaultJava, ProtoBufJava, ByteBufferJava, FlatBufJava, KryoJava},		   
 		xticklabels={Handcoded, inPlace, FlatBuf, ProtoBuf, Boost, Bson, MessagePack, Bincode, Json, FlexBuf, Bson, Json+Gzip, Json, Bson, Default, ProtoBuf, ByteBuffer, FlatBuf, Kryo},  		   
 		point meta=rawy,            
 		nodes near coords={%
     		\pgfmathprintnumberto[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}{\myval}%
-    		\pgfmathparse{\myval<=0.1?:\myval}\pgfmathresult%
+    		\pgfmathparse{\myval<0.1?:\myval}\pgfmathresult%
 		},
 		nodes near coords custom={1}, 
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tug}{color7}{0.21\textwidth}{{10,100}}{{10,100}}{{enlarge x limits=0.15,}};	
-\node [draw=none,inner sep=2, fill=lightgray, text width=0.12\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.965) {C++};
-\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.86) {\shortstack[l]{
-		\ref{CPUCPP} CPU 
-		\ref{IOCPP} IO 
-}};
+\addDiagramExpOne{CPP}{black}{white}{0.23\textwidth}{{10,100,1000}}{{10,100,1000}}{{enlarge x limits=0.15,}};	
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
 
-\addDiagramExpOne{Rust}{tugb}{color7}{0.19\textwidth}{}{}{{enlarge x limits=0.18,}};
-\node [draw=none,inner sep=2, fill=lightgray, text width=0.1\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.965) {Rust};
-\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.86) {\shortstack[l]{
-		\ref{CPURust} CPU 
-		\ref{IORust} IO 
-}};
+\addDiagramExpOne{Rust}{black}{color7}{0.21\textwidth}{}{}{{enlarge x limits=0.18,}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
 
-\addDiagramExpOne{Java}{color4}{color7}{0.26\textwidth}{}{}{{enlarge x limits=0.14,}};
-\node [draw=none,inner sep=2, fill=lightgray, text width=0.17\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.965) {Java};
-\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.86) {\shortstack[l]{
-		\ref{CPUJava} CPU  
-		\ref{IOJava} IO 
-}};
+\addDiagramExpOne{Java}{black}{color7}{0.29\textwidth}{}{}{{enlarge x limits=0.14,}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
+
+
 \end{groupplot}
+
+\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at ($(group c2r1.north west) + (-0.0cm,0.3cm)$) {\shortstack[l]{
+		\ref{CPUJava} CPU \ \ \  
+		\ref{IOJava} I/O
+}};
    
 \end{tikzpicture}
