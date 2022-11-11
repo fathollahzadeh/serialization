@@ -69,219 +69,219 @@ file(GLOB srcComplexObject "${PROJECT_SOURCE_DIR}/benchmark/complexobject/source
 file(GLOB srcComplexObjectIP "${PROJECT_SOURCE_DIR}/benchmark/complexobject/source/inplace/*.cpp")
 
 
-## prepare data
-#add_executable(DataPrepare
-#        experiments/DataPrepare.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataPrepare PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataPrepare PRIVATE mongo::mongocxx_shared)
-#
-## load data to memory- single thread
-#add_executable(DataLoadToMemorySingle
-#        experiments/DataLoadToMemorySingle.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataLoadToMemorySingle PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataLoadToMemorySingle PRIVATE mongo::mongocxx_shared)
-#
-## load data to memory- multi thread
-#add_executable(DataLoadToMemoryParallel
-#        experiments/DataLoadToMemoryParallel.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataLoadToMemoryParallel PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataLoadToMemoryParallel PRIVATE mongo::mongocxx_shared)
-#
-#
-## serialize data single thread
-#add_executable(DataSerializationSingle
-#        experiments/DataSerializationSingle.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataSerializationSingle PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataSerializationSingle PRIVATE mongo::mongocxx_shared)
-#
-## serialize data multi thread
-#add_executable(DataSerializationParallel
-#        experiments/DataSerializationParallel.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataSerializationParallel PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataSerializationParallel PRIVATE mongo::mongocxx_shared)
-#
-## serialize data single thread
-#add_executable(DataWriteSingle
-#        experiments/DataWriteSingle.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataWriteSingle PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataWriteSingle PRIVATE mongo::mongocxx_shared)
-#
-## serialize data multi thread
-#add_executable(DataWriteParallel
-#        experiments/DataWriteParallel.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataWriteParallel PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataWriteParallel PRIVATE mongo::mongocxx_shared)
-#
-## read data single thread
-#add_executable(DataReadSingle
-#        experiments/DataReadSingle.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataReadSingle PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataReadSingle PRIVATE mongo::mongocxx_shared)
-#
-#add_executable(DataReadParallel
-#        experiments/DataReadParallel.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataReadParallel PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataReadParallel PRIVATE mongo::mongocxx_shared)
-#
-## read I/O data single thread
-#add_executable(DataReadIOSingle
-#        experiments/DataReadIOSingle.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataReadIOSingle PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataReadIOSingle PRIVATE mongo::mongocxx_shared)
-#
-#
-## read I/O data multi thread
-#add_executable(DataReadIOParallel
-#        experiments/DataReadIOParallel.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataReadIOParallel PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataReadIOParallel PRIVATE mongo::mongocxx_shared)
-#
-## External sort
-#add_executable(ExternalSort
-#        experiments/ExternalSort.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(ExternalSort PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(ExternalSort PRIVATE mongo::mongocxx_shared)
-#
-## External sort IO
-#add_executable(ExternalSortIO
-#        experiments/ExternalSortIO.cpp
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(ExternalSortIO PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(ExternalSortIO PRIVATE mongo::mongocxx_shared)
-#
-#
-## Data Read Network
-#add_executable(DataReadNetwork
-#        experiments/DataReadNetwork.cpp
-#        util/header/
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataReadNetwork PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataReadNetwork PRIVATE mongo::mongocxx_shared)
-#
-## Data Read Network NetworkIO
-#add_executable(DataReadNetworkIO
-#        experiments/DataReadNetworkIO.cpp
-#        util/header/
-#        ${srcIO}
-#        ${srcUtil}
-#        ${srcSerialization}
-#        ${srcInPlace}
-#        ${srcProtobuf}
-#        ${srcProtobufcc}
-#        ${srcFlatbuf}
-#        )
-#target_link_libraries(DataReadNetworkIO PRIVATE mongo::bsoncxx_shared)
-#target_link_libraries(DataReadNetworkIO PRIVATE mongo::mongocxx_shared)
+# prepare data
+add_executable(DataPrepare
+        experiments/DataPrepare.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataPrepare PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataPrepare PRIVATE mongo::mongocxx_shared)
+
+# load data to memory- single thread
+add_executable(DataLoadToMemorySingle
+        experiments/DataLoadToMemorySingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataLoadToMemorySingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataLoadToMemorySingle PRIVATE mongo::mongocxx_shared)
+
+# load data to memory- multi thread
+add_executable(DataLoadToMemoryParallel
+        experiments/DataLoadToMemoryParallel.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataLoadToMemoryParallel PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataLoadToMemoryParallel PRIVATE mongo::mongocxx_shared)
+
+
+# serialize data single thread
+add_executable(DataSerializationSingle
+        experiments/DataSerializationSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataSerializationSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataSerializationSingle PRIVATE mongo::mongocxx_shared)
+
+# serialize data multi thread
+add_executable(DataSerializationParallel
+        experiments/DataSerializationParallel.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataSerializationParallel PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataSerializationParallel PRIVATE mongo::mongocxx_shared)
+
+# serialize data single thread
+add_executable(DataWriteSingle
+        experiments/DataWriteSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataWriteSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataWriteSingle PRIVATE mongo::mongocxx_shared)
+
+# serialize data multi thread
+add_executable(DataWriteParallel
+        experiments/DataWriteParallel.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataWriteParallel PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataWriteParallel PRIVATE mongo::mongocxx_shared)
+
+# read data single thread
+add_executable(DataReadSingle
+        experiments/DataReadSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadSingle PRIVATE mongo::mongocxx_shared)
+
+add_executable(DataReadParallel
+        experiments/DataReadParallel.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadParallel PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadParallel PRIVATE mongo::mongocxx_shared)
+
+# read I/O data single thread
+add_executable(DataReadIOSingle
+        experiments/DataReadIOSingle.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadIOSingle PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadIOSingle PRIVATE mongo::mongocxx_shared)
+
+
+# read I/O data multi thread
+add_executable(DataReadIOParallel
+        experiments/DataReadIOParallel.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadIOParallel PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadIOParallel PRIVATE mongo::mongocxx_shared)
+
+# External sort
+add_executable(ExternalSort
+        experiments/ExternalSort.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(ExternalSort PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(ExternalSort PRIVATE mongo::mongocxx_shared)
+
+# External sort IO
+add_executable(ExternalSortIO
+        experiments/ExternalSortIO.cpp
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(ExternalSortIO PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(ExternalSortIO PRIVATE mongo::mongocxx_shared)
+
+
+# Data Read Network
+add_executable(DataReadNetwork
+        experiments/DataReadNetwork.cpp
+        util/header/
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadNetwork PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadNetwork PRIVATE mongo::mongocxx_shared)
+
+# Data Read Network NetworkIO
+add_executable(DataReadNetworkIO
+        experiments/DataReadNetworkIO.cpp
+        util/header/
+        ${srcIO}
+        ${srcUtil}
+        ${srcSerialization}
+        ${srcInPlace}
+        ${srcProtobuf}
+        ${srcProtobufcc}
+        ${srcFlatbuf}
+        )
+target_link_libraries(DataReadNetworkIO PRIVATE mongo::bsoncxx_shared)
+target_link_libraries(DataReadNetworkIO PRIVATE mongo::mongocxx_shared)
 
 # Benchmark
 add_executable(ProtoBufBench
