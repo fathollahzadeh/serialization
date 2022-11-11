@@ -29,6 +29,7 @@ int main(int argc, char *argv[]) {
     int nrow = atoi(argv[4]);
 
     ObjectReader *reader = new ObjectReader(inDataPath, method);
+    cout<<"page count="<<reader->getObjectInEachPage().size()<<endl;
     if (strcasecmp(seqRand.c_str(), "sequential") == 0) {
         switch (reader->getMethod()) {
             case HANDCODED:
@@ -46,7 +47,8 @@ int main(int argc, char *argv[]) {
                 TweetStatusIP **tweets = new TweetStatusIP *[nrow];
                 int listSize = reader->readObjects(0, nrow, tweets);
                 for (int i = 0; i < listSize; ++i) {
-                    delete tweets[i];
+                    char *tbuffer = (char *)  tweets[i];
+                    delete[] tbuffer;
                 }
                 delete[] tweets;
                 break;
@@ -103,7 +105,8 @@ int main(int argc, char *argv[]) {
                 for (int i = 0; i< nrow; i++)
                     tweets[index++] = reader->readObjectIP(randomIDs[i]);
                 for (int i = 0; i < nrow; ++i) {
-                    delete tweets[i];
+                    char *tbuffer = (char *)  tweets[i];
+                    delete[] tbuffer;
                 }
                 delete[] tweets;
                 break;
