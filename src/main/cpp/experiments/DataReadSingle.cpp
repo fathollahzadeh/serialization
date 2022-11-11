@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
     int nrow = atoi(argv[4]);
 
     ObjectReader *reader = new ObjectReader(inDataPath, method);
-    cout<<"page count="<<reader->getObjectInEachPage().size()<<endl;
     if (strcasecmp(seqRand.c_str(), "sequential") == 0) {
         switch (reader->getMethod()) {
             case HANDCODED:
