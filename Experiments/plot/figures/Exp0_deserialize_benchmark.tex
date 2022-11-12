@@ -1,37 +1,33 @@
 \begin{tikzpicture}[scale=1, node distance=6.0mm]
-    \newcommand{\myaddplot}[4]{
-        \addplot[color=#4!40,mark=#3,discard if single={#1},dotted, line cap=round, mark options={scale=1.5,,solid, #4,fill=#4}]
+    \newcommand{\myaddplot}[5]{
+        \addplot[color=gray,mark=#3,discard if single={#1},dotted, line cap=round, mark options={scale=2,solid, #4,fill=#4}]
         table[ y=#2, col sep=comma, x=object_level] {results/Exp0_benchmark.dat};
-        \label{#1}
+        \label{#1#5}
     };
 
     \newcommand{\addDiagramExpThree}[2]{
-        \myaddplot{FlatBuf}{deserialization_time}{triangle}{black};
-        \myaddplot{FlatBuf}{serialization_time}{triangle*}{black};
+        \myaddplot{FlatBuf}{deserialization_time}{square*}{black}{se};
+        \myaddplot{FlatBuf}{serialization_time}{square}{black}{de};
 
-        \myaddplot{ProtoBuf}{deserialization_time}{o}{blue};        
-        \myaddplot{ProtoBuf}{serialization_time}{*}{blue};    
-        
-        \myaddplot{Boost}{deserialization_time}{diamond}{brown};
-        \myaddplot{Boost}{serialization_time}{diamond*}{brown};
+        \myaddplot{ProtoBuf}{deserialization_time}{*}{black}{se};
+        \myaddplot{ProtoBuf}{serialization_time}{o}{black}{de};       
 
-        \myaddplot{Hand-coded}{deserialization_time}{pentagon}{purple};
-        \myaddplot{Hand-coded}{serialization_time}{pentagon*}{purple};
+        \myaddplot{Boost}{deserialization_time}{diamond*}{black}{se};
+        \myaddplot{Boost}{serialization_time}{diamond}{black}{de};
 
-        \myaddplot{inPlace}{deserialization_time}{triangle}{darkgray};
-        \myaddplot{inPlace}{serialization_time}{triangle*}{darkgray};
-        
-        %\myaddplot{Boost}{deserialization_time}{square*}{color3};
-        %\myaddplot{Hand-coded}{deserialization_time}{triangle}{color6};
-        %\myaddplot{inPlace}{deserialization_time}{triangle*}{color5};
+        \myaddplot{Hand-coded}{deserialization_time}{pentagon*}{black}{se};
+        \myaddplot{Hand-coded}{serialization_time}{pentagon}{black}{de};
 
-        % \node [draw=none,inner sep=1, font=\Large] at (rel axis cs: 0.3,0.65){\shortstack[l]{
-        %     \ref{ProtoBuf} ProtoBuf \\
-        %     \ref{FlatBuf} FlatBuf \\
-        %     \ref{Boost} Boost \\
-        %     \ref{Hand-coded} Hand-coded \\
-        %     \ref{inPlace} inPlace
-        % }};
+        \myaddplot{inPlace}{deserialization_time}{triangle*}{black}{se};
+        \myaddplot{inPlace}{serialization_time}{triangle}{black}{de};
+       
+        \node [draw=none,inner sep=1, font=\Large] at (rel axis cs: 0.4,0.8){\shortstack[l]{
+            \ref{ProtoBufse}ser. \ref{ProtoBufde}de. ProtoBuf \\ \\
+            \ref{FlatBufse}ser. \ref{FlatBufde}de. FlatBuf \\ \\
+            \ref{Boostse}ser. \ref{Boostde}de. Boost \\ \\
+            \ref{Hand-codedse}ser. \ref{Hand-codedde}de. Hand-coded \\ \\
+            \ref{inPlacese}ser. \ref{inPlacede}de. inPlace
+        }};
    };
 
    
@@ -53,11 +49,13 @@
         ymode=log,    
         ymin=0,
         ymax=15,
+        log ticks with fixed point,
         y tick label style={/pgf/number format/1000 sep={}},   
         scaled y ticks=false,
         scaled x ticks=false,
         tick label style={/pgf/number format/fixed},
         enlarge x limits=0.03,
+        enlarge y limits={0.45,upper},	
         ylabel={Latency[$\mu s$]},
         xlabel={$\#$ Objects Level},
         xtick pos=left,
@@ -65,18 +63,19 @@
         ytick align=outside,
         xtick align=outside,
         yticklabel style = {font=\Large},
-        ylabel style = {font=\Large},
+        ylabel style = {font=\Large, yshift=5pt},
         xticklabel style = {font=\Large},
         xtick=data,
+        ytick={0.5,1,2,12},
         xtick={1,2,3,4,5},
         xticklabels={1,2,4,8,16},
         xlabel style = {font=\Large, yshift=-7pt},
-        height=1\columnwidth,
+        height=\columnwidth,
         width=\columnwidth,
         grid=both,
         grid style=dotted,
         minor grid style={gray!50},
-        every axis plot/.append style={line width=.75pt,mark options={scale=10,solid}},        
+        every axis plot/.append style={line width=0.7pt,mark options={scale=10,solid}},        
         ]
         \addDiagramExpThree{}{};
 
