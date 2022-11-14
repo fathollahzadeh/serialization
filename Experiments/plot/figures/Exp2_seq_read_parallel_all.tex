@@ -75,14 +75,17 @@
 
     \begin{axis}
         [
-        %ymode=log,    
-        ymin=0,
+        ymin=0.3,
+        ymode=log,    
+        ymax=5,
         y tick label style={/pgf/number format/1000 sep={}},   
         scaled y ticks=false,
         scaled x ticks=false,
         tick label style={/pgf/number format/fixed},
+        ytick={0.3, 0.5, 1, 1.5, 2.5,4},
+        yticklabels={0, 0.5, 1, 1.5, 2.5,4},
         enlarge x limits=0.03,
-        ylabel={Execution Time[s]},
+        ylabel={Execution Time[min.]},
         xlabel={$\#$ Read Objects},
         xtick pos=left,
         ytick pos=left,
