@@ -49,6 +49,7 @@
 	\nextgroupplot[
 		width=#4,		
 		ytick=#5,
+		yticklabels =#5,
 		y axis line style={opacity=#6},
 		#7,
 		axis y line*=#8,
@@ -151,7 +152,7 @@
 		ybar stacked,        
 		ymode=log,
 		ymin=0.5,
-		%ymax=10000,
+		ymax=100,
 		scaled y ticks=false,		  
 		enlarge y limits={0.15,upper},		
 		ylabel={Execution Time[min.]},		   
@@ -176,7 +177,7 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tugb}{color7}{0.42\textwidth}{{10,100,1000,10000,100000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
+\addDiagramExpOne{CPP}{tugb}{color7}{0.42\textwidth}{{10,100}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.75) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time (taskset True) \\ 
 		\ref{IOTrue} I/O Time (taskset True) \\
