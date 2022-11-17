@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
         switch (reader->getMethod()) {
             case HANDCODED:
             case BOOST:
+            case BOOSTBINARY:
             case BSON: {
                 TweetStatus **tweets = new TweetStatus *[nrow];
                 int listSize = reader->readObjects(0, nrow, tweets);
@@ -88,6 +89,7 @@ int main(int argc, char *argv[]) {
         switch (reader->getMethod()) {
             case HANDCODED:
             case BOOST:
+            case BOOSTBINARY:
             case BSON: {
                 TweetStatus **tweets = new TweetStatus *[nrow];
                 for (int i = 0; i< nrow; i++)

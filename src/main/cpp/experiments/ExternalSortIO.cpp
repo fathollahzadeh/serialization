@@ -34,7 +34,9 @@ int main(int argc, char *argv[]) {
         methodID = INPLACE;
     } else if (strcasecmp(method.c_str(), "Boost") == 0) {
         methodID = BOOST;
-    } else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
+    } else if (strcasecmp(method.c_str(), "BoostBinary") == 0) {
+        methodID = BOOSTBINARY;
+    }else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
         methodID = PROTOBUF;
     } else if (strcasecmp(method.c_str(), "Bson") == 0) {
         methodID = BSON;
@@ -43,7 +45,7 @@ int main(int argc, char *argv[]) {
     }
 
     //if serialization type is Handcoded or Boost:
-    if (methodID == HANDCODED || methodID == BOOST || methodID == BSON) {
+    if (methodID == HANDCODED || methodID == BOOST || methodID == BOOSTBINARY || methodID == BSON) {
         ExternalSortIO<TweetStatus> externalSort(inDataPath, outDataPath, method, chunkSize);
         externalSort.runExternalSort();
     }

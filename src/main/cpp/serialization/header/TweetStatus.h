@@ -30,8 +30,6 @@
 #include "MatchingRulesEntity.h"
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/map.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
 
 using namespace std;
 
@@ -159,8 +157,13 @@ public:
 	//Boost serialization:
 	char *serializeBoost(char *buffer, int &objectSize);
 
+    //Boost serialization:
+    char *serializeBoostBinary(char *buffer, int &objectSize);
+
 	//Boost de-serialization:
 	TweetStatus *deserializeBoost(char *buffer, int &bytesRead);
+
+    TweetStatus *deserializeBoostBinary(char *buffer, int &bytesRead);
 
 	//BSON buffer serialization
 	bsoncxx::document::value serializeBSON();

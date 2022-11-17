@@ -6,12 +6,13 @@
 #include <regex>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/string.hpp>
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <stdexcept>
-#include <boost/archive/text_iarchive.hpp>
 
 #include <bsoncxx/builder/stream/array.hpp>
 #include <bsoncxx/builder/stream/document.hpp>

@@ -35,6 +35,8 @@ ObjectWriter::ObjectWriter(const string &method, int rlen, int pageSize) {
         this->method = INPLACE;
     } else if (strcasecmp(method.c_str(), "Boost") == 0) {
         this->method = BOOST;
+    }else if (strcasecmp(method.c_str(), "BoostBinary") == 0) {
+        this->method = BOOSTBINARY;
     } else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
         this->method = PROTOBUF;
     } else if (strcasecmp(method.c_str(), "Bson") == 0) {
@@ -81,6 +83,9 @@ void ObjectWriter::writeObjectToFile(TweetStatus *object) {
             // if serialization type is Boost:
         else if (this->method == BOOST) {
             object->serializeBoost(buffer + currentOffset, objectSize);
+        }
+        else if (this->method == BOOSTBINARY) {
+            object->serializeBoostBinary(buffer + currentOffset, objectSize);
         }
             // if serialization type is ProtoBuf:
         else if (this->method == PROTOBUF) {
@@ -254,6 +259,9 @@ void ObjectWriter::serializeObject(TweetStatus *object) {
         else if (this->method == BOOST) {
             object->serializeBoost(buffer, objectSize);
         }
+        else if (this->method == BOOSTBINARY) {
+            object->serializeBoostBinary(buffer, objectSize);
+        }
             // if serialization type is ProtoBuf:
         else if (this->method == PROTOBUF) {
             TweetStatusProto *tweetStatusProto = new TweetStatusProto(object);
@@ -372,7 +380,9 @@ void ObjectWriter::writeObjectToNetworkPage(TweetStatus *object, Client *client)
         // if serialization type is Boost:
     else if (this->method == BOOST) {
         object->serializeBoost(buffer + currentOffset, objectSize);
-    } else if (this->method == BSON) {
+    } else if (this->method == BOOSTBINARY) {
+        object->serializeBoostBinary(buffer + currentOffset, objectSize);
+    }else if (this->method == BSON) {
         string jsonString = bsoncxx::to_json(object->serializeBSON());
         objectSize = jsonString.size();
 

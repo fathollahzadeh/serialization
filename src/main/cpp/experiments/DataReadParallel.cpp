@@ -83,6 +83,8 @@ int main(int argc, char *argv[]) {
         methodID = INPLACE;
     } else if (strcasecmp(method.c_str(), "Boost") == 0) {
         methodID = BOOST;
+    }else if (strcasecmp(method.c_str(), "BoostBinary") == 0) {
+        methodID = BOOSTBINARY;
     } else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
         methodID = PROTOBUF;
     } else if (strcasecmp(method.c_str(), "Bson") == 0) {
@@ -98,6 +100,7 @@ int main(int argc, char *argv[]) {
         switch (methodID) {
             case HANDCODED:
             case BOOST:
+            case BOOSTBINARY:
             case BSON: {
                 TweetStatus **tweets = new TweetStatus *[nrow];
                 for (int i = 0; i < NUM_THREADS & i * blklen < nrow; i++) {
@@ -151,6 +154,7 @@ int main(int argc, char *argv[]) {
         switch (methodID) {
             case HANDCODED:
             case BOOST:
+            case BOOSTBINARY:
             case BSON: {
                 TweetStatus **tweets = new TweetStatus *[nrow];
                 for (int i = 0; i < NUM_THREADS & i * blklen < nrow; i++) {

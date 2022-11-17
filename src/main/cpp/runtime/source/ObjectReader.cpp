@@ -23,7 +23,9 @@ ObjectReader::ObjectReader(const string &method) {
         this->method = INPLACE;
     } else if (strcasecmp(method.c_str(), "Boost") == 0) {
         this->method = BOOST;
-    } else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
+    } else if (strcasecmp(method.c_str(), "BoostBinary") == 0) {
+        this->method = BOOSTBINARY;
+    }else if (strcasecmp(method.c_str(), "ProtoBuf") == 0) {
         this->method = PROTOBUF;
     } else if (strcasecmp(method.c_str(), "Bson") == 0) {
         this->method = BSON;
@@ -157,7 +159,10 @@ TweetStatus *ObjectReader::readObject(int i) {
         object->deserializeHandcoded(curBuffer + objectIndex[i], tempObjectSize);
     } else if (this->method == BOOST) {
         object = TweetStatus(false).deserializeBoost(curBuffer + objectIndex[i], tempObjectSize);
-    } else if (this->method == BSON) {
+    } else if (this->method == BOOSTBINARY) {
+        object = TweetStatus(false).deserializeBoostBinary(curBuffer + objectIndex[i], tempObjectSize);
+    }
+    else if (this->method == BSON) {
         object = new TweetStatus();
         memcpy(&tempObjectSize, curBuffer + objectIndex[i], sizeof(int));
         //keep data in heap
@@ -364,6 +369,8 @@ void ObjectReader::deSerializeNetworkBuffer(char *buffer, int pageSize, vector<T
             object->deserializeHandcoded(buffer + relativePosition, objectSize);
         } else if (this->method == BOOST) {
             object = TweetStatus(false).deserializeBoost(buffer + relativePosition, objectSize);
+        } else if (this->method == BOOSTBINARY) {
+            object = TweetStatus(false).deserializeBoostBinary(buffer + relativePosition, objectSize);
         } else if (this->method == BSON) {
             object = new TweetStatus();
             memcpy(&objectSize, buffer + relativePosition, sizeof(int));

@@ -360,6 +360,26 @@ char *TweetStatus::serializeBoost(char *buffer, int &objectSize) {
 	return buffer;
 }
 
+char *TweetStatus::serializeBoostBinary(char *buffer, int &objectSize) {
+    //Serialize:
+    TweetStatus *T = this;
+
+    //Serializer:
+    stringstream ss;
+    boost::archive::binary_oarchive oa(ss, boost::archive::no_header);
+
+    //Serialize:
+    oa << T;
+
+    //Now, serialize the object.
+    char *tempBuffer = buffer;
+
+    //Copy String:
+    copyString(tempBuffer, ss.str(), objectSize);
+
+    return buffer;
+}
+
 //Boost de-serialization:
 TweetStatus *TweetStatus::deserializeBoost(char *buffer, int &bytesRead) {
 
@@ -387,6 +407,34 @@ TweetStatus *TweetStatus::deserializeBoost(char *buffer, int &bytesRead) {
 	delete ia;
 	delete rs;
 	return boostObject;
+}
+
+TweetStatus *TweetStatus::deserializeBoostBinary(char *buffer, int &bytesRead) {
+
+    TweetStatus *boostObject = this; //new TweetStatus();
+
+    //Use this subsequently:
+    char *tempBuffer = buffer;
+
+    //Parse "length" of the string.
+    int sizeofString;
+    memcpy(&sizeofString, tempBuffer, sizeof(int));
+    tempBuffer += sizeof(int);
+    bytesRead += sizeof(int);
+
+    //Create stream on heap: Keep stream alive:
+    stringstream *rs = new stringstream();
+    rs->write(tempBuffer, sizeofString);
+    bytesRead += sizeofString;
+
+    //Create archive on heap: Keep stream alive:
+    boost::archive::binary_iarchive *ia = new boost::archive::binary_iarchive(*rs, boost::archive::no_header);
+    (*ia) >> boostObject;
+
+    ia->delete_created_pointers();
+    delete ia;
+    delete rs;
+    return boostObject;
 }
 
 bsoncxx::document::value TweetStatus::serializeBSON() {

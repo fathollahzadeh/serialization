@@ -15,6 +15,7 @@ static const int BOOST = 3;
 static const int PROTOBUF = 4;
 static const int BSON = 5;
 static const int FLATBUF = 6;
+static const int BOOSTBINARY = 7;
 
 const auto NUM_THREADS = std::thread::hardware_concurrency();
 
