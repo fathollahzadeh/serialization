@@ -28,23 +28,23 @@ mv  bin/ "$path/Experiments/cppbin"
 
 # compile Rust baselines
 cd "$path/src/main/rust"
-$HOME/.cargo/bin/cargo clean
+# $HOME/.cargo/bin/cargo clean
 
-$HOME/.cargo/bin/cargo build --release
-mkdir -p "$path/Experiments/rustbin"
-cp -r target/release/DataPrepare "$path/Experiments/rustbin/"
-cp -r target/release/DataLoadToMemorySingle "$path/Experiments/rustbin/"
-cp -r target/release/DataLoadToMemoryParallel "$path/Experiments/rustbin/"
-cp -r target/release/DataReadIOParallel "$path/Experiments/rustbin/"
-cp -r target/release/DataReadSingle "$path/Experiments/rustbin/"
-cp -r target/release/DataReadParallel "$path/Experiments/rustbin/"
-cp -r target/release/DataReadIOSingle "$path/Experiments/rustbin/"
-cp -r target/release/DataSerializationSingle "$path/Experiments/rustbin/"
-cp -r target/release/DataSerializationParallel "$path/Experiments/rustbin/"
-cp -r target/release/DataWriteSingle "$path/Experiments/rustbin/"
-cp -r target/release/DataWriteParallel "$path/Experiments/rustbin/"
-cp -r target/release/ExternalSort "$path/Experiments/rustbin/"
-cp -r target/release/ExternalSortIO "$path/Experiments/rustbin/"
-cp -r target/release/DataReadNetwork "$path/Experiments/rustbin/"
-cp -r target/release/DataReadNetworkIO "$path/Experiments/rustbin/"
+# $HOME/.cargo/bin/cargo build --release
+# mkdir -p "$path/Experiments/rustbin"
+# cp -r target/release/DataPrepare "$path/Experiments/rustbin/"
+# cp -r target/release/DataLoadToMemorySingle "$path/Experiments/rustbin/"
+# cp -r target/release/DataLoadToMemoryParallel "$path/Experiments/rustbin/"
+# cp -r target/release/DataReadIOParallel "$path/Experiments/rustbin/"
+# cp -r target/release/DataReadSingle "$path/Experiments/rustbin/"
+# cp -r target/release/DataReadParallel "$path/Experiments/rustbin/"
+# cp -r target/release/DataReadIOSingle "$path/Experiments/rustbin/"
+# cp -r target/release/DataSerializationSingle "$path/Experiments/rustbin/"
+# cp -r target/release/DataSerializationParallel "$path/Experiments/rustbin/"
+# cp -r target/release/DataWriteSingle "$path/Experiments/rustbin/"
+# cp -r target/release/DataWriteParallel "$path/Experiments/rustbin/"
+# cp -r target/release/ExternalSort "$path/Experiments/rustbin/"
+# cp -r target/release/ExternalSortIO "$path/Experiments/rustbin/"
+# cp -r target/release/DataReadNetwork "$path/Experiments/rustbin/"
+# cp -r target/release/DataReadNetworkIO "$path/Experiments/rustbin/"
 
