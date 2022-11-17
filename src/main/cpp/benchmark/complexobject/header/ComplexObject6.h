@@ -30,6 +30,10 @@ public:
 
     char *serializeBoost(char *buffer, int &objectSize);
 
+    char *serializeBoostBinary(char *buffer, int &objectSize);
+
+    ComplexObject6 *deserializeBoostBinary(char *buffer, int bytesRead);
+
     ComplexObject6 *deserializeBoost(char *buffer, int bytesRead);
 
     char *serializeHandcoded(char *buffer, int &objectSize);

@@ -36,6 +36,38 @@ ComplexObject1 *ComplexObject1::deserializeBoost(char *buffer, int bytesRead) {
     return boostObject;
 }
 
+char *ComplexObject1::serializeBoostBinary(char *buffer, int &objectSize) {
+    //Serialize:
+    ComplexObject1 *T = this;
+
+    //Serializer:
+    stringstream ss;
+    boost::archive::binary_oarchive oa(ss, boost::archive::no_header);
+    oa << T;
+    objectSize = ss.str().length();
+    memcpy(buffer, ss.str().c_str(), objectSize);
+    return buffer;
+}
+
+//Boost de-serialization:
+ComplexObject1 *ComplexObject1::deserializeBoostBinary(char *buffer, int bytesRead) {
+
+    ComplexObject1 *boostObject = this;
+
+    //Create stream on heap: Keep stream alive:
+    stringstream *rs = new stringstream();
+    rs->write(buffer, bytesRead);
+
+    //Create archive on heap: Keep stream alive:
+    boost::archive::binary_iarchive *ia = new boost::archive::binary_iarchive(*rs, boost::archive::no_header);
+    (*ia) >> boostObject;
+
+    ia->delete_created_pointers();
+    delete ia;
+    delete rs;
+    return boostObject;
+}
+
 char *ComplexObject1::serializeHandcoded(char *buffer, int &objectSize) {
     buffer = copyString(buffer, this->var_string, objectSize);
     buffer = complexObject->serializeHandcoded(buffer, objectSize);

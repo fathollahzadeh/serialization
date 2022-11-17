@@ -33,6 +33,10 @@ public:
 
     ComplexObject14 *deserializeBoost(char *buffer, int bytesRead);
 
+    char *serializeBoostBinary(char *buffer, int &objectSize);
+
+    ComplexObject14 *deserializeBoostBinary(char *buffer, int bytesRead);
+
     char *serializeHandcoded(char *buffer, int &objectSize);
 
     ComplexObject14 *deserializeHandcoded(char *buffer, int &bytesRead);
