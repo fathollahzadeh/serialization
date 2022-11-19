@@ -9,8 +9,8 @@ path=$(pwd)
 
 cd "$path"
 # compile Java baselines
-mvn clean compile assembly:single
-mv target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar "$path/Experiments/SerializationJava.jar"
+#mvn clean compile assembly:single
+#mv target/Twitter-1.0-SNAPSHOT-jar-with-dependencies.jar "$path/Experiments/SerializationJava.jar"
 
 # compile C++ baslelines
 cd "$path/src/main/cpp"
@@ -22,7 +22,7 @@ rm -rf cpp.cbp
 rm -rf bin
 cmake .
 make clean
-make -j16
+make -j32
 
 mv  bin/ "$path/Experiments/cppbin"
 
