@@ -1,0 +1,10 @@
+baseline,language,taskset,execution,platform,seq_rand,nrow,time
+DefaultJava,Java,false,Total,Single,Sequential,10000000,788516
+Json+GzipJava,Java,false,Total,Single,Sequential,10000000,2598753
+BsonJava,Java,false,Total,Single,Sequential,10000000,906224
+ProtoBufJava,Java,false,Total,Single,Sequential,10000000,388704
+KryoJava,Java,false,Total,Single,Sequential,10000000,402334
+ByteBufferJava,Java,false,Total,Single,Sequential,10000000,364549
+JsonJava,Java,false,Total,Single,Sequential,10000000,1609450
+FlatBuffersJava,Java,false,Total,Single,Sequential,10000000,494722
+DefaultJava,Java,false,Total,Single,Sequential,10000000,787108
