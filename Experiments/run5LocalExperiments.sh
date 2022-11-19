@@ -8,11 +8,11 @@ randomDataPath="data/random_list_"
 outDataPath="data/tmp/tweets"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
-declare -a cpp_methods=("BoostBinary") #("Handcoded" "inPlace" "Boost" "BoostBinary" "ProtoBuf" "Bson" "FlatBuf") 
+declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "BoostBinary" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf")  
 
 max_nrow=1000000
-declare -a nrows=(1000000) #(10000000 8000000 6000000 4000000 2000000)
+declare -a nrows=(10000000 8000000 6000000 4000000 2000000)
 
 
 # Load data into memory
@@ -72,15 +72,15 @@ for rp in {1..1}; do
 
     for method in "${cpp_methods[@]}"; do
          #clean up
-         #rm -rf data/tmp
-         #mkdir -p data/tmp
+         rm -rf data/tmp
+         mkdir -p data/tmp
       
         #serialize/write data into disk
         ##############################
         #Seralization (just CPU time)
-        #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single false Experiment1_Write_times
-        #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single true Experiment1_Write_times
-        #./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Parallel false Experiment1_Write_times
+        ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single false Experiment1_Write_times
+        ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Single true Experiment1_Write_times
+        ./explocal/runExperiment1b_SerializationCPP.sh $method $inDataPathCPP $max_nrow Parallel false Experiment1_Write_times
 
         #Write (CPU+IO)
         #############
@@ -88,9 +88,9 @@ for rp in {1..1}; do
         ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single true Experiment1_Write_times
         ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Parallel false Experiment1_Write_times
     
-        #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true $max_nrow Experiment1_LoadToMemory_times
-        #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false $max_nrow Experiment1_LoadToMemory_times
-        #./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Parallel false $max_nrow Experiment1_LoadToMemory_times
+        ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single true $max_nrow Experiment1_LoadToMemory_times
+        ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Single false $max_nrow Experiment1_LoadToMemory_times
+        ./explocal/runExperiment1a_LoadToMemoryCPP.sh $inDataPathCPP Parallel false $max_nrow Experiment1_LoadToMemory_times
 
          #De-Seralization (just IO time)
          ##############################
@@ -98,9 +98,9 @@ for rp in {1..1}; do
          ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $max_nrow Single true Sequential Experiment2_Read_times
          ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $max_nrow Parallel false Sequential Experiment2_Read_times
 
-         #./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $max_nrow Single false Random Experiment2_Read_times "$randomDataPath$max_nrow.dat"
-         #./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $max_nrow Single true Random Experiment2_Read_times "$randomDataPath$max_nrow.dat"
-         #./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $max_nrow Parallel false Random Experiment2_Read_times "$randomDataPath$max_nrow.dat"
+         ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $max_nrow Single false Random Experiment2_Read_times "$randomDataPath$max_nrow.dat"
+         ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $max_nrow Single true Random Experiment2_Read_times "$randomDataPath$max_nrow.dat"
+         ./explocal/runExperiment2a_ReadIOCPP.sh $method $outDataPath $max_nrow Parallel false Random Experiment2_Read_times "$randomDataPath$max_nrow.dat"
 
          for nrow in "${nrows[@]}"; do    
              #Read (CPU+IO)
@@ -108,9 +108,9 @@ for rp in {1..1}; do
             ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single true Sequential Experiment2_Read_times
             ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Parallel false Sequential Experiment2_Read_times
 
-            #./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
-            #./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
-            #./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Single true Random Experiment2_Read_times "$randomDataPath$nrow.dat"
+            ./explocal/runExperiment2a_ReadCPP.sh $method $outDataPath $nrow Parallel false Random Experiment2_Read_times "$randomDataPath$nrow.dat"
 
         done
    done
