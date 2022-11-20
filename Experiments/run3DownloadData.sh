@@ -18,21 +18,21 @@
 
 #rm -rf data/*.txt
 cd data
-wget https://utcs378.s3.amazonaws.com/tweets_1M_rows.txt.bz2
+#wget https://utcs378.s3.amazonaws.com/tweets_1M_rows.txt.bz2
 # wget https://storage.googleapis.com/tweets_1m/random_lists.zip
 
 
-bzip2 -d tweets_1M_rows.txt.bz2
+#bzip2 -d tweets_1M_rows.txt.bz2
 # unzip random_lists.zip
 #mv random_lists/*.dat .
 
 # duplicate data
-mv tweets_1M_rows.txt tweets_1m.txt
+#mv tweets_1M_rows.txt tweets_1m.txt
 cd ..
 
 SCRIPT="$jnCMD -DinDataPath=data/tweets_1m.txt\
                -DoutDataPath=data/tweets.txt\
-               -Dcount=15\
+               -Dcount=3\
                -cp ./SerializationJava.jar at.tugraz.experiments.DataDuplicate
                 "          
 echo $SCRIPT
