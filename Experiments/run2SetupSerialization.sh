@@ -28,9 +28,9 @@ mv  bin/ "$path/Experiments/cppbin"
 
 # compile Rust baselines
 cd "$path/src/main/rust"
-# $HOME/.cargo/bin/cargo clean
+$HOME/.cargo/bin/cargo clean
 
-# $HOME/.cargo/bin/cargo build --release
+$HOME/.cargo/bin/cargo build --release
 mkdir -p "$path/Experiments/rustbin"
 cp -r target/release/DataPrepare "$path/Experiments/rustbin/"
 cp -r target/release/DataLoadToMemorySingle "$path/Experiments/rustbin/"

@@ -36,100 +36,100 @@ done
 #     ./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
 # done
 
-for rp in {1..5}; do
+# for rp in {1..5}; do
 
-    for method in "${java_methods[@]}"; do      
+#     for method in "${java_methods[@]}"; do      
 
-        # 1. Memory-to-Memory (m2m)
-        #./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2m Experiment4_ExternalSort_times
+#         # 1. Memory-to-Memory (m2m)
+#         #./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2m Experiment4_ExternalSort_times
 
-        # 2. Memory-to-Disk (m2d)
-        #./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2d Experiment4_ExternalSort_times
+#         # 2. Memory-to-Disk (m2d)
+#         #./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2d Experiment4_ExternalSort_times
 
-        # 3. Disk-to-Memory (d2m)
-        #./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2m Experiment4_ExternalSort_times
+#         # 3. Disk-to-Memory (d2m)
+#         #./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2m Experiment4_ExternalSort_times
 
-        # 4. Disk-to-Disk (d2d)
-        ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2d Experiment4_ExternalSort_times
+#         # 4. Disk-to-Disk (d2d)
+#         ./expnetwork/runExperiment4_ExternalSortJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2d Experiment4_ExternalSort_times
 
-        # 5. IO (m2m)
-        #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2m Experiment4_ExternalSort_times
+#         # 5. IO (m2m)
+#         #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2m Experiment4_ExternalSort_times
 
-        # 6. IO (m2d)
-        #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2d Experiment4_ExternalSort_times
+#         # 6. IO (m2d)
+#         #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava m2d Experiment4_ExternalSort_times
 
-        # 7. IO (d2m)
-        #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2m Experiment4_ExternalSort_times
+#         # 7. IO (d2m)
+#         #./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2m Experiment4_ExternalSort_times
 
-        # 8. IO (d2d)
-        rm -rf ${outDataPath}.${method}SortedJava
-        ./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2d Experiment4_ExternalSort_times
+#         # 8. IO (d2d)
+#         rm -rf ${outDataPath}.${method}SortedJava
+#         ./expnetwork/runExperiment4_ExternalSortNetworkIOJava.sh $method ${outDataPath}.${method}Java ${outDataPath}.${method}SortedJava d2d Experiment4_ExternalSort_times
 
-        # clean-up
-        rm -rf ${outDataPath}.${method}SortedJava
-    done    
+#         # clean-up
+#         rm -rf ${outDataPath}.${method}SortedJava
+#     done    
 
 
-    # for method in "${cpp_methods[@]}"; do
+#     # for method in "${cpp_methods[@]}"; do
         
-    #     # 1. Memory-to-Memory (m2m)
-    #     #./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2m Experiment4_ExternalSort_times
+#     #     # 1. Memory-to-Memory (m2m)
+#     #     #./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2m Experiment4_ExternalSort_times
 
-    #     # 2. Memory-to-Disk (m2d)
-    #     #./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2d Experiment4_ExternalSort_times
+#     #     # 2. Memory-to-Disk (m2d)
+#     #     #./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2d Experiment4_ExternalSort_times
 
-    #     # 3. Disk-to-Memory (d2m)
-    #     #./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2m Experiment4_ExternalSort_times
+#     #     # 3. Disk-to-Memory (d2m)
+#     #     #./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2m Experiment4_ExternalSort_times
 
-    #     # 4. Disk-to-Disk (d2d)
-    #     ./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
+#     #     # 4. Disk-to-Disk (d2d)
+#     #     ./expnetwork/runExperiment4_ExternalSortCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
 
-    #     # 5. IO (m2m)
-    #     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2m Experiment4_ExternalSort_times
+#     #     # 5. IO (m2m)
+#     #     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2m Experiment4_ExternalSort_times
 
-    #     # 6. IO (m2d)
-    #     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2d Experiment4_ExternalSort_times
+#     #     # 6. IO (m2d)
+#     #     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP m2d Experiment4_ExternalSort_times
 
-    #     # 7. IO (d2m)
-    #     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2m Experiment4_ExternalSort_times
+#     #     # 7. IO (d2m)
+#     #     #./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2m Experiment4_ExternalSort_times
 
-    #     # 8. IO (d2d)
-    #     rm -rf ${outDataPath}.${method}SortedCPP
-    #     ./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
+#     #     # 8. IO (d2d)
+#     #     rm -rf ${outDataPath}.${method}SortedCPP
+#     #     ./expnetwork/runExperiment4_ExternalSortNetworkIOCPP.sh $method ${outDataPath}.${method}CPP ${outDataPath}.${method}SortedCPP d2d Experiment4_ExternalSort_times
 
-    #     #clean-up
-    #     rm -rf ${outDataPath}.${method}SortedCPP
-    # done   
+#     #     #clean-up
+#     #     rm -rf ${outDataPath}.${method}SortedCPP
+#     # done   
 
 
-    # for method in "${rust_methods[@]}"; do
+#     # for method in "${rust_methods[@]}"; do
     
-    #     # 1. Memory-to-Memory (m2m)
-    #     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
+#     #     # 1. Memory-to-Memory (m2m)
+#     #     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
 
-    #     # 2. Memory-to-Disk (m2d)
-    #     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2d Experiment4_ExternalSort_times
+#     #     # 2. Memory-to-Disk (m2d)
+#     #     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2d Experiment4_ExternalSort_times
 
-    #     # 3. Disk-to-Memory (d2m)
-    #     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
+#     #     # 3. Disk-to-Memory (d2m)
+#     #     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
 
-    #     # 4. Disk-to-Disk (d2d)
-    #     ./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
+#     #     # 4. Disk-to-Disk (d2d)
+#     #     ./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
 
-    #     # 5. IO (m2m)
-    #     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
+#     #     # 5. IO (m2m)
+#     #     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
 
-    #     # 6. IO (m2d)
-    #     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2d Experiment4_ExternalSort_times
+#     #     # 6. IO (m2d)
+#     #     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2d Experiment4_ExternalSort_times
 
-    #     # 7. IO (d2m)
-    #     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
+#     #     # 7. IO (d2m)
+#     #     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
 
-    #     # 8. IO (d2d)
-    #     rm -rf ${outDataPath}.${method}SortedRust
-    #     ./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
+#     #     # 8. IO (d2d)
+#     #     rm -rf ${outDataPath}.${method}SortedRust
+#     #     ./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
 
-    #     # clean-up
-    #     rm -rf ${outDataPath}.${method}SortedRust
-    # done   
-done    
+#     #     # clean-up
+#     #     rm -rf ${outDataPath}.${method}SortedRust
+#     # done   
+# done    
