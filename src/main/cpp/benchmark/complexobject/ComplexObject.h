@@ -60,14 +60,14 @@ void ComplexObject<T>::runBoostBinary(){
     long sum_deserialization = 0;
     int bufferSize = 0;
     char *bu = new char[4096];
-    cObject->serializeBoost(bu, bufferSize);
+    cObject->serializeBoostBinary(bu, bufferSize);
     delete[] bu;
 
     for (int i = 0; i < totalObjects; ++i) {
         int tmpSize = 0;
         char *buffer = new char[bufferSize];
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-        cObject->serializeBoostBinary(buffer, tmpSize);
+        buffer = cObject->serializeBoostBinary(buffer, tmpSize);
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
         char *tmpPointer = buffer;
@@ -83,7 +83,7 @@ void ComplexObject<T>::runBoostBinary(){
     }
     double avg = (double) sum_serialization / totalObjects;
     double avgd = (double) sum_deserialization / totalObjects;
-    cout << "BoostBinary," << objectLevel << "," << avg << "," << avgd << "," << bufferSize << endl;
+    cout << "BoostBinary," << objectLevel << "," << avg << "," << avgd << "," << bufferSize<<",1024,"<<(bufferSize-1024) << endl;
 }
 
 template<class T>
@@ -116,7 +116,7 @@ void ComplexObject<T>::runHandCoded() {
     //delete cObject;
     double avg = (double) sum_serialization / totalObjects;
     double avgd = (double) sum_deserialization / totalObjects;
-    cout << "Hand-coded," << objectLevel << "," << avg << "," << avgd << "," << bufferSize << endl;
+    cout << "Hand-coded," << objectLevel << "," << avg << "," << avgd << "," << bufferSize<<",1024,"<<(bufferSize-1024) << endl;
 }
 
 template<class T>

@@ -9,7 +9,7 @@
 template<class T, class S>
 class ComplexObjectIP {
 private:
-    int totalObjects = 5000000;
+    int totalObjects = 1000000;
     string randString;
     int objectLevel;
     S *vObject;
@@ -75,7 +75,7 @@ void ComplexObjectIP<T,S>::runInPlace() {
     //delete cObject;
     double avg = (double) sum_serialization / totalObjects;
     double avgd = (double) sum_deserialization / totalObjects;
-    cout << "inPlace," << objectLevel << "," << avg << "," << avgd << "," << objectSize << endl;
+    cout << "inPlace," << objectLevel << "," << avg << "," << avgd << "," << objectSize<<",1024,"<<(objectSize-1024) << endl;
 }
 
 template<class T, class S>

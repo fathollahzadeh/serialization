@@ -118,17 +118,17 @@ int main(int argc, char *argv[]) {
     co2.runBoostBinary();
     co2.runHandCoded();
 
-    ComplexObject<ComplexObject13> co4(4, genComplexObject13(randString4));
+    ComplexObject<ComplexObject13> co4(3, genComplexObject13(randString4));
     co4.runBoost();
     co4.runBoostBinary();
     co4.runHandCoded();
 
-    ComplexObject<ComplexObject9> co8(8, genComplexObject9(randString8));
+    ComplexObject<ComplexObject9> co8(4, genComplexObject9(randString8));
     co8.runBoost();
     co8.runBoostBinary();
     co8.runHandCoded();
 
-    ComplexObject<ComplexObject1> co16(16, genComplexObject1(randString16));
+    ComplexObject<ComplexObject1> co16(5, genComplexObject1(randString16));
     co16.runBoost();
     co16.runBoostBinary();
     co16.runHandCoded();
@@ -139,13 +139,13 @@ int main(int argc, char *argv[]) {
     ComplexObjectIP<ComplexObjectIP15, ComplexObject15> coIP2(2, genComplexObject15(randString2));
     coIP2.runInPlace();
 
-    ComplexObjectIP<ComplexObjectIP13, ComplexObject13> coIP4(4, genComplexObject13(randString4));
+    ComplexObjectIP<ComplexObjectIP13, ComplexObject13> coIP4(3, genComplexObject13(randString4));
     coIP4.runInPlace();
 
-    ComplexObjectIP<ComplexObjectIP9, ComplexObject9> coIP8(8, genComplexObject9(randString8));
+    ComplexObjectIP<ComplexObjectIP9, ComplexObject9> coIP8(4, genComplexObject9(randString8));
     coIP8.runInPlace();
 
-    ComplexObjectIP<ComplexObjectIP1, ComplexObject1> coIP16(16, genComplexObject1(randString16));
+    ComplexObjectIP<ComplexObjectIP1, ComplexObject1> coIP16(5, genComplexObject1(randString16));
     coIP16.runInPlace();
 
     return 0;

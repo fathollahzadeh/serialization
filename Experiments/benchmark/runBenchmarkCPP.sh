@@ -11,9 +11,9 @@
 # sleep 30
 
 
-./cppbin/ProtoBufBench
+#./cppbin/ProtoBufBench
 
-./cppbin/FlatBufBench
+#./cppbin/FlatBufBench
 
 ./cppbin/ComplexObjectBench
 
