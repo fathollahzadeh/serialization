@@ -3,7 +3,8 @@
 	\makeatletter
 	\pgfplots@stacked@isfirstplottrue
 	\makeatother
-	\addplot [forget plot,draw=none] coordinates{({HandcodedCPP},0.1) ({inPlaceCPP},0.1) ({FlatBufCPP},0.1) ({ProtoBufCPP},0.1) ({BoostCPP},0.1) ({BsonCPP},0.1) ({MessagePackRust},0.1) ({BincodeRust},0.1) ({JsonRust},0.1) ({FlexBufRust},0.1) ({BsonRust},0.1) ({Json+GzipJava},0.1) ({JsonJava},0.1) ({BsonJava},0.1) ({DefaultJava},0.1) ({ProtoBufJava},0.1) ({ByteBufferJava},0.1) ({FlatBufJava},0.1) ({KryoJava},0.1)};
+	\addplot [forget plot,draw=none] coordinates{({HandcodedCPP},0.1) ({inPlaceCPP},0.1) ({FlatBufCPP},0.1) ({ProtoBufCPP},0.1) ({BoostBinaryCPP},0.1) ({BoostCPP},0.1)  ({BsonCPP},0.1) 
+	({BincodeRust},0.1) ({MessagePackRust},0.1) ({JsonRust},0.1) ({FlexBufRust},0.1) ({BsonRust},0.1) ({Json+GzipJava},0.1) ({JsonJava},0.1) ({BsonJava},0.1) ({DefaultJava},0.1) ({ProtoBufJava},0.1) ({ByteBufferJava},0.1) ({FlatBufJava},0.1) ({KryoJava},0.1)};
 }
 \makeatother
 
@@ -158,10 +159,12 @@
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.6\columnwidth,  
-		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostCPP, BsonCPP, MessagePackRust, BincodeRust, JsonRust, FlexBufRust, BsonRust, Json+GzipJava, JsonJava, BsonJava, DefaultJava, ProtoBufJava, ByteBufferJava, FlatBufJava, KryoJava},		   
-		xticklabels={ HandCoded,, FlatBuf,, Boost,, MessagePack,, Json,, Bson,, Json,, Default,, Byte Buffer,, Kryo},  
-		extra x ticks={inPlaceCPP,ProtoBufCPP,BsonCPP,BincodeRust,FlexBufRust,Json+GzipJava,BsonJava, ProtoBufJava,FlatBufJava},
-		extra x tick labels={inPlace,ProtoBuf,Bson,Bincode,FlexBuf,Json+Gzip,Bson,ProtoBuf,FlatBuf},
+		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostBinaryCPP, BoostCPP, BsonCPP,BincodeRust, MessagePackRust,  JsonRust, FlexBufRust, BsonRust, Json+GzipJava, JsonJava, BsonJava, DefaultJava, ProtoBufJava, ByteBufferJava, FlatBufJava, KryoJava},
+		%%%%%%%%%%%		   
+		xticklabels={HandcodedCPP, , FlatBufCPP, , BoostBinaryCPP, , BsonCPP, , MessagePackRust , , FlexBufRust, , Json+GzipJava, , BsonJava, , ProtoBufJava, , FlatBufJava, },  
+		extra x ticks={inPlaceCPP,ProtoBufCPP,BoostCPP,BincodeRust,JsonJava,DefaultJava,ByteBufferJava,KryoJava},
+		extra x tick labels={inPlaceCPP,ProtoBufCPP,BoostCPP,BincodeRust,JsonJava,DefaultJava,ByteBufferJava,KryoJava},
+		%%%%%%%%%%%
 		every extra x tick/.style={major tick length=15pt, xtick align=outside},
 		point meta=rawy,            
 		nodes near coords={\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}},
@@ -169,7 +172,7 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tugb}{color7}{0.42\textwidth}{{0,10,100,1000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
+\addDiagramExpOne{CPP}{tugb}{color7}{0.48\textwidth}{{0,10,100,1000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
 
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.85) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time(taskset True) \\ \\

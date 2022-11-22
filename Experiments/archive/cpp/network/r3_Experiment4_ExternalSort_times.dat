@@ -1,0 +1,15 @@
+baseline,language,plan,machineip,time
+HandcodedCPP,CPP,Total,d2d,10.142.0.2 ,344785
+HandcodedCPP,CPP,IO,d2d,10.142.0.2 ,264679
+inPlaceCPP,CPP,Total,d2d,10.142.0.2 ,405296
+inPlaceCPP,CPP,IO,d2d,10.142.0.2 ,401159
+BoostCPP,CPP,Total,d2d,10.142.0.2 ,1002595
+BoostCPP,CPP,IO,d2d,10.142.0.2 ,261607
+BoostBinaryCPP,CPP,Total,d2d,10.142.0.2 ,637941
+BoostBinaryCPP,CPP,IO,d2d,10.142.0.2 ,302904
+ProtoBufCPP,CPP,Total,d2d,10.142.0.2 ,397838
+ProtoBufCPP,CPP,IO,d2d,10.142.0.2 ,221368
+BsonCPP,CPP,Total,d2d,10.142.0.2 ,8067582
+BsonCPP,CPP,IO,d2d,10.142.0.2 ,521685
+FlatBufCPP,CPP,Total,d2d,10.142.0.2 ,384981
+FlatBufCPP,CPP,IO,d2d,10.142.0.2 ,341048
