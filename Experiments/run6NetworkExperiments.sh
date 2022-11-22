@@ -28,15 +28,15 @@ echo "baseline,language,plan,machineip,time" >>results/Experiment4_ExternalSort_
 #     ./expnetwork/runExperiment4_WriteJava.sh $method $inDataPathMemoryJava ${outDataPath}.${method}Java $nrow 
 # done
 
-# for method in "${cpp_methods[@]}"; do    
-#     ./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP ${outDataPath}.${method}CPP $nrow 
-# done
+for method in "${cpp_methods[@]}"; do    
+    ./expnetwork/runExperiment4_WriteCPP.sh $method $inDataPathMemoryCPP ${outDataPath}.${method}CPP $nrow 
+done
 
 # for method in "${rust_methods[@]}"; do
 #     ./expnetwork/runExperiment4_WriteRust.sh $method $inDataPathMemoryRust ${outDataPath}.${method}Rust $nrow 
 # done
 
-for rp in {1..5}; do
+#for rp in {1..1}; do
 
     # for method in "${java_methods[@]}"; do      
 
@@ -102,7 +102,7 @@ for rp in {1..5}; do
     # done   
 
 
-    for method in "${rust_methods[@]}"; do
+    #for method in "${rust_methods[@]}"; do
     
     #     # 1. Memory-to-Memory (m2m)
     #     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
@@ -113,8 +113,8 @@ for rp in {1..5}; do
     #     # 3. Disk-to-Memory (d2m)
     #     #./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
 
-        # 4. Disk-to-Disk (d2d)
-        ./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
+        # # 4. Disk-to-Disk (d2d)
+        # ./expnetwork/runExperiment4_ExternalSortRust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
 
     #     # 5. IO (m2m)
     #     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust m2m Experiment4_ExternalSort_times
@@ -125,11 +125,11 @@ for rp in {1..5}; do
     #     # 7. IO (d2m)
     #     #./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2m Experiment4_ExternalSort_times
 
-        # 8. IO (d2d)
-        rm -rf ${outDataPath}.${method}SortedRust
-        ./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
+        # # 8. IO (d2d)
+        # rm -rf ${outDataPath}.${method}SortedRust
+        # ./expnetwork/runExperiment4_ExternalSortNetworkIORust.sh $method ${outDataPath}.${method}Rust ${outDataPath}.${method}SortedRust d2d Experiment4_ExternalSort_times
 
-        # clean-up
-        rm -rf ${outDataPath}.${method}SortedRust
-    done   
-done    
+        # # clean-up
+        # rm -rf ${outDataPath}.${method}SortedRust
+   # done   
+#done    
