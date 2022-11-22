@@ -1,0 +1,25 @@
+baseline,language,execution,plan,machineip,time
+HandcodedCPP,CPP,Total,d2d,10.142.0.2 ,330800
+HandcodedCPP,CPP,IO,d2d,10.142.0.2 ,250463
+inPlaceCPP,CPP,Total,d2d,10.142.0.2 ,404881
+inPlaceCPP,CPP,IO,d2d,10.142.0.2 ,380290
+BoostCPP,CPP,Total,d2d,10.142.0.2 ,1002179
+BoostCPP,CPP,IO,d2d,10.142.0.2 ,260157
+BoostBinaryCPP,CPP,Total,d2d,10.142.0.2 ,648008
+BoostBinaryCPP,CPP,IO,d2d,10.142.0.2 ,304032
+ProtoBufCPP,CPP,Total,d2d,10.142.0.2 ,368780
+ProtoBufCPP,CPP,IO,d2d,10.142.0.2 ,234505
+BsonCPP,CPP,Total,d2d,10.142.0.2 ,8169409
+BsonCPP,CPP,IO,d2d,10.142.0.2 ,532534
+FlatBufCPP,CPP,Total,d2d,10.142.0.2 ,389000
+FlatBufCPP,CPP,IO,d2d,10.142.0.2 ,337993
+HandcodedCPP,CPP,Total,d2d,10.142.0.2 ,328680
+HandcodedCPP,CPP,IO,d2d,10.142.0.2 ,248955
+inPlaceCPP,CPP,Total,d2d,10.142.0.2 ,400972
+inPlaceCPP,CPP,IO,d2d,10.142.0.2 ,379646
+BoostCPP,CPP,Total,d2d,10.142.0.2 ,1010527
+BoostCPP,CPP,IO,d2d,10.142.0.2 ,255356
+BoostBinaryCPP,CPP,Total,d2d,10.142.0.2 ,645748
+BoostBinaryCPP,CPP,IO,d2d,10.142.0.2 ,294084
+ProtoBufCPP,CPP,Total,d2d,10.142.0.2 ,367247
+ProtoBufCPP,CPP,IO,d2d,10.142.0.2 ,230015
