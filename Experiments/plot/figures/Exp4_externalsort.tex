@@ -4,7 +4,7 @@
 	\pgfplots@stacked@isfirstplottrue
 	\makeatother
 	\addplot [forget plot,draw=none] coordinates{({HandcodedCPP},0.1) ({inPlaceCPP},0.1) ({FlatBufCPP},0.1) ({ProtoBufCPP},0.1) ({BoostBinaryCPP},0.1) ({BoostCPP},0.1)  ({BsonCPP},0.1) 
-	({BincodeRust},0.1) ({MessagePackRust},0.1) ({JsonRust},0.1) ({FlexBufRust},0.1) ({BsonRust},0.1) ({Json+GzipJava},0.1) ({JsonJava},0.1) ({BsonJava},0.1) ({DefaultJava},0.1) ({ProtoBufJava},0.1) ({ByteBufferJava},0.1) ({FlatBufJava},0.1) ({KryoJava},0.1)};
+	({BincodeRust},0.1) ({MessagePackRust},0.1) ({JsonRust},0.1) ({FlexBufRust},0.1) ({BsonRust},0.1) ({FlatBufJava},0.1) ({ProtoBufJava},0.1) ({KryoJava},0.1) ({ByteBufferJava},0.1) ({BsonJava},0.1) ({DefaultJava},0.1) ({JsonJava},0.1) ({Json+GzipJava},0.1)};
 }
 \makeatother
 
@@ -150,7 +150,9 @@
 		enlarge y limits={0.5,upper},		
 		ylabel={Execution Time[min.]},		   
 		ytick align=inside,
-		xtick align=outside,			
+		xtick align=outside,	
+		ytick={10,100,1000},
+		yticklabels={10,100,1000},		
 		xtick pos=left,
 		ytick pos=left,
 		yticklabel style = {font=\scriptsize},
@@ -159,12 +161,10 @@
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.6\columnwidth,  
-		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostBinaryCPP, BoostCPP, BsonCPP,BincodeRust, MessagePackRust,  JsonRust, FlexBufRust, BsonRust, Json+GzipJava, JsonJava, BsonJava, DefaultJava, ProtoBufJava, ByteBufferJava, FlatBufJava, KryoJava},
-		%%%%%%%%%%%		   
-		xticklabels={HandcodedCPP, , FlatBufCPP, , BoostBinaryCPP, , BsonCPP, , MessagePackRust , , FlexBufRust, , Json+GzipJava, , BsonJava, , ProtoBufJava, , FlatBufJava, },  
-		extra x ticks={inPlaceCPP,ProtoBufCPP,BoostCPP,BincodeRust,JsonJava,DefaultJava,ByteBufferJava,KryoJava},
-		extra x tick labels={inPlaceCPP,ProtoBufCPP,BoostCPP,BincodeRust,JsonJava,DefaultJava,ByteBufferJava,KryoJava},
-		%%%%%%%%%%%
+		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostBinaryCPP, BoostCPP, BsonCPP,BincodeRust, MessagePackRust,  JsonRust, FlexBufRust, BsonRust, FlatBufJava, ProtoBufJava, KryoJava, ByteBufferJava, BsonJava, DefaultJava, JsonJava, Json+GzipJava },
+		xticklabels={HandCoded, , FlatBuf, , BoostBinary, , Bson,Bincode, ,Json,, Bson,, ProtoBuf,, ByteBuffer, , Default, , Json+Gzip},  
+		extra x ticks={inPlaceCPP,ProtoBufCPP,BoostCPP,MessagePackRust,FlexBufRust,FlatBufJava,KryoJava,BsonJava,JsonJava},
+		extra x tick labels={InPlace,ProtoBuf,BoostText,MessagePack,FlexBuf,FlatBuf,Kryo,Bson,Json},
 		every extra x tick/.style={major tick length=15pt, xtick align=outside},
 		point meta=rawy,            
 		nodes near coords={\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}},
@@ -189,8 +189,8 @@
 
 \begin{scope}[decoration=brace]
 	\pgfdecorationsegmentamplitude=5pt
-	\draw[decorate] ($(T2.south east)+(-5pt,0)$) -- ($(T0.south west)+(-20pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{C++}};
-	\draw[decorate] ($(T4.south east)+(20pt,0)$) -- ($(T3.south west)+(-25pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
-	\draw[decorate] ($(T8.south east)+(20pt,0)$) -- ($(T5.south west)+(-0pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Java}};	
+	\draw[decorate] ($(T2.south east)+(20pt,0)$) -- ($(T0.south west)+(-30pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{C++}};
+	\draw[decorate] ($(T4.south east)+(20pt,0)$) -- ($(T3.south west)+(-15pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
+	\draw[decorate] ($(T8.south east)+(30pt,0)$) -- ($(T5.south west)+(0pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Java}};	
   \end{scope}
 \end{tikzpicture}
