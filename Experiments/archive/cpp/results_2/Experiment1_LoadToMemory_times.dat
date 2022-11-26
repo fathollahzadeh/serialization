@@ -1,0 +1,6 @@
+language,platform,taskset,nrow,time
+CPP,Parallel,false,10000000,77465
+CPP,Parallel,false,10000000,77224
+CPP,Parallel,false,10000000,77723
+CPP,Parallel,false,10000000,77286
+CPP,Parallel,false,10000000,77521
