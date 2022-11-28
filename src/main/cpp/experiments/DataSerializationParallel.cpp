@@ -27,7 +27,7 @@ void SerializeTask(string method, char **buffer, int beginPos, int endPos) {
     for (int i = beginPos; i < endPos; i++) {
         TweetStatus *object = new TweetStatus();
         int objectSize = 0;
-        object->deserializeHandcoded(buffer[i], objectSize);
+        object = object->deserializeHandcoded(buffer[i], objectSize);
         writer->serializeObject(object);
         delete[] buffer[i];
         delete object;
