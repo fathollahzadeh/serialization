@@ -6,28 +6,31 @@
     };
 
     \newcommand{\addDiagramExpThree}[2]{
-        \myaddplot{FlatBuf}{deserialization_time}{square*}{black}{se};
-        \myaddplot{FlatBuf}{serialization_time}{square}{black}{de};
+        % \myaddplot{FlatBuf}{deserialization_time}{square*}{black}{se};
+        % \myaddplot{FlatBuf}{serialization_time}{square}{black}{de};
 
-        \myaddplot{ProtoBuf}{deserialization_time}{*}{black}{se};
-        \myaddplot{ProtoBuf}{serialization_time}{o}{black}{de};       
+        % \myaddplot{ProtoBuf}{deserialization_time}{*}{black}{se};
+        % \myaddplot{ProtoBuf}{serialization_time}{o}{black}{de};       
 
-        \myaddplot{Boost}{deserialization_time}{diamond*}{black}{se};
-        \myaddplot{Boost}{serialization_time}{diamond}{black}{de};
+        % \myaddplot{Boost}{deserialization_time}{diamond*}{black}{se};
+        % \myaddplot{Boost}{serialization_time}{diamond}{black}{de};
 
-        \myaddplot{Hand-coded}{deserialization_time}{pentagon*}{black}{se};
-        \myaddplot{Hand-coded}{serialization_time}{pentagon}{black}{de};
+        % \myaddplot{BoostBinary}{deserialization_time}{+}{black}{se};
+        % \myaddplot{BoostBinary}{serialization_time}{|}{black}{de};
 
-        \myaddplot{inPlace}{deserialization_time}{triangle*}{black}{se};
-        \myaddplot{inPlace}{serialization_time}{triangle}{black}{de};
+        % \myaddplot{Hand-coded}{deserialization_time}{pentagon*}{black}{se};
+        % \myaddplot{Hand-coded}{serialization_time}{pentagon}{black}{de};
+
+        %\myaddplot{inPlace}{deserialization_time}{triangle*}{black}{se};
+        %\myaddplot{inPlace}{serialization_time}{triangle}{black}{de};
        
-        \node [draw=none,inner sep=1, font=\Large] at (rel axis cs: 0.4,0.8){\shortstack[l]{
-            \ref{ProtoBufse}ser. \ref{ProtoBufde}de. ProtoBuf \\ \\
-            \ref{FlatBufse}ser. \ref{FlatBufde}de. FlatBuf \\ \\
-            \ref{Boostse}ser. \ref{Boostde}de. Boost \\ \\
-            \ref{Hand-codedse}ser. \ref{Hand-codedde}de. Hand-coded \\ \\
-            \ref{inPlacese}ser. \ref{inPlacede}de. inPlace
-        }};
+        % \node [draw=none,inner sep=1, font=\Large] at (rel axis cs: 0.4,0.8){\shortstack[l]{
+        %     \ref{ProtoBufse}ser. \ref{ProtoBufde}de. ProtoBuf \\ \\
+        %     \ref{FlatBufse}ser. \ref{FlatBufde}de. FlatBuf \\ \\
+        %     \ref{Boostse}ser. \ref{Boostde}de. Boost \\ \\
+        %     \ref{Hand-codedse}ser. \ref{Hand-codedde}de. Hand-coded \\ \\
+        %     \ref{inPlacese}ser. \ref{inPlacede}de. inPlace
+        % }};
    };
 
    
@@ -46,9 +49,9 @@
 
     \begin{axis}
         [
-        ymode=log,    
-        ymin=0,
-        ymax=15,
+        %ymode=log,    
+        ymin=-1,
+        %ymax=15,
         log ticks with fixed point,
         y tick label style={/pgf/number format/1000 sep={}},   
         scaled y ticks=false,

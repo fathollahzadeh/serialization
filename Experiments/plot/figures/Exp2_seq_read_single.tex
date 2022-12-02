@@ -3,7 +3,9 @@
 	\makeatletter
 	\pgfplots@stacked@isfirstplottrue
 	\makeatother
-	\addplot [forget plot,draw=none] coordinates{({HandcodedCPP},0.1) ({inPlaceCPP},0.1) ({FlatBufCPP},0.1) ({ProtoBufCPP},0.1) ({BoostCPP},0.1) ({BsonCPP},0.1) ({MessagePackRust},0.1) ({BincodeRust},0.1) ({JsonRust},0.1) ({FlexBufRust},0.1) ({BsonRust},0.1) ({Json+GzipJava},0.1) ({JsonJava},0.1) ({BsonJava},0.1) ({DefaultJava},0.1) ({ProtoBufJava},0.1) ({ByteBufferJava},0.1) ({FlatBufJava},0.1) ({KryoJava},0.1)};
+	\addplot [forget plot,draw=none] coordinates{({HandcodedCPP},0.1) ({inPlaceCPP},0.1) ({ProtoBufCPP},0.1) ({FlatBufCPP},0.1)  ({BoostBinaryCPP},0.1) ({BoostCPP},0.1)  ({BsonCPP},0.1) 
+	({MessagePackRust},0.1) ({BincodeRust},0.1)  ({JsonRust},0.1) ({FlexBufRust},0.1) ({BsonRust},0.1) 
+	({ByteBufferJava},0.1) ({KryoJava},0.1) ({ProtoBufJava},0.1) ({FlatBufJava},0.1) ({DefaultJava},0.1) ({BsonJava},0.1)  ({JsonJava},0.1) ({Json+GzipJava},0.1)};
 }
 \makeatother
 
@@ -48,6 +50,7 @@
 	\nextgroupplot[
 		width=#4,		
 		ytick=#5,
+		yticklabels=#5,
 		y axis line style={opacity=#6},
 		#7,
 		axis y line*=#8,
@@ -180,10 +183,13 @@
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.6\columnwidth,  
-		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostCPP, BsonCPP, MessagePackRust, BincodeRust, JsonRust, FlexBufRust, BsonRust, Json+GzipJava, JsonJava, BsonJava, DefaultJava, ProtoBufJava, ByteBufferJava, FlatBufJava, KryoJava},		   
-		xticklabels={ HandCoded,, FlatBuf,, Boost,, MessagePack,, Json,, Bson,, Json,, Default,, Byte Buffer,, Kryo},  
-		extra x ticks={inPlaceCPP,ProtoBufCPP,BsonCPP,BincodeRust,FlexBufRust,Json+GzipJava,BsonJava, ProtoBufJava,FlatBufJava},
-		extra x tick labels={inPlace,ProtoBuf,Bson,Bincode,FlexBuf,Json+Gzip,Bson,ProtoBuf,FlatBuf},
+		symbolic x coords={ HandcodedCPP, inPlaceCPP, ProtoBufCPP, FlatBufCPP, BoostBinaryCPP, BoostCPP, BsonCPP, MessagePackRust,BincodeRust, JsonRust, FlexBufRust, BsonRust,ByteBufferJava,KryoJava,ProtoBufJava,FlatBufJava,DefaultJava,BsonJava,JsonJava, Json+GzipJava},
+		%
+		xticklabels={HandCoded, , ProtoBuf, , BoostBinary, , Bson, ,Bincode, , FlexBuf, ,ByteBuffer,,ProtoBuf,,Default,,Json, },  
+		%
+		extra x ticks={inPlaceCPP,FlatBufCPP,BoostCPP,MessagePackRust,JsonRust,BsonRust,KryoJava,FlatBufJava,BsonJava,Json+GzipJava},
+		extra x tick labels={InPlace,FlatBuf,Boost,MessagePack,Json,Bson,Kryo,FlatBuf,Bson,Json+Gzip},
+		%
 		every extra x tick/.style={major tick length=15pt, xtick align=outside},
 		point meta=rawy,            
 		nodes near coords={\pgfmathprintnumber[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}},
@@ -191,7 +197,7 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tugb}{color7}{0.42\textwidth}{{10,100,1000,10000,100000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
+\addDiagramExpOne{CPP}{tugb}{color7}{0.48\textwidth}{{10,100}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
 \node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.75) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time (taskset True) \\ 
 		\ref{IOTrue} I/O Time (taskset True) \\
@@ -199,14 +205,14 @@
 		\ref{IOFalse} I/O Time (taskset False) 				
 }};
 \addDiagramExpOne{Rust}{tugb}{color7}{0.40\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
-\addDiagramExpOne{Java}{tugb}{color7}{0.53\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
+\addDiagramExpOne{Java}{tugb}{color7}{0.55\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
 		
 \end{groupplot}
 
 \begin{scope}[decoration=brace]
 	\pgfdecorationsegmentamplitude=5pt
-	\draw[decorate] ($(T2.south east)+(-5pt,0)$) -- ($(T0.south west)+(-20pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{C++}};
-	\draw[decorate] ($(T4.south east)+(15pt,0)$) -- ($(T3.south west)+(-25pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
-	\draw[decorate] ($(T8.south east)+(15pt,0)$) -- ($(T5.south west)+(-0pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Java}};	
+	\draw[decorate] ($(T2.south east)+(25pt,0)$) -- ($(T0.south west)+(-25pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{C++}};
+	\draw[decorate] ($(T4.south east)+(60pt,0)$) -- ($(T3.south west)+(5pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
+	\draw[decorate] ($(T8.south east)+(58pt,0)$) -- ($(T5.south west)+(43pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Java}};	
   \end{scope}
 \end{tikzpicture}
