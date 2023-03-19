@@ -106,7 +106,7 @@ MessagePackRust,Rust,True,CPU,Single,Sequential,10000000,0.44
 MessagePackRust,Rust,True,IO,Single,Sequential,10000000,1.88
 MessagePackRust,Rust,False,Total,Single,Sequential,10000000,1.53
 MessagePackRust,Rust,False,CPU,Single,Sequential,10000000,0.53
-MessagePackRust,Rust,False,IO,Single,Sequential,10000000,1.00
+MessagePackRust,Rust,False,IO,Single,Sequential,10000000,1.01
 BsonRust,Rust,True,Total,Single,Sequential,10000000,13.81
 BsonRust,Rust,True,CPU,Single,Sequential,10000000,10.53
 BsonRust,Rust,True,IO,Single,Sequential,10000000,3.27
