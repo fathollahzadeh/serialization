@@ -11,5 +11,5 @@ while :
 
     echo "$DATE,$total,$var">>$log_file_name
 
-    sleep 1
+    sleep 0.5
 done
