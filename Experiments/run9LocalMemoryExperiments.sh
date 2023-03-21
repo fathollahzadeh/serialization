@@ -22,7 +22,7 @@ mkdir monitorResults
 #     mkdir -p data/tmp
 
 #     ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
-#     ./explocal/runExperiment4a_MemoryRust.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
+#     ./explocal/runExperiment4_MemoryRust.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
 # done
 
 for method in "${cpp_methods[@]}"; do
@@ -31,7 +31,7 @@ for method in "${cpp_methods[@]}"; do
     # mkdir -p data/tmp
     
     # ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
-    ./explocal/runExperiment4a_MemoryCPP.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
+    ./explocal/runExperiment4_MemoryCPP.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
 done
 
 # for method in "${java_methods[@]}"; do
@@ -40,5 +40,5 @@ done
 #     mkdir -p data/tmp
         
 #     ./explocal/runExperiment1c_WriteJava.sh $method $inDataPathJava $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
-#     ./explocal/runExperiment4a_MemoryJava.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
+#     ./explocal/runExperiment4_MemoryJava.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
 # done
