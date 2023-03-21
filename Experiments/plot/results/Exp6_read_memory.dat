@@ -1,0 +1,6 @@
+baseline,language,memory
+HandcodedCPP,CPP,68.65
+inPlaceCPP,CPP,42.35
+BoostCPP,CPP,68.82
+BoostBinaryCPP,CPP,68.75
+ProtoBufCPP,CPP,78.45

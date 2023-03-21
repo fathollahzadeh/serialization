@@ -33,7 +33,7 @@ implementations.
       ./run4PrepareData.sh
       ./run5LocalExperiments.sh # on scale-up node
       ./run5LocalExperimentsExternalSort.sh # on scale-up GC node
-      ./run6NetworkExperiments.sh # on scale-out cluster
+      ./run6NetworkExperiments.sh # on scale-out GC cluster
       ./run7LocalMemoryExperiments.sh # on scale-up node
    ```
 

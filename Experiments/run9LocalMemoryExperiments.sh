@@ -16,23 +16,23 @@ max_nrow=10000000
 rm -rf monitorResults
 mkdir monitorResults
 
-# for method in "${rust_methods[@]}"; do
-#     #clean up
-#     rm -rf data/tmp
-#     mkdir -p data/tmp
-
-#     ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
-#     ./explocal/runExperiment4_MemoryRust.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
-# done
-
-for method in "${cpp_methods[@]}"; do
+for method in "${rust_methods[@]}"; do
     #clean up
     rm -rf data/tmp
     mkdir -p data/tmp
-    
-    ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
-    ./explocal/runExperiment4_MemoryCPP.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
+
+    ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
+    ./explocal/runExperiment4_MemoryRust.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
 done
+
+# for method in "${cpp_methods[@]}"; do
+#     #clean up
+#     rm -rf data/tmp
+#     mkdir -p data/tmp
+    
+#     ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
+#     ./explocal/runExperiment4_MemoryCPP.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
+# done
 
 # for method in "${java_methods[@]}"; do
 #     #clean up
