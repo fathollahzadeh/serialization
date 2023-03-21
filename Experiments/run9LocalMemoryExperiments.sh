@@ -16,29 +16,29 @@ max_nrow=10000000
 rm -rf monitorResults
 mkdir monitorResults
 
-for method in "${rust_methods[@]}"; do
-    #clean up
-    rm -rf data/tmp
-    mkdir -p data/tmp
+# for method in "${rust_methods[@]}"; do
+#     #clean up
+#     rm -rf data/tmp
+#     mkdir -p data/tmp
 
-    ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
-    ./explocal/runExperiment4a_MemoryRust.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
-done
+#     ./explocal/runExperiment1c_WriteRust.sh $method $inDataPathRust $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
+#     ./explocal/runExperiment4a_MemoryRust.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
+# done
 
 for method in "${cpp_methods[@]}"; do
     #clean up
-    rm -rf data/tmp
-    mkdir -p data/tmp
+    # rm -rf data/tmp
+    # mkdir -p data/tmp
     
-    ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
+    # ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
     ./explocal/runExperiment4a_MemoryCPP.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
 done
 
-for method in "${java_methods[@]}"; do
-    #clean up
-    rm -rf data/tmp
-    mkdir -p data/tmp
+# for method in "${java_methods[@]}"; do
+#     #clean up
+#     rm -rf data/tmp
+#     mkdir -p data/tmp
         
-    ./explocal/runExperiment1c_WriteJava.sh $method $inDataPathJava $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
-    ./explocal/runExperiment4a_MemoryJava.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
-done
+#     ./explocal/runExperiment1c_WriteJava.sh $method $inDataPathJava $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
+#     ./explocal/runExperiment4a_MemoryJava.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
+# done
