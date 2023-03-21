@@ -7,7 +7,7 @@ inDataPathRust="data/tweets.rbin"
 outDataPath="data/tmp/tweets"
 
 declare -a java_methods=("Default" "Json+Gzip" "Bson" "ProtoBuf" "Kryo" "ByteBuffer" "Json" "FlatBuffers") 
-declare -a cpp_methods=("Handcoded" "inPlace" "Boost" "BoostBinary" "ProtoBuf" "Bson" "FlatBuf") 
+declare -a cpp_methods=("Handcoded") #("Handcoded" "inPlace" "Boost" "BoostBinary" "ProtoBuf" "Bson" "FlatBuf") 
 declare -a rust_methods=("Json" "Bincode" "MessagePack" "Bson" "FlexBuf")  
 
 max_nrow=10000000

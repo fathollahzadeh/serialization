@@ -21,9 +21,9 @@ if [ "$task_set" = true ] ; then
 fi
 echo $SCRIPT
 
-rm -rf "monitorResults/{$log_file_name}_{$method}_times" #clean-up
+rm -rf "monitorResults/"${log_file_name}"_"${method}"_times" #clean-up
 
 ./explocal/stopMonitoring.sh
-./explocal/runMonitoring.sh "monitorResults/{$log_file_name}_{$method}_times"
+./explocal/runMonitoring.sh "monitorResults/"${log_file_name}"_"${method}"_times"
 $SCRIPT
 ./explocal/stopMonitoring.sh
