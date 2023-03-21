@@ -17,9 +17,9 @@ fi
 echo $SCRIPT
 
 
-rm -rf "monitorResults/"${log_file_name}"_"${method}"_times" #clean-up
+rm -rf "monitorResults/"${log_file_name}"_"${method}"Rust_times.csv" #clean-up
 
 ./explocal/stopMonitoring.sh
-./explocal/runMonitoring.sh "monitorResults/"${log_file_name}"_"${method}"_times"
+./explocal/runMonitoring.sh "monitorResults/"${log_file_name}"_"${method}"Rust_times.csv"
 $SCRIPT
 ./explocal/stopMonitoring.sh
