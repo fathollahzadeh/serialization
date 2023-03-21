@@ -21,6 +21,8 @@ if [ "$task_set" = true ] ; then
 fi
 echo $SCRIPT
 
+rm -rf "monitorResults/$log_file_name_$method_times" #clean-up
+
 ./stopMonitoring.sh
 ./runMonitoring.sh "monitorResults/$log_file_name_$method_times"
 $SCRIPT

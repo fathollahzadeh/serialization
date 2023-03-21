@@ -18,3 +18,4 @@ src/serialization.iml
 Experiments/CPPDependencies/*
 Experiments/rustbin/*
 SerializationJava.jar
+.vscode/settings.json

@@ -30,7 +30,7 @@ for method in "${cpp_methods[@]}"; do
     rm -rf data/tmp
     mkdir -p data/tmp
     
-    ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathRust $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
+    ./explocal/runExperiment1c_WriteCPP.sh $method $inDataPathCPP $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
     ./explocal/runExperiment4a_MemoryCPP.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
 done
 
@@ -39,6 +39,6 @@ for method in "${java_methods[@]}"; do
     rm -rf data/tmp
     mkdir -p data/tmp
         
-    ./explocal/runExperiment1c_WriteJava.sh $method $inDataPathRust $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
+    ./explocal/runExperiment1c_WriteJava.sh $method $inDataPathJava $outDataPath $max_nrow Single false Experiment1_Write_times # Write (CPU+IO)
     ./explocal/runExperiment4a_MemoryJava.sh $method $outDataPath $max_nrow Single false Sequential Experiment4_Memory
 done
