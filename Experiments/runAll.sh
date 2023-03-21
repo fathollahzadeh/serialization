@@ -9,7 +9,7 @@ mkdir -p data/tmp
 rm -rf loging.log
 export LOG4JPROP='conf/log4j.properties'
 export NETWORKCONFIG='conf/machines.inf'
-export jCMD="java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:$LOG4JPROP"
+export jCMD="java -Xms120g -Xmx120g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:$LOG4JPROP"
 export jnCMD="java -Xms28g -Xmx28g -Xmn2g --illegal-access=deny -Dlog4j.configuration=file:$LOG4JPROP"
 export cppValgrind="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt"
 

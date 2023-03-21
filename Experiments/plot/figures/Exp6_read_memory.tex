@@ -1,5 +1,16 @@
 \makeatletter
 
+% \makeatletter
+% \newcommand\resetstackedplots{
+% 	\makeatletter
+% 	\pgfplots@stacked@isfirstplottrue
+% 	\makeatother
+% 	\addplot [forget plot,draw=none] coordinates{({inPlaceCPP},1) ({BsonCPP},1) ({HandcodedCPP},1) ({ProtoBufCPP},1)  ({FlatBufCPP},1) ({BoostBinaryCPP},1)  ({BoostCPP},1) 
+% 	({MessagePackRust},1) ({BincodeRust},1)  ({JsonRust},1) ({FlexBufRust},1) ({BsonRust},1) 
+% 	({ByteBufferJava},1) ({KryoJava},1) ({ProtoBufJava},1) ({FlatBufJava},1) ({DefaultJava},1) ({BsonJava},1)  ({JsonJava},1) ({Json+GzipJava},1)};
+% }
+% \makeatother
+
 \begin{tikzpicture}
 	\newcommand{\myaddplot}[1]{
 	   \addplot[white,draw=black,line width=0.15pt, fill=black, discard if single={#1},
@@ -9,6 +20,7 @@
    
    \newcommand{\addDiagramExpOne}[3]{	
 	\nextgroupplot[width=#2,#3]
+		%\resetstackedplots	
 		\myaddplot{#1};
 		%\myaddplot{0}{#2}{IO}{#2}{none}{I/O Time(taskset True)}{#1};
    };    
@@ -96,8 +108,8 @@
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.55\columnwidth,  
-		symbolic x coords={ HandcodedCPP, inPlaceCPP, ProtoBufCPP, FlatBufCPP, BoostBinaryCPP, BoostCPP, BsonCPP, MessagePackRust,BincodeRust, JsonRust, FlexBufRust, BsonRust,ByteBufferJava,KryoJava,ProtoBufJava,FlatBufJava,DefaultJava,BsonJava,JsonJava, Json+GzipJava},		   
-		xticklabels={HandCoded, InPlace, ProtoBuf, FlatBuf, BoostBinary, BoostText, Bson, MessagePack,Bincode, Json, FlexBuf, Bson,ByteBuffer,Kryo,ProtoBuf,FlatBuf,Default,Bson,Json, Json+Gzip},  		   
+		symbolic x coords={inPlaceCPP,FlatBufCPP, HandcodedCPP,BoostBinaryCPP, BoostCPP, ProtoBufCPP, BsonCPP, MessagePackRust,BincodeRust, JsonRust, FlexBufRust, BsonRust,ByteBufferJava,KryoJava,ProtoBufJava,FlatBufJava,DefaultJava,BsonJava,JsonJava, Json+GzipJava},		   
+		xticklabels={InPlace,Bson, HandCoded,ProtoBuf,FlatBuf,BoostBinary,BoostText, MessagePack,Bincode, Json, FlexBuf, Bson,ByteBuffer,Kryo,ProtoBuf,FlatBuf,Default,Bson,Json, Json+Gzip},		
 		point meta=rawy,            
 		nodes near coords={%
     		\pgfmathprintnumberto[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}{\myval}%

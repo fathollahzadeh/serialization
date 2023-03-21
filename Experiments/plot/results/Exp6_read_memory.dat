@@ -4,3 +4,5 @@ inPlaceCPP,CPP,42.35
 BoostCPP,CPP,68.82
 BoostBinaryCPP,CPP,68.75
 ProtoBufCPP,CPP,78.45
+BsonCPP,CPP,109.97
+FlatBufCPP,CPP,64.40
