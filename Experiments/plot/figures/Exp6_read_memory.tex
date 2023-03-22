@@ -1,28 +1,27 @@
 \makeatletter
 
-% \makeatletter
-% \newcommand\resetstackedplots{
-% 	\makeatletter
-% 	\pgfplots@stacked@isfirstplottrue
-% 	\makeatother
-% 	\addplot [forget plot,draw=none] coordinates{({inPlaceCPP},1) ({BsonCPP},1) ({HandcodedCPP},1) ({ProtoBufCPP},1)  ({FlatBufCPP},1) ({BoostBinaryCPP},1)  ({BoostCPP},1) 
-% 	({MessagePackRust},1) ({BincodeRust},1)  ({JsonRust},1) ({FlexBufRust},1) ({BsonRust},1) 
-% 	({ByteBufferJava},1) ({KryoJava},1) ({ProtoBufJava},1) ({FlatBufJava},1) ({DefaultJava},1) ({BsonJava},1)  ({JsonJava},1) ({Json+GzipJava},1)};
-% }
-% \makeatother
+\makeatletter
+\newcommand\resetstackedplots{
+	\makeatletter
+	\pgfplots@stacked@isfirstplottrue
+	\makeatother
+	\addplot [forget plot,draw=none] coordinates{({inPlaceCPP},0.1) ({FlatBufCPP},0.1) ({HandcodedCPP},0.1) ({BoostBinaryCPP},0.1)  ({BoostCPP},0.1) ({ProtoBufCPP},0.1)  ({BsonCPP},0.1) 
+	({BincodeRust},0.1) ({FlexBufRust},0.1)  ({MessagePackRust},0.1) ({BsonRust},0.1) ({JsonRust},0.1) 
+	({ByteBufferJava},0.1) ({KryoJava},0.1) ({ProtoBufJava},0.1) ({FlatBufJava},0.1) ({DefaultJava},0.1) ({BsonJava},0.1)  ({JsonJava},0.1) ({Json+GzipJava},-0.1)};
+}
+\makeatother
 
 \begin{tikzpicture}
 	\newcommand{\myaddplot}[1]{
 	   \addplot[white,draw=black,line width=0.15pt, fill=black, discard if single={#1},
-	   every node near coord/.append style={black, xshift=3pt,anchor=west} ] 
+	   every node near coord/.append style={black, xshift=1pt,anchor=west} ] 
 	   table[ y=memory, col sep=comma, x=baseline] {results/Exp6_read_memory.dat};	   
    };   
    
-   \newcommand{\addDiagramExpOne}[3]{	
-	\nextgroupplot[width=#2,#3]
-		%\resetstackedplots	
-		\myaddplot{#1};
-		%\myaddplot{0}{#2}{IO}{#2}{none}{I/O Time(taskset True)}{#1};
+   \newcommand{\addDiagramExpOne}[5]{	
+	\nextgroupplot[width=#2,#3,ytick=#4, yticklabels=#5]
+		\resetstackedplots	
+		\myaddplot{#1};		
    };    
    
    \pgfplotsset{
@@ -89,27 +88,28 @@
 		},			
 		axis line style={gray},
 		ybar stacked,        
-		ymin=0,
+		ymin=0.2,
 		log ticks with fixed point,
 		x tick label style={/pgf/number format/1000 sep=},
 		y tick label style={/pgf/number format/1000 sep={}},
 		ymax=128,		
 		scaled y ticks=false,		  
-		enlarge y limits={0.12,upper},		
+		enlarge y limits={0.13,upper},		
 		ylabel={Memory Used[GB]},		   
 		ytick align=inside,
 		xtick align=outside,			
 		xtick pos=left,
 		ytick pos=left,
-		ytick={0,16,32,48,64,80,96,112,128},
 		yticklabel style = {font=\scriptsize},
 		ylabel style = {font=\scriptsize, yshift=-12pt},
 		xticklabel style = {font=\scriptsize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.55\columnwidth,  
-		symbolic x coords={inPlaceCPP,FlatBufCPP, HandcodedCPP,BoostBinaryCPP, BoostCPP, ProtoBufCPP, BsonCPP, MessagePackRust,BincodeRust, JsonRust, FlexBufRust, BsonRust,ByteBufferJava,KryoJava,ProtoBufJava,FlatBufJava,DefaultJava,BsonJava,JsonJava, Json+GzipJava},		   
-		xticklabels={InPlace,Bson, HandCoded,ProtoBuf,FlatBuf,BoostBinary,BoostText, MessagePack,Bincode, Json, FlexBuf, Bson,ByteBuffer,Kryo,ProtoBuf,FlatBuf,Default,Bson,Json, Json+Gzip},		
+		symbolic x coords={inPlaceCPP,FlatBufCPP, HandcodedCPP,BoostBinaryCPP, BoostCPP, ProtoBufCPP, BsonCPP, 
+		BincodeRust,FlexBufRust, MessagePackRust,BsonRust, JsonRust, 
+		ByteBufferJava,KryoJava,ProtoBufJava,FlatBufJava,DefaultJava,BsonJava,JsonJava, Json+GzipJava},		   
+		xticklabels={InPlace,FlatBuf,HandCoded,BoostBinary,BoostText,ProtoBuf,Bson, Bincode, FlexBuf,MessagePack,Bson, Json, ByteBuffer,Kryo,ProtoBuf,FlatBuf,Default,Bson,Json, Json+Gzip},		
 		point meta=rawy,            
 		nodes near coords={%
     		\pgfmathprintnumberto[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}{\myval}%
@@ -119,14 +119,14 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{0.26\textwidth}{{enlarge x limits=0.15,}};	
+\addDiagramExpOne{CPP}{0.26\textwidth}{{enlarge x limits=0.15,}}{{0,16,32,48,64,80,96,112,128}}{{0,16,32,48,64,80,96,112,128}};	
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.17\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
 
-% \addDiagramExpOne{Rust}{0.21\textwidth}{{enlarge x limits=0.18,}};
-% \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
+\addDiagramExpOne{Rust}{0.21\textwidth}{{enlarge x limits=0.18,}}{{0,16,32,48,64,80,96,112,128}}{{}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
 
-% \addDiagramExpOne{Java}{0.29\textwidth}{{enlarge x limits=0.10,}};
-% \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
+\addDiagramExpOne{Java}{0.29\textwidth}{{enlarge x limits=0.10,}}{{0,16,32,48,64,80,96,112,128}}{{}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
 
 
 \end{groupplot}
