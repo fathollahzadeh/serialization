@@ -1,0 +1,7 @@
+baseline,language,taskset,execution,platform,seq_rand,nrow,time
+BsonCPP,CPP,True,Total,Single,Sequential,10000000,36.07
+BsonCPP,CPP,True,CPU,Single,Sequential,10000000,35.04
+BsonCPP,CPP,True,IO,Single,Sequential,10000000,1.03
+BsonCPP,CPP,False,Total,Single,Sequential,10000000,36.89
+BsonCPP,CPP,False,CPU,Single,Sequential,10000000,35.09
+BsonCPP,CPP,False,IO,Single,Sequential,10000000,1.80
