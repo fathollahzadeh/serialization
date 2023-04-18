@@ -22,8 +22,8 @@
 	   every node near coord/.append style={		  
 		   check for zeronan/.code={
 			   \pgfkeys{/pgf/fpu=true}
-			   \showvalue{\xbaseline}{HandcodedCPP}{inPlaceCPP}{FlatBufCPP}{ProtoBufCPP}{BoostBinaryCPP}{BincodeRust}{JsonRust}{FlexBufRust}{}
-			   \showvalue{\xbaseline}{FlatBufJava}{ProtoBufJava}{KryoJava}{}{}{}{}{}{}
+			   \showvalue{\xbaseline}{HandcodedCPP}{inPlaceCPP}{FlatBufCPP}{}{}{BincodeRust}{JsonRust}{}{}
+			   \showvalue{\xbaseline}{FlatBufJava}{}{}{}{}{}{}{}{}
 			   \pgfkeys{/pgf/fpu=false}
 		   },
 		   check for zeronan,
@@ -40,7 +40,7 @@
 		nodes near coords={\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}},
 		every node near coord/.append style={
 			black,			
-			xshift=-5pt,
+			xshift=-10pt,
 			anchor=west
 		}
 	] 
@@ -130,49 +130,49 @@
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
-		ymin=0.9,
+		ymin=1.4,
 		x tick label style={/pgf/number format/1000 sep=},
-		ymax=1000,		
+		ymax=300,		
 		scaled y ticks=false,		  
-		enlarge y limits={0.17,upper},		
-		ylabel={Execution Time[min]},		   
+		enlarge y limits={0.11,upper},		
+		ylabel={Execution Time [min]},		   
 		ytick align=inside,
 		xtick align=outside,			
 		xtick pos=left,
 		ytick pos=left,
-		yticklabel style = {font=\scriptsize},
-		ylabel style = {font=\scriptsize, yshift=-12pt},
-		xticklabel style = {font=\scriptsize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
+		yticklabel style = {font=\footnotesize},
+		ylabel style = { yshift=-12pt},
+		xticklabel style = {font=\footnotesize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
 		x label style={yshift=-20pt},
 		xtick=data,
-		height=0.55\columnwidth,  
+		height=0.7\columnwidth,  
 		symbolic x coords={ HandcodedCPP, ProtoBufCPP,  FlatBufCPP,inPlaceCPP, BoostBinaryCPP, BoostCPP, BsonCPP, BincodeRust, MessagePackRust, JsonRust, FlexBufRust, BsonRust,
 		ProtoBufJava,FlatBufJava,KryoJava,ByteBufferJava,BsonJava,DefaultJava,JsonJava,Json+GzipJava},		   
-		xticklabels={HandCoded, ProtoBuf,FlatBuf,InPlace, BoostBinary, BoostText, Bson, Bincode, MessagePack, Json, FlexBuf, Bson, ProtoBuf,FlatBuf,Kryo,ByteBuffer,Bson,Default,Json,Json+Gzip},  		   
+		xticklabels={HandCoded, ProtoBuf,FlatBuf,InPlace, BoostBinary, BoostText, BSON, Bincode, MessagePack, JSON, FlexBuf, BSON, ProtoBuf,FlatBuf,Kryo,ByteBuffer,BSON,Default,JSON,JSON+Gzip},  		   
 		point meta=rawy,            
 		nodes near coords={%
     		\pgfmathprintnumberto[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}{\myval}%
     		\pgfmathparse{\myval<=0.1?:\myval}\pgfmathresult%
 		},
 		nodes near coords custom={1}, 
-		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
+		legend image code/.code={\draw [#1] (-0.2cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{black}{white}{0.26\textwidth}{{10,100,1000}}{{10,100,1000}}{{enlarge x limits=0.15,}};	
-\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.17\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
+\addDiagramExpOne{CPP}{black}{white}{0.26\textwidth}{{2,5,10,20,50,100,150,300}}{{2,5,10,20,50,100,150,}}{{enlarge x limits=0.15,}};	
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.17\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
 
-\addDiagramExpOne{Rust}{black}{color7}{0.21\textwidth}{}{}{{enlarge x limits=0.18,}};
-\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
+\addDiagramExpOne{Rust}{black}{color7}{0.21\textwidth}{{2,5,10,20,50,100,150,300}}{}{{enlarge x limits=0.18,}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
 
-\addDiagramExpOne{Java}{black}{color7}{0.29\textwidth}{}{}{{enlarge x limits=0.14,}};
-\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
+\addDiagramExpOne{Java}{black}{color7}{0.29\textwidth}{{2,5,10,20,50,100,150,300}}{}{{enlarge x limits=0.14,}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
 
 
 \end{groupplot}
 
-\node [draw=lightgray,inner sep=0.5mm, font=\scriptsize, anchor=west](leg1) at ($(group c2r1.north west) + (-0.5cm,0.3cm)$) {\shortstack[l]{
+\node [draw=gray,inner sep=0.5mm, font=\footnotesize, anchor=west](leg1) at ($(group c2r1.north west) + (-0.5cm,0.3cm)$) {\shortstack[l]{
 		\ref{CPUJava} CPU \ \ \  
-		\ref{IOJava} I/O (HDD + Network)
+		\ref{IOJava} I/O (SSD + Network)
 }};
 
 

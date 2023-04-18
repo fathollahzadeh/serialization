@@ -23,7 +23,7 @@
 	   every node near coord/.append style={		  
 		   check for zeronan/.code={
 			   \pgfkeys{/pgf/fpu=true}
-			   \showvalue{\xbaseline}{MessagePackRust}{inPlaceCPP}{JsonRust}{FlatBufJava}{FlexBufRust}{BincodeRust}{}{}{}
+			   \showvalue{\xbaseline}{}{}{}{FlatBufJava}{}{BincodeRust}{}{}{}
 			   \pgfkeys{/pgf/fpu=false}
 		   },
 		   check for zeronan,
@@ -40,7 +40,7 @@
 		nodes near coords={\pgfmathprintnumber[precision=2]{\pgfplotspointmeta}},
 		every node near coord/.append style={
 			black,			
-			xshift=-7pt,
+			xshift=-9pt,
 			anchor=west
 		}
 	] 
@@ -144,45 +144,43 @@
 		axis line style={gray},
 		ybar stacked,        
 		ymode=log,
-		ymin=0.55,
+		ymin=0.9,
 		ymax=270,
 		scaled y ticks=false,		  
-		enlarge y limits={0.5,upper},		
-		ylabel={Execution Time[min]},		   
+		enlarge y limits={0.25,upper},		
+		ylabel={Execution Time [min]},		   
 		ytick align=inside,
 		xtick align=outside,	
-		ytick={10,100,1000},
-		yticklabels={10,100,1000},		
+		ytick={2,5,10,20,50,100,270},
+		yticklabels={2,5,10,20,50,100,270},		
 		xtick pos=left,
 		ytick pos=left,
-		yticklabel style = {font=\scriptsize},
-		ylabel style = {font=\scriptsize, yshift=-12pt},
-		xticklabel style = {font=\scriptsize},
+		yticklabel style = {font=\footnotesize},
+		ylabel style = { yshift=-12pt},
+		xticklabel style = {font=\footnotesize},
 		x label style={yshift=-20pt},
 		xtick=data,
-		height=0.6\columnwidth,  
+		height=0.7\columnwidth,  
 		symbolic x coords={ HandcodedCPP, inPlaceCPP, FlatBufCPP, ProtoBufCPP, BoostBinaryCPP, BoostCPP, BsonCPP,BincodeRust, MessagePackRust,  JsonRust, FlexBufRust, BsonRust, FlatBufJava, ProtoBufJava, KryoJava, ByteBufferJava, BsonJava, DefaultJava, JsonJava, Json+GzipJava },
-		xticklabels={HandCoded, , FlatBuf, , BoostBinary, , Bson,Bincode, ,Json,, Bson,, ProtoBuf,, ByteBuffer, , Default, , Json+Gzip},  
+		xticklabels={HandCoded, , FlatBuf, , BoostBinary, , BSON,Bincode, ,JSON,, BSON,, ProtoBuf,, ByteBuffer, , Default, , JSON+Gzip},  
 		extra x ticks={inPlaceCPP,ProtoBufCPP,BoostCPP,MessagePackRust,FlexBufRust,FlatBufJava,KryoJava,BsonJava,JsonJava},
-		extra x tick labels={InPlace,ProtoBuf,BoostText,MessagePack,FlexBuf,FlatBuf,Kryo,Bson,Json},
-		every extra x tick/.style={major tick length=15pt, xtick align=outside},
+		extra x tick labels={InPlace,ProtoBuf,BoostText,MessagePack,FlexBuf,FlatBuf,Kryo,BSON,JSON},
+		every extra x tick/.style={major tick length=18pt, xtick align=outside},
 		point meta=rawy,            
 		nodes near coords={\pgfmathprintnumber[precision=1]{\pgfplotspointmeta}},
 		nodes near coords custom={1}, 
-		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
+		legend image code/.code={\draw [#1] (-0.2cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tugb}{color7}{0.48\textwidth}{{0,10,100,1000}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
+\addDiagramExpOne{CPP}{tugb}{color7}{0.48\textwidth}{{2,5,10,20,50,100,270}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
 
-\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.85) {\shortstack[l]{
-		\ref{CPUTrue} CPU Time(taskset True) \\ \\
-		\ref{IOTrue} I/O Time(taskset True) 			
-}};
-\addDiagramExpOne{Rust}{tugb}{color7}{0.40\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
-\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.85) {\shortstack[l]{
-		\ref{CPUFalse} CPU Time(taskset False) \\ \\
+\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.77) {\shortstack[l]{
+		\ref{CPUTrue} CPU Time(taskset True) \\ 
+		\ref{IOTrue} I/O Time(taskset True)  \\			
+		\ref{CPUFalse} CPU Time(taskset False) \\ 
 		\ref{IOFalse} I/O Time(taskset False) 			
 }};
+\addDiagramExpOne{Rust}{tugb}{color7}{0.40\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
 \addDiagramExpOne{Java}{tugb}{color7}{0.53\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
 		
 \end{groupplot}

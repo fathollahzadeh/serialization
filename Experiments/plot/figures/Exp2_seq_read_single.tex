@@ -172,33 +172,33 @@
 		ymax=100,
 		scaled y ticks=false,		  
 		enlarge y limits={0.2,upper},		
-		ylabel={Execution Time[min.]},		   
+		ylabel={Execution Time [min]},		   
 		ytick align=inside,
 		xtick align=outside,			
 		xtick pos=left,
 		ytick pos=left,
-		yticklabel style = {font=\scriptsize},
-		ylabel style = {font=\scriptsize, yshift=-12pt},
-		xticklabel style = {font=\scriptsize},
+		yticklabel style = {font=\footnotesize},
+		ylabel style = {yshift=-12pt},
+		xticklabel style = {font=\footnotesize},
 		x label style={yshift=-20pt},
 		xtick=data,
-		height=0.6\columnwidth,  
+		height=0.7\columnwidth,  
 		symbolic x coords={ HandcodedCPP, inPlaceCPP, ProtoBufCPP, FlatBufCPP, BoostBinaryCPP, BoostCPP, BsonCPP, MessagePackRust,BincodeRust, JsonRust, FlexBufRust, BsonRust,ByteBufferJava,KryoJava,ProtoBufJava,FlatBufJava,DefaultJava,BsonJava,JsonJava, Json+GzipJava},
 		%
-		xticklabels={HandCoded, , ProtoBuf, , BoostBinary, , Bson, ,Bincode, , FlexBuf, ,ByteBuffer,,ProtoBuf,,Default,,Json, },  
+		xticklabels={HandCoded, , ProtoBuf, , BoostBinary, , BSON, ,Bincode, , FlexBuf, ,ByteBuffer,,ProtoBuf,,Default,,JSON, },  
 		%
 		extra x ticks={inPlaceCPP,FlatBufCPP,BoostCPP,MessagePackRust,JsonRust,BsonRust,KryoJava,FlatBufJava,BsonJava,Json+GzipJava},
-		extra x tick labels={InPlace,FlatBuf,BoostText,MessagePack,Json,Bson,Kryo,FlatBuf,Bson,Json+Gzip},
+		extra x tick labels={InPlace,FlatBuf,BoostText,MessagePack,JSON,BSON,Kryo,FlatBuf,BSON,JSON+Gzip},
 		%
-		every extra x tick/.style={major tick length=15pt, xtick align=outside},
+		every extra x tick/.style={major tick length=18pt, xtick align=outside},
 		point meta=rawy,            
 		nodes near coords={\pgfmathprintnumber[fixed,assume math mode=true,precision=1]{\pgfplotspointmeta}},
 		nodes near coords custom={1}, 
-		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
+		legend image code/.code={\draw [#1] (-0.2cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
 \addDiagramExpOne{CPP}{tugb}{color7}{0.48\textwidth}{{10,100}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
-\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.75) {\shortstack[l]{
+\node [draw=none,inner sep=0, font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.1,0.77) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time (taskset True) \\ 
 		\ref{IOTrue} I/O Time (taskset True) \\
 		\ref{CPUFalse} CPU Time (taskset False) \\ 
