@@ -1,9 +1,0 @@
-all: create clean
-
-create:
-	#pdflatex SIGMOD2023.tex
-	pdflatex -shell-escape Plot.tex
-
-clean:
-	rm -rf *.aux  *.nav  *.vrb  *.log  *.out *.snm *.toc *.gz *.mtc* *.maf *.fls *.tmp *.bbl *.blg  *.mtc  *.bcf *.xml *.fdb_latexmk plots/*.dep plots/*.dpth plots/*.log plots/*.md5
-
