@@ -55,8 +55,8 @@
 		#7
 		]
 		\resetstackedplots	
-		\myaddplot{0}{#2}{IO}{#2}{none}{I/O Time(taskset True)}{#1};
-  		\myaddplotnan{0}{#2!25}{CPU}{#2!25}{north east lines}{CPU Time(taskset True)}{#1}{#2};
+		\myaddplot{0}{#2}{IO}{black}{none}{I/O Time(taskset True)}{#1};
+  		\myaddplotnan{0}{#3}{CPU}{#3}{north east lines}{CPU Time(taskset True)}{#1}{#2};
 		\myaddplots{0}{white}{Total}{none}{#1};
    };     
 
@@ -135,7 +135,7 @@
 		ymax=300,		
 		scaled y ticks=false,		  
 		enlarge y limits={0.11,upper},		
-		ylabel={Execution Time [min]},		   
+		ylabel={Execution Time [min.]},		   
 		ytick align=inside,
 		xtick align=outside,			
 		xtick pos=left,
@@ -145,7 +145,8 @@
 		xticklabel style = {font=\footnotesize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
 		x label style={yshift=-20pt},
 		xtick=data,
-		height=0.7\columnwidth,  
+		height=0.4\columnwidth,  
+		width=\columnwidth,
 		symbolic x coords={ HandcodedCPP, ProtoBufCPP,  FlatBufCPP,inPlaceCPP, BoostBinaryCPP, BoostCPP, BsonCPP, BincodeRust, MessagePackRust, JsonRust, FlexBufRust, BsonRust,
 		ProtoBufJava,FlatBufJava,KryoJava,ByteBufferJava,BsonJava,DefaultJava,JsonJava,Json+GzipJava},		   
 		xticklabels={HandCoded, ProtoBuf,FlatBuf,InPlace, BoostBinary, BoostText, BSON, Bincode, MessagePack, JSON, FlexBuf, BSON, ProtoBuf,FlatBuf,Kryo,ByteBuffer,BSON,Default,JSON,JSON+Gzip},  		   
@@ -158,13 +159,13 @@
 		legend image code/.code={\draw [#1] (-0.2cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{black}{white}{0.26\textwidth}{{2,5,10,20,50,100,150,300}}{{2,5,10,20,50,100,150,}}{{enlarge x limits=0.15,}};	
+\addDiagramExpOne{CPP}{colora}{colorb}{0.27\textwidth}{{2,5,10,20,50,100,150,300}}{{2,5,10,20,50,100,150,}}{{enlarge x limits=0.15,}};	
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.17\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
 
-\addDiagramExpOne{Rust}{black}{color7}{0.21\textwidth}{{2,5,10,20,50,100,150,300}}{}{{enlarge x limits=0.18,}};
+\addDiagramExpOne{Rust}{colora}{colorb}{0.22\textwidth}{{2,5,10,20,50,100,150,300}}{}{{enlarge x limits=0.18,}};
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
 
-\addDiagramExpOne{Java}{black}{color7}{0.29\textwidth}{{2,5,10,20,50,100,150,300}}{}{{enlarge x limits=0.14,}};
+\addDiagramExpOne{Java}{colora}{colorb}{0.30\textwidth}{{2,5,10,20,50,100,150,300}}{}{{enlarge x limits=0.14,}};
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
 
 

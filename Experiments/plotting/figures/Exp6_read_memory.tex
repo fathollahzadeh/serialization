@@ -13,7 +13,7 @@
 
 \begin{tikzpicture}
 	\newcommand{\myaddplot}[1]{
-	   \addplot[white,draw=black,line width=0.15pt, fill=black, discard if single={#1},
+	   \addplot[white,draw=black,line width=0.15pt, fill=colora, discard if single={#1},
 	   every node near coord/.append style={black, xshift=1pt,anchor=west} ] 
 	   table[ y=memory, col sep=comma, x=baseline] {results/Exp6_read_memory.dat};	   
    };   
@@ -105,7 +105,8 @@
 		xticklabel style = {font=\footnotesize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
 		x label style={yshift=-20pt},
 		xtick=data,
-		height=0.7\columnwidth,  
+		height=0.4\columnwidth,  
+		width=\columnwidth,
 		symbolic x coords={inPlaceCPP,FlatBufCPP, HandcodedCPP,BoostBinaryCPP, BoostCPP, ProtoBufCPP, BsonCPP, 
 		BincodeRust,FlexBufRust, MessagePackRust,BsonRust, JsonRust, 
 		FlatBufJava,ProtoBufJava,KryoJava,DefaultJava,JsonJava, Json+GzipJava,BsonJava,ByteBufferJava},		   
@@ -120,13 +121,13 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{0.26\textwidth}{{enlarge x limits=0.15,}}{{0,16,32,48,64,80,96,112,128}}{{0,16,32,48,64,80,96,112,128}};	
+\addDiagramExpOne{CPP}{0.27\textwidth}{{enlarge x limits=0.15,}}{{0,16,32,48,64,80,96,112,128}}{{0,16,32,48,64,80,96,112,128}};	
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.17\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
 
-\addDiagramExpOne{Rust}{0.21\textwidth}{{enlarge x limits=0.18,}}{{0,16,32,48,64,80,96,112,128}}{{}};
+\addDiagramExpOne{Rust}{0.22\textwidth}{{enlarge x limits=0.18,}}{{0,16,32,48,64,80,96,112,128}}{{}};
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
 
-\addDiagramExpOne{Java}{0.29\textwidth}{{enlarge x limits=0.10,}}{{0,16,32,48,64,80,96,112,128}}{{}};
+\addDiagramExpOne{Java}{0.30\textwidth}{{enlarge x limits=0.10,}}{{0,16,32,48,64,80,96,112,128}}{{}};
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
 
 
