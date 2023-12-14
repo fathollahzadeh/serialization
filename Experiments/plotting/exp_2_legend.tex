@@ -1,0 +1,27 @@
+\documentclass[a4paper,fleqn]{cas-dc}
+\input{setting_main.tex}
+\pgfplotsset{compat=1.9}
+%\pgfplotsset{compat=1.12}
+
+\begin{document}
+
+\input{setting_content.tex}
+
+\tikzsetnextfilename{Exp2_legend_single}
+    \begin{figure*}[h]
+        \centering
+        \input{figures/Exp2_legend_single}
+        \caption{Experiment2:Single (legend)}
+\end{figure*}
+
+\tikzsetnextfilename{Exp2_legend_parallel}
+    \begin{figure*}[h]
+        \centering
+        \input{figures/Exp2_legend_parallel}
+        \caption{Experiment2: Parallel (legend)}
+\end{figure*}
+
+
+\bibliographystyle{cas-model2-names} 
+\bibliography{References}
+\end{document}
