@@ -56,7 +56,7 @@
 		]
 		\resetstackedplots	
 		\myaddplot{0}{#2}{IO}{black}{none}{I/O Time(taskset True)}{#1};
-  		\myaddplotnan{0}{tugb}{CPU}{black}{north east lines}{CPU Time(taskset True)}{#1}{black};
+  		\myaddplotnan{0}{colorb}{CPU}{black}{north east lines}{CPU Time(taskset True)}{#1}{black};
 		\myaddplots{0}{white}{Total}{none}{#1};
    };     
 
@@ -166,13 +166,13 @@
 		legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{tug}{white}{0.27\textwidth}{{10,100,1000}}{{10,100,1000}}{{enlarge x limits=0.15,}};	
+\addDiagramExpOne{CPP}{colora}{white}{0.27\textwidth}{{10,100,1000}}{{10,100,1000}}{{enlarge x limits=0.15,}};	
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.17\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
 
-\addDiagramExpOne{Rust}{tug}{color7}{0.215\textwidth}{}{{10,100,1000}}{{enlarge x limits=0.18,}};
+\addDiagramExpOne{Rust}{colora}{color7}{0.215\textwidth}{}{{10,100,1000}}{{enlarge x limits=0.18,}};
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
 
-\addDiagramExpOne{Java}{tug}{color7}{0.29\textwidth}{}{{10,100,1000}}{{enlarge x limits=0.10,}};
+\addDiagramExpOne{Java}{colora}{color7}{0.29\textwidth}{}{{10,100,1000}}{{enlarge x limits=0.10,}};
 \node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
 
 

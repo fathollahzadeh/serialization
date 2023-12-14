@@ -11,20 +11,6 @@
 \tsc{BEC}
 \tsc{DE}
 %%%
-
-% Uncomment and use as if needed
-%\newtheorem{theorem}{Theorem}
-%\newtheorem{lemma}[theorem]{Lemma}
-%\newdefinition{rmk}{Remark}
-%\newproof{pf}{Proof}
-%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \usepackage{graphicx}
 \usepackage{balance}  
 \usepackage[utf8x]{inputenc}
@@ -85,6 +71,18 @@
 \definecolor{color6}{RGB}{77,77,77} % dark gray
 \definecolor{color7}{RGB}{31,119,180}
 \definecolor{color8}{RGB}{7,77,125}
+
+\definecolor{colora}{RGB}{0,63,92}
+\definecolor{colorb}{RGB}{148,190,217}
+\definecolor{colorc}{RGB}{88,80,141}
+\definecolor{colord}{RGB}{218,210,248}
+
+\def\ConvColor{rgb:yellow,5;red,2.5;white,5}
+\def\ConvReluColor{rgb:yellow,5;red,5;white,5}
+\def\PoolColor{rgb:red,1;black,0.3}
+\def\DcnvColor{rgb:blue,5;green,2.5;white,5}
+\def\SoftmaxColor{rgb:magenta,5;black,7}
+\def\SumColor{rgb:blue,5;green,15}
 
 % Enable this two commands when you want to extract diagrams in extra files, then run "make"
 \usetikzlibrary{external}

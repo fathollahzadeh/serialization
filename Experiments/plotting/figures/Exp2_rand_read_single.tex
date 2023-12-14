@@ -57,12 +57,12 @@
 		%xlabel=#9,				
 		]
 		\resetstackedplots	
-		\myaddplot{True}{-6}{black}{IO}{black}{none}{I/O Time(taskset True)}{#1};
-  		\myaddplotnan{True}{-6}{white}{CPU}{black}{north east lines}{CPU Time(taskset True)}{#1}{black};
+		\myaddplot{True}{-6}{colora}{IO}{black}{none}{I/O Time(taskset True)}{#1};
+  		\myaddplotnan{True}{-6}{colorb}{CPU}{black}{north east lines}{CPU Time(taskset True)}{#1}{black};
 		\myaddplots{True}{-6}{white}{Total}{none}{#1};
 	    \resetstackedplots	 
-		\myaddplot{False}{6}{gray!135}{IO}{gray!135}{none}{I/O Time(taskset False)}{#1};  
-	    \myaddplotnan{False}{6}{lightgray!85}{CPU}{lightgray!85}{north west lines}{CPU Time(taskset False)}{#1}{black};
+		\myaddplot{False}{6}{colorc}{IO}{black}{none}{I/O Time(taskset False)}{#1};  
+	    \myaddplotnan{False}{6}{colord}{CPU}{black}{north west lines}{CPU Time(taskset False)}{#1}{black};
 		\myaddplots{False}{6}{white}{Total}{none}{#1};
    };     
 
@@ -172,7 +172,7 @@
 		ymax=100,
 		scaled y ticks=false,		  
 		enlarge y limits={0.2,upper},		
-		ylabel={Execution Time [min]},		   
+		ylabel={Execution Time [min.]},		   
 		ytick align=inside,
 		xtick align=outside,			
 		xtick pos=left,
@@ -182,10 +182,11 @@
 		xticklabel style = {font=\footnotesize},
 		x label style={yshift=-20pt},
 		xtick=data,
-		height=0.7\columnwidth,  
+		height=0.4\columnwidth,
+		width=\textwidth,  
 		symbolic x coords={ HandcodedCPP, inPlaceCPP, ProtoBufCPP, FlatBufCPP, BoostBinaryCPP, BoostCPP, BsonCPP, MessagePackRust,BincodeRust, JsonRust, FlexBufRust, BsonRust,ByteBufferJava,KryoJava,ProtoBufJava,FlatBufJava,DefaultJava,BsonJava,JsonJava, Json+GzipJava},
 		%
-		xticklabels={HandCoded, , ProtoBuf, , BoostBinary, , BSON, ,Bincode, , FlexBuf, ,ByteBuffer,,ProtoBuf,,Default,,JSON, },  
+		xticklabels={HandCoded, , ProtoBuf, , BoostBinary, , BSON, ,Bincode, , FlexBuf, ,ByteBuffer, ,ProtoBuf, ,Default, ,JSON, },  
 		%
 		extra x ticks={inPlaceCPP,FlatBufCPP,BoostCPP,MessagePackRust,JsonRust,BsonRust,KryoJava,FlatBufJava,BsonJava,Json+GzipJava},
 		extra x tick labels={InPlace,FlatBuf,BoostText,MessagePack,JSON,BSON,Kryo,FlatBuf,BSON,JSON+Gzip},
@@ -199,10 +200,10 @@
 ]
 \addDiagramExpOne{CPP}{tugb}{color7}{0.48\textwidth}{{10,100}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
 \node [draw=none,inner sep=0, font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.1,0.77) {\shortstack[l]{
-		\ref{CPUTrue} CPU Time (taskset True) \\ 
-		\ref{IOTrue} I/O Time (taskset True) \\
-		\ref{CPUFalse} CPU Time (taskset False) \\ 
-		\ref{IOFalse} I/O Time (taskset False) 				
+		\ref{CPUTrue} CPU Time (Taskset=True) \\ 
+		\ref{IOTrue} I/O Time (Taskset=True) \\
+		\ref{CPUFalse} CPU Time (Taskset=False) \\ 
+		\ref{IOFalse} I/O Time (Taskset=False) 				
 }};
 \addDiagramExpOne{Rust}{tugb}{color7}{0.40\textwidth}{\empty}{0}{{enlarge x limits=0.24,}}{left}{Rust};
 \addDiagramExpOne{Java}{tugb}{color7}{0.55\textwidth}{\empty}{1}{{enlarge x limits=0.12,}}{right}{Java};
@@ -211,8 +212,8 @@
 
 \begin{scope}[decoration=brace]
 	\pgfdecorationsegmentamplitude=5pt
-	\draw[decorate] ($(T2.south east)+(25pt,0)$) -- ($(T0.south west)+(-25pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{C++}};
-	\draw[decorate] ($(T4.south east)+(60pt,0)$) -- ($(T3.south west)+(5pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
+	\draw[decorate] ($(T2.south east)+(18pt,-2pt)$) -- ($(T0.south west)+(-25pt,-2pt)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{C++}};
+	\draw[decorate] ($(T4.south east)+(55pt,0)$) -- ($(T3.south west)+(5pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
 	\draw[decorate] ($(T8.south east)+(58pt,0)$) -- ($(T5.south west)+(43pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Java}};	
 \end{scope}
 \end{tikzpicture}

@@ -58,12 +58,12 @@
 		%xlabel=#9,				
 		] 
 		\resetstackedplots	
-		\myaddplot{True}{-6}{tug}{IO}{black}{none}{I/O Time(taskset True)}{#1};
-  		\myaddplotnan{True}{-6}{tug!30}{CPU}{black}{north east lines}{CPU Time(taskset True)}{#1}{black};
+		\myaddplot{True}{-6}{colora}{IO}{black}{none}{I/O Time(taskset True)}{#1};
+  		\myaddplotnan{True}{-6}{colorb}{CPU}{black}{north east lines}{CPU Time(taskset True)}{#1}{black};
 		\myaddplots{True}{-6}{white}{Total}{none}{#1};
 	    \resetstackedplots	 
-		\myaddplot{False}{6}{tugb}{IO}{gray!135}{none}{I/O Time(taskset False)}{#1};  
-	    \myaddplotnan{False}{6}{tugb!30}{CPU}{lightgray!85}{north west lines}{CPU Time(taskset False)}{#1}{black};
+		\myaddplot{False}{6}{colorc}{IO}{black}{none}{I/O Time(taskset False)}{#1};  
+	    \myaddplotnan{False}{6}{colord}{CPU}{black}{north west lines}{CPU Time(taskset False)}{#1}{black};
 		\myaddplots{False}{6}{white}{Total}{none}{#1};
    };     
 
