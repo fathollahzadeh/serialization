@@ -146,7 +146,7 @@
 			ylabels at=edge left,
 			horizontal sep=2pt,
 			vertical sep=0pt,
-			/pgf/bar width=10pt
+			/pgf/bar width=12pt
 		},			
 		axis line style={gray},
 		ybar stacked,        
@@ -161,9 +161,9 @@
 		xtick align=outside,			
 		xtick pos=left,
 		ytick pos=left,
-		yticklabel style = {font=\footnotesize},
+		yticklabel style = {font=\scriptsize},
 		ylabel style = {yshift=-12pt},
-		xticklabel style = {font=\footnotesize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
+		xticklabel style = {font=\scriptsize, rotate=50, anchor=east, xshift=1pt, yshift=-1pt},
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.4\columnwidth,
@@ -179,19 +179,19 @@
 		legend image code/.code={\draw [#1] (-0.2cm,-0.1cm) rectangle (0.20cm,0.20cm); },
 		xticklabel style={name=T\ticknum}			
 ]
-\addDiagramExpOne{CPP}{colora}{colord}{0.27\textwidth}{{1,2,3,4,5,}}{{1,2,3,4,5,8}}{{enlarge x limits=0.15,}};	
-\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.17\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
+\addDiagramExpOne{CPP}{colora}{colord}{0.35\textwidth}{{1,2,3,4,5,}}{{1,2,3,4,5,8}}{{enlarge x limits=0.15,}};	
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.25\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {C++};
 
-\addDiagramExpOne{Rust}{colora}{colord}{0.22\textwidth}{}{{1,2,3,4,5,8}}{{enlarge x limits=0.18,}};
-\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.134\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
+\addDiagramExpOne{Rust}{colora}{colord}{0.30\textwidth}{}{{1,2,3,4,5,8}}{{enlarge x limits=0.18,}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.214\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Rust};
 
-\addDiagramExpOne{Java}{colora}{colord}{0.30\textwidth}{}{{1,2,3,4,5,8}}{{enlarge x limits=0.14,}};
-\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.2\textwidth,align=center,font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
+\addDiagramExpOne{Java}{colora}{colord}{0.38\textwidth}{}{{1,2,3,4,5,8}}{{enlarge x limits=0.14,}};
+\node [draw=none,inner sep=3, fill=lightgray!50, text width=0.28\textwidth,align=center,font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.00,0.955) {Java};
 
 
 \end{groupplot}
 
-\node [draw=gray,inner sep=0.5mm, font=\footnotesize, anchor=west](leg1) at ($(group c2r1.north west) + (-0.0cm,0.3cm)$) {\shortstack[l]{
+\node [draw=gray,inner sep=0.5mm, font=\scriptsize, anchor=west](leg1) at ($(group c2r1.north west) + (-0.0cm,0.3cm)$) {\shortstack[l]{
 		\ref{CPUJava} CPU \ \ \  
 		\ref{IOJava} I/O
 }};
