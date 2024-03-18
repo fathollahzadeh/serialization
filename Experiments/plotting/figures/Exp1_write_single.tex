@@ -162,9 +162,9 @@
 		xtick align=outside,			
 		xtick pos=left,
 		ytick pos=left,
-		yticklabel style = {font=\footnotesize},
-		ylabel style = { yshift=-12pt},
-		xticklabel style = {font=\footnotesize},
+		yticklabel style = {font=\scriptsize},
+		ylabel style = { yshift=-10pt},
+		xticklabel style = {font=\scriptsize},
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.4\columnwidth,
@@ -184,7 +184,7 @@
 		xticklabel style={name=T\ticknum}			
 ]
 \addDiagramExpOne{CPP}{tugb}{tug}{0.48\textwidth}{{10,100}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
-\node [draw=none,inner sep=0, font=\footnotesize, anchor=west](leg1) at (rel axis cs: 0.1,0.78) {\shortstack[l]{
+\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.1,0.78) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time (Taskset=True) \\ 
 		\ref{IOTrue} I/O Time (Taskset=True) \\
 		\ref{CPUFalse} CPU Time (Taskset=False) \\ 
@@ -197,8 +197,8 @@
 
 \begin{scope}[decoration=brace]
 	\pgfdecorationsegmentamplitude=5pt
-	\draw[decorate] ($(T2.south east)+(18pt,-2pt)$) -- ($(T0.south west)+(-25pt,-2pt)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{C++}};
-	\draw[decorate] ($(T4.south east)+(60pt,0)$) -- ($(T3.south west)+(5pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
-	\draw[decorate] ($(T8.south east)+(58pt,0)$) -- ($(T5.south west)+(43pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Java}};	
+	\draw[decorate] ($(T2.south east)+(18pt,-2pt)$) -- ($(T0.south west)+(-25pt,-2pt)$) node[midway,below=\pgfdecorationsegmentamplitude] {\scriptsize{C++}};
+	\draw[decorate] ($(T4.south east)+(60pt,0)$) -- ($(T3.south west)+(5pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\scriptsize{Rust}};
+	\draw[decorate] ($(T8.south east)+(58pt,0)$) -- ($(T5.south west)+(43pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\scriptsize{Java}};	
   \end{scope}
 \end{tikzpicture}

@@ -1,4 +1,16 @@
-\usepackage{amssymb}
+%\usepackage[numbers]{natbib}
+%\usepackage[authoryear]{natbib}
+\usepackage[authoryear,longnamesfirst]{natbib}
+
+%%%Author definitions
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+\tsc{EP}
+\tsc{PMS}
+\tsc{BEC}
+\tsc{DE}
+%%%
 \usepackage{graphicx}
 \usepackage{balance}  
 \usepackage[utf8x]{inputenc}
@@ -105,3 +117,18 @@
     \equal{#1}{#9} 
   }{\pgfkeys{/tikz/coordinate}}{}
 }
+
+
+
+\makeatletter
+\def\endthebibliography{%
+	\def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+	\endlist
+}
+\makeatother
+
+%\theoremstyle{definition}
+%\newtheorem{findings}{Findings}
+
+
+% \hyphenation{op-tical net-works semi-conduc-tor}

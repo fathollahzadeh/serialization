@@ -2,7 +2,7 @@ all: create clean
 
 create:
 	#pdflatex -shell-escape exp_0.tex
-	#pdflatex -shell-escape exp_1.tex
+	pdflatex -shell-escape exp_1.tex
 	#pdflatex -shell-escape exp_2.tex
 	#pdflatex -shell-escape exp_2_legend.tex
 	#pdflatex -shell-escape exp_4.tex
