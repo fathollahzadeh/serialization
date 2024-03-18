@@ -57,13 +57,13 @@
 		%xlabel=#9,				
 		]
 		\resetstackedplots	
-		\myaddplot{True}{-6}{colora}{IO}{black}{none}{I/O Time(taskset True)}{#1};
-  		\myaddplotnan{True}{-6}{colorb}{CPU}{black}{north east lines}{CPU Time(taskset True)}{#1}{black};
-		\myaddplots{True}{-6}{white}{Total}{none}{#1};
+		\myaddplot{True}{-5}{colora}{IO}{black}{none}{I/O Time(taskset True)}{#1};
+  		\myaddplotnan{True}{-5}{colorb}{CPU}{black}{north east lines}{CPU Time(taskset True)}{#1}{black};
+		\myaddplots{True}{-5}{white}{Total}{none}{#1};
 	    \resetstackedplots	 
-		\myaddplot{False}{6}{colorc}{IO}{black}{none}{I/O Time(taskset False)}{#1};  
-	    \myaddplotnan{False}{6}{colord}{CPU}{black}{north west lines}{CPU Time(taskset False)}{#1}{black};
-		\myaddplots{False}{6}{white}{Total}{none}{#1};    
+		\myaddplot{False}{5}{colorc}{IO}{black}{none}{I/O Time(taskset False)}{#1};  
+	    \myaddplotnan{False}{5}{colord}{CPU}{black}{north west lines}{CPU Time(taskset False)}{#1}{black};
+		\myaddplots{False}{5}{white}{Total}{none}{#1};    
    };     
 
   \pgfplotsset{
@@ -139,7 +139,7 @@
 			ylabels at=edge left,
 			horizontal sep=0pt,
 			vertical sep=0pt,
-			/pgf/bar width=12pt
+			/pgf/bar width=10pt
 		},			
 		axis line style={gray},
 		ybar stacked,        
@@ -155,9 +155,9 @@
 		yticklabels={2,5,10,20,50,100,270},		
 		xtick pos=left,
 		ytick pos=left,
-		yticklabel style = {font=\footnotesize},
-		ylabel style = { yshift=-12pt},
-		xticklabel style = {font=\footnotesize},
+		yticklabel style = {font=\scriptsize},
+		ylabel style = { yshift=-8pt},
+		xticklabel style = {font=\scriptsize},
 		x label style={yshift=-20pt},
 		xtick=data,
 		height=0.4\columnwidth,
@@ -175,7 +175,7 @@
 ]
 \addDiagramExpOne{CPP}{colora}{color7}{0.48\textwidth}{{2,5,10,20,50,100,270}}{1}{{enlarge x limits=0.12,}}{left}{C++};		
 
-\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.77) {\shortstack[l]{
+\node [draw=none,inner sep=0, font=\scriptsize, anchor=west](leg1) at (rel axis cs: 0.04,0.81) {\shortstack[l]{
 		\ref{CPUTrue} CPU Time(Taskset=True) \\ 
 		\ref{IOTrue} I/O Time(Taskset=True)  \\			
 		\ref{CPUFalse} CPU Time(Taskset=False) \\ 
@@ -188,8 +188,8 @@
 
 \begin{scope}[decoration=brace]
 	\pgfdecorationsegmentamplitude=5pt
-	\draw[decorate] ($(T2.south east)+(20pt,0)$) -- ($(T0.south west)+(-30pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{C++}};
-	\draw[decorate] ($(T4.south east)+(20pt,0)$) -- ($(T3.south west)+(-15pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Rust}};
-	\draw[decorate] ($(T8.south east)+(30pt,0)$) -- ($(T5.south west)+(0pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\footnotesize{Java}};	
+	\draw[decorate] ($(T2.south east)+(20pt,0)$) -- ($(T0.south west)+(-30pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\scriptsize{C++}};
+	\draw[decorate] ($(T4.south east)+(20pt,0)$) -- ($(T3.south west)+(-15pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\scriptsize{Rust}};
+	\draw[decorate] ($(T8.south east)+(30pt,0)$) -- ($(T5.south west)+(0pt,0)$) node[midway,below=\pgfdecorationsegmentamplitude] {\scriptsize{Java}};	
   \end{scope}
 \end{tikzpicture}
