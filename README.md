@@ -13,7 +13,7 @@
  * Packages/Libraries Needed: OpenJDK, Clang++, Rust
 
 **Dataset Used:**
-* Twiter: <https://utcs378.s3.amazonaws.com/tweets_1M_rows.txt.bz2>
+* Twiter: <https://www.cs.utexas.edu/~kiat/datasets/tweets_1M_rows.txt.bz2>
 
 **Hardware and Software Info:** The experiments use both a scale-up, one-socket AMD server, and a scale-out cluster of 7 single-socket Intel servers:
  * Scale-up node: AMD EPYC 7302 CPU @ 3.0-3.3 GHz (16 physical/32 virtual cores) with 512KB, 8MB and 128MB
