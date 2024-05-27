@@ -1,4 +1,4 @@
-# Reproducibility Submission TKDE 2023
+
 **Authors:** Saeed Fathollahzadeh, Kia Teymourian, Chris Jermaine
 
 **Paper Name:** How Object Model and Its Implementation Impacts Performance of Big Data Systems: A Controlled Experimental Study
